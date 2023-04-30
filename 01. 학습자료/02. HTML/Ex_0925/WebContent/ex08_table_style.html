@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>테이블 스타일 변경</title>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+		
+			table{border-collapse: collapse;
+					margin: 0 auto;
+					height: 450px;
+					background: #ffc;
+					width: 900px;}
+			
+			caption {font: 30px "궁서", sans-serif;
+						margin-bottom: 15px;}
+						
+			th{padding: 15px 20px;
+				width: 100px;}			
+			
+			thead th{height: 50px;
+						background: #36f;
+						color: #fff;
+						border-bottom: 6px solid #003;}
+						
+			.aa{text-align: center;}
+			
+		
+		</style>
+	</head>
+	<body>
+		<table border="1">
+			<caption>업종별 모범거래 기준</caption>
+			<!-- 맨 윗 라인  -->
+			<thead>
+				<tr>
+					<th>구분</th>
+					<th>제빵</th>
+					<th>피자</th>
+					<th>치킨</th>
+					<th>커피</th>
+				</tr>				
+			</thead>
+			
+			<tbody>
+				<tr>
+					<th>영업지역</th>
+					<td class="aa">500m</td>
+					<td class="aa">1,500m</td>
+					<td class="aa">800m</td>
+					<td class="aa">500m</td>
+				</tr>
+				<tr>
+					<th>광고</th>
+					<td>관련내용 없음<br>(분쟁없음)</td>
+					<td>주변 상권 사전 동의</td>
+					<td>주변 상권 사전 동의</td>
+					<td>주변 상권 사전 동의</td>
+				</tr>
+				<tr>
+					<th>대금 지급</th>
+					<td>관련 내용 없음</td>
+					<td>관련 내용 없음</td>
+					<td>관련 내용 없음</td>
+					<td>본사에 월 1회 정산</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</body>
+</html>

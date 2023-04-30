@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- CONTEXT-4-SERVICE
+			- CONTEXT-3로부터 TEST_DAOBEAN을 받아서 서비스 객체를 주입
+			- TESTSERVICEIMPL TEST_SERVICE = NEW TESTSERVICEIMPL(TEST_DAOBEAN)
+	 -->
+	<bean id="test_service" class="serviceImpl.TestServiceImpl">
+		<property name="test_dao" ref="test_daoBean"/>
+	</bean>
+	
+</beans>

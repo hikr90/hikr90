@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+	
+	<!-- M_IDX(회원번호)와 일치하는 장바구니 목록 조회 -->
+	<select id="cart_list" parameterType="int" resultType="cart">
+		select * from cart_view where m_idx = #{m_idx}
+	</select>
+	
+	<!-- 회원별 장바구니의 총계
+		상품이 존재하지 않는 경우 AMOUNT는 0이 되지 않고 NULL값이 된다. 이를 방지하기위해서 NVL을 사용해줘야한다.
+		NVL은 AMOUNT의 합계가 NULL이면 0으로 처리하라는 ORACLE의 함수이다. -->
+	<select id="total_amount" parameterType="int" resultType="int">
+		select nvl(sum(amount),0) from cart_view where m_idx = #{m_idx} 
+	</select>
+	
+	<!-- 회원별 카트의 수량 업데이트 
+		MAP이 파라미터로 넘어오면 MAP에서 PUT했을 때 키값을 넣어주면 된다. -->
+	<update id="cart_cnt_update" parameterType="java.util.HashMap">
+		update cart set c_cnt = #{c_cnt} where c_idx = #{c_idx} and m_idx = #{m_idx}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="cart_delete" parameterType="java.util.HashMap">
+		delete from cart where c_idx = ${c_idx} and m_idx = ${m_idx}
+	</delete>
+	
+	<!-- 장바구니에 해당 상품이 있는지 조회 -->
+	<select id="cart_one" resultType="cart" parameterType="cart">
+		select * from cart where m_idx = #{m_idx} and p_idx = #{p_idx}
+	</select>
+	
+	<!-- 장바구니에 중복되는 상품이 없는 경우 추가 -->
+	<insert id="cart_insert" parameterType="cart">
+		insert into cart values(seq_cart_idx.nextVal,1,#{p_idx},#{m_idx})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>서브 메뉴 만들기</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			#nav{width: 1000px;
+					height: 45px;
+					padding: 6px 7px;
+					background: #666;
+					margin: 0 auto;
+					position: relative;}
+					
+			/* > : 자식 선택자 
+			기본적으로 아무 표식이 없으면 전체 선택자로 자식, 손자까지 전부 적용하는데 >는 직계 자식만 적용되게 한다. */			
+			#nav > li{float: left;
+					margin: 3px 10px;
+					margin-left: 70px;
+					/* ul들이 직계 li에 맞춰서 위치를 잡도록 설정 */
+					position: relative;}
+					
+					
+			a{display: block;
+				font: 16px "고딕", "sans-serif";
+				color:  #e7e5e5;
+				padding: 10px 20px;}
+			
+			/* 최상 목록(li)에 마우스를 올렸을 때, a의 속성 변경 */
+			li:hover a{background: #fff;
+						color: black;}
+				
+			ul{position: absolute;
+				left: 0; top: 42px;
+				width: 150px;
+				border: 1px solid #b4b4b4;}
+				
+			/* 37분 */
+			#nav li ul {display: none;}
+				
+			/* li에 마우스 올렸을 때 하위가 목록이 있는 경우만 (안에 ul이 있는 경우) */
+			#nav li:hover ul{display: block;}
+			
+			#nav ul li:hover a{background: #ccc; font-weight: bold;}
+			
+		</style>
+	</head>
+	<body>
+	
+		<ul id="nav">
+			<li><a href="#" alt="처음으로">처음으로</a></li>
+			
+			<li>
+				<a href="#" alt="여행안내">여행 안내</a>
+				<ul>
+					<li><a href="#" alt="오시는 길">오시는 길</a></li>
+					<li><a href="#" alt="소개합니다">소개합니다.</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<a href="#" alt="이용 방법">이용 방법</a>
+				<ul>
+					<li><a href="#" alt="객실보기">객실보기</a></li>
+					<li><a href="#" alt="요금 안내">요금 안내</a></li>
+					<li><a href="#" alt="예약하기">예약하기</a></li>
+					<li><a href="#" alt="예약확인">예약 확인</a></li>
+				</ul>
+			</li>
+
+			<li>
+				<a href="#" alt="게시판">게시판</a>
+				<ul>
+					<li><a href="#" alt="공지사항">공지사항</a></li>
+					<li><a href="#" alt="Q&A">Q&A</a></li>
+				</ul>
+			</li>
+			
+			<li><a href="#" alt="프로필">프로필</a></li>
+			
+		</ul>
+	
+	
+	</body>
+</html>

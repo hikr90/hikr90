@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gogek">
+
+ <!-- 여기에서 sql문을 넣는다.
+ 		namespcae : 식별자
+ 		sql문 작성시 ;는 절대로 사용해서는 안된다.
+ 		
+ 		저장방식이 가져오고 add가 아니라 vo로 다 뽑아서 한번에 넣는다.
+ 		resultTpye : sql코드를 실행하고 돌려받을 결과의 형태 (모아놓을 형태)  -->
+  <select id="gogek_list" resultType="vo.GogekVO">
+  		select * from GOGEK
+  </select>
+
+  <select id="gogek_list_search" resultType="vo.GogekVO" parameterType="java.lang.String">
+  		select * from GOGEK where goaddr like '%'||#{ search }||'%'
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

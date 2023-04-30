@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>클래스를 통한 css정의</title>
+	
+		<style type="text/css">
+		
+			/* box라는 클래스의 자식(내부태그)으로 존재하는 모든 h2에게 속성을 적용하여라
+			실제로 생략되어있는 내용을 꺼내면 아래와 같다.
+			body안에 있는 div중 box라는 이름의 div안의 h2에 접근 */
+			body div .box h2{color: red;}
+			
+			
+			/* 특정 부분만 지정하여 css처리
+			붙여서 .으로 가는 경우 : 클래스명으로 접근 (22분)
+			띄웠을 경우 : 구조로 접근(하위 태그로 접근) */
+			.box h2 span{color: blue;}
+			p.text2{}
+			.s_green{color: green;}
+			
+		</style>
+	
+	</head>
+	<body>
+	
+		<div class="box">
+			
+			<h2><span>클래스</span> 연습1</h2>
+			
+			<div class="box">
+				<h2>클래스 연습2</h2>
+			</div>
+			
+		</div>
+	
+		<!-- span은 인라인 요소로서,  -->
+		<h2><span class="s_green">클래스</span> 연습3</h2>	
+	
+	</body>
+</html>

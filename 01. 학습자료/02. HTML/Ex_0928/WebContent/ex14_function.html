@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>자바스크립트의 메서드</title>
+		<script type="text/javascript">
+			/* 메서드는 script영역에서 작성이 가능하다.
+			자바 스크립트의 메서드는 void와 같이 반환형이 없고 그냥 생으로 return이 가능하다. */
+			function test1() {
+				alert("버튼 1을 눌렀습니다.");
+			}
+			
+			/* 자바와 다르게 자바스크립트는 자료형이 없기 때문에 매개변수는 그냥 자료형을 적지 않는다. */
+			function test2(num) {
+				// body에서 원하는 객체(태그)를 검색해서 값을 전달하는 방법
+				// document = body로 접근
+				// id가 result인 태그에 접근한다.
+				var a = document.getElementById("result");
+				
+				// a는 입력상자의 주소값을 받게 된다. 즉 a와 입력상자 input은 같다.
+				// 입력상자의 값을 num으로 준다.
+				a.value = num;
+			}
+			
+			// 입력상자에 써져있는 값을 body의 div로 출력
+			function test3() {
+				// 입력상자에 있는 텍스트 값 = value 
+				var input = document.getElementById("result").value;
+				// div 태그 그 자체에 접근
+				var my_div = document.getElementById("my_div");
+				// div태그에는 value가 없으니 innerHTML을 사용한다.
+				my_div.innerHTML = input;
+			}
+			
+			/* 클래스로는 script로 검색이 안된다. */
+			
+		</script>
+	</head>
+	<body>
+		<!-- input : body에서 값을 받는 기능 (버튼등의 기능도 가능하다.) 
+		input은 대부분 인라인 요소이다. 
+		onClick은 버튼을 눌렀을 경우의 이벤트 처리이다. 
+		아래에서는 버튼을 누르는 경우 test1(); 의 메서드가 실행된다는 뜻이다. -->
+		<input type="button" value="버튼1" onclick="test1();">
+		<!-- 버튼에서 값을 받고 경우 onClick의 ()안에 파라미터를 넣어주면 된다. -->
+		<input type="button" value="버튼2" onclick="test2(10)"><br>
+		
+		<!-- 입력상자(textfield) 
+		type 없으면 자동으로 text
+		value는 미리 써놓고 싶은 단어 영역이다. -->
+		<input type="text" value="" id="result">
+		<input type="button" value="버튼3" onclick="test3();">
+		<br>
+		
+		<div id="my_div">
+			
+		</div>
+		
+	</body>
+</html>

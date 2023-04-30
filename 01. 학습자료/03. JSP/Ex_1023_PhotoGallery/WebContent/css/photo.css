@@ -1,0 +1,41 @@
+/* css폴더 생성 후 photo명칭의 css파일 생성 */
+@charset "UTF-8";
+*{margin: 0; padding: 0}
+
+#main_box h1{
+	text-align: center;
+	/* 글자에 그림자주기 : 가로라인(px), 아래라인(px), 그림자의번짐정도(px), 글씨색 */
+	text-shadow: 3px 3px 5px gray;
+	color: white;
+}
+
+#main_box{
+	width: 720px;
+	margin: auto;
+}
+
+#photo_box{
+	width: 710px;
+	height: 665px;
+	border: 1px solid blue;
+	/* box에 주는 그림자 (속성값은 글자와 같다.) */
+	box-shadow: 5px 5px 10px gray; 
+	padding: 10px;
+	/* 영역을 넘어가는 경우 스크롤 생성 */
+	overflow: auto; 
+}
+
+.photo_type{
+	width: 150px;
+	height: 200px;
+	float:left;
+	margin: 10px;
+	border: 1px solid black;
+}
+
+.photo_type img{
+	margin: 0 auto;
+	display: block;
+	width: 98%;
+	height: 150px;
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="empProc">
+	<insert id="intrEmpProc10101010" parameterType="java.util.HashMap">
+		/* intrEmpProc10101010 : 사원 등록 처리 */
+		INSERT INTO INTR_EMP
+		(
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		)
+		VALUES
+		(
+				'EMP_' || #{contentIdx, jdbcType=VARCHAR}
+			,	#{deptCd, jdbcType=VARCHAR}
+			,	#{gradeCd, jdbcType=VARCHAR}
+			,	#{empNm, jdbcType=VARCHAR}
+			,	#{empGender, jdbcType=VARCHAR}
+			,	#{empPhone, jdbcType=VARCHAR}
+			,	#{empAddr, jdbcType=VARCHAR}
+			,	#{empAddrInfo, jdbcType=VARCHAR}
+			,	#{empEmail, jdbcType=VARCHAR}
+			,	#{empId, jdbcType=VARCHAR}
+			,	#{empPwd, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	NULL
+		)
+	</insert>
+	
+	<update id="intrEmpProc10201010" parameterType="java.util.HashMap">
+		/* intrEmpProc10201010 : 사원 수정 처리 */
+		UPDATE INTR_EMP
+			SET 	DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+				,	GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+				,	EMP_GENDER = #{empGender, jdbcType=VARCHAR}
+				,	EMP_PHONE = #{empPhone, jdbcType=VARCHAR}
+				,	EMP_ADDR = #{empAddr, jdbcType=VARCHAR}
+				,	EMP_ADDR_INFO = #{empAddrInfo, jdbcType=VARCHAR}
+				,	EMP_EMAIL = #{empEmail, jdbcType=VARCHAR}
+		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc10301010" parameterType="java.util.HashMap">
+		/* intrEmpProc10301010 : 사원 복직, 퇴사 처리 */
+		UPDATE INTR_EMP
+			SET EMP_RESI_DATE =
+				CASE WHEN EMP_RESI_DATE IS NULL
+					THEN TO_CHAR(SYSDATE,'YYYYMMDD')
+				ELSE NULL END
+		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+</mapper>

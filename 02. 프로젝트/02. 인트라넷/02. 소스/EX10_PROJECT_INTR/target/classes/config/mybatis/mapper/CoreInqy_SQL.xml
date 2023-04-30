@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="coreInqy">
+	<select id="intrCoreInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCoreInqy10101010 : 사용자 메뉴 조회 */
+		SELECT 
+				DATA.*
+			,	LEVEL AS LV
+		FROM (
+				SELECT 
+				        M.MENU_CD 
+				    ,   M.MENUTYPE_CD
+				    ,   M.MENU_NM
+				    ,   M.UPPR_MENU_CD
+				    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
+				    ,   M.MAPPING_ID
+				    ,   M.USE_YN
+				    ,   M.DISP_ORDER
+				    ,   M.REMARK
+				FROM INTR_MENU M
+				LEFT OUTER JOIN INTR_MENU UPPR_M
+				ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+				WHERE 1=1
+					AND M.MENUTYPE_CD = 'USER'
+			) DATA 
+			START WITH DATA.UPPR_MENU_CD IS NULL
+			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+	</select>
+		
+	<select id="intrCoreInqy10102010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCoreInqy10102010 : 관리자 메뉴 조회 */
+		SELECT 
+				DATA.*
+			,	LEVEL AS LV
+		FROM (
+				SELECT 
+				        M.MENU_CD 
+				    ,   M.MENUTYPE_CD
+				    ,   M.MENU_NM
+				    ,   M.UPPR_MENU_CD
+				    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
+				    ,   M.MAPPING_ID
+				    ,   M.USE_YN
+				    ,   M.DISP_ORDER
+				    ,   M.REMARK
+				FROM INTR_MENU M
+				LEFT OUTER JOIN INTR_MENU UPPR_M
+				ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+				WHERE 1=1
+					AND M.MENUTYPE_CD = 'ADMIN'
+			) DATA 
+			START WITH DATA.UPPR_MENU_CD IS NULL
+			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+	</select>
+
+	<select id="intrCoreInqy10103010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCoreInqy10103010 : 전체 메뉴 조회 */
+		SELECT 
+				DATA.*
+			,	LEVEL AS LV
+		FROM (
+				SELECT 
+				        M.MENU_CD 
+				    ,   M.MENUTYPE_CD
+				    ,   M.MENU_NM
+				    ,   M.UPPR_MENU_CD
+				    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
+				    ,   M.MAPPING_ID
+				    ,   M.USE_YN
+				    ,   M.DISP_ORDER
+				    ,   M.REMARK
+				FROM INTR_MENU M
+				LEFT OUTER JOIN INTR_MENU UPPR_M
+				ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+				WHERE 1=1
+			) DATA 
+			START WITH DATA.UPPR_MENU_CD IS NULL
+			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+	</select>
+	
+	<select id="intrCoreInqy10301010" resultType="CamelHashMap">
+		/* intrCoreInqy10301010 : 시퀀스 (컨텐츠) 생성 */
+		SELECT TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(SEQ_CONTENT_IDX.NEXTVAL,4,0) AS CONTENT_IDX FROM DUAL
+	</select>
+
+	<select id="intrCoreInqy10301011" resultType="CamelHashMap">
+		/* intrCoreInqy10301011 : 시퀀스 (사원) 생성 */
+		SELECT LPAD(SEQ_EMP_IDX.NEXTVAL,4,0) AS CONTENT_IDX FROM DUAL
+	</select>
+
+			
+</mapper>

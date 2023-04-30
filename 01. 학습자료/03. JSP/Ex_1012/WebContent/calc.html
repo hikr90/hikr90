@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		function send(f) {
+			
+			var su1 = f.su1.value;
+			var su2 = f.su2.value;
+			
+			// 숫자만 들어왔는지 감지하는 패턴
+			var pattern = /^[0-9]+$/;
+			
+			// 패턴으로 su1을 확인했을 때, 문제가 있다면 if문 작동
+			if(!pattern.test(su1)){
+				alert("정수만 가능합니다.");
+				return;
+			}
+
+			if(!pattern.test(su2)){
+				alert("정수만 가능합니다.");
+				return;
+			}
+			
+			f.submit();
+			
+		}
+	
+	</script>
+	
+</head>
+<body>
+	<form action="calc.do" method="GET" name = "ff">
+		수1 : <input type="text" name="su1"><br>
+		수2 : <input type="text" name="su2"><br>
+		
+		<input type="button" value="확인" onclick="send(this.form)">
+	
+	</form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	
+		<style type="text/css">
+		*{margin: 0; padding: 0}
+		
+		/* 겹치는 방법 */
+		p{border: 1px solid red;
+			padding: 10px;
+			width: 80px;
+			height: 80px;
+			position: absolute;} /* position:absolute는 절대 좌표로서 
+			브라우저 0,0은 좌상단이다. 절대좌표로 넣는 순간 모든 p태그가 전부 0,0에 자리잡게된다.
+			객체들은 덮어쓰기가 되어 가장 마지막에 있는 회색이 보이게된다.
+			만약 맨 위의 margin과 padding을 0으로 잡아주지 않으면 p태그가 가지는 기본적인 좌표에 덮어쓰게된다. */
+		
+		.box1{background: yellow;
+				/* 절대 좌표에서 위치변경 */
+				left: 100px;
+				top: 100px;
+				/* 이 태그들의 높이를 변경하는 태그가 z-index이다.
+				z-index는 값이 클수록 화면 위쪽에 표시된다. */
+				z-index: 3}
+		.box2{background: orange;
+				left: 120px;
+				top: 120px;
+				z-index: 1}
+		.box3{background: gray;
+				left: 140px;
+				top: 140px;
+				z-index: 2}
+		
+		</style>
+	
+	</head>
+	<body>
+		
+		<p class="box1">박스1</p>
+		<p class="box2">박스2</p>
+		<p class="box3">박스3</p>
+		
+	</body>
+</html>

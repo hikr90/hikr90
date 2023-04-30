@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pro">
+	<!-- 카테고리별 검색 -->
+	<select id="product_list" resultType="vo.ProductVO" parameterType="java.lang.String">
+		select * from product where category = #{ category }
+	</select>
+	
+	<!-- 상품 등록 
+			SELECT를 제외한 DML(DELTE, INSERT, UPDATE) 작업은 RESULTTYPE작업이 필요없다.
+			DML작업은 숫자로 반환하기 때문이다. -->
+	<insert id="product_insert" parameterType="vo.ProductVO">
+		insert into product values(
+			seq_pro_idx.nextVal,
+			<!-- VO안에 있는 여러 값과 중복되지 않기위해서 반드시 컬럼명과 같은 값을 찾아오도록 해야한다.
+					ORACLE에서 SYSDATE는 오늘 날짜를 뜻한다. -->
+			#{category},
+			#{p_num},
+			#{p_name},
+			#{p_company},
+			#{p_price},
+			#{p_saleprice},
+			#{p_image_s},
+			#{p_image_l},
+			#{p_content},
+			sysdate
+		)		
+	</insert>
+	
+	<!-- IDX에따른 제품 리스트  -->
+	<select id="product_content" resultType="product" parameterType="int">
+		select * from product where idx = #{idx}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

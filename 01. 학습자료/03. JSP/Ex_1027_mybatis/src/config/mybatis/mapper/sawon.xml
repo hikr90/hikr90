@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sawon">
+
+ <!-- MAPPER
+ 		SQL문장을 처리하는 영역으로 맵퍼에서 SQL문에는 ;를 사용하지 않는다.
+ 		MYBATIS의 저장방식은 RS처럼 행 하나를 가져와서 LIST등에 ADD하는 방식이 아니고 VO로 모든 정보를 행단위로 모아서 뽑은 뒤에 한번에 집어넣는 방식이다.
+ 		
+ 		NAMESPACE
+ 			해당 XML을 식별하는 식별자
+ 		
+ 		RESULT TYPE
+ 			SQL 쿼리문을 동작한 뒤 실행 결과를 돌려받을 형태를 뜻한다.
+ 			해당 예시에서는 SAWON테이블의 전체를 가져오므로 한 행의 결과 타입은 VO객체이므로 VO.SAWONVO로 작성해야한다.
+ 			SPRING에서 축약을 사용하기전에는 패키지명까지 전부 붙여서 사용해야한다.
+ 		
+		PARAMETER TPYE
+ 			JSP에서 보내는 파라미터의 자료형을 뜻한다.
+ 			기본 자료형을 제외한 다른 형식의 파라미터를 받는 경우에는 JAVA.LANG.STRING의 방식으로 앞에 패키지명을 완전히 같게 넣어줘야한다.
+ 				- INT : int
+ 				- STRING : java.lang.String 
+ 				- HASHMAP : java.util.HashMap
+ 			
+ 			JSP에서 넘겨주는 파라미터를 맵퍼에서 사용할 때는 #을 통해서 식별한다.
+ 			파라미터의 명칭은 혼동하지 않도록 가급적이면 보내는 파라미터 명과 같게 하는 것이 좋다.
+ 		-->
+ 		
+ 		<!-- 전체 출력 -->
+		<select id="sawon_list" resultType="vo.SawonVO">
+  			select * from sawon
+		</select>
+	
+		<!-- 부서 번호에 해당하는 정보만 출력 -->
+		<select id="sawon_list_no" resultType="vo.SawonVO" parameterType="int">
+  			select * from sawon where deptno = #{ deptno }
+		</select>	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

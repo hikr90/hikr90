@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>자바 스크립트의 이미지 슬라이드</title>
+	
+		<script type="text/javascript">
+			var num = 1;
+			var path = "image/img";
+			
+			function prev() {
+					num--;									
+				if(num==0){
+					num = 7;
+				}
+			/* 이미지 태그의 src에 접근한다. 
+			대체로 검색 코드(태그변수)는 전역변수로는 선언하지 않는다. */
+			document.getElementById("gallery").src = path+num+'.jpg';
+			}
+			
+			
+			function next() {
+					num++;
+				if(num==8){
+					num = 1;
+				}
+			document.getElementById("gallery").src = path+num+'.jpg';
+			}
+			
+			/* setInterval : 메서드를 시간 간격으로 동작 */
+			setInterval("next()",1000);
+			
+		</script>
+	
+	</head>
+	<body>
+		<div id="galleryWrap">
+			<p>
+				
+				<a href="#" alt="임시" onclick="prev();">
+					<img alt="이전" src="image/left_btn.png">
+				</a>
+				
+				<img alt="갤러리" src="image/img1.jpg"
+					width="300" height="200"
+					id="gallery">
+
+				<a href="#" alt="임시" onclick="next();">
+					<img alt="이전" src="image/right_btn.png">
+				</a>
+			</p>
+		</div>
+	</body>
+</html>

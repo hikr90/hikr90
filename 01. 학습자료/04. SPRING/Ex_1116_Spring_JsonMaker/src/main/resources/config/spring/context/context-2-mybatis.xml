@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+	<!-- MYBATIS 라이브러리 다운로드
+			MYBATIS를 사용하기위해서 필요한 라이브러리
+			1 https://mvnrepository.com/ 접속
+			2 mybatis 검색
+			3  첫번쨰 항목 선택
+			4 3.4.5 version 선택
+			5 MAVEN 입력란 안에 있는 코드 복사
+			6 POM.XML에 붙여넣기
+			
+			7 MYBATIS-SPRING 검색 후 첫번째 선택
+			8 1.3.1 Version 선택
+			9 POM.XML에 붙여넣기
+			
+			10 SPRING-JDBC 검색 후 첫번째 선택
+			11 3.2.2 Version 선택
+			12 POM.XML에 붙여넣기
+			 
+			CONTEXT-2-MYBATIS는 CONFIG.SPRING.MAPPER의 MYBATIS-CONFIG를 참조한다.		
+	 -->
+	 
+	 <!-- BEAN으로 만들수 있는 SQLFACTORYSESSION 
+	 		db 연결 정보를 가지고있는 ds객체를 참조해야한다.
+	 		mybatis-config.xml : (28분) -->
+	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
+	</bean>	 
+	
+	<!-- SQLSESSION
+			sqlsessiontem은 기본생성자가 없고 파라미터를 받는 생성자만 있어서 생성자 인젝션으로 factorybean을 받아야한다. -->
+	<bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="factoryBean"/>
+	</bean>
+</beans>

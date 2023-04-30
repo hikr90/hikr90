@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="">
+		<environment id="">
+			<transactionManager type="JDBC" />
+			<dataSource type="JNDI">
+				<property name="data_source" 
+				value="java:comp/env/jdbc/oracle_test" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="config/mybatis/mapper/sawon.xml" />
+		<mapper resource="config/mybatis/mapper/gogek.xml" />
+	</mappers>
+</configuration>
+
+<!-- 
+	SQLMAPCONFIG
+		SQLMAPCONFIG는 DB접속 주소나 MAPPING (XML) 파일의 경로를 포함하는 설정 파일이다. 
+		DB에 접근하기위해서는 접속할 서버의 이름을 찾아서 접근해야하는데 우리가 찾고있는 JMDI (ORACLE_TEST)으로 지정해줘야만 ORACLE_TEST 계정의 리소스를 얻는 것이 가능하다.		
+		
+		또한, MAPPER는 새로운 DB접근시 그에 해당하는 XML가 반드시 있어야한다.
+-->

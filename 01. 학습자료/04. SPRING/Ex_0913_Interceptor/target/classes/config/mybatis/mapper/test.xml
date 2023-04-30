@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+	
+	<select id="testCheck" resultType="vo" parameterType="java.lang.String">
+		SELECT
+			TEST_ID,
+			TEST_PWD,
+			TEST_NM,
+			REMARK
+		FROM USERINFO
+		WHERE 1=1 
+				AND UPPER(TEST_ID) = UPPER(#{test_id, jdbcType=VARCHAR})
+	</select>
+	
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+	
+	<select id="test_list" resultType="test">
+		SELECT * FROM TEST
+	</select>
+	
+	<select id="test_vo" resultType="test" parameterType="java.lang.String">
+		SELECT * FROM TEST WHERE TEST_NO = #{test_no, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="test_insert" parameterType="test">
+		INSERT INTO TEST
+		(
+			TEST_NO,
+			TEST_NM,
+			DISP_ORDER,
+			REMARK
+		) 
+		VALUES
+		(
+			#{test_no, jdbcType=VARCHAR},
+			#{test_nm, jdbcType=VARCHAR},
+			NULL,
+			NULL
+		)
+	</insert>
+	
+	<update id="test_update" parameterType="test">
+		UPDATE TEST
+			SET TEST_NM = #{test_nm, jdbcType=VARCHAR}
+			WHERE TEST_NO = #{test_no, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="test_delete" parameterType="test">
+		DELETE FROM TEST
+			WHERE TEST_NO = #{test_no, jdbcType=VARCHAR} 
+	</delete>
+</mapper>

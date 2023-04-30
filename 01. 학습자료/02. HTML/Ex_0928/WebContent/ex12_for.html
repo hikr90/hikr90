@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>자바 스크립트의 for문</title>
+	
+		<script type="text/javascript">
+		/* 문제 
+			prompt에서 값을 받아서 구구단을 출력
+			단 : 5
+			5 * 1 = 5
+			5 * 2 = 10
+		*/
+		
+		var dan = Number(prompt("단 : "));
+		
+		for(var i=1;i<10;i++){
+			document.write(dan+" * "+i+" = "+dan*i+"<br>");
+		}
+		
+		document.write("<hr>");
+		
+		
+
+		// h태그를 이용해서 글자를 점차 작게 출력
+		for(var i=6;i>=1;i--){
+			document.write("<h"+i+">"+"안녕"+"</h"+i+">");
+		}
+		
+		document.write("<hr>");
+
+		document.write("<ul>");
+		
+		// for문을 통해서 li 생성
+		for(var i=0;i<5;i++){
+			document.write("<li>"+"메뉴"+"</li>")
+		}
+		
+		document.write("</ul>");
+
+		
+		
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

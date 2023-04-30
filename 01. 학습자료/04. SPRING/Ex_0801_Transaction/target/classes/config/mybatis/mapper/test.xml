@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+	
+	<select id="test_list" resultType="test" parameterType="java.lang.String">
+		select * from test
+	</select>
+	
+	<update id="test_update1">
+		update test
+		set remark = '테스트1'
+		where test_no = #{testNo, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 고의적인 오류 발생 -->
+	<update id="test_update2" parameterType="java.lang.String">
+		update test
+		set remark = '테스트2
+		where test_no = #{testNo, jdbcType=VARCHAR}
+	</update>
+	
+</mapper>

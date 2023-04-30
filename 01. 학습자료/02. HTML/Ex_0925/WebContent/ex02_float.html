@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>float 예제</title>
+			
+		<style type="text/css">
+		*{margin: 0;padding: 0;}
+		
+		#wrap{width: 500px;
+				margin: 0 auto;
+				border: 5px solid #f00;
+				background: black;}
+				
+				/* 세로 중앙 : padding
+					가로 중앙 : text-allin: center */
+		#header{width: 500px;
+				background: #09f;
+				padding: 10px 0;
+				text-align: center;
+				color: #fff;}
+		
+		#content{width: 500px;
+					background: #ccc;
+					margin-top: 10px;
+					margin-bottom: 10px;
+					/* 3개 추가하고싶은 경우 마진으로 L L L 혹은 L R R으로 주면 된다. */
+					overflow: hidden;}
+		
+		#left{width: 120px;
+				background: #fcf;
+				padding: 10px;
+				height: 100px;
+				float: left;}
+
+		#right{width: 120px;
+				background: #fcf;
+				padding: 10px;
+				height: 100px;
+				float: right;}
+		
+		#center{width: 120px;
+				background: #fcf;
+				padding: 10px;
+				height: 100px;
+				float:left;
+				margin-left: 40px; }
+		
+				
+		#footer{width: 500px;
+				background: #33f;
+				text-align: center;
+				padding: 10px 0;}
+		
+		</style>
+	</head>
+	<body>
+		
+		<div id="wrap">
+			<div id="header">
+				<p>float을 사용한 2단 틀!</p>
+				</div>
+				
+				<div id="content">
+					<div id="left">
+						<p>왼쪽으로 갈테얌</p>					
+					</div>
+					
+					<div id="center">
+						<p>중앙이얌</p>
+					</div>
+					
+					<div id="right">
+						<p>오른쪽으로 갈테얌</p>					
+					</div>
+				</div>
+			
+			<div id="footer">
+				<p>아래로 갈테얌</p>
+			</div>
+
+
+			
+				
+		
+		
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="v">
+	
+	<!-- 방명록 전체 글 조회 -->
+	<select id="visit_list" resultType="visit">
+		select * from visit order by idx desc
+	</select>	
+	
+	<!-- 방명록 글 등록 -->
+	<insert id="visit_insert" parameterType="visit">
+		insert into visit values(seq_visit_idx.nextVal,#{name},#{content},#{pwd},#{ip},sysdate, #{filename})
+	</insert>
+	
+	<!-- 방명록 삭제 -->
+	<delete id="visit_delete" parameterType="int">
+		delete from visit where idx = #{idx}
+	</delete>
+	
+	<!-- 특정 방명록 검색 -->
+	<select id="visit_selectone" resultType="visit" parameterType="int">
+		select * from visit where idx = #{idx}
+	</select>
+	
+	<!-- 방명록 수정 -->
+	<update id="visit_update" parameterType="visit">
+		update visit set name=#{name}, content=#{content}, pwd=#{pwd}, ip=#{ip}, regdate=sysdate, filename=#{filename} where idx = #{idx}
+	</update>
+</mapper>

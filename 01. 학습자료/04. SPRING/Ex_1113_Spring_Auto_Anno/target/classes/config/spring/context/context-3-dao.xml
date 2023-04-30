@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- CONTEXT-3-DAO
+			- CONTEXT-2-MYBATIS로부터 SQLSESSION을 받아서 빈객체 생성
+			- 생성한 객체는 TESTSERVICEIMPL에서 셋터 인젝션으로 주입받아 사용한다. 
+			
+			- TESTDAOIMPL TEST_DAO = NEW TESTDAOIMPL(SQLSESSION)
+			- 주입 관계의 빈 객체 ID값과 REF명칭은 같아야한다.
+	 -->
+	<bean id="test_daoBean" class="com.korea.daoImpl.TestDAOImpl">
+		<property name="sqlSession" ref="sqlSessionBean"/> 
+	</bean>
+		
+</beans>

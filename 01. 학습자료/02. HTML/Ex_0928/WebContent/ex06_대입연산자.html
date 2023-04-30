@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>자바 스크립트의 대입연산자</title>
+		<script type="text/javascript">
+			var num1 = 10;
+			var num2 = 20;
+			
+			num1 += 5;
+			document.write("+=연산자 : "+num1+"<br>");
+			
+			/* 문제  과수원에서 하루에 생산되는 과일의 총 갯수와 한시간에 몇개가 생산되는지 시간당 생산수를 자바 스크립트로 출력
+			사과 5개, 오렌지 10개, 배 3개
+			하루 생산량 : 18개
+			시간당 평균 : 0.75개 */
+			
+			var pear = 3;
+			var apple = 5;
+			var orange = 10;
+			
+			var total;
+			var avg;
+			
+			total = pear+apple+orange;
+			avg = total/24;
+			
+			document.write("하루 생산량 : "+total+"개"+"<br>");
+			document.write("시간당 평균 : "+avg.toFixed(2)+"개","<br>");
+			
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

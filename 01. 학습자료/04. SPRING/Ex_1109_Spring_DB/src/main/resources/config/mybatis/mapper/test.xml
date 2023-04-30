@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+	
+	<!-- MAPPER (XML)
+			- 마이바티스를 통해서 자바 객체와 SQL문을 연동해주는 파일
+			- 맵퍼에서는 SELECT, UPDATE, DELETE등의 DML 쿼리 태그를 사용할 수 있다.
+			
+			- ID : 쿼리문의 식별값으로 DAO와 해당 ID값으로 호출한다.
+			- RESULTTYPE :  쿼리문 동작 시 리턴값의 자료형
+				- UPDATE, DELETE의 경우 결과값은 숫자이므로 작성하지 않는다.
+				- SELECT문의 경우 VO클래스(TYPEALIAS태그에서 지정한 축약어로도 사용가능) 혹은 HASHMAP등이 사용된다.
+			
+			- PARAMETERTYPE : 쿼리문에 삽입되는 파라미터의 자료형
+				- JAVA.LANG.STRING
+				- JAVA.UTIL.HASHMAP
+				- 기본 자료형의 경우 INT등으로 입력한다.
+				- 입력값은 WHERE COLUM = #{값} 의 형태로 사용되며 
+				- MYBATIS의 경우 ORACLE사용 시 NULL 처리를 위해서 JDBCTYPE=VARCHAR를 입력한다. 
+
+			- 쿼리문의 마지막에는 세미 콜론 (;)을 사용하지 않는다.
+		-->
+	<select id="test_list" resultType="test" parameterType="java.util.HashMap">
+		select * from test where test_no = #{test, jdbcType=VARCHAR}
+	</select>
+
+</mapper>

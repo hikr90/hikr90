@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	
+	function send(f) {
+		
+		// greet.do로 파라미터 전달
+		f.submit();
+	}
+	
+</script>
+
+</head>
+<body>
+	<form action="greet.do" method="GET">
+	외국 인사말 선택하기<br>
+	<!--nation은 같아야한다.  checked (미리선택) -->
+	<input type="radio" name="nation" value="kor" checked="checked">한국<br>
+	<input type="radio" name="nation" value="eng" checked="checked">미국<br>
+	<input type="radio" name="nation" value="jpn" checked="checked">일본<br>
+	<input type="radio" name="nation" value="chn" checked="checked">중국<br>
+	
+	<!-- 유효성 체크를 무시하고 곧바로 form태그 안의 name 파라미터의 value를 greet.do로 넘긴다. -->
+
+	<!-- 버튼 동작과 동시에 send 메서드가 호출되면서 폼에있는 내용이 옮겨질 것이다. -->
+	<input type="button" value="알려줘" onclick="send(this.form)">
+	</form>
+	
+	
+</body>
+</html>

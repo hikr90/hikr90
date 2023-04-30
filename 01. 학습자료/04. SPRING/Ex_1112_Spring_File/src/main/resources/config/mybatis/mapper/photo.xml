@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="photo">
+	
+	<insert id="insert_photo" parameterType="photo">
+		INSERT INTO PHOTO_FILE(IDX, TITLE, FILENAME, REGDATE) VALUES(seq_file_idx.nextVal,#{title},#{filename},TO_CHAR(SYSDATE,'YYYYMMDD'))
+	</insert>
+
+</mapper>

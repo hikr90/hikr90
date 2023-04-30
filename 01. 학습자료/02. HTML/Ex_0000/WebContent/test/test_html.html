@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+		
+		function calc(op) {
+			
+				var su1 = document.getElementById("su1").value;
+				var su2 = document.getElementById("su2").value;
+				
+				/* 유효성 검사 */
+				if(su1.trim()==''){
+					alert("빈값이 있습니다.");
+				}
+				
+				if(su2.trim()==''){
+					alert("빈값이 있습니다.");
+				}
+				
+				var res;
+				
+				if(op=='+'){
+					/* 스크립트 영역에서도 STYLE.COLOR등으로 서식 변경이 가능은 하다.
+						(보통 외부 CSS로 처리하므로 자주 사용하지는 않음) */
+					document.getElementById("t").style.color = "red";
+					res = Number(su1) + Number(su2);
+				}else if(op=='-'){
+					res = Number(su1) - Number(su2);
+				}
+				
+				// RESULT에 결과값 저장
+				var result = document.getElementById("result");
+				result.value = res;
+				
+
+				// INPUT에 값을 채워넣는 경우는 VALUE를 많이 사용하며
+				// 태그와 태그 사이에 값을 집어넣는 경우 INNERHTML을 사용한다.
+			}		
+		</script>
+		
+		<style type="text/css">
+			table{border-collapse: collapse;
+					width: 220px;}
+
+			ul{overflow: hidden;}
+					
+			li{list-style: none;
+				float:left;
+				margin-left: 10px;}
+				
+			input{border-style: none;}
+				
+		</style>	
+	
+	</head>
+	<body>
+			<table border="1" id="t">
+			<tr>
+				<th class="su1">수1</th>
+				<td><input id="su1"></td>
+			</tr>
+
+			<tr>
+				<th class="su2">수2</th>
+				<td><input id="su2"></td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+					<ul>
+						<li><input type="button" value="+" onclick="calc('+');"></li>
+						<li><input type="button" value="-" onclick="calc('-');"></li>
+						<li><input type="button" value="*" onclick="calc('*');"></li>
+						<li><input type="button" value="/" onclick="calc('/');"></li>
+					</ul>
+				</td>
+			</tr>
+			
+			<tr>
+				<th class="res">결과</th>
+				<td><input id="result"></td>
+			</tr>
+		</table>
+	</body>
+</html>

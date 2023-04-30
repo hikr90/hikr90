@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings> 
+	
+	<typeAliases>
+		<typeAlias type="com.intr.vo.EmpVO" alias="emp"/>
+		<typeAlias type="com.intr.util.CamelHashMap" alias="CamelHashMap"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="config/mybatis/mapper/LoginInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/LoginProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/TempInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/TempProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/CoreInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/BoardInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/BoardProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/FileInqy_SQL.xml" />		
+		<mapper resource="config/mybatis/mapper/FileProc_SQL.xml" />		
+		<mapper resource="config/mybatis/mapper/EmpInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/EmpProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/TaskInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/TaskProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/PopupInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/AuthInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/AuthProc_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/ScheInqy_SQL.xml" />
+	</mappers>
+	
+</configuration>
