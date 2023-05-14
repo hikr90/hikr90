@@ -21,10 +21,7 @@ function ajaxPopup(param, width, height, mappingId){
          msTransform:	'translate(-50%, -50%)',
          webkitTransform:	'translate(-50%, -50%)'
 	});
-	
-	// 감춤 제어
-	$("#popupArea").removeClass("hidden");
-	
+		
 	// 동작 제어
 	$.ajax({
 		type:	"POST" , 
@@ -34,6 +31,8 @@ function ajaxPopup(param, width, height, mappingId){
 		success : function(data){
 			//
 			$("#postCon").html(data);
+			$("#popupArea").removeClass("hidden");
+
 		},
 		error : function(res, status, error){
 			//

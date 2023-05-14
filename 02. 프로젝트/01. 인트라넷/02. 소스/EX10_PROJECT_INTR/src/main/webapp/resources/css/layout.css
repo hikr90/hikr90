@@ -53,7 +53,6 @@ input[type="text"], textarea, .selStyle, select { height: 43px; line-height: 23p
 
 #_subArticle #_content { display: table-cell; vertical-align: top; width: calc(100% - 220px); -webkit-box-sizing: border-box; box-sizing: border-box;}
 
-#_subArticle #_content .postWrap { padding: 20px 0px 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
 #_subArticle #_content .tagWrap { display: inline; padding-bottom: 25px; }
 #_subArticle #_content .listWrap { margin-bottom: 3%; }
 

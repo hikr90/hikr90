@@ -90,7 +90,7 @@
 							<h3>LOGIN</h3>
 							<input type="button" class="_admin_insert" value="관리자 회원가입" onclick="adminProc();">
 							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);">
-							<input type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="pushLoginKey(this.form);">
+							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);">
 							<input type="button" class="login-btn" value="로그인" onclick="loginCall(this.form);">
 	                        <input type="button" class="btn-find-info" value="아이디/비밀번호 찾기" onclick="popCall();">
 						</div>

@@ -38,12 +38,12 @@
 		//
 		$.ajax({
 		    	type : 'post',
-		    	url : "",
+		    	url : "intrMailProc1010.do",
 				data : param,
 				dataType : 'text',
 			success : function(data){
 		    	//
-				alert("인증 번호가 전송되었습니다.");
+				alert("정보 찾기 인증 번호가 전송되었습니다.\n등록하신 메일 계정에서 인증번호를 확인해주세요.");
 
 			},
 			error : function(xhr, status, error){
@@ -51,7 +51,6 @@
 				alert("인증 번호 전송에 실패하였습니다.\n관리자에게 문의해주세요.");				
 		    }
 		});
-
 	}
 	
 	// 인증 번호 체크
@@ -74,7 +73,7 @@
                                 
                                 <div class="btn_center">
                                 	<input type="button" class="_btn _grey" value="찾기" onclick="">
-                                    <input type="button" class="_btn _line" value="취소" onclick="popupClose('popupArea');">
+                                    <input type="button" class="_btn _line" value="취소" onclick="popClose('popupArea');">
                                 </div>
                             </div><!-- End postWrap -->
                           </div> 

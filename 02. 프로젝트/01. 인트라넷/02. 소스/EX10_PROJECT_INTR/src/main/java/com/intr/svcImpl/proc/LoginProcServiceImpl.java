@@ -89,7 +89,7 @@ public class LoginProcServiceImpl implements LoginProcService{
 			//--------------------------------------------------------------------------------------------
 			// 관리자 여부 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = loginInqyDao.intrLoginInqy10201010(model);
+			defaultInfo = loginInqyDao.intrLoginInqy10201010();
 			
 			//
 			if(defaultInfo==null) {

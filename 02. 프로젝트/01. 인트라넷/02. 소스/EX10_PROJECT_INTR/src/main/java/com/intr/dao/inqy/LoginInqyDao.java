@@ -26,7 +26,7 @@ public class LoginInqyDao{
 	}
 	
 	// 관리자 계정 조회
-	public HashMap<String, Object> intrLoginInqy10201010(Model model) {
+	public HashMap<String, Object> intrLoginInqy10201010() {
 		HashMap<String, Object> defatulInfo = null;
 		defatulInfo = sqlsession.selectOne("loginInqy.intrLoginInqy10201010");
 		//
