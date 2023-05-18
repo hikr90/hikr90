@@ -48,4 +48,31 @@
 		FROM INTR_EMP
 		WHERE UPPER(EMP_ID) = 'ADMIN'
 	</select>
+
+	<select id="intrLoginInqy10301010" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		/* intrLoginInqy10301010 : 사용자 정보 찾기 */
+		SELECT 
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		FROM INTR_EMP
+		WHERE 1=1 
+			AND UPPER(EMP_EMAIL) = UPPER(#{findEmail, jdbcType=VARCHAR})
+			<if test="findId != null and findId != ''">
+				AND UPPER(EMP_ID) = UPPER(#{findId, jdbcType=VARCHAR})
+			</if>
+			<if test="findNm != null and findNm != ''">
+				AND EMP_NM = #{findNm, jdbcType=VARCHAR}
+			</if>
+	</select>
 </mapper>

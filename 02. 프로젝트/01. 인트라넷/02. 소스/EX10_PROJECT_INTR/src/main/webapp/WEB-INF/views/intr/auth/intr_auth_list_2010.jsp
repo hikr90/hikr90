@@ -56,7 +56,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -77,7 +77,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}

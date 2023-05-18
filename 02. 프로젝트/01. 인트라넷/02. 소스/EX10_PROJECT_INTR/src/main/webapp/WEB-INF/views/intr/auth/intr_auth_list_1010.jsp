@@ -43,7 +43,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -65,7 +65,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -86,14 +86,14 @@
 	            success : function(data){
 	     				//
 	            	    $(".treeInfo").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="comm.proc.succ"/>"); // ALERT
+	    				alert("<spring:message code="PROC.SUCCESS"/>"); // ALERT
 	    				
 	    				// 재 조회
 	            		$(".listCall").trigger("click");	
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}		
@@ -116,7 +116,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -136,7 +136,7 @@
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -157,14 +157,14 @@
 	            success : function(data){
 	     				//
 	            	    $(".treeInfo").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="comm.proc.succ"/>"); // ALERT
+	    				alert("<spring:message code="PROC.SUCCESS"/>");
 	    				
 	    				// 재 조회
 	            		$(".listCall").trigger("click");	
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}		
@@ -186,14 +186,14 @@
 	            success : function(data){
 	     				//
 	            	    $(".treeInfo").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="comm.proc.succ"/>"); // ALERT
+	    				alert("<spring:message code="PROC.SUCCESS"/>");
 	    				
 	    				// 재 조회
 	            		$(".listCall").trigger("click");	
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}

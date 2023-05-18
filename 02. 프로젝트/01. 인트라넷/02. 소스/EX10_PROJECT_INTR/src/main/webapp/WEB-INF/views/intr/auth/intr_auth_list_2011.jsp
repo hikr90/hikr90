@@ -20,7 +20,7 @@
 	function moveBtn(f) {
 		// 체크한 건이 없는 경우
 		if($("input[id=menuCd]:checked").length==0){
-			alert("<spring:message code="comm.chk.none"/>");
+			alert("<spring:message code="CHECK.NONE"/>");
 			return;
 		}
 		
@@ -81,7 +81,7 @@
 	function delCall(){
 		// 유효성 검증
 		if($("input[id=authMenuCd]:checked").length==0){
-			alert("<spring:message code="comm.chk.none"/>");
+			alert("<spring:message code="CHECK.NONE"/>");
 			return;
 		}
 		
@@ -118,12 +118,12 @@
 	            dataType : 'html',
 	            success : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.succ"/>");
+					alert("<spring:message code="PROC.SUCCESS"/>");
 	            	setListCall();
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}				

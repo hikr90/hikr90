@@ -16,7 +16,7 @@
 				<label>ID</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="아이디 입력" name="empId">
+				<input type="text" title="아이디" id="findId" name="findId">
 			</dd>
 		</dl>
 		<dl>
@@ -24,7 +24,7 @@
 				<label>이메일</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="이메일 입력" name="empMail"> 
+				<input type="text" title="이메일" id="findEmail" name="findEmail"> 
 				<input type="button" class="stb-box-btn email-btn" value="코드 전송" onclick="sendNum(this.form);">
 			</dd>
 		</dl>
@@ -33,7 +33,7 @@
 				<label>이메일 인증</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="인증번호 입력" name="authNum" id="authNum">
+				<input type="text" title="인증번호" name="authNum" id="authNum">
 				<input type="button" class="stb-box-btn" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
 			</dd>
 		</dl>

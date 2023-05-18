@@ -55,7 +55,7 @@
 	function regProc(f){
 		//
 		if(addCnt==0){
-			alert("<spring:message code="task.proc.cnt"/>");
+			alert("<spring:message code="TAKS.NONE"/>");
 			return;
 		}
 		//
@@ -91,7 +91,7 @@
    						formSubmit('intrTaskInqy2010.do');
    					} else {
    						//
-   						alert("<spring:message code="comm.proc.fail"/>");
+   						alert("<spring:message code="PROC.FAIL"/>");
    					}
 				},
 				error : function(xhr, status, error){

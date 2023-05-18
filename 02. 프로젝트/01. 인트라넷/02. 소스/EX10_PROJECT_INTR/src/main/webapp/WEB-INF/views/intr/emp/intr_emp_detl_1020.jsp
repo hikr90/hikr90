@@ -46,16 +46,16 @@
    					if(json[0].res=="NO"){
    						//
    	     				chqEmpYn = "Y";
-   						alert("<spring:message code="emp.chq.succ"/>"); // ALERT
+   						alert("<spring:message code="EMP.ID.SUCCESS"/>"); // ALERT
    					} else {
 						//
    	     				chqEmpYn = "N";
-						alert("<spring:message code="emp.chq.fail"/>"); // ALERT
+						alert("<spring:message code="EMP.ID.FAIL"/>"); // ALERT
    					}
             },
             error : function(data){
             	//
-				alert("<spring:message code="comm.proc.error"/>");
+				alert("<spring:message code="PROC.ERROR"/>");
             }
       	});
 	}
@@ -66,7 +66,7 @@
 		if(!validation()){return;};
 		//
 		if(chqEmpYn!="Y"){
-			alert("<spring:message code="emp.chq.none"/>");
+			alert("<spring:message code="EMP.ID.CHECK"/>");
 			return;
 		}
 		if($("#empPwd").val()!=$("#chqPwd").val()){
@@ -92,13 +92,13 @@
 	   						location.href = "intrEmpInqy1010.do";
 	     				} else {
 	     					//
-	     					alert("<spring:message code="comm.proc.fail"/>");
+	     					alert("<spring:message code="PROC.FAIL"/>");
 							return;	
 	     				}
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}		

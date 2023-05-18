@@ -39,7 +39,7 @@
 		});
 		// 유효성 체크
 		if(delIdxArr.length==0){
-			alert("<spring:message code="comm.chk.none"/>");
+			alert("<spring:message code="CHECK.NONE"/>");
 			return;
 		}	
 		//				
@@ -57,18 +57,18 @@
    					var json = eval(data);
    					if(json[0].res=="YES"){
    	   					//
-   						alert("<spring:message code="comm.proc.succ"/>");
+   						alert("<spring:message code="PROC.SUCCESS"/>");
    	   					location.href="intrBoardInqy1010.do";
    	   					
    					} else {
    						//
-   						alert("<spring:message code="comm.proc.error"/>");
+   						alert("<spring:message code="PROC.ERROR"/>");
    						return;
    					}
    				},
    				error : function(res, status, error){
    					//
-   					alert("<spring:message code="comm.proc.error"/>");
+   					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
 

@@ -33,21 +33,21 @@
 	   						var json = eval(data);
 	   						if(json[0].res=='YES'){
 	   	   						//
-	   							alert("<spring:message code="comm.proc.succ"/>");
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
 		   						location.href = "intrBoardInqy1010.do";
 	   						}else if(json[0].res=='NO'){
 	   	   						//
-	   							alert("<spring:message code="comm.proc.fail"/>");
+	   							alert("<spring:message code="PROC.FAIL"/>");
 								return;	   							
 	   						}else{
 	   	   						//
-	   							alert("<spring:message code="comm.proc.exists"/>");
+	   							alert("<spring:message code="PROC.EXISTS"/>");
 								return;	   							
 	   						}
 	   				},
 	   				error : function(res, status, error){
 	   					//
-	   					alert("<spring:message code="comm.proc.error"/>");
+	   					alert("<spring:message code="PROC.ERROR"/>");
 	   				}
 	   			});
 			}

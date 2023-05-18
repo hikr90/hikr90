@@ -48,6 +48,7 @@ function ajaxPopup(param, width, height, mappingId){
  * 작성일자 : 2022.11.02 
  * 내용 : 아이디, 비밀번호 찾기 화면 전환
  */
+var EmaChkYn = false; 	// 인증 여부 체크
 function chgPopup(mappingId){
 	// 화면 전환
 	$.ajax({
@@ -56,6 +57,7 @@ function chgPopup(mappingId){
 		dataType:	"text" ,
 		success : function(data){
 			//
+			EmaChkYn = false;
 			$("#postCon").html(data);
 		},
 		error : function(res, status, error){

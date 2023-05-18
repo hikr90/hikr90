@@ -36,16 +36,16 @@
 	     				var json = eval(data);
 	   					if(json[0].res=="YES"){
 	   						//
-	   						alert("<spring:message code="comm.proc.succ"/>"); // ALERT
+	   						alert("<spring:message code="comm.proc.succ"/>");
 	   						formSubmit('intrEmpInqy1030.do');
 	   					} else {
 							//
-							alert("<spring:message code="comm.proc.fail"/>"); // ALERT
+							alert("<spring:message code="PROC.FAIL"/>");
 	   					}
 	            },
 	            error : function(data){
 	            	//
-					alert("<spring:message code="comm.proc.error"/>");
+					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
 		}

@@ -32,4 +32,12 @@ public class LoginInqyDao{
 		//
 		return defatulInfo;
 	}
+
+	// 사용자 정보 조회
+	public HashMap<String, Object> intrLoginInqy10301010(HashMap<String, Object> paramMap) {
+		HashMap<String, Object> defatulInfo = null;
+		defatulInfo = sqlsession.selectOne("loginInqy.intrLoginInqy10301010", paramMap);
+		//
+		return defatulInfo;
+	}
 }

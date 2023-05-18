@@ -12,7 +12,7 @@
    		function popCall(){
    			// 정보 찾기 팝업
    			var param = null;
-   			ajaxPopup(param,"650","380","intrPopupInqy1021.do");
+   			ajaxPopup(param,"650","360","intrPopupInqy1021.do");
    		}
    		
    		// 로그인
@@ -31,10 +31,10 @@
    					var json = eval(data);
    					if(json[0].res=="NO_ID"){
    	   					//
-   						alert("<spring:message code="login.proc.fail.no.id"/>");
+   						alert("<spring:message code="LOGIN.ID.FAIL"/>");
    					} else if(json[0].res=="NO_PWD") {
    	   					//
-   						alert("<spring:message code="login.proc.fail.no.pwd"/>");
+   						alert("<spring:message code="LOGIN.PWD.FAIL"/>");
    					} else {
    						//
    						location.href = "intrLoginInqy1020.do";
@@ -42,7 +42,7 @@
    				},
    				error : function(res, status, error){
    					//
-   					alert("<spring:message code="comm.proc.error"/>");
+   					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
 
@@ -60,14 +60,14 @@
    					//
    					var json = eval(data);
    					if(json[0].res=="YES"){
-   	   					alert("<spring:message code="login.admin.insert.proc.succ"/>");
+   	   					alert("<spring:message code="ADMIN.SUCCESS"/>");
    					} else {
-   	   					alert("<spring:message code="login.admin.insert.proc.fail"/>");
+   	   					alert("<spring:message code="ADMIN.FAIL"/>");
    					}
    				},
    				error : function(res, status, error){
    					//
-   					alert("<spring:message code="comm.proc.error"/>");
+   					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
 

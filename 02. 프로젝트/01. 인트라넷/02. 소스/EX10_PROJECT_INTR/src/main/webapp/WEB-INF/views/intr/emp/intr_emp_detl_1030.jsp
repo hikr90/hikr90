@@ -39,13 +39,13 @@
 	   						location.href = "intrEmpInqy1010.do";
    						}else{
    	   						//
-   							alert("<spring:message code="comm.proc.fail"/>");
+   							alert("<spring:message code="PROC.FAIL"/>");
 							return;	   							
    						}
    				},
    				error : function(res, status, error){
    					//
-   					alert("<spring:message code="comm.proc.error"/>");
+   					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
 			

@@ -9,14 +9,14 @@
 	<a class="" onclick="javascript:chgPopup('intrPopupInqy1022.do');">비밀번호 찾기</a>
 </h2>
 
-<div id="findId" class="findId">
+<div id="findYn" class="findYn">
 	<div class="postWrite">
 		<dl>
 			<dt>
 				<label>이름</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="이름 입력" name="empNm">
+				<input type="text" title="이름" name="findNm" id="findNm">
 			</dd>
 		</dl>
 		<dl>
@@ -24,8 +24,8 @@
 				<label>이메일</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="이메일 입력" name="empMail"> <input
-					type="button" class="stb-box-btn email-btn" value="코드 전송" onclick="sendNum(this.form);">
+				<input type="text" title="이메일" id="findEmail" name="findEmail"> 
+				<input type="button" class="stb-box-btn email-btn" value="코드 전송" onclick="sendNum(this.form);">
 			</dd>
 		</dl>
 		<dl>
@@ -33,8 +33,8 @@
 				<label>이메일 인증</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="인증번호 입력" name="authNum" id="authNum">
-				<input type="button" class="stb-box-btn" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
+				<input type="text" title="인증번호 입력" id="authNum">
+				<input type="button" class="stb-box-btn" value="인증하기" onclick="chkNum(this.form);">
 			</dd>
 		</dl>
 	</div>
