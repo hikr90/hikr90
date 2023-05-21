@@ -16,19 +16,11 @@ public class CoreInqyDao {
 	@Autowired
 	SqlSession sqlsession;
 	
-	// 사용자 메뉴 조회
+	// 메뉴 조회
 	public List<HashMap<String, Object>> intrCoreInqy10101010(Model model, HashMap<String,Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("coreInqy.intrCoreInqy10101010", paramMap);
-		return defaultList;
-	}
-
-	// 관리자 메뉴 조회
-	public List<HashMap<String, Object>> intrCoreInqy10102010(Model model, HashMap<String,Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("coreInqy.intrCoreInqy10102010", paramMap);
 		return defaultList;
 	}
 

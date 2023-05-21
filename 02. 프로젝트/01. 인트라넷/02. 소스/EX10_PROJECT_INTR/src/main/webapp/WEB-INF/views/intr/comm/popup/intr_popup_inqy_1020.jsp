@@ -17,7 +17,7 @@
 	// 아이디, 비밀번호 찾기 여부 검증
 	function findIdYn(){
 		//
-		var findYn = "";
+		findYn = "";
 		if($("#findYn").length < 1){
 			findYn = 'N';
 		}else {
@@ -68,11 +68,15 @@
 				//
 				var json = eval(data);
    				if(json[0].res=="NO"){
-   	   				//
-   					alert("<spring:message code="FIND.INFO.FAIL"/>");
+   	   				// 발송 실패
+   					alert("<spring:message code="FIND.INFO.NONE"/>");
    				} else {
-   					//
-   					alert("<spring:message code="FIND.INFO.SUCCESS"/>");
+   					// 발송 성공
+   					alert("<spring:message code="JOIN.CODE.SUCCESS"/>");
+   					// 인증 코드 입력
+   					$("#joinCode").val(json[0].joinCode);
+   					$("#empId").val(json[0].empId);
+   					$("#empPwd").val(json[0].empPwd);
    				}
 			},
 			error : function(xhr, status, error){
@@ -82,17 +86,49 @@
 		});
 	}
 	
-	//
+	// 인증하기
 	function chkNum(f){
 		//
-		EmaChkYn = true;
+		var joinCode = $("#joinCode").val();
+		var inputCode = $("#inputCode").val();
+		// 인증코드 입력값이 없는 경우
+		if(inputCode==""){
+			//
+			alert("<spring:message code="INPUT.CODE.NONE"/>");
+			return;
+		}
+		// 인증을 하지 않았을 경우
+		if(joinCode==""){
+			//
+			alert("<spring:message code="JOIN.CODE.NONE"/>");
+			return;	
+		} 
+		// 인증코드와 입력코드 비교
+		if(inputCode!=joinCode){
+			// 인증 실패
+			EmaChkYn = false;
+			alert("<spring:message code="CODE.NO.COINCIDE"/>");
+			return;
+			
+		} else {
+			// 인증 성공
+			EmaChkYn = true;
+			alert("<spring:message code="CODE.SUCCESS"/>");
+			return;	
+		}
 	}
 	
 	// 찾기
 	function popConfirm(){
 		//
-		alert(EmaChkYn);
-	}	
+		if(!EmaChkYn){
+			alert("<spring:message code="FIND.CHECK.NONE"/>");
+			return;	
+		}
+		//
+		findYn == "Y" ? findInfo = $("#empId").val() : $("#empPwd").val();
+		alert("찾고 계신 정보는 [" + findInfo + "] 입니다.");
+	}
 </script>
 <form id="popForm">
 <div class="_popList">
@@ -103,6 +139,10 @@
 					<div class="_contentArea _formArea" style="margin-bottom: 0px;">
                         <div class="_find_info_Wrap">
                             <div class="postWrap" style="height: 350px;">
+                            	<input type="hidden" id="joinCode" value="">
+                            	<input type="hidden" id="empId" value="">
+                            	<input type="hidden" id="empPwd" value="">
+
                                 <div id="postCon">
                                 
                                 </div>

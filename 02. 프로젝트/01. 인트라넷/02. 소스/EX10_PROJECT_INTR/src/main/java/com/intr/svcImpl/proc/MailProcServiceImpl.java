@@ -36,12 +36,13 @@ public class MailProcServiceImpl implements MailProcService{
 	// 메일 전송
 	public String intrMailProc101010(Model model, HashMap<String, Object> paramMap) {
 		//
-		System.out.println("param : "+paramMap);
-		//
 		String defaultStr = ""; // 결과 전달 JSON
 		String resStr = "NO";	// 결과값
+		String joinCode = "";	// 인증 코드
+		String empId = "";		// 아이디
+		String empPwd = "";		// 비밀번호
+		//
 		HashMap<String, Object> defaultInfo = null;
-		
 		//
 		try {
 			
@@ -51,15 +52,18 @@ public class MailProcServiceImpl implements MailProcService{
 			defaultInfo = loginInqyDao.intrLoginInqy10301010(paramMap);
 			//
 			if(defaultInfo!=null) {
-				//
+				// 값 저장
 				resStr = "YES";
+				empId = String.valueOf(defaultInfo.get("empId"));
+				empPwd = String.valueOf(defaultInfo.get("empPwd"));
+				
 				//--------------------------------------------------------------------------------------------
 				// 메일 전송
 				//--------------------------------------------------------------------------------------------
-				SendMail(paramMap);
+				joinCode = SendMail(paramMap);
 			}
 			//
-			defaultStr = String.format("[{'res':'%s'}]", resStr);
+			defaultStr = String.format("[{'res':'%s','joinCode':'%s','empId':'%s','empPwd':'%s'}]", resStr, joinCode, empId, empPwd);
 			
 		} catch (Exception e) {
 			//
@@ -70,7 +74,7 @@ public class MailProcServiceImpl implements MailProcService{
 	}
 
 	// 메일 발송
-	private void SendMail(HashMap<String, Object> paramMap) {
+	private String SendMail(HashMap<String, Object> paramMap) {
 		//
         MimeMessage message = javaMailSender.createMimeMessage();
         //
@@ -139,6 +143,8 @@ public class MailProcServiceImpl implements MailProcService{
             //
         	logger.error("[처리 결과] 메일 전송 실패 : "+e.getMessage());
         }
+        
+		return joinCode;
     }
 
 }

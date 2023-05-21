@@ -58,6 +58,10 @@ function chgPopup(mappingId){
 		success : function(data){
 			//
 			EmaChkYn = false;
+			$("#joinCode").val("");
+			$("#empId").val("");
+			$("#empPwd").val("");
+			//
 			$("#postCon").html(data);
 		},
 		error : function(res, status, error){

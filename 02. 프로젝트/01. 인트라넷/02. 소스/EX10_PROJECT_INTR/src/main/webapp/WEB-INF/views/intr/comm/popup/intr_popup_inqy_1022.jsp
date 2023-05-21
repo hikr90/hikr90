@@ -30,10 +30,10 @@
 		</dl>
 		<dl>
 			<dt>
-				<label>이메일 인증</label>
+				<label>인증코드</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="인증번호" name="authNum" id="authNum">
+				<input type="text" title="인증번호" id="inputCode">
 				<input type="button" class="stb-box-btn" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
 			</dd>
 		</dl>

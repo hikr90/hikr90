@@ -1,13 +1,14 @@
 package com.intr.svc.inqy;
 
 import java.util.HashMap;
+
 import org.springframework.ui.Model;
 
 public interface CoreInqyService {
 	// 메뉴 조회
-	void intrCoreInqy101010(Model model, HashMap<String, Object> paramMap); // 사용자 메뉴
-	void intrCoreInqy101020(Model model, HashMap<String, Object> paramMap); // 관리자 메뉴
-	void intrCoreInqy101030(Model model, HashMap<String, Object> paramMap); // 전체
+	void intrCoreInqy101020(String type); 									// 메뉴 세션 저장
+	void intrCoreInqy101010(Model model, HashMap<String, Object> paramMap); // 메뉴 조회
+	void intrCoreInqy101030(Model model, HashMap<String, Object> paramMap); // 전체 메뉴
 
 	// 페이징 처리
 	void intrCoreInqy102010(Model model, HashMap<String, Object> paramMap);

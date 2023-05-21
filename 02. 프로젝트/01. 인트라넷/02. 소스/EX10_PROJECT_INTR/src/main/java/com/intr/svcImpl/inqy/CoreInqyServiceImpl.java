@@ -3,6 +3,9 @@ package com.intr.svcImpl.inqy;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ import com.intr.vo.EmpVO;
 public class CoreInqyServiceImpl implements CoreInqyService{
 	//
 	@Autowired
+	HttpServletRequest request;
+	
+	@Autowired
 	CoreInqyDao coreInqyDao;
 	
 	@Autowired
@@ -29,39 +35,56 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// 사용자 메뉴 조회
+	// 메뉴 조회
 	public void intrCoreInqy101010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 사용자 메뉴 조회
+			// 메뉴 세션 조회
+			//--------------------------------------------------------------------------------------------
+			HttpSession session = request.getSession();
+			String menuType = (String)session.getAttribute("menuType");
+			//
+			if(menuType!=null) {
+				paramMap.put("menuType", menuType);
+			}
+			
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = coreInqyDao.intrCoreInqy10101010(model, paramMap);
 			model.addAttribute("menuList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사용자 메뉴 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 메뉴 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
 
-	// 관리자 메뉴 조회
-	public void intrCoreInqy101020(Model model, HashMap<String, Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
+	// 메뉴 세션 저장
+	public void intrCoreInqy101020(String type) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 관리자 메뉴 조회
+			// 메뉴 세션 저장
+			// 	- 0 : 사용자 , 1 : 관리자
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreInqyDao.intrCoreInqy10102010(model, paramMap);
-			model.addAttribute("menuList", defaultList);
+			HttpSession session = request.getSession();
+			String menuType = (String)session.getAttribute("menuType");
+			
+			// 세션이 없음 (처음 상태)
+			if(menuType==null || menuType=="1") {
+				type = "0";
+			} 
+			
+			// 세션 값 저장
+			session.setAttribute("menuType", type);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 관리자 메뉴 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 메뉴 세션 저장 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
 
