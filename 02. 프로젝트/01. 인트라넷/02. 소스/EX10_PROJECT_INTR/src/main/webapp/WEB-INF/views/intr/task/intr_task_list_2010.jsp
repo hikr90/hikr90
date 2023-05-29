@@ -87,7 +87,7 @@
    	   					//
 	  					addCnt = 0;
    	   					//
-   						alert("<spring:message code="comm.proc.succ"/>");
+   						alert("<spring:message code="PROC.SUCCESS"/>");
    						formSubmit('intrTaskInqy2010.do');
    					} else {
    						//
@@ -96,7 +96,7 @@
 				},
 				error : function(xhr, status, error){
 			    	//
-					alert("<spring:message code="comm.proc.error"/>");				
+					alert("<spring:message code="PROC.ERROR"/>");				
 			    }
 			});
 		}

@@ -1,7 +1,12 @@
 package com.intr.ctr.inqy;
 
 
+import java.io.PrintWriter;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +39,21 @@ public class LoginInqyController {
 	 * 내용 : 로그인 화면 조회
 	 */
 	@RequestMapping(value={"/","/intrLoginInqy1010.do"})
-	public String intrLoginInqy1010(Model model) throws Exception {
+	public String intrLoginInqy1010(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//
+		String returnUrl = request.getRequestURI();
+		HttpSession session = request.getSession();
+		EmpVO empInfo = (EmpVO)session.getAttribute("empVO");
 		//
 		try {
 			//
-			
+			if(returnUrl.contains("/intrLoginInqy1010.do") && empInfo==null) {
+				// ALERT 호출
+				response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter pw = response.getWriter();
+	            pw.println("<script>alert('로그인 정보가 없습니다.');</script>");
+	            pw.flush(); 	
+			}
 			
 		} catch (Exception e) {
 			//

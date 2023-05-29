@@ -60,7 +60,7 @@ public class MailProcServiceImpl implements MailProcService{
 				//--------------------------------------------------------------------------------------------
 				// 皋老 傈价
 				//--------------------------------------------------------------------------------------------
-				joinCode = SendMail(paramMap);
+				joinCode = sendMail(paramMap);
 			}
 			//
 			defaultStr = String.format("[{'res':'%s','joinCode':'%s','empId':'%s','empPwd':'%s'}]", resStr, joinCode, empId, empPwd);
@@ -74,7 +74,7 @@ public class MailProcServiceImpl implements MailProcService{
 	}
 
 	// 皋老 惯价
-	private String SendMail(HashMap<String, Object> paramMap) {
+	private String sendMail(HashMap<String, Object> paramMap) {
 		//
         MimeMessage message = javaMailSender.createMimeMessage();
         //

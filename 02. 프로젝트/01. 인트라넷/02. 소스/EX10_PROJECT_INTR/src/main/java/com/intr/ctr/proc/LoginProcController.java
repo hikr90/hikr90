@@ -101,7 +101,7 @@ public class LoginProcController {
 		}
 		
 		//
-		return "redirect:intrLoginInqy1010.do";
+		return "redirect:/";
 
 	}
 

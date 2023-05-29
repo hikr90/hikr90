@@ -36,7 +36,7 @@
 	     				var json = eval(data);
 	   					if(json[0].res=="YES"){
 	   						//
-	   						alert("<spring:message code="comm.proc.succ"/>");
+	   						alert("<spring:message code="PROC.SUCCESS"/>");
 	   						formSubmit('intrEmpInqy1030.do');
 	   					} else {
 							//
