@@ -42,7 +42,7 @@
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.brdIdx}">
 					
-						<div class="postCon">
+						<div class="postCon" style="padding-bottom: 20px;">
 						<div class="postWrap">
                             <h2>공지사항 상세</h2>
 							<!-- Form postViewWrap  -->

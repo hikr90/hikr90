@@ -37,7 +37,7 @@
    						alert("<spring:message code="LOGIN.PWD.FAIL"/>");
    					} else {
    						//
-   						location.href = "intrLoginInqy1020.do";
+   						location.href = "intrMainInqy1020.do";
    					}
    				},
    				error : function(res, status, error){

@@ -3,34 +3,55 @@
 <mapper namespace="coreInqy">
 	<select id="intrCoreInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrCoreInqy10101010 : 메뉴 조회 */
-		SELECT 
-				DATA.*
-			,	LEVEL AS LV
-		FROM (
+		WITH A_DATA AS 
+			(
 				SELECT 
-				        M.MENU_CD 
-				    ,   M.MENUTYPE_CD
-				    ,   M.MENU_NM
-				    ,   M.UPPR_MENU_CD
-				    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
-				    ,   M.MAPPING_ID
-				    ,   M.USE_YN
-				    ,   M.DISP_ORDER
-				    ,   M.REMARK
-				FROM INTR_MENU M
-				LEFT OUTER JOIN INTR_MENU UPPR_M
-				ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
-				WHERE 1=1
-					<if test="menuType != null and menuType != '' and menuType != 1">
-						AND M.MENUTYPE_CD = '0'
-					</if>
-					<if test="menuType != null and menuType != '' and menuType != 0">
-						AND M.MENUTYPE_CD = '1'
-					</if>
-			) DATA 
-			START WITH DATA.UPPR_MENU_CD IS NULL
-			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
-			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+							DATA.*
+				FROM 
+							(
+								SELECT 
+										AM.MENU_CD
+								FROM INTR_AUTH A
+								INNER JOIN INTR_EMP E
+									ON E.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+									AND A.USE_YN = 'Y'
+                                INNER JOIN INTR_AUTH_EMP AE
+                                    ON AE.EMP_IDX = E.EMP_IDX
+                                INNER JOIN INTR_AUTH_MENU AM
+                                    ON AM.AUTH_CD = A.AUTH_CD
+                                GROUP BY AM.MENU_CD
+							) DATA
+			)
+			SELECT 
+						DATA.*
+					,	LEVEL AS LV
+			FROM (
+					SELECT
+						        M.MENU_CD 
+						    ,   M.MENUTYPE_CD
+						    ,   M.MENU_NM
+						    ,   M.UPPR_MENU_CD
+						    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
+						    ,   M.MAPPING_ID
+						    ,   M.USE_YN
+						    ,   M.DISP_ORDER
+						    ,   M.REMARK
+					FROM A_DATA
+					INNER JOIN INTR_MENU M
+					ON M.MENU_CD = A_DATA.MENU_CD
+					LEFT OUTER JOIN INTR_MENU UPPR_M
+						ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+					WHERE 1=1
+						<if test="menuType != null and menuType != '' and menuType != 1">
+							AND M.MENUTYPE_CD = '0'
+						</if>
+						<if test="menuType != null and menuType != '' and menuType != 0">
+							AND M.MENUTYPE_CD = '1'
+						</if>
+				) DATA
+				START WITH DATA.UPPR_MENU_CD IS NULL
+				CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+				ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
 	</select>
 		
 	<select id="intrCoreInqy10103010" resultType="CamelHashMap" parameterType="java.util.HashMap">

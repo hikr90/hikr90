@@ -32,7 +32,7 @@
 				<div id="sub_content" class="_inner" style="padding-top: 40px;">
 					<div class="_contentArea _formArea">
 						<!-- Form postWrap  -->
-						<div class="postWrap" style="padding-bottom: 20%;">
+						<div class="postWrap" style="height: 710px;">
 							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							<input type="hidden" id="page" name="page" value="${param.page}">
 							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
@@ -109,6 +109,7 @@
 											<td>${list.brdReadhit}</td>
                                         </tr>
                                         </c:forEach>
+                                        
                                         <!-- 글이 없는 경우 -->
                                         <c:if test="${ empty defaultList }">
                                             <tr>
@@ -117,6 +118,7 @@
                                                 </td>
                                             </tr>
                                         </c:if>
+                                        
 									</tbody>
 								</table>
 							</div>

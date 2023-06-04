@@ -39,16 +39,26 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 	public void intrCoreInqy101010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
+		EmpVO empInfo = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 메뉴 세션 조회
+			// 메뉴 정보 세션 조회
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
 			String menuType = (String)session.getAttribute("menuType");
 			//
 			if(menuType!=null) {
 				paramMap.put("menuType", menuType);
+			}
+
+			//--------------------------------------------------------------------------------------------
+			// 로그인 정보 세션 조회
+			//--------------------------------------------------------------------------------------------
+			empInfo = (EmpVO)session.getAttribute("empVO");
+			//
+			if(empInfo!=null) {
+				paramMap.put("empIdx", empInfo.getEmpIdx());
 			}
 			
 			//--------------------------------------------------------------------------------------------

@@ -78,7 +78,7 @@
 			<div id="_content">
 				<div id="sub_content" class="_inner" style="padding-top: 40px;">
 					<div class="_contentArea _formArea">
-					<div class="postCon">
+					<div class="postCon" style="padding-bottom: 20px;">
 						<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.brdIdx}">
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">

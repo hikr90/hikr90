@@ -73,7 +73,9 @@
 	// 권한 상세보기
 	function detCall(authCd){
 		//
+		$(".authCd").val(authCd);
 		var param = $("#form").serialize();
+		//
 		$.ajax({
     		type : 'post',
         	url : 'intrAuthInqy3011.do',
@@ -102,6 +104,7 @@
 			<div id="_content">
 				<div id="sub_content" class="_inner">					
 					<div class="_contentArea _formArea" style="margin-bottom: 0px;">
+						<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
 					
 						<div class="postWrap" style="padding-top: 60px;">
 							<h2>사용자 권한 관리</h2>

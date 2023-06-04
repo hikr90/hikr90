@@ -46,8 +46,10 @@ public class LoginInqyController {
 		EmpVO empInfo = (EmpVO)session.getAttribute("empVO");
 		//
 		try {
-			//
-			if(returnUrl.contains("/intrLoginInqy1010.do") && empInfo==null) {
+			// LOGIN 제외 컨트롤러의 경우
+			if(!returnUrl.contains("Login") 
+			&& !returnUrl.equals("/intr/")	
+			&& empInfo==null) {
 				// ALERT 호출
 				response.setContentType("text/html; charset=UTF-8");
 	            PrintWriter pw = response.getWriter();
@@ -64,13 +66,13 @@ public class LoginInqyController {
 		return IntrConstant.VIEW_PATH_LOGIN + IntrConstant.INTR_LOGIN_INQY_1010;
 	}
 
-	/* 명칭 : intrLoginInqy1020
+	/* 명칭 : intrMainInqy1020
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
 	 * 내용 : 사용자 메인 화면 이동
 	 */
-	@RequestMapping("/intrLoginInqy1020.do")
-	public String intrLoginInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrMainInqy1020.do")
+	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -92,13 +94,13 @@ public class LoginInqyController {
 		return IntrConstant.VIEW_PATH_MAIN + IntrConstant.INTR_MAIN_INQY_1010;
 	}
 
-	/* 명칭 : intrLoginInqy1030
+	/* 명칭 : intrMainInqy1030
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
 	 * 내용 : 관리자 메인 화면 조회
 	 */
-	@RequestMapping("/intrLoginInqy1030.do")
-	public String intrLoginInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrMainInqy1030.do")
+	public String intrMainInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------

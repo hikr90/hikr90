@@ -20,11 +20,10 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		EmpVO empInfo = (EmpVO)session.getAttribute("empVO");
 
-		// 로그인 화면, 로그인 처리, 로그아웃 시
-		if(returnUrl.equals("/") 
-			|| returnUrl.contains("/intrLoginInqy1010") 
-			|| returnUrl.contains("/intrLoginProc1010")
-			|| returnUrl.contains("/intrLoginProc1030.do")) {
+		// LOGIN 관련 컨트롤러인 경우
+		if(returnUrl.equals("/intr/") 
+		|| returnUrl.contains("Login")
+		|| returnUrl.contains("intrPopupInqy102")) {
 			return resYn;
 		}
 
@@ -34,8 +33,10 @@ public class Interceptor extends HandlerInterceptorAdapter{
 			return resYn;
 		}
 
-		//
-		if(empInfo==null) {
+		// LOGIN 제외 컨트롤러의 경우
+		if(!returnUrl.equals("/intr/") // 첫 화면
+		&& !returnUrl.contains("Login") // 로그인 관련
+		&& empInfo==null) {
 			// 세션 정보 미존재
 			resYn = false;
 			response.sendRedirect("intrLoginInqy1010.do");

@@ -184,15 +184,25 @@
 											<td>${list.brdReadhit}</td>
                                         </tr>
                                         </c:forEach>
+                                        
+                                        <!-- 글이 없는 경우 -->
+                                        <c:if test="${ empty defaultList }">
+                                            <tr>
+                                                <td align="center" colspan="6">
+                                              	      등록된 글이 없습니다.
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                        
 									</tbody>
 								</table>
 							</div>
 						
-						<div class="scrollArea"></div><!-- End pagingWrap -->
-							<c:if test="${ not empty defaultList }">
-								총 건수 : ${ defaultList[0].listCnt }건
-							</c:if>
-						</div><!-- End postWrap -->
+							<div class="scrollArea"></div><!-- End pagingWrap -->
+								<c:if test="${ not empty defaultList }">
+									총 건수 : ${ defaultList[0].listCnt }건
+								</c:if>
+							</div><!-- End postWrap -->
 					</div><!-- End _contentArea _formArea -->
 				</div><!-- End _inner -->
 			</div><!-- End _content -->

@@ -11,7 +11,7 @@
 	//
 	$(document).ready(function() {
 		// 업무 삭제
-		$(document).on("click", "#taskRemove", function() {
+		$(document).on("click", "#taskDel", function() {
 			$(this).parent().parent().remove();
 		});
 		//
@@ -36,7 +36,7 @@
 		taskStr += 			"<input type='text' id='taskContent' name='taskContent' value='' style='height: 33px; text-align: left; width: 100%;'>";
 		taskStr += 		"</td>";
 		taskStr += 		"<td>";
-		taskStr += 			"<span id='taskRemove' class='taskRemove'></span>";
+		taskStr += 			"<span id='taskDel' class='taskDel'></span>";
 		taskStr += 		"</td>";
 		taskStr += "</tr>";
 		//
@@ -162,7 +162,7 @@
 												<input type="text" id="taskContent" name="taskContent" value="${list.taskContent}" style="height: 33px; text-align: left; width: 100%;">
 											</td>
 											<td>
-												<span id="taskRemove" class="taskRemove"></span>
+												<span id="taskDel" class="taskDel"></span>
 											</td>
                                         </tr>
                                         </c:forEach>

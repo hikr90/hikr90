@@ -58,7 +58,7 @@ public class LoginProcServiceImpl implements LoginProcService{
 					//
 					resStr = "YES";
 					session.setAttribute("empVO", defaultInfo);
-					session.setMaxInactiveInterval(2*2); // 저장 시간 1시간
+					session.setMaxInactiveInterval(60*60); // 저장 시간 1시간
 				}
 				
 			} else {

@@ -11,8 +11,8 @@
 		<div class="utilWrap">
 			<div class="login_state">
 				<ul class="utilList">
-					<li><a href="intrLoginInqy1030.do">관리자 화면으로</a></li>
-					<li><a href="intrLoginInqy1020.do">사용자 화면으로</a></li>
+					<li><a href="intrMainInqy1030.do">관리자 화면으로</a></li>
+					<li><a href="intrMainInqy1020.do">사용자 화면으로</a></li>
 					<li><a onclick="logout();">로그아웃</a></li>
 				</ul>
 				<br><br>

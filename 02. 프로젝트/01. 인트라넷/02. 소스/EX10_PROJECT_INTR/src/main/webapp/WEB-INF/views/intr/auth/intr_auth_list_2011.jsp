@@ -101,8 +101,10 @@
 	
 	// 저장 처리
 	function regProc(){
-		//
+		// 권한 값 지정
 		$("#authCd").val($(".list_bg").attr('id'));
+		
+		// 권한 메뉴 추가
 		$("input[name=authMenuCd]").each(function(idx) {
 			$(this).attr("name","menuCd"+idx);
 		});
