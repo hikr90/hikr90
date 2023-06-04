@@ -18,7 +18,7 @@
                                 INNER JOIN INTR_AUTH_EMP AE
                                     ON AE.EMP_IDX = E.EMP_IDX
                                 INNER JOIN INTR_AUTH_MENU AM
-                                    ON AM.AUTH_CD = A.AUTH_CD
+                                    ON AM.AUTH_CD = AE.AUTH_CD
                                 GROUP BY AM.MENU_CD
 							) DATA
 			)

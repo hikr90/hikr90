@@ -141,8 +141,7 @@
 													<caption>권한 목록 테이블</caption>
 													<colgroup>
 														<col class="w7per">
-														<col class="w20per">
-														<col class="w10per">
+														<col class="w30per">
 													</colgroup>
 													<thead>
 														<tr>
@@ -153,7 +152,6 @@
 																</span>
 															</th>
 															<th scope="col">메뉴명</th>
-															<th scope="col">타입</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -169,7 +167,6 @@
 																<c:if test="${list.lv ne '1'}">&nbsp;&nbsp;ㄴ</c:if>
 																${list.menuNm}
 															</td>
-															<td>${list.menutypeCd}</td>
 														</tr>
 						                                </c:forEach>
 													</tbody>

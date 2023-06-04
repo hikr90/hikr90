@@ -6,12 +6,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<header>
+<header style="min-height: 100px;">
 	<div class="_wrap">
 		<div class="utilWrap">
 			<div class="login_state">
 				<ul class="utilList">
+				<c:if test="${empVO.authYn eq 'Y'}">
 					<li><a href="intrMainInqy1030.do">관리자 화면으로</a></li>
+				</c:if>
+					
 					<li><a href="intrMainInqy1020.do">사용자 화면으로</a></li>
 					<li><a onclick="logout();">로그아웃</a></li>
 				</ul>

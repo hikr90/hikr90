@@ -4,7 +4,7 @@ public class EmpVO {
 	//--------------------------------------------------------------------------------------------
 	private String empIdx, deptCd, deptNm, gradeCd, gradeNm, empNm,
 					empGender, empPhone, empMail, empAddr, empAddrInfo,
-					empId, empPwd, empHireDate, empResiDate;
+					empId, empPwd, empHireDate, empResiDate, authYn;
 	//--------------------------------------------------------------------------------------------
 
 	public String getEmpIdx() {
@@ -126,4 +126,13 @@ public class EmpVO {
 	public void setEmpResiDate(String empResiDate) {
 		this.empResiDate = empResiDate;
 	}
+	
+	public String getAuthYn() {
+		return authYn;
+	}
+
+	public void setAuthYn(String authYn) {
+		this.authYn = authYn;
+	}
+
 }
