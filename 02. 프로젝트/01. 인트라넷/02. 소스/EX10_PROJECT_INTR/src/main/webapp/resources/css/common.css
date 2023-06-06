@@ -349,9 +349,9 @@ header #gnbWrap #_nav a:hover, header #gnbWrap #_nav a:focus, header #gnbWrap #_
 header #gnbWrap #_nav .ul_1 > .li_1 { position: relative; display: inline-block; vertical-align: top; margin: 0 4%; }
 header #gnbWrap #_nav .ul_1 > .li_1 > .a_1 { display: block; color: #214b97; font-size: 1.8rem; font-weight: 800; padding: 10px 0 20px; }
 header #gnbWrap #_nav .ul_1 > .li_1._active .a_1, header #gnbWrap #_nav .ul_1 > .li_1._open .a_1 { color: #214b97; font-weight: 700; }
-header #gnbWrap #_nav .ul_1 > .li_1._open > .ul_2 { height: auto; width: 500px; text-align: left; padding-left: 100%; }
+header #gnbWrap #_nav .ul_1 > .li_1._open > .ul_2 { height: auto; width: 390px; text-align: left; }
 header #gnbWrap #_nav .ul_1 > .li_1.hidden { margin: 0; }
-header #gnbWrap #_nav .ul_1 > .li_1 .ul_2 { overflow: auto; width: 400px; height: 0; position: absolute; top: 52px; left: -130px; text-align: left; background-color: #fff; padding: 0 18px; -webkit-box-sizing: border-box; box-sizing: border-box; z-index: 2; text-align: center;}
+header #gnbWrap #_nav .ul_1 > .li_1 .ul_2 { overflow: auto; width: 400px; height: 0; position: absolute; top: 52px; left: -110%; text-align: left; background-color: #fff; padding: 0 18px; -webkit-box-sizing: border-box; box-sizing: border-box; z-index: 2; text-align: center;}
 header #gnbWrap #_nav .ul_1 > .li_1 .ul_2.hide { z-index: -999; }
 header #gnbWrap #_nav .ul_1 > .li_1 .ul_2 > .li_2 { display: block; margin: 15px 0; }
 header #gnbWrap #_nav .ul_1 > .li_1 .ul_2 > .li_2 > .a_2 { display: inline; padding: 0 10px; color: #444; font-size: 1.6rem; }

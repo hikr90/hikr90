@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public interface FileProcService {
 	// 파일 업로드
 	String intrFileProc101010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request); // 업로드
-	void intrFileProc102010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response); // 다운로드 (단건)
-	
+	// 파일 다운로드
+	void intrFileProc102010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response); // 단건
+	void intrFileProc103010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response); // 전체
 }

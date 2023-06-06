@@ -86,14 +86,16 @@
 								<dl>
 									<dt>내용</dt>
 									<dd class="post_text">
-										<pre style="font-family: NanumSquare">${ defaultInfo.brdContent }</pre>
+										<pre style="font-family: NanumSquare">${defaultInfo.brdContent}</pre>
 									</dd>
 								</dl>
 							</div><!-- End postViewWrap -->
-							
+
 							<div class="btnWrap alignR">
 								<div class="floatR">
-									<a class="_btn _grey" onclick="modCall();">수정</a>
+									<c:if test="${defaultInfo.empIdx eq empVO.empIdx}">
+										<a class="_btn _grey" onclick="modCall();">수정</a>
+									</c:if>
 									<a class="_btn _blue" onclick="listCall();">목록으로</a>
 								</div>
 							</div>

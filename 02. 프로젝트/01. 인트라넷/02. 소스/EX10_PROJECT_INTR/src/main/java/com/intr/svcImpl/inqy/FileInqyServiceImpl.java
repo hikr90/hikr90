@@ -31,7 +31,25 @@ public class FileInqyServiceImpl implements FileInqyService{
 		} else {
 			workPath = IntrConstant.EMP_PATH;
 		}
-		
+		//
+		workPath = intrFileInqy101012(paramMap, workPath);
+		//
+		return workPath;
+	}
+	
+	// (임시)파일 경로 조회
+	public String intrFileInqy101011(HashMap<String, Object> paramMap) {
+		//--------------------------------------------------------------------------------------------
+		// 경로 검색
+		//--------------------------------------------------------------------------------------------
+		String workPath = IntrConstant.TEMP_PATH;
+		workPath = intrFileInqy101012(paramMap, workPath);
+		//
+		return workPath;
+	}
+	
+	// 운영 체제 조회
+	public String intrFileInqy101012(HashMap<String, Object> paramMap, String workPath) {
 		//--------------------------------------------------------------------------------------------
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
@@ -45,4 +63,5 @@ public class FileInqyServiceImpl implements FileInqyService{
 		//
 		return workPath;
 	}
+
 }

@@ -23,7 +23,7 @@
 		
 		// 전체 다운로드
 		function zipProc(){
-			//
+			formSubmit('intrFileProc1030.do');
 		}
 	</script>
 </head>
@@ -94,7 +94,9 @@
 							
 							<div class="btnWrap alignR">
 								<div class="floatR">
-									<a class="_btn" onclick="zipProc();">전체 다운로드</a>
+									<c:if test="${defaultList ne null}">
+										<a class="_btn" onclick="zipProc();">전체 다운로드</a>
+									</c:if>
 									<a class="_btn _blue" onclick="listCall();">목록으로</a>
 								</div>
 							</div>

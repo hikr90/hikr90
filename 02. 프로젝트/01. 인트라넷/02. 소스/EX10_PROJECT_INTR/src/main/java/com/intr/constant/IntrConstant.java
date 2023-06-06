@@ -28,6 +28,7 @@ public class IntrConstant implements PageConstant, ViewConstant {
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
 	public static final String FILE_PATH = "UPLOAD/FILE"; // 파일
+	public static final String TEMP_PATH = "UPLOAD/TEMP"; // (임시)파일
 	public static final String EMP_PATH = "UPLOAD/EMP"; // 프로필 이미지
 
 }
