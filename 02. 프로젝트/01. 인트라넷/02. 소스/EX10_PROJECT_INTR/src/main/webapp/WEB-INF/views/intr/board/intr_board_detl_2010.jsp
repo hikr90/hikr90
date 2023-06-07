@@ -42,6 +42,7 @@
 						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.brdIdx}">
+						<input type="hidden" id="brdTitle" name="brdTitle" value="${defaultInfo.brdTitle}">
 					
 						<div class="postCon">
 						<div class="postWrap">
@@ -50,7 +51,7 @@
 							<div class="postView">
 								<dl>
 									<dt>제목</dt>
-									<dd>${ defaultInfo.brdTitle }</dd>
+									<dd>${defaultInfo.brdTitle}</dd>
 									<dt>작성일</dt>
 									<dd>
 										<span class="date">

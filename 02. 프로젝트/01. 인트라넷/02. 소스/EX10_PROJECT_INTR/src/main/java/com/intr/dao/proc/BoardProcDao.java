@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 @Repository
 public class BoardProcDao {
@@ -39,4 +40,12 @@ public class BoardProcDao {
 		return resInt;
 	}
 	
+	// 공지사항 조회수 증가
+	public int intrBoardProc10104010(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("boardProc.intrBoardProc10104010", paramMap);
+		return resInt;
+	}
+
 }

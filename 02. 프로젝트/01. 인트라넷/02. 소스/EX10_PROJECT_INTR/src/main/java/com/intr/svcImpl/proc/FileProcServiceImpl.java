@@ -138,15 +138,15 @@ public class FileProcServiceImpl implements FileProcService{
 	}
 
 	// 파일 다운로드
-	public void fileDownProc(String workPath, String fileNm, HttpServletRequest request, HttpServletResponse response) {
+	public void fileDownProc(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) {
 		//
 		String value = "";
+		String fullPathNm = String.format("%s/%s", path, fileNm);
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			String fullPathNm = String.format("%s/%s", workPath, fileNm);
 			File f = new File(fullPathNm);
 			byte [] b = new byte[1024*1024*4]; 
 			//
@@ -271,22 +271,18 @@ public class FileProcServiceImpl implements FileProcService{
 	// 전체 다운로드
 	public void intrFileProc103010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
 		//
-		List<HashMap<String, Object>> defaultList = null;
 		String workPath = "";
 		String tempPath = "";
 		String contentIdx = (String)paramMap.get("contentIdx");
+		String contentNm = (String)paramMap.get("brdTitle");
+		String fileNm = contentIdx + "_" + contentNm + ".zip";
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
-			// 컨텐츠 파일 정보 조회
-			//--------------------------------------------------------------------------------------------
-			defaultList = fileInqyDao.intrFileInqy101010(model, paramMap);
-			
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 생성
 			//--------------------------------------------------------------------------------------------
 			workPath = fileInqyService.intrFileInqy101010(paramMap);
-
+			
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 생성
 			//--------------------------------------------------------------------------------------------
@@ -295,8 +291,8 @@ public class FileProcServiceImpl implements FileProcService{
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			fileDownProc(tempPath, contentIdx, request, response);
-			
+			fileDownProc(tempPath, fileNm, request, response);
+
 			//--------------------------------------------------------------------------------------------
 			// 임시 경로 삭제
 			//--------------------------------------------------------------------------------------------
@@ -312,6 +308,8 @@ public class FileProcServiceImpl implements FileProcService{
 	public String makeZip(HashMap<String, Object> paramMap, String workPath) {
 		//
 		String tempPath = "";
+		String contentIdx = (String)paramMap.get("contentIdx");
+		String contentNm = (String)paramMap.get("brdTitle");
 		//
 		FileOutputStream fos = null;
 		FileInputStream fis = null;
@@ -338,7 +336,7 @@ public class FileProcServiceImpl implements FileProcService{
 			}
 			
 			// 압축 파일 생성 스트림 오픈
-			fos = new FileOutputStream(tempPath);
+			fos = new FileOutputStream(tempPath + File.separator + contentIdx + "_" + contentNm + ".zip");
 			zos = new ZipOutputStream(fos);
 			
 			// 압축할 파일을 임시 경로에 생성
@@ -382,22 +380,31 @@ public class FileProcServiceImpl implements FileProcService{
 		//
 		try {
 			//
-			String lowPath = "";
+			System.out.println("kth1 : "+path);
+			
 			File file = new File(path);
 			
 			// 하위 폴더가 존재하는 경우
 			if(file.isDirectory()) {
 				// 
 				File [] fs = file.listFiles();
-				for(File f:fs) {
-					//
-					if(f.isFile()) {
-						f.delete(); // 파일 삭제
-					} else {
-						// 폴더 인 경우 반복 함수 반복
-						lowPath = f.getPath();
-						removePath(lowPath);
+				// 폴더 내 파일이 존재하는 경우
+				if(fs.length>0) {
+					// 
+					for(File f:fs) {
+						//
+						if(f.isFile()) {
+							f.delete(); // 파일 삭제
+							removePath(f.getParent()); // 폴더 삭제
+							
+						} else {
+							// 폴더 인 경우 재귀 반복
+							removePath(f.getPath());
+						}
 					}
+				} else {
+					// 빈 폴더인 경우
+					file.delete();
 				}
 			}
 			

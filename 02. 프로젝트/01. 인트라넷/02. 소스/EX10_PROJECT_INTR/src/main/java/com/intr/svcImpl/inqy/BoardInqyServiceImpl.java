@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 
 import com.intr.dao.inqy.BoardInqyDao;
 import com.intr.dao.inqy.FileInqyDao;
+import com.intr.dao.proc.BoardProcDao;
 import com.intr.svc.inqy.BoardInqyService;
 
 @Service
@@ -22,6 +24,9 @@ public class BoardInqyServiceImpl implements BoardInqyService{
 	//
 	@Autowired
 	BoardInqyDao boardInqyDao;
+	
+	@Autowired
+	BoardProcDao boardProcDao;
 	
 	@Autowired
 	FileInqyDao fileInqyDao;
@@ -108,6 +113,18 @@ public class BoardInqyServiceImpl implements BoardInqyService{
 			//--------------------------------------------------------------------------------------------
 			defaultList = fileInqyDao.intrFileInqy101010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
+
+			//--------------------------------------------------------------------------------------------
+			// 조회수 처리
+			//--------------------------------------------------------------------------------------------
+			HttpSession session = request.getSession();
+			String readhit = (String)session.getAttribute("readhit");
+			//
+			if(readhit==null) {
+				boardProcDao.intrBoardProc10104010(model, paramMap);
+				session.setAttribute("readhit", "hit");
+			}
+
 			
 		} catch (Exception e) {
 			//

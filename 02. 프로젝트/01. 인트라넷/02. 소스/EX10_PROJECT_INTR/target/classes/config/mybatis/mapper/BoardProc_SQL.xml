@@ -50,4 +50,11 @@
 				,	BRD_CONTENT = #{brdContent, jdbcType=VARCHAR}
 		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
 	</update>	
+
+	<update id="intrBoardProc10104010" parameterType="java.util.HashMap">
+	/* intrBoardProc10104010 : 공지사항 조회수 증가 */
+		UPDATE INTR_BOARD
+			SET 	BRD_READHIT = BRD_READHIT + 1
+		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
+	</update>	
 </mapper>

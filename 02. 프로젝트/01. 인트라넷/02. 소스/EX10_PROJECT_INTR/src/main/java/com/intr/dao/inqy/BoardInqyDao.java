@@ -30,7 +30,6 @@ public class BoardInqyDao {
 		return defaultInfo;
 	}
 
-	
 	// 공지사항 상세 조회
 	public HashMap<String, Object> intrBoardInqy10102010(Model model, HashMap<String, Object> paramMap) {
 		//
@@ -38,5 +37,4 @@ public class BoardInqyDao {
 		defaultInfo = sqlsession.selectOne("boardInqy.intrBoardInqy10102010", paramMap);
 		return defaultInfo;
 	}
-	
 }
