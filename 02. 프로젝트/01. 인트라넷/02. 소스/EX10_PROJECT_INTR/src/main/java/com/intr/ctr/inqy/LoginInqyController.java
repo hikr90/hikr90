@@ -2,8 +2,10 @@ package com.intr.ctr.inqy;
 
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -72,7 +74,7 @@ public class LoginInqyController {
 	 * 내용 : 사용자 메인 화면 이동
 	 */
 	@RequestMapping("/intrMainInqy1020.do")
-	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -121,5 +123,4 @@ public class LoginInqyController {
 		//
 		return IntrConstant.VIEW_PATH_MAIN + IntrConstant.INTR_MAIN_INQY_2010;
 	}
-
 }

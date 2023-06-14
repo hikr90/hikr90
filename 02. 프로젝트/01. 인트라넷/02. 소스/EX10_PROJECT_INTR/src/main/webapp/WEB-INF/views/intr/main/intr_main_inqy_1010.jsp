@@ -11,7 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head></head>
-<body id="main">
+<script type="text/javascript">
+	//
+	
+</script>
+<body id="main" onload="javascript:openPopup('popup.html')">
 <form id="form" name="form" method="POST" onsubmit="return false;">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>

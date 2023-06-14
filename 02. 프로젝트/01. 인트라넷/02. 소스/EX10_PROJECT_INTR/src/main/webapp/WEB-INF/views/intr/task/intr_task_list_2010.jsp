@@ -1,3 +1,7 @@
+<!--명칭 : intr_task_inqy_2010
+	작성자 : 김태현
+	작성일자 : 2023.06.13
+	내용 : 사용자 업무일지 작성 화면-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -117,7 +121,7 @@
 						</div><!-- End listWrap -->
 						<!-- Form postWrap  -->
 						<div class="postWrap" style="height: 710px;">
-							<h2>업무 일지</h2>
+							<h2>업무 일지 작성</h2>
 							<div class="f-srchWrap">
 								<div class="alignC">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
