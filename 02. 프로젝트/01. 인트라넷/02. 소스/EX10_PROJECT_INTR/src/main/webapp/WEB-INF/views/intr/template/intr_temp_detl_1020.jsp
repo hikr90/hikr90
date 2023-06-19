@@ -8,29 +8,21 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
+<script>
+	$(document).ready(function() {
+		CKEDITOR.replace('editor',{ height: 500});
+	});
+</script>
+
 <!-- Form postWriteWrap  -->
-<h2 style="display: table;">신규 등록</h2>
 <div class="postWrite">
 	<dl>
 		<dt>
 			<label for="post-title">템플릿명</label>
 		</dt>
-		<dd>
+		<dd style="width: 50%;">
 			<input type="text" id="templateNm" class="templateNm" title="템플릿명" name="templateNm">
 		</dd>
-	</dl>
-	<dl>
-		<dt>
-			<label for="post-title">상위 템플릿명</label>
-		</dt>
-		<dd>
-			<input type="text" id="upprTemplateNm" class="upprTemplateNm" title="상위템플릿명" name="upprTemplateNm" readonly="readonly" style="width: 75%;">
-			<input type="hidden" id="upprTemplateCd" class="upprTemplateCd" name="upprTemplateCd">
-			<input type="button" class="stb-box-btn" value="선택" style="margin-left: 3px; margin-right: 5px; margin-bottom: 5px;" onclick="popCall();" >
-			<input type="button" class="stb-box-btn-grey" value="삭제" style="margin-right: -15px; margin-bottom: 5px;" onclick="delPopCall();">
-		</dd>
-	</dl>
-	<dl>
 		<dt>
 			<label>사용여부</label>
 		</dt>
@@ -46,13 +38,12 @@
 			</div>
 		</dd>
 	</dl>
-
 	<dl>
 		<dt>
-			<label for="post-title">비고</label>
+			<label for="post-title">내용</label>
 		</dt>
 		<dd>
-			<textarea rows="10" cols="30" title="비고" id="remark" name="remark"></textarea>
+			<textarea id="editor" name="templateContent" title="템플릿 내용"></textarea>
 		</dd>
 	</dl>
 </div>

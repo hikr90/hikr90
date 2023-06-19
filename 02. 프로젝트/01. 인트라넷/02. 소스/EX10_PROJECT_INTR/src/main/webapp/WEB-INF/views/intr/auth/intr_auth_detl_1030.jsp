@@ -7,7 +7,6 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- Form postWriteWrap  -->
-<h2 style="display: table;">정보 수정</h2>
 <div class="postWrite">
 	<dl>
 		<dt>

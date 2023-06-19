@@ -95,7 +95,7 @@
 </script>
 </head>
 <body id="main">
-<form id="form">
+<form id="form" onsubmit="return false;">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	 

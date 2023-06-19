@@ -140,31 +140,4 @@ public class TempInqyController {
 		//
 		return IntrConstant.VIEW_PATH_TEMP + IntrConstant.INTR_TEMP_DETL_1010;
 	}
-	
-	/* 명칭 : intrTempInqy1040
-	 * 작성자 : 김태현
-	 * 작성일자 : 2022.12.30
-	 * 내용 : 템플릿 수정 화면
-	 */
-	@RequestMapping("/intrTempInqy1040.do")
-	public String intrTempInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 메뉴 조회
-			//--------------------------------------------------------------------------------------------
-			coreInqyService.intrCoreInqy101010(model, paramMap);
-
-			//--------------------------------------------------------------------------------------------
-			// 템플릿 상세 조회
-			//--------------------------------------------------------------------------------------------
-			tempInqyService.intrTempInqy102010(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("[컨트롤러] 관리자 템플릿 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		//
-		return IntrConstant.VIEW_PATH_TEMP + IntrConstant.INTR_TEMP_DETL_1030;
-	}
 }

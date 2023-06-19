@@ -201,7 +201,7 @@
 </script>
 </head>
 <body id="main">
-<form id="form" name="form">
+<form id="form" name="form" onsubmit="return false;">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
@@ -247,7 +247,7 @@
 										</ul>
 									</div>	
 								</div>
-								<div class="treeInfo" id="treeInfo">
+								<div class="treeInfo" id="treeInfo" style="width: 855px; height: 474px;">
 									
 								</div>
 							</div>

@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tempInqy">
+	<resultMap type="HashMap" id="getTempInfo">
+		<result property="templateCd" column="TEMPLATE_CD"/>
+		<result property="templateNm" column="TEMPLATE_NM"/>
+		<result property="useYn" column="USE_YN"/>
+		<result property="templateContent" column="TEMPLATE_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+
 	<select id="intrTempInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrTempInqy10101010 : 템플릿 목록 조회 */
 		SELECT 
-        		    DATA.*
-        		,   CASE WHEN LEAD(DATA.UPPR_TEMPLATE_CD, 1) OVER (ORDER BY 1) = DATA.TEMPLATE_CD
-                		THEN 'N'
-                		ELSE 'Y'
-            		END AS ISLEAF
-		FROM (
-        		SELECT 
-			                TEMP.TEMPLATE_CD
-			            ,   TEMP.TEMPLATE_NM
-			            ,   TEMP.UPPR_TEMPLATE_CD
-			            ,   LEVEL AS LV
-			            ,   TEMP.USE_YN
-			            ,   TEMP.DISP_ORDER
-			            ,   TEMP.REMARK
-			        FROM INTR_TEMPLATE TEMP
-			        WHERE 1=1
-			    		<if test="srchNm != null and srchNm != ''">
-						   	AND REGEXP_REPLACE(LOWER(TEMP.TEMPLATE_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-				    	</if>
-	            	START WITH TEMP.UPPR_TEMPLATE_CD IS NULL
-	            	CONNECT BY PRIOR TEMP.TEMPLATE_CD = TEMP.UPPR_TEMPLATE_CD
-	            	ORDER SIBLINGS BY TEMP.TEMPLATE_CD
-	        ) DATA
+				TMP.TEMPLATE_CD
+	        ,   TMP.TEMPLATE_NM
+	        ,   TMP.USE_YN
+	        ,   TMP.DISP_ORDER
+	        ,   TMP.REMARK
+		FROM INTR_TEMPLATE TMP
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+				AND REGEXP_REPLACE(LOWER(TMP.TEMPLATE_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+	    	</if>
 	</select>
 	
-	<select id="intrTempInqy10201010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+	<select id="intrTempInqy10201010" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getTempInfo">
 		/* intrTempInqy10201010 : 템플릿 상세 조회 */
 		SELECT 
-					LT.TEMPLATE_CD
-				, 	LT.TEMPLATE_NM
-				, 	LT.UPPR_TEMPLATE_CD
-				, 	UT.TEMPLATE_NM AS UPPR_TEMPLATE_NM
-				,	LT.USE_YN
-				, 	LT.DISP_ORDER
-				, 	LT.REMARK
-		FROM INTR_TEMPLATE LT
-		LEFT OUTER JOIN INTR_TEMPLATE UT
-			ON UT.TEMPLATE_CD = LT.UPPR_TEMPLATE_CD
-		WHERE LT.TEMPLATE_CD = #{templateCd, jdbcType=VARCHAR}
+				TMP.TEMPLATE_CD
+	        ,   TMP.TEMPLATE_NM
+	        ,	TMP.TEMPLATE_CONTENT
+	        ,	TMP.USE_YN
+		FROM INTR_TEMPLATE TMP
+		WHERE 1=1
+			AND TMP.TEMPLATE_CD = #{templateCd, jdbcType=VARCHAR}
 	</select>
 
 </mapper>

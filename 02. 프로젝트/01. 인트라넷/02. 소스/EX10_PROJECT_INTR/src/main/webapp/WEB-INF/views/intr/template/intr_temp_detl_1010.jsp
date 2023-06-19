@@ -9,46 +9,50 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
+<script>
+	$(document).ready(function() {
+		CKEDITOR.replace('editor',{ height: 500});
+	});
+</script>
+
+
 <!-- Form postWriteWrap  -->
-<h2 style="display: table;">상세 보기</h2>
 <div class="postWrite">
 	<dl>
 		<dt>
 			<label for="post-title">템플릿명</label>
 		</dt>
-		<dd>
-			${defaultInfo.templateNm} 
+		<dd style="width: 50%;">
+			<input type="text" id="templateNm" title="템플릿명" name="templateNm" value="${defaultInfo.templateNm}">
+			<input type="hidden" class="templateCd" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
 		</dd>
-	</dl>
-	<dl>
-		<dt>
-			<label for="post-title">상위 템플릿명</label>
-		</dt>
-		<dd>
-			${defaultInfo.upprTemplateNm}
-		</dd>
-	</dl>
-	<dl>
 		<dt>
 			<label for="post-title">사용여부</label>
 		</dt>
 		<dd>
-			<c:if test="${defaultInfo.useYn eq 'Y'}">예</c:if>
-			<c:if test="${defaultInfo.useYn ne 'Y'}">아니오</c:if>
+			<div class="_radioBox enter-chkBox">
+				<span class="radio-area"> 
+					<input type="radio" id="chk-local" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
+					<label for="chk-local">예<span></span></label>
+					
+					<input type="radio" id="chk-foreign" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
+					<label for="chk-foreign">아니오<span></span></label>
+				</span> 
+			</div>
 		</dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="post-title">비고</label>
+			<label for="post-title">템플릿 내용</label>
 		</dt>
-		<dd style="height: 120px; vertical-align: text-top;">
-			${defaultInfo.remark}
+		<dd>
+			<textarea id="editor" name="templateContent" title="템플릿 내용">${defaultInfo.templateContent}</textarea>
 		</dd>
 	</dl>
 </div>
 
 <div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _line" onclick="modCall(this.form);" value="수정">
+	<input type="button" class="_btn _line" onclick="modProc(this.form);" value="수정">
 	<input type="button" class="_btn _grep" onclick="delProc(this.form);" value="삭제">	
 </div>
 	

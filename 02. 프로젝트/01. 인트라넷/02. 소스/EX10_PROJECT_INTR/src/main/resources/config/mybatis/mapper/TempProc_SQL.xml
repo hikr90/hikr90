@@ -7,7 +7,7 @@
 		(
 				TEMPLATE_CD
 			,	TEMPLATE_NM
-			,	UPPR_TEMPLATE_CD
+			,	TEMPLATE_CONTENT
 			,	USE_YN
 			,	DISP_ORDER
 			,	REMARK
@@ -18,14 +18,14 @@
 					'TEMP_' || LPAD(NVL(MAX(SUBSTR(TEMPLATE_CD,LENGTH(TEMPLATE_CD)-3,LENGTH(TEMPLATE_CD))),0) + 1,4,0) AS TEMPLATE_CD 
 				FROM INTR_TEMPLATE)
 			,	#{templateNm, jdbcType=VARCHAR}
-			,	#{upprTemplateCd, jdbcType=VARCHAR}
+			,	#{templateContent, jdbcType=VARCHAR}
 			,	#{useYn, jdbcType=VARCHAR}
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
 					FROM INTR_TEMPLATE
 				)
-			,	#{remark, jdbcType=VARCHAR}
+			,	NULL
 		)
 	</insert>
 

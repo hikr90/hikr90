@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 
 public interface CoreInqyService {
 	// 메뉴 조회
-	void intrCoreInqy101020(String type); 									// 메뉴 세션 저장
+	void intrCoreInqy101020(String string); 								// 메뉴 세션 저장
 	void intrCoreInqy101010(Model model, HashMap<String, Object> paramMap); // 메뉴 조회
 	void intrCoreInqy101030(Model model, HashMap<String, Object> paramMap); // 전체 메뉴
 

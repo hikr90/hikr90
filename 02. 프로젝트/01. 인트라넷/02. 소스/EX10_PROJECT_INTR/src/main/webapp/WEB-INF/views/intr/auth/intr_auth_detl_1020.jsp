@@ -9,7 +9,6 @@
 <%@ taglib prefix="spring"  uri="http://www.springframework.org/tags" %>
 
 <!-- Form postWriteWrap  -->
-<h2 style="display: table;">신규 등록</h2>
 <div class="postWrite">
 	<dl>
 		<dt>

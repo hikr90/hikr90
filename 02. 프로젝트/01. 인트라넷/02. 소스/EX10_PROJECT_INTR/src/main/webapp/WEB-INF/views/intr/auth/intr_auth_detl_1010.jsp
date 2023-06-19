@@ -10,7 +10,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!-- Form postWriteWrap  -->
-<h2 style="display: table;">상세 보기</h2>
 <div class="postWrite">
 	<dl>
 		<dt>

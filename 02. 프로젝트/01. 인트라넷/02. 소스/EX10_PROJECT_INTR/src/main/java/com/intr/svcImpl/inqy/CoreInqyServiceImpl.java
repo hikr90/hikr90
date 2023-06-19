@@ -47,7 +47,7 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
 			String menuType = (String)session.getAttribute("menuType");
-			//
+			// 메뉴 정보가 들어있는 경우
 			if(menuType!=null) {
 				paramMap.put("menuType", menuType);
 			}
@@ -74,7 +74,7 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 	}
 
 	// 메뉴 세션 저장
-	public void intrCoreInqy101020(String type) {
+	public void intrCoreInqy101020(String menuIdx) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -82,15 +82,7 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 			// 	- 0 : 사용자 , 1 : 관리자
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
-			String menuType = (String)session.getAttribute("menuType");
-			
-			// 세션이 없음 (처음 상태)
-			if(menuType==null || menuType=="1") {
-				type = "0";
-			} 
-			
-			// 세션 값 저장
-			session.setAttribute("menuType", type);
+			session.setAttribute("menuType", menuIdx);
 			
 		} catch (Exception e) {
 			//

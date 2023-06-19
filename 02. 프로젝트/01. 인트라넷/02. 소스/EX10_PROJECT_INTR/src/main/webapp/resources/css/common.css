@@ -336,7 +336,7 @@ header .utilWrap .login_state .login_state_text strong { color: #162f57; }
 
 header .utilWrap .utilList { display: inline-block; }
 header .utilWrap .utilList li { display: inline-block; }
-header .utilWrap .utilList li > a { color: #636363; font-size: 1.3rem; font-weight: 500; text-transform: uppercase; }
+header .utilWrap .utilList li > a { color: #636363; font-size: 1.2rem; font-weight: 500; text-transform: uppercase; }
 header .utilWrap .utilList li:before { content: ''; display: inline-block; vertical-align: middle; width: 1px; height: 11px; background-color: #ccc; margin: 0 5px 0 3px; }
 header .utilWrap .utilList li:first-child:before { display: none; }
 

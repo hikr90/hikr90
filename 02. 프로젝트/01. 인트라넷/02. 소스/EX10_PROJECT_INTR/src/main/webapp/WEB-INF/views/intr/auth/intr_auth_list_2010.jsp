@@ -86,7 +86,7 @@
 </script>
 </head>
 <body id="main">
-<form id="form">
+<form id="form" onsubmit="return false;">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	 
@@ -135,7 +135,7 @@
 									
 									<div id="treeArrow" class="treeArrow" style="cursor: pointer; -webkit-transform: scaleX(-1);" onclick="moveBtn(this.form);"></div>
 									<div id="treeInfo" class="treeInfo" style="width: 455px; margin-left: 0px; margin-bottom: 5%; height: 468px; overflow: hidden;">
-										<div class="postWrap">
+										<div class="postWrap" style="padding-top: 20px;">
 											<div class="scrollTableWrap" style="height: 518px;">
 												<table class="postTable menuTbl" style="">
 													<caption>권한 목록 테이블</caption>

@@ -71,7 +71,7 @@ public class LoginInqyController {
 	/* 명칭 : intrMainInqy1020
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
-	 * 내용 : 사용자 메인 화면 이동
+	 * 내용 : 메인(사용자/관리자) 이동
 	 */
 	@RequestMapping("/intrMainInqy1020.do")
 	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -99,7 +99,7 @@ public class LoginInqyController {
 	/* 명칭 : intrMainInqy1030
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
-	 * 내용 : 관리자 메인 화면 조회
+	 * 내용 : 메인(사용자) 이동
 	 */
 	@RequestMapping("/intrMainInqy1030.do")
 	public String intrMainInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {

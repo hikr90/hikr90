@@ -41,4 +41,7 @@
 	<!-- CALENDAR -->
 	<link href='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.css' rel='stylesheet' />
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
+
+	<!-- CKEDITOR -->
+	<script src="${ pageContext.request.contextPath }/resources/ckeditor4/ckeditor.js"></script>
 </head>

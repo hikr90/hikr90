@@ -15,7 +15,7 @@
 	//
 	
 </script>
-<body id="main" onload="javascript:openPopup('popup.html')">
+<body id="main">
 <form id="form" name="form" method="POST" onsubmit="return false;">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>

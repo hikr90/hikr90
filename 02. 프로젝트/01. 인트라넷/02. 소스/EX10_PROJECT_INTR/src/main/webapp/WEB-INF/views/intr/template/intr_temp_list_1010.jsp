@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 선택 항목 음영 처리
@@ -24,9 +25,6 @@
 			//
 			$(this).addClass('list_bg');
 		})
-		
-		// 트리 세팅
-		setTree("treeArea");
 	});
 
 	// 템플릿 조회
@@ -40,6 +38,7 @@
             dataType : 'html',
             success : function(data){
             	//
+            	$(".treeInfo").html("");
             	$(".tree").html(data);
             	setTree("treeArea");
             },
@@ -74,6 +73,12 @@
 	
 	// 템플릿 등록 처리
 	function regProc(){
+		// 에디터 내용 저장
+		var editCont = CKEDITOR.instances.editor.getData();
+		if(editCont.trim()!=null && editCont.trim()!=''){
+			$("#editor").val(editCont);
+		}
+
 		// 유효성 검증
 		if(!validation()){return;};
 		var param = $("#form").serialize();
@@ -110,27 +115,6 @@
 		$.ajax({
     		type : 'post',
         	url : 'intrTempInqy1030.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-     				//
-            	    $(".treeInfo").html(data);
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
-	}
-	
-	// 템플릿 수정화면
-	function modCall(f){
-		//
-		var param = $("#form").serialize();
-		//
-		$.ajax({
-    		type : 'post',
-        	url : 'intrTempInqy1040.do',
             data : param,
             dataType : 'html',
             success : function(data){
@@ -202,42 +186,10 @@
 	      	});
 		}
 	}
-	
-	// 상위 공통코드 팝업
-	function popCall(){
-		//
-		var param = $("#form").serialize();
-		ajaxPopup(param,"650","440","intrPopupInqy1030.do");
-	}
-	
-	// (팝업) 상위 템플릿 선택
-	function popConfirm(){
-		//
-		if($("input[type=radio]:checked").length==0){
-			//
-			alert("선택된 항목이 없습니다.");
-			return;
-		}
-		// 값 지정
-		var checkedCd = $("input[type='radio']:checked").val();
-		var checkedNm = $("input[type='radio']:checked").attr('templateNm');
-		//
-		$(".upprTemplateCd").val(checkedCd);
-		$(".upprTemplateNm").val(checkedNm);
-		//
-		popClose('popupArea');
-	}
-	
-	// 상위 공통코드 삭제
-	function delPopCall() {
-		//
-		$(".upprTemplateCd").val("");
-		$(".upprTemplateNm").val("");
-	}
 </script>
 </head>
 <body id="main">
-<form id="form" name="form">
+<form id="form" name="form" onsubmit="return false;">
 	<!-- 정보 찾기 -->
  	<div id="popupArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
@@ -274,62 +226,21 @@
                             </div>
                             <!-- end Form srchWrap  -->
 							
-							<div class="treeWrap">
+							<div class="treeWrap" style="height: 830px;">
 								<div class="treeArea" id="treeArea"> 
 									<div class="tree">
 										<ul class="ul_1">
-																		
 										<c:forEach var="list" items="${defaultList}" varStatus="status">
-											<c:set var="spanIcon"	value="icon_folder"/>
-											<c:set var="nextLv"	value=""/>
-											<c:set var="prevLv"	value=""/>
-										
-											<c:if test="${list.isleaf eq 'Y'}">
-			           						   	<c:set var="spanIcon" 	value="icon_list"/> 
-			            					</c:if>
-										
-											<c:if test="${ empty list.lv }">
-			           						   	<c:set var="nextLv"	value="1"/>
-			            					</c:if>
-											
-											<!-- 태그 열기 -->
-											<c:choose>
-												<c:when test="${list.lv gt prevLv}">
-													<ul class="ul_${list.lv}">
-														<li class="li_${list.lv}">
-														<span class="${spanIcon}"></span>
-														<a class="a_btn" id="${list.templateCd}" href="#" onclick="detCall('${list.templateCd}');">${list.templateNm}</a>
-												</c:when>
-												<c:when test="${list.lv eq prevLv}">
-													<li class="li_${list.lv}">
-													<span class="${spanIcon}"></span>
-													<a class="a_btn" id="${list.templateCd}" href="#" onclick="detCall('${list.templateCd}');">${list.templateNm}</a>
-												</c:when>
-											</c:choose>
+		           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 
-											<!-- 태그 닫기 -->										
-											<c:choose>
-												<c:when test="${list.lv gt nextLv}">
-													</li>
-													
-													<c:forEach begin="1" end="${list.lv - prevLv}" varStatus="status">
-														<c:if test="${list.lv ne '1'}">
-																</ul>
-															</li>
-														</c:if>
-													</c:forEach>
-													
-												</c:when>
-												<c:when test="${list.lv eq nextLv}">
-													</li>
-												</c:when>
-											</c:choose>
-												
-											<c:set var="prevLv" value="${list.lv}" />
+											<li class="li_1">
+											<span class="${spanIcon}"></span>
+											<a class="a_btn" id="${list.templateCd}" href="#" onclick="detCall('${list.templateCd}');">${list.templateNm}</a>
 										</c:forEach>
+										</ul>
 									</div>	
 								</div>
-								<div class="treeInfo" id="treeInfo">
+								<div class="treeInfo" id="treeInfo" style="width: 855px; height: 474px;">
 									
 								</div>
 							</div>
@@ -341,5 +252,7 @@
 	</article>
 </form>
 </body>
+</html>
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>
+

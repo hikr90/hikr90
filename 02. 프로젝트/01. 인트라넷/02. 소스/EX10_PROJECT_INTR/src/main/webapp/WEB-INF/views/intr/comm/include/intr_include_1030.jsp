@@ -11,10 +11,17 @@
 		<div class="utilWrap">
 			<div class="login_state">
 				<ul class="utilList">
-				<c:if test="${empVO.authYn eq 'Y'}">
-					<li><a href="intrMainInqy1030.do">관리자 화면으로</a></li>
-				</c:if>
-					<li><a href="intrMainInqy1020.do">사용자 화면으로</a></li>
+
+				<!-- 메인 메뉴 출력-->
+				<c:choose>
+					<c:when test="${empVO.authYn eq 'Y'}">
+						<li><a href="intrMainInqy1020.do">사용자</a></li>
+						<li><a href="intrMainInqy1030.do">관리자</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="intrMainInqy1020.do">사용자</a></li>
+					</c:otherwise>
+				</c:choose>
 					<li><a onclick="logout();">로그아웃</a></li>
 				</ul>
 				<br><br>
