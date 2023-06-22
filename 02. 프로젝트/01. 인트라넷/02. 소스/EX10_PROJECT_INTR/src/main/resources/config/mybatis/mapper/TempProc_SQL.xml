@@ -33,22 +33,14 @@
 		/* intrTempProc10201010 : 템플릿 수정 처리 */
 		UPDATE INTR_TEMPLATE
 			SET		TEMPLATE_NM = #{templateNm, jdbcType=VARCHAR}
-				,	UPPR_TEMPLATE_CD = #{upprTemplateCd, jdbcType=VARCHAR}
+				,	TEMPLATE_CONTENT = #{templateContent, jdbcType=VARCHAR}
 				,	USE_YN = #{useYn, jdbcType=VARCHAR}
-				,	REMARK = #{remark, jdbcType=VARCHAR}
 		WHERE TEMPLATE_CD = #{templateCd, jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="intrTempProc10301010" parameterType="java.util.HashMap">
 		/* intrTempProc10301010 : 템플릿 삭제 처리 */
 		DELETE FROM INTR_TEMPLATE
-			WHERE TEMPLATE_CD IN 
-				(
-					SELECT 
-						TEMPLATE_CD 
-					FROM INTR_TEMPLATE 
-					START WITH TEMPLATE_CD = #{templateCd, jdbcType=VARCHAR}
-					CONNECT BY PRIOR TEMPLATE_CD = UPPR_TEMPLATE_CD
-				)
+			WHERE TEMPLATE_CD = #{templateCd, jdbcType=VARCHAR}
 	</delete>
 </mapper>

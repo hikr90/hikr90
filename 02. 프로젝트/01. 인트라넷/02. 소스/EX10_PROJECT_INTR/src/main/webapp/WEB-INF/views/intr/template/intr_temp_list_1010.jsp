@@ -132,10 +132,13 @@
 	function modProc(f){
 		// 유효성 검증
 		if(!validation()){return;};
-		var param = $("#form").serialize();
 		//
 		if(confirm("수정하시겠습니까?")){
-			//		
+			//
+			var editCont = CKEDITOR.instances.editor.getData();
+			$("#editor").val(editCont);
+			//
+			var param = $("#form").serialize();
 			$.ajax({
 	    		type : 'post',
 	        	url : 'intrTempProc1020.do',
