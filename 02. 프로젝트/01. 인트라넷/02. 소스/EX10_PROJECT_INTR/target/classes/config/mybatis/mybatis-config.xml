@@ -31,6 +31,8 @@
 		<mapper resource="config/mybatis/mapper/AuthInqy_SQL.xml" />
 		<mapper resource="config/mybatis/mapper/AuthProc_SQL.xml" />
 		<mapper resource="config/mybatis/mapper/ScheInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/AprvInqy_SQL.xml" />
+		<mapper resource="config/mybatis/mapper/AprvInqy_SQL.xml" />
 	</mappers>
 	
 </configuration>

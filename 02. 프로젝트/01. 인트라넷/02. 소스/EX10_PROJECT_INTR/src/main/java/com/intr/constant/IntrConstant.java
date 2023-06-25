@@ -23,6 +23,7 @@ public class IntrConstant implements PageConstant, ViewConstant {
 	public static final String VIEW_PATH_EMP 	= INTR_PATH + "/emp/";	 		// 사원
 	public static final String VIEW_PATH_TEMP 	= INTR_PATH + "/template/";	 	// 템플릿
 	public static final String VIEW_PATH_AUTH 	= INTR_PATH + "/auth/";	 		// 권한
+	public static final String VIEW_PATH_APRV 	= INTR_PATH + "/aprv/";	 		// 결재
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로

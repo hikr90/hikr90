@@ -86,8 +86,8 @@
 				<div id="sub_content" class="_inner">					
 					<div class="_contentArea _formArea">
 						<!-- Form srchWrap  -->
-						<div class="listWrap">
-						</div><!-- End listWrap -->
+						<div class="listWrap"></div>
+						<!-- End listWrap -->
 						<!-- Form postWrap  -->
 						<div class="postWrap" style="height: 710px;">
 							<input type="hidden" id="contentIdx" name="contentIdx" value="">

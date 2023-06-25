@@ -86,4 +86,9 @@ public interface ViewConstant {
 	public static final String INTR_AUTH_LIST_3010 = "intr_auth_list_3010.jsp"; 	// 권한 목록 (사용자 권한)
 	public static final String INTR_AUTH_LIST_3011 = "intr_auth_list_3011.jsp"; 	// 권한 목록
 
+	//--------------------------------------------------------------------------------------------
+	// 결재
+	//--------------------------------------------------------------------------------------------
+	public static final String INTR_APRV_LIST_1010 = "intr_aprv_list_1010.jsp"; 	// 기안 작성 화면
+
 }

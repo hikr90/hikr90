@@ -1,7 +1,7 @@
-<!--명칭 : intr_board_list_2010
+<!--명칭 : intr_draft_list_2010
 	작성자 : 김태현
-	작성일자 : 2022.12.01
-	내용 : 공지사항 목록-->
+	작성일자 : 2023.06.25
+	내용 : 결재내역 목록-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -11,15 +11,9 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrBoardInqy2010.do");
+		formSubmit("");
 	}
 
-	// 공지사항 상세
-	function detCall(contentIdx) {
-		//
-		$("#contentIdx").val(contentIdx);
-		formSubmit("intrBoardInqy2020.do");
-	}
 </script>
 <body id="main">
 <form id="form" method="POST">
@@ -38,8 +32,8 @@
 							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 							<input type="hidden" id="srchSdt" name="page" value="${param.srchSdt}">
 							<input type="hidden" id="srchEdt" name="page" value="${param.srchEdt}">
-						
-							<h2>공지사항</h2>
+							
+							<h2>결재내역</h2>
 							<div class="f-srchWrap">
 								<div class="search_nav">
 									<div class="srchArea">
@@ -68,7 +62,7 @@
 							</div>
 							<div class="postTableWrap">
 								<table class="postTable">
-									<caption>공지사항 목록 조회</caption>
+									<caption>결재내역 목록 조회</caption>
 									<colgroup>
 										<col class="w7per">
 										<col class="auto">
@@ -93,9 +87,6 @@
 											<td class="first-td">${list.num}</td>
 											<td class="_title">
 												<a class="show_view a_title" onclick="detCall('${list.brdIdx}');">${list.brdTitle}</a>
-												<c:if test="${list.fileYn eq 'Y'}">
-													<img id="fileImg" src='resources/images/icon/icon_file.png' style="width: 15px; padding-left: 3px;"/>
-												</c:if>
 											</td>
 											<td>${list.deptNm}</td>
 											<td>${list.empNm}</td>
