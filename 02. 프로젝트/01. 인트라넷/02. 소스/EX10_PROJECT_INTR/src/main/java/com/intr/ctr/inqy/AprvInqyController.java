@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.constant.IntrConstant;
 import com.intr.svc.inqy.AprvInqyService;
 import com.intr.svc.inqy.CoreInqyService;
+import com.intr.svc.inqy.TempInqyService;
 
 @Controller
 public class AprvInqyController {
@@ -23,6 +24,9 @@ public class AprvInqyController {
 
 	@Autowired
 	AprvInqyService aprvInqyService;
+
+	@Autowired
+	TempInqyService tempInqyService;
 	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -58,4 +62,37 @@ public class AprvInqyController {
 		//
 		return IntrConstant.VIEW_PATH_APRV + IntrConstant.INTR_APRV_LIST_1010;
 	}
+
+	/* 명칭 : intrAprvInqy1020
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.06.26
+	 * 내용 : 선택 기안문 작성 화면 조회
+	 */
+	@RequestMapping("/intrAprvInqy1020.do")
+	public String intrAprvInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 선택 템플릿 상세 조회
+			//--------------------------------------------------------------------------------------------
+			tempInqyService.intrTempInqy102010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 검색 조건 저장
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy103010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 관리자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConstant.VIEW_PATH_APRV + IntrConstant.INTR_APRV_DETL_1020;
+	}
+
 }

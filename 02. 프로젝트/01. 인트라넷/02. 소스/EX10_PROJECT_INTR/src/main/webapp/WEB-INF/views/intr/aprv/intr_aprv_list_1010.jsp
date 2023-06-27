@@ -11,14 +11,25 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("");
+		formSubmit("intrAprvInqy1010.do");
 	}
 
+	// 템플릿 조회 팝업
+	function popCall(){
+		// 정보 찾기 팝업
+		var param = null;
+		ajaxPopup(param,"650","360","intrPopupInqy1010.do");
+	}
 </script>
 <body id="main">
 <form id="form" method="POST">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
+
+	<!-- 템플릿 팝업 -->
+ 	<div id="popupArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
+	</div>
 
 	<article id="_subArticle">
 		<div class="_wrap">
@@ -29,11 +40,15 @@
 						<div class="postWrap" style="height: 710px;">
 							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							<input type="hidden" id="page" name="page" value="${param.page}">
-							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-							<input type="hidden" id="srchSdt" name="page" value="${param.srchSdt}">
-							<input type="hidden" id="srchEdt" name="page" value="${param.srchEdt}">
 							
-							<h2>결재내역</h2>
+							<div class="tagWrap">
+								<h2>결재내역
+									<span class="stb-box">
+										<input type="button" class="stb-box-btn2" value="기안문 작성" onclick="popCall();">
+									</span>
+								</h2>
+							</div>
+							
 							<div class="f-srchWrap">
 								<div class="search_nav">
 									<div class="srchArea">

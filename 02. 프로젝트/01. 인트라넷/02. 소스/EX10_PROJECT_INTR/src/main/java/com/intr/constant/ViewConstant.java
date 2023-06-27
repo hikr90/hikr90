@@ -68,7 +68,6 @@ public interface ViewConstant {
 
 	public static final String INTR_TEMP_DETL_1010 = "intr_temp_detl_1010.jsp";		// 관리자 공통코드 상세
 	public static final String INTR_TEMP_DETL_1020 = "intr_temp_detl_1020.jsp";		// 관리자 공통코드 등록
-	public static final String INTR_TEMP_DETL_1030 = "intr_temp_detl_1030.jsp";		// 관리자 공통코드 수정
 
 	//--------------------------------------------------------------------------------------------
 	// 권한
@@ -90,5 +89,7 @@ public interface ViewConstant {
 	// 결재
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_APRV_LIST_1010 = "intr_aprv_list_1010.jsp"; 	// 기안 작성 화면
+	public static final String INTR_APRV_DETL_1010 = "intr_aprv_detl_1010.jsp";		// 기안문 상세 화면
+	public static final String INTR_APRV_DETL_1020 = "intr_aprv_detl_1020.jsp";		// 기안문 등록 화면
 
 }

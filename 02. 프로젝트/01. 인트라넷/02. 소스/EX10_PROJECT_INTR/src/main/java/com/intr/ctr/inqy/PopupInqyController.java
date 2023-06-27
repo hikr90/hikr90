@@ -28,6 +28,34 @@ public class PopupInqyController {
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+	/* 명칭 : intrPopupInqy1010
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.01.03
+	 * 내용 : 상위 공통코드 조회 
+	 */
+	@RequestMapping("/intrPopupInqy1010.do")
+	public String intrPopupInqy1010(Model model, HashMap<String, Object> paramMap) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 템플릿 목록 조회
+			//--------------------------------------------------------------------------------------------
+			tempInqyService.intrTempInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 검색 조건 저장
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy103010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 템플릿 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1011;
+	}
+
 	
 	/* 명칭 : intrPopupInqy1021
 	 * 작성자 : 김태현
@@ -69,33 +97,4 @@ public class PopupInqyController {
 		//
 		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1022;
 	}
-	
-	/* 명칭 : intrPopupInqy1030
-	 * 작성자 : 김태현
-	 * 작성일자 : 2023.01.03
-	 * 내용 : 상위 공통코드 조회 
-	 */
-	@RequestMapping("/intrPopupInqy1030.do")
-	public String intrPopupInqy1030(Model model, HashMap<String, Object> paramMap) {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 공통코드 목록 조회
-			//--------------------------------------------------------------------------------------------
-			tempInqyService.intrTempInqy101010(model, paramMap);
-
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			coreInqyService.intrCoreInqy103010(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("[컨트롤러] 공통코드 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		
-		//
-		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1011;
-	}
-	
 }

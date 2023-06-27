@@ -8,17 +8,6 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<script>
-	$(document).ready(function(){
-		// 선택한 값의 라디오 버튼 제거
-		$("input[name='radio']").each(function(){
-			if($(".list_bg").attr("id")==this.value){
-				this.remove();				
-			}			
-		});
-	});
-</script>
-
 <div class="scrollTableWrap" style="height: auto;">
 	<div class="popTree">
 		<div class="tree">
@@ -44,13 +33,13 @@
 						<ul class="ul_${list.lv}">
 							<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
-							<input type="radio" name="radio" value="${list.templateCd}" templateNm="${list.templateNm}">
+							<input type="radio" name="templateCd" value="${list.templateCd}">
 							${list.templateNm}
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
 						<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
-							<input type="radio" name="radio" value="${list.templateCd}" templateNm="${list.templateNm}">
+							<input type="radio" name="templateCd" value="${list.templateCd}">
 							${list.templateNm}
 					</c:when>
 				</c:choose>

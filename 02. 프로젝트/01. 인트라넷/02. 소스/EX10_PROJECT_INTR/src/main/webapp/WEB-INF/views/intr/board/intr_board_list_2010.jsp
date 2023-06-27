@@ -35,9 +35,6 @@
 						<div class="postWrap" style="height: 710px;">
 							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							<input type="hidden" id="page" name="page" value="${param.page}">
-							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-							<input type="hidden" id="srchSdt" name="page" value="${param.srchSdt}">
-							<input type="hidden" id="srchEdt" name="page" value="${param.srchEdt}">
 						
 							<h2>공지사항</h2>
 							<div class="f-srchWrap">

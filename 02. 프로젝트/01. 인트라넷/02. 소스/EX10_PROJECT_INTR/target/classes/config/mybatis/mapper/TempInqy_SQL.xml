@@ -16,6 +16,8 @@
 	        ,   TMP.USE_YN
 	        ,   TMP.DISP_ORDER
 	        ,   TMP.REMARK
+	        ,	'1' AS LV
+	        ,	'Y' AS ISLEAF
 		FROM INTR_TEMPLATE TMP
 		WHERE 1=1
 			<if test="srchNm != null and srchNm != ''">
