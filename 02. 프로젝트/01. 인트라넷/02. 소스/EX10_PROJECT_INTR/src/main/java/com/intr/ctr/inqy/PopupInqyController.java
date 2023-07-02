@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.intr.constant.IntrConstant;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.CoreInqyService;
+import com.intr.svc.inqy.EmpInqyService;
 import com.intr.svc.inqy.PopupInqyService;
 
 @Controller
@@ -25,6 +26,9 @@ public class PopupInqyController {
 	
 	@Autowired
 	CoreInqyService coreInqyService;
+	
+	@Autowired
+	EmpInqyService empInqyService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -67,8 +71,6 @@ public class PopupInqyController {
 		//
 		try {
 			//
-				
-			
 		} catch (Exception e) {
 			//
 			logger.debug("[컨트롤러] 팝업(아이디 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -88,8 +90,6 @@ public class PopupInqyController {
 		//
 		try {
 			//
-				
-			
 		} catch (Exception e) {
 			//
 			logger.debug("[컨트롤러] 팝업(비밀번호 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -97,4 +97,28 @@ public class PopupInqyController {
 		//
 		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1022;
 	}
+	
+	/* 명칭 : intrPopupInqy1030
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.02
+	 * 내용 : 팝업(결재선) 조회
+	 */
+	@RequestMapping("/intrPopupInqy1031.do")
+	public String intrPopupInqy1030(Model model) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 부서 및 직원 조회
+			//--------------------------------------------------------------------------------------------
+			empInqyService.intrEmpInqy103010(model);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 팝업(결재선) 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		//
+		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1031;
+	}
+
 }

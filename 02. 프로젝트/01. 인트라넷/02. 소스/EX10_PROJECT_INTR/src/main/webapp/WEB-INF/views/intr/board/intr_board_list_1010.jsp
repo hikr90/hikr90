@@ -105,9 +105,9 @@
 									<!-- 작성일자 -->
 									<div class="srchArea">
 										<label class="srcLabel">작성일자</label>
-										<input type="text" class="srch-cdt-date" id="srchSdt" name="srchSdt" value="${srchMap.srchSdt}" readonly="readonly" />
+										<input type="text" class="srch-cdt-date srchSdt" id="srchSdt" name="srchSdt" value="${srchMap.srchSdt}" readonly="readonly" />
 										~
-										<input type="text" class="srch-cdt-date" id="srchEdt" name="srchEdt" value="${srchMap.srchEdt}" readonly="readonly"/>
+										<input type="text" class="srch-cdt-date srchEdt" id="srchEdt" name="srchEdt" value="${srchMap.srchEdt}" readonly="readonly"/>
 									</div>
 									
 									<!-- 부서 -->

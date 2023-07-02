@@ -15,4 +15,7 @@ public interface EmpInqyService {
 	
 	// 부서, 직급 조회
 	void intrEmpInqy101012(Model model, HashMap<String, Object> paramMap);
+
+	// 부서 사용자 트리 조회
+	void intrEmpInqy103010(Model model);
 }

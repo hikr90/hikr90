@@ -153,7 +153,7 @@ function validation(){
 			//
 			if($(tag).val()=="" || $(tag).val()==null){
 				//
-				alert($(tag).attr("title")+"를 입력해주세요.");
+				alert($(tag).attr("title")+"(을)를 입력해주세요.");
 				chkYn = false;
 				return false;
 			}
@@ -169,7 +169,7 @@ function validation(){
 				//
 				if($(tag).val().length==0){
 					//
-					alert($(tag).attr("title")+"를 입력해주세요.");
+					alert($(tag).attr("title")+"(을)를 입력해주세요.");
 					chkYn = false;
 					return false;
 				}

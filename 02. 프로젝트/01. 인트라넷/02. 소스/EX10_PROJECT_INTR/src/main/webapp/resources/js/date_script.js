@@ -1,6 +1,6 @@
 $(function() {
 	// 시작 일자
-	$('input[name="srchSdt"]').daterangepicker(
+	$('input[id="srchSdt"]').daterangepicker(
 			{
 				//
 				locale:{
@@ -21,7 +21,7 @@ $(function() {
 	});
 	
 	// 종료 일자
-	$('input[name="srchEdt"]').daterangepicker(
+	$('input[id="srchEdt"]').daterangepicker(
 			{
 				//
 				locale:{
@@ -42,21 +42,21 @@ $(function() {
 	});
 	
 	// 시작 일자 포맷
-	$('input[name="srchSdt"]').on('apply.daterangepicker', function(ev, picker) {
+	$('input[id="srchSdt"]').on('apply.daterangepicker', function(ev, picker) {
 	    $(this).val(picker.startDate.format('YYYY-MM-DD'));
 	});
 
 	// 
-	$('input[name="srchSdt"]').on('cancel.daterangepicker', function(ev, picker) {
+	$('input[id="srchSdt"]').on('cancel.daterangepicker', function(ev, picker) {
 	      $(this).val('');
 	});
 
 	// 종료 일자 포맷
-	$('input[name="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
+	$('input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
 		$(this).val(picker.endDate.format('YYYY-MM-DD'));
 	});
 	
-	$('input[name="srchEdt"]').on('cancel.daterangepicker', function(ev, picker) {
+	$('input[id="srchEdt"]').on('cancel.daterangepicker', function(ev, picker) {
 		$(this).val('');
 	});
 	

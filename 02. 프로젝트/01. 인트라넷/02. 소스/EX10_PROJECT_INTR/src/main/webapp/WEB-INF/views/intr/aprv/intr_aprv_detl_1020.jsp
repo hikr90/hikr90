@@ -19,10 +19,49 @@
 		$(document).ready(function() {
 			CKEDITOR.replace('editor',{ height: 500});
 		});
+		
+		// 기안문 등록 처리
+		function aprvLineCall(){
+			// 유효성 검증
+			if(!validation()){return;};
+
+			// 시행일자 유효성 검증			
+ 			var date = new Date();
+			var today = getDateStamp(date); 
+			// 시행일자 (시작, 종료일)
+			var aprvSdt = $("#srchSdt").val();
+			var aprvEdt = $("#srchEdt").val();
+			//
+/* 			if(aprvSdt=='' || aprvEdt==''){
+				alert("<spring:message code="APRV.DT.NONE"/>");
+				return;
+			}
+ 			if(aprvSdt<today || aprvSdt<today){
+				alert("<spring:message code="APRV.DT.PAST"/>");
+				return;
+			}
+ 			if(aprvSdt>aprvEdt){
+				alert("<spring:message code="APRV.EDT.PAST"/>");
+				return;
+			}
+ */			
+ 			// 결재선 팝업
+			if(confirm("등록하시겠습니까?")){
+				//
+	   			var param = null;
+   				ajaxPopup(param,"1100","650","intrPopupInqy1031.do");
+			}
+		}
 	</script>
 </head>
 <body id="main">
 	<form id="form" method="POST" enctype="multipart/form-data">
+
+	<!-- 결재선 -->
+ 	<div id="popupArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
+	</div>
+
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 		
@@ -58,9 +97,9 @@
 									</dd>
 									<dt>시행일자</dt>
 									<dd>
-										<input type="text" id="aprvSdt" class="srch-cdt-date" id="aprvSdt" name="aprvSdt" readonly="readonly" style="width: 22%;"/>
+										<input type="text" id="srchSdt" class="srch-cdt-date" name="aprvSdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
 										~
-										<input type="text" id="aprvEdt" class="srch-cdt-date" id="aprvEdt" name="aprvEdt" readonly="readonly" style="width: 22%;"/>
+										<input type="text" id="srchEdt" class="srch-cdt-date" name="aprvEdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
 									</dd>
 								</dl>
 								<dl class="post-info">
@@ -87,7 +126,7 @@
 								</dl>
 							</div><!-- End postWriteWrap -->
 							<div class="btnWrap alignR">
-									<input type="button" class="_btn _grey" onclick="regProc(this.form);" value="등록">
+									<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
 									<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
 							</div>
 						</div><!-- End postWrap -->

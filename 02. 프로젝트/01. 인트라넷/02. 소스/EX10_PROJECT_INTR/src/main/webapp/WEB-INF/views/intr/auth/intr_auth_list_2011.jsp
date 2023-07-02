@@ -40,7 +40,6 @@
 				var authMenuCd = $(this).val();
 				//
 				if(authMenuCd==menuCd){
-					//
 					dupeYn = "Y";
 					return; 
 				}

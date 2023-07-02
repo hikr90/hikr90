@@ -164,5 +164,23 @@ public class EmpInqyServiceImpl implements EmpInqyService{
 			logger.debug("[서비스] 관리자 사원 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
+	
+	// 부서 사원 트리 조회
+	public void intrEmpInqy103010(Model model) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 목록
+			//--------------------------------------------------------------------------------------------
+			defaultList = empInqyDao.intrEmpInqy103010(model);
+			model.addAttribute("defaultList",defaultList);
+
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 사용자 부서 사용자 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
 
 }

@@ -60,4 +60,13 @@ public class EmpInqyDao {
 		defaultInfo = sqlsession.selectOne("empInqy.intrEmpInqy10102010",paramMap);
 		return defaultInfo;
 	}
+	
+	// 부서 사원 트리 조회
+	public List<HashMap<String, Object>> intrEmpInqy103010(Model model) {
+		//
+		List<HashMap<String, Object>> defaulList = null;
+		defaulList = sqlsession.selectList("empInqy.intrEmpInqy10103010");
+		return defaulList;
+	}
+
 }

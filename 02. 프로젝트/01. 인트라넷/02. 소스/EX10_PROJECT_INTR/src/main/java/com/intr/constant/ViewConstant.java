@@ -27,6 +27,8 @@ public interface ViewConstant {
 	public static final String INTR_POPUP_INQY_1020 = "intr_popup_inqy_1020.jsp";	// 회원정보 찾기 팝업
 	public static final String INTR_POPUP_INQY_1021 = "intr_popup_inqy_1021.jsp";	// 팝업 (아이디 찾기)
 	public static final String INTR_POPUP_INQY_1022 = "intr_popup_inqy_1022.jsp";	// 팝업 (비밀번호 찾기)
+
+	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";	// 결재선 팝업 트리
 	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항

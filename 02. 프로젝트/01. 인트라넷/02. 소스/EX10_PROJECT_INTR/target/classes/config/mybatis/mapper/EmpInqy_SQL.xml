@@ -144,4 +144,53 @@
 		WHERE EMP.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</select>
 
+	<select id="intrEmpInqy10103010" resultType="CamelHashMap">
+		/* intrEmpInqy10103010 : 부서 사원 트리 조회 */
+		SELECT 
+				    SUB_DATA.*
+				,   CASE WHEN SUB_DATA.EMP_NM IS NULL
+						THEN 'N'
+					    ELSE 'Y'
+					END AS ISLEAF
+		FROM (
+				SELECT 
+							DATA.*
+					FROM (
+		                    	SELECT 
+		                	        		DEPT.DEPT_CD
+		                  				,   DEPT.DEPT_NM
+		                            	,   DEPT.UPPR_DEPT_CD
+	                                    ,   '' AS GRDE_CD
+	                                    ,   '' AS GRDE_NM		                            
+		                            	,   LEVEL AS LV
+	            				        ,   ''  AS EMP_IDX
+	         				            ,   ''  AS EMP_NM
+	                                    ,   0 AS ROW_NUM
+			                    FROM INTR_DEPT DEPT
+								WHERE DEPT.USE_YN = 'Y'
+			                    	START WITH DEPT.UPPR_DEPT_CD IS NULL
+			                    	CONNECT BY PRIOR DEPT.DEPT_CD = DEPT.UPPR_DEPT_CD
+			                    	ORDER SIBLINGS BY DEPT.DEPT_CD
+		      			) DATA
+			      UNION
+				  SELECT 
+				  			EMP.DEPT_CD
+				        ,   DEPT.DEPT_NM
+				        ,   DEPT.UPPR_DEPT_CD
+				        ,   EMP.GRADE_CD AS GRDE_CD
+                        ,   GRDE.GRADE_NM AS GRDE_NM
+				        ,   2 AS LV
+				        ,   EMP.EMP_IDX
+				        ,   EMP.EMP_NM
+                        ,   ROW_NUMBER() OVER(ORDER BY EMP_NM ASC) AS ROW_NUM
+				    FROM INTR_EMP EMP 
+				    LEFT OUTER JOIN INTR_DEPT DEPT 
+				    	ON EMP.DEPT_CD = DEPT.DEPT_CD
+				    LEFT OUTER JOIN INTR_GRADE GRDE
+                    	ON EMP.GRADE_CD = GRDE.GRADE_CD
+                     WHERE EMP.EMP_RESI_DATE IS NULL
+				) SUB_DATA
+			WHERE 1=1
+		    ORDER BY SUB_DATA.ROW_NUM
+	</select>	
 </mapper>
