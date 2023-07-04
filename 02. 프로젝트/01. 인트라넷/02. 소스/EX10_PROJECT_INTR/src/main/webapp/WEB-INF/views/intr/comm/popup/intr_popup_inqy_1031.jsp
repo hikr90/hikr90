@@ -7,86 +7,103 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <script>
+	var aprvCnt = 0;
 	$(document).ready(function(){
-		// TRUE : 디폴트 추가 (기안자), FALSE (직접 추가)
-		setAprvLine(true);
+		//
+		setAprvLine(false);
 	});
 	
 	// 목록 이동 
-	function moveBtn(defaultYn){
-		// 체크한 건이 없는 경우
-		if($("input[id=empIdx]:checked").length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
-		}
-		
-		// 결재선 추가
-		setAprvLine(false);
-	}
-	
-	// 결재선 추가
-	function setAprvLine(setLineYn){
-		// 체크한 목록 결재선 추가
-		var str = "";
-		if(setLineYn==false){
-			// 중복 확인
-			$("input[id=empIdx]:checked").each(function() {
-				// 중복 여부 변수
-				var str = "";								// 결재선
-				var dupeYn = 'Y';							// 중복 여부
-				var empIdx = $(this).val();					// 사원 IDX
-				var empNm = $(this).next().val();			// 사원명
-				var deptNm = $(this).next().val();			// 부서명
-	
-					// 체크한 부서 사용자 확인
-					$("input[id=aprvEmpIdx]").each(function() {
-						// 중복되는 경우 중복 여부 값 변경
-						var aprvEmpIdx = $(this).val();
-						//
-						if(aprvEmpIdx==empIdx){
-							dupeYn = "Y";
-							return; 
-						}
-					});
-				
-					// 미 중복
-					if(dupeYn=='N'){
-						//
-						str += "<tr>"
-						str += "	<td class='first-td'>";
-						str += "		<span class='_chkBox'>";
-						str += "		<input type='checkbox' class='checkbox' id='aprvEmpIdx' value='" + empIdx + "'/>"
-						str += "		<label for='chk_local'><span></span></label></span>";
-						str += "		<input type='hidden' name='aprvEmpIdx' value='" + empIdx + "'/>"
-						str += "	</td>";
-						str += "	<td>"+"준비중"+"</td>";
-						str += "	<td>${empVO.deptNm}</td>";
-						str += "	<td>${empVO.empNm}</td>";
-						str += "	<td>삭제</td>";
-						str += "</tr>";
-					}	
-				});
-			
-		} else { 
-			// 기본 결재선 추가
-			str += "<tr>"
-			str += "	<td class='first-td'>";
-			str += "		<span class='_chkBox'>";
-			str += "		<input type='checkbox' class='checkbox' id='aprvEmpIdx' value='" + empIdx + "'/>"
-			str += "		<label for='chk_local'><span></span></label></span>";
-			str += "		<input type='hidden' name='aprvEmpIdx' value='" + empIdx + "'/>"
+	function setAprvLine(defaultYn){
+		//
+		if(defaultYn==true){
+			// 체크한 건이 없는 경우
+			var checkedIdx = $("input[id=radioIdx]:checked");
+			if(checkedIdx.length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}
+
+			// 변수
+			var str = "";								// 결재선
+			var empIdx = checkedIdx.val();				// 사원 IDX
+			var empNm = checkedIdx.attr("empNm");		// 사원명
+			var deptNm = checkedIdx.attr("deptNm");		// 부서명
+			//
+			str += "<tr id='setListTr"+aprvCnt+"' class='setListTr' empIdx='"+empIdx+"'>"
+			str += "	<td>" + deptNm + "</td>";
+			str += "	<td>" + empNm + "</td>";
+			str += "	<td>";
+			str += "		<select style='width:90%; height:25px; text-align:left;'>";
+			str += "			<option value='STAT_0003' selected>결재</option>";
+			str += "			<option value='STAT_0004'>참조</option>";
+			str += "		</select>";
 			str += "	</td>";
-			str += "	<td>"+"준비중"+"</td>";
+			str += "	<td><div id='divArea' onclick=\"delCall('setListTr"+aprvCnt+"');\"><a>삭제</a></div></td>";
+			str += "</tr>";
+
+		} else {
+			//
+			str += "<tr id='setListTr"+aprvCnt+"' class='setListTr' empIdx='${empVO.empIdx}'>"
 			str += "	<td>${empVO.deptNm}</td>";
 			str += "	<td>${empVO.empNm}</td>";
-			str += "	<td>삭제</td>";
+			str += "	<td>";
+			str += "		<select disabled style='width:90%; height:25px; text-align:left;'>";
+			str += "			<option value='STAT_0002' selected>기안</option>";
+			str += "		</select>";
+			str += "	</td>";
+			str += "	<td></td>";
 			str += "</tr>";
 		}
-			
-		// 체크 해제
+	
+		// 결재선 추가
+		aprvCnt++;
 		$(".aprvLineTbl").append(str);
-		$("input[id='empIdx']").prop("checked", false);
-		$(".aprvLineChk").prop("checked", false);
+	}
+
+	// 화면 상 제거
+	function delCall(setListTr){
+		// 화면 상 삭제 처리
+		$("#"+setListTr).remove();
+	}
+	
+	// 결재선 등록
+	function popConfirm(){
+		// 결재선
+		var empIdx = "";
+		var statCd = "";
+		// 유효성 검증
+		var setAprvIdx = "";
+		var setStatCd = "";
+		var setStatCnt = 0;
+		$(".setListTr").each(function(){
+			// 검증
+			setStatCd = $(this).find('select option:selected').val();
+			if(setStatCd=="STAT_0002"){
+				setStatCnt++;				
+			};
+			// 결재선
+			empIdx += $(this).attr('empIdx') + "|";
+			statCd += setStatCd + "|";
+		});
+		// 결재자 1명 이상
+		if(setStatCnt==0){
+			alert("<spring:message code="APRV.LINE.NONE"/>");
+			return;
+		};
+		
+		// 결재선 저장
+		$("#aprvEmpIdx").val(empIdx);
+		$("#aprvStatCd").val(statCd);
+		
+		// 등록 처리
+		aprvProc();
+	}
+	
+	// 등록 처리
+	function aprvProc(){
+		//
+		
 	}
 </script>
 <!-- 부서 사용자 트리 -->
@@ -118,17 +135,13 @@
 							<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
 							<c:if test="${list.isleaf eq 'Y'}">
-								<input type="radio" id="empIdx" name="empIdx" value="${list.empIdx}">
+								<input type="radio" id="radioIdx" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
 							</c:if>${spanNm}
-							<input type="hidden" id="empNm" name="empNm" value="${list.empNm}">
-							<input type="hidden" id="deptNm" name="deptNm" value="${list.deptNm}">
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
 						<c:if test="${list.isleaf eq 'Y'}">
-							<input type="radio" id="empIdx" name="empIdx" value="${list.empIdx}">
+							<input type="radio" id="radioIdx" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
 						</c:if>${spanNm}
-						<input type="hidden" id="empNm" name="empNm" value="${list.empNm}">
-						<input type="hidden" id="deptNm" name="deptNm" value="${list.deptNm}">
 					</c:when>
 				</c:choose>
 		
@@ -157,7 +170,7 @@
 </div>
 
 <!-- 이동 화살표 -->
-<div id="treeArrow" class="treeArrow" style="cursor: pointer; -webkit-transform: scaleX(-1);" onclick="moveBtn(this.form);"></div>
+<div id="treeArrow" class="treeArrow" style="cursor: pointer;" onclick="setAprvLine(true);"></div>
 
 <!-- 결재선 목록 -->
 <div id="treeInfo" class="treeInfo" style="width: 560px; margin-left: 0px; margin-bottom: 2%; height: 468px; overflow: hidden; display: inline-block;">
@@ -166,24 +179,17 @@
 			<table class="postTable aprvLineTbl">
 				<caption>결재선 목록</caption>
 				<colgroup>
-					<col class="w15per">
-					<col class="w20per">
-					<col class="w25per">
+					<col class="w30per">
+					<col class="w30per">
 					<col class="w25per">
 					<col class="w15per">
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">
-							<span class="_chkBox">
-								<input type="checkbox" class="checkbox aprvLineChk"> 
-								<label for="chk-local"><span></span></label>
-							</span>
-						</th>
-						<th scope="col">단계</th>
 						<th scope="col">부서</th>
 						<th scope="col">이름</th>
-						<th scope="col">제거</th>
+						<th scope="col">단계</th>
+						<th scope="col">비고</th>
 					</tr>
 				</thead>
 				<tbody>

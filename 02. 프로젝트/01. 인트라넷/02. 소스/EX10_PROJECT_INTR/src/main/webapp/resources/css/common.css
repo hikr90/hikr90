@@ -247,11 +247,13 @@ textarea { height: auto; line-height: 1.5; text-indent: 0; padding: 15px; }
 .tree input[class="valueCd"] { margin-right: 10px; }
 
 .treeArea { margin-top: 27px; border: solid 2px #f6f6f6; }
+.treeArea input[type=radio] { vertical-align: middle; margin: 3px; }
+
 
 .popTree span { margin-left: 5px; }
 .popTree li { margin: 15px; list-style: none; }
 .popTree button { display: inline-block; border: 1px solid black; width: 14px; height: 14px; }
-.popTree input[type=radio] { margin-right: 3px; vertical-align: middle; }
+.popTree input[type=radio] { margin: 3px; vertical-align: middle; }
 
 
 .popTree .treePlus{ background-color: black; color: white; }

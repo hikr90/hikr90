@@ -32,7 +32,7 @@
 			var aprvSdt = $("#srchSdt").val();
 			var aprvEdt = $("#srchEdt").val();
 			//
-/* 			if(aprvSdt=='' || aprvEdt==''){
+ 			if(aprvSdt=='' || aprvEdt==''){
 				alert("<spring:message code="APRV.DT.NONE"/>");
 				return;
 			}
@@ -44,7 +44,7 @@
 				alert("<spring:message code="APRV.EDT.PAST"/>");
 				return;
 			}
- */			
+			
  			// 결재선 팝업
 			if(confirm("등록하시겠습니까?")){
 				//
@@ -52,6 +52,9 @@
    				ajaxPopup(param,"1100","650","intrPopupInqy1031.do");
 			}
 		}
+		
+		// 임시저장
+		
 	</script>
 </head>
 <body id="main">
@@ -74,6 +77,9 @@
 						<div class="postWrap">
 							<!-- Form postWriteWrap  -->
 							<h2>기안문 등록</h2>
+							<input type="hidden" id="aprvEmpIdx" name="aprvEmpIdx" value="">
+							<input type="hidden" id="aprvStatCd" name="aprvStatCd" value="">
+							
 							<div class="postWrite">
 								<dl>
 									<dt><label for="post-title">제목</label></dt>
@@ -126,6 +132,8 @@
 								</dl>
 							</div><!-- End postWriteWrap -->
 							<div class="btnWrap alignR">
+									<input type="button" class="stb-box-btn2" value="기안문 작성" onclick="tempSave(this.form);">
+							
 									<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
 									<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
 							</div>
