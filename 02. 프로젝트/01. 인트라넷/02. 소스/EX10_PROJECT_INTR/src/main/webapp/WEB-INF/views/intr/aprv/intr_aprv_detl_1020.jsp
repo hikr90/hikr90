@@ -20,11 +20,10 @@
 			CKEDITOR.replace('editor',{ height: 500});
 		});
 		
-		// 기안문 등록 처리
-		function aprvLineCall(){
-			// 유효성 검증
-			if(!validation()){return;};
-
+		// 시행일자 유효성
+		function validateAprvDt(){
+			//
+			var chkYn = true;
 			// 시행일자 유효성 검증			
  			var date = new Date();
 			var today = getDateStamp(date); 
@@ -32,29 +31,78 @@
 			var aprvSdt = $("#srchSdt").val();
 			var aprvEdt = $("#srchEdt").val();
 			//
- 			if(aprvSdt=='' || aprvEdt==''){
+ 			/* if(aprvSdt=='' || aprvEdt==''){
 				alert("<spring:message code="APRV.DT.NONE"/>");
-				return;
+				chkYn = false;
 			}
  			if(aprvSdt<today || aprvSdt<today){
 				alert("<spring:message code="APRV.DT.PAST"/>");
-				return;
+				chkYn = false;
 			}
  			if(aprvSdt>aprvEdt){
 				alert("<spring:message code="APRV.EDT.PAST"/>");
-				return;
-			}
+				chkYn = false;
+			} */
+			
+			return chkYn;			
+		}
+		
+		// 기안문 등록 처리
+		function aprvLineCall(){
+			// 유효성 검증
+			if(!validation()){return;};
+			if(!validateAprvDt()){return;};
 			
  			// 결재선 팝업
-			if(confirm("등록하시겠습니까?")){
-				//
+			if($(".setListTr").length==0){
+				// 첫 시작
 	   			var param = null;
-   				ajaxPopup(param,"1100","650","intrPopupInqy1031.do");
+				ajaxPopup(param,"1100","650","intrPopupInqy1031.do");
+				
+			} else {
+				// 숨김 해제
+				$("#popupArea").removeClass('hidden');
 			}
 		}
 		
 		// 임시저장
-		
+		function tempSave(f){
+			// 유효성 검증
+			if(!validation()){return;};
+			if(!validateAprvDt()){return;};
+			//
+			if(confirm("등록하시겠습니까?")){
+				var tempLine = $("#aprvLine").val();
+				$("#aprvLine").val("${empVO.empIdx}@STAT_0001|"+tempLine);
+				// 태그 내 변수 저장
+				var fileList = setFileList();
+				//
+	   			$.ajax({
+					url:"intrAprvProc1010.do",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'post',
+	   				success : function(data){
+	   						//
+	   						var json = eval(data);
+	   						if(json[0].res=='YES'){
+	   	   						//
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrAprvInqy1010.do";
+	   						}else{
+	   	   						//
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;	   							
+	   						}
+	   				},
+	   				error : function(res, status, error){
+	   					//
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
+		}
 	</script>
 </head>
 <body id="main">
@@ -77,8 +125,7 @@
 						<div class="postWrap">
 							<!-- Form postWriteWrap  -->
 							<h2>기안문 등록</h2>
-							<input type="hidden" id="aprvEmpIdx" name="aprvEmpIdx" value="">
-							<input type="hidden" id="aprvStatCd" name="aprvStatCd" value="">
+							<input type="hidden" id="aprvLine" name="aprvLine" value="${empVO.empIdx}@STAT_0002|">
 							
 							<div class="postWrite">
 								<dl>
@@ -131,11 +178,12 @@
 									</dd>
 								</dl>
 							</div><!-- End postWriteWrap -->
+
 							<div class="btnWrap alignR">
-									<input type="button" class="stb-box-btn2" value="기안문 작성" onclick="tempSave(this.form);">
-							
-									<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
-									<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
+								<input type="button" class="_btn _blue" onclick="tempSave(this.form);" value="임시저장" style="float: left;">
+
+								<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
+								<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
 							</div>
 						</div><!-- End postWrap -->
 						</div>

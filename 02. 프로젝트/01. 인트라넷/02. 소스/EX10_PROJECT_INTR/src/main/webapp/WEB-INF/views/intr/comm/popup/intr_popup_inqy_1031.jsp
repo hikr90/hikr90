@@ -68,10 +68,9 @@
 	}
 	
 	// 결재선 등록
-	function popConfirm(){
+	function popConfirm(f){
 		// 결재선
-		var empIdx = "";
-		var statCd = "";
+		var aprvLine = "";
 		// 유효성 검증
 		var setAprvIdx = "";
 		var setStatCd = "";
@@ -79,12 +78,11 @@
 		$(".setListTr").each(function(){
 			// 검증
 			setStatCd = $(this).find('select option:selected').val();
-			if(setStatCd=="STAT_0002"){
+			if(setStatCd=="STAT_0003"){
 				setStatCnt++;				
 			};
 			// 결재선
-			empIdx += $(this).attr('empIdx') + "|";
-			statCd += setStatCd + "|";
+			aprvLine += $(this).attr('empIdx') + "@" + setStatCd + "|";
 		});
 		// 결재자 1명 이상
 		if(setStatCnt==0){
@@ -93,19 +91,23 @@
 		};
 		
 		// 결재선 저장
-		$("#aprvEmpIdx").val(empIdx);
-		$("#aprvStatCd").val(statCd);
+		$("#aprvLine").val(aprvLine);
 		
 		// 등록 처리
-		aprvProc();
+		aprvProc(f);
 	}
 	
 	// 등록 처리
-	function aprvProc(){
-		//
-		
+	function aprvProc(f){
+		if(confirm("등록하시겠습니까?")){
+			// 유효성 검증
+			if(!validation()){return;};
+			if(!validateAprvDt()){return;};
+						
+		}
 	}
 </script>
+
 <!-- 부서 사용자 트리 -->
 <div class="treeWrap" style="display: inline;">
 	<div class="treeArea" id="treeArea" style="width: 350px;"> 

@@ -8,7 +8,6 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<form id="popForm">
 <div class="_popList">
 	<article id="_subArticle">
 		<div class="_wrap">
@@ -26,11 +25,11 @@
 								</div>
                                 
                                 <div id="postCon">
-                                
+
                                 </div>
                                 
                                 <div class="btn_center" style="text-align: center;">
-                                	<input type="button" class="_btn _grey" value="선택" onclick="popConfirm();">
+                                	<input type="button" class="_btn _grey" value="선택" onclick="popConfirm(this.form);">
                                     <input type="button" class="_btn _line" value="취소" onclick="popClose('popupArea');">
                                 </div>
                             </div><!-- End postWrap -->
@@ -41,4 +40,3 @@
 		</div><!-- End _wrap -->
 	</article>
 </div>
-</form>

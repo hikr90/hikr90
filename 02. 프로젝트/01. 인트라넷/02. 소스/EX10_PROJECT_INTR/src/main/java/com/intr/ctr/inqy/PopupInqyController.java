@@ -98,13 +98,13 @@ public class PopupInqyController {
 		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1022;
 	}
 	
-	/* 명칭 : intrPopupInqy1030
+	/* 명칭 : intrPopupInqy1031
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.07.02
 	 * 내용 : 팝업(결재선) 조회
 	 */
 	@RequestMapping("/intrPopupInqy1031.do")
-	public String intrPopupInqy1030(Model model) {
+	public String intrPopupInqy1031(Model model) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ public class PopupInqyController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 팝업(결재선) 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 팝업(결재선) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		//

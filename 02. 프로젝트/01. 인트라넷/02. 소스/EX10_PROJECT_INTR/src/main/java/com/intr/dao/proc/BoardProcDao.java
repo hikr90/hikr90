@@ -18,7 +18,6 @@ public class BoardProcDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.insert("boardProc.intrBoardProc10101010", paramMap);
-		//
 		return resInt;
 	}
 
@@ -27,7 +26,6 @@ public class BoardProcDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.update("boardProc.intrBoardProc10201010", paramMap);
-		//
 		return resInt;
 	}
 	
@@ -36,7 +34,6 @@ public class BoardProcDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.update("boardProc.intrBoardProc10103010", paramMap);
-		//
 		return resInt;
 	}
 	
