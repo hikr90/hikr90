@@ -17,7 +17,11 @@
 	<title>Insert title here</title>
 	<script>
 		$(document).ready(function() {
+			// 에디터
 			CKEDITOR.replace('editor',{ height: 500});
+			
+			// 기본 결재선 등록
+			setAprvLine();
 		});
 		
 		// 시행일자 유효성
@@ -31,18 +35,18 @@
 			var aprvSdt = $("#srchSdt").val();
 			var aprvEdt = $("#srchEdt").val();
 			//
- 			/* if(aprvSdt=='' || aprvEdt==''){
+ 			if(aprvSdt=='' || aprvEdt==''){
 				alert("<spring:message code="APRV.DT.NONE"/>");
 				chkYn = false;
-			}
+			};
  			if(aprvSdt<today || aprvSdt<today){
 				alert("<spring:message code="APRV.DT.PAST"/>");
 				chkYn = false;
-			}
+			};
  			if(aprvSdt>aprvEdt){
 				alert("<spring:message code="APRV.EDT.PAST"/>");
 				chkYn = false;
-			} */
+			};
 			
 			return chkYn;			
 		}
@@ -65,6 +69,11 @@
 			}
 		}
 		
+		// 결재선 기본 등록
+		function setAprvLine(){
+			$("#aprvLine").val("${empVO.empIdx}@STAT_0002|");
+		}
+		
 		// 임시저장
 		function tempSave(f){
 			// 유효성 검증
@@ -72,8 +81,8 @@
 			if(!validateAprvDt()){return;};
 			//
 			if(confirm("등록하시겠습니까?")){
-				var tempLine = $("#aprvLine").val();
-				$("#aprvLine").val("${empVO.empIdx}@STAT_0001|"+tempLine);
+				// 임시 저장
+				$("#tempSave").val("Y");
 				// 태그 내 변수 저장
 				var fileList = setFileList();
 				//
@@ -125,13 +134,15 @@
 						<div class="postWrap">
 							<!-- Form postWriteWrap  -->
 							<h2>기안문 등록</h2>
-							<input type="hidden" id="aprvLine" name="aprvLine" value="${empVO.empIdx}@STAT_0002|">
+							<input type="hidden" id="aprvLine" name="aprvLine" value="">
+							<input type="hidden" id="tempSave" name="tempSave" value="N">
+
 							
 							<div class="postWrite">
 								<dl>
 									<dt><label for="post-title">제목</label></dt>
 									<dd style="width: 45%;">
-										<input type="text" id="templateNm" class="templateNm" title="템플릿명" name="templateNm" value="${defaultInfo.templateNm}">
+										<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${defaultInfo.templateNm}">
 									</dd>
 									<dt>부서</dt>
 									<dd>${empVO.deptNm}</dd>
@@ -174,7 +185,7 @@
 								<dl>
 									<dt><label for="post_text">내용</label></dt>
 									<dd class="post_text">
-										<textarea id="editor" name="templateContent" title="템플릿 내용">${defaultInfo.templateContent}</textarea>
+										<textarea id="editor" name="aprvContent" title="템플릿 내용">${defaultInfo.templateContent}</textarea>
 									</dd>
 								</dl>
 							</div><!-- End postWriteWrap -->

@@ -83,17 +83,17 @@
 										<col class="auto">
 										<col class="w12per">
 										<col class="w12per">
-										<col class="w15per">
-										<col class="w7per">
+										<col class="w12per">
+										<col class="w12per">
 									</colgroup>
 									<thead>
 										<tr>
 											<th scope="col">순번</th>
-											<th scope="col">제목</th>
+											<th scope="col">품의문 제목</th>
+											<th scope="col">진행 단계</th>
 											<th scope="col">부서</th>
-											<th scope="col">작성자</th>
+											<th scope="col">기안자</th>
 											<th scope="col">작성일자</th>
-											<th scope="col">조회수</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -101,18 +101,18 @@
 										<tr>
 											<td class="first-td">${list.num}</td>
 											<td class="_title">
-												<a class="show_view a_title" onclick="detCall('${list.brdIdx}');">${list.brdTitle}</a>
+												<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
 											</td>
+											<td>${list.statusNm}</td>
 											<td>${list.deptNm}</td>
 											<td>${list.empNm}</td>
 											<td>
 												<span class="date">
-													<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+													<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>
 													<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
 													${formatDt} 
 												</span>	
 											</td>
-											<td>${list.brdReadhit}</td>
                                         </tr>
                                         </c:forEach>
                                         

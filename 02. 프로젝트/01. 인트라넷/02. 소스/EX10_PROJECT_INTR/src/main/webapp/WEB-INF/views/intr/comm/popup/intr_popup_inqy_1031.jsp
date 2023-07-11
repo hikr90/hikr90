@@ -35,8 +35,8 @@
 			str += "	<td>" + empNm + "</td>";
 			str += "	<td>";
 			str += "		<select style='width:90%; height:25px; text-align:left;'>";
-			str += "			<option value='STAT_0003' selected>결재</option>";
-			str += "			<option value='STAT_0004'>참조</option>";
+			str += "			<option value='STEP_0002' selected>결재</option>";
+			str += "			<option value='STEP_0003'>참조</option>";
 			str += "		</select>";
 			str += "	</td>";
 			str += "	<td><div id='divArea' onclick=\"delCall('setListTr"+aprvCnt+"');\"><a>삭제</a></div></td>";
@@ -49,7 +49,7 @@
 			str += "	<td>${empVO.empNm}</td>";
 			str += "	<td>";
 			str += "		<select disabled style='width:90%; height:25px; text-align:left;'>";
-			str += "			<option value='STAT_0002' selected>기안</option>";
+			str += "			<option value='STEP_0001' selected>기안</option>";
 			str += "		</select>";
 			str += "	</td>";
 			str += "	<td></td>";
@@ -75,10 +75,11 @@
 		var setAprvIdx = "";
 		var setStatCd = "";
 		var setStatCnt = 0;
+		//
 		$(".setListTr").each(function(){
 			// 검증
 			setStatCd = $(this).find('select option:selected').val();
-			if(setStatCd=="STAT_0003"){
+			if(setStatCd=="STEP_0002"){
 				setStatCnt++;				
 			};
 			// 결재선
@@ -103,7 +104,33 @@
 			// 유효성 검증
 			if(!validation()){return;};
 			if(!validateAprvDt()){return;};
-						
+			// 태그 내 변수 저장
+			var fileList = setFileList();
+			//
+   			$.ajax({
+				url:"intrAprvProc1010.do",
+				processData : false,
+				contentType : false,
+				data: fileList,
+				type : 'post',
+   				success : function(data){
+   						//
+   						var json = eval(data);
+   						if(json[0].res=='YES'){
+   	   						//
+   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   						location.href = "intrAprvInqy1010.do";
+   						}else{
+   	   						//
+   							alert("<spring:message code="PROC.FAIL"/>");
+							return;	   							
+   						}
+   				},
+   				error : function(res, status, error){
+   					//
+   					alert("<spring:message code="PROC.ERROR"/>");
+   				}
+   			});
 		}
 	}
 </script>

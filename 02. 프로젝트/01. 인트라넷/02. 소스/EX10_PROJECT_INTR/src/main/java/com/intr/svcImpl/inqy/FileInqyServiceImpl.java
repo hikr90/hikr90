@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.dao.inqy.FileInqyDao;
 import com.intr.svc.inqy.FileInqyService;
 
@@ -27,9 +27,9 @@ public class FileInqyServiceImpl implements FileInqyService{
 		String contentIdx = (String)paramMap.get("contentIdx");
 		//
 		if(contentIdx.length()>10) {
-			workPath = IntrConstant.FILE_PATH;
+			workPath = IntrConst.FILE_PATH;
 		} else {
-			workPath = IntrConstant.EMP_PATH;
+			workPath = IntrConst.EMP_PATH;
 		}
 		//
 		workPath = intrFileInqy101012(paramMap, workPath);
@@ -42,7 +42,7 @@ public class FileInqyServiceImpl implements FileInqyService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String workPath = IntrConstant.TEMP_PATH;
+		String workPath = IntrConst.TEMP_PATH;
 		workPath = intrFileInqy101012(paramMap, workPath);
 		//
 		return workPath;

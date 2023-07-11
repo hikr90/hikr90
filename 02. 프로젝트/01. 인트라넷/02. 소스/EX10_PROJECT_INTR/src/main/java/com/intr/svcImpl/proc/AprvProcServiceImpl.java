@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.intr.constant.IntrConst;
 import com.intr.dao.inqy.CoreInqyDao;
 import com.intr.dao.proc.AprvProcDao;
 import com.intr.dao.proc.AuthProcDao;
@@ -50,9 +51,6 @@ public class AprvProcServiceImpl implements AprvProcService{
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
 		String resStr = "NO";
-		
-		System.out.println("kth1 : "+paramMap);
-		
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -64,7 +62,7 @@ public class AprvProcServiceImpl implements AprvProcService{
 			//--------------------------------------------------------------------------------------------
 			// 기안문 등록 (INTR_APRV, INTR_APRV_STATUS)
 			//--------------------------------------------------------------------------------------------
-			this.intrAprvProc101011(model, paramMap);
+			resStr = this.intrAprvProc101011(model, paramMap);
 			
 			
 			//--------------------------------------------------------------------------------------------
@@ -81,42 +79,71 @@ public class AprvProcServiceImpl implements AprvProcService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 공지사항 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 품의문 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		return defaultStr;
 	}
 
 	// 기안문 등록 (INTR_APRV, INTR_APRV_STATUS)
-	private void intrAprvProc101011(Model model, HashMap<String, Object> paramMap) {
-		// EMP_0001@STAT_0001|EMP_0002@STAT_0002...
-		Map<String, Object> tempMap = null;
-		String aprvLine = (String)paramMap.get("aprvLine");
-		String [] aprvLineArray = aprvLine.split("|");
-		String [] statCdArray = null;
-		
-		//--------------------------------------------------------------------------------------------
-		// 기안문 등록
-		//--------------------------------------------------------------------------------------------
-		for(int i=0;i<aprvLineArray.length;i++) {
-			// 품의문 정보
-			tempMap = new HashMap<String, Object>();
-			tempMap.put("aprvIdx", (String)paramMap.get("contentIdx"));			// 컨텐츠 ID
-			tempMap.put("aprvTitle", (String)paramMap.get("aprvTitle"));		// 품의문 제목
-			tempMap.put("aprvContent", (String)paramMap.get("aprvContent"));	// 품의문 내용
-			// 결재선 정보
-			statCdArray = aprvLineArray[i].split("@");
-			tempMap.put("empIdx", statCdArray[0]);								// EMP_IDX
-			tempMap.put("statCd", statCdArray[1]);								// STATUS_CD
-
-			// INTR_APRV
-			if(i==0) {
-				aprvProcDao.intrAprvProc10101010(tempMap);
-			};
+	private String intrAprvProc101011(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		String resStr = "NO";
+		//
+		try {
+			//
+			HashMap<String, Object> tempMap = null;
+			String tempSave = (String)paramMap.get("tempSave");
+			String aprvStr = (String)paramMap.get("aprvLine");
+			String [] aprvLine = aprvStr.split("\\|");
 			
-			// INTR_APRV_STATUS
-			aprvProcDao.intrAprvProc10101020(tempMap);
+
+			// 결재선 분리
+
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안문 등록
+			//--------------------------------------------------------------------------------------------
+			for(int i=0;i<aprvLine.length;i++) {
+				// 품의문 정보
+				tempMap = new HashMap<String, Object>();
+				tempMap.put("aprvIdx", (String)paramMap.get("contentIdx"));			// 컨텐츠 ID
+				tempMap.put("aprvTitle", (String)paramMap.get("aprvTitle"));		// 품의문 제목
+				tempMap.put("aprvContent", (String)paramMap.get("aprvContent"));	// 품의문 내용
+				
+				// 결재선 정보
+				String [] statLine = aprvLine[i].split("@");
+				tempMap.put("aprvEmpIdx", statLine[0]);								// 결재선 사번
+				tempMap.put("statusCd", statLine[1]);								// 결재 단계 (기안, 결재, 참조, 반려, 회수)
+				tempMap.put("stepCd", IntrConst.STAT_0003);							// 진행 완료
+				
+				//--------------------------------------------------------------------------------------------
+				// 임시저장 처리
+				//--------------------------------------------------------------------------------------------
+				if(i==0) { // 첫 단계
+					if(tempSave.equals("Y")) { // 임시 저장
+						tempMap.put("stepCd", IntrConst.STAT_0001);		// 임시 저장
+					}
+					// INTR_APRV
+					resInt = aprvProcDao.intrAprvProc10101010(tempMap);
+
+				} else {
+					// 첫 단계가 아닌 경우 (INTR_APRV_STATUS)
+					tempMap.put("stepCd", IntrConst.STAT_0002);		// 대기
+					resInt = aprvProcDao.intrAprvProc10101020(tempMap);
+				}
+			}
+			//
+			if(resInt>0) {
+				resStr = "YES";
+			}
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스 메소드] 품의문 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-		
+		//
+		return resStr;
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.AprvInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.TempInqyService;
@@ -60,7 +60,7 @@ public class AprvInqyController {
 			logger.debug("[컨트롤러] 관리자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_APRV + IntrConstant.INTR_APRV_LIST_1010;
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_LIST_1010;
 	}
 
 	/* 명칭 : intrAprvInqy1020
@@ -92,7 +92,7 @@ public class AprvInqyController {
 			logger.debug("[컨트롤러] 관리자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_APRV + IntrConstant.INTR_APRV_DETL_1020;
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1020;
 	}
 
 }

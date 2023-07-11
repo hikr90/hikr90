@@ -30,14 +30,14 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 권한 목록 조회
+			// 사용자 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvInqyDao.intrAprvInqy10101010(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사용자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 사용자 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 
 	}

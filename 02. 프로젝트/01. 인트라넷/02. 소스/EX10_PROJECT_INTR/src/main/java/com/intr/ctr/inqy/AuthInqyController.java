@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.AuthInqyService;
@@ -57,7 +57,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_1010;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_1010;
 	}
 
 	/* 명칭 : intrAuthInqy1011
@@ -90,7 +90,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_1011;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_1011;
 	}
 	
 	/* 명칭 : intrAuthInqy1020
@@ -112,7 +112,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 권한 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_DETL_1020;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_DETL_1020;
 	}
 	
 	/* 명칭 : intrAuthInqy1030
@@ -139,7 +139,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 권한 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_DETL_1010;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_DETL_1010;
 	}
 	
 	/* 명칭 : intrAuthInqy1040
@@ -166,7 +166,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 권한 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_DETL_1030;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_DETL_1030;
 	}
 	
 	/* 명칭 : intrAuthInqy2010
@@ -203,7 +203,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_2010;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_2010;
 	}
 	
 	/* 명칭 : intrAuthInqy2011
@@ -235,7 +235,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_2011;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_2011;
 	}
 	
 	/* 명칭 : intrAuthInqy3010
@@ -272,7 +272,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 사용자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_3010;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_3010;
 	}
 	
 	/* 명칭 : intrAuthInqy3011
@@ -309,7 +309,7 @@ public class AuthInqyController {
 			logger.debug("[컨트롤러] 관리자 사용자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_AUTH + IntrConstant.INTR_AUTH_LIST_3011;
+		return IntrConst.VIEW_PATH_AUTH + IntrConst.INTR_AUTH_LIST_3011;
 	}
 
 }

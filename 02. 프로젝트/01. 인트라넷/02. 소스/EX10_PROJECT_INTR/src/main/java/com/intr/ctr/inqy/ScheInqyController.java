@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.EmpInqyService;
@@ -67,7 +67,7 @@ public class ScheInqyController {
 			logger.debug("[컨트롤러] 관리자 일정 관리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_SCHE + IntrConstant.INTR_SCHE_INQY_1010;
+		return IntrConst.VIEW_PATH_SCHE + IntrConst.INTR_SCHE_INQY_1010;
 	}
 
 }

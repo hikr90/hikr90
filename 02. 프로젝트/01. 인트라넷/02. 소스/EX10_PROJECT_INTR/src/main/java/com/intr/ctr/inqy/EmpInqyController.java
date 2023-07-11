@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.EmpInqyService;
@@ -68,7 +68,7 @@ public class EmpInqyController {
 			logger.debug("[컨트롤러] 관리자 사원 정보 정정 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_EMP + IntrConstant.INTR_EMP_LIST_1010;
+		return IntrConst.VIEW_PATH_EMP + IntrConst.INTR_EMP_LIST_1010;
 	}
 	
 	/* 명칭 : intrEmpInqy1011
@@ -152,7 +152,7 @@ public class EmpInqyController {
 			logger.debug("[컨트롤러] 관리자 사원 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_EMP + IntrConstant.INTR_EMP_DETL_1020;
+		return IntrConst.VIEW_PATH_EMP + IntrConst.INTR_EMP_DETL_1020;
 	}
 	
 	/* 명칭 : intrEmpInqy1030
@@ -179,7 +179,7 @@ public class EmpInqyController {
 			logger.debug("[컨트롤러] 관리자 사원 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_EMP + IntrConstant.INTR_EMP_DETL_1010;
+		return IntrConst.VIEW_PATH_EMP + IntrConst.INTR_EMP_DETL_1010;
 	}
 	
 	/* 명칭 : intrEmpInqy1040
@@ -211,7 +211,7 @@ public class EmpInqyController {
 			logger.debug("[컨트롤러] 관리자 사원 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_EMP + IntrConstant.INTR_EMP_DETL_1030;
+		return IntrConst.VIEW_PATH_EMP + IntrConst.INTR_EMP_DETL_1030;
 	}
 	
 	/* 명칭 : intrEmpInqy2010
@@ -254,7 +254,7 @@ public class EmpInqyController {
 			logger.debug("[컨트롤러] 사원 연락처 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_EMP + IntrConstant.INTR_EMP_LIST_2010;
+		return IntrConst.VIEW_PATH_EMP + IntrConst.INTR_EMP_LIST_2010;
 	}
 
 }

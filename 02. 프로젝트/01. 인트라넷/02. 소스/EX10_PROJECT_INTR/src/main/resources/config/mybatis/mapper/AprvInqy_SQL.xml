@@ -13,6 +13,8 @@
 				SELECT 
 				        APRV.APRV_IDX
 				    ,   APRV.EMP_IDX
+                    ,   APRV_STAT.STATUS_CD
+                    ,   ST.STATUS_NM
 				    ,   EMP.EMP_NM
 				    ,   DEPT.DEPT_NM
 				    ,   APRV_TITLE
@@ -27,6 +29,10 @@
 				            AND USE_YN = 'Y'
 				        ) AS FILE_CNT
 				FROM INTR_APRV APRV
+                INNER JOIN INTR_APRV_STATUS APRV_STAT
+                    ON APRV_STAT.STATUS_CD = APRV.APRV_STATUS
+                LEFT OUTER JOIN INTR_STATUS ST
+                    ON ST.STATUS_CD = APRV_STAT.STATUS_CD
 				LEFT OUTER JOIN INTR_EMP EMP
 				    ON APRV.EMP_IDX = EMP.EMP_IDX
 				LEFT OUTER JOIN INTR_DEPT DEPT

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.dao.inqy.CoreInqyDao;
 import com.intr.svc.inqy.BoardInqyService;
 import com.intr.svc.inqy.CoreInqyService;
@@ -127,8 +127,8 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 			}
 					
 			// 페이지 첫, 마지막 인덱스
-			int sIdx = (nowPage-1)*IntrConstant.BLOCKLIST+1;
-			int endIdx = sIdx+IntrConstant.BLOCKLIST-1;
+			int sIdx = (nowPage-1)*IntrConst.BLOCKLIST+1;
+			int endIdx = sIdx+IntrConst.BLOCKLIST-1;
 			//
 			//--------------------------------------------------------------------------------------------
 			// 페이지 변수 저장
@@ -136,8 +136,8 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 			paramMap.put("nowPage", nowPage);
 			paramMap.put("sIdx",sIdx);
 			paramMap.put("eIdx",endIdx);
-			paramMap.put("blockList",IntrConstant.BLOCKLIST);
-			paramMap.put("blockPage",IntrConstant.BLOCKPAGE);
+			paramMap.put("blockList",IntrConst.BLOCKLIST);
+			paramMap.put("blockPage",IntrConst.BLOCKPAGE);
 
 			// 페이지 메뉴 구성
 			String pageMenu = this.getPaging(paramMap);

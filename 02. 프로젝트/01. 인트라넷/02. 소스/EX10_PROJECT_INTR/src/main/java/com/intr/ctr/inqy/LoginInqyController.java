@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.LoginInqyService;
 import com.intr.vo.EmpVO;
@@ -65,7 +65,7 @@ public class LoginInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_LOGIN + IntrConstant.INTR_LOGIN_INQY_1010;
+		return IntrConst.VIEW_PATH_LOGIN + IntrConst.INTR_LOGIN_INQY_1010;
 	}
 
 	/* ¸íÄª : intrMainInqy1020
@@ -93,7 +93,7 @@ public class LoginInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_MAIN + IntrConstant.INTR_MAIN_INQY_1010;
+		return IntrConst.VIEW_PATH_MAIN + IntrConst.INTR_MAIN_INQY_1010;
 	}
 
 	/* ¸íÄª : intrMainInqy1030
@@ -121,6 +121,6 @@ public class LoginInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_MAIN + IntrConstant.INTR_MAIN_INQY_2010;
+		return IntrConst.VIEW_PATH_MAIN + IntrConst.INTR_MAIN_INQY_2010;
 	}
 }

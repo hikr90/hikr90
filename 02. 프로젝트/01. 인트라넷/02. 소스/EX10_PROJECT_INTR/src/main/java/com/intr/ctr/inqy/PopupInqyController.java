@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.EmpInqyService;
@@ -57,7 +57,7 @@ public class PopupInqyController {
 			logger.debug("[컨트롤러] 템플릿 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1011;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1011;
 	}
 
 	
@@ -77,7 +77,7 @@ public class PopupInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1021;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1021;
 	}
 
 	/* 명칭 : intrPopupInqy1022
@@ -95,7 +95,7 @@ public class PopupInqyController {
 			logger.debug("[컨트롤러] 팝업(비밀번호 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1022;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1022;
 	}
 	
 	/* 명칭 : intrPopupInqy1031
@@ -118,7 +118,7 @@ public class PopupInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_POPUP + IntrConstant.INTR_POPUP_INQY_1031;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1031;
 	}
 
 }

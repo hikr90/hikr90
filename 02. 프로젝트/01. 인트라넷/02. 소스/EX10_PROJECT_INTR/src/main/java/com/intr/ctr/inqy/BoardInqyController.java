@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.intr.constant.IntrConstant;
+import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.BoardInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 
@@ -57,7 +57,7 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_LIST_1010;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_LIST_1010;
 	}
 	
 	/* ¸íÄª : intrBoardInqy1020
@@ -80,7 +80,7 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_DETL_1020;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_DETL_1020;
 	}
 	
 	/* ¸íÄª : intrBoardInqy1030
@@ -108,7 +108,7 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_DETL_1010;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_DETL_1010;
 	}
 
 	/* ¸íÄª : intrBoardInqy1040
@@ -136,7 +136,7 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_DETL_1030;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_DETL_1030;
 	}
 	
 	/* ¸íÄª : intrBoardInqy2010
@@ -179,7 +179,7 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_LIST_2010;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_LIST_2010;
 	}
 	
 	/* ¸íÄª : intrBoardInqy2020
@@ -207,6 +207,6 @@ public class BoardInqyController {
 		}
 		
 		//
-		return IntrConstant.VIEW_PATH_BOARD + IntrConstant.INTR_BOARD_DETL_2010;
+		return IntrConst.VIEW_PATH_BOARD + IntrConst.INTR_BOARD_DETL_2010;
 	}
 }

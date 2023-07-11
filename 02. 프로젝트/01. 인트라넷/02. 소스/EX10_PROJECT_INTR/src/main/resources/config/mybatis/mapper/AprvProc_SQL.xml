@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="aprvInqy">
-
+<mapper namespace="aprvProc">
+	<insert id="intrAprvProc10101010" parameterType="java.util.HashMap" >
+	/* intrAprvProc10101010 : 품의문 기본 정보 등록 처리 */
+		INSERT INTO INTR_APRV
+		(
+				APRV_IDX
+			,	EMP_IDX
+			,	APRV_TITLE
+			,	APRV_CONTENT
+			,	APRV_STATUS
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{aprvIdx, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	#{aprvTitle, jdbcType=VARCHAR}
+			,	#{aprvContent, jdbcType=VARCHAR}
+			,	#{statCd, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_APRV
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<insert id="intrAprvProc10101020" parameterType="java.util.HashMap" >
+	/* intrAprvProc10101020 : 품의문 결재선 등록 처리 */
+		INSERT INTO INTR_APRV_STATUS
+		(
+				APRV_IDX
+			,	STATUS_CD
+			,	APRV_EMP_IDX
+			,	APRV_RSLT_DT
+			,	APRV_RSLT_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{aprvIdx, jdbcType=VARCHAR}
+			,	#{statCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_APRV_STATUS WHERE APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
 </mapper>
