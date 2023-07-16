@@ -17,7 +17,7 @@
 			return;
 		}
 		// 팝업 종료 후,
-		popClose('popupArea');		
+		popClose('popupArea');	
 		formSubmit("intrAprvInqy1020.do");
 	}
 </script>
@@ -51,9 +51,6 @@
                                 </div>
                             </div><!-- End postWrap -->
                           </div> 
-					
-					
-					
 					</div><!-- End _contentArea _formArea -->
 				</div><!-- End _inner -->
 			</div><!-- End _content -->

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.compiler.ast.IntConst;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,17 +91,13 @@ public class AprvProcServiceImpl implements AprvProcService{
 		//
 		int resInt = 0;
 		String resStr = "NO";
+		String flag = "N";
 		//
 		try {
 			//
 			HashMap<String, Object> tempMap = null;
-			String tempSave = (String)paramMap.get("tempSave");
 			String aprvStr = (String)paramMap.get("aprvLine");
-			String [] aprvLine = aprvStr.split("\\|");
-			
-
-			// 결재선 분리
-
+			String [] aprvLine = aprvStr.split(IntrConst.VERTICAL_BAR);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안문 등록
@@ -108,31 +105,39 @@ public class AprvProcServiceImpl implements AprvProcService{
 			for(int i=0;i<aprvLine.length;i++) {
 				// 품의문 정보
 				tempMap = new HashMap<String, Object>();
-				tempMap.put("aprvIdx", (String)paramMap.get("contentIdx"));			// 컨텐츠 ID
+				tempMap.put("aprvIdx", (String)paramMap.get("contentIdx"));			// 컨텐츠 IDX
+				tempMap.put("empIdx", (String)paramMap.get("empIdx"));				// EMP IDX
+				tempMap.put("templateCd", (String)paramMap.get("templateCd"));		// 템플릿 CD
+				tempMap.put("aprvSno", i + 1);										// 컨텐츠 SNO
 				tempMap.put("aprvTitle", (String)paramMap.get("aprvTitle"));		// 품의문 제목
 				tempMap.put("aprvContent", (String)paramMap.get("aprvContent"));	// 품의문 내용
 				
 				// 결재선 정보
-				String [] statLine = aprvLine[i].split("@");
-				tempMap.put("aprvEmpIdx", statLine[0]);								// 결재선 사번
-				tempMap.put("statusCd", statLine[1]);								// 결재 단계 (기안, 결재, 참조, 반려, 회수)
-				tempMap.put("stepCd", IntrConst.STAT_0003);							// 진행 완료
+				String [] stepLine = aprvLine[i].split(IntrConst.AT_SIGN);
+				tempMap.put("aprvEmpIdx", stepLine[0]);								// 결재선 사번
+				tempMap.put("stepCd", stepLine[1]);									// 결재 단계 (기안, 결재, 참조, 반려, 회수)
+				tempMap.put("lastAprvYn", "N");										// 최종결재자여부
 				
 				//--------------------------------------------------------------------------------------------
-				// 임시저장 처리
+				// 결재 정보 등록
 				//--------------------------------------------------------------------------------------------
-				if(i==0) { // 첫 단계
-					if(tempSave.equals("Y")) { // 임시 저장
-						tempMap.put("stepCd", IntrConst.STAT_0001);		// 임시 저장
-					}
-					// INTR_APRV
+				if(flag.equals("N") && stepLine[1].equals(IntrConst.STEP_0002)) { // 첫번 째 결재 단계인 경우 저장
+					flag = "Y";
 					resInt = aprvProcDao.intrAprvProc10101010(tempMap);
-
-				} else {
-					// 첫 단계가 아닌 경우 (INTR_APRV_STATUS)
-					tempMap.put("stepCd", IntrConst.STAT_0002);		// 대기
-					resInt = aprvProcDao.intrAprvProc10101020(tempMap);
 				}
+				
+				//--------------------------------------------------------------------------------------------
+				// 최종 결재자 여부 지정
+				//--------------------------------------------------------------------------------------------
+				if(i==aprvLine.length-1) {
+					tempMap.put("lastAprvYn", "Y");	
+				}
+
+				//--------------------------------------------------------------------------------------------
+				// 결재선 정보 등록
+				//--------------------------------------------------------------------------------------------
+				tempMap.put("flag", flag);
+				resInt = aprvProcDao.intrAprvProc10101020(tempMap);
 			}
 			//
 			if(resInt>0) {

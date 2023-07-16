@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.inqy.AprvInqyDao;
+import com.intr.dao.inqy.FileInqyDao;
 import com.intr.svc.inqy.AprvInqyService;
 
 @Service
@@ -19,6 +20,9 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 	//
 	@Autowired
 	AprvInqyDao aprvInqyDao;
+	
+	@Autowired
+	FileInqyDao fileInqyDao;
 	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -38,6 +42,38 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 		} catch (Exception e) {
 			//
 			logger.debug("[서비스] 사용자 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+
+	}
+	
+	// 결재선 상세 정보 조회
+	public void intrAprvInqy102010(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재 상세 정보 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = aprvInqyDao.intrAprvInqy10102010(model, paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+
+			//--------------------------------------------------------------------------------------------
+			// 결재선 정보 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvInqyDao.intrAprvInqy10103010(model, paramMap);
+			model.addAttribute("defaultList", defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 파일 정보
+			//--------------------------------------------------------------------------------------------
+			defaultList = fileInqyDao.intrFileInqy101010(model, paramMap);
+			model.addAttribute("fileList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 결재 상세 정보 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 
 	}

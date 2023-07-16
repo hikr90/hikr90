@@ -38,14 +38,17 @@
  			if(aprvSdt=='' || aprvEdt==''){
 				alert("<spring:message code="APRV.DT.NONE"/>");
 				chkYn = false;
+				return;
 			};
  			if(aprvSdt<today || aprvSdt<today){
 				alert("<spring:message code="APRV.DT.PAST"/>");
 				chkYn = false;
+				return;
 			};
  			if(aprvSdt>aprvEdt){
 				alert("<spring:message code="APRV.EDT.PAST"/>");
 				chkYn = false;
+				return;
 			};
 			
 			return chkYn;			
@@ -73,45 +76,6 @@
 		function setAprvLine(){
 			$("#aprvLine").val("${empVO.empIdx}@STAT_0002|");
 		}
-		
-		// 임시저장
-		function tempSave(f){
-			// 유효성 검증
-			if(!validation()){return;};
-			if(!validateAprvDt()){return;};
-			//
-			if(confirm("등록하시겠습니까?")){
-				// 임시 저장
-				$("#tempSave").val("Y");
-				// 태그 내 변수 저장
-				var fileList = setFileList();
-				//
-	   			$.ajax({
-					url:"intrAprvProc1010.do",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'post',
-	   				success : function(data){
-	   						//
-	   						var json = eval(data);
-	   						if(json[0].res=='YES'){
-	   	   						//
-	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrAprvInqy1010.do";
-	   						}else{
-	   	   						//
-	   							alert("<spring:message code="PROC.FAIL"/>");
-								return;	   							
-	   						}
-	   				},
-	   				error : function(res, status, error){
-	   					//
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
-			}
-		}
 	</script>
 </head>
 <body id="main">
@@ -135,8 +99,9 @@
 							<!-- Form postWriteWrap  -->
 							<h2>기안문 등록</h2>
 							<input type="hidden" id="aprvLine" name="aprvLine" value="">
-							<input type="hidden" id="tempSave" name="tempSave" value="N">
-
+							<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
+							<input type="hidden" id="modCnt" name="modCnt" value="0">
+							<input type="hidden" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
 							
 							<div class="postWrite">
 								<dl>
@@ -191,8 +156,6 @@
 							</div><!-- End postWriteWrap -->
 
 							<div class="btnWrap alignR">
-								<input type="button" class="_btn _blue" onclick="tempSave(this.form);" value="임시저장" style="float: left;">
-
 								<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
 								<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
 							</div>

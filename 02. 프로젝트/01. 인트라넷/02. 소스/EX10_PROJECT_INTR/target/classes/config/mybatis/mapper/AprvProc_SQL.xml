@@ -6,10 +6,10 @@
 		INSERT INTO INTR_APRV
 		(
 				APRV_IDX
+			,	APRV_SNO
 			,	EMP_IDX
 			,	APRV_TITLE
 			,	APRV_CONTENT
-			,	APRV_STATUS
 			,	REG_DT
 			,	REG_TM
 			,	USE_YN
@@ -19,10 +19,10 @@
 		VALUES
 		(
 				#{aprvIdx, jdbcType=VARCHAR}
+			,	LPAD(#{aprvSno, jdbcType=VARCHAR},4,0)
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{aprvTitle, jdbcType=VARCHAR}
 			,	#{aprvContent, jdbcType=VARCHAR}
-			,	#{statCd, jdbcType=VARCHAR}
 			,	TO_CHAR(SYSDATE,'YYYYMMDD')
 			,	TO_CHAR(SYSDATE,'HH24MISS')
 			,	'Y'
@@ -37,13 +37,16 @@
 	
 	<insert id="intrAprvProc10101020" parameterType="java.util.HashMap" >
 	/* intrAprvProc10101020 : 품의문 결재선 등록 처리 */
-		INSERT INTO INTR_APRV_STATUS
+		INSERT INTO INTR_APRV_LINE
 		(
 				APRV_IDX
-			,	STATUS_CD
+			,	APRV_SNO
+			,	STEP_CD
 			,	APRV_EMP_IDX
+			,	LAST_APRV_YN
 			,	APRV_RSLT_DT
 			,	APRV_RSLT_TM
+			,	APRV_RSLT_RESN
 			,	USE_YN
 			,	DISP_ORDER
 			,	REMARK
@@ -51,15 +54,26 @@
 		VALUES
 		(
 				#{aprvIdx, jdbcType=VARCHAR}
-			,	#{statCd, jdbcType=VARCHAR}
-			,	#{empIdx, jdbcType=VARCHAR}
-			,	TO_CHAR(SYSDATE,'YYYYMMDD')
-			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	LPAD(#{aprvSno, jdbcType=VARCHAR},4,0)
+			,	#{stepCd, jdbcType=VARCHAR}
+			,	#{aprvEmpIdx, jdbcType=VARCHAR}
+			,	#{lastAprvYn, jdbcType=VARCHAR}
+			<choose>
+				<when test='stepCd == "STEP_0002" and flag =="Y"'>
+					,	TO_CHAR(SYSDATE,'YYYYMMDD')
+					,	TO_CHAR(SYSDATE,'HH24MISS')
+				</when>
+				<otherwise>
+					,	NULL
+					,	NULL
+				</otherwise>
+			</choose>
+			,	NULL
 			,	'Y'
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM INTR_APRV_STATUS WHERE APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+					FROM INTR_APRV_LINE WHERE APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
 				)
 			,	NULL
 		)

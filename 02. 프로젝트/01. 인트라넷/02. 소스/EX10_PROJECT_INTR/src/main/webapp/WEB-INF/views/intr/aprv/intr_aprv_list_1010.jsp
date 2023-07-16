@@ -16,13 +16,19 @@
 
 	// 템플릿 조회 팝업
 	function popCall(){
-		// 정보 찾기 팝업
+		//
 		var param = null;
 		ajaxPopup(param,"650","360","intrPopupInqy1010.do");
 	}
+	
+	// 품의문 상세 팝업
+	function detCall(aprvIdx) {
+		openPopup(aprvIdx,"850","760","intrPopupInqy1040.do");
+	}
+
 </script>
 <body id="main">
-<form id="form" method="POST">
+<form id="form" name="form" method="POST">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
@@ -38,8 +44,8 @@
 					<div class="_contentArea _formArea">
 						<!-- Form postWrap  -->
 						<div class="postWrap" style="height: 710px;">
-							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							<input type="hidden" id="page" name="page" value="${param.page}">
+							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							
 							<div class="tagWrap">
 								<h2>결재내역
@@ -101,9 +107,12 @@
 										<tr>
 											<td class="first-td">${list.num}</td>
 											<td class="_title">
+												<c:if test="${list.fileYn eq 'Y'}">
+													<img id="fileImg" src='resources/images/icon/icon_file.png' style="width: 15px; padding-left: 3px;"/>
+												</c:if>
 												<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
 											</td>
-											<td>${list.statusNm}</td>
+											<td>${list.currStepNm}</td>
 											<td>${list.deptNm}</td>
 											<td>${list.empNm}</td>
 											<td>

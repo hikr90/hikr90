@@ -80,3 +80,25 @@ function popClose(area){
 	//
 	$("#"+area).addClass('hidden');
 }
+
+/* 명칭 : openPopup
+ * 작성자 : 김태현
+ * 작성일자 : 2023.07.16
+ * 내용 : window.open 팝업 출력
+ */
+function openPopup(aprvIdx, width, height, url){
+	//
+	$("#contentIdx").val(aprvIdx);
+	// 팝업
+	var left = Math.ceil((window.screen.width - width)/2);
+	var top = Math.ceil((window.screen.height - height)/2 - 30);
+	var param = "width="+width+", height="+height+", left="+left+", top="+top;
+	window.open("", "form", param);
+	// 폼태그
+	var form = document.form;
+	form.action = url;
+	form.method = "post";
+	form.target = "form";
+	form.contentIdx = aprvIdx;
+	form.submit();
+}

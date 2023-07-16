@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intr.constant.IntrConst;
 import com.intr.svc.inqy.TempInqyService;
+import com.intr.svc.inqy.AprvInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.EmpInqyService;
 import com.intr.svc.inqy.PopupInqyService;
@@ -30,13 +32,16 @@ public class PopupInqyController {
 	@Autowired
 	EmpInqyService empInqyService;
 	
+	@Autowired
+	AprvInqyService aprvInqyService;
+	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	/* 명칭 : intrPopupInqy1010
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.01.03
-	 * 내용 : 상위 공통코드 조회 
+	 * 내용 : 템플릿 조회 
 	 */
 	@RequestMapping("/intrPopupInqy1010.do")
 	public String intrPopupInqy1010(Model model, HashMap<String, Object> paramMap) {
@@ -119,6 +124,35 @@ public class PopupInqyController {
 		
 		//
 		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1031;
+	}
+	
+	/* 명칭 : intrPopupInqy1040
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.02
+	 * 내용 : 팝업(결재선) 조회
+	 */
+	@RequestMapping("/intrPopupInqy1040.do")
+	public String intrPopupInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 품의문 정보 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy102010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 품의문 정보 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy102010(model, paramMap);
+
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 품의문 정보 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1010;
 	}
 
 }

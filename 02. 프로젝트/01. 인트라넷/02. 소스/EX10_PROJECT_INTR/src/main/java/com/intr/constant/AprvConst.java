@@ -2,14 +2,6 @@ package com.intr.constant;
 
 public interface AprvConst {
 	//--------------------------------------------------------------------------------------------
-	// 결재 단계 (INTR_STATUS)
-	//--------------------------------------------------------------------------------------------
-	public static final String STAT_0001 = "STAT_0001"; 	// 임시 저장
-	public static final String STAT_0002 = "STAT_0002"; 	// 대기
-	public static final String STAT_0003 = "STAT_0003"; 	// 진행 중
-	public static final String STAT_0004 = "STAT_0004"; 	// 진행 완료
-
-	//--------------------------------------------------------------------------------------------
 	// 결재 단계 (INTR_STEP)
 	//--------------------------------------------------------------------------------------------
 	public static final String STEP_0001 = "STEP_0001"; 	// 기안 
@@ -21,7 +13,7 @@ public interface AprvConst {
 	//--------------------------------------------------------------------------------------------
 	// 결재 단위
 	//--------------------------------------------------------------------------------------------
-	public static final String ATSIGN = "@"; 		 
-	public static final String VERTICALBAR = "|"; 
+	public static final String AT_SIGN = "@"; 		 
+	public static final String VERTICAL_BAR = "\\|"; 
 
 }
