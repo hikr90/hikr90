@@ -60,10 +60,11 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 			model.addAttribute("defaultInfo", defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
-			// 결재선 정보 조회
+			// 현재 결재 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvInqyDao.intrAprvInqy10103010(model, paramMap);
-			model.addAttribute("defaultList", defaultList);
+			defaultInfo = aprvInqyDao.intrAprvInqy10102011(model, paramMap);
+			model.addAttribute("aprvInfo", defaultInfo);
+
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
@@ -77,5 +78,6 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 		}
 
 	}
-
+	
+	
 }

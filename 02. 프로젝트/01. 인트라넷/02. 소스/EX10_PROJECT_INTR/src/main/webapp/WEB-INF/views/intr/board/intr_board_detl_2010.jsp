@@ -1,7 +1,7 @@
-<!--명칭 : intr_board_detl_1010
+<!--명칭 : intr_board_detl_2010
 	작성자 : 김태현
 	작성일자 : 2022.12.25
-	내용 : 공지사항 상세-->
+	내용 : 공지사항 상세 조회-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -68,6 +68,7 @@
 									<dd>${ defaultInfo.empNm }</dd>
 								</dl>
 	
+								<c:if test="${not empty defaultList and defaultList ne ''}">
 								<dl class="post_file">
 									<dt>첨부파일</dt>
 									<dd class="post_file">
@@ -84,6 +85,7 @@
 										</div>
 									</dd>
 								</dl>
+								</c:if>
 
 								<dl>
 									<dt>내용</dt>
@@ -95,7 +97,7 @@
 							
 							<div class="btnWrap alignR">
 								<div class="floatR">
-									<c:if test="${defaultList ne null}">
+									<c:if test="${not empty defaultList and defaultList ne ''}">
 										<a class="_btn" onclick="zipProc();">전체 다운로드</a>
 									</c:if>
 									<a class="_btn _blue" onclick="listCall();">목록으로</a>

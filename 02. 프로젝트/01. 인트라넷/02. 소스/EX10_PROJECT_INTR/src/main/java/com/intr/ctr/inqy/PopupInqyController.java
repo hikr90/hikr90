@@ -1,6 +1,7 @@
 package com.intr.ctr.inqy;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intr.constant.IntrConst;
+import com.intr.dao.inqy.AprvInqyDao;
 import com.intr.svc.inqy.TempInqyService;
 import com.intr.svc.inqy.AprvInqyService;
 import com.intr.svc.inqy.CoreInqyService;
@@ -34,6 +36,9 @@ public class PopupInqyController {
 	
 	@Autowired
 	AprvInqyService aprvInqyService;
+
+	@Autowired
+	AprvInqyDao aprvInqyDao;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -106,7 +111,7 @@ public class PopupInqyController {
 	/* 명칭 : intrPopupInqy1031
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.07.02
-	 * 내용 : 팝업(결재선) 조회
+	 * 내용 : 팝업(결재선) 선택 조회
 	 */
 	@RequestMapping("/intrPopupInqy1031.do")
 	public String intrPopupInqy1031(Model model) {
@@ -126,33 +131,31 @@ public class PopupInqyController {
 		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1031;
 	}
 	
-	/* 명칭 : intrPopupInqy1040
+	/* 명칭 : intrPopupInqy1032
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.07.02
-	 * 내용 : 팝업(결재선) 조회
+	 * 내용 : 팝업(결재선) 목록 조회
 	 */
-	@RequestMapping("/intrPopupInqy1040.do")
-	public String intrPopupInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	@RequestMapping("/intrPopupInqy1032.do")
+	public String intrPopupInqy1032(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
+			System.out.println("kth1 : "+paramMap);
 			//--------------------------------------------------------------------------------------------
-			// 품의문 정보 조회
+			// 결재선 목록 조회
 			//--------------------------------------------------------------------------------------------
-			aprvInqyService.intrAprvInqy102010(model, paramMap);
-
-			//--------------------------------------------------------------------------------------------
-			// 품의문 정보 조회
-			//--------------------------------------------------------------------------------------------
-			aprvInqyService.intrAprvInqy102010(model, paramMap);
-
+			defaultList = aprvInqyDao.intrAprvInqy10103010(model, paramMap);
+			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 품의문 정보 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 팝업(결재선) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		//
-		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1010;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1032;
 	}
 
 }

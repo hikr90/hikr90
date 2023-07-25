@@ -28,7 +28,9 @@ public interface JspConst {
 	public static final String INTR_POPUP_INQY_1021 = "intr_popup_inqy_1021.jsp";	// 팝업 (아이디 찾기)
 	public static final String INTR_POPUP_INQY_1022 = "intr_popup_inqy_1022.jsp";	// 팝업 (비밀번호 찾기)
 
-	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";	// 결재선 팝업 트리
+	public static final String INTR_POPUP_INQY_1030 = "intr_popup_inqy_1030.jsp";	// 결재선 팝업 관리
+	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";	// 결재선 선택 팝업 트리
+	public static final String INTR_POPUP_INQY_1032 = "intr_popup_inqy_1032.jsp";	// 결재선 목록
 	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항

@@ -8,6 +8,11 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
+<script>
+	//
+	function 
+</script>
+
 <div class="_popList">
 	<article id="_subArticle">
 		<div class="_wrap">
@@ -19,7 +24,7 @@
 								<div class="srchWrap">
 									<div class="search_nav">
 										<div class="srchArea">
-											<label class="srcLabel">결재선 지정</label>
+											<label class="srcLabel">결재선 관리</label>
 										</div>
 									</div>
 								</div>
@@ -29,8 +34,8 @@
                                 </div>
                                 
                                 <div class="btn_center" style="text-align: center;">
-                                	<input type="button" class="_btn _grey" value="선택" onclick="popConfirm(this.form);">
-                                    <input type="button" class="_btn _line" value="취소" onclick="popClose('popupArea');">
+                               		<input type="button" class="_btn _grey" value="확인" onclick="popConfirm(this.form);">
+                                    <input type="button" class="_btn _line" value="닫기" onclick="popClose('popupArea');">
                                 </div>
                             </div><!-- End postWrap -->
                           </div> 

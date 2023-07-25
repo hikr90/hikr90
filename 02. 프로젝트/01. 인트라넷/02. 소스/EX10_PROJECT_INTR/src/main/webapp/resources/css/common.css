@@ -17,7 +17,6 @@ summary, time, mark, audio, video
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 
-
 /* ================== DEFAULT PROPERTY CSS ================== */
 body { font-size: 1.4rem; color: #727272; letter-spacing: -0.5px; }
 body #sub #gnbWrap { display: none; }

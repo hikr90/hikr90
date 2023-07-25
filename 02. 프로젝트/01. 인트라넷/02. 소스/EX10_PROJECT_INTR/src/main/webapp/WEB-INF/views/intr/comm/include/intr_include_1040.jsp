@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <ul id="updUl">
-	<c:if test="${defaultList ne null}">
+	<c:if test="${not empty defaultList and defaultList ne ''}">
 		<c:forEach var="list" items="${defaultList}" varStatus="status">
 			<li id="updLi${status.index}">
 				<input type='checkbox' class='_chkBox' name='checkIdx' value="${status.index}">

@@ -94,5 +94,34 @@ public class AprvInqyController {
 		//
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1020;
 	}
+	
+	/* 명칭 : intrAprvInqy1030
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.02
+	 * 내용 : 품의문 상세 조회
+	 */
+	@RequestMapping("/intrAprvInqy1030.do")
+	public String intrAprvInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 품의문 정보 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy102010(model, paramMap);
+
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 품의문 정보 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1010;
+	}
 
 }

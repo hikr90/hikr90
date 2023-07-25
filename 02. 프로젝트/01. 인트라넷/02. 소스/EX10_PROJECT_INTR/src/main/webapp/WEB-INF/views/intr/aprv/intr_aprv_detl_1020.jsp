@@ -32,20 +32,20 @@
  			var date = new Date();
 			var today = getDateStamp(date); 
 			// 시행일자 (시작, 종료일)
-			var aprvSdt = $("#srchSdt").val();
-			var aprvEdt = $("#srchEdt").val();
+			var efctSdt = $("#srchSdt").val();
+			var efctEdt = $("#srchEdt").val();
 			//
- 			if(aprvSdt=='' || aprvEdt==''){
+ 			if(efctSdt=='' || efctEdt==''){
 				alert("<spring:message code="APRV.DT.NONE"/>");
 				chkYn = false;
 				return;
 			};
- 			if(aprvSdt<today || aprvSdt<today){
+ 			if(efctSdt<today || efctSdt<today){
 				alert("<spring:message code="APRV.DT.PAST"/>");
 				chkYn = false;
 				return;
 			};
- 			if(aprvSdt>aprvEdt){
+ 			if(efctSdt>efctEdt){
 				alert("<spring:message code="APRV.EDT.PAST"/>");
 				chkYn = false;
 				return;
@@ -63,8 +63,8 @@
  			// 결재선 팝업
 			if($(".setListTr").length==0){
 				// 첫 시작
-	   			var param = null;
-				ajaxPopup(param,"1100","650","intrPopupInqy1031.do");
+				var obj = new Object();
+				ajaxPopup(obj,"1100","650","intrPopupInqy1031.do");
 				
 			} else {
 				// 숨김 해제
@@ -126,9 +126,9 @@
 									</dd>
 									<dt>시행일자</dt>
 									<dd>
-										<input type="text" id="srchSdt" class="srch-cdt-date" name="aprvSdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
+										<input type="text" id="srchSdt" class="srch-cdt-date" name="efctSdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
 										~
-										<input type="text" id="srchEdt" class="srch-cdt-date" name="aprvEdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
+										<input type="text" id="srchEdt" class="srch-cdt-date" name="efctEdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
 									</dd>
 								</dl>
 								<dl class="post-info">

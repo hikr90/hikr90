@@ -48,4 +48,29 @@ public class AprvProcController {
 		//
 		return defaultStr;
 	}
+
+	/* 명칭 : intrAprvProc1020
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.025
+	 * 내용 : 기안문 수신 처리
+	 */
+	@RequestMapping("/intrAprvProc1020.do")
+	@ResponseBody
+	public String intrAprvProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 기안문 수신처리 진행
+			//--------------------------------------------------------------------------------------------
+			defaultStr = aprvProcService.intrAprvProc102010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 기안문 결재 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
 }

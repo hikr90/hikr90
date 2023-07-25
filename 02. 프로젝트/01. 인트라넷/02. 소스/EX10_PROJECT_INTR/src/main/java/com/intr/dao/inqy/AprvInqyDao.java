@@ -37,4 +37,11 @@ public class AprvInqyDao {
 		defaultList = sqlsession.selectList("aprvInqy.intrAprvInqy10103010", paramMap);
 		return defaultList;
 	}
+	
+	// 현재 결재 상태 조회
+	public HashMap<String, Object> intrAprvInqy10102011(Model model, HashMap<String, Object> paramMap) {
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("aprvInqy.intrAprvInqy10102011", paramMap);
+		return defaultInfo;
+	}
 }

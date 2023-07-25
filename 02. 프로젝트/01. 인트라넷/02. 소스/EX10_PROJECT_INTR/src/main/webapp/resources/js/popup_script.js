@@ -3,7 +3,7 @@
  * 작성일자 : 2022.11.02
  * 내용 : 기본 팝업 
  */
-function ajaxPopup(param, width, height, mappingId){
+function ajaxPopup(obj, width, height, mappingId){
 	//
 	var zIndex = 9999;
 	var popupArea = $("#popupArea");
@@ -21,12 +21,12 @@ function ajaxPopup(param, width, height, mappingId){
          msTransform:	'translate(-50%, -50%)',
          webkitTransform:	'translate(-50%, -50%)'
 	});
-		
+	
 	// 동작 제어
 	$.ajax({
 		type:	"POST" , 
 		url:	mappingId,
-		data:	param,
+		data:	obj,
 		dataType:	"text" ,
 		success : function(data){
 			//
@@ -79,26 +79,4 @@ function chgPopup(mappingId){
 function popClose(area){
 	//
 	$("#"+area).addClass('hidden');
-}
-
-/* 명칭 : openPopup
- * 작성자 : 김태현
- * 작성일자 : 2023.07.16
- * 내용 : window.open 팝업 출력
- */
-function openPopup(aprvIdx, width, height, url){
-	//
-	$("#contentIdx").val(aprvIdx);
-	// 팝업
-	var left = Math.ceil((window.screen.width - width)/2);
-	var top = Math.ceil((window.screen.height - height)/2 - 30);
-	var param = "width="+width+", height="+height+", left="+left+", top="+top;
-	window.open("", "form", param);
-	// 폼태그
-	var form = document.form;
-	form.action = url;
-	form.method = "post";
-	form.target = "form";
-	form.contentIdx = aprvIdx;
-	form.submit();
 }

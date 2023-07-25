@@ -111,6 +111,8 @@ public class AprvProcServiceImpl implements AprvProcService{
 				tempMap.put("aprvSno", i + 1);										// 컨텐츠 SNO
 				tempMap.put("aprvTitle", (String)paramMap.get("aprvTitle"));		// 품의문 제목
 				tempMap.put("aprvContent", (String)paramMap.get("aprvContent"));	// 품의문 내용
+				tempMap.put("efctSdt", (String)paramMap.get("efctSdt"));			// 시행일자 (시작)
+				tempMap.put("efctEdt", (String)paramMap.get("efctEdt"));			// 시행일자 (종료)
 				
 				// 결재선 정보
 				String [] stepLine = aprvLine[i].split(IntrConst.AT_SIGN);
@@ -151,4 +153,29 @@ public class AprvProcServiceImpl implements AprvProcService{
 		//
 		return resStr;
 	}
+	
+	// 결재 수신 처리
+	public String intrAprvProc102010(Model model, HashMap<String, Object> paramMap) {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재 수신처리
+			//--------------------------------------------------------------------------------------------
+
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 결재 수신 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		return defaultStr;
+	}
+
 }

@@ -78,7 +78,7 @@
 			<div id="_content">
 				<div id="sub_content" class="_inner" style="padding-top: 40px;">
 					<div class="_contentArea _formArea">
-					<div class="postCon" style="padding-bottom: 20px;">
+					<div class="postCon">
 						<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.brdIdx}">
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
@@ -113,6 +113,8 @@
 										</div>
 									</dd>
 								</dl>
+								
+								<c:if test="${not empty defaultList and defaultList ne ''}">
 								<dl class="post-info">
 									<dt></dt>
 									<dd class="post_file">
@@ -129,9 +131,11 @@
 										</div>
 									</dd>
 								</dl>
+								</c:if>
+								
 								<dl>
 									<dt><label for="post_text">내용</label></dt>
-									<dd class="post_text">
+									<dd class="post_text" style="height: 465px;">
 										<textarea id="post_text" name="brdContent" title="내용">${defaultInfo.brdContent}</textarea>
 									</dd>
 								</dl>

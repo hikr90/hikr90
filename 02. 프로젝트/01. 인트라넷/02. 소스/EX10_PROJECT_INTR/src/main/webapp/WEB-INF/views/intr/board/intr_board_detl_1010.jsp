@@ -42,7 +42,7 @@
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.brdIdx}">
 					
-						<div class="postCon" style="padding-bottom: 20px;">
+						<div class="postCon">
 						<div class="postWrap">
                             <h2>공지사항 상세</h2>
 							<!-- Form postViewWrap  -->
@@ -66,6 +66,7 @@
 									<dd>${ defaultInfo.empNm }</dd>
 								</dl>
 	
+								<c:if test="${not empty defaultList and defaultList ne ''}">
 								<dl class="post_file">
 									<dt>첨부파일</dt>
 									<dd class="post_file">
@@ -82,10 +83,11 @@
 										</div>
 									</dd>
 								</dl>
+								</c:if>
 
 								<dl>
 									<dt>내용</dt>
-									<dd class="post_text">
+									<dd class="post_text" style="height: 465px;">
 										<pre style="font-family: NanumSquare">${defaultInfo.brdContent}</pre>
 									</dd>
 								</dl>

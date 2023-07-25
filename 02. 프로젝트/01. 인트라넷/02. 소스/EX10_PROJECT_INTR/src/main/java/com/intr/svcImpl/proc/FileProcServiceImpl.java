@@ -274,8 +274,7 @@ public class FileProcServiceImpl implements FileProcService{
 		String workPath = "";
 		String tempPath = "";
 		String contentIdx = (String)paramMap.get("contentIdx");
-		String contentNm = (String)paramMap.get("brdTitle");
-		String fileNm = contentIdx + "_" + contentNm + ".zip";
+		String fileNm = contentIdx + ".zip";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------

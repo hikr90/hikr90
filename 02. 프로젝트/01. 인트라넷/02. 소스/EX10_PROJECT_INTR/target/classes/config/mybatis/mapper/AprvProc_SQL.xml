@@ -6,12 +6,15 @@
 		INSERT INTO INTR_APRV
 		(
 				APRV_IDX
-			,	APRV_SNO
+			,	CURR_APRV_SNO
 			,	EMP_IDX
 			,	APRV_TITLE
 			,	APRV_CONTENT
+			,	TEMPLATE_CD
 			,	REG_DT
 			,	REG_TM
+			,	EFCT_SDT
+			,	EFCT_EDT
 			,	USE_YN
 			,	DISP_ORDER
 			,	REMARK
@@ -23,8 +26,11 @@
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{aprvTitle, jdbcType=VARCHAR}
 			,	#{aprvContent, jdbcType=VARCHAR}
+			,	#{templateCd, jdbcType=VARCHAR}
 			,	TO_CHAR(SYSDATE,'YYYYMMDD')
 			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	REPLACE(#{efctSdt, jdbcType=VARCHAR},'-','')
+			,	REPLACE(#{efctEdt, jdbcType=VARCHAR},'-','')
 			,	'Y'
 			,	(
 					SELECT 
@@ -59,7 +65,7 @@
 			,	#{aprvEmpIdx, jdbcType=VARCHAR}
 			,	#{lastAprvYn, jdbcType=VARCHAR}
 			<choose>
-				<when test='stepCd == "STEP_0002" and flag =="Y"'>
+				<when test='stepCd != "STEP_0002"'>
 					,	TO_CHAR(SYSDATE,'YYYYMMDD')
 					,	TO_CHAR(SYSDATE,'HH24MISS')
 				</when>

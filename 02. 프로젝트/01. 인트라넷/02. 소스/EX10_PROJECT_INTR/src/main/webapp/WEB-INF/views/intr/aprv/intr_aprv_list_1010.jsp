@@ -17,15 +17,16 @@
 	// 템플릿 조회 팝업
 	function popCall(){
 		//
-		var param = null;
-		ajaxPopup(param,"650","360","intrPopupInqy1010.do");
+		var obj = new Object();
+		ajaxPopup(obj,"650","360","intrPopupInqy1032.do");
 	}
 	
-	// 품의문 상세 팝업
-	function detCall(aprvIdx) {
-		openPopup(aprvIdx,"850","760","intrPopupInqy1040.do");
+	// 품의문 상세 조회
+	function detCall(contentIdx) {
+		//
+		$("#contentIdx").val(contentIdx);
+		formSubmit("intrAprvInqy1030.do");
 	}
-
 </script>
 <body id="main">
 <form id="form" name="form" method="POST">
