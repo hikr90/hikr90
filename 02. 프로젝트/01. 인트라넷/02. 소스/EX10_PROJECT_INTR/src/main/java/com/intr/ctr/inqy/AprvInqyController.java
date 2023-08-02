@@ -34,7 +34,7 @@ public class AprvInqyController {
 	/* 명칭 : intrAprvInqy1010
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.06.25
-	 * 내용 : 결재내역 목록 조회
+	 * 내용 : 기안 목록 조회
 	 */
 	@RequestMapping("/intrAprvInqy1010.do")
 	public String intrAprvInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
@@ -46,7 +46,7 @@ public class AprvInqyController {
 			coreInqyService.intrCoreInqy101010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
-			// 결재내역 목록 조회
+			// 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
 			aprvInqyService.intrAprvInqy101010(model, paramMap);
 			
@@ -57,7 +57,7 @@ public class AprvInqyController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 관리자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_LIST_1010;
@@ -98,7 +98,7 @@ public class AprvInqyController {
 	/* 명칭 : intrAprvInqy1030
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.07.02
-	 * 내용 : 품의문 상세 조회
+	 * 내용 : 기안 목록 품의문 상세 조회
 	 */
 	@RequestMapping("/intrAprvInqy1030.do")
 	public String intrAprvInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) {
@@ -117,11 +117,71 @@ public class AprvInqyController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 품의문 정보 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 기안 목록 품의문 정보 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		//
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1010;
+	}
+	
+	/* 명칭 : intrAprvInqy1010
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.31
+	 * 내용 : 결재 목록 조회
+	 */
+	@RequestMapping("/intrAprvInqy2010.do")
+	public String intrAprvInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 결재 목록 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy201010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 검색 조건 저장
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy103010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_LIST_2010;
+	}
+	
+	/* 명칭 : intrAprvInqy2020
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.07.31
+	 * 내용 : 결재 목록 품의문 상세 조회
+	 */
+	@RequestMapping("/intrAprvInqy2020.do")
+	public String intrAprvInqy2020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 품의문 정보 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy102010(model, paramMap);
+
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 결재 목록 품의문 정보 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_2010;
 	}
 
 }

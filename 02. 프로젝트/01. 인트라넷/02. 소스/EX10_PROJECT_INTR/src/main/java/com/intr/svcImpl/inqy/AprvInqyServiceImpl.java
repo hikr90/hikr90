@@ -27,23 +27,22 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	//
+	// 기안 목록 조회
 	public void intrAprvInqy101010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 사용자 결재 목록 조회
+			// 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvInqyDao.intrAprvInqy10101010(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사용자 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-
 	}
 	
 	// 결재선 상세 정보 조회
@@ -79,5 +78,22 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 
 	}
 	
-	
+	// 결재 목록 조회
+	public void intrAprvInqy201010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재 목록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvInqyDao.intrAprvInqy20101010(model, paramMap);
+			model.addAttribute("defaultList", defaultList);
+
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
+
 }

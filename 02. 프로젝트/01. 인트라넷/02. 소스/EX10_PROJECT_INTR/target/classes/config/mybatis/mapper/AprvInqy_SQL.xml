@@ -22,18 +22,7 @@
 	</resultMap>
 
 	<select id="intrAprvInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy10101010 : 결재내역 목록 조회 */
-		WITH MAIN_LINE AS
-		(
-		    SELECT 
-		    		LINE.APRV_IDX
-		    	, 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY APRV_SNO) AS LINE_EMP_IDX
-		    FROM INTR_APRV APRV 
-		    LEFT OUTER JOIN INTR_APRV_LINE LINE
-		        ON LINE.APRV_IDX = APRV.APRV_IDX
-		    WHERE 1=1
-		    GROUP BY LINE.APRV_IDX 
-		)
+		/* intrAprvInqy10101010 : 기안 목록 조회 */
 		SELECT 
 		    	SUB_DATA.* 
 		    	,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
@@ -45,6 +34,8 @@
 				        APRV.APRV_IDX
 				    ,	APRV.CURR_APRV_SNO
 				    ,   APRV.EMP_IDX
+				    ,	APRV_EMP.EMP_NM AS APRV_EMP_NM
+				    ,	APRV_DEPT.DEPT_NM AS APRV_DEPT_NM
                     ,	LINE.STEP_CD
 				    ,	STEP.STEP_NM
 				    ,	LINE.LAST_APRV_YN
@@ -62,7 +53,6 @@
 				    ,   APRV.REG_TM AS APRV_REG_TM
                     ,   LINE.APRV_RSLT_DT
                     ,   LINE.APRV_RSLT_TM
-                    ,   ML.LINE_EMP_IDX
 				    ,   RANK() OVER(ORDER BY APRV.APRV_IDX) AS NUM
 				    ,   COUNT(APRV.APRV_IDX) OVER() AS LIST_CNT
 				    ,   (SELECT 
@@ -82,8 +72,10 @@
 				LEFT OUTER JOIN INTR_DEPT DEPT
 				    ON DEPT.DEPT_CD = EMP.DEPT_CD
 				    AND DEPT.USE_YN = 'Y'
-                LEFT OUTER JOIN MAIN_LINE ML
-                    ON ML.APRV_IDX = APRV.APRV_IDX
+				LEFT OUTER JOIN INTR_EMP APRV_EMP
+					ON APRV_EMP.EMP_IDX = LINE.APRV_EMP_IDX
+				LEFT OUTER JOIN INTR_DEPT APRV_DEPT
+					ON APRV_DEPT.DEPT_CD = APRV_EMP.DEPT_CD
 				WHERE 
 					1=1
 				    	AND APRV.USE_YN = 'Y'
@@ -99,7 +91,7 @@
 			) SUB_DATA
 		WHERE 
 			1=1 
-				AND (SUB_DATA.EMP_IDX = #{empIdx, jdbcType=VARCHAR} OR INSTR(SUB_DATA.LINE_EMP_IDX, #{empIdx, jdbcType=VARCHAR}) > 0)
+				AND SUB_DATA.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
  				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
         	</if>
@@ -198,5 +190,96 @@
 			ON GRDE.GRADE_CD = EMP.GRADE_CD
 		WHERE LINE.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 		ORDER BY LINE.APRV_SNO ASC
+	</select>
+	
+	<select id="intrAprvInqy20101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy20101010 : 결재 목록 조회 */
+		WITH MAIN_LINE AS
+		(
+		    SELECT 
+		    		LINE.APRV_IDX
+		    	, 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY APRV_SNO) AS LINE_EMP_IDX
+		    FROM INTR_APRV APRV 
+		    LEFT OUTER JOIN INTR_APRV_LINE LINE
+		        ON LINE.APRV_IDX = APRV.APRV_IDX
+		    WHERE 1=1
+		    GROUP BY LINE.APRV_IDX 
+		)
+		SELECT 
+		    	SUB_DATA.* 
+		    	,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
+		            THEN 'Y'
+		            ELSE 'N'
+		            END AS FILE_YN
+		FROM (
+				SELECT 
+				        APRV.APRV_IDX
+				    ,	APRV.CURR_APRV_SNO
+				    ,   APRV.EMP_IDX
+                    ,	LINE.STEP_CD
+				    ,	STEP.STEP_NM
+				    ,	LINE.LAST_APRV_YN
+                    ,   CASE WHEN LINE.LAST_APRV_YN = 'N'
+                                THEN STEP.STEP_NM || ' 진행 중'
+                        ELSE 
+                            CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
+                                THEN STEP.STEP_NM || ' 완료' 
+                                ELSE STEP.STEP_NM || ' 진행 중' END
+                        END CURR_STEP_NM                                
+				    ,   EMP.EMP_NM
+				    ,   DEPT.DEPT_NM
+				    ,   APRV_TITLE
+				    ,   APRV.REG_DT AS APRV_REG_DT
+				    ,   APRV.REG_TM AS APRV_REG_TM
+                    ,   LINE.APRV_RSLT_DT
+                    ,   LINE.APRV_RSLT_TM
+                    ,	APRV_EMP.EMP_NM AS APRV_EMP_NM
+                    ,	APRV_DEPT.DEPT_NM AS APRV_DEPT_NM
+                    ,   ML.LINE_EMP_IDX
+				    ,   RANK() OVER(ORDER BY APRV.APRV_IDX) AS NUM
+				    ,   COUNT(APRV.APRV_IDX) OVER() AS LIST_CNT
+				    ,   (SELECT 
+				            COUNT(CONTENT_IDX)
+				         FROM INTR_FILE
+				         WHERE CONTENT_IDX = APRV.APRV_IDX
+				            AND USE_YN = 'Y'
+				        ) AS FILE_CNT
+				FROM INTR_APRV APRV
+                INNER JOIN INTR_APRV_LINE LINE
+                    ON LINE.APRV_IDX = APRV.APRV_IDX
+                    AND LINE.APRV_SNO = APRV.CURR_APRV_SNO
+                LEFT OUTER JOIN INTR_STEP STEP
+                    ON STEP.STEP_CD = LINE.STEP_CD
+				LEFT OUTER JOIN INTR_EMP EMP
+				    ON APRV.EMP_IDX = EMP.EMP_IDX
+				LEFT OUTER JOIN INTR_DEPT DEPT
+				    ON DEPT.DEPT_CD = EMP.DEPT_CD
+				    AND DEPT.USE_YN = 'Y'
+                LEFT OUTER JOIN MAIN_LINE ML
+                    ON ML.APRV_IDX = APRV.APRV_IDX
+                LEFT OUTER JOIN INTR_EMP APRV_EMP
+                	ON APRV_EMP.EMP_IDX = LINE.APRV_EMP_IDX
+   				LEFT OUTER JOIN INTR_DEPT APRV_DEPT
+					ON APRV_DEPT.DEPT_CD = APRV_EMP.DEPT_CD
+				WHERE 
+					1=1
+				    	AND APRV.USE_YN = 'Y'
+				    <if test="srchNm != null and srchNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(APRV.APRV_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            </if>
+		            <if test="srchSdt != null and srchSdt !=''">
+		            	AND APRV.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		            <if test="srchEdt != null and srchEdt !=''">
+		            	AND APRV.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		            </if>
+			) SUB_DATA
+		WHERE 
+			1=1 
+				AND INSTR(SUB_DATA.LINE_EMP_IDX, #{empIdx, jdbcType=VARCHAR}) > 0
+			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
 	</select>
 </mapper>

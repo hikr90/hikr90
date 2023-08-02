@@ -65,7 +65,7 @@
 			,	#{aprvEmpIdx, jdbcType=VARCHAR}
 			,	#{lastAprvYn, jdbcType=VARCHAR}
 			<choose>
-				<when test='stepCd != "STEP_0002"'>
+				<when test="stepCd != 'STEP_0002' and stepCd !='STEP_0003'">
 					,	TO_CHAR(SYSDATE,'YYYYMMDD')
 					,	TO_CHAR(SYSDATE,'HH24MISS')
 				</when>
@@ -84,4 +84,41 @@
 			,	NULL
 		)
 	</insert>
+	
+	<update id="intrAprvProc10101021" parameterType="java.util.HashMap" >
+	/* intrAprvProc10101021 : RSLT 데이터 NULL 처리 */
+		UPDATE INTR_APRV_LINE
+			SET 	APRV_RSLT_DT = NULL
+				,	APRV_RSLT_TM = NULL
+				,	APRV_RESN = #{aprvResn, jdbcType=VARCHAR}
+		WHERE APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+	</update>	
+
+	<update id="intrAprvProc10101022" parameterType="java.util.HashMap" >
+	/* intrAprvProc10101022 : CURR_APRV_SNO 현 단계로 처리 */
+	UPDATE INTR_APRV APRV
+		SET APRV.CURR_APRV_SNO = 
+			(WITH MAIN_DATA AS (
+				SELECT SUB_DATA.* FROM 
+					(
+						SELECT 
+							LINE.APRV_IDX,
+							LINE.APRV_SNO, 
+							ROW_NUMBER() OVER(ORDER BY DECODE(STEP_CD,'STEP_0002',1)) AS ROW_NUM 
+						FROM INTR_APRV_LINE LINE 
+						WHERE LINE.APRV_RSLT_DT IS NULL -- 처리 X
+							AND STEP_CD = 'STEP_0002' -- 결재
+							AND APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+					) SUB_DATA
+				WHERE SUB_DATA.ROW_NUM = 1
+			)
+			SELECT MD.APRV_SNO NEXT_APRV_SNO FROM INTR_APRV APRV
+				INNER JOIN INTR_APRV_LINE LINE
+					ON APRV.APRV_IDX = LINE.APRV_IDX
+					AND LINE.APRV_RSLT_DT IS NULL -- 처리 X
+					AND LINE.STEP_CD = 'STEP_0002' -- 결재
+				INNER JOIN MAIN_DATA MD
+					ON MD.APRV_IDX = APRV.APRV_IDX)
+			WHERE APRV.APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+	</update>	
 </mapper>

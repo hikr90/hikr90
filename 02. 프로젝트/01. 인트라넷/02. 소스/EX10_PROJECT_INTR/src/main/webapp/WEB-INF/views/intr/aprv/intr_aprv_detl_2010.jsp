@@ -18,7 +18,7 @@
 
 	// 목록으로
 	function listCall() {
-		formSubmit('intrAprvInqy1010.do');
+		formSubmit('intrAprvInqy2010.do');
 	}
 	
 	// 파일 다운로드
@@ -42,9 +42,24 @@
 	
 	// 결재 처리
 	function aprvCall(aprvGb){
-		// 반송(0), 결재(1) 구분 값 지정
+		// 결재 수신처리 (반려:0, 결재:1, 회수:2)
 		$("#aprvGb").val(aprvGb);
-		formSubmit('intrAprvProc1020.do');
+
+		// 팝업 사이즈
+		var w = 700;
+		var h = 340;
+		// 팝업 위치
+		var res_w = Math.ceil((window.screen.width-w)/2);
+		var res_h = Math.ceil((window.screen.height-h)/2);
+		//		
+		var options = "scrollbars=no, status=no, width="+w+", height="+h+", left="+res_w+", top="+res_h;
+		window.open("<c:url value='intrPopupInqy2010.do'/>", "_blank", options);
+	}
+	
+	// 팝업에서 처리 후 동작
+	function aprvProc(){
+		formSubmit("intrAprvProc1020.do");
+		window.close();
 	}
 </script>
 </head>
@@ -144,6 +159,15 @@
 									</dd>
 								</dl>
 							</div><!-- End postViewWrap -->
+							
+							<div class="btnWrap alignR">
+								<div class="floatR">
+									<c:if test="${empVO.empIdx eq defaultInfo.aprvEmpIdx}">
+										<a class="_btn _gray" onclick="aprvCall('0');">반려</a>
+										<a class="_btn _blue" onclick="aprvCall('1');">결재</a>
+									</c:if>
+								</div>
+							</div>
 						</div><!-- End postWrap -->
 					</div>
 					</div><!-- End _contentArea _formArea -->

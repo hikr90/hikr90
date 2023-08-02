@@ -142,7 +142,6 @@ public class PopupInqyController {
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
-			System.out.println("kth1 : "+paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 결재선 목록 조회
 			//--------------------------------------------------------------------------------------------
@@ -156,6 +155,25 @@ public class PopupInqyController {
 		
 		//
 		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1032;
+	}
+	
+	/* 명칭 : intrPopupInqy2010
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.08.02
+	 * 내용 : 결재 처리 팝업 
+	 */
+	@RequestMapping("/intrPopupInqy2010.do")
+	public String intrPopupInqy2010(Model model, HashMap<String, Object> paramMap) {
+		//
+		try {
+			//
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 결재 처리 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_2010;
 	}
 
 }

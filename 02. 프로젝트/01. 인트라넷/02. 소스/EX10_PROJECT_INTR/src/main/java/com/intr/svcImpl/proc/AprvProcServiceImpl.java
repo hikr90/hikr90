@@ -138,7 +138,6 @@ public class AprvProcServiceImpl implements AprvProcService{
 				//--------------------------------------------------------------------------------------------
 				// 결재선 정보 등록
 				//--------------------------------------------------------------------------------------------
-				tempMap.put("flag", flag);
 				resInt = aprvProcDao.intrAprvProc10101020(tempMap);
 			}
 			//
@@ -159,15 +158,43 @@ public class AprvProcServiceImpl implements AprvProcService{
 		//
 		String defaultStr = "";
 		String resStr = "NO";
+		String aprvGb = (String)paramMap.get("aprvGb"); // 결재, 반송 여부
+		int resInt = 0;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 결재 수신처리
+			// 수신 처리 (반려:0, 결재:1, 취소:2)
 			//--------------------------------------------------------------------------------------------
-
+			if(aprvGb.equals("0")) {
+				//--------------------------------------------------------------------------------------------
+				// 반려 처리 
+				//--------------------------------------------------------------------------------------------
+				paramMap.put("stepCd", IntrConst.STEP_0004);
+				resInt = this.aprvReturn(model, paramMap);
+				
+			} else if(aprvGb.equals("1")) {
+				//--------------------------------------------------------------------------------------------
+				// 결재 처리
+				//--------------------------------------------------------------------------------------------
+				paramMap.put("stepCd", IntrConst.STEP_0002);
+				resInt = this.aprvConfirm(model, paramMap);
+				
+			} else {
+				//--------------------------------------------------------------------------------------------
+				// 결재 취소
+				//--------------------------------------------------------------------------------------------
+				paramMap.put("stepCd", IntrConst.STEP_0005);
+				resInt = this.aprvWithdraw(model, paramMap);
+			}; 
+			
+			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
 			//--------------------------------------------------------------------------------------------
+			if(resInt!=0) {
+				resStr = "YES";
+			}
+			//
 			defaultStr = String.format("[{'res':'%s'}]", resStr);			
 			
 		} catch (Exception e) {
@@ -178,4 +205,33 @@ public class AprvProcServiceImpl implements AprvProcService{
 		return defaultStr;
 	}
 
+	// 결재 승인
+	private int aprvConfirm(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		
+		//--------------------------------------------------------------------------------------------
+		// RSLT 수정
+		//--------------------------------------------------------------------------------------------
+		resInt = aprvProcDao.intrAprvProc10101021(model, paramMap);
+
+		//--------------------------------------------------------------------------------------------
+		// CURR_APRV_SNO 수정
+		//--------------------------------------------------------------------------------------------
+		resInt = aprvProcDao.intrAprvProc10101022(model, paramMap);
+		//
+		return resInt;
+	}
+
+	// 결재 반려
+	private int aprvReturn(Model model, HashMap<String, Object> paramMap) {
+		//
+		return 0;
+	}
+
+	// 결재 취소
+	private int aprvWithdraw(Model model, HashMap<String, Object> paramMap) {
+		//
+		return 0;
+	}
 }

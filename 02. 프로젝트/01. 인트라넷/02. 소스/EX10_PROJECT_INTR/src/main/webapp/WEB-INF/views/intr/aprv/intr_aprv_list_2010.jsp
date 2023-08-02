@@ -1,7 +1,7 @@
 <!--명칭 : intr_aprv_list_2010
 	작성자 : 김태현
-	작성일자 : 2023.06.25
-	내용 : 기안 목록-->
+	작성일자 : 2023.07.31
+	내용 : 결재 목록-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -11,32 +11,20 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrAprvInqy1010.do");
-	}
-
-	// 템플릿 조회 팝업
-	function popCall(){
-		//
-		var obj = new Object();
-		ajaxPopup(obj,"650","360","intrPopupInqy1010.do");
+		formSubmit("intrAprvInqy2010.do");
 	}
 	
 	// 품의문 상세 조회
 	function detCall(contentIdx) {
 		//
 		$("#contentIdx").val(contentIdx);
-		formSubmit("intrAprvInqy1030.do");
+		formSubmit("intrAprvInqy2020.do");
 	}
 </script>
 <body id="main">
 <form id="form" name="form" method="POST">
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
-
-	<!-- 템플릿 팝업 -->
- 	<div id="popupArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
-	</div>
 
 	<article id="_subArticle">
 		<div class="_wrap">
@@ -49,11 +37,7 @@
 							<input type="hidden" id="contentIdx" name="contentIdx" value="">
 							
 							<div class="tagWrap">
-								<h2>기안 목록
-									<span class="stb-box">
-										<input type="button" class="stb-box-btn2" value="기안문 작성" onclick="popCall();">
-									</span>
-								</h2>
+								<h2>결재 목록</h2>
 							</div>
 							
 							<div class="f-srchWrap">
@@ -115,7 +99,7 @@
 												<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
 											</td>
 											<td>${list.aprvDeptNm} ${list.aprvEmpNm}</td>
-											<td>${list.deptNm} ${list.empNm}</td>
+											<td>${list.empNm} ${list.deptNm}</td>
 											<td>
 												<span class="date">
 													<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>

@@ -31,6 +31,8 @@ public interface JspConst {
 	public static final String INTR_POPUP_INQY_1030 = "intr_popup_inqy_1030.jsp";	// 결재선 팝업 관리
 	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";	// 결재선 선택 팝업 트리
 	public static final String INTR_POPUP_INQY_1032 = "intr_popup_inqy_1032.jsp";	// 결재선 목록
+
+	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";	// 결재선 처리 팝업
 	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
@@ -92,8 +94,10 @@ public interface JspConst {
 	//--------------------------------------------------------------------------------------------
 	// 결재
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_APRV_LIST_1010 = "intr_aprv_list_1010.jsp"; 	// 기안 작성 화면
-	public static final String INTR_APRV_DETL_1010 = "intr_aprv_detl_1010.jsp";		// 기안문 상세 화면
+	public static final String INTR_APRV_LIST_1010 = "intr_aprv_list_1010.jsp"; 	// 기안 목록
+	public static final String INTR_APRV_DETL_1010 = "intr_aprv_detl_1010.jsp";		// 기안 상세 화면
 	public static final String INTR_APRV_DETL_1020 = "intr_aprv_detl_1020.jsp";		// 기안문 등록 화면
 
+	public static final String INTR_APRV_LIST_2010 = "intr_aprv_list_2010.jsp"; 	// 결재 목록
+	public static final String INTR_APRV_DETL_2010 = "intr_aprv_detl_2010.jsp";		// 결재 상세 화면
 }

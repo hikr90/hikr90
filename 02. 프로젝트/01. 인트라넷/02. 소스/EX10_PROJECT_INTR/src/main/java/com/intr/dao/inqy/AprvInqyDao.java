@@ -14,7 +14,7 @@ public class AprvInqyDao {
 	@Autowired
 	SqlSession sqlsession;
 
-	// 결재내역 목록 조회
+	// 기안 목록 조회
 	public List<HashMap<String, Object>> intrAprvInqy10101010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
@@ -43,5 +43,13 @@ public class AprvInqyDao {
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("aprvInqy.intrAprvInqy10102011", paramMap);
 		return defaultInfo;
+	}
+
+	// 결재 목록 조회
+	public List<HashMap<String, Object>> intrAprvInqy20101010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprvInqy.intrAprvInqy20101010", paramMap);
+		return defaultList;
 	}
 }
