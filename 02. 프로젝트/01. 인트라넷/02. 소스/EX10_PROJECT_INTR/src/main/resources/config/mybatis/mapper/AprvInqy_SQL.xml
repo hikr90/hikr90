@@ -4,6 +4,7 @@
 	<resultMap type="HashMap" id="getAprvInfo">
 		<result property="aprvIdx" 		column="APRV_IDX"/>
 		<result property="aprvSno" 		column="APRV_SNO"/>
+		<result property="currAprvSno"	column="CURR_APRV_SNO"/>
 		<result property="aprvTitle" 	column="APRV_TITLE"/>
 		<result property="templateCd" 	column="TEMPLATE_CD"/>
 		<result property="regDt" 		column="REG_DT"/>
@@ -11,7 +12,10 @@
 		<result property="stepCd" 		column="STEP_CD"/>
 		<result property="stepNm" 		column="STEP_NM"/>
 		<result property="empIdx" 		column="EMP_IDX"/>
-		<result property="aprvEmpIdx" 		column="APRV_EMP_IDX"/>
+		<result property="lastAprvYn" 	column="LAST_APRV_YN"/>
+		<result property="aprvEmpIdx" 	column="APRV_EMP_IDX"/>
+		<result property="aprvRsltDt" 	column="APRV_RSLT_DT"/>
+		<result property="aprvRsltTm" 	column="APRV_RSLT_TM"/>
 		<result property="empNm" 		column="EMP_NM"/>
 		<result property="deptCd" 		column="DEPT_CD"/>
 		<result property="deptNm" 		column="DEPT_NM"/>
@@ -114,6 +118,9 @@
 			    ,	APRV.REG_TM
 			    ,	LINE.STEP_CD
 			    ,	LINE.APRV_EMP_IDX
+			    ,	LINE.LAST_APRV_YN
+			    ,	LINE.APRV_RSLT_DT
+			    ,	LINE.APRV_RSLT_TM
 			    ,	STEP.STEP_NM
 			    ,	APRV.EFCT_SDT
 			    ,	APRV.EFCT_EDT
@@ -137,8 +144,8 @@
 		WHERE APRV.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 	</select>
 
-		<select id="intrAprvInqy10102011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy10102011 : 결재 상세 조회 */
+	<select id="intrAprvInqy10102011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy10102011 : 현재 결재 정보 조회 */
 		SELECT DATA.* FROM 
 			(
 				SELECT
@@ -197,13 +204,13 @@
 		WITH MAIN_LINE AS
 		(
 		    SELECT 
-		    		LINE.APRV_IDX
-		    	, 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY APRV_SNO) AS LINE_EMP_IDX
+		    		APRV.APRV_IDX
+                , 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY LINE.APRV_SNO) AS LINE_EMP_IDX
 		    FROM INTR_APRV APRV 
-		    LEFT OUTER JOIN INTR_APRV_LINE LINE
-		        ON LINE.APRV_IDX = APRV.APRV_IDX
+		    INNER JOIN INTR_APRV_LINE LINE
+		        ON LINE.APRV_IDX = APRV.APRV_IDX AND LINE.STEP_CD IN ('STEP_0001','STEP_0002','STEP_0003')
 		    WHERE 1=1
-		    GROUP BY LINE.APRV_IDX 
+            GROUP BY APRV.APRV_IDX
 		)
 		SELECT 
 		    	SUB_DATA.* 

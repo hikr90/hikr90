@@ -37,7 +37,7 @@
 		var obj = new Object();
 		obj["contentIdx"] = aprvIdx;
 		//		
-		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do");
+		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do","");
 	}
 	
 	// 결재 처리

@@ -3,10 +3,10 @@
  * 작성일자 : 2022.11.02
  * 내용 : 기본 팝업 
  */
-function ajaxPopup(obj, width, height, mappingId){
+function ajaxPopup(obj, width, height, mappingId, i){
 	//
 	var zIndex = 9999;
-	var popupArea = $("#popupArea");
+	var popupArea = $("#popupArea"+i);
 	//
 	popupArea.css({
 		 //
@@ -30,8 +30,8 @@ function ajaxPopup(obj, width, height, mappingId){
 		dataType:	"text" ,
 		success : function(data){
 			//
-			$("#postCon").html(data);
-			$("#popupArea").removeClass("hidden");
+			$("#postCon"+i).html(data);
+			$("#popupArea"+i).removeClass("hidden");
 
 		},
 		error : function(res, status, error){

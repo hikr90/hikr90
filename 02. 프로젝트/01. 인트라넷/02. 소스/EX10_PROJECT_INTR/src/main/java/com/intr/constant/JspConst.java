@@ -32,7 +32,8 @@ public interface JspConst {
 	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";	// 결재선 선택 팝업 트리
 	public static final String INTR_POPUP_INQY_1032 = "intr_popup_inqy_1032.jsp";	// 결재선 목록
 
-	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";	// 결재선 처리 팝업
+	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";	// 결재의견 관리
+	public static final String INTR_POPUP_INQY_2011 = "intr_popup_inqy_2011.jsp";	// 결재의견 입력
 	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항

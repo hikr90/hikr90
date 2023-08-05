@@ -37,42 +37,78 @@
 		var obj = new Object();
 		obj["contentIdx"] = aprvIdx;
 		//		
-		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do");
+		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do","");
 	}
 	
 	// 결재 처리
 	function aprvCall(aprvGb){
 		// 결재 수신처리 (반려:0, 결재:1, 회수:2)
 		$("#aprvGb").val(aprvGb);
-
-		// 팝업 사이즈
-		var w = 700;
-		var h = 340;
-		// 팝업 위치
-		var res_w = Math.ceil((window.screen.width-w)/2);
-		var res_h = Math.ceil((window.screen.height-h)/2);
-		//		
-		var options = "scrollbars=no, status=no, width="+w+", height="+h+", left="+res_w+", top="+res_h;
-		window.open("<c:url value='intrPopupInqy2010.do'/>", "_blank", options);
+		//
+		var obj = new Object();
+		ajaxPopup(obj,"700","340","intrPopupInqy2011.do","1");
 	}
 	
-	// 팝업에서 처리 후 동작
+	// 팝업 확인
 	function aprvProc(){
-		formSubmit("intrAprvProc1020.do");
-		window.close();
+		//
+		var aprvPwd = $("#aprvPwd").val();
+		var aprvResn = $("#aprvResn").val();
+		var empPwd = "${empVO.empPwd}";
+		//
+		if(aprvPwd==''){
+			alert("<spring:message code="APRV.PWD.NONE"/>");
+			return;
+		}
+		if(aprvPwd!=empPwd){
+			alert("<spring:message code="APRV.PWD.FAIL"/>");
+			return;
+		}
+		
+		// 처리
+		var param = $("#form").serialize();
+		if(confirm("진행하시겠습니까?")){
+			$.ajax({
+		    	type : 'post',
+		    	url : "intrAprvProc1020.do",
+				data : param,
+				dataType : 'text',
+				success : function(data){
+					//
+					var json = eval(data);
+	   				if(json[0].res=="NO"){
+	   	   				// 결재 실패
+	   					alert("<spring:message code="PROC.FAIL"/>");
+	   				} else {
+	   					// 결재 완료 후 새로고침
+	   					alert("<spring:message code="PROC.SUCCESS"/>");
+	   					location.reload();
+	   				}
+				},
+				error : function(xhr, status, error){
+			    	//
+					alert("<spring:message code="PROC.ERROR"/>");
+			    }
+			});
+		}
 	}
 </script>
 </head>
 <body id="main">
+<form id="form" name="form" method="POST">
 	<!-- 결재선 -->
  	<div id="popupArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
 	</div>
 
+	<!-- 결재 의견 -->
+ 	<div id="popupArea1" class="popupArea1 hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_2010.jsp"></c:import>	
+	</div>
+
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
-	<form id="form" method="POST">
 	<article id="_subArticle">
 		<div class="_wrap">
 			<div id="_content">
@@ -82,7 +118,9 @@
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.aprvIdx}">
+						<input type="hidden" id="currAprvSno" name="currAprvSno" value="${defaultInfo.currAprvSno}">
+						<input type="hidden" id="aprvIdx" name="aprvIdx" value="${defaultInfo.aprvIdx}">
+						<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq defaultInfo.aprvEmpIdx?defaultInfo.lastAprvYn:'N'}">
 						<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 					
 						<div class="postCon">
@@ -127,7 +165,7 @@
 									</dd>
 									<dt>결재선</dt>
 									<dd>
-	                            		<a class="_btn _gray" onclick="popCall(${defaultInfo.aprvIdx});">결재선</a>
+	                            		<a class="_btn _gray" onclick="popCall(${defaultInfo.aprvIdx});">결재선</a> 
 									</dd>
 								</dl>
 
@@ -162,7 +200,7 @@
 							
 							<div class="btnWrap alignR">
 								<div class="floatR">
-									<c:if test="${empVO.empIdx eq defaultInfo.aprvEmpIdx}">
+									<c:if test="${empVO.empIdx eq defaultInfo.aprvEmpIdx and (defaultInfo.aprvRsltDt eq null or defaultInfo.aprvRsltDt eq '')}">
 										<a class="_btn _gray" onclick="aprvCall('0');">반려</a>
 										<a class="_btn _blue" onclick="aprvCall('1');">결재</a>
 									</c:if>
@@ -175,7 +213,7 @@
 			</div><!-- End _content -->
 		</div><!-- End _wrap -->
 	</article>
-	</form>
+</form>
 </body>		
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>

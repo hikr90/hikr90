@@ -18,7 +18,7 @@
 	function popCall(){
 		//
 		var obj = new Object();
-		ajaxPopup(obj,"650","360","intrPopupInqy1010.do");
+		ajaxPopup(obj,"650","360","intrPopupInqy1010.do","");
 	}
 	
 	// 품의문 상세 조회

@@ -1,7 +1,7 @@
 <!--명칭 : intr_popup_inqy_1031
 	작성자 : 김태현
 	작성일자 : 2022.12.01
-	내용 : 팝업 결재선 트리 -->
+	내용 : 팝업 결재선 목록 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -12,6 +12,8 @@
 	function popConfirm(){
 		popClose('popupArea');
 	}
+	
+	// 툴팁 관련
 </script>
 
 <!-- 결재선 목록 -->
@@ -58,7 +60,12 @@
 									${formatDt} ${formatTm}
 								</span>	
 							</td>
-							<td></td>
+							<td><c:if test="${list.aprvRsltResn ne null and list.aprvRsltResn ne ''}">
+								<div class="tooltip">
+									<img src="resources/images/icon/icon_tooltip.png" style="height: 17px;">
+									<span class="tooltiptext tooltip-bottom">[결재 의견] ${list.aprvRsltResn}</span>
+								</div>
+							</c:if></td>
 						</tr>
 					</c:forEach>
 				</tbody>

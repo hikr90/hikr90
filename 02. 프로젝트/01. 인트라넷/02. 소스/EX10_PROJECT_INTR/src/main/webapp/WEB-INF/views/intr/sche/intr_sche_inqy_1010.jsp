@@ -8,7 +8,8 @@
 <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
 <script>
-	// 
+	var defaultList = JSON.parse('${defaultList}');
+	//
 	document.addEventListener('DOMContentLoaded', function() {
 		//
 		var scheContent = document.getElementById('calendar');
@@ -18,13 +19,13 @@
 			eventLimit: true,				// 이벤트 내용 초과 시, MORE로 표현
 			displayEventTime: false, 		// 이벤트 시간 여부
 			navLinks: true, 				// 날짜 선택할 경우 상세 데이터 조회 
-			selectable: true,				// 네모칸 선택 여부
+			selectable: false,				// 네모 선택 여부
 			headerToolbar: {
 				start: 'prev,next today',
 				center: 'title',
 			    end: 'dayGridMonth,listMonth'
 			},
-			// 네모칸 선택 이벤트
+			// 네모 선택 이벤트
 	        select: function(arg) {
 				//
 			},
@@ -32,8 +33,8 @@
 			eventClick: function(arg) {
 				//
 			},
-			// JSON 데이터 (TITLE, START, END 필수)
-			// events : json
+			// 데이터
+			events : defaultList
 		});
 	    
 	    //

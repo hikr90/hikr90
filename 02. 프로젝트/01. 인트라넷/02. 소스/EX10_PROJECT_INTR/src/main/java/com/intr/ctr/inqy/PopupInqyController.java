@@ -157,23 +157,23 @@ public class PopupInqyController {
 		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_1032;
 	}
 	
-	/* 명칭 : intrPopupInqy2010
+	/* 명칭 : intrPopupInqy2011
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.08.02
-	 * 내용 : 결재 처리 팝업 
+	 * 내용 : 결재 의견 팝업 
 	 */
-	@RequestMapping("/intrPopupInqy2010.do")
-	public String intrPopupInqy2010(Model model, HashMap<String, Object> paramMap) {
+	@RequestMapping("/intrPopupInqy2011.do")
+	public String intrPopupInqy2011(Model model, HashMap<String, Object> paramMap) {
 		//
 		try {
 			//
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 결재 처리 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 결재 의견 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_2010;
+		return IntrConst.VIEW_PATH_POPUP + IntrConst.INTR_POPUP_INQY_2011;
 	}
 
 }

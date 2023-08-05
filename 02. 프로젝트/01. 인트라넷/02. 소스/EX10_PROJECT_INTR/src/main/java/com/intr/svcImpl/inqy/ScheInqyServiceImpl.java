@@ -14,6 +14,9 @@ import com.intr.dao.inqy.TempInqyDao;
 import com.intr.dao.inqy.AuthInqyDao;
 import com.intr.dao.inqy.ScheInqyDao;
 import com.intr.svc.inqy.TempInqyService;
+
+import net.sf.json.JSONArray;
+
 import com.intr.svc.inqy.AuthInqyService;
 import com.intr.svc.inqy.ScheInqyService;
 
@@ -30,6 +33,7 @@ public class ScheInqyServiceImpl implements ScheInqyService{
 	// 일정 목록 조회
 	public void intrScheInqy101010(Model model, HashMap<String, Object> paramMap) {
 		//
+		JSONArray jsonArray = new JSONArray();
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
@@ -37,7 +41,7 @@ public class ScheInqyServiceImpl implements ScheInqyService{
 			// 일정 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = scheInqyDao.intrScheInqy10101010(model, paramMap);
-			model.addAttribute("defaultList", defaultList);
+			model.addAttribute("defaultList", jsonArray.fromObject(defaultList));
 			
 		} catch (Exception e) {
 			//

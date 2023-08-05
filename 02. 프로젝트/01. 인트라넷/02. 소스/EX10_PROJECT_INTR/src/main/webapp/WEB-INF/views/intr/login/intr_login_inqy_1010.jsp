@@ -12,7 +12,7 @@
    		function popCall(){
    			// 정보 찾기 팝업 (WIDTH, HEIGTH, MAPPINGID)
    			var obj = new Object();
-   			ajaxPopup(obj,"650","360","intrPopupInqy1021.do");
+   			ajaxPopup(obj,"650","360","intrPopupInqy1021.do","");
    		}
    		
    		// 로그인
