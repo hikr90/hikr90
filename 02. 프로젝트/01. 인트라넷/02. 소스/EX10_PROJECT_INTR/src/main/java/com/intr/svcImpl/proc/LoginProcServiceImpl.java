@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.inqy.LoginInqyDao;
-import com.intr.dao.proc.LoginProcDao;
 import com.intr.svc.proc.LoginProcService;
 import com.intr.vo.EmpVO;
 
@@ -24,15 +23,12 @@ public class LoginProcServiceImpl implements LoginProcService{
 	HttpSession session;
 
 	@Autowired
-	LoginProcDao loginProcDao;
-
-	@Autowired
 	LoginInqyDao loginInqyDao;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// 로그인_로그인 처리
+	// 로그인 처리
 	public String intrLoginProc101010(Model model, HashMap<String, Object> paramMap) {
 		//
 		String defaultStr = "";
@@ -76,10 +72,9 @@ public class LoginProcServiceImpl implements LoginProcService{
 		return defaultStr;
 	}
 	
-	// 로그인_관리자 계정 등록
+	// 기초데이터 업로드 처리
 	public String intrLoginProc102010(Model model) {
 		//
-		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
 		String resStr = "NO";
 		int resInt = 0;
@@ -87,29 +82,19 @@ public class LoginProcServiceImpl implements LoginProcService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 관리자 여부 조회
+			// 기초데이터 업로드
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = loginInqyDao.intrLoginInqy10201010();
 			
-			//
-			if(defaultInfo==null) {
-				//--------------------------------------------------------------------------------------------
-				// 관리자 계정 등록 (INTR_EMP)
-				//--------------------------------------------------------------------------------------------
-				resInt = loginProcDao.intrLoginProc10201020(model);
-				// 
-				if(resInt>0) {
-					resStr = "YES";
-				}
+			if(resInt>0) {
+				resStr = "YES";
+			}
 				
-			} 
-			
 			//
 			defaultStr = String.format("[{'res':'%s'}]", resStr);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 관리자 계정 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 기초데이터 업로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		return defaultStr;

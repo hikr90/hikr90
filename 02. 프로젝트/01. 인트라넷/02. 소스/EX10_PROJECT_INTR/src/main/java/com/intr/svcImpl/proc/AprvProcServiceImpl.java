@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.constant.IntrConst;
+import com.intr.dao.inqy.AprvInqyDao;
 import com.intr.dao.inqy.CoreInqyDao;
 import com.intr.dao.proc.AprvProcDao;
 import com.intr.dao.proc.AuthProcDao;
-import com.intr.dao.proc.FileProcDao;
 import com.intr.dao.proc.TempProcDao;
 import com.intr.dao.proc.TaskProcDao;
 import com.intr.svc.proc.AprvProcService;
 import com.intr.svc.proc.AuthProcService;
-import com.intr.svc.proc.FileProcService;
 import com.intr.svc.proc.TempProcService;
 import com.intr.svc.proc.TaskProcService;
 
@@ -35,14 +34,11 @@ public class AprvProcServiceImpl implements AprvProcService{
 	AprvProcDao aprvProcDao;
 	
 	@Autowired
+	AprvInqyDao aprvInqyDao;
+
+	@Autowired
 	CoreInqyDao coreInqyDao;
-
-	@Autowired
-	FileProcDao fileProcDao;
 	
-	@Autowired
-	FileProcService fileProcService;
-
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -50,6 +46,7 @@ public class AprvProcServiceImpl implements AprvProcService{
 	public String intrAprvProc101010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
 		//
 		HashMap<String, Object> defaultInfo = null;
+		List<HashMap<String, Object>> defaultList = null;
 		String defaultStr = "";
 		String resStr = "NO";
 		//
@@ -64,14 +61,6 @@ public class AprvProcServiceImpl implements AprvProcService{
 			// 기안문 등록 (INTR_APRV, INTR_APRV_STATUS)
 			//--------------------------------------------------------------------------------------------
 			resStr = this.intrAprvProc101011(model, paramMap);
-			
-			
-			//--------------------------------------------------------------------------------------------
-			// 파일 등록 (INTR_FILE)
-			//--------------------------------------------------------------------------------------------
-			if(!request.getFiles("fileList").isEmpty()) {
-				resStr = fileProcService.intrFileProc101010(model, paramMap, request);
-			}
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -191,8 +180,10 @@ public class AprvProcServiceImpl implements AprvProcService{
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
 			//--------------------------------------------------------------------------------------------
-			if(resInt!=0) {
+			if(resInt>0) {
 				resStr = "YES";
+			} else if(resInt<0) {
+				resStr = "EXIST";
 			}
 			//
 			defaultStr = String.format("[{'res':'%s'}]", resStr);			
@@ -226,12 +217,56 @@ public class AprvProcServiceImpl implements AprvProcService{
 	// 결재 반려
 	private int aprvReturn(Model model, HashMap<String, Object> paramMap) {
 		//
-		return 0;
+		int resInt = 0;
+		paramMap.put("tempStepCd", IntrConst.STEP_0004);
+		
+		//--------------------------------------------------------------------------------------------
+		// 현 단계 반송으로 변경 (INTR_APRV)
+		//--------------------------------------------------------------------------------------------
+		resInt = aprvProcDao.intrAprvProc10101025(model, paramMap);
+
+		//--------------------------------------------------------------------------------------------
+		// 현 단계 반송으로 변경 (INTR_APRV_LINE)
+		//--------------------------------------------------------------------------------------------
+		resInt = aprvProcDao.intrAprvProc10101026(model, paramMap);
+		//
+		return resInt;
 	}
 
 	// 결재 취소
 	private int aprvWithdraw(Model model, HashMap<String, Object> paramMap) {
 		//
-		return 0;
+		HashMap<String, Object> defaultInfo = null;
+		String cancelYn = "";
+		int resInt = 0;
+		
+		//--------------------------------------------------------------------------------------------
+		// 결재 상태 확인
+		//--------------------------------------------------------------------------------------------
+		defaultInfo = aprvInqyDao.intrAprvInqy10102011(model, paramMap);
+		paramMap.put("tempAprvSno", "0001");
+		paramMap.put("tempStepCd", IntrConst.STEP_0005);
+		//
+		if(defaultInfo!=null) {
+			cancelYn = String.valueOf(defaultInfo.get("cancelYn"));
+			//
+			if(cancelYn.equals("Y")) {
+				//--------------------------------------------------------------------------------------------
+				// 현 단계 회수로 변경 (INTR_APRV)
+				//--------------------------------------------------------------------------------------------
+				resInt = aprvProcDao.intrAprvProc10101023(model, paramMap);
+
+				//--------------------------------------------------------------------------------------------
+				// 현 단계 회수로 변경 (INTR_APRV_LINE)
+				//--------------------------------------------------------------------------------------------
+				resInt = aprvProcDao.intrAprvProc10101024(model, paramMap);
+
+			} else {
+				//
+				resInt = -1;
+			}
+		}
+		//
+		return resInt;
 	}
 }

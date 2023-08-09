@@ -2,7 +2,7 @@
 /* ====================== COMMON ====================== */
 ._wrap { width: 100%; max-width: 1400px; min-width: 1100px; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0 auto; }
 ._login_wrap { width: 100%; max-width: 920px; -webkit-box-sizing: border-box; box-sizing: border-box; margin: -30px auto 0; }
-._admin_insert { display: block; border:none; color: #fff; font-size: 1.2rem; text-align: center; width: 20%; height: 30px; margin: 10px 0; background-color:#214b97; float:right;}
+.basicData { display: block; border:none; color: #fff; font-size: 1.2rem; text-align: center; width: 20%; margin: 10px 0; background-color:#214b97; float:right; cursor: pointer;}
 
 input[type="text"], .selStyle, select { height: 43px; line-height: 43px; border: 0; -webkit-box-sizing: border-box; box-sizing: border-box; vertical-align: middle; border: 1px solid #d7d7d7; color: #727272; font-size: 1.4rem; text-indent: 10px; }
 input[type="text"], textarea, .selStyle, select { height: 43px; line-height: 23px; border: 0; -webkit-box-sizing: border-box; box-sizing: border-box; vertical-align: middle; border: 1px solid #d7d7d7; color: #727272; font-size: 1.4rem; }
@@ -143,7 +143,7 @@ input[type="text"], textarea, .selStyle, select { height: 43px; line-height: 23p
 ._formArea .postWrite .stb-box-btn, ._formArea .postView .stb-box-btn, .stb-box-btn-grey { vertical-align: middle; display: inline-block; }
 ._formArea .postWrite .postBtn, ._formArea .postView .postBtn { height: 43px; line-height: 43px; border: 0; -webkit-box-sizing: border-box; box-sizing: border-box; vertical-align: middle; color: #fff; font-size: 1.4rem; font-weight: 700; min-width: 69px; background-color: #214b97; margin-bottom: 5px; padding: 0 15px; }
 ._formArea .postWrite .vstShow, ._formArea .postView .vstShow { height: 43px; line-height: 43px; border: 0; -webkit-box-sizing: border-box; box-sizing: border-box; vertical-align: middle; display: block; color: #fff; font-size: 1.3rem; font-weight: 400; height: 25px; line-height: 25px; background-color: #214b97; border-radius: 5px; padding: 0 6px; margin: 10px 0; }
-._formArea .postWrite dl, ._formArea .postView dl { display: table; table-layout: fixed; width: 100%; border-bottom: 1px solid #d6d6d6; }
+._formArea .postWrite dl, ._formArea .postView dl { min-height: 60px; display: table; table-layout: fixed; width: 100%; border-bottom: 1px solid #d6d6d6; }
 ._formArea .postWrite dl > dt, ._formArea .postWrite dl > dd, ._formArea .postView dl > dt, ._formArea .postView dl > dd { display: table-cell; padding: 10px 10px 5px; -webkit-box-sizing: border-box; box-sizing: border-box; }
 ._formArea .postWrite dl > dt, ._formArea .postView dl > dt { width: 130px; font-weight: 700; background-color: #f6f6f6; padding: 20px 0 0 15px; vertical-align: top; }
 ._formArea .postWrite dl > dt em, ._formArea .postView dl > dt em { word-wrap: break-word; word-break: keep-all; display: block; width: 80%; color: #214b97; font-size: 1.3rem; font-weight: 700; margin: 10px 0; }

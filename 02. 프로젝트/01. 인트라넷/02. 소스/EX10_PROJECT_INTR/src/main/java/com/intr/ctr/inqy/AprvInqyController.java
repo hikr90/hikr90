@@ -89,7 +89,7 @@ public class AprvInqyController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 관리자 결재내역 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 선택 기안문 작성 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1020;
@@ -124,7 +124,7 @@ public class AprvInqyController {
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1010;
 	}
 	
-	/* 명칭 : intrAprvInqy1010
+	/* 명칭 : intrAprvInqy2010
 	 * 작성자 : 김태현
 	 * 작성일자 : 2023.07.31
 	 * 내용 : 결재 목록 조회
@@ -183,5 +183,68 @@ public class AprvInqyController {
 		//
 		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_2010;
 	}
+	
+	/* 명칭 : intrAprvInqy1030
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.08.09
+	 * 내용 : 품의문 재사용등록 조회
+	 */
+	@RequestMapping("/intrAprvInqy1040.do")
+	public String intrAprvInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
 
+			//--------------------------------------------------------------------------------------------
+			// 재사용 등록 품의문 정보 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy102010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 검색 조건 저장
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy103010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 품의문 재사용등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_DETL_1030;
+	}
+	
+	/* 명칭 : intrAprvInqy3010
+	 * 작성자 : 김태현
+	 * 작성일자 : 2023.08.09
+	 * 내용 : 전체 결재 목록 조회
+	 */
+	@RequestMapping("/intrAprvInqy3010.do")
+	public String intrAprvInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 전체 결재 목록 조회
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy201010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 검색 조건 저장
+			//--------------------------------------------------------------------------------------------
+			coreInqyService.intrCoreInqy103010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[컨트롤러] 전체 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return IntrConst.VIEW_PATH_APRV + IntrConst.INTR_APRV_LIST_2010;
+	}
 }

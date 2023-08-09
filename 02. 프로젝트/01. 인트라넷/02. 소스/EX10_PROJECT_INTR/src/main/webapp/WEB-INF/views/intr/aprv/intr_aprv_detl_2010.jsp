@@ -79,6 +79,7 @@
 	   				if(json[0].res=="NO"){
 	   	   				// 결재 실패
 	   					alert("<spring:message code="PROC.FAIL"/>");
+	   	   				return;
 	   				} else {
 	   					// 결재 완료 후 새로고침
 	   					alert("<spring:message code="PROC.SUCCESS"/>");
@@ -88,6 +89,7 @@
 				error : function(xhr, status, error){
 			    	//
 					alert("<spring:message code="PROC.ERROR"/>");
+			    	return;
 			    }
 			});
 		}
@@ -118,9 +120,9 @@
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-						<input type="hidden" id="currAprvSno" name="currAprvSno" value="${defaultInfo.currAprvSno}">
-						<input type="hidden" id="aprvIdx" name="aprvIdx" value="${defaultInfo.aprvIdx}">
-						<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq defaultInfo.aprvEmpIdx?defaultInfo.lastAprvYn:'N'}">
+						<input type="hidden" id="currAprvSno" name="currAprvSno" value="${aprvDetInfo.currAprvSno}">
+						<input type="hidden" id="contentIdx" name="contentIdx" value="${aprvDetInfo.aprvIdx}">
+						<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx?aprvDetInfo.lastAprvYn:'N'}">
 						<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 					
 						<div class="postCon">
@@ -135,47 +137,47 @@
 							<div class="postView">
 								<dl>
 									<dt>제목</dt>
-									<dd style="width: 40%;">${defaultInfo.aprvTitle}</dd>
+									<dd style="width: 40%;">${aprvDetInfo.aprvTitle}</dd>
 									<dt>작성일</dt>
 									<dd>
 										<span class="date">
-											<fmt:parseDate value="${defaultInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 											${fomatDt} 
 										</span>	
 									</dd>
 									<dt>진행 단계</dt>
-									<dd>${defaultInfo.currStepNm}</dd>
+									<dd>${aprvDetInfo.currStepNm}</dd>
 								</dl>
 								<dl class="post-info">
 									<dt>기안자</dt>
-									<dd style="width: 40%;">(${defaultInfo.deptNm}) ${defaultInfo.empNm}</dd>
+									<dd style="width: 40%;">(${aprvDetInfo.deptNm}) ${aprvDetInfo.empNm}</dd>
 									<dt>시행일자</dt>
 									<dd>
 										<span class="date">
 											<!-- 시행 시작일 --> 
-											<fmt:parseDate value="${defaultInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
 
 											<!-- 시행 종료일 --> 
-											<fmt:parseDate value="${defaultInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
 											${formatSdt} ~ ${formatEdt}
 										</span>	
 									</dd>
 									<dt>결재선</dt>
 									<dd>
-	                            		<a class="_btn _gray" onclick="popCall(${defaultInfo.aprvIdx});">결재선</a> 
+	                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</a> 
 									</dd>
 								</dl>
 
-								<c:if test="${not empty fileList and fileList ne ''}">
+								<c:if test="${not empty defaultList and defaultList ne ''}">
 								<dl class="post_file">
 									<dt>첨부파일</dt>
 									<dd class="post_file" style="width: 40%;">
 										<div class="scrollFileWrap">
 											<ul id="updUl"> 
-											<c:forEach var="list" items="${fileList}">
+											<c:forEach var="list" items="${defaultList}">
 												<li>
 													<img src='resources/images/icon/icon_file.png'/>
 													<a href="#" onclick="fileProc();">${list.fileOrglNm}</a>
@@ -193,14 +195,14 @@
 								<dl>
 									<dt>내용</dt>
 									<dd class="post_text">
-										<textarea id="editor" name="aprvContent" title="템플릿 내용">${defaultInfo.aprvContent}</textarea>
+										<textarea id="editor" name="aprvContent" title="템플릿 내용">${aprvDetInfo.aprvContent}</textarea>
 									</dd>
 								</dl>
 							</div><!-- End postViewWrap -->
 							
 							<div class="btnWrap alignR">
 								<div class="floatR">
-									<c:if test="${empVO.empIdx eq defaultInfo.aprvEmpIdx and (defaultInfo.aprvRsltDt eq null or defaultInfo.aprvRsltDt eq '')}">
+									<c:if test="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx and (aprvDetInfo.aprvRsltDt eq null or aprvDetInfo.aprvRsltDt eq '')}">
 										<a class="_btn _gray" onclick="aprvCall('0');">반려</a>
 										<a class="_btn _blue" onclick="aprvCall('1');">결재</a>
 									</c:if>

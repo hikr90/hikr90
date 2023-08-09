@@ -7,6 +7,6 @@ import org.springframework.ui.Model;
 public interface LoginProcService {
 	//
 	String intrLoginProc101010(Model model, HashMap<String, Object> paramMap); // 사용자 조회
-	String intrLoginProc102010(Model model); // 관리자 계정 조회
+	String intrLoginProc102010(Model model); 								// 기초데이터 업로드
 
 }

@@ -91,7 +91,7 @@
 			SET 	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
 				,	APRV_RSLT_TM = TO_CHAR(SYSDATE,'HH24MISS')
 				,	APRV_RSLT_RESN = #{aprvResn, jdbcType=VARCHAR}
-		WHERE APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+		WHERE APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 			AND APRV_SNO = #{currAprvSno, jdbcType=VARCHAR}
 	</update>	
 
@@ -110,7 +110,7 @@
 								FROM INTR_APRV_LINE LINE 
 								WHERE LINE.APRV_RSLT_DT IS NULL -- 처리 X
 									AND STEP_CD = 'STEP_0002' -- 결재
-									AND APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+									AND APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 									<choose>
 										<when test='lastAprvYn=="N"'>
 											AND APRV_SNO != #{currAprvSno, jdbcType=VARCHAR}
@@ -131,6 +131,41 @@
 						ON MD.APRV_IDX = APRV.APRV_IDX
 				        AND MD.APRV_SNO = LINE.APRV_SNO
 				)
-				WHERE APRV.APRV_IDX = #{aprvIdx, jdbcType=VARCHAR}
+				WHERE APRV.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 	</update>	
+	
+	<update id="intrAprvProc10101023" parameterType="java.util.HashMap" >
+		/* intrAprvProc10101023 : 현 단계 회수로 변경 (INTR_APRV) */
+		UPDATE INTR_APRV
+			SET 	CURR_APRV_SNO = #{tempAprvSno, jdbcType=VARCHAR}
+		WHERE APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
+	</update>
+
+	<update id="intrAprvProc10101024" parameterType="java.util.HashMap" >
+		/* intrAprvProc10101024 : 현 단계 회수로 변경 (INTR_APRV_LINE)) */
+		UPDATE INTR_APRV_LINE
+			SET 	STEP_CD = #{tempStepCd, jdbcType=VARCHAR}
+				,	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+				,	APRV_RSLT_TM = TO_CHAR(SYSDATE,'HH24MISS')
+		WHERE APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
+			AND APRV_SNO = '0001'
+	</update>
+
+	<update id="intrAprvProc10101025" parameterType="java.util.HashMap" >
+		/* intrAprvProc10101025 : 현 단계 반송으로 변경 (INTR_APRV) */
+		UPDATE INTR_APRV
+			SET 	CURR_APRV_SNO = #{currAprvSno, jdbcType=VARCHAR}
+		WHERE APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
+	</update>
+
+	<update id="intrAprvProc10101026" parameterType="java.util.HashMap" >
+		/* intrAprvProc10101026 : 현 단계 반송으로 변경 (INTR_APRV_LINE)) */
+		UPDATE INTR_APRV_LINE
+			SET 	STEP_CD = #{tempStepCd, jdbcType=VARCHAR}
+				,	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+				,	APRV_RSLT_TM = TO_CHAR(SYSDATE,'HH24MISS')
+				,	APRV_RSLT_RESN = #{aprvResn, jdbcType=VARCHAR}
+		WHERE APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
+			AND APRV_SNO = #{currAprvSno, jdbcType=VARCHAR}
+	</update>
 </mapper>

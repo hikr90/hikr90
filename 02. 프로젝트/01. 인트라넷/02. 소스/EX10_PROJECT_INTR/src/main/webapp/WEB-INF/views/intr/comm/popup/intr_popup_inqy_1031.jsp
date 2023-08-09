@@ -101,9 +101,9 @@
 	// 등록 처리
 	function aprvProc(f){
 		if(confirm("등록하시겠습니까?")){
-			// 유효성 검증
-			if(!validation()){return;};
-			if(!validateAprvDt()){return;};
+			// 에디터 내용 저장
+			var getData = CKEDITOR.instances.editor.getData();
+			document.getElementById("aprvContent").setAttribute('value',getData);
 			// 태그 내 변수 저장
 			var fileList = setFileList();
 			//

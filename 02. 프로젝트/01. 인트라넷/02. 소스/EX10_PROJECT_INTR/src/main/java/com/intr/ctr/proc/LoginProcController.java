@@ -56,7 +56,7 @@ public class LoginProcController {
 	/* 명칭 : intrLoginProc1020
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.20
-	 * 내용 : 관리자 계정 등록
+	 * 내용 : 기초데이터 업로드
 	 */
 	@RequestMapping("/intrLoginProc1020.do")
 	@ResponseBody
@@ -66,13 +66,13 @@ public class LoginProcController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 관리자 등록 
+			// 기초데이터 업로드
 			//--------------------------------------------------------------------------------------------
 			defaultStr = loginProcService.intrLoginProc102010(model);	
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[컨트롤러] 로그인 처리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[컨트롤러] 기초데이터 업로드 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		
 		//

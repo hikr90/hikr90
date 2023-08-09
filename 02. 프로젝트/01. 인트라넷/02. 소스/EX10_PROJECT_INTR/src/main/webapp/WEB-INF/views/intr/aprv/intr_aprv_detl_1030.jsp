@@ -1,7 +1,7 @@
-<!--명칭 : intr_aprv_detl_1020
+<!--명칭 : intr_aprv_detl_1030
 	작성자 : 김태현
-	작성일자 : 2023.06.26
-	내용 : 기안문 등록 화면-->
+	작성일자 : 2023.08.09
+	내용 : 기안문 재사용 등록 화면-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -59,6 +59,7 @@
 			// 유효성 검증
 			if(!validation()){return;};
 			if(!validateAprvDt()){return;};
+			
  			// 결재선 팝업
 			if($(".setListTr").length==0){
 				// 첫 시작
@@ -78,7 +79,7 @@
 	</script>
 </head>
 <body id="main">
-	<form id="form" method="POST">
+	<form id="form" method="POST" enctype="multipart/form-data">
 
 	<!-- 결재선 -->
  	<div id="popupArea" class="popupArea hidden">
@@ -96,17 +97,18 @@
 					<div class="postCon">
 						<div class="postWrap">
 							<!-- Form postWriteWrap  -->
-							<h2>기안문 등록</h2>
+							<h2>재사용등록</h2>
 							<input type="hidden" id="aprvLine" name="aprvLine" value="">
+							<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.aprvIdx}">
 							<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 							<input type="hidden" id="modCnt" name="modCnt" value="0">
-							<input type="hidden" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
+							<input type="hidden" id="templateCd" name="templateCd" value="${aprvDetInfo.templateCd}">
 							
 							<div class="postWrite">
 								<dl>
 									<dt><label for="post-title">제목</label></dt>
 									<dd style="width: 45%;">
-										<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${defaultInfo.templateNm}">
+										<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${aprvDetInfo.aprvTitle}">
 									</dd>
 									<dt>시행일자</dt>
 									<dd>
@@ -122,11 +124,11 @@
 									<dd>${empVO.gradeNm}</dd>
 									<dt>작성자</dt>
 									<dd>${empVO.empNm}</dd>
-								</dl>
+								</dl>								
 								<dl>
 									<dt><label for="post_text">내용</label></dt>
 									<dd class="post_text">
-										<textarea id="editor" title="템플릿 내용">${defaultInfo.templateContent}</textarea>
+										<textarea id="editor" title="템플릿 내용">${aprvDetInfo.aprvContent}</textarea>
 										<input type="hidden" id="aprvContent" title="템플릿 내용" name="aprvContent" value="">
 									</dd>
 								</dl>

@@ -109,9 +109,6 @@
 											<td class="first-td">${list.num}</td>
 											<td>${list.currStepNm}</td>
 											<td class="_title">
-												<c:if test="${list.fileYn eq 'Y'}">
-													<img id="fileImg" src='resources/images/icon/icon_file.png' style="width: 15px; padding-left: 3px;"/>
-												</c:if>
 												<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
 											</td>
 											<td>${list.aprvDeptNm} ${list.aprvEmpNm}</td>

@@ -8,9 +8,6 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<script type="text/javascript">
-
-</script>
 <div class="_popList">
 	<article id="_subArticle">
 		<div class="_wrap">

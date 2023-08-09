@@ -15,7 +15,6 @@
 	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/LoginInqy_SQL.xml" />
-		<mapper resource="config/mybatis/mapper/LoginProc_SQL.xml" />
 		<mapper resource="config/mybatis/mapper/TempInqy_SQL.xml" />
 		<mapper resource="config/mybatis/mapper/TempProc_SQL.xml" />
 		<mapper resource="config/mybatis/mapper/CoreInqy_SQL.xml" />

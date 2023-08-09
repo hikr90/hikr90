@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.inqy.AprvInqyDao;
-import com.intr.dao.inqy.FileInqyDao;
 import com.intr.svc.inqy.AprvInqyService;
 
 @Service
@@ -20,9 +19,6 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 	//
 	@Autowired
 	AprvInqyDao aprvInqyDao;
-	
-	@Autowired
-	FileInqyDao fileInqyDao;
 	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -56,20 +52,13 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 			// 결재 상세 정보 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvInqyDao.intrAprvInqy10102010(model, paramMap);
-			model.addAttribute("defaultInfo", defaultInfo);
+			model.addAttribute("aprvDetInfo", defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 현재 결재 정보 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvInqyDao.intrAprvInqy10102011(model, paramMap);
-			model.addAttribute("aprvInfo", defaultInfo);
-
-			
-			//--------------------------------------------------------------------------------------------
-			// 파일 정보
-			//--------------------------------------------------------------------------------------------
-			defaultList = fileInqyDao.intrFileInqy101010(model, paramMap);
-			model.addAttribute("fileList", defaultList);
+			model.addAttribute("currAprvInfo", defaultInfo);
 			
 		} catch (Exception e) {
 			//
@@ -95,5 +84,4 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 			logger.debug("[서비스] 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
-
 }

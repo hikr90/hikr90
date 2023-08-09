@@ -48,10 +48,12 @@
 
    		}
    		
-   		// 관리자 계정 등록
-   		function adminProc(f){
+   		// 기초데이터 업로드
+   		function setBasicData(){
+   			// 유효성 검증
+   			
 			//
-   			$.ajax({
+/*    			$.ajax({
    				type:	"post" ,
    				url:	"intrLoginProc1020.do",
    				data:	null,
@@ -70,8 +72,7 @@
    					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
-
-   		}
+ */   		}
 	</script>
 </head>
 <body id="sub">
@@ -88,7 +89,9 @@
 					<div class="login-wrap">
 						<div class="login-area">
 							<h3>LOGIN</h3>
-							<input type="button" class="_admin_insert" value="관리자 계정등록" onclick="adminProc();">
+							<label for="basicData"><span class="basicData">기초데이터 업로드</span></label>
+							<input type="file" id="basicData" name="basicData" class="_basic_data" value="기초데이터 업로드" onchange="setBasicData();" style="display: none;">
+
 							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);">
 							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);">
 							<input type="button" class="login-btn" value="로그인" onclick="loginCall(this.form);">

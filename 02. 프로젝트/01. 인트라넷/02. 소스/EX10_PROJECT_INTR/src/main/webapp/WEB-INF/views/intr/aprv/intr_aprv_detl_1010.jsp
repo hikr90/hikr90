@@ -42,9 +42,49 @@
 	
 	// 결재 처리
 	function aprvCall(aprvGb){
-		// 반송(0), 결재(1) 구분 값 지정
+		// 결재 (0), 반송 (1), 취소(2)		
 		$("#aprvGb").val(aprvGb);
-		formSubmit('intrAprvProc1020.do');
+		//
+		var param = $("#form").serialize();
+		if(confirm("진행하시겠습니까?")){
+			$.ajax({
+		    	type : 'post',
+		    	url : "intrAprvProc1020.do",
+				data : param,
+				dataType : 'text',
+				success : function(data){
+					//
+					var json = eval(data);
+	   				if(json[0].res=="NO"){
+	   	   				// 결재 실패
+	   					alert("<spring:message code="APRV.LINE.EXSIT"/>");
+	   	   				return;
+	   	   				
+	   				} else if(json[0].res=="EXIST"){
+	   					// 이미 결재 완료된 상태
+	   					alert("<spring:message code="PROC.FAIL"/>");
+	   					return;
+	   					
+					} else {
+	   					// 결재 완료 후 새로고침
+	   					alert("<spring:message code="PROC.SUCCESS"/>");
+	   					location.reload();
+	   				}
+				},
+				error : function(xhr, status, error){
+			    	//
+					alert("<spring:message code="PROC.ERROR"/>");
+			    	return;
+			    }
+			});
+		}
+	}
+	
+	// 품의문 재사용 등록
+	function reAprvCall(){
+		if(confirm("진행하시겠습니까?")){
+			formSubmit('intrAprvInqy1040.do');
+		}
 	}
 </script>
 </head>
@@ -67,7 +107,7 @@
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-						<input type="hidden" id="contentIdx" name="contentIdx" value="${defaultInfo.aprvIdx}">
+						<input type="hidden" id="contentIdx" name="contentIdx" value="${aprvDetInfo.aprvIdx}">
 						<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 					
 						<div class="postCon">
@@ -82,68 +122,59 @@
 							<div class="postView">
 								<dl>
 									<dt>제목</dt>
-									<dd style="width: 40%;">${defaultInfo.aprvTitle}</dd>
+									<dd style="width: 40%;">${aprvDetInfo.aprvTitle}</dd>
 									<dt>작성일</dt>
 									<dd>
 										<span class="date">
-											<fmt:parseDate value="${defaultInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 											${fomatDt} 
 										</span>	
 									</dd>
 									<dt>진행 단계</dt>
-									<dd>${defaultInfo.currStepNm}</dd>
+									<dd>${aprvDetInfo.currStepNm}</dd>
 								</dl>
 								<dl class="post-info">
-									<dt>기안자</dt>
-									<dd style="width: 40%;">(${defaultInfo.deptNm}) ${defaultInfo.empNm}</dd>
+									<dt>작성자</dt>
+									<dd style="width: 40%;">(${aprvDetInfo.deptNm}) ${aprvDetInfo.empNm} ${aprvDetInfo.gradeNm}</dd>
 									<dt>시행일자</dt>
 									<dd>
 										<span class="date">
 											<!-- 시행 시작일 --> 
-											<fmt:parseDate value="${defaultInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
 
 											<!-- 시행 종료일 --> 
-											<fmt:parseDate value="${defaultInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+											<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
 											<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
 											${formatSdt} ~ ${formatEdt}
 										</span>	
 									</dd>
 									<dt>결재선</dt>
 									<dd>
-	                            		<a class="_btn _gray" onclick="popCall(${defaultInfo.aprvIdx});">결재선</a>
+	                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</a>
 									</dd>
 								</dl>
-
-								<c:if test="${not empty fileList and fileList ne ''}">
-								<dl class="post_file">
-									<dt>첨부파일</dt>
-									<dd class="post_file" style="width: 40%;">
-										<div class="scrollFileWrap">
-											<ul id="updUl"> 
-											<c:forEach var="list" items="${fileList}">
-												<li>
-													<img src='resources/images/icon/icon_file.png'/>
-													<a href="#" onclick="fileProc();">${list.fileOrglNm}</a>
-													<input type="hidden" id="fileIdx" name="fileIdx" value="${list.fileIdx}">
-												</li>
-											</c:forEach>
-											</ul>
-										</div>
-									</dd>
-									<dt><a class="_btn" onclick="zipProc();">전체 다운로드</a></dt>
-									<dd></dd>
-								</dl>
-								</c:if>
-
 								<dl>
 									<dt>내용</dt>
 									<dd class="post_text">
-										<textarea id="editor" name="aprvContent" title="템플릿 내용">${defaultInfo.aprvContent}</textarea>
+										<textarea id="editor" name="aprvContent" title="템플릿 내용">${aprvDetInfo.aprvContent}</textarea>
 									</dd>
 								</dl>
 							</div><!-- End postViewWrap -->
+							
+							<div class="btnWrap alignR">
+								<div class="floatR">
+									<!-- 기안한 자이면서, 결재 취소할 수 있는 상황인 경우 -->
+									<c:if test="${empVO.empIdx eq currAprvInfo.empIdx and currAprvInfo.cancelYn eq 'Y'}">
+										<a class="_btn _gray" onclick="aprvCall('2');">결재 취소</a>
+									</c:if>
+									<!-- 기안한 자이면서, 반송 상태인 경우 -->
+									<c:if test="${empVO.empIdx eq aprvDetInfo.empIdx and (aprvDetInfo.stepCd eq 'STEP_0004' or aprvDetInfo.stepCd eq 'STEP_0005')}">
+										<a class="_btn _gray" onclick="reAprvCall();">재사용 등록</a>
+									</c:if>
+								</div>
+							</div>
 						</div><!-- End postWrap -->
 					</div>
 					</div><!-- End _contentArea _formArea -->

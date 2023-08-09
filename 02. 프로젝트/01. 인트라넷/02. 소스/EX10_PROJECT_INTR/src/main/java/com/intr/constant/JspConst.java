@@ -98,7 +98,8 @@ public interface JspConst {
 	public static final String INTR_APRV_LIST_1010 = "intr_aprv_list_1010.jsp"; 	// 기안 목록
 	public static final String INTR_APRV_DETL_1010 = "intr_aprv_detl_1010.jsp";		// 기안 상세 화면
 	public static final String INTR_APRV_DETL_1020 = "intr_aprv_detl_1020.jsp";		// 기안문 등록 화면
-
+	public static final String INTR_APRV_DETL_1030 = "intr_aprv_detl_1030.jsp";		// 기안문 재사용등록 화면
+	
 	public static final String INTR_APRV_LIST_2010 = "intr_aprv_list_2010.jsp"; 	// 결재 목록
 	public static final String INTR_APRV_DETL_2010 = "intr_aprv_detl_2010.jsp";		// 결재 상세 화면
 }

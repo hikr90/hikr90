@@ -28,7 +28,19 @@
 	<select id="intrAprvInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqy10101010 : 기안 목록 조회 */
 		SELECT 
-		    	SUB_DATA.* 
+			    	SUB_DATA.* 
+		    	,	CASE WHEN SUB_DATA.STEP_CD IN ('STEP_0004','STEP_0005')
+				    	THEN SUB_DATA.STEP_NM
+				    	ELSE
+				    		CASE WHEN SUB_DATA.LAST_APRV_YN = 'N'
+	                 	       THEN SUB_DATA.STEP_NM || ' 진행 중'
+			                ELSE 
+            	                CASE WHEN SUB_DATA.APRV_RSLT_DT IS NOT NULL
+                	                THEN SUB_DATA.STEP_NM || ' 완료' 
+                    	            ELSE SUB_DATA.STEP_NM || ' 진행 중'
+                        		END 
+                        	END
+                        END CURR_STEP_NM
 		    	,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
 		            THEN 'Y'
 		            ELSE 'N'
@@ -43,13 +55,6 @@
                     ,	LINE.STEP_CD
 				    ,	STEP.STEP_NM
 				    ,	LINE.LAST_APRV_YN
-                    ,   CASE WHEN LINE.LAST_APRV_YN = 'N'
-                                THEN STEP.STEP_NM || ' 진행 중'
-                        ELSE 
-                            CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
-                                THEN STEP.STEP_NM || ' 완료' 
-                                ELSE STEP.STEP_NM || ' 진행 중' END
-                        END CURR_STEP_NM                                
 				    ,   EMP.EMP_NM
 				    ,   DEPT.DEPT_NM
 				    ,   APRV_TITLE
@@ -69,6 +74,7 @@
                 INNER JOIN INTR_APRV_LINE LINE
                     ON LINE.APRV_IDX = APRV.APRV_IDX
                     AND LINE.APRV_SNO = APRV.CURR_APRV_SNO
+                    AND APRV.TEMPLATE_CD = 'TEMP_0001'
                 LEFT OUTER JOIN INTR_STEP STEP
                     ON STEP.STEP_CD = LINE.STEP_CD
 				LEFT OUTER JOIN INTR_EMP EMP
@@ -111,6 +117,7 @@
                 ,   EMP.EMP_NM
                 ,	EMP.DEPT_CD
                 ,	DEPT.DEPT_NM
+                ,	GRDE.GRADE_NM
 			    ,	APRV.APRV_TITLE 
 			    ,	APRV.APRV_CONTENT 
 			    ,	APRV.TEMPLATE_CD 
@@ -124,34 +131,70 @@
 			    ,	STEP.STEP_NM
 			    ,	APRV.EFCT_SDT
 			    ,	APRV.EFCT_EDT
-			    ,   CASE WHEN LINE.LAST_APRV_YN = 'N'
-                		THEN STEP.STEP_NM || ' 진행 중'
-                    ELSE 
-                    	CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
-                        	THEN STEP.STEP_NM || ' 완료' 
-                            ELSE STEP.STEP_NM || ' 진행 중' END
-                        END CURR_STEP_NM                                
-		FROM INTR_APRV APRV
+		    	,	CASE WHEN LINE.STEP_CD IN ('STEP_0004','STEP_0005')
+				    	THEN STEP.STEP_NM
+				    	ELSE 
+				    		CASE WHEN LINE.LAST_APRV_YN = 'N'
+	                 	       THEN STEP.STEP_NM || ' 진행 중'
+			                ELSE 
+            	                CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
+                	                THEN STEP.STEP_NM || ' 완료' 
+                    	            ELSE STEP.STEP_NM || ' 진행 중'
+                        		END 
+                        	END
+                        END CURR_STEP_NM		
+        FROM INTR_APRV APRV
 		INNER JOIN INTR_APRV_LINE LINE
 			ON LINE.APRV_IDX = APRV.APRV_IDX
 			AND LINE.APRV_SNO = APRV.CURR_APRV_SNO
+            AND APRV.TEMPLATE_CD = 'TEMP_0001'
 		LEFT OUTER JOIN INTR_STEP STEP
 			ON STEP.STEP_CD = LINE.STEP_CD
         LEFT OUTER JOIN INTR_EMP EMP
             ON EMP.EMP_IDX = APRV.EMP_IDX
         LEFT OUTER JOIN INTR_DEPT DEPT
             ON EMP.DEPT_CD = EMP.DEPT_CD
+        LEFT OUTER JOIN INTR_GRADE GRDE
+            ON GRDE.GRADE_CD = EMP.GRADE_CD
 		WHERE APRV.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 	</select>
 
 	<select id="intrAprvInqy10102011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqy10102011 : 현재 결재 정보 조회 */
-		SELECT DATA.* FROM 
+		WITH NEXT_LINE AS
+    (
+        SELECT 
+                DATA.APRV_IDX
+            ,   DATA.APRV_SNO AS NEXT_APRV_SNO
+            ,   DATA.APRV_RSLT_DT AS NEXT_RSLT_DT
+        FROM (
+                SELECT 
+                        APRV.APRV_IDX, 
+                        LINE.APRV_SNO,
+                        LINE.APRV_RSLT_DT,
+                        ROW_NUMBER() OVER(ORDER BY APRV_SNO ASC) AS NUM
+                FROM INTR_APRV APRV
+                LEFT OUTER JOIN INTR_APRV_LINE LINE
+                    ON LINE.APRV_IDX = APRV.APRV_IDX
+                    AND LINE.STEP_CD = 'STEP_0002'
+                    AND APRV.TEMPLATE_CD = 'TEMP_0001'
+                WHERE APRV.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
+                ORDER BY LINE.APRV_SNO ASC    
+            ) DATA
+        WHERE DATA.NUM = 1
+        )
+		SELECT 
+                DATA.*,
+                NL.*,
+                CASE WHEN NL.NEXT_APRV_SNO = DATA.APRV_SNO AND NEXT_RSLT_DT IS NULL 
+                    THEN 'Y' ELSE 'N' END AS CANCEL_YN                    
+        FROM 
 			(
 				SELECT
 							LINE.APRV_IDX
 						, 	LINE.APRV_SNO
 						,	LINE.STEP_CD
+						,	APRV.EMP_IDX
 						,	LINE.APRV_EMP_IDX
 						,	LINE.APRV_RSLT_DT
 						,	LINE.APRV_RSLT_TM
@@ -161,9 +204,11 @@
 				FROM INTR_APRV_LINE LINE
 				INNER JOIN INTR_APRV APRV
 					ON APRV.APRV_IDX = LINE.APRV_IDX
-					AND LINE.APRV_RSLT_DT IS NULL
+					AND LINE.APRV_SNO = APRV.CURR_APRV_SNO
 			WHERE APRV.APRV_IDX = #{contentIdx, jdbcType=VARCHAR}
 			) DATA 
+            INNER JOIN NEXT_LINE NL
+                ON NL.APRV_IDX = DATA.APRV_IDX
 		WHERE DATA.NUM = 1
 	</select>
 	
@@ -208,12 +253,26 @@
                 , 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY LINE.APRV_SNO) AS LINE_EMP_IDX
 		    FROM INTR_APRV APRV 
 		    INNER JOIN INTR_APRV_LINE LINE
-		        ON LINE.APRV_IDX = APRV.APRV_IDX AND LINE.STEP_CD IN ('STEP_0001','STEP_0002','STEP_0003')
+		        ON LINE.APRV_IDX = APRV.APRV_IDX 
+		        -- AND LINE.STEP_CD IN ('STEP_0001','STEP_0002','STEP_0003')
+		        AND APRV.TEMPLATE_CD = 'TEMP_0001'
 		    WHERE 1=1
             GROUP BY APRV.APRV_IDX
 		)
 		SELECT 
-		    	SUB_DATA.* 
+			    	SUB_DATA.* 
+		    	,	CASE WHEN SUB_DATA.STEP_CD IN ('STEP_0004','STEP_0005')
+				    	THEN SUB_DATA.STEP_NM
+				    	ELSE 
+				    		CASE WHEN SUB_DATA.LAST_APRV_YN = 'N'
+	                 	       THEN SUB_DATA.STEP_NM || ' 진행 중'
+			                ELSE 
+            	                CASE WHEN SUB_DATA.APRV_RSLT_DT IS NOT NULL
+                	                THEN SUB_DATA.STEP_NM || ' 완료' 
+                    	            ELSE SUB_DATA.STEP_NM || ' 진행 중'
+                        		END 
+                        	END
+                        END CURR_STEP_NM                                
 		    	,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
 		            THEN 'Y'
 		            ELSE 'N'
@@ -226,13 +285,6 @@
                     ,	LINE.STEP_CD
 				    ,	STEP.STEP_NM
 				    ,	LINE.LAST_APRV_YN
-                    ,   CASE WHEN LINE.LAST_APRV_YN = 'N'
-                                THEN STEP.STEP_NM || ' 진행 중'
-                        ELSE 
-                            CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
-                                THEN STEP.STEP_NM || ' 완료' 
-                                ELSE STEP.STEP_NM || ' 진행 중' END
-                        END CURR_STEP_NM                                
 				    ,   EMP.EMP_NM
 				    ,   DEPT.DEPT_NM
 				    ,   APRV_TITLE
@@ -255,6 +307,7 @@
                 INNER JOIN INTR_APRV_LINE LINE
                     ON LINE.APRV_IDX = APRV.APRV_IDX
                     AND LINE.APRV_SNO = APRV.CURR_APRV_SNO
+                    AND APRV.TEMPLATE_CD = 'TEMP_0001'
                 LEFT OUTER JOIN INTR_STEP STEP
                     ON STEP.STEP_CD = LINE.STEP_CD
 				LEFT OUTER JOIN INTR_EMP EMP

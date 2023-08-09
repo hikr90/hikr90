@@ -33,7 +33,7 @@ public class AprvProcDao {
 	public int intrAprvProc10101021(Model model, HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("aprvProc.intrAprvProc10101021", paramMap);
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101021", paramMap);
 		return resInt;
 	}
 
@@ -41,7 +41,39 @@ public class AprvProcDao {
 	public int intrAprvProc10101022(Model model, HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("aprvProc.intrAprvProc10101022", paramMap);
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101022", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 회수로 변경 (INTR_APRV)
+	public int intrAprvProc10101023(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101023", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 회수로 변경 (INTR_APRV_LINE)
+	public int intrAprvProc10101024(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101024", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 반송으로 변경 (INTR_APRV)
+	public int intrAprvProc10101025(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101025", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 반송으로 변경 (INTR_APRV_LINE)
+	public int intrAprvProc10101026(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprvProc.intrAprvProc10101026", paramMap);
 		return resInt;
 	}
 }
