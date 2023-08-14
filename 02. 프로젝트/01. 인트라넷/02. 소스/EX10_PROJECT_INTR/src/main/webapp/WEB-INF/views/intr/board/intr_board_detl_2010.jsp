@@ -35,7 +35,7 @@
 	<article id="_subArticle">
 		<div class="_wrap">
 			<div id="_content">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
+				<div id="sub_content" class="_inner" style="padding-top: 20px;">
 					<div class="_contentArea _formArea">
 						<input type="hidden" id="page" name="page" value="${param.page}">
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
@@ -89,8 +89,8 @@
 
 								<dl>
 									<dt>내용</dt>
-									<dd class="post_text">
-										<pre style="font-family: NanumSquare">${ defaultInfo.brdContent }</pre>
+									<dd class="post_text"  style="height: 465px;">
+										<pre style="font-family: NanumSquare">${defaultInfo.brdContent}</pre>
 									</dd>
 								</dl>
 							</div><!-- End postViewWrap -->

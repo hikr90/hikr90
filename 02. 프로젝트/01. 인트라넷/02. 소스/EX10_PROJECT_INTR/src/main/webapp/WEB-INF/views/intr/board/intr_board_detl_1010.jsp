@@ -35,7 +35,7 @@
 	<article id="_subArticle">
 		<div class="_wrap">
 			<div id="_content">
-				<div id="sub_content" class="_inner" style="margin-top: 40px;">					
+				<div id="sub_content" class="_inner" style="padding-top: 20px;">					
 					<div class="_contentArea _formArea">
 						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">

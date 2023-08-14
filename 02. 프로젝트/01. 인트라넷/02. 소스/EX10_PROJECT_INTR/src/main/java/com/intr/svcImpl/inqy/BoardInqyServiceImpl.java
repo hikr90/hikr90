@@ -54,7 +54,7 @@ public class BoardInqyServiceImpl implements BoardInqyService{
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("pageURL", "intrBoardInqy2010.do");
 			//
-			if(defaultList!=null) {
+			if(defaultList!=null && defaultList.size()!=0) {
 				paramMap.put("rowTotal", defaultList.get(0).get("listCnt"));
 			} else {
 				paramMap.put("rowTotal", "0");				

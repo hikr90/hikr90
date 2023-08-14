@@ -84,4 +84,41 @@ public class AprvInqyServiceImpl implements AprvInqyService{
 			logger.debug("[서비스] 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
+
+	// 나의 기안 목록 조회
+	public void intrAprvInqy103010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재 목록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvInqyDao.intrAprvInqy10301010(model, paramMap);
+			model.addAttribute("aprvReqList", defaultList);
+
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 나의 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
+	
+	// 나의 결재 목록 조회
+	public void intrAprvInqy103011(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재 목록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvInqyDao.intrAprvInqy10301110(model, paramMap);
+			model.addAttribute("aprvRecList", defaultList);
+
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 나의 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
+
 }

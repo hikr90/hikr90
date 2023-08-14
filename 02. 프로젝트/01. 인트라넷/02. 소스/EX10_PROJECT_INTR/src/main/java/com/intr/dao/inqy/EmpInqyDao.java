@@ -62,10 +62,18 @@ public class EmpInqyDao {
 	}
 	
 	// 부서 사원 트리 조회
-	public List<HashMap<String, Object>> intrEmpInqy103010(Model model) {
+	public List<HashMap<String, Object>> intrEmpInqy10301010(Model model) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
 		defaulList = sqlsession.selectList("empInqy.intrEmpInqy10103010");
+		return defaulList;
+	}
+	
+	// 부서 사원 수 조회
+	public List<HashMap<String, Object>> intrEmpInqy10401010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaulList = null;
+		defaulList = sqlsession.selectList("empInqy.intrEmpInqy10401010");
 		return defaulList;
 	}
 

@@ -52,4 +52,20 @@ public class AprvInqyDao {
 		defaultList = sqlsession.selectList("aprvInqy.intrAprvInqy20101010", paramMap);
 		return defaultList;
 	}
+
+	// 나의 기안 목록 조회
+	public List<HashMap<String, Object>> intrAprvInqy10301010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprvInqy.intrAprvInqy10301010", paramMap);
+		return defaultList;
+	}
+
+	// 나의 결재 목록 조회
+	public List<HashMap<String, Object>> intrAprvInqy10301110(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprvInqy.intrAprvInqy10301110", paramMap);
+		return defaultList;
+	}
 }

@@ -51,20 +51,29 @@
    		// 기초데이터 업로드
    		function setBasicData(){
    			// 유효성 검증
-   			
+   			var file = $("#basicData").val();
+			var fileExt = file.split('.').pop().toLowerCase();
+			// 엑셀 검증	
+ 	        if($.inArray(fileExt, ['xls','xlsx']) == -1) {
+				alert("<spring:message code="BASIC.EXCEL.NONE"/>");
+ 	        	return;
+ 	        }
+
 			//
-/*    			$.ajax({
+			var fileList = setFileList();
+   			$.ajax({
    				type:	"post" ,
+				processData : false,
+				contentType : false,
    				url:	"intrLoginProc1020.do",
-   				data:	null,
-   				dataType:	"text" ,
+   				data:	fileList,
    				success : function(data){
    					//
    					var json = eval(data);
    					if(json[0].res=="YES"){
-   	   					alert("<spring:message code="ADMIN.SUCCESS"/>");
+   	   					alert("<spring:message code="PROC.SUCCESS"/>");
    					} else {
-   	   					alert("<spring:message code="ADMIN.FAIL"/>");
+   	   					alert("<spring:message code="PROC.FAIL"/>");
    					}
    				},
    				error : function(res, status, error){
@@ -72,7 +81,7 @@
    					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
- */   		}
+    	}
 	</script>
 </head>
 <body id="sub">
@@ -82,14 +91,14 @@
 	</div>
 
 	<!-- 로그인 화면 -->
-	<form id="form">
+	<form id="form" method="post" enctype="multipart/form-data">
 		<div class="_body">
 			<div class="_tbl">
 				<div class="_login_wrap _sty2">
 					<div class="login-wrap">
 						<div class="login-area">
 							<h3>LOGIN</h3>
-							<label for="basicData"><span class="basicData">기초데이터 업로드</span></label>
+							<label for="basicData"><span class="basicData hidden">기초데이터 업로드</span></label>
 							<input type="file" id="basicData" name="basicData" class="_basic_data" value="기초데이터 업로드" onchange="setBasicData();" style="display: none;">
 
 							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);">

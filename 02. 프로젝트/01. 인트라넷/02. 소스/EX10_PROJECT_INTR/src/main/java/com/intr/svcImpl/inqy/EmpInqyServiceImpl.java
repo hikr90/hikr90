@@ -174,13 +174,30 @@ public class EmpInqyServiceImpl implements EmpInqyService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = empInqyDao.intrEmpInqy103010(model);
+			defaultList = empInqyDao.intrEmpInqy10301010(model);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사용자 부서 사용자 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 부서 사원 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
 
+	// 부서 사원 수 조회
+	public void intrEmpInqy104010(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 부서 사원 수 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empInqyDao.intrEmpInqy10401010(model, paramMap);
+			model.addAttribute("brdList",defaultList);
+
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 부서 직원 수 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
 }

@@ -64,7 +64,6 @@
 					str += "	<td style='text-align: left;'>" + menuNm + "</td>";
 				}
 				//
-				str += "	<td>" + menutypeCd + "</td>";
 				str += "</tr>";
 				
 				$(".authMenuTbl").append(str);

@@ -2,6 +2,7 @@ package com.intr.svcImpl.proc;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.inqy.LoginInqyDao;
+import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.proc.LoginProcService;
 import com.intr.vo.EmpVO;
 
@@ -24,6 +28,9 @@ public class LoginProcServiceImpl implements LoginProcService{
 
 	@Autowired
 	LoginInqyDao loginInqyDao;
+
+	@Autowired
+	CoreInqyService coreInqyService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -73,7 +80,7 @@ public class LoginProcServiceImpl implements LoginProcService{
 	}
 	
 	// 기초데이터 업로드 처리
-	public String intrLoginProc102010(Model model) {
+	public String intrLoginProc102010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -84,6 +91,7 @@ public class LoginProcServiceImpl implements LoginProcService{
 			//--------------------------------------------------------------------------------------------
 			// 기초데이터 업로드
 			//--------------------------------------------------------------------------------------------
+			resInt = coreInqyService.intrCoreInqy104010(model, paramMap, request);	
 			
 			if(resInt>0) {
 				resStr = "YES";

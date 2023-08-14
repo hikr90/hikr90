@@ -2,10 +2,8 @@ package com.intr.ctr.inqy;
 
 
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intr.constant.IntrConst;
+import com.intr.dao.inqy.EmpInqyDao;
+import com.intr.svc.inqy.AprvInqyService;
+import com.intr.svc.inqy.BoardInqyService;
 import com.intr.svc.inqy.CoreInqyService;
+import com.intr.svc.inqy.EmpInqyService;
 import com.intr.svc.inqy.LoginInqyService;
 import com.intr.vo.EmpVO;
 
@@ -30,7 +32,16 @@ public class LoginInqyController {
 	LoginInqyService loginInqyService;
 	
 	@Autowired
+	BoardInqyService boardInqyService;
+	
+	@Autowired
 	CoreInqyService coreInqyService;
+	
+	@Autowired
+	EmpInqyService empInqyService;
+
+	@Autowired
+	AprvInqyService aprvInqyService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -71,7 +82,7 @@ public class LoginInqyController {
 	/* 명칭 : intrMainInqy1020
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
-	 * 내용 : 메인(사용자/관리자) 이동
+	 * 내용 : 메인(사용자) 이동
 	 */
 	@RequestMapping("/intrMainInqy1020.do")
 	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -86,12 +97,26 @@ public class LoginInqyController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 공지사항 조회
+			//--------------------------------------------------------------------------------------------
+			boardInqyService.intrBoardInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 나의 기안 목록
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy103010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 나의 결재 목록
+			//--------------------------------------------------------------------------------------------
+			aprvInqyService.intrAprvInqy103011(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("[컨트롤러] 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-		
 		//
 		return IntrConst.VIEW_PATH_MAIN + IntrConst.INTR_MAIN_INQY_1010;
 	}
@@ -99,7 +124,7 @@ public class LoginInqyController {
 	/* 명칭 : intrMainInqy1030
 	 * 작성자 : 김태현
 	 * 작성일자 : 2022.11.26
-	 * 내용 : 메인(사용자) 이동
+	 * 내용 : 메인(관리자) 이동
 	 */
 	@RequestMapping("/intrMainInqy1030.do")
 	public String intrMainInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
@@ -114,6 +139,11 @@ public class LoginInqyController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			coreInqyService.intrCoreInqy101010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 부서 사원 수 조회
+			//--------------------------------------------------------------------------------------------
+			empInqyService.intrEmpInqy104010(model, paramMap);
 
 		} catch (Exception e) {
 			//

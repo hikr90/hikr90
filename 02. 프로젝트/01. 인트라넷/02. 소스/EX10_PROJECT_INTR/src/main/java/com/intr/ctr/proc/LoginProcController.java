@@ -2,6 +2,7 @@ package com.intr.ctr.proc;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.proc.LoginProcService;
 
@@ -60,7 +63,7 @@ public class LoginProcController {
 	 */
 	@RequestMapping("/intrLoginProc1020.do")
 	@ResponseBody
-	public String intrLoginProc1020(Model model) throws Exception {
+	public String intrLoginProc1020(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -68,7 +71,7 @@ public class LoginProcController {
 			//--------------------------------------------------------------------------------------------
 			// 기초데이터 업로드
 			//--------------------------------------------------------------------------------------------
-			defaultStr = loginProcService.intrLoginProc102010(model);	
+			defaultStr = loginProcService.intrLoginProc102010(model, paramMap, request);	
 			
 		} catch (Exception e) {
 			//

@@ -191,6 +191,22 @@
                      WHERE EMP.EMP_RESI_DATE IS NULL
 				) SUB_DATA
 			WHERE 1=1
-		    ORDER BY SUB_DATA.ROW_NUM
-	</select>	
+   		    ORDER BY SUB_DATA.DEPT_CD ASC , SUB_DATA.LV ASC
+	</select>
+	
+	<select id="intrEmpInqy10401010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy10401010 : 부서 사원 수 조회 */
+		SELECT 
+					DEPT.DEPT_CD
+                ,   DEPT.DEPT_NM
+                ,   DEPT.REG_DT
+                ,   COUNT(EMP.EMP_NM) AS DEPT_CNT
+		FROM INTR_DEPT DEPT
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON EMP.DEPT_CD = DEPT.DEPT_CD
+            AND DEPT.USE_YN = 'Y'
+            AND EMP.EMP_RESI_DATE IS NULL
+		GROUP BY DEPT.DEPT_NM, DEPT.DEPT_CD, DEPT.REG_DT
+        ORDER BY DEPT_CD ASC
+	</select>
 </mapper>

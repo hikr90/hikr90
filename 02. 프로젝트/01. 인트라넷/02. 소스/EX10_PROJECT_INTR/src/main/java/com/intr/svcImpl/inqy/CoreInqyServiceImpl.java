@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.constant.IntrConst;
 import com.intr.dao.inqy.CoreInqyDao;
@@ -250,5 +253,23 @@ public class CoreInqyServiceImpl implements CoreInqyService{
 			//
 			logger.debug("[서비스] 검색 조건 저장 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
+	}
+	
+	// 기초데이터 업로드
+	public int intrCoreInqy104010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 기초데이터 업로드
+			//--------------------------------------------------------------------------------------------
+			
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 기초데이터 업로드 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		//
+		return 0;
 	}
 }

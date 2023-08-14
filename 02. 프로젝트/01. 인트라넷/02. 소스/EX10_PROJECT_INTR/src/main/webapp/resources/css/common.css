@@ -398,3 +398,11 @@ footer#footer .footer_info address, footer#footer .footer_info p.copy { display:
 /* 화살표 */
 .tooltip .tooltip-bottom {width: 120px; top: 150%; left: 50%; margin-left: -120px;}
 .tooltip .tooltip-bottom::after {bottom: 100%; left: 50%; margin-left: -5px; border-color: transparent transparent black transparent;}
+
+
+/* ================== 툴팁 ================== */
+.mainBotWrap { background-color: lightgray; }
+.mainBotWrap .mainBotArea { overflow: hidden; height: 360px; width: 50%; display: inline-block; }
+._subArticle { height: 100%; overflow: hidden; max-width: 96%; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 35px 25px 30px; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+._subArticle h2 {float: left; color: #214b97; font-size: 2.4rem; font-weight: 700;}

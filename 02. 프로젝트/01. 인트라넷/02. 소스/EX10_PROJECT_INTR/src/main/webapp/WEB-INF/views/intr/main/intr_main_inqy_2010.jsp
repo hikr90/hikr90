@@ -23,8 +23,43 @@
 				<div class="_wrap">
 					<div class="mainTopWrap">
 						<div class="mainTopArea">
-							<h3>입사 현황</h3>
-							
+							<h3>부서 현황</h3>
+							<a href="javascript:formSubmit('intrEmpInqy1010.do')" class="moreBtn">전체보기</a>
+							<c:if test="${defaultList ne null and defaultList ne ''}">
+								<!-- 부서 사원 수 목록 -->
+								<div class="scrollTableWrap">
+								<table class="postTable" style="width: 80%; float: right;">
+									<caption>부서 사원 수 목록</caption>
+									<colgroup>
+										<col class="auto">
+										<col class="w10per">
+										<col class="w25per">
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col">부서</th>
+											<th scope="col">인원 수</th>
+											<th scope="col">등록일자</th>
+										</tr>
+									</thead>
+									<tbody>
+                                       <c:forEach var="list" items="${defaultList}" varStatus="status"> 
+										<tr>
+											<td>${list.deptNm}</td>
+											<td style="text-align: center;">${list.deptCnt}</td>
+											<td style="text-align: center;">
+												<span class="date">
+													<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+													<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+													${formatDt} 
+												</span>	
+											</td>
+                                        </tr>
+                                        </c:forEach>
+									</tbody>
+								</table>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div><!-- End _wrap -->
@@ -33,11 +68,21 @@
 	</article>
    
    	<!-- MAIN BOTTOM -->
-    <div class="mainBotWrap">
-    	<div class="mainBotArea">
-    		
+	<div class="mainBotWrap">
+		<div class="mainBotArea">
+	    	<article class="_subArticle" style="margin: 0 auto auto 52%;">
+		    	<h2>템플릿 관리</h2>
+			
+		    </article>
+	    </div>
+        
+        <div class="mainBotArea" style="width: 25%;">
+			<article class="_subArticle">
+	    		<h2>권한 부여</h2>
+    	
+    		</article>
         </div>
-    </div>
+	</div>
 
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>
 </form>	
