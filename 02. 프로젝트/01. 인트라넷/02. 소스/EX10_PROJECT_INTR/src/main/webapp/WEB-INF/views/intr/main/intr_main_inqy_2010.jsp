@@ -25,7 +25,7 @@
 						<div class="mainTopArea">
 							<h3>부서 현황</h3>
 							<a href="javascript:formSubmit('intrEmpInqy1010.do')" class="moreBtn">전체보기</a>
-							<c:if test="${defaultList ne null and defaultList ne ''}">
+							<c:if test="${not empty deptEmpList}">
 								<!-- 부서 사원 수 목록 -->
 								<div class="scrollTableWrap">
 								<table class="postTable" style="width: 80%; float: right;">
@@ -43,7 +43,7 @@
 										</tr>
 									</thead>
 									<tbody>
-                                       <c:forEach var="list" items="${defaultList}" varStatus="status"> 
+                                       <c:forEach var="list" items="${deptEmpList}" varStatus="status"> 
 										<tr>
 											<td>${list.deptNm}</td>
 											<td style="text-align: center;">${list.deptCnt}</td>
@@ -72,14 +72,30 @@
 		<div class="mainBotArea">
 	    	<article class="_subArticle" style="margin: 0 auto auto 52%;">
 		    	<h2>템플릿 관리</h2>
-			
+			    	<a href="javascript:formSubmit('intrTempInqy1010.do')" class="moreBtn">전체보기</a>
+					<ul style="line-height: 25px;">
+					<c:forEach var="list" items="${tempList}" begin="0" end="9">
+						<li><a href="javascript:#"><span class="date">${list.templateNm}</span></a></li>
+					</c:forEach>
+					<c:if test="${empty tempList}">
+						등록된 템플릿이 없습니다.
+					</c:if>
+					</ul>
 		    </article>
 	    </div>
         
         <div class="mainBotArea" style="width: 25%;">
 			<article class="_subArticle">
 	    		<h2>권한 부여</h2>
-    	
+		    		<a href="javascript:formSubmit('intrAuthInqy3010.do')" class="moreBtn">전체보기</a>
+					<ul style="line-height: 25px;">
+					<c:forEach var="list" items="${authEmpList}" begin="0" end="9">
+						<li><a href="javascript:#">${list.authNm}<span class="date">(${list.deptNm}) ${list.empNm}</span></a></li>
+					</c:forEach>
+					<c:if test="${empty authEmpList}">
+						권한을 소유한 사용자가 없습니다.
+					</c:if>
+					</ul>
     		</article>
         </div>
 	</div>

@@ -27,6 +27,17 @@ function formSubmit(mappingId){
 	f.submit();
 }
 
+/* 명칭 : setContentIdx
+ * 작성자 : 김태현
+ * 작성일자 : 2023.08.16 
+ * 내용 : 목록 선택 시 인덱스값 부여
+ */ 
+function setContentIdx(contentIdx, mappingId){
+	//
+	$("#contentIdx").val(contentIdx);
+	formSubmit(mappingId);
+}
+
 /* 명칭 : logout
  * 작성자 : 김태현
  * 작성일자 : 2022.12.03 

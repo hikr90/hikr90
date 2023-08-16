@@ -128,7 +128,9 @@
 				LEFT OUTER JOIN INTR_DEPT D
 					ON D.DEPT_CD = E.DEPT_CD
 				WHERE 1=1
-					AND A.AUTH_CD = #{authCd, jdbcType=VARCHAR}
+					<if test="authCd != null and authCd != ''">
+						AND A.AUTH_CD = #{authCd, jdbcType=VARCHAR}
+					</if>
 			) DATA 
             ORDER BY DATA.EMP_NM, DATA.EMP_IDX
 	</select>

@@ -304,6 +304,7 @@
 				WHERE 
 					1=1
 				    	AND APRV.USE_YN = 'Y'
+				    	AND LINE.STEP_CD NOT IN ('STEP_0004', 'STEP_0005')
 				    <if test="srchNm != null and srchNm != ''">
 		            	AND REGEXP_REPLACE(LOWER(APRV.APRV_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 		            </if>
@@ -442,6 +443,7 @@
 			) SUB_DATA
 		WHERE 
 			1=1 
+			  	AND SUB_DATA.STEP_CD NOT IN ('STEP_0004', 'STEP_0005')
 				AND INSTR(SUB_DATA.LINE_EMP_IDX, #{empIdx, jdbcType=VARCHAR}) > 0
 		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC	
 	</select>

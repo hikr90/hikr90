@@ -186,7 +186,7 @@
                                         </c:forEach>
                                         
                                         <!-- 글이 없는 경우 -->
-                                        <c:if test="${ empty defaultList }">
+                                        <c:if test="${empty defaultList}">
                                             <tr>
                                                 <td align="center" colspan="6">
                                               	      등록된 글이 없습니다.

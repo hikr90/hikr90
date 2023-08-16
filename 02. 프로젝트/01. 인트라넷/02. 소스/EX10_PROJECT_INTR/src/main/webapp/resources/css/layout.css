@@ -222,7 +222,16 @@ input[type="text"], textarea, .selStyle, select { height: 43px; line-height: 23p
 .widgetBox .mainTopWrap .mainTopArea ul li a > .date { float: right; }
 .widgetBox .mainTopWrap .mainTopArea a.moreBtn { position: absolute; top: 85px; left: 30px; color: #4c4c4c; font-size: 1.5rem; padding-right: 15px; }
 
+.mainBotWrap { overflow: hidden; margin-top: -1%; }
 .mainBotWrap .mainBotArea { background-color: lightgray; padding: 30px 0; height: 400px; }
+
+.mainBotWrap .mainBotArea ul { float: right; width: calc(100% - 115px); display:block;}
+.mainBotWrap .mainBotArea ul li { margin: 0 0 6px; }
+.mainBotWrap .mainBotArea ul li a { color: #444; font-size: 1.4rem; }
+.mainBotWrap .mainBotArea ul li a > p { display: block; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; width: calc(100% - 80px); }
+.mainBotWrap .mainBotArea ul li a > .date { float: right; }
+.mainBotWrap .mainBotArea h3 { float: left; color: #214b97; font-size: 2.4rem; font-weight: 700; }
+.mainBotWrap .mainBotArea a.moreBtn { position: absolute; top: 85px; left: 30px; color: #4c4c4c; font-size: 1.5rem; padding-right: 15px; }
 
 /* ================== EMP ================== */
 #profileSpan { margin-bottom: 10px; }

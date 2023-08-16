@@ -193,7 +193,7 @@ public class EmpInqyServiceImpl implements EmpInqyService{
 			// 부서 사원 수 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = empInqyDao.intrEmpInqy10401010(model, paramMap);
-			model.addAttribute("brdList",defaultList);
+			model.addAttribute("deptEmpList",defaultList);
 
 		} catch (Exception e) {
 			//

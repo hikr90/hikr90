@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.intr.constant.IntrConst;
 import com.intr.dao.inqy.EmpInqyDao;
 import com.intr.svc.inqy.AprvInqyService;
+import com.intr.svc.inqy.AuthInqyService;
 import com.intr.svc.inqy.BoardInqyService;
 import com.intr.svc.inqy.CoreInqyService;
 import com.intr.svc.inqy.EmpInqyService;
 import com.intr.svc.inqy.LoginInqyService;
+import com.intr.svc.inqy.TempInqyService;
 import com.intr.vo.EmpVO;
 
 @Controller
@@ -42,6 +44,12 @@ public class LoginInqyController {
 
 	@Autowired
 	AprvInqyService aprvInqyService;
+
+	@Autowired
+	TempInqyService tempInqyService;
+
+	@Autowired
+	AuthInqyService authInqyService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -145,6 +153,16 @@ public class LoginInqyController {
 			//--------------------------------------------------------------------------------------------
 			empInqyService.intrEmpInqy104010(model, paramMap);
 
+			//--------------------------------------------------------------------------------------------
+			// 템플릿 목록 조회
+			//--------------------------------------------------------------------------------------------
+			tempInqyService.intrTempInqy103010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 권한 목록 조회
+			//--------------------------------------------------------------------------------------------
+			authInqyService.intrAuthInqy301020(model, paramMap);
+			
 		} catch (Exception e) {
 			//
 			logger.debug("[컨트롤러] 관리자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");

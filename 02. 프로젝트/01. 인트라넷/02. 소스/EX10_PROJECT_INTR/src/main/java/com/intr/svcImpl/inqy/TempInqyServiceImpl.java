@@ -58,4 +58,22 @@ public class TempInqyServiceImpl implements TempInqyService{
 			logger.debug("[서비스] 관리자 템플릿 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
+
+	// (메인)템플릿 목록 조회
+	public void intrTempInqy103010(Model model, HashMap<String, Object> paramMap) {
+			//
+			List<HashMap<String, Object>> defaultList = null;
+			//
+			try {
+				//--------------------------------------------------------------------------------------------
+				// (메인)템플릿 목록 조회
+				//--------------------------------------------------------------------------------------------
+				defaultList = tempInqyDao.intrTempInqy10101010(model, paramMap);
+				model.addAttribute("tempList", defaultList);
+				
+			} catch (Exception e) {
+				//
+				logger.debug("[서비스] 관리자 (메인)템플릿 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			}
+		}
 }
