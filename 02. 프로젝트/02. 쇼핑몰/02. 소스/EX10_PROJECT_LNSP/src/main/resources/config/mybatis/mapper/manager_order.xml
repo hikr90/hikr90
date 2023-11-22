@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="manager_order">
+
+	<select id="manager_orderList" parameterType="java.util.HashMap"
+		resultType="orderinfo">
+		SELECT *
+		FROM (SELECT RANK() OVER(ORDER BY IDX DESC, OI_DATE DESC) no, B.*
+		FROM( SELECT O.IDX,O.OI_DATE, O.IMP_UID,G.G_NAME, O.OI_PRICE, O.OI_COUNT, O.OI_STATUS,
+		O.OI_DESTATUS, O.STATUS, M.M_NAME
+		FROM ORDERINFO O
+		JOIN GOODS G ON(O.G_NUM = G.G_NUM)
+		JOIN MEMBER M ON(O.M_NUM = M.IDX)) b
+		)
+		WHERE STATUS = 0
+		AND no BETWEEN #{start} AND #{end}
+		ORDER BY OI_DATE DESC
+	</select>
+
+	<select id="order_count" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		ORDERINFO OI
+		JOIN GOODS G ON(OI.G_NUM = G.G_NUM)
+		WHERE OI.STATUS = 0
+	</select>
+	
+	<select id="getRowTotal_refund" resultType="int">
+		SELECT COUNT(*)
+		FROM ORDERINFO OI
+		JOIN GOODS G ON(OI.G_NUM = G.G_NUM)
+		WHERE OI.STATUS = 0
+		AND (OI.OI_STATUS = 1
+		OR OI.OI_STATUS = 4)
+	</select>
+
+	<select id="getCount_total" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDERINFO
+		WHERE STATUS = 0
+	</select>
+	
+	<select id="getCount_refund" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDERINFO
+		WHERE (OI_STATUS = 1
+		OR OI_STATUS = 2
+		OR OI_STATUS = 4)
+		AND STATUS = 0
+	</select>
+	
+	<select id="getCount_change" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDERINFO
+		WHERE OI_STATUS = 3
+		AND STATUS = 0	
+	</select>
+	
+	<select id="getCount_sum" resultType="java.lang.Integer" parameterType="java.util.HashMap">	
+		<if test="total != 0">
+			SELECT SUM(OI_PRICE* OI_COUNT)
+			FROM ORDERINFO
+			WHERE STATUS = 0	
+		</if>
+		<if test="total == 0" >
+			SELECT COUNT(OI_PRICE* OI_COUNT)
+			FROM ORDERINFO
+			WHERE STATUS = 0
+		</if>
+	</select>
+	
+	<select id="manager_refund" resultType="orderinfo" parameterType="java.util.HashMap">
+		SELECT *
+		FROM (SELECT RANK() OVER(ORDER BY IDX DESC, OI_DATE DESC) no, B.*
+		FROM( SELECT O.IDX,O.OI_DATE, O.IMP_UID, G.G_NAME, O.OI_PRICE, O.OI_COUNT, O.OI_STATUS,
+		O.OI_DESTATUS, O.STATUS, M.M_NAME
+		FROM ORDERINFO O
+		JOIN GOODS G ON(O.G_NUM = G.G_NUM)
+		JOIN MEMBER M ON(O.M_NUM = M.IDX)) b
+		)
+		WHERE STATUS = 0
+		AND no BETWEEN #{start} AND #{end}
+		AND (OI_STATUS = 1
+		OR OI_STATUS = 4)
+		ORDER BY OI_DATE DESC	
+	</select>
+	
+	<update id="refund_status" parameterType="int">
+		UPDATE ORDERINFO
+		SET OI_STATUS = 4
+		WHERE IDX = #{idx}	
+	</update>
+	
+	<select id="manager_refund_search" parameterType="java.util.HashMap" resultType="orderinfo">
+		SELECT *
+		FROM (SELECT RANK() OVER(ORDER BY IDX DESC, OI_DATE DESC) no, B.*
+		FROM( SELECT O.IDX,O.OI_DATE, O.IMP_UID, G.CATEGORY, G.G_NAME, O.OI_PRICE, O.OI_COUNT, O.OI_STATUS,
+		O.OI_DESTATUS, O.STATUS, M.M_NAME
+		FROM ORDERINFO O
+		JOIN GOODS G ON(O.G_NUM = G.G_NUM)
+		JOIN MEMBER M ON(O.M_NUM = M.IDX)) b
+		)
+		WHERE STATUS = 0
+		AND no BETWEEN #{start} AND #{end}
+		AND (OI_STATUS = 1
+		OR OI_STATUS = 4)
+		AND IMP_UID LIKE '%' || #{orderCode} || '%'
+		<if test="radio != all">
+		AND CATEGORY LIKE '%' || #{radio} || '%'
+		</if>
+		ORDER BY OI_DATE DESC
+	</select>
+	
+	<select id="getRowTotal_search" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM ORDERINFO OI
+		JOIN GOODS G ON(OI.G_NUM = G.G_NUM)
+		WHERE OI.STATUS = 0
+		AND (OI.OI_STATUS = 1
+		OR OI.OI_STATUS = 4)
+		AND IMP_UID LIKE '%' || #{orderCode} || '%'
+		<if test="radio != all">
+		AND CATEGORY LIKE '%' || #{radio} || '%'
+		</if>
+	</select>
+
+</mapper>

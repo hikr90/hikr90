@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardInqy">
+	<select id="intrBoardInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqy10101010 : 공지사항 목록 조회 */
+		SELECT 
+		            SUB_DATA.NUM
+				,	SUB_DATA.BRD_IDX
+				,	SUB_DATA.BRD_TITLE
+				,	SUB_DATA.EMP_NM
+				,	SUB_DATA.DEPT_NM
+				,	SUB_DATA.LIST_CNT
+				,	SUB_DATA.REG_DT
+				,	SUB_DATA.BRD_READHIT
+                ,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
+                        THEN 'Y'
+                        ELSE 'N'
+                    END AS FILE_YN
+		FROM (
+				SELECT 
+		    			BRD.BRD_IDX
+					,   BRD.BRD_TITLE
+                    ,   BRD.EMP_IDX
+		    		,   EMP.EMP_NM
+		    		,   DEPT.DEPT_NM
+                    ,   BRD.REG_DT
+                    ,   BRD.REG_TM
+                    ,	BRD.BRD_READHIT
+                    ,	RANK() OVER(ORDER BY BRD.BRD_IDX DESC) AS NUM
+                    ,   COUNT(BRD.BRD_IDX) OVER() AS LIST_CNT
+      				,	(SELECT 
+      							COUNT(CONTENT_IDX) 
+      						FROM INTR_FILE 
+      						WHERE CONTENT_IDX = BRD.BRD_IDX
+      							AND USE_YN = 'Y'
+      					) AS FILE_CNT
+		        FROM INTR_BOARD BRD
+		        	LEFT OUTER JOIN INTR_EMP EMP
+		            	ON BRD.EMP_IDX = EMP.EMP_IDX
+		            LEFT OUTER JOIN INTR_DEPT DEPT
+		            	ON DEPT.DEPT_CD = EMP.DEPT_CD
+                        AND DEPT.USE_YN = 'Y'
+		        WHERE 
+		            1 = 1
+		            	AND BRD.USE_YN = 'Y'
+		            <if test="srchNm != null and srchNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            </if>
+		            <if test="srchSdt != null and srchSdt !=''">
+		            	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		            </if>
+		            <if test="srchEdt != null and srchEdt !=''">
+		            	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		            </if>
+        	) SUB_DATA
+ 		WHERE 1=1 
+ 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+        ORDER BY SUB_DATA.REG_DT DESC, SUB_DATA.REG_TM DESC
+	</select>	
+
+	<select id="intrBoardInqy10101011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqy10101011 : 공지사항 목록 건수 조회 */	
+		SELECT 
+				COUNT(BRD.BRD_IDX) AS LIST_CNT 
+		FROM INTR_BOARD BRD
+		WHERE 1 = 1
+			AND BRD.USE_YN = 'Y'
+		    <if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		    </if>
+		    <if test="srchSdt != null and srchSdt !=''">
+		    	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		    </if>
+		    <if test="srchEdt != null and srchEdt !=''">
+		    	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		    </if>
+	</select>	
+	
+	<select id="intrBoardInqy10102010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqy10102010 : 공지사항 상세 */
+		SELECT 
+					BRD.BRD_IDX
+				,	BRD.BRD_TITLE
+				,	BRD.EMP_IDX
+				,	EMP.EMP_IDX
+				,	EMP.EMP_NM
+				,	EMP.DEPT_CD
+				,	DEPT.DEPT_NM
+				,	EMP.GRADE_CD
+				,	GRADE.GRADE_NM
+				,	BRD.BRD_CONTENT
+				,	BRD.BRD_READHIT
+				,	BRD.REG_DT
+				,	BRD.REG_TM
+				,	BRD.USE_YN
+				,	BRD.DISP_ORDER
+				,	BRD.REMARK
+		FROM INTR_BOARD BRD
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON BRD.EMP_IDX = EMP.EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+			AND DEPT.USE_YN = 'Y'
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
+			AND GRADE.USE_YN = 'Y'
+		WHERE BRD.BRD_IDX = #{contentIdx, jdbcType=VARCHAR}
+	</select>
+</mapper>

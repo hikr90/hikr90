@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="taskProc">
+	<delete id="intrTaskProc10101010" parameterType="java.util.HashMap">
+		/* intrTaskProc10101010 : 업무일지 삭제 처리 */
+		DELETE FROM INTR_TASK
+			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+	</delete>
+	
+	<insert id="intrTaskProc10101011" parameterType="java.util.HashMap">
+		/* intrTaskProc10101011 : 업무일지 등록 처리 */
+		INSERT INTO INTR_TASK
+		(
+				TASK_CD
+			,	EMP_IDX
+			,	TASK_CONTENT
+			,	REG_DT
+			,	REG_TM
+		)
+		VALUES
+		(
+				'TASK_' || LPAD(SEQ_TASK_IDX.NEXTVAL,4,0)
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	#{taskContent, jdbcType=VARCHAR}
+			,	#{regDt, jdbcType=VARCHAR}
+			,	#{regTm, jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>

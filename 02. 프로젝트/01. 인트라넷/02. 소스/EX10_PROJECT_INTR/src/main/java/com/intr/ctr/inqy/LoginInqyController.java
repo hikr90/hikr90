@@ -69,7 +69,7 @@ public class LoginInqyController {
 		try {
 			// LOGIN 제외 컨트롤러의 경우
 			if(!returnUrl.contains("Login") 
-			&& !returnUrl.equals("/intr/")	
+			&& !returnUrl.equals("/intr/") && !returnUrl.equals("/")	
 			&& empInfo==null) {
 				// ALERT 호출
 				response.setContentType("text/html; charset=UTF-8");

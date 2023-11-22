@@ -1,0 +1,186 @@
+@charset "utf-8";
+/* menu.css */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "나눔스퀘어";
+}
+
+/* ��� <ul> �±׿� ���� */
+ul{
+	margin-top:0;
+	padding:0;
+	list-style:none; 
+	color:black; 
+	font-family: "나눔스퀘어";
+}
+
+
+/********** MAIN �޴� �׸� **********/
+
+#wrap{
+	width: 100%;
+	margin: 0 auto;
+	height: 930px;
+	min-width: 1840px;
+	background-color: #f8f8f8;
+}
+
+
+#top {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	height: 70px;
+	background-color: #055d0b;
+	min-width: 1840px;
+}
+
+#toplogo {
+	float: left;
+	width: 170px;
+	margin-left: 50px;
+	margin-top: 5px;
+}
+
+#login {
+	height: 70px;
+	width: 270px;
+	float: right;
+	font-size: 18px;
+	color: #fff;
+	padding-top: 24px;
+}
+
+#login a{
+	color: #fff;
+}
+
+#logout {
+	height: 70px;
+	width: 110px;
+	float: right;
+	font-size: 18px;
+	color: #fff;
+	padding-top: 24px;
+}
+
+#sub {
+	height: 930px;
+	width: 269px;
+	float: left;
+	border-right: 1px solid #ccc;
+	background-color: #fff;
+
+}
+
+
+.menu1{
+	height: 40px;
+	text-align:left;
+	padding-left: 60px;
+	padding-top: 20px;
+	margin-top: 5px;
+	border-bottom: 1px solid #ccc;
+	
+}
+        
+.menu1 p{
+	color: #4c300c;
+	font-size: 22px;
+	font-weight: bold;
+}        
+      
+.menu1 p:hover {
+	color: #055d0b;
+}
+
+.submenu1 {
+	padding-top: 10px;
+	padding-left: 80px;
+	padding-bottom: 10px;
+}
+
+.submenu1 a{
+	font-size: 17px;
+	color: #000;
+	line-height: 35px;
+}
+
+.submenu1 a:hover{
+	font-size: 17px;
+	color: #055d0b;
+	text-decoration: underline;
+	line-height: 35px;
+}
+
+#main {
+	float: left;
+	height: 900px;
+	width: 1470px;
+	margin-left: 100px;
+	font-weight: bold;
+	font-size:20px;
+	font-family: "NANUMSQUARER";
+	color:#090909;
+}
+#qna {
+	width: 1230px;
+	margin-top: 50px;
+	float: left;
+	margin-left: 100px;
+}
+
+
+#qnaform {
+	float: left;
+	margin-bottom: 50px;
+}
+
+
+#qnaform th {
+	background-color: #c2eeb7;
+	padding: 15px;
+	font-size: 18px;
+	border: 1px;
+	border-color: #A9DDB3;
+	border-style: solid;
+	
+}
+
+#qnaform td {
+	border: 1px;
+	border-color: #A9DDB3;
+	border-style: solid;
+	padding-left: 30px;
+	font-size: 18px;
+	background-color: #fff;
+}
+
+#qnaform p {
+	font-size: 15px;
+	line-height: 23px;
+	color: #555555;
+	text-align: center;
+}
+
+
+
+#qnaform textarea {
+	width: 400px;
+	height: 180px;
+	resize:none;
+}
+
+.summit {
+	text-align: center;
+} 
+
+input[type=password] {
+        font-family: 'pass', 'Roboto', Helvetica, Arial, sans-serif ;
+		width:152;
+		&::placeholder {
+        	font-family: "NanumSquare";
+        }
+}

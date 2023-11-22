@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="taskInqy">
+	<select id="intrTaskInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy10101010 : 업무일지 목록 조회 */
+		SELECT 
+			    T.TASK_CD
+			,   T.EMP_IDX
+			,	E.EMP_NM
+			,	D.DEPT_NM
+			,	G.GRADE_NM
+			,	T.TASK_CONTENT
+			,   T.REG_DT || T.REG_TM AS REG_DT_TM
+			,	T.REG_DT
+			,	T.REG_TM	
+		FROM INTR_TASK T
+		LEFT OUTER JOIN INTR_EMP E
+			ON E.EMP_IDX = T.EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT D
+			ON D.DEPT_CD = E.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE G
+			ON G.GRADE_CD = E.GRADE_CD
+		WHERE 1=1 
+			<if test="empIdx != null and empIdx !=''">
+            	AND T.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND T.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+            </if>
+		ORDER BY T.REG_DT DESC, T.REG_TM ASC, T.TASK_CD ASC
+	</select>
+	
+	<select id="intrTaskInqy10101011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy10101011 : 업무일지 목록 건수 조회 */
+		SELECT 
+			COUNT(T.TASK_CD) AS LIST_CNT 
+		FROM INTR_TASK T
+		WHERE 1 = 1
+	</select>
+</mapper>

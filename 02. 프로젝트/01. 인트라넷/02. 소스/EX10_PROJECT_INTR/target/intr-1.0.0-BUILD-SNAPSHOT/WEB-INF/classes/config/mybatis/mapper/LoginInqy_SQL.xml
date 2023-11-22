@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loginInqy">
+	<select id="intrLoginInqy10101010" resultType="emp" parameterType="java.util.HashMap">
+		/* intrLoginInqy10101010 : 로그인 사용자 조회 */
+		SELECT 
+				EMP.EMP_IDX
+			,	EMP.DEPT_CD
+			,	DEPT.DEPT_NM
+			,	EMP.GRADE_CD
+			,	GRADE.GRADE_NM
+			,	EMP.EMP_NM
+			,	EMP.EMP_GENDER
+			,	EMP.EMP_PHONE
+			,	EMP.EMP_ADDR
+			,	EMP.EMP_ADDR_INFO
+			,	EMP.EMP_EMAIL
+			,	EMP.EMP_ID
+			,	EMP.EMP_PWD
+			,	EMP.EMP_HIRE_DATE
+			,	EMP.EMP_RESI_DATE
+         	,   CASE WHEN AE.AUTH_CD IS NOT NULL
+                    THEN 'Y' 
+                    ELSE 'N' END AS AUTH_YN
+		FROM INTR_EMP EMP
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+			AND DEPT.USE_YN = 'Y'
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
+			AND GRADE.USE_YN = 'Y'
+        LEFT OUTER JOIN INTR_AUTH_EMP AE
+            ON AE.EMP_IDX = EMP.EMP_IDX
+            AND AE.AUTH_CD = 'AUTH_0001'
+		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
+	</select>
+
+	<select id="intrLoginInqy10201010" resultType="CamelHashMap">
+		/* intrLoginInqy10201010 : 관리자 계정 조회 */
+		SELECT 
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		FROM INTR_EMP
+		WHERE UPPER(EMP_ID) = 'ADMIN'
+	</select>
+
+	<select id="intrLoginInqy10301010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrLoginInqy10301010 : 사용자 정보 찾기 */
+		SELECT 
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		FROM INTR_EMP
+		WHERE 1=1 
+			AND UPPER(EMP_EMAIL) = UPPER(#{findEmail, jdbcType=VARCHAR})
+			<if test="findId != null and findId != ''">
+				AND UPPER(EMP_ID) = UPPER(#{findId, jdbcType=VARCHAR})
+			</if>
+			<if test="findNm != null and findNm != ''">
+				AND EMP_NM = #{findNm, jdbcType=VARCHAR}
+			</if>
+	</select>
+</mapper>

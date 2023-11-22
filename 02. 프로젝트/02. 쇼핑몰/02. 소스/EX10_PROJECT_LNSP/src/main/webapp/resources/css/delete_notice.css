@@ -1,0 +1,344 @@
+@charset "euc-kr";
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "³ª´®½ºÄù¾î";
+	text-decoration: none;
+}
+
+#qna {
+	width: 1020px;
+	height: 800px;
+	float: left;
+}
+
+#productform {
+	float: left;
+	width: 980px;
+	margin-left: 20px;
+	margin-top: 20px;
+	
+}
+
+#productform h2 {
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+#productform th {
+	background-color: #c2eeb7;
+	border-top: 2px;
+	border-top-style: solid;
+	border-top-color: #4D371B;
+	border: 2px solid #A9DDB3;
+	border-collapse: collapse;
+	font-size: 19px;
+
+}
+
+#productform td {
+	text-align: center;
+	border: 2px solid #A9DDB3;
+	font-size: 19px;
+	border-collapse: collapse;
+
+}
+
+
+
+#productform p {
+	font-size: 17px;
+	line-height: 27px;
+	color: #555555;
+}
+
+.question1{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question1 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question1 .blind_view1{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view1 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question2{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question2 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question2 .blind_view2{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view2 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question3{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question3 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question3 .blind_view3{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view3 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question4{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question4 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question4 .blind_view4{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view4 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question5{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question5 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question5 .blind_view5{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view5 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question6{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question6 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question6 .blind_view6{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view6 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question7{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question7 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question7 .blind_view7{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view7 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question8{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question8 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question8 .blind_view8{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view8 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question9{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question9 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question9 .blind_view9{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view9 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+		}
+
+.question10{
+			color:#934545;
+			height: 42px;
+			text-align:left;
+			padding-left: 30px;
+			padding-top: 18px;
+		}
+        .question10 button {
+			cursor:pointer;
+			font-family:Arial,'µ¸¿ò',Dotum;
+			border:none;
+			padding:0;
+			background:#fff; 
+			outline:0;
+			text-align: left;
+		}
+        .question10 .blind_view10{
+			font-size:19px;
+			color:#000000;
+			text-align: left;
+		}
+        .answer_view10 {
+			display:none; 
+			background-color: #F8f8f8;
+			line-height: 40px;
+			text-align: left;
+			padding: 30px;
+}

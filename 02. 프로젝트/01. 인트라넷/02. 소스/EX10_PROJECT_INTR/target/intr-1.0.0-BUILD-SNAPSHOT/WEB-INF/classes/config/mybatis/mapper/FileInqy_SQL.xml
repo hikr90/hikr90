@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fileInqy">
+	<select id="intrFileInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy10101010 : 컨텐츠 파일 데이터 조회 */
+		SELECT 
+		    F.FILE_IDX,
+		    F.CONTENT_IDX,
+		    F.FILE_SNO, 
+		    F.FILE_ORGL_NM, 
+		    F.FILE_TYPE, 
+		    F.FILE_SIZE,
+		    F.USE_YN,
+		    F.DISP_ORDER,
+		    F.REMARK
+		FROM INTR_FILE F
+		WHERE F.CONTENT_IDX = #{contentIdx, jdbcType=VARCHAR}
+			AND F.USE_YN = 'Y'
+	</select>
+
+	<select id="intrFileInqy10101011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy10101011 : 단건 파일 데이터 조회 */
+		SELECT 
+		    F.FILE_IDX,
+		    F.CONTENT_IDX, 
+		    F.FILE_SNO, 
+		    F.FILE_ORGL_NM, 
+		    F.FILE_TYPE, 
+		    F.FILE_SIZE, 
+		    F.USE_YN,
+		    F.DISP_ORDER,
+		    F.REMARK
+		FROM INTR_FILE F
+		WHERE F.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
+			AND F.USE_YN = 'Y'
+	</select>
+</mapper>

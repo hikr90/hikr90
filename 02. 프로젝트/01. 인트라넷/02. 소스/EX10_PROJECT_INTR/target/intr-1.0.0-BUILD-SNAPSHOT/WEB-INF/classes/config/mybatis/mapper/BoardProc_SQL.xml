@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardProc">
+	<insert id="intrBoardProc10101010" parameterType="java.util.HashMap" >
+		/* intrBoardProc10101010 : 공지사항 등록 처리 */
+		INSERT INTO INTR_BOARD
+		(
+				BRD_IDX
+			,	EMP_IDX
+			,	BRD_TITLE
+			,	BRD_CONTENT
+			,	BRD_READHIT
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+		)
+		VALUES
+		(
+				#{contentIdx, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	#{brdTitle, jdbcType=VARCHAR}
+			,	#{brdContent, jdbcType=VARCHAR}
+			,	0
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_BOARD
+				)
+		)
+	</insert>
+	
+	<update id="intrBoardProc10201010" parameterType="java.util.HashMap">
+	/* intrBoardProc10201010 : 공지사항 삭제 처리 */
+		UPDATE INTR_BOARD
+			SET USE_YN = 'N'
+		WHERE BRD_IDX IN
+		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
+			#{delIdx}	
+		</foreach>
+	</update>	
+	
+	<update id="intrBoardProc10103010" parameterType="java.util.HashMap">
+	/* intrBoardProc10103010 : 공지사항 수정 처리 */
+		UPDATE INTR_BOARD
+			SET 	BRD_TITLE = #{brdTitle, jdbcType=VARCHAR}
+				,	BRD_CONTENT = #{brdContent, jdbcType=VARCHAR}
+		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
+	</update>	
+
+	<update id="intrBoardProc10104010" parameterType="java.util.HashMap">
+	/* intrBoardProc10104010 : 공지사항 조회수 증가 */
+		UPDATE INTR_BOARD
+			SET 	BRD_READHIT = BRD_READHIT + 1
+		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
+	</update>	
+</mapper>

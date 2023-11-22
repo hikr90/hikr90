@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" 			 value="false" />
+		<setting name="useGeneratedKeys" 		 value="true" />
+		<setting name="defaultExecutorType" 	 value="REUSE" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.lnsp.vo.CartVO" 		alias="cart" />
+		<typeAlias type="com.lnsp.vo.ChangeVO" 		alias="change" />
+		<typeAlias type="com.lnsp.vo.EstimateVO" 	alias="estimate" />
+		<typeAlias type="com.lnsp.vo.FaqVO" 		alias="faq" />
+		<typeAlias type="com.lnsp.vo.MemberVO" 		alias="member" />
+		<typeAlias type="com.lnsp.vo.GoodsVO" 		alias="goods" />
+		<typeAlias type="com.lnsp.vo.OrderInfoVO" 	alias="orderinfo" />
+		<typeAlias type="com.lnsp.vo.TempVO" 		alias="temp" />
+		<typeAlias type="com.lnsp.vo.QnaVO" 		alias="qna"/>
+		<typeAlias type="com.lnsp.vo.AnswerVO" 		alias="answer"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="config/mybatis/mapper/LnspFaq_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspGoods_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspMember_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspOrderinfo_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspTemp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspManager_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspCart_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspCscenter_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspQna_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspAnswer_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspConsult_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspOrder_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/LnspManagerGoods_Sql.xml" />
+	</mappers>
+</configuration>

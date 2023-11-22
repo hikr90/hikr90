@@ -1,0 +1,186 @@
+@charset "utf-8";
+/* menu.css */
+
+/* 모든 <ul> 태그에 적용 */
+* {
+	padding: 0;
+	margin: 0 auto;
+	font-family: "나눔스퀘어";
+		}
+
+header {
+	width: 100%;
+	min-width: 1280px;
+	height: 17px;
+}
+
+#topMenuBox{
+	float: right; /*������ ���� */
+	color: black;
+	font-size: 15px;
+	font-family: "나눔스퀘어";
+	text-decoration: none;
+	position: relative;
+	z-index: 5;
+	height: 17px;
+	margin-top: 10px;
+	
+}
+
+#topMenuBox a{ /*������ ���� */
+	color: #000000;
+	font-size: 17px;
+	font-family: "나눔스퀘어";
+	text-decoration: none;
+}
+
+#top {
+	width: 100%;
+	margin-right: auto;
+	margin-bottom: 30px;
+	margin-left: auto;
+	height: 105px;
+	min-width: 1280px;
+	z-index: 5;
+	position: relative;
+}
+
+
+
+#toplogo {
+	float: left;
+	height: 90px;
+	width: 180px;
+	margin-left: 40px;
+	margin-top: 7px;
+	z-index: 5;
+	position: relative;
+}
+nav {
+	text-align: left;
+	float: right;
+	height: 30px;
+	width: 1000px;
+	margin-top: 45px;
+	margin-left: 60px;
+	z-index: 5;
+	position: relative;
+}
+nav ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	z-index: 5;
+}
+nav ul li {
+	font-size: 11pt;
+	font-weight: bold;
+	display: inline;
+	margin-left: 90px;
+	margin-right: 15px;
+	font-family: "나눔스퀘어";
+	z-index: 5;
+	
+}
+
+
+nav ul li a {
+	color: #ffffff;
+	font-size: 16pt;
+	text-decoration: none;
+	z-index: 5;
+}
+
+
+nav ul li a:hover {
+	color: #057918;
+	font-size: 16pt;
+	text-decoration: none;
+}
+
+#submenubox {
+	width:560px;
+	text-align: left;
+	position:absolute;
+	z-index:10;
+	padding-bottom:0;
+	visibility:hidden;
+}
+
+.submenuitem {
+	width: 20%;
+	background-color: white;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-width: 1px;
+	border-left-width: 4px;
+	border-left-color: #009618;
+	border-right-color: #BDBDBD;
+	border-top-color: #BDBDBD;
+	border-bottom-color: #BDBDBD;
+	left: 28px;
+	line-height: 35px;
+
+}
+
+#submenuitem1 {
+	position: absolute;
+	margin-left: 11%;
+	padding-left: 15px;
+	padding-top: 5px;
+	height: 90px;
+}
+
+#submenuitem2{
+	position: absolute;
+	margin-left: 43%;
+	padding-left: 15px;
+	padding-top: 5px;
+	height: 120px;
+}
+
+#submenuitem3 {
+	position: absolute;
+	margin-left: 75%;
+	padding-left: 15px;
+	padding-top: 5px;
+	height: 150px;
+}
+
+#submenuitem4 {
+	position: absolute;
+	margin-left: 112%;
+	padding-left: 15px;
+	padding-top: 5px;
+	height: 60px;
+}
+
+#submenuitem5 {
+	position: absolute;
+	margin-left: 148%;
+	padding-left: 15px;
+	padding-top: 5px;
+	height: 120px;
+}
+
+.submenuitem ul {
+	background-color: #FFF;
+}
+
+.submenuitem ul li a {
+	color: #000000;
+	display: block;
+	font-size: 19px;
+}
+
+.submenuitem ul li a:hover {
+	text-decoration: underline;
+	color: #007202;
+	display: block;
+	font-size: 19px;
+	
+}
