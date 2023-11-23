@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="faq">
+	<select id="viewTop10" resultType="faq">
+		SELECT RANK() OVER (ORDER BY readhit DESC, idx) RANK, idx, category, question, answer, faq_date, readhit
+		FROM faq_top10 ORDER BY readhit DESC, idx 
+	</select>
+	
+	<select id="viewNotice" parameterType="java.util.HashMap" resultType="faq">
+		SELECT * FROM faq_notice WHERE order_idx &#62;= #{start} AND order_idx &#60;= #{end}
+	</select>
+	
+	<select id="getNoticeTotal" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM faq_notice
+	</select>
+	
+	<select id="viewMember" resultType="faq">
+		SELECT * FROM faq_member
+	</select>
+	
+	<select id="viewDelivery" resultType="faq">
+		SELECT * FROM faq_delivery
+	</select>
+	
+	<select id="viewOrder" resultType="faq">
+		SELECT * FROM faq_order
+	</select>
+	
+	<select id="viewRefund" resultType="faq">
+		SELECT * FROM faq_refund
+	</select>
+	
+	<update id="updateReadhit" parameterType="java.lang.Integer">
+		UPDATE faq SET readhit = readhit + 1 WHERE idx = #{idx}
+	</update>
+	
+	<select id="getSearchResult" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM faq_notice WHERE question LIKE '%' || #{text} || '%'
+	</select>
+	
+	<select id="getSearch" parameterType="java.util.HashMap" resultType="faq">
+		SELECT * FROM faq_notice WHERE question LIKE '%' || #{sc} || '%' <!-- AND order_idx &#62;= #{start} AND order_idx &#60;= #{end} -->
+	</select>
+</mapper>

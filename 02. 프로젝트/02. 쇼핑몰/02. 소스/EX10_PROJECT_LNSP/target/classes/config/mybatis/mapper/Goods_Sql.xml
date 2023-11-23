@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goods">
+	<select id="goodList" resultType="goods"
+		parameterType="java.lang.String">
+		select * from goods where category= #{category}
+	</select>
+
+	<select id="selectOne" resultType="goods"
+		parameterType="int">
+		select * from goods where idx = #{idx}
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="goods_update_readhit" parameterType="int">
+		update goods set
+		readhit = readhit + 1 where IDX=#{IDX}
+	</update>
+
+	<select id="goods_list_condition" parameterType="java.util.HashMap" resultType="goods">
+		<!-- SELECT * FROM goods WHERE category = #{category} and idx between #{start} 
+			AND #{end} -->
+		select * 
+		from ( 
+				SELECT rank() over(order by idx) no, g.*
+				FROM (
+					  select *
+					  from goods
+					  WHERE category = #{category}) g
+			  )
+		where no
+		between #{start} and #{end}
+	</select>
+
+	<select id="goods_count" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM goods
+		where category=#{category}
+	</select>
+
+	<!-- 페이지별 게시물 조회 -->
+	<!-- <select id="goods_list_condition" parameterType="java.util.HashMap" 
+		resultType="goods"> select * from ( select rank() over no, b.* from 
+		( select * from goods ) b ) where no between #{start} and #{end} </select> 
+		전체 게시물 수 조회 <select id="goods_count" resultType="int"> select count(*) from 
+		goods </select> -->
+</mapper>
