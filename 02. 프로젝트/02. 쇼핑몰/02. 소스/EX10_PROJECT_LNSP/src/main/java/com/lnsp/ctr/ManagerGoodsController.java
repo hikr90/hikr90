@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lnsp.comm.Common;
 import com.lnsp.dao.ManagerGoodsDAO;
+import com.lnsp.util.Paging_Productlist;
 import com.lnsp.vo.GoodsVO;
-
-import util.Paging_Productlist;
 
 @Controller
 public class ManagerGoodsController {

@@ -10,9 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lnsp.dao.ManageCSCenterDAO;
+import com.lnsp.util.ClientUtils;
 import com.lnsp.vo.FaqVO;
-
-import util.ClientUtils;
 
 @Controller
 public class ManageCSCenterController {

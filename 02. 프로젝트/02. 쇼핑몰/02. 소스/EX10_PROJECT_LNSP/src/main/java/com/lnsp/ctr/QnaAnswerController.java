@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lnsp.comm.Common;
 import com.lnsp.dao.QnaAnswerDAO;
 import com.lnsp.dao.QnaDAO;
-import com.lnsp.vo.AnswerVO;
+import com.lnsp.util.Paging;
+import com.lnsp.vo.QnaVO;
 import com.lnsp.vo.MemberVO;
-import com.lnsp.vo.QnaAnswerVO;
-
-import util.Paging;
+import com.lnsp.vo.AnswerVO;
 
 @Controller
 public class QnaAnswerController {
@@ -66,7 +65,7 @@ public class QnaAnswerController {
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		list = qnaAnswer_dao.qnaOneAnswerList(map);
 		
@@ -117,7 +116,7 @@ public class QnaAnswerController {
 		map.put("end", end);
 		map.put("count", count);
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		list = qnaAnswer_dao.qnaOneAnswerPartList(map);
 		
@@ -167,7 +166,7 @@ public class QnaAnswerController {
 		map.put("end", end);
 		map.put("count", count);
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		int row_total = 0;
 		
@@ -225,7 +224,7 @@ public class QnaAnswerController {
 	@RequestMapping("/manager_1to1QNAanswer.do")
 	public String qnaoneAnswerForm( int idx, Model model ) {
 		
-		AnswerVO vo = qnaAnswer_dao.qnaOneAnswerForm(idx);
+		QnaVO vo = qnaAnswer_dao.qnaOneAnswerForm(idx);
 		
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd");
@@ -238,7 +237,7 @@ public class QnaAnswerController {
 	}
 	
 	@RequestMapping("/manager_1to1QNAinsert.do")
-	public String qnaOneInsert( QnaAnswerVO vo, Integer page ) {
+	public String qnaOneInsert( AnswerVO vo, Integer page ) {
 		
 		int res = qnaAnswer_dao.qnaOneInsert(vo);
 		int ynres = qna_dao.qnaOneYSupdate(vo.getQna_idx());
@@ -253,10 +252,10 @@ public class QnaAnswerController {
 	@RequestMapping("/qnaoneanswerview.do")
 	public String qnaoneanswer(Model model, int q_idx) {
 		
-		AnswerVO vo = qna_dao.qnaOneAnswerView(q_idx);
+		QnaVO vo = qna_dao.qnaOneAnswerView(q_idx);
 		model.addAttribute("vo", vo);
 		
-		QnaAnswerVO qavo = qnaAnswer_dao.qnaOneManagerAnswerView(q_idx);
+		AnswerVO qavo = qnaAnswer_dao.qnaOneManagerAnswerView(q_idx);
 		model.addAttribute("qavo", qavo);
 		
 		return "/WEB-INF/views/front/1to1QNAanswer.jsp";
@@ -283,7 +282,7 @@ public class QnaAnswerController {
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		list = qnaAnswer_dao.qnaProdAnswerList(map);
 		
@@ -312,7 +311,7 @@ public class QnaAnswerController {
 	@RequestMapping("/manager_itemQNAanswer.do")
 	public String qnaprodAnswerForm( int idx, Model model ) {
 		
-		AnswerVO vo = qnaAnswer_dao.qnaProdAnswerForm(idx);
+		QnaVO vo = qnaAnswer_dao.qnaProdAnswerForm(idx);
 		
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM / dd");
@@ -325,7 +324,7 @@ public class QnaAnswerController {
 	}
 	
 	@RequestMapping("/manager_itemQNAinsert.do")
-	public String qnaProdInsert( QnaAnswerVO vo, Integer page ) {
+	public String qnaProdInsert( AnswerVO vo, Integer page ) {
 		
 		int res = qnaAnswer_dao.qnaProdInsert(vo);
 		int ynres = qna_dao.qnaProdYSupdate(vo.getQna_idx());
@@ -340,9 +339,9 @@ public class QnaAnswerController {
 	@RequestMapping("/qnaprodanswerview.do")
 	public String qnaprodanswer(Model model, int q_idx) {
 		
-		AnswerVO vo = qna_dao.qnaprodAnswerView(q_idx);
+		QnaVO vo = qna_dao.qnaprodAnswerView(q_idx);
 		model.addAttribute("vo", vo);
-		QnaAnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
+		AnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
 		model.addAttribute("qavo", qavo);
 		
 		return "/WEB-INF/views/front/itemQNAanswer.jsp";
@@ -351,9 +350,9 @@ public class QnaAnswerController {
 	@RequestMapping("/qnaOneanswerInManagerview.do")
 	public String qnaprodanswerInManager(Model model, int q_idx) {
 		
-		AnswerVO vo = qna_dao.qnaOneAnswerView(q_idx);
+		QnaVO vo = qna_dao.qnaOneAnswerView(q_idx);
 		model.addAttribute("vo", vo);
-		QnaAnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
+		AnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
 		model.addAttribute("qavo", qavo);
 		
 		return "/WEB-INF/views/front/1to1QNAanswerInManager.jsp";
@@ -365,9 +364,9 @@ public class QnaAnswerController {
 	@RequestMapping("/qnaprodanswerInGoodsview.do")
 	public String qnaprodanswerInGoods(Model model, int q_idx) {
 		
-		AnswerVO vo = qna_dao.qnaprodAnswerView(q_idx);
+		QnaVO vo = qna_dao.qnaprodAnswerView(q_idx);
 		model.addAttribute("vo", vo);
-		QnaAnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
+		AnswerVO qavo = qnaAnswer_dao.qnaProdManagerAnswerView(q_idx);
 		model.addAttribute("qavo", qavo);
 		
 		return "/WEB-INF/views/front/itemQNAanswerInGoods.jsp";

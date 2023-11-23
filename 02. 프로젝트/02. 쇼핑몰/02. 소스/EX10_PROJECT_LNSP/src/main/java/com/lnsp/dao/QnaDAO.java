@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.lnsp.vo.AnswerVO;
+import com.lnsp.vo.QnaVO;
 
 @Repository
 public class QnaDAO {
@@ -15,22 +15,22 @@ public class QnaDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public List<AnswerVO> qnaOneList() {
-		List<AnswerVO> list = sqlSession.selectList("qna.qnaOneList");
+	public List<QnaVO> qnaOneList() {
+		List<QnaVO> list = sqlSession.selectList("qna.qnaOneList");
 		return list;
 	}
 	
-	public List<AnswerVO> qnaOneList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qna.qnaOnePagingList", map);
+	public List<QnaVO> qnaOneList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qna.qnaOnePagingList", map);
 		return list;
 	}
 	
-	public AnswerVO qnaOneFormList( ) {
-		AnswerVO vo = sqlSession.selectOne("qna.qnaOneFormList", 1);
+	public QnaVO qnaOneFormList( ) {
+		QnaVO vo = sqlSession.selectOne("qna.qnaOneFormList", 1);
 		return vo;
 	}
 	
-	public int qnaOneInsert( AnswerVO vo ) {
+	public int qnaOneInsert( QnaVO vo ) {
 		
 		int res = sqlSession.insert("qna.qnaOneInsert",vo);
 		
@@ -38,9 +38,9 @@ public class QnaDAO {
 		
 	}
 	
-	public AnswerVO qnaOneAnswerView(int q_idx) {
+	public QnaVO qnaOneAnswerView(int q_idx) {
 		
-		AnswerVO vo = sqlSession.selectOne("qna.qnaOneAnswerView", q_idx);
+		QnaVO vo = sqlSession.selectOne("qna.qnaOneAnswerView", q_idx);
 		return vo;
 	}
 	
@@ -56,23 +56,23 @@ public class QnaDAO {
 
 	
 	
-	public List<AnswerVO> qnaProdList() {
-		List<AnswerVO> list = sqlSession.selectList("qna.qnaProdList");
+	public List<QnaVO> qnaProdList() {
+		List<QnaVO> list = sqlSession.selectList("qna.qnaProdList");
 		return list;
 	}
 	
-	public List<AnswerVO> qnaProdList(HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qna.qnaProdPagingList", map);
+	public List<QnaVO> qnaProdList(HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qna.qnaProdPagingList", map);
 		return list;
 	}
 	
-	public AnswerVO qnaprodForm(AnswerVO vo) {
-		AnswerVO resvo = sqlSession.selectOne("qna.qnaOneFormlist", vo);
+	public QnaVO qnaprodForm(QnaVO vo) {
+		QnaVO resvo = sqlSession.selectOne("qna.qnaOneFormlist", vo);
 		return resvo;
 	}
 	
 
-	public int qnaProdInsert( AnswerVO vo ) {
+	public int qnaProdInsert( QnaVO vo ) {
 		
 		int res = sqlSession.insert("qna.qnaProdInsert", vo);
 		
@@ -81,9 +81,9 @@ public class QnaDAO {
 	}
 	
 	
-	public AnswerVO qnaprodAnswerView(int q_idx) {
+	public QnaVO qnaprodAnswerView(int q_idx) {
 		
-		AnswerVO vo = sqlSession.selectOne("qna.qnaProdAnswerView", q_idx);
+		QnaVO vo = sqlSession.selectOne("qna.qnaProdAnswerView", q_idx);
 		return vo;
 	}
 	
@@ -98,8 +98,8 @@ public class QnaDAO {
 	}
 	
 
-	public List<AnswerVO> qprodIngoodsListView(HashMap<String, Object> map ){
-		List<AnswerVO> list = sqlSession.selectList("qna.qprodIngoodsListView", map);
+	public List<QnaVO> qprodIngoodsListView(HashMap<String, Object> map ){
+		List<QnaVO> list = sqlSession.selectList("qna.qprodIngoodsListView", map);
 		return list;
 	}
 	

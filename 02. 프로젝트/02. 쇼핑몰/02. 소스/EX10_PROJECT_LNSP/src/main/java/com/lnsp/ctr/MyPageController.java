@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lnsp.comm.Common;
 import com.lnsp.dao.MemberDAO;
 import com.lnsp.dao.OrderInfoDAO;
+import com.lnsp.util.IamportClient;
+import com.lnsp.util.Paging_myPage;
 import com.lnsp.vo.MemberVO;
 import com.lnsp.vo.OrderInfoVO;
-
-import util.IamportClient;
-import util.Paging_myPage;
 
 @Controller
 public class MyPageController {

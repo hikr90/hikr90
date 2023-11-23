@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lnsp.comm.Common;
 import com.lnsp.dao.ManagerDAO;
 import com.lnsp.dao.ManagerOrderDAO;
+import com.lnsp.util.IamportClient;
+import com.lnsp.util.Paging;
 import com.lnsp.vo.EstimateVO;
 import com.lnsp.vo.FaqVO;
 import com.lnsp.vo.GoodsVO;
@@ -25,9 +27,6 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-
-import util.IamportClient;
-import util.Paging;
 
 @Controller
 public class ManagerController {

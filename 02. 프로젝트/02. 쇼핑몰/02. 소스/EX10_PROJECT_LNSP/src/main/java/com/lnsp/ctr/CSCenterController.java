@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lnsp.comm.Common;
 import com.lnsp.dao.FaqDAO;
+import com.lnsp.util.Paging;
+import com.lnsp.util.Paging_CSCenterResult;
 import com.lnsp.vo.FaqVO;
-
-import util.Paging;
-import util.Paging_CSCenterResult;
 
 @Controller
 public class CSCenterController {

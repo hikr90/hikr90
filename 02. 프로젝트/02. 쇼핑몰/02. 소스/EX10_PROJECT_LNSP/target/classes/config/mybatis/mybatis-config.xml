@@ -23,18 +23,18 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="config/mybatis/mapper/LnspFaq_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspGoods_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspMember_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspOrderinfo_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspTemp_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspManager_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspCart_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspCscenter_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspQna_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspAnswer_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspConsult_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspOrder_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/LnspManagerGoods_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Faq_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Goods_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Member_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/OrderInfo_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Temp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Manager_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Cart_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/CScenter_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Qna_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Answer_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Consult_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Order_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/ManagerGoods_Sql.xml" />
 	</mappers>
 </configuration>

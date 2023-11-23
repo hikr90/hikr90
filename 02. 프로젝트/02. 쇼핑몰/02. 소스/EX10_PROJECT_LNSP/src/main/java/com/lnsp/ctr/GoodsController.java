@@ -19,16 +19,15 @@ import com.lnsp.dao.GoodsDAO;
 import com.lnsp.dao.OrderInfoDAO;
 import com.lnsp.dao.QnaDAO;
 import com.lnsp.dao.TempDAO;
-import com.lnsp.vo.AnswerVO;
+import com.lnsp.util.Paging;
+import com.lnsp.util.Paging_Productlist;
+import com.lnsp.util.Paging_QNAinGoods;
+import com.lnsp.vo.QnaVO;
 import com.lnsp.vo.CartVO;
 import com.lnsp.vo.GoodsVO;
 import com.lnsp.vo.MemberVO;
 import com.lnsp.vo.OrderInfoVO;
 import com.lnsp.vo.TempVO;
-
-import util.Paging;
-import util.Paging_Productlist;
-import util.Paging_QNAinGoods;
 
 @Controller
 public class GoodsController {
@@ -141,7 +140,7 @@ public class GoodsController {
 		map.put("end", end);
 		map.put("idx", idx);
 
-		List<AnswerVO> list = null;
+		List<QnaVO> list = null;
 		// 목록
 		list = qna_dao.qprodIngoodsListView(map);
 

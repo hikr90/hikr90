@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lnsp.comm.Common;
 import com.lnsp.dao.QnaDAO;
-import com.lnsp.vo.AnswerVO;
+import com.lnsp.util.Paging;
+import com.lnsp.vo.QnaVO;
 import com.lnsp.vo.MemberVO;
-
-import util.Paging;
 
 @Controller
 public class QnaController {
@@ -60,7 +59,7 @@ public class QnaController {
 		map.put("end", end);
 		map.put("idx", user.getIdx());
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		list = qna_dao.qnaOneList(map);
 		
@@ -96,7 +95,7 @@ public class QnaController {
 	
 	//1대1문의 insert
 	@RequestMapping("/qnaoneinsert.do")
-	public String qnaOneInsert(AnswerVO vo, int idx) {
+	public String qnaOneInsert(QnaVO vo, int idx) {
 		
 		vo.setQ_ip(request.getRemoteAddr());
 		vo.setMember_idx(idx);
@@ -144,7 +143,7 @@ public class QnaController {
 		map.put("end", end);
 		map.put("idx", user.getIdx());
 		
-		List<AnswerVO> list = null;	
+		List<QnaVO> list = null;	
 		//전체목록
 		list = qna_dao.qnaProdList(map);
 		
@@ -169,9 +168,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping("/qnaprodform.do")
-	public String qnaprodForm( AnswerVO paramvo, Model model) {
+	public String qnaprodForm( QnaVO paramvo, Model model) {
 		
-		AnswerVO vo = qna_dao.qnaprodForm(paramvo);
+		QnaVO vo = qna_dao.qnaprodForm(paramvo);
 		model.addAttribute("vo", vo);
 		
 		return VIEW_PATH + "itemQNAform.jsp";
@@ -179,7 +178,7 @@ public class QnaController {
 	
 	@RequestMapping("/qnaprodinsert.do")
 	@ResponseBody
-	public String qnaProdInsert( AnswerVO vo) {
+	public String qnaProdInsert( QnaVO vo) {
 		
 		vo.setQ_ip(request.getRemoteAddr());
 		int res = qna_dao.qnaProdInsert(vo);

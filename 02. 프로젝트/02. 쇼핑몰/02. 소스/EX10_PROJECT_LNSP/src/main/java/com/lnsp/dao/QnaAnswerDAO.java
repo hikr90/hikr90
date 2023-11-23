@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.lnsp.vo.QnaVO;
 import com.lnsp.vo.AnswerVO;
-import com.lnsp.vo.QnaAnswerVO;
 
 @Repository
 public class QnaAnswerDAO {
@@ -17,28 +17,28 @@ public class QnaAnswerDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public List<AnswerVO> qnaOneAnswerList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerPagingList", map);
+	public List<QnaVO> qnaOneAnswerList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerPagingList", map);
 		return list;
 	}
 	
-	public List<AnswerVO> qnaOneAnswerPartList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerPartPagingList", map);
+	public List<QnaVO> qnaOneAnswerPartList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerPartPagingList", map);
 		return list;
 	}
 	
-	public List<AnswerVO> qnaOneAnswerWaitList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerWaitPagingList", map);
+	public List<QnaVO> qnaOneAnswerWaitList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerWaitPagingList", map);
 		return list;
 	}
 	
-	public List<AnswerVO> qnaOneAnswerCompleteList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerCompletePagingList", map);
+	public List<QnaVO> qnaOneAnswerCompleteList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerCompletePagingList", map);
 		return list;
 	}
 	
-	public List<AnswerVO> qnaOneAnswerDeleteList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerDeletePagingList", map);
+	public List<QnaVO> qnaOneAnswerDeleteList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaOneAnswerDeletePagingList", map);
 		return list;
 	}
 	
@@ -103,23 +103,23 @@ public class QnaAnswerDAO {
 		
 	}
 	
-	public AnswerVO qnaOneAnswerForm( int idx ) {
+	public QnaVO qnaOneAnswerForm( int idx ) {
 		
-		AnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaOneAnswerForm", idx);
+		QnaVO vo = sqlSession.selectOne("qnaAnswer.qnaOneAnswerForm", idx);
 		
 		return vo;
 	}
 	
-	public int qnaOneInsert( QnaAnswerVO vo) {
+	public int qnaOneInsert( AnswerVO vo) {
 		
 		int res = sqlSession.insert("qnaAnswer.qnaOneAnswerInsert", vo);
 		return res;
 		
 	}
 	
-	public QnaAnswerVO qnaOneManagerAnswerView(int q_idx) {
+	public AnswerVO qnaOneManagerAnswerView(int q_idx) {
 		
-		QnaAnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaOneManagerAnswerView", q_idx);
+		AnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaOneManagerAnswerView", q_idx);
 		return vo;
 		
 	}
@@ -129,8 +129,8 @@ public class QnaAnswerDAO {
 	
 	
 	
-	public List<AnswerVO> qnaProdAnswerList( HashMap<String, Object> map ) {
-		List<AnswerVO> list = sqlSession.selectList("qnaAnswer.qnaProdAnswerPagingList", map);
+	public List<QnaVO> qnaProdAnswerList( HashMap<String, Object> map ) {
+		List<QnaVO> list = sqlSession.selectList("qnaAnswer.qnaProdAnswerPagingList", map);
 		return list;
 	}
 	
@@ -151,14 +151,14 @@ public class QnaAnswerDAO {
 		
 	}
 	
-	public AnswerVO qnaProdAnswerForm( int idx ) {
+	public QnaVO qnaProdAnswerForm( int idx ) {
 		
-		AnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaProdAnswerForm", idx);
+		QnaVO vo = sqlSession.selectOne("qnaAnswer.qnaProdAnswerForm", idx);
 		
 		return vo;
 	}
 	
-	public int qnaProdInsert( QnaAnswerVO vo) {
+	public int qnaProdInsert( AnswerVO vo) {
 		
 		int res = sqlSession.insert("qnaAnswer.qnaProdAnswerInsert", vo);
 		return res;
@@ -166,9 +166,9 @@ public class QnaAnswerDAO {
 	}
 	
 	
-	public QnaAnswerVO qnaProdManagerAnswerView(int q_idx) {
+	public AnswerVO qnaProdManagerAnswerView(int q_idx) {
 		
-		QnaAnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaProdManagerAnswerView", q_idx);
+		AnswerVO vo = sqlSession.selectOne("qnaAnswer.qnaProdManagerAnswerView", q_idx);
 		return vo;
 		
 	}

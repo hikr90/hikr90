@@ -11,7 +11,7 @@
 		<constructor-arg value="fKFbeWmSM15LsMe5ImgJu7wVZnlg5wOkhtwvpSocTuXlgcqYyHI3PeYOCj4HQS27myDMr2YlwWHN88MG"/>
 	</bean>
 	
-	<bean id="IamportClientBean" class="util.IamportClient">
+	<bean id="IamportClientBean" class="com.lnsp.util.IamportClient">
 		<constructor-arg ref="apiKey"/>
 		<constructor-arg ref="apiSecret"/>
 	</bean>
