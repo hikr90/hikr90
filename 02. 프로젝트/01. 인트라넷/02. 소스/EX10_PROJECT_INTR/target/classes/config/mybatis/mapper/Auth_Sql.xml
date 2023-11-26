@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="auth">
+	<select id="intrAuthInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy10101010 : 권한 목록 조회 */
+		SELECT 
+					AUTH_CD
+				,	AUTH_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM INTR_AUTH
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+				AND REGEXP_REPLACE(LOWER(AUTH_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			</if>
+		ORDER BY AUTH_CD
+	</select>
+	
+	<select id="intrAuthInqy10201010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy10201010 : 권한 상세 조회 */
+		SELECT 
+					AUTH_CD
+				,	AUTH_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		FROM INTR_AUTH
+		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="intrAuthInqy20101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy20101010 : 메뉴 권한 목록 조회 */
+		SELECT 
+					DATA.*
+				,	LEVEL AS LV
+		FROM (
+				SELECT 
+					    	AM.AUTH_CD
+					    ,	A.AUTH_NM
+					    ,	AM.MENU_CD
+					    ,	M.MENU_NM
+					    ,	M.MENUTYPE_CD
+					    ,	M.UPPR_MENU_CD
+					    ,	M.DISP_ORDER
+				FROM INTR_AUTH_MENU AM
+				LEFT OUTER JOIN INTR_AUTH A
+					ON A.AUTH_CD = AM.AUTH_CD
+					AND A.USE_YN = 'Y'
+				LEFT OUTER JOIN INTR_MENU M
+					ON M.MENU_CD = AM.MENU_CD
+				WHERE 1=1
+					AND A.AUTH_CD = #{authCd, jdbcType=VARCHAR}
+			) DATA 
+			START WITH DATA.UPPR_MENU_CD IS NULL
+			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
+			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD	
+	</select>
+
+	<select id="intrAuthInqy30101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy30101010 : 사용자 목록 조회 */
+		WITH INTR_MAIN AS 
+			(
+				SELECT 
+				        DATA.DEPT_CD
+				    ,   DATA.DEPT_NM
+				    ,   '' AS EMP_IDX
+			    	,   '' AS EMP_NM
+			    	,   LEVEL AS LV
+			    	,   'N' AS ISLEAF
+				FROM 
+					(
+						SELECT
+						        LD.DEPT_CD
+						    ,   LD.DEPT_NM
+						    ,   LD.UPPR_DEPT_CD
+						    ,   UD.DEPT_NM AS UPPR_DEPT_NM
+					    	,   UD.DISP_ORDER
+						FROM INTR_DEPT LD
+						LEFT OUTER JOIN INTR_DEPT UD
+							ON LD.UPPR_DEPT_CD = UD.DEPT_CD
+							AND UD.USE_YN = 'Y'
+					) DATA
+					START WITH DATA.UPPR_DEPT_CD IS NULL
+					CONNECT BY PRIOR DATA.DEPT_CD = DATA.UPPR_DEPT_CD
+					ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.DEPT_CD
+				)
+				SELECT 
+						IM.*
+				FROM INTR_MAIN IM
+				UNION ALL
+				SELECT 
+			        	INTR_SUB.*
+			        ,	'Y'
+				FROM (
+						SELECT 
+						        EMP.DEPT_CD
+						    ,   IM.DEPT_NM
+						    ,   EMP.EMP_IDX
+						    ,   EMP.EMP_NM
+						    ,   IM.LV + 1  AS LV
+						FROM INTR_EMP EMP
+						LEFT OUTER JOIN INTR_MAIN IM
+							ON IM.DEPT_CD = EMP.DEPT_CD
+						WHERE EMP_RESI_DATE IS NULL
+						ORDER BY EMP.EMP_NM
+					) INTR_SUB 
+	</select>
+
+	<select id="intrAuthInqy30101020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy30101020 : 사용자 권한 목록 조회 */
+		SELECT 
+					DATA.*
+		FROM (
+				SELECT 
+				    	AE.AUTH_CD
+				    ,	A.AUTH_NM
+				    ,	AE.EMP_IDX
+                    ,   E.EMP_NM
+				    ,	D.DEPT_NM
+				    ,	AE.DISP_ORDER
+				FROM INTR_AUTH_EMP AE
+                LEFT OUTER JOIN INTR_EMP E
+                    ON E.EMP_IDX = AE.EMP_IDX
+				LEFT OUTER JOIN INTR_AUTH A
+					ON A.AUTH_CD = AE.AUTH_CD
+					AND A.USE_YN = 'Y'
+				LEFT OUTER JOIN INTR_DEPT D
+					ON D.DEPT_CD = E.DEPT_CD
+				WHERE 1=1
+					<if test="authCd != null and authCd != ''">
+						AND A.AUTH_CD = #{authCd, jdbcType=VARCHAR}
+					</if>
+			) DATA 
+            ORDER BY DATA.EMP_NM, DATA.EMP_IDX
+	</select>
+	
+		<insert id="intrAuthProc10101010" parameterType="java.util.HashMap">
+		/* intrAuthProc10101010 : 권한 등록 처리 */
+		INSERT INTO INTR_AUTH
+		(
+					AUTH_CD
+				,	AUTH_NM
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				(SELECT 
+					'AUTH_' || LPAD(NVL(MAX(SUBSTR(AUTH_CD,LENGTH(AUTH_CD)-3,LENGTH(AUTH_CD))),0) + 1,4,0) AS AUTH_CD 
+				 FROM INTR_AUTH
+				)
+			,	#{authNm, jdbcType=VARCHAR}
+			,	#{useYn, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_AUTH
+				)
+			,	#{remark, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="intrAuthProc10201010" parameterType="java.util.HashMap">
+		/* intrAuthProc10201010 : 권한 수정 처리 */
+		UPDATE INTR_AUTH
+			SET		AUTH_NM = #{authNm, jdbcType=VARCHAR}
+				,	USE_YN = #{useYn, jdbcType=VARCHAR}
+				,	REMARK = #{remark, jdbcType=VARCHAR}
+		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="intrAuthProc10301010" parameterType="java.util.HashMap">
+		/* intrAuthProc10301010 : 권한 삭제 처리 */
+		DELETE FROM INTR_AUTH
+			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="intrAuthProc20101010" parameterType="java.util.HashMap">
+		/* intrAuthProc20101010 : 메뉴 권한 삭제 처리 */
+		DELETE FROM INTR_AUTH_MENU
+			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="intrAuthProc20101020" parameterType="java.util.HashMap">
+		/* intrAuthProc20101020 : 메뉴 권한 등록 처리 */
+		INSERT INTO INTR_AUTH_MENU
+		(
+					AUTH_CD
+				,	MENU_CD
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				#{authCd, jdbcType=VARCHAR}
+			,	#{menuCd, jdbcType=VARCHAR}
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_AUTH_MENU WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+	
+	<delete id="intrAuthProc30101010" parameterType="java.util.HashMap">
+		/* intrAuthProc30101010 : 사용자 권한 삭제 처리 */
+		DELETE FROM INTR_AUTH_EMP
+			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="intrAuthProc30101020" parameterType="java.util.HashMap">
+		/* intrAuthProc30101020 : 사용자 권한 등록 처리 */
+		INSERT INTO INTR_AUTH_EMP
+		(
+					AUTH_CD
+				,	EMP_IDX
+				,	USE_YN
+				,	DISP_ORDER
+				,	REMARK
+		)
+		VALUES
+		(
+				#{authCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_AUTH_EMP WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
+				)
+			,	NULL
+		)
+	</insert>
+</mapper>
