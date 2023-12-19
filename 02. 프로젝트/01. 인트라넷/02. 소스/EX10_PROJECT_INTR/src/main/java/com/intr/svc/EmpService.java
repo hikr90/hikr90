@@ -16,8 +16,8 @@ public interface EmpService {
 	
 	// 부서 직급
 	void intrEmpInqy101012(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 부서, 직급 조회
-	void intrEmpInqy103010(Model model) throws Exception; 									// 부서 직원 트리 조회
-	void intrEmpInqy104010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 부서 직원 수 조회
+	void intrEmpInqy103010(Model model) throws Exception; 										// 부서 사원 트리 조회
+	void intrEmpInqy104010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 부서 사원 수 조회
 	
 	// 관리자 사원 관리
 	String intrEmpProc101010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; // 등록

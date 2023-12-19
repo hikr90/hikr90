@@ -206,7 +206,7 @@ public class EmpServiceImpl implements EmpService{
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 부서 직원 수 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("[서비스] 부서 사원 수 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
 	

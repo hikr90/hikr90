@@ -1,0 +1,7 @@
+3. 정렬 (ORDER BY)
+  - SQL로 검색된 행들을 정렬하고자 할 때 사용한다.
+
+  - 정렬의 NOT 사용
+     (!= 사용 혹은 WHERE 절에 NOT 사용)
+     where not department_id = 80;
+

@@ -44,6 +44,9 @@
 		            <if test="srchEdt != null and srchEdt !=''">
 		            	AND EMP.EMP_HIRE_DATE &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		            </if>
+		            <if test="deptCd != null and deptCd != ''">
+						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+					</if>
         	) SUB_DATA
  		WHERE 1=1 
  			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">

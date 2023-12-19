@@ -52,9 +52,9 @@
 	// 팝업 확인
 	function aprvProc(){
 		//
-		var aprvPwd = $("#aprvPwd").val();
+		var aprvPwd = $("#aprvPwd").val().toUpperCase();
 		var aprvResn = $("#aprvResn").val();
-		var empPwd = "${empVO.empPwd}";
+		var empPwd = "${empVO.empPwd}".toUpperCase();
 		//
 		if(aprvPwd==''){
 			alert("<spring:message code="APRV.PWD.NONE"/>");
@@ -97,7 +97,7 @@
 </script>
 </head>
 <body id="main">
-<form id="form" name="form" method="POST">
+<form id="form" name="form" method="POST" onsubmit="return false;">
 	<!-- 결재선 -->
  	<div id="popupArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	

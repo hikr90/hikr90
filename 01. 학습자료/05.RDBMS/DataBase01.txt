@@ -1,0 +1,34 @@
+:: 데이터베이스 ::
+  1) 데이터를 저장하는 객체 또는 관계들의 집합
+  2) 서로 다른 관계를 생성하기 위해 관계들에게 가해지는 일련의 연산자들의 집합
+
+1. SQL 문장(Query문)
+  - 원하는 결과를 얻기위해 db에 요청하는 요청 코드
+  
+  - sql 문장의 종류
+    1) DML (Data Manipulation Langugage) : 데이터 조작어
+	- SELECT, INSERT, UPDATE, DELETE (Create, Read, Update, Delete)
+    2) DDL (Data Definition Language) : 데이터 정의어
+	- CREATE, ALTER, DROP, RENAME등
+    3) DCL (Data Contrl Language) : 데이터 제어어
+	- GRANT, REVOKE
+
+---------------------------------------------------------------------------------------------------
+
+1-1 SELECT문 : DB의 자원들을 검색할 때 사용하는 키워드
+(SELECT * FROM TABLE명;)
+
+1-2 WHERE절 : 테이블에서 자원들을 검색할 때, 필요하며 사용자가 원하는 자원들을 간단한 연산자등을 통해서
+비교할 수 있도록 해주는 키워드
+
+1-3 SQL 연산자
+BETWEEN 연산자 : A와 B사이의 값을 검색할 떄 사용한다.
+IN 연산자 : 여러개의 조건을 목록화한 뒤 일치하는 조건을 검색한다.
+LIKE 연산자 :  지정한 문자형태와 완전히 일치하는 혹은 특정 문장을 포함하고 있는 자원을 검색
+
+
+
+
+
+
+

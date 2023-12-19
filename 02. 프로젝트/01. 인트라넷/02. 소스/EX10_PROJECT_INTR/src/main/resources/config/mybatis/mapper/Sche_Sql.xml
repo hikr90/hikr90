@@ -24,5 +24,9 @@
 			ON EMP.EMP_IDX = APRV.EMP_IDX
 		LEFT OUTER JOIN INTR_DEPT DEPT
 			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		WHERE 1=1
+			<if test="deptCd != null and deptCd != ''">
+				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+			</if>
 	</select>
 </mapper>

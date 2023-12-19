@@ -40,6 +40,11 @@
 	    //
 	    scheCont.render();
 	});
+	
+	// 검색 조회
+	function listCall(f){
+		formSubmit("intrScheInqy1010.do");
+	}
 </script>
 <body id="main">
 	<!-- MENU -->
@@ -63,20 +68,12 @@
 								<div class="search_nav">
 									<div class="srchArea">
 										<label class="srcLabel">부서</label>
+										
+										<select id="deptCd" name="srchDeptCd" style="width: 200px;">
+											<option value="" <c:if test="${empty srchMap.deptCd}">selected</c:if>>전체</option>
 
-										<select id="deptCd" name="deptCd" style="width: 200px;">
 										<c:forEach var="list" items="${deptList}" varStatus="status">
-											<option value="${list.deptCd}">${list.deptNm}</option>
-										</c:forEach>
-										</select>
-									</div>
-									
-									<div class="srchArea">
-										<label class="srcLabel">직급</label>
-
-										<select id="gradeCd" name="gradeCd" style="width: 200px;">
-										<c:forEach var="list" items="${gradeList}" varStatus="status">
-											<option value="${list.gradeCd}">${list.gradeNm}</option>
+											<option value="${list.deptCd}" <c:if test="${srchMap.deptCd eq list.deptCd}">selected</c:if>>${list.deptNm}</option>
 										</c:forEach>
 										</select>
 									</div>
@@ -88,7 +85,6 @@
 									</div>
 									<div class="srchArea cdtArea noLabel">                                
                                    		<input type="button" class="stb-box-btn" value="조회" onclick="listCall(this.form);">
-	                                	<input type="button" class="stb-box-btn-grey" value="초기화" onclick="javasript:initSrch();" style="margin-top: 0px;">
                                 	</div>
                                 	</div>
                                 </div>

@@ -97,7 +97,7 @@
 	<!-- MENU -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
-	<form id="form" method="POST">
+	<form id="form" method="POST" onsubmit="return false;">
 	<article id="_subArticle">
 		<div class="_wrap">
 			<div id="_content">

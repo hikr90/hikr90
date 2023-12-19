@@ -45,43 +45,7 @@
    					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
-
    		}
-   		
-   		// 기초데이터 업로드
-   		function setBasicData(){
-   			// 유효성 검증
-   			var file = $("#basicData").val();
-			var fileExt = file.split('.').pop().toLowerCase();
-			// 엑셀 검증	
- 	        if($.inArray(fileExt, ['xls','xlsx']) == -1) {
-				alert("<spring:message code="BASIC.EXCEL.NONE"/>");
- 	        	return;
- 	        }
-
-			//
-			var fileList = setFileList();
-   			$.ajax({
-   				type:	"post" ,
-				processData : false,
-				contentType : false,
-   				url:	"intrLoginProc1020.do",
-   				data:	fileList,
-   				success : function(data){
-   					//
-   					var json = eval(data);
-   					if(json[0].res=="YES"){
-   	   					alert("<spring:message code="PROC.SUCCESS"/>");
-   					} else {
-   	   					alert("<spring:message code="PROC.FAIL"/>");
-   					}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
-    	}
 	</script>
 </head>
 <body id="sub">
@@ -98,9 +62,6 @@
 					<div class="login-wrap">
 						<div class="login-area">
 							<h3>LOGIN</h3>
-							<label for="basicData"><span class="basicData hidden">기초데이터 업로드</span></label>
-							<input type="file" id="basicData" name="basicData" class="_basic_data" value="기초데이터 업로드" onchange="setBasicData();" style="display: none;">
-
 							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);">
 							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);">
 							<input type="button" class="login-btn" value="로그인" onclick="loginCall(this.form);">

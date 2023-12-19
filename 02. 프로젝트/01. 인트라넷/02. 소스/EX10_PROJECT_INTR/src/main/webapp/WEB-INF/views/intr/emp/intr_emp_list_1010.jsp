@@ -47,13 +47,27 @@
 						<input type="hidden" id="empIdx" name="empIdx" value="">
 						<input type="hidden" id="contentIdx" name="contentIdx" value="">
 
-							<h2>사원 정보
+							<h2>사원 조회
 								<span class="stb-box">
 									<input type="button" class="stb-box-btn2" value="등록" onclick="regCall();">
 								</span>
 							</h2>
 							<div class="f-srchWrap">
 								<div class="search_nav">
+									<!-- 부서 -->
+									<div class="srchArea">
+										<label class="srcLabel">부서</label>
+										
+										<select id="deptCd" name="deptCd" style="width: 200px;">
+											<option value="" <c:if test="${empty srchMap.deptCd}">selected</c:if>>전체</option>
+
+										<c:forEach var="list" items="${deptList}" varStatus="status">
+											<option value="${list.deptCd}" <c:if test="${srchMap.deptCd eq list.deptCd}">selected</c:if>>${list.deptNm}</option>
+										</c:forEach>
+										</select>
+									</div>
+
+									<!-- 입사일자 -->
 									<div class="srchArea">
 										<label class="srcLabel">입사일</label>
 										<input type="text" id="srchSdt" class="srch-cdt-date" id="srchSdt" name="srchSdt" value="${srchMap.srchSdt}" readonly="readonly" />

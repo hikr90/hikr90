@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.comm.Page;
 import com.intr.comm.Path;
 import com.intr.svc.BoardService;
+import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 
 @Controller
@@ -25,6 +26,9 @@ public class BoardController {
 	
 	@Autowired
 	MainService mainService;
+	
+	@Autowired
+	EmpService empService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -48,6 +52,11 @@ public class BoardController {
 			//--------------------------------------------------------------------------------------------
 			boardService.intrBoardInqy101010(model, paramMap);
 
+			//--------------------------------------------------------------------------------------------
+			// 부서, 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy101012(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
@@ -172,9 +181,16 @@ public class BoardController {
 			boardService.intrBoardInqy101010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
+			// 부서, 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy101012(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqy103010(model, paramMap);
+			
+			System.out.println("kth1 : "+paramMap);
 			
 		} catch (Exception e) {
 			//

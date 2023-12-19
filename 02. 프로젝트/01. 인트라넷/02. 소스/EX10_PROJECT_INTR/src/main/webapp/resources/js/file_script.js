@@ -119,8 +119,6 @@ $(function() {
 		// 파일 삭제
 		fileTemp = [];
 	})
-	
-	
 });
 
 /* 명칭 : setFileList

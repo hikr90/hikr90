@@ -32,7 +32,7 @@
 										<li>
 											<a href="javascript:setContentIdx('${list.brdIdx}','intrBoardInqy1030.do')">
 												${list.brdTitle}
-												<c:if test="${list.fileYn gt 'Y'}">
+												<c:if test="${list.fileYn eq 'Y'}">
 													<img id="updImg" src='resources/images/icon/icon_file.png' style="width: 15px; padding-left: 3px;"/>
 												</c:if>
 												<fmt:parseDate value="${list.regDt}" var="formatDt" pattern="yyyyMMdd"/>

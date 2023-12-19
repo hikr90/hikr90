@@ -88,6 +88,9 @@
 		            <if test="srchEdt != null and srchEdt !=''">
 		            	AND APRV.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		            </if>
+		  			<if test="deptCd != null and deptCd != ''">
+						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+					</if>
 			) SUB_DATA
 		WHERE 
 			1=1 
@@ -314,6 +317,9 @@
 		            <if test="srchEdt != null and srchEdt !=''">
 		            	AND APRV.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		            </if>
+		  			<if test="deptCd != null and deptCd != ''">
+						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+					</if>
 			) SUB_DATA
 		WHERE 
 			1=1 

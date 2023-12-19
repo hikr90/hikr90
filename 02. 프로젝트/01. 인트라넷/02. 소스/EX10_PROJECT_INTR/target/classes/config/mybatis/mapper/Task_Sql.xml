@@ -25,6 +25,18 @@
             	AND T.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 				AND T.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
             </if>
+            <if test="srchNm != null and srchNm != ''">
+            	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            </if>
+            <if test="srchSdt != null and srchSdt !=''">
+            	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+            </if>
+            <if test="srchEdt != null and srchEdt !=''">
+            	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+            </if>
+            <if test="deptCd != null and deptCd != ''">
+				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+			</if>
 		ORDER BY T.REG_DT DESC, T.REG_TM ASC, T.TASK_CD ASC
 	</select>
 	

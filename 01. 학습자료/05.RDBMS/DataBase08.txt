@@ -1,0 +1,57 @@
+9. 테이블 생성 (CREATE)
+  - 회원정보를 저장하는 테이블 만들기
+CREATE TABLE MEMBER_T(
+             IDX NUMBER(3) PRIMARY KEY,
+	ID VARCHAR2(30) UNIQUE, 
+	PWD VARCHAR2(50) NOT NULL,
+	NAME VARCHAR2(30) NOT NULL, 
+	EMAIL VARCHAR2(50) UNIQUE,
+	PHONE VARCHAR2(15));
+
+테이블 삭제
+  - DROP TABLE MEMBER_T;
+
+(START DATABASE 실행 뒤, sqlplus 계정명/비번)
+홈페이지에서도 ADD COLUMN으로 컬럼이 추가가능하나 코드로 작성도 할 수 있다.
+
+테이블에 컬럼 추가하기(ADD)
+  - ALTER TABLE 테이블명칭 ADD 컬럼명칭 데이터타입;
+
+테이블의 컬럼 수정
+  - ALTER TABLE 테이블명칭 MODIFY 컬럼명칭 데이터타입;
+
+테이블의 컬럼 삭제
+  - ALTER TABLE MEMBER_T DROP COLUMN PHONE;
+
+
+테이블에 자원 추가(INSERT)
+
+  - INSERT INTO MEMBER_T VALUES(1,'HONG','1111','HONG','H@NAVER.COM','010-1111-1111');
+
+
+COMMIT & ROLLBACK;
+COMMIT : 물리적으로 데이터를 갱신하는 코드
+
+테이블의 자원 수정
+  - UPDATE MEMBER_T SET PWD = '1234', EMAIL = 'HONG@K.COM' WHERE IDX = 2;
+
+테이블의 자원 삭제
+  - DELETE FROM MEMBER_T WHERE IDX = 1;
+
+
+시퀀스 : 테이블에 값을 저자할 때 순차적인 숫자가 자동으로 지정되도록 하는 객체
+(1번부터 시작하고 절대로 중복되지 않는다.)
+단, 기존에 있는 번호와 시퀀스가 겹치는 순간 오류가 나기에 시퀀스는 제일 처음에 설정해야한다.
+커밋 불필요, OBJECT BROSWER에서 시퀀스 확인 가능
+
+CREATE SQUENCE 시퀀스명; -- 시퀀스 생성
+-- START WITH 3; (3번부터 시작)
+
+CREATE SEQUENCE MEMBER_SEQ;
+
+(currVal : 현재 번호)
+시퀀스를 사용한 데이터 INSERT
+INSERT INTO MEMBER_T VALUES(MEMBER_SEQ.nextVal, 'HONG',1111,'HONG GIL','H@NAVER.COM','010-1234-1234');
+
+
+시퀀스 삭제

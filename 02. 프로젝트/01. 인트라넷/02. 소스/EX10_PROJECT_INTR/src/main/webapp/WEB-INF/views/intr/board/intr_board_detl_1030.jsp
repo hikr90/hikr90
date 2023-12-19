@@ -135,7 +135,7 @@
 								
 								<dl>
 									<dt><label for="post_text">내용</label></dt>
-									<dd class="post_text" style="height: 465px;">
+									<dd class="post_text" style="max-height: 465px;">
 										<textarea id="post_text" name="brdContent" title="내용">${defaultInfo.brdContent}</textarea>
 									</dd>
 								</dl>
