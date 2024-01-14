@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- controls : 비디오, 음성, 재생, 멈춤 등의 조정을 위한 UI 제공 -->
+    <!-- autoplay : 자동 실행 -->
+    <!-- muted : 음소거 -->
+    <!-- loop : 반복 동작 -->
+    <!-- poster : 영상 실행 전 보여지는 썸네일 -->
+    <!-- preload : 영상 로드 설정을 지정하는 기능
+            - auto : 시청 유무와 상관없이 다운로드 (중요한 영상에 사용)
+            - metadata : 영상을 다운로드하지않고 영상 상영 시간과 같은 메타 정보만 다운로드
+            - none : 영상을 다운로드하지 않음 (트래픽 절감)
+    -->
+    <video
+      src="./media/bootcamp.mp4"
+      width="320px;"
+      controls
+      autoplay
+      muted
+      loop
+      poster="./media/bootcamp.png"
+    ></video>
+
+    <br />
+    <!-- track  : 자막을 뜻하는 태그 -->
+    <!-- kind : 자막 종류
+            - subtitles : 일반적인 비디오 자막
+            - captions : 청각장애인을 위한 자막
+            - descripotions : 시각장애인을 위한 자막
+            - srclang : 자막의 언어
+    -->
+    <!-- label : 영상 내 자막 UI 클릭 시,  목록 명칭 -->
+    <video src="./media/bootcap.mp4" width="320px;" controls>
+      <track
+        src="./media/bootcamp.en.vtt"
+        kind="subtitles"
+        srclang="en"
+        label="영어(English)"
+      />
+      <track
+        src="./media/bootcamp.ko.vtt"
+        kind="subtitles"
+        srclang="ko"
+        label="한국어(Korea)"
+      />
+    </video>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 3. EXTERNAL CSS -->
+    <link rel="stylesheet" href="./CSS/style.css" />
+
+    <style>
+      /* .table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .table tr th,
+      .table tr td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      .striped-table tbody tr:nth-child(2n + 1) {
+        background-color: greenyellow;
+      } */
+
+      /* 같은 이름의 CSS가 존재하는 경우, 디자인이 합쳐지는데
+            같은 속성인 경우에는 대체가 된다. */
+      .table {
+        border: 1px solid black;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- CSS 적용 방법
+        1. INLINE STYLE : html 시작 태그에 style 속성을 통해서 직접 지정
+        2. INTERNAL CSS : head태그 안에 style 태그 내에서 스타일을 지정
+        3. EXTERNAL CSS : 별도의 CSS 파일을 생성하여 태그 안에 CSS 파일을 삽입해서 사용
+    -->
+    <!-- 1. INLINE STYLE -->
+    <a href="" style="text-decoration: none">A태그 입니다.</a>
+
+    <!-- 2. INTERNAL CSS -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>TEST1</th>
+          <th>TEST2</th>
+          <th>TEST3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AAA</td>
+          <td>000-0000-0000</td>
+          <td>AAA@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>BBB</td>
+          <td>111-1111-1111</td>
+          <td>BBB@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>CCC</td>
+          <td>222-2222-2222</td>
+          <td>CCC@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>DDD</td>
+          <td>333-3333-3333</td>
+          <td>DDD@TEST.COM</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+    <table class="table striped-table">
+      <thead>
+        <tr>
+          <th>TEST1</th>
+          <th>TEST2</th>
+          <th>TEST3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AAA</td>
+          <td>000-0000-0000</td>
+          <td>AAA@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>BBB</td>
+          <td>111-1111-1111</td>
+          <td>BBB@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>CCC</td>
+          <td>222-2222-2222</td>
+          <td>CCC@TEST.COM</td>
+        </tr>
+        <tr>
+          <td>DDD</td>
+          <td>333-3333-3333</td>
+          <td>DDD@TEST.COM</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
