@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- # 패딩과 마진은 인자의 수에따라 적용 값이 다르다. 
+          (1) 네가지의 값이 있는 경우 top, right, bottom, left 값 적용
+            - 10px, 5px, 8px, 7px
+
+          (2) 두가지의 값이 있는 경우 (top과 bottom), (left과 right)의 값 적용
+            - 10px, 5px;
+          
+          (3) 세가지의 값이 있는 경우 top, (left와 right),  bottom의 값 적용
+            - 10px, 5px, 8px;
+    -->
+
+    <!-- 각각 따로 값을 지정하는 경우
+            - padding-top, padding-bottom, padding-left, padding-right
+            - margin-top, margin-bottom, margin-left, margin-right    
+    -->
+    <div style="padding: 10px; margin: 10px; border: 10px solid green">
+      <div style="padding: 5px; margin: 5px; border: 5px solid red">
+        CSS BOX MODEL
+      </div>
+    </div>
+  </body>
+</html>

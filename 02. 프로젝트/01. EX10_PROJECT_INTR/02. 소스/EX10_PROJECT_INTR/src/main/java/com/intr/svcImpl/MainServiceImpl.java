@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.comm.Paging;
+import com.intr.dao.AuthDao;
 import com.intr.dao.MainDao;
 import com.intr.svc.BoardService;
 import com.intr.svc.MainService;
@@ -32,6 +33,9 @@ public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	MainDao mainDao;
+	
+	@Autowired
+	AuthDao authDao;
 	
 	@Autowired
 	BoardService boardService;
@@ -316,5 +320,23 @@ public class MainServiceImpl implements MainService{
 		}
 		
 		return defaultStr;
+	}
+
+	// 로그인 권한 사용자 조회
+	public void intrMainInqy104010(Model model) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 로그인 권한 사용자 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = authDao.intrAuthInqy40101010(model);
+			model.addAttribute("defaultList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("[서비스] 로그인 권한 사용자 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
 	}
 }

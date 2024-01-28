@@ -369,7 +369,7 @@ header #gnbWrap #_nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97;
 
 
 /* ================== FOOTER ================== */
-footer#footer { overflow: hidden; padding: 20px 0; -webkit-box-sizing: border-box; box-sizing: border-box; border-top: 1px solid #ccc; text-align:center;}
+footer#footer { overflow: hidden; padding: 10px 0; -webkit-box-sizing: border-box; box-sizing: border-box; border-top: 1px solid #ccc; text-align:center;}
 footer#footer .footerWrap { max-width: 1300px; margin: 0 auto; }
 footer#footer .footer_info { margin-top: 10px; }
 footer#footer .footer_info address, footer#footer .footer_info p.copy { display: inline-block; color: #6c6c6c; font-size: 1.4rem; }

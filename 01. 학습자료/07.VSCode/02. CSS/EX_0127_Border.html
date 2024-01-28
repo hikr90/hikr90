@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      /* border: 3px solid red; */
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+
+      border-width: 3px;
+      /* border-style: solid; */
+      border-color: red;
+    }
+
+    .solid {
+      border-style: solid;
+    }
+
+    .dashed {
+      border-style: dashed;
+    }
+
+    .dotted {
+      border-style: dotted;
+    }
+
+    .double {
+      border-style: double;
+    }
+
+    .groove {
+      border-style: groove;
+    }
+
+    .ridge {
+      border-style: ridge;
+    }
+
+    .inset {
+      border-style: inset;
+    }
+
+    .outset {
+      border-style: outset;
+    }
+
+    /* 선 두께 */
+    .thin {
+      border-width: thin;
+    }
+
+    .medium {
+      border-width: medium;
+    }
+
+    .thick {
+      border-width: thick;
+    }
+
+    /* 모서리 각도 */
+    .radius {
+      border-radius: 25px;
+    }
+
+    /* BORDER
+        - border-width
+        - border-style    
+    */
+  </style>
+  <body>
+    <!-- 큰 점선 -->
+    <div class="dashed"></div>
+
+    <!-- 작은 점선 -->
+    <div class="dotted"></div>
+
+    <!-- 기본 선 -->
+    <div class="solid"></div>
+    <div class="solid thin"></div>
+    <div class="solid medium"></div>
+    <div class="solid thick"></div>
+
+    <div class="solid radius"></div>
+
+    <!-- 두줄 선 -->
+    <div class="double"></div>
+
+    <!-- 테두리가 파인 선 -->
+    <div class="groove"></div>
+
+    <!-- 테두리가 튀어나온 선 -->
+    <div class="ridge"></div>
+
+    <!-- 요소가 파인 선 -->
+    <div class="inset"></div>
+
+    <!-- 요소가 튀어나온 선 -->
+    <div class="outset"></div>
+  </body>
+</html>

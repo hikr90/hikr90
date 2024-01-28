@@ -196,7 +196,6 @@
                                                 </td>
                                             </tr>
                                         </c:if>
-                                        
 									</tbody>
 								</table>
 							</div>

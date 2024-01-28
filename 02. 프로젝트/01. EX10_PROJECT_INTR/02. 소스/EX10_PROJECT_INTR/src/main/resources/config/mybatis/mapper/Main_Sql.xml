@@ -90,7 +90,7 @@
 		SELECT LPAD(SEQ_EMP_IDX.NEXTVAL,4,0) AS CONTENT_IDX FROM DUAL
 	</select>
 
-		<select id="intrLoginInqy10101010" resultType="emp" parameterType="java.util.HashMap">
+	<select id="intrLoginInqy10101010" resultType="emp" parameterType="java.util.HashMap"> 
 		/* intrLoginInqy10101010 : 로그인 사용자 조회 */
 		SELECT 
 				EMP.EMP_IDX

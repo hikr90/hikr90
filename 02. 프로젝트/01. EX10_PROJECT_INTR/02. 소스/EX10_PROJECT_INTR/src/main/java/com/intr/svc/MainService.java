@@ -14,5 +14,6 @@ public interface MainService {
 	void intrMainInqy103010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 검색 값 저장
 	//
 	String intrLoginProc101010(Model model, HashMap<String, Object> paramMap) throws Exception; // 사용자 조회
+	void intrMainInqy104010(Model model) throws Exception; // 로그인 권한 사용자 조회
 
 }

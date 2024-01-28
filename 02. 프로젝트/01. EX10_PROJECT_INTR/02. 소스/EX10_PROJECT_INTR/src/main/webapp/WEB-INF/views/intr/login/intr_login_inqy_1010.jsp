@@ -46,6 +46,13 @@
    				}
    			});
    		}
+   		
+   		// 로그인 정보 입력
+   		function setInfo(empId, empPwd){
+   			//
+   			$("input[name=empId]").val(empId);
+   			$("input[name=empPwd]").val(empPwd);
+   		}
 	</script>
 </head>
 <body id="sub">
@@ -62,10 +69,36 @@
 					<div class="login-wrap">
 						<div class="login-area">
 							<h3>LOGIN</h3>
-							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);">
-							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);">
+							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);" value="">
+							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);" value="">
 							<input type="button" class="login-btn" value="로그인" onclick="loginCall(this.form);">
 	                        <input type="button" class="btn-find-info" value="아이디/비밀번호 찾기" onclick="popCall();">
+						</div>
+						
+						<div class="auth-area">
+							<div class="scrollTableWrap">
+								<table class="postTable">
+									<caption>로그인 권한 목록 조회</caption>
+									<colgroup>
+										<col class="auto">
+										<col class="w60per">
+									</colgroup>
+										<thead>
+										<tr>
+											<th scope="col">소유자</th>
+											<th scope="col">권한</th>
+										</tr>
+									</thead>
+									<tbody>
+		                                <c:forEach var="list" items="${defaultList}" varStatus="status"> 
+											<tr>
+												<td class="_title"><a href="javascript:setInfo('${list.empId}','${list.empPwd}');">${list.empNm}</a></td>
+												<td>${list.authNm}</td>
+											</tr>
+		                               </c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

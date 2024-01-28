@@ -111,4 +111,11 @@ public class AuthDao {
 		return resInt;
 	}
 
+	// 로그인 권한 사용자 목록 조회
+	public List<HashMap<String, Object>> intrAuthInqy40101010(Model model) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("auth.intrAuthInqy40101010");
+		return defaultList;
+	}
 }
