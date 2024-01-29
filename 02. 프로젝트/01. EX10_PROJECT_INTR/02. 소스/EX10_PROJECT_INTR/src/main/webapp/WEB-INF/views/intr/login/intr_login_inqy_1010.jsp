@@ -92,7 +92,7 @@
 									<tbody>
 		                                <c:forEach var="list" items="${defaultList}" varStatus="status"> 
 											<tr>
-												<td class="_title"><a href="javascript:setInfo('${list.empId}','${list.empPwd}');">${list.empNm}</a></td>
+												<td class="_title"><a href="javascript:setInfo('${list.empId}','${list.empPwd}');" style="color: #214b97;">${list.empNm}</a></td>
 												<td>${list.authNm}</td>
 											</tr>
 		                               </c:forEach>

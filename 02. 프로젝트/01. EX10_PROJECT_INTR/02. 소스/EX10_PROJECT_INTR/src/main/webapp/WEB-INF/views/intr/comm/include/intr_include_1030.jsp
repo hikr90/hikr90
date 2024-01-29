@@ -27,7 +27,7 @@
 				<br><br>
 				<div class="login_state_text">
 					접속을 환영합니다.<br><br>
-					<a href=""><strong>${empVO.empNm}님</strong></a>
+					<strong>${empVO.empNm}님</strong>
 				</div>
 			</div>
 		</div>

@@ -225,7 +225,7 @@ input[type="text"], textarea, .selStyle, select { height: 43px; line-height: 23p
 .widgetBox .mainTopWrap .mainTopArea ul li a > .date { float: right; }
 .widgetBox .mainTopWrap .mainTopArea a.moreBtn { position: absolute; top: 85px; left: 30px; color: #4c4c4c; font-size: 1.5rem; padding-right: 15px; }
 
-.mainBotWrap { overflow: hidden; margin-top: -1%; }
+.mainBotWrap { overflow: hidden; }
 .mainBotWrap .mainBotArea { background-color: lightgray; padding: 30px 0; height: 400px; }
 
 .mainBotWrap .mainBotArea ul { float: right; width: calc(100% - 115px); display:block;}

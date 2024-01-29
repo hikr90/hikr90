@@ -10,10 +10,10 @@
 	<context:property-placeholder location="classpath:config/mybatis/db.properties"/>
 
  	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${driver}"/> 
-		<property name="url" value="${url}"/>
-		<property name="username" value="${user}"/>
-		<property name="password" value="${password}"/>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="INTR"/>
+		<property name="password" value="1111"/>
 		<property name="maxActive" value="20"/>
 	</bean>
 

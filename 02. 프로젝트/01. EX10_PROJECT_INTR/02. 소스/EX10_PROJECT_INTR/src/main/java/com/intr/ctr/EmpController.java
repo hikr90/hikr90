@@ -1,7 +1,6 @@
 package com.intr.ctr;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -104,7 +103,7 @@ public class EmpController {
 	 * 내용 : 사원 프로필 사진 조회
 	 */
 	@RequestMapping("/intrEmpInqy1012.do")
-	public void intrEmpInqy1012(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response) throws IOException {
+	public void intrEmpInqy1012(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
 		//
 		String workPath = "";
 		//

@@ -59,7 +59,7 @@
 	
 	<article id="_subArticle">
 		<div class="_wrap">
-			<div id="_content" style="padding-bottom: 30px;">
+			<div id="_content" style="padding-bottom: 35px;">
 				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
 					<div class="_contentArea _formArea">
 						<div class="postWrap">

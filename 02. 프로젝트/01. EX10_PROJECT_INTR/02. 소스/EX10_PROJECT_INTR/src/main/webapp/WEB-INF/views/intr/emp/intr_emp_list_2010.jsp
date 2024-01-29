@@ -29,7 +29,7 @@
 				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
 					<div class="_contentArea _formArea">
 						<!-- Form srchWrap  -->
-						<div class="postWrap" style="padding-bottom: 14%;">
+						<div class="postWrap" style="padding-bottom: 15%;">
 							<h2>사원 조회</h2>
 							<div class="f-srchWrap">
 								<div class="search_nav">

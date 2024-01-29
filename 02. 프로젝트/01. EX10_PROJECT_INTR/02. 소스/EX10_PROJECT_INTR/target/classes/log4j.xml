@@ -12,20 +12,20 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.korea.intr">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<logger name="org.springframework.web">
@@ -34,38 +34,38 @@
 
 	<!-- SQL TIMING -->
 	<logger name="jdbc.sqltiming" additivity="false">
-		<level value="info" />
+		<level value="debug" />
 		<appender-ref ref="console"/> 
 	</logger>
 
 	<!-- SQL ONLY -->
 	<logger name="jdbc.sqlonly" additivity="false"> 
-		<level value="info"/> 
+		<level value="debug"/> 
 		<appender-ref ref="console"/> 
 	</logger>
 
 	<!-- AUDIT -->
 	<logger name="jdbc.audit" additivity="false"> 
-		<level value="warn"/>  
+		<level value="debug"/>  
 		<appender-ref ref="console"/> 
 	</logger> 
 
 	<!-- RESULTSET -->
 	<logger name="jdbc.resultset" additivity="false">
-		<level value="warn" />
+		<level value="debug" />
 		<appender-ref ref="console"/> 
 	</logger>
 
 	<!-- RESULT SET TABLE -->
 	<logger name="jdbc.resultsettable" additivity="false"> 
-		<level value="info"/>  
+		<level value="debug"/>  
 		<appender-ref ref="console"/> 
 	</logger> 
 
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="error" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
 	
