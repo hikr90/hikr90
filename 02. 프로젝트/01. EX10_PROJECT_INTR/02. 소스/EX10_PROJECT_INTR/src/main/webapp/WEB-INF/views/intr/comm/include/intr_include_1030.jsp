@@ -8,7 +8,7 @@
 
 <header style="min-height: 100px;">
 	<div class="_wrap">
-		<div class="utilWrap">
+		<div class="headerWrap">
 			<div class="login_state">
 				<ul class="utilList">
 

@@ -10,9 +10,6 @@ select {
     font-size: 10px; font-weight: 400;
 }
 
-/*	@FONT-FACE
-		- 사용자 컴퓨터에 폰트가 설치되어있지 않아도 서버에서 내려받도록 지정하는 어노테이션
-*/
 @font-face {
     font-family: 'NanumSquare';
     font-style: normal;
