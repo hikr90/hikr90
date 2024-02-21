@@ -87,7 +87,7 @@
 
 								<dl>
 									<dt>내용</dt>
-									<dd class="post_text" style="max-height: 465px;">
+									<dd class="post_text" style="height: 465px;">
 										<pre style="font-family: NanumSquare">${defaultInfo.brdContent}</pre>
 									</dd>
 								</dl>

@@ -8,7 +8,7 @@
 
 <header style="min-height: 100px;">
 	<div class="_wrap">
-		<div class="headerWrap">
+		<div class="utilWrap">
 			<div class="login_state">
 				<ul class="utilList">
 
@@ -27,7 +27,7 @@
 				<br><br>
 				<div class="login_state_text">
 					접속을 환영합니다.<br><br>
-					<strong>${empVO.empNm}님</strong>
+					<a href=""><strong>${empVO.empNm}님</strong></a>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings> 
+	
+	<typeAliases>
+		<typeAlias type="com.intr.vo.EmpVO" alias="emp"/>
+		<typeAlias type="com.intr.util.CamelHashMap" alias="CamelHashMap"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="config/mybatis/mapper/Temp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Main_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Board_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Util_Sql.xml" />		
+		<mapper resource="config/mybatis/mapper/Emp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Task_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Auth_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Sche_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Aprv_Sql.xml" />
+	</mappers>
+	
+</configuration>

@@ -135,7 +135,7 @@
                                 </div>
 							</div>
 							<div class="scrollTableWrap">
-								<table class="postTable" style="margin-bottom: -50px;">
+								<table class="postTable">
 									<caption>공지사항 정보정정 목록 조회</caption>
 									<colgroup>
 										<col class="w7per">
@@ -198,12 +198,15 @@
                                         </c:if>
 									</tbody>
 								</table>
+								
+								<c:if test="${ not empty defaultList }">
+									<div id="totalCnt">
+										총 건수 : ${ defaultList[0].listCnt }건
+									</div>
+								</c:if>
 							</div>
 						
 							<div class="scrollArea"></div><!-- End pagingWrap -->
-								<c:if test="${ not empty defaultList }">
-									총 건수 : ${ defaultList[0].listCnt }건
-								</c:if>
 							</div><!-- End postWrap -->
 					</div><!-- End _contentArea _formArea -->
 				</div><!-- End _inner -->
