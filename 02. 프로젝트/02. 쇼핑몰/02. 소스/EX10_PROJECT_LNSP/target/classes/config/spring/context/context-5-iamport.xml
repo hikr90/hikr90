@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean class="java.lang.String" id="apiKey">
+		<constructor-arg value="6862946469110187"/>
+	</bean>
+	
+	<bean class="java.lang.String" id="apiSecret">
+		<constructor-arg value="fKFbeWmSM15LsMe5ImgJu7wVZnlg5wOkhtwvpSocTuXlgcqYyHI3PeYOCj4HQS27myDMr2YlwWHN88MG"/>
+	</bean>
+	
+	<bean id="IamportClientBean" class="com.lnsp.util.IamportClient">
+		<constructor-arg ref="apiKey"/>
+		<constructor-arg ref="apiSecret"/>
+	</bean>
+</beans>

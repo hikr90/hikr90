@@ -1,0 +1,404 @@
+@charset "utf-8";
+/* menu.css */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "나눔스퀘어"; 
+}
+
+/* ��� <ul> �±׿� ���� */
+ul{
+	margin-top:0;
+	padding:0;
+	list-style:none; 
+	color:black; 
+	font-family: "나눔스퀘어";
+}
+
+
+
+/********** MAIN �޴� �׸� **********/
+
+#wrap{
+	margin:0 auto;
+	width:1280px;
+	height: 6800px;
+	margin-top: 35px;
+}
+
+
+
+
+@media screen and (orientation:landscape) and (min-width:720px) and (max-width:1280px) and (width:100%){
+}
+
+
+
+
+#history {
+	height: 40px;
+	width: 1180px;
+	text-align: left;
+	color: #666;
+	font-size: 16px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 40px;
+	color: #714600;
+	font-weight: bold;
+	font-family: "나눔스퀘어";
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #BBBBBB;
+}
+
+#history a{
+	color: #006818;
+	font-weight: bold;
+	font-family: "나눔스퀘어";
+}
+
+
+#item {
+	height: 610px;
+	width: 1180px;
+	border-bottom: 1px solid #ccc;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+.itemimg {
+	float: left;
+	height: 450px;
+	width: 450px;
+	margin-top: 20px;
+}
+
+
+#ground {
+	margin-top: 20px;
+}
+
+h2 {
+	font-family: "나눔스퀘어";
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.treeprice {
+	font-family: "나눔스퀘어";
+	font-size: 16px;
+}
+
+#ground th{
+	margin-left: 60px;
+	font-family: "나눔스퀘어";
+	font-size: 18px;
+}
+
+
+#ground td{
+	font-family: "나눔스퀘어";
+	font-size: 18px;
+}
+
+.border {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #B9B9B9;
+}
+
+
+#tab1 {
+	height: 100px;
+	width: 1180px;
+	margin-bottom: 50px;
+	
+
+}
+
+
+
+
+ul,li { list-style:none; }
+a {
+	text-decoration:none; color:#000000; 
+}
+.tab {
+	border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; 
+}
+.tab li {
+	float:left; width:25%; height: 70px; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; font-size: 20px; 
+}
+.tab li {
+	display:inline-block; padding:20px; cursor:pointer; 
+	
+}
+
+.tab li.on {
+	background-color: #057918; 
+	color: #ffffff; 
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+.tab li.on a{
+	color: #ffffff; 
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+.tab_con {
+	clear:both;  
+}
+.tab_con div { 
+	display:none; height:100px; background:#fff; line-height:100px; text-align:center; 
+}
+
+
+
+
+
+#explaintable {
+	height: 500px;
+	width: 1180px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 60px;
+	
+}
+
+#explaintable td {
+	border: 1px;
+	border-color: #A9DDB3;
+	border-style: solid;
+	padding-left: 30px;
+	font-size: 18px;
+	
+}
+
+#explaintable th {
+	border: 1px;
+	border-color: #A9DDB3;
+	border-style: solid;
+	background-color: #c2eeb7;
+	font-size: 18px;
+	
+}
+#picture {
+	height: 3600px;
+	width: 1180px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 100px;
+	text-align: center;
+}
+.picturetxt {
+	height: 133px;
+	width: 1180px;
+    text-align: center;
+	margin-bottom: 50px;
+	line-height: 25px;
+	font-size: 18px;
+}
+
+#picture img {
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+
+.notice {
+	height: 250px;
+	width: 1180px;
+	text-align: left;
+	font-size: 19px;
+	border-bottom: solid;
+	border-bottom-color: #B5B5B5;
+	line-height: 30px;
+
+}
+
+
+#delivery {
+	height: 830px;
+	width: 1180px;
+	margin-top: 70px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+#deliveryform th {
+	padding-bottom: 250px;
+	padding-top: 30px;
+	font-size: 22px;
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A9DDB3;
+	border-top: 1px;
+	border-top-style: solid;
+	border-top-color: #A9DDB3;
+	
+}
+
+
+#deliveryform td {
+	line-height: 35px;
+	border-left: 1px;
+	border-left-style: solid;
+	border-left-color: #A9DDB3;
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A9DDB3;
+	padding-left: 30px;
+	border-top: 1px;
+	border-top-style: solid;
+	border-top-color: #A9DDB3;
+	font-size: 18px;
+}
+
+#review {
+	width: 1180px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 50px;
+	
+	
+}
+
+.reviewImg {
+	padding-left: 960px;
+}
+
+
+#reviewtable {
+	width: 1180px;
+	margin-top: 30px;
+	float: left;
+	margin-bottom: 50px;
+}
+
+
+
+
+#reviewtable th {
+	background-color: #c2eeb7;
+	border-top: 2px;
+	border-top-style: solid;
+	border-top-color: #4D371B;
+	font-size: 18px;
+
+}
+
+#reviewtable td {
+	text-align: center;
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A9DDB3;
+	font-size: 18px;
+
+}
+
+.write {
+	text-align: right;
+}
+
+#question {
+	width: 1180px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 50px;
+	
+	
+}
+
+.reviewImg {
+	padding-left: 950px;
+}
+
+
+#questiontable {
+	width: 1180px;
+	margin-top: 70px;
+	float: left;
+	margin-bottom: 50px;
+}
+
+
+
+
+
+#questiontable th {
+	background-color: #c2eeb7;
+	border-top: 2px;
+	border-top-style: solid;
+	border-top-color: #4D371B;
+	font-size: 18px;
+
+}
+
+#questiontable td {
+	text-align: center;
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A9DDB3;
+	font-size: 18px;
+
+}
+
+#footer {
+	width:100%;
+	min-width:1280px;
+	height: 260px;
+}
+
+.bgfooter {
+	width:100%;
+	min-width:1280px;
+	height: 260px;
+	position: relative;
+}
+
+
+.bgfooter img{
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	min-width: 1280px;
+	margin: 0 auto;	
+	height: 260px;
+}
+
+.footercontent {
+	width:700px;
+	height:100px;
+	position: relative;
+	z-index: 10;
+	top: 150px;
+	left:580px;
+}
+
+
+.footerlogo {
+	float: left;
+	height: 100px;
+	width: 170px;
+	z-index: 10;
+	
+	
+	
+}
+.company {
+	float: left;
+	height: 100px;
+	width: 500px;
+	z-index: 10;
+	font-size: 15px;
+	line-height: 25px;
+	margin-left: 30px;
+	font-family: "나눔스퀘어";
+	
+}
+
+

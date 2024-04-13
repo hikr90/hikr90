@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderinfo">
+	<select id="order_list" resultType="orderinfo" parameterType="java.util.HashMap">
+	   SELECT *
+       FROM (SELECT RANK() OVER(ORDER BY IDX DESC, OI_DATE DESC) no, B.*
+	         FROM( SELECT O.IDX, O.OI_DATE, G.G_NAME, O.OI_PRICE, O.OI_COUNT, O.OI_STATUS, O.OI_DESTATUS, O.STATUS
+	         	   FROM ORDERINFO O
+		  		   JOIN GOODS G ON(O.G_NUM = G.G_NUM)
+		  		   JOIN MEMBER M ON(O.M_NUM = M.IDX) 
+		  		   WHERE M.IDX = #{idx}) b 
+		     )
+       WHERE STATUS = 0
+	   AND no BETWEEN #{start} AND #{end}
+	   ORDER BY OI_DATE DESC
+	</select>
+	
+	<select id="mypage_count" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM ORDERINFO OI
+		JOIN GOODS G ON(OI.G_NUM = G.G_NUM)
+		JOIN MEMBER M ON(OI.M_NUM = M.IDX)
+		WHERE M.IDX = #{idx}
+		AND OI.STATUS = 0 
+	</select>
+	
+	<select id="refundOk" resultType="orderinfo" parameterType="int">
+		SELECT *
+		FROM ORDERINFO OI
+		JOIN GOODS G ON(OI.G_NUM = G.G_NUM)
+		JOIN MEMBER M ON(OI.M_NUM = M.IDX)
+		WHERE OI.IDX = #{idx}
+	</select>
+	
+	<insert id="insertOrderInfo" parameterType="orderinfo">
+		INSERT INTO ORDERINFO VALUES(
+				SEQ_ORDERINFO_IDX.NEXTVAL,
+				'11111',
+				#{g_num},
+				#{m_num},
+				#{oi_price},
+				#{oi_count},
+				#{oi_dename},
+				#{oi_deemail},
+				#{oi_dephone},
+				#{oi_detel},
+				#{oi_sms},
+				#{oi_deaddr},
+				DEFAULT,
+				DEFAULT,
+				#{oi_derequest},
+				SYSDATE,
+				DEFAULT		
+		)
+	</insert>
+	<insert id="insertOrderInfo2" parameterType="orderinfo">
+		INSERT INTO ORDERINFO VALUES(
+				SEQ_ORDERINFO_IDX.NEXTVAL,
+				'11111',
+				'SRO-4',
+				#{m_num},
+				${oi_price},
+				1,
+				#{oi_dename},
+				#{oi_deemail},
+				#{oi_dephone},
+				#{oi_detel},
+				#{oi_sms},
+				#{oi_deaddr},
+				DEFAULT,
+				DEFAULT,
+				#{oi_derequest},
+				SYSDATE,
+				DEFAULT		
+		)
+	</insert>
+	
+	<update id="updateInfo" parameterType="java.util.HashMap">
+		UPDATE ORDERINFO
+		SET IMP_UID = #{imp}
+		WHERE IDX = #{idx}	
+	</update>
+	
+	<select id="select_orderinfo" resultType="orderinfo">
+			SELECT *
+			FROM ORDERINFO
+			WHERE IDX = (
+							SELECT MAX(IDX)
+							FROM ORDERINFO
+						)	
+	</select>
+	
+	<select id="select_import" resultType="orderinfo" parameterType="java.util.HashMap">
+		SELECT *
+		FROM ORDERINFO O
+		JOIN GOODS G ON(G.G_NUM = O.G_NUM)
+		WHERE O.M_NUM = #{m_num}
+		AND O.IDX = #{idx}
+		AND O.STATUS = 0
+	</select>
+	
+	<select id="orderOk" resultType="orderinfo" parameterType="java.util.HashMap">
+		SELECT *
+		FROM ORDERINFO O
+		JOIN MEMBER M ON(O.M_NUM = M.IDX)
+		JOIN GOODS G ON(G.G_NUM = O.G_NUM)
+		WHERE M.IDX = #{m_num}
+		AND O.IDX = #{idx}
+		AND O.STATUS = 0	
+	</select>
+	
+	<update id="refund_check" parameterType="int">
+		UPDATE ORDERINFO
+		SET OI_STATUS = 1
+		WHERE IDX = #{idx}	
+	</update>
+	
+</mapper>

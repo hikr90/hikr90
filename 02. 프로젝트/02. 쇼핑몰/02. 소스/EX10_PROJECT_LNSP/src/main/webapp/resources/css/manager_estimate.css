@@ -1,0 +1,190 @@
+@charset "utf-8";
+/* menu.css */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "나눔스퀘어";
+}
+
+/* ��� <ul> �±׿� ���� */
+ul{
+	margin-top:0;
+	padding:0;
+	list-style:none; 
+	color:black; 
+	font-family: "나눔스퀘어";
+}
+
+
+/********** MAIN �޴� �׸� **********/
+
+#wrap{
+	width: 100%;
+	margin: 0 auto;
+	height: 1100px;
+	min-width: 1840px;
+	background-color: #f8f8f8;
+}
+
+
+#top {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	height: 70px;
+	background-color: #055d0b;
+	min-width: 1840px;
+}
+
+#toplogo {
+	float: left;
+	width: 170px;
+	margin-left: 50px;
+	margin-top: 5px;
+}
+
+#login {
+	height: 70px;
+	width: 270px;
+	float: right;
+	font-size: 18px;
+	color: #fff;
+	padding-top: 24px;
+}
+
+#login a{
+	color: #fff;
+}
+
+#logout {
+	height: 70px;
+	width: 110px;
+	float: right;
+	font-size: 18px;
+	color: #fff;
+	padding-top: 24px;
+}
+
+#sub {
+	height: 1100px;
+	width: 269px;
+	float: left;
+	border-right: 1px solid #ccc;
+	background-color: #fff;
+
+}
+
+
+.menu1{
+	height: 40px;
+	text-align:left;
+	padding-left: 60px;
+	padding-top: 20px;
+	margin-top: 5px;
+	border-bottom: 1px solid #ccc;
+	
+}
+        
+.menu1 p{
+	color: #4c300c;
+	font-size: 22px;
+	font-weight: bold;
+}        
+      
+.menu1 p:hover {
+	color: #055d0b;
+}
+
+.submenu1 {
+	padding-top: 10px;
+	padding-left: 80px;
+	padding-bottom: 10px;
+}
+
+.submenu1 a{
+	font-size: 17px;
+	color: #000;
+	line-height: 35px;
+}
+
+.submenu1 a:hover{
+	font-size: 17px;
+	color: #055d0b;
+	text-decoration: underline;
+	line-height: 35px;
+}
+
+#main {
+	float: left;
+	width: 1470px;
+	margin-left: 100px;
+}
+
+
+.totalbar {
+	height: 200px;
+	width: 1430px;
+	margin-top: 30px;
+}
+
+#totalform {
+	width: 1428px;
+	margin-top: 15px;
+}
+
+
+
+#totalform th {
+	background-color: #c2eeb7;
+	font-size: 18px;
+	border: 1px solid #A9DDB3;
+}
+
+#totalform td {
+	font-size: 20px;
+	border: 1px solid #A9DDB3;
+	background-color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+
+
+
+#productlist {
+	margin-top: 50px;
+	float: left;
+	width: 1430px;
+}
+
+#listform {
+	
+	margin-top: 15px;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	float: left;
+	
+}
+
+#listform th {
+	background-color: #c2eeb7;
+	font-size: 18px;
+	border: 1px solid #A9DDB3;
+}
+
+#listform td {
+	font-size: 18px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background-color: #fff;
+	text-align: center;
+}
+
+
+
+#listform a{
+}
+
+
+

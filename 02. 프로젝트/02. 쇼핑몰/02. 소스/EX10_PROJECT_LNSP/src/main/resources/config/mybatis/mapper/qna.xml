@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	<!-- parameterType="String" -->
+	
+	<!-- 1대1문의 리스트 -->
+	<select id="qnaOneList"  parameterType="java.util.HashMap" resultType="QnaVO">
+		select * from qna where q_category = 1 order by q_infonum DESC
+	</select>
+	
+	
+	<select id="qnaOnePagingList"  parameterType="java.util.HashMap" resultType="QnaVO">
+		
+		select * from
+		( select rank() over( order by q_infonum DESC ) no, b.*
+		from ( select * from qna where q_category = 1 and member_idx=#{idx} ) b )
+		where no between #{start} and #{end}
+
+	</select>
+	
+	<!-- 1대1 질문등록 -->
+	<insert id="qnaOneInsert" parameterType="QnaVO">
+		insert into qna values(
+		seq_qna_idx.nextval,
+		seq_onevsone_idx.nextval,
+		1,	<!-- 1대1이면 1 -->
+		null,	<!-- 상품번호 -->
+		#{member_idx}, <!-- 회원번호외래키 바꿔야함 -->
+		#{q_qnapart},	<!-- 문의분야 -->
+		#{q_title},		<!-- 제목 -->
+		#{q_content},	<!-- 내용 -->
+		sysdate,
+		default,
+		#{q_ip},
+		default
+		)
+	</insert>
+	
+	<!-- 1대1문의 보기 -->
+	<select id="qnaOneAnswerView" parameterType="int" resultType="QnaVO">
+		select * from qna where q_idx = #{q_idx}
+	</select>
+	
+	<select id="qnaOneTotal"  resultType="java.lang.Integer">
+		select count(*) from qna where q_category=1
+	</select>
+	
+	<select id="qnaOneIdxTotal" parameterType="int" resultType="java.lang.Integer">
+		select count(*) from qna where q_category=1 and member_idx=#{idx}
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 상품문의리스트 -->
+	<select id="qnaProdList"  resultType="QnaVO">
+		select * from qprod_list_view where q_category = 2 order by q_infonum DESC
+	</select>
+	
+	<select id="qnaProdPagingList" parameterType="java.util.HashMap" resultType="QnaVO">
+		select * from
+		( select rank() over( order by q_infonum DESC ) no, b.*
+		from ( select * from qprod_list_view where q_category = 2 and member_idx=#{idx} ) b )
+		where no between #{start} and #{end}
+	</select>
+	
+	
+	
+	<!-- 상품 질문등록폼에 띄울 정보 -->
+	<select id="qnaOneFormlist" parameterType="QnaVO" resultType="QnaVO">
+		select m.idx member_idx, g.idx goods_idx, m.m_id, m.m_email, g.g_name from member m, goods g where m.idx=#{member_idx} and g.idx=#{goods_idx}
+	</select>
+	
+	<!-- 상품등록 -->
+	<insert id="qnaProdInsert" parameterType="QnaVO">
+		insert into qna values(
+		seq_qna_idx.nextval,
+		seq_prod_idx.nextval,
+		2,	<!-- 상품문의 2 -->
+		#{goods_idx},	<!-- 상품번호 -->
+		#{member_idx}, <!-- 회원번호외래키 바꿔야함 -->
+		null,	<!-- 문의분야 -->
+		#{q_title},		<!-- 제목 -->
+		#{q_content},	<!-- 내용 -->
+		sysdate,
+		default,
+		#{q_ip},
+		default
+		)
+	</insert>
+	
+	<select id="qnaProdAnswerView" parameterType="int" resultType="QnaVO">
+		select * from qprod_list_view where q_idx = #{q_idx}
+	</select>
+	
+	<select id="qnaProdTotal" parameterType="int" resultType="java.lang.Integer">
+		select count(*) from qna where q_category=2
+	</select>
+	
+	<select id="qnaProdIdxTotal" parameterType="int" resultType="java.lang.Integer">
+		select count(*) from qna where q_category=2 and member_idx=#{idx}
+	</select>
+	
+	<select id="qprodIngoodsListView" parameterType="java.util.HashMap" resultType="QnaVO">
+		select * from
+		( select rank() over( order by q_infonum DESC ) no, b.*
+		from ( select * from qprod_list_view where goods_idx=#{idx} ) b )
+		where no between #{start} and #{end}
+	</select>
+	
+	<select id="qnaProdIngoodsIdxTotal" parameterType="int" resultType="java.lang.Integer">
+		select count(*) from qna where goods_idx=#{idx}
+	</select>
+	
+	
+	<!-- 답변했을경우 1로 변경 -->
+	<update id="qnaOneYSupdate" parameterType="int">
+		update qna set q_qnayn = 1 where q_idx=#{idx}
+	</update>
+	
+	<update id="qnaProdYSupdate" parameterType="int">
+		update qna set q_qnayn = 1 where q_idx=#{idx}
+	</update>
+	
+	<update id="qnaOneDelete" parameterType="int">
+		update qna set q_delete = 1 where q_idx=#{idx}
+	</update>
+	
+	<update id="qnaProdDelete" parameterType="int">
+		update qna set q_delete = 1 where q_idx=#{idx}
+	</update>
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
