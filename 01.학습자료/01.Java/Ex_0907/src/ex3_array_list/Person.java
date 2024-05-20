@@ -1,7 +1,7 @@
 package ex3_array_list;
 
 public class Person {
-	
+	//
 	private String id;
 	private int pwd;
 
@@ -17,7 +17,4 @@ public class Person {
 	public void setPwd(int pwd) {
 		this.pwd = pwd;
 	}
-	
-	
-	
 }

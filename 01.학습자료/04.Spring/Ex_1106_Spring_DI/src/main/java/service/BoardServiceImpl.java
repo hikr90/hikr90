@@ -6,11 +6,11 @@ import dao.BoardDAO;
 
 public class BoardServiceImpl implements BoardService{
 	
-	/*	SERVICEIMPL
-	 		- SERVICE를 구현하는 CLASS
-	 		- ROOT-CONTEXT에서 생성자 인젝션 방식으로 주입한 DAO의 객체를 받아주기위해서 기본 생성자를 작성한다.
-	 		- SERVICE에 있는 추상 메소드를 오버라이딩한다.
-	*/
+	/*	ServiceImpl
+	 * 		- 서비스를 구현하는 클래스
+	 * 		- 추상 메소드를 통해서 하나의 단위 작업(DML)에 여러 기능(DAO)를 붙여 사용한다.
+	 * 		- 공통된 속성의 기능을 사용하는 경우, 하나의 인터페이스에서 생성한 뒤 타 클래스에서 객체만 주입하여 공통적으로 사용 가능하다.
+	 */
 	BoardDAO dao;
 	
 	// 기본 생성자
@@ -18,17 +18,16 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 	
-	// 빈 객체를 받아주는 생성자
+	// 빈객체를 받는 생성자
 	public BoardServiceImpl(BoardDAO dao) {
 		this.dao = dao;
 	}
 	
-	// 인터페이스에 생성된 VIEWLIST 메소드 구현
+	// 인터페이스의 추상메소드 오버라이딩
 	@Override
 	public List viewList() {
-		// VIEWLIST 서비스 메소드에서 DAO의 목록 조회 메소드와 조회수를 증가시키는 기능 동작		
-		List list = dao.selectList();
-		int res = dao.increaseCnt();
+		List list = dao.selectList();	// 목록 조회
+		int res = dao.increaseCnt();	// 조회수 증가
 		//
 		return list;
 	}

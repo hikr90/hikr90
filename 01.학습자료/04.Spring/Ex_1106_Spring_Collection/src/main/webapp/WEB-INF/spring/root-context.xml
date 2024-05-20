@@ -4,13 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<!-- MYSET 객체 생성  -->
+	<!-- MySet 객체 생성 후 값 부여  -->
 	<bean id="MySetBean" class="coll.MySet">
-		<property name="set"> <!-- 셋터 인젝션을 사용하여 기본생성자를 통해서 호출 -->
+		<property name="set">
 			<set>
-				<!-- SET태그를 통해서 NEW HASHSET으로 객체 생성하며
-						VALUE태그를 통해서 ADD 작업을 진행한다. -->
 				<value>서울</value>
 				<value>대전</value>
 				<value>대구</value>
@@ -19,12 +16,10 @@
 		</property>
 	</bean>
 	
-	<!-- MYLIST 객체 생성 -->
+	<!-- MyList 객체 생성 후 값 부여 -->
 	<bean id="MyListBean" class="coll.MyList">
 		<property name="list">
-			<!-- NEW ARRAYLIST -->
 			<list>
-				<!-- ADD -->
 				<value>사과</value>
 				<value>배</value>
 				<value>수박</value>
@@ -33,15 +28,13 @@
 		</property>
 	</bean>
 	
-	<!-- MYMAP 객체 생성 -->
+	<!-- MyMap 객체 생성 후 값 부여 -->
 	<bean id="MyMapBean" class="coll.MyMap">
 		<property name="map">
-		<!-- NEW HASHMAP -->
-		<map>
-			<!-- ENTRY가 ADD의 역할을 한다. (KEY와 VALUE의 타입은 반드시 STRING타입이여야한다.) -->
-			<entry key="hong" value="1111"/>
-			<entry key="kim" value="2222"/>
-		</map>
+			<map>
+				<entry key="hong" value="1111"/>
+				<entry key="kim" value="2222"/>
+			</map>
 		</property>
 	</bean>
 </beans>

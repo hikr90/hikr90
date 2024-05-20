@@ -9,13 +9,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MybatisConnector {
 	static MybatisConnector single = null;
-
+	//
 	public static MybatisConnector getInstance() {
 		if (single == null)
 			single = new MybatisConnector();
 		return single;
 	}
-	
+	//
 	SqlSessionFactory factory = null;
 	
 	// 생성자
@@ -28,9 +28,8 @@ public class MybatisConnector {
 		}
 	}
 	
-	// GETTER (DAO에 FACTROY를 제공하기위함)
+	//
 	public SqlSessionFactory getFactory() {
 		return factory;
 	}
-	
 }

@@ -13,24 +13,9 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<!-- SERVLET-CONTEXT는 기본적으로 참조파일(CSS, SCRIPT등)을 WEBAPP의 RESOURCE에서 보관한다. -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-
-	<!--	 Q. 컨트롤러의 RETURN에서 JSP없이 화면 이동이 가능한 이유?
-			 A. INTERNELRESOURCEVIEWRESOLVER클래스는 MODEL 혹은 MODELANDVIEW를 화면으로 전송하는 역할을 한다.	
-			 	PREFIX값은 화면의 경로를, SUFFIX값으로 확장명을 지정한다.
-				
-				현업에서는 많은 JSP를 관리하므로 편의를 위해서 각각의 폴더로 화면을 구분하여 저장한 뒤
-				해당 부분을 주석처리한 뒤 따로 경로값을 지정한다.
-	-->
-	<!--
- 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-			<beans:property name="prefix" value="/WEB-INF/views/" />
-			<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
- 	-->	
- 
 	<context:component-scan base-package="com.korea.mvc" />
+	
 </beans:beans>

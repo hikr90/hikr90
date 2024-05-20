@@ -1,96 +1,93 @@
 package util;
-/*
-  		PAGE의 기능을 처리하는 클래스
-  			(COMMON이 페이지 게시물의 수나 메뉴 수를 정하는 클래스라면 여기서는 페이지의 기능이나 메뉴 이미지 선택, 디자인등의 변경이 가능하다.)
-			
-			핵심 변수
-			  nowPage 	: 현재 페이지
-			  rowTotal 	: 전체 데이터 개수
-			  blockList : 한 페이지당의 게시물 수
-			  blockPage : 한 화면에 나타낼 페이지 메뉴 수
- */
+
 public class Paging {
 	public static String getPaging(String pageURL,int nowPage, int rowTotal,int blockList, int blockPage){
-		
-		int totalPage,	/*전체페이지수*/
-            startPage,	/*시작페이지번호*/
-            endPage;	/*마지막페이지번호*/
+		/*	Paging 클래스 
+		 *		- 페이지 기능을 처리하는 클래스
+		 *		- Common 클래스가 게시물의 수, 페이지 넘버 수를 조정하는 클래스라면 해당 클래스는 기능이나 메뉴, 디자인 등의 변경이 가능하다.
+		 *		
+		 *		관련 변수
+		 *	 		(1) nowPage : 현재 페이지
+		 *			(2) rowTotal : 전체 데이터 수
+		 *			(3) blockList : 한 화면 내 게시물 수
+		 *			(4) blockPage : 한 화면 내 출력할 페이지 수
+		 *			(5) isPrevPage : < 가 있는지에대한 여부
+		 *			(6) isNextPage : > 가 있는지에대한 여부
+		 */
+		int totalPage,	/* 전체 페이지 수 */
+            startPage,	/* 시작 페이지 번호 */
+            endPage;	/* 마지막 페이지 번호 */
 
-		// isPrevPage는 < 1 2 3 > 에서 <를 선택했는지 여부를, isNextPage는 >를 선택했는지의 여부를 BOOLEAN타입으로 리턴
 		boolean  isPrevPage,isNextPage;
-		StringBuffer sb; //모든 상황을 판단하여 HTML코드를 저장할 곳
-		
+		StringBuffer sb; // 페이지 구성을 Html로 반환
 		isPrevPage=isNextPage=false;
-		// 입력된 전체 자원을 통해 전체 페이지 수를 구한다..
+
+		// 전체 페이지 계산
 		totalPage = (int)(rowTotal/blockList);
 		if(rowTotal%blockList!=0)totalPage++;
 		
-		// 만약 잘못된 연산과 움직임으로 인하여 현재 페이지 수가 전체 페이지 수를
-		// 넘을 경우 강제로 현재페이지 값을 전체 페이지 값으로 변경
+		// 만약 잘못된 연산으로 현재 페이지 수가 전체 페이지 수를 넘어가면 강제로 현재 페이지 값을 전체 페이지 값으로 변경
 		if(nowPage > totalPage)nowPage = totalPage;
 		
-		//시작 페이지와 마지막 페이지를 구한다.
+		// 시작 페이지와 마지막 페이지 계산
 		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
 		endPage = startPage + blockPage - 1; 
 		
-		// 마지막 페이지 수가 전체페이지수보다 크면 마지막페이지 값을 변경
+		// 마지막 페이지 수가 전체 페이지수보다 크면 마지막페이지 값을 변경
 		if(endPage > totalPage)endPage = totalPage;
 		
-		// 마지막 페이지가 전체 페이지보다 작을 경우 다음 페이징이 적용할 수 있도록
-		// BOOLEAN형 변수의 값을 설정
+		// 마지막 페이지가 전체 페이지보다 작을 경우 다음 페이징이 적용할 수 있도록 다음 페이지 여부를 참으로 변경
 		if(endPage < totalPage) isNextPage = true;
-		// 시작 페이지의 값이 1보다 작으면 이전 페이징 적용할 수 있도록 값설정
+
+		// 시작 페이지의 값이 1보다 크면 이전 페이징 적용할 수 있도록 이전 페이지 여부를 참으로 변경
 		if(startPage > 1)isPrevPage = true;
 		
-		// HTML코드를 저장할 StringBuffer생성 => 코드생성
+		// Html 출력을 위한 StringBuffer 선언
 		sb = new StringBuffer();
-//-----그룹페이지처리 이전 --------------------------------------------------------------------------------------------		
+
+		/*	그룹페이지 이전 */
 		if(isPrevPage){
 			sb.append("<a href ='"+pageURL+"?page=");
-			// sb.append(nowPage - blockPage);
 			sb.append( startPage-1 );
-			// 클릭이 되는 화살표 (img의 src는 ''만 사용가능하다.)
-			sb.append("'><img src='../img/btn_prev.gif'></a>");
+			sb.append("'><img src='../img/btn_prev.gif'></a>");	// 클릭이 가능한 < 화살표 이미지
 		}
 		else
-			// 맨 앞 페이지로 와서 더이상 클릭이 안되는 화살표
+			// 첫 페이지이므로 더이상 클릭이 안되는 < 화살표 이미지
 			sb.append("<img src='../img/btn_prev.gif'>");
-		
-//------페이지 목록 출력 -------------------------------------------------------------------------------------------------
+
+		/* 페이지 목록 출력 */
 		sb.append("&nbsp;");
 		for(int i=startPage; i<= endPage ;i++){
 			if(i>totalPage)break;
-			if(i == nowPage){ // 현재 있는 페이지 (선택된 페이지)
+			// 선택된 페이지
+			if(i == nowPage){
 				sb.append("&nbsp;<b><font color='#ff0000'>");
 				sb.append(i); // 페이지 숫자
 				sb.append("</font></b>");
 			}
-			else{// 현재 페이지가 아니면 (선택안된 페이지)
+			// 선택되지 않은 페이지
+			else{	
 				sb.append("&nbsp;<a href='"+pageURL+"?page=");
 				sb.append(i);
 				sb.append("'>");
 				sb.append(i);
 				sb.append("</a>");
 			}
-		}// end for
-		
+		}
+		//
 		sb.append("&nbsp;&nbsp;");
-		
-//-----그룹페이지처리 다음 ----------------------------------------------------------------------------------------------
+
+		/* 그룹페이지 다음 */
 		if(isNextPage){
 			sb.append("<a href='"+pageURL+"?page=");
-			
 			sb.append(endPage + 1);
-			/*if(nowPage+blockPage > totalPage)nowPage = totalPage;
-			else
-				nowPage = nowPage+blockPage;
-			sb.append(nowPage);*/
-			sb.append("'><img src='../img/btn_next.gif'></a>"); // 클릭이 되는 화살표
+			sb.append("'><img src='../img/btn_next.gif'></a>"); // 클릭이 가능한 > 화살표 이미지
 		}
 		else
-			sb.append("<img src='../img/btn_next.gif'>"); // 마지막 페이지에 와서 더이상 클릭이 안되는 화살표
-//---------------------------------------------------------------------------------------------------------------------	    
-
+			// 마지막 페이지이므로 더이상 클릭이 안되는 > 화살표 이미지
+			sb.append("<img src='../img/btn_next.gif'>");
+		
+		// Html 형식의 메뉴 값을 String값으로 변환하여 반환
 		return sb.toString();
 	}
 }

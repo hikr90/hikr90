@@ -24,42 +24,37 @@ public class PhotoDelAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// 
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
-		// 넘겨받을 idx로 삭제하고자하는 객체의 파일명을 가져온다.
+		// 받아온 인덱스 파라미터를 통해서 해당 건을 조회한다.
 		PhotoVO vo = PhotoDAO.getInstance().selectOne(idx);
 		
-		// 절대 경로의 파일 삭제를 위한 절대 경로 파악
+		// 요청 객체의 getServletContext 메소드를 통해서 해당 파일의 절대 경로를 파악한다.
 		String web_path = "/upload/";
 		ServletContext app = request.getServletContext();
 		String path = app.getRealPath(web_path);
 		System.out.println(path);
 		
-		// idx를 통해서 db에서의 삭제
+		// DB 삭제
 		int res = PhotoDAO.getInstance().delete(idx);
 		
-		// 절대 경로에 있는 파일을 삭제할지에대한 정보가 확실한 것을 판단한 뒤, 절대 경로에 있는 파일 삭제
+		// 데이터베이스에서 정보가 삭제되었으므로 파일도 삭제한다.
 		if(res>0) {
-			// path경로 안에 vo.getFilename()이 있는지 확인
+			// 경로와 파일명을 파라미터로 해당 파일의 객체를 생성
 			File f = new File(path,vo.getFilename());
-			// 참 : 파일이 있음
+			// 파일이 있는 경우 삭제
 			if(f.exists()) {
 				f.delete(); // delete는 절대 path경로의 파일을 제거한다.
 			}
 		}
-		
-		
+		//
 		String param = "no";
 		if(res>0) {
 			param = "yes";
 		}
-		
+		// 삭제 여부를 반환
 		String resultStr = String.format("[{'param':'%s'}]",param);
 		response.getWriter().print(resultStr);
-		
-		// DELETE작업시 주의사항
-		// 하단의 SERVER가 DELETE종료후 재시작될 경우 실제 PATH경로의 이미지를 잘 백업해두는 것이 좋다.
 	}
-
 }

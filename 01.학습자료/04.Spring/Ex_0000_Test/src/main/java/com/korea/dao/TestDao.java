@@ -1,10 +1,24 @@
 package com.korea.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.korea.vo.TestVO;
 
-public interface TestDao {
-	//
-	List<TestVO> selectList() throws Exception;
+@Repository
+public class TestDao {
 	
+	@Autowired
+	SqlSession sqlSession;
+	
+	// 테스트 목록 가져오기
+	public List<TestVO> selectList(){
+		//
+		List<TestVO> list = sqlSession.selectList("test.test_list");
+		return list;
+	}
+
 }

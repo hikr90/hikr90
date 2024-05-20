@@ -21,15 +21,10 @@ public class LogoutAction extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 로그아웃
-		// 먼저 sessionScope를 검색  (세션은 싱글톤처럼 중복 명칭이 존재하지 않는다.)
+		//	- 세션정보를 불러온다.
+		//	- removeAttribute를 사용하여 키 값을 기준으로 세션 데이터를 삭제한다.
 		HttpSession session = request.getSession();
-		
-		// removeAttribute(키값) : 키값을 기준으로 데이터 삭제
 		session.removeAttribute("user");
-		
-		
 		response.sendRedirect("login_form.jsp");
-		
 	}
-
 }

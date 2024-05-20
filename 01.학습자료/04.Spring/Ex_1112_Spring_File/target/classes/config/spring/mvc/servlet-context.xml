@@ -16,24 +16,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
-	
-	<!-- CONTEXT:COMPONENT-SCAN
-			- 지정한 패키지의 하위 경로에 있는 클래스들을 스캔하여 자동으로 빈 객체를 생성한다.
-			- 빈 객체 등록 여부와 상관없이 스프링 프레임워크가 @CONTROLLER/@SERVICE/@REPOSITORY/@AUTOWIRED등의 어노테이션을 스캔하고 활성화한다. 
-			- BASE-PACKAGE의 순서대로 생성하므로 DAO부터 생성하는 것이 좋다. (서비스 클래스가 추가되는 경우 서비스도 있어야한다.) 
-			- CONTEXT:COMPONENT-SCAN태그 사용 시 CONTEXT:ANNOTATION-CONFIG는 사용하지 않는다.
-	 -->
 	<context:component-scan base-package="dao, controller" />
 	
-	<!-- CONTEXT:ANNOTATION-CONFIG
-			- XML에 등록되어있는 (혹은 SCAN으로 검색된) 어노테이션 빈을 활성화
-			- 해당 태그는 SCAN처럼 빈을 찾아서 등록하지는 않는다.
-			- SCAN없이 ANNOTATION-CONFIG만 있는 경우는 아래처럼 빈 설정을 잡아주어야하며 각 빈객체를 등록하는 클래스에서 셋터 혹은 생성자로 받아줘야한다.
-	 -->
 	<context:annotation-config/>
 	
 </beans:beans>

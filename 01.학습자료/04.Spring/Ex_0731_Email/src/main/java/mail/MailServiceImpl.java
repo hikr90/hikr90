@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailServiceImpl implements MailService{
 	
-	 // org.springframework.mail.javamail.JavaMailSender
+	 // javaMailSender 객체 생성
     private final JavaMailSender javaMailSender;
  
     @Autowired
@@ -25,21 +25,19 @@ public class MailServiceImpl implements MailService{
     // 메일 전송 메소드
     @Override
     public boolean send(String subject, String text, String from, String to, String filePath) {
-        // javax.mail.internet.MimeMessage
+        // MimeMessage 객체 생성
         MimeMessage message = javaMailSender.createMimeMessage();
  
         try {
-            // org.springframework.mail.javamail.MimeMessageHelper
-        	// MIMEMESSAGEHELPER 객체 생성
+        	// MimeMessageHelper 객체 생성
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setSubject(subject);
 
-            /*	SETTEXT
-             		- SETTEXT(TEXT) : 문자열로 전송
-             		- SETTEXT(TEXT, TRUE) : 태그로 전송
-            */
+            /*	setText
+             * 		- setText(text) : 문자열로 전송
+             * 		- setText(text, true) : 태그로 전송
+             */ 
             helper.setText(text, true);
-            
             helper.setFrom(from);
             helper.setTo(to);
  
@@ -51,8 +49,7 @@ public class MailServiceImpl implements MailService{
 					helper.addAttachment(file.getName(), new File(filePath)); 
 				} 
 			}
-			
- 
+			//
             javaMailSender.send(message);
             return true;
             
@@ -61,6 +58,4 @@ public class MailServiceImpl implements MailService{
         }
         return false;
     }
-
-
 }

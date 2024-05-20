@@ -14,7 +14,7 @@ public class Common {
 		public final static int BLOCKPAGE = 3;
 	}
 	
-	// 추가 예시
+	// 공지사항
 	public static class Notice{
 		// 
 		public static final String VIEW_PATH = "/WEB-INF/views/notice/";

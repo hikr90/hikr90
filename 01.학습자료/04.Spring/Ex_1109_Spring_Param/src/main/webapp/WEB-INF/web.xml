@@ -3,10 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
-	<!-- WEB.XML의 FILTER
-			JSP와 컨트롤러 간 파라미터 전송시, 특정 확장자 맵핑주소르 형식을 사용할 경우 특정 확장자의 맵핑주소는 UTF-8로 받을 수 있도록 설정이 가능하다.
-			(.DO로 끝나는 확장자명의 URL은 모두 아래의 필터를 거쳐서 UTF-8의 형식으로 인코딩 된다.)
-	-->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -16,7 +12,6 @@
 		</init-param>
 	</filter>
 	
-	<!-- FILETER-MAPPING으로 인코딩 타입을 .DO의 맵핑주소를 가지는 컨트롤러에 적용한다. -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
@@ -48,5 +43,4 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
 </web-app>

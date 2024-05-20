@@ -1,15 +1,17 @@
 package ex4_inheritance;
 
 public class Snake extends Animal{
+	// Animal을 상속받는 Snake 클래스 
 	String sence = "감각이 발달";
 	
-	// 메서드의 오버라이딩
-	// 메서드의 재정의
-	// 이미 부모가 가지고있는 메서드를 가지고와서, 자식 클래스에서 내용을 자식의 사정에 맞춰서 재정의 하는 것
-	// 반드시 상속 관계의 객체에서 가능하다. 
+	/*	오버라이딩
+	 * 	- 메소드의 재정의
+	 * 	- 이미 부모가 가지고있는 메소드를 가져와서, 자식 클래스에서 재정의하여 덮어쓰는 행위를 뜻한다.
+	 * 	- 상속의 관계에서만 가능하다.
+	 * 
+	 */
 	@Override
 	public int getLeg() {
 		return 0;
 	}
-	
 }

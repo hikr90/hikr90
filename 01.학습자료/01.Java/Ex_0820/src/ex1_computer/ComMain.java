@@ -2,14 +2,17 @@ package ex1_computer;
 
 public class ComMain {
 	public static void main(String[] args) {
-		// 클래스를 사용하는 클래스는 메인이 필요하다.
 		
-		// Computer에서 (컴퓨터를 다른 공장에서 생산한 컴퓨터를 내가 삼)
-		// stack에 c1(객체)의 주소값 이 생기고 heap에  컴퓨터에 해당하는 클래스의 모든 데이터가 담기게 된다. 
-		Computer c1 = new Computer();
+		/* 클래스
+		 *		- 객체를 정의하는 틀, 또는 설계도
+		 *		- 객체의 상태를 뜻하는 필드와 객체의 행동을 뜻하는 메소드로 구성되어있다.
+		 *
+		 *		- 클래스를 사용하는 클래스는 메인이 필요하다.
+		 */
+		// 클래스 생성
+		Computer c1 = new Computer();	// 공장에서 생산한 컴퓨터를 내가 구매
 		
-		// 클래스. 는 c1이 가지고있는 hdd라는 데이터에 접근해서 hdd의 값인 500을 꺼내올 수 있다.
-		// 설계도에대한 정보를 가져옴
+		// 객체 c1이 생성되었으므로 해당 객체 접근하여 hdd 등의 정보를 가져올 수 있다.
 		System.out.println(c1.hdd);
 		System.out.println(c1.ram);
 		System.out.println(c1.cpu);
@@ -17,37 +20,31 @@ public class ComMain {
 		
 		System.out.println("---------------");
 		
-		// 다른 친구가 똑같은 사양의 컴퓨터를 사는 행위
-		// 당연히 같은 사양이니 같은 정보가 꺼내져온다. 
-		Computer c2 = new Computer();
+		// 클래스 생성
+		Computer c2 = new Computer();	// 친구도 공장에서 생산한 동일한 컴퓨터를 구매
 		
+		// 같은 제품이니 같은 정보를 가져올 수 있다.
 		System.out.println(c2.hdd);
 		System.out.println(c2.ram);
 		System.out.println(c2.cpu);
 		System.out.println(c2.color);
 		
 		System.out.println("---------------");
-
-		// 왜 new로 다른 영역을 가지는가?
-		// 내 컴퓨터가 망가진다고 내 친구 컴도 망가지지는 않기 때문이다.
 		
-		// 친구가 하드를 업그레이드 시킨다면
-		// stack의 c2에 접근하여 주소값을 통해서 heap의 c2데이터로 이동하여 hdd 500을 1000으로 변경하게 된다.
-		// 즉, 특정 개체에 접근하여 개체의 데이터를 변경하는 것이 가능하다. 
-		c2.hdd = 1000;
+		
+		// 클래스의 속성 값을 수정한다.
+		c2.hdd = 1000;		// 친구가 자기 컴퓨터의 hdd를 업그레이드했다.
 		System.out.println(c2.hdd);
 		
 		System.out.println("---------------");
 		
-		// 반복되는 코드 작업을 피하기위한 용도로서 매서드가 사용된다. 
-		// c2(친구)의 hdd만 1000으로 변경되어있으니 1000으로 변경되어있는 것을 확인할 수 있다. 
+		// 클래스와 객체
+		// - 내 컴퓨터와 친구의 컴퓨터는 같은 설계도로 제작되었으나 서로 다른 물건이다.
+		// - 하나의 설계도 (클래스) 로 두개의 제품 (객체) 을 생성한 것이다.
 		c1.getInfo();
 		c2.getInfo();
 		
-		// private가 걸린 변수나 매서드는 타 클래스에서 사용할 수 없다.
-		//(오류)c2.company = "apple";
-	
-	
-	
+		// - 접근제한자 private가 있는 변수나 메소드는 타 클래스에서 접근할 수 없다.
+		//c2.company = "apple";
 	}
 }

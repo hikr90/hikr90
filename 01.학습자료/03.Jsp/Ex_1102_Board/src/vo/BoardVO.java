@@ -1,13 +1,14 @@
 package vo;
 
 public class BoardVO {
+	//
 	private int idx; private int readhit;
 	private int ref; private int step;
 	private int depth; private String name;
 	private String subject;	private String content;
 	private String pwd;	private String ip;
-	private String regdate;	private int del_info; // 게시글 삭제 여부 (안지워진 게시물은 0)
-	
+	private String regdate;	private int del_info;
+	//
 	public int getDel_info() {
 		return del_info;
 	}
@@ -80,5 +81,4 @@ public class BoardVO {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	
 }

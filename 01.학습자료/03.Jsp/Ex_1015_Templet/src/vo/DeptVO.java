@@ -1,11 +1,11 @@
 package vo;
 
 public class DeptVO {
-	
+	//
 	private int deptno;
 	private String dname;
 	private String loc;
-
+	//
 	public int getDeptno() {
 		return deptno;
 	}
@@ -24,7 +24,4 @@ public class DeptVO {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-	
-	
-	
 }

@@ -5,93 +5,94 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- ROOT-CONTEXT 
-			- WEB.XML으로부터 실행되어 최종적으로 접근된 파일로 객체를 생성하는 곳이다.
-			- SPRING에서는 NEW를 통한 기존의 방식으로 객체를 생성하지 않고 빈태그를 통해서 주입하는 방식으로 생성한다.
-			- 생성한 객체는 기본적으로 SINGLETON 방식 (한번 생성 후 기존의 객체를 계속 사용)으로 APPLICATIONSCOPE에 저장된다.
+	<!-- root-context
+			- 스프링 동작 시 web.xml에서 실행되어 마지막으로 접근하는 곳으로 파일 객체를 생성한다.
+			- 스프링에서는 New를 통한 방식으로 객체를 생성하지 않고 빈 태그를 통해서 주입하는 방식으로 객체를 생성한다.
+			- 이를 의존성 주입이라고 한다.
+			- 생성된 객체는 기본적으로 싱글톤 방식으로 applicationScope에 저장된다.
 			
-		객체 생성 방법
-			- 빈이라는 태그로 빈객체를 생성한다.
-			- 빈은 스프링에서 XML을 통해서 생성하는 객체를 뜻하며 BEANS는 BEAN을 모아두는 주머니 정도로 볼 수 있다.
-			- 빈 객체는 셋터 혹은 생성자로 주입가능하다.
-			- 셋터와 생성자 등에 사용되는 PROPERTY나 CONSTRUCTOR태그의 NAME속성은 반드시 객체 필드 속성의 명칭과 같아야한다.
-			
-		빈 태그 속성
-			- ID : 객체명
-			- CLASS : 객체를 생성하고자하는 클래스 명칭
-			- REF : 참조하고자하는 객체명
-			
-		-->	
-		
-		<!-- 셋터 인젝션(SI, SETTER INJECTION)
-				- 객체에 있는 셋터를 통해서 주입하는 방식
-				- PROPERTY 속성은 셋터로 주입되는 값을 뜻한다.
+			의존성 주입
+				- 클래스의 변경 및 교체를 보다 쉽게 진행하기 위한 목적의 기능
+				- 클래스 객체를 개발자가 코드에서 생성하지 않고 프레임워크가 생성자, 셋터의 형태로 외부에서 주입받는 방식으로 되어있다.
+				- 코드의 단순화, 유지보수 및 관리가 용이하다.
 				
-			 아래의 빈객체는 다음의 자바 코드와 같다.
-			 	- PERSONVO P1 = NEW PERSON();
-			 	- P1.SETNAME("일길동");
-			 	- P1.SETAGE(20);
-			 	- P1.SETTEL("010-1111-1111");	
-		-->
-		<bean id="p1" class="com.korea.vo.PersonVO">					
-			<property name="name" value="일길동"/>
-			<property name="age" value="20"/>
-			<property name="tel" value="010-1111-1111"/>			
-		</bean>
+			Bean객체
+				- 컨테이너에서 생성되는 자바(클래스)객체
+				- XML에서는 각 객체를 <bean>으로 표현하며 각 클래스 객체를 빈이라고 부른다.
+				- Bean은 하나의 객체를, Beans는 Bean객체를 모아두는 주머니와 같다.
+				- 셋터와 생성자 등에 사용되는 Property, Constructor태그의 name 속성은 반드시 객체 필드 속성의 명칭과 같아야한다.
+			
+				속성
+					- id 	: 객체명
+					- class : 객체를 생성하고자하는 클래스 명칭
+					- ref 	: 참조하고자하는 객체명
+	-->	
 		
-		<!-- 생성자 인젝션 (CI, CONSTRUCTOR INJECTION)
-				- 객체의 생성자에 파라미터를 넣어 주입하는 방식
-				- 생성자 인젝션은 CONSTRUCTOR-ARG로 파라미터를 주입한다.
-				- 반드시 파라미터의 순서를 맞춰줘야하며 주입 시, 해당 클래스에서는 반드시 기본 생성자를 잡아줘야한다.
+	<!-- 셋터 인젝션
+			- 객체에 있는 셋터를 통해서 주입하는 방식
+			- 프로퍼티 속성은 셋터로 주입되는 값을 뜻한다.
+			- 해당 클래스에서는 반드시 셋터 메소드가 있어야한다.
+			
+			[참고] 아래의 빈객체는 다음의 자바 코드와 같다.
+			 	- PersonVO p1 = new PersonVO();
+			 	- p1.setName("일길동");
+			 	- P1.setAge(20);
+		 		- P1.eetTel("010-1111-1111");	
+	-->
+	<bean id="p1" class="com.korea.vo.PersonVO">					
+		<property name="name" value="일길동"/>
+		<property name="age" value="20"/>
+		<property name="tel" value="010-1111-1111"/>			
+	</bean>
+	
+	<!-- 생성자 인젝션
+			- 객체의 생성자에 파라미터를 넣어 주입하는 방식
+			- 생성자 인젝션은 constructor-arg태그로 파라미터를 주입한다.
+			- 반드시 파라미터의 순서를 맞춰줘야하며 주입 시, 해당 클래스에서는 반드시 기본 생성자를 잡아줘야한다.
 
-			 아래의 빈객체는 다음의 자바 코드와 같다.
-				- PERSONVO P2 = NEW PERSONVO("이길동",20,"010-1111-2222");
-		-->
-		<bean id="p2" class="com.korea.vo.PersonVO">
-			<constructor-arg value="이길동"/>
-			<constructor-arg value="20"/>
-			<constructor-arg value="010-1111-2222"/>
-		</bean>
+		 	[참고] 아래의 빈객체는 다음의 자바 코드와 같다.
+				- PersonVO p2 = new PersonVO("이길동",20,"010-1111-2222");
+	-->
+	<bean id="p2" class="com.korea.vo.PersonVO">
+		<constructor-arg value="이길동"/>
+		<constructor-arg value="20"/>
+		<constructor-arg value="010-1111-2222"/>
+	</bean>
 
-		
-		<!-- 의존성 주입 (DI, DEPENDENCY INJECTION)
-				- 객체를 주입 시에는 REF속성을 사용하여 빈객체를 참조한다.
-		-->
-		
-		<!-- STRING타입의 빈 객체 생성
-				- STRING NAMEBEAN = NEW STRING("홍길동"); 
-		-->
-		<bean id="nameBean" class="java.lang.String">
-			<constructor-arg value="홍길동"/>
-		</bean>
-		
-		<bean id="ageBean" class="java.lang.Integer">
-			<constructor-arg value="40"/>
-		</bean>
-		
-		<bean id="telBean" class="java.lang.String">
-			<constructor-arg value="011-5555-6666"/>
-		</bean>
-		
-		<!-- 주입한 빈객체를 사용하여 참조방식의 의존성 주입 -->		
-		<bean id="p3" class="com.korea.vo.PersonVO">
-			<property name="name" ref="nameBean"/>
-			<property name="age" ref="ageBean"/>
-			<property name="tel" ref="telBean"/>
-		</bean>
-		
-		<!-- SCOPE
-				- 객체의 생성 방식을 지정하는 속성
-				- 기본값은 SINGLETON으로 본 예제에서는 VO값이 고정되면 안되므로
-				- PROTOTYPE으로 지정하여 객체화마다 생성되는 방식으로 지정한다.
-		
-				SINGLETON : 한번 생성하면 객체가 고정되는 방식
-				PROTOTYPE : 객체 생성마다 초기화되는 방식
-		-->
-		<bean id="p4" class="com.korea.vo.PersonVO" scope="prototype">
-			<constructor-arg ref="nameBean"/>
-			<constructor-arg ref="ageBean"/>
-			<constructor-arg ref="telBean"/>
-		</bean>
+	
+	<!-- ref
+			- 빈 객체를 참조하는 속성
+	-->
+	<bean id="nameBean" class="java.lang.String">
+		<constructor-arg value="홍길동"/>
+	</bean>
+	
+	<bean id="ageBean" class="java.lang.Integer">
+		<constructor-arg value="40"/>
+	</bean>
+	
+	<bean id="telBean" class="java.lang.String">
+		<constructor-arg value="011-5555-6666"/>
+	</bean>
+	
+	<!-- 주입한 객체를 참조하여 의존성 주입 -->		
+	<bean id="p3" class="com.korea.vo.PersonVO">
+		<property name="name" ref="nameBean"/>
+		<property name="age" ref="ageBean"/>
+		<property name="tel" ref="telBean"/>
+	</bean>
+	
+	<!-- scope
+			- 객체 생성 방식을 지정하는 속성
+			- 기본 값은 싱글톤이지만 본 예제에서는 VO값이 고정되면 안되므로 Prototype으로 생성하여 객체화마다 생성되도록 한다. 
+			
+				- (1) Singleton : 한번 객체 생성 시 객체가 고정
+				- (2) Prototype : 객체 생성마다 초기화
+	-->
+	<bean id="p4" class="com.korea.vo.PersonVO" scope="prototype">
+		<constructor-arg ref="nameBean"/>
+		<constructor-arg ref="ageBean"/>
+		<constructor-arg ref="telBean"/>
+	</bean>
 
 </beans>

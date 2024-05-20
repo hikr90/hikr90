@@ -6,15 +6,8 @@ public class Ex5_square {
 	
 	public static void main(String[] args) {
 		
-		/* 숙제 마방진 
-		 0번째 행 가운데 열 : 1
-		 한칸 위 오른쪽에 2
-		 위로 올라와서 오른쪽에 3
-		 위 오른쪽 : 4
-		 
-		 3x3은 3의 배수를 만나는 위치에 이미 숫자가 있는데 4의 경우 3아래에 찍는다. (5의 경우 5밑에 6)
-		 */
-		
+		// 숙제
+		// - 마방진을 그려주세요.
 		Scanner sc = new Scanner(System.in);
 		
 		int num = 1; // 시작수
@@ -62,8 +55,6 @@ public class Ex5_square {
 			}
 			System.out.println();
 		}
-
-		
 	}
 }
 

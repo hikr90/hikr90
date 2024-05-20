@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.korea.daoImpl.TestDAOImpl;
+import com.korea.daoImpl.TestDaoImpl;
 import com.korea.service.TestService;
 import com.korea.serviceImpl.TestServiceImpl;
 import com.korea.vo.TestVO;
@@ -69,6 +69,5 @@ public class TestController {
 		//
 		test_service.test_delete(model, vo);
 	}
-
 	
 }

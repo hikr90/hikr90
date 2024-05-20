@@ -1,7 +1,7 @@
 package vo;
 
 public class SawonVO {
-	
+	//
 	private int sabun;
 	private String saname;
 	private int deptno;
@@ -31,9 +31,4 @@ public class SawonVO {
 	public void setSajob(String sajob) {
 		this.sajob = sajob;
 	}
-	
-	
-	
-	
-	
 }

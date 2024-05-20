@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import vo.BoardVO;
 
-public class BoardDAO {
+public class BoardDao {
 	
 	//
 	SqlSession sqlSession;
@@ -46,7 +46,7 @@ public class BoardDAO {
 		return res;
 	}
 	
-	// STEP 증가
+	// Step 증가
 	public int update_step(BoardVO baseVO) {
 		//
 		int res = sqlSession.update("board.board_update_step",baseVO);

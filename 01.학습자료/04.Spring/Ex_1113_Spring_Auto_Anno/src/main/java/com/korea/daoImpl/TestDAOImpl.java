@@ -9,15 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import vo.TestVO;
 
-/*	REPOSITORY 어노테이션 
-		- DAO클래스라는 것을 명시하는 어노테이션
-		- REPOSITORY 어노테이션이 있는 클래스는 AUTO-DETECTING으로 자동 생성이 가능하다.
-		- (DAO에서 따로 빈객체 생성할 필요가 없다.)
-		- ""안에 DAO의 명칭을 명시하는 것이 가능하다.
-*/
+/*	@Repository
+ * 		- Dao클래스임을 명시하는 어노테이션
+ * 		- 해당 어노테이션이 있는 클래스는 component-scan 태그를 통해서 자동 주입이 가능하다.
+ * 		- @Repository("Dao명칭")방식으로도 작성 가능하다.
+ */
 @Repository
-public class TestDAOImpl {
-	
+public class TestDaoImpl {
 	//
 	@Autowired
 	SqlSession sqlSession;

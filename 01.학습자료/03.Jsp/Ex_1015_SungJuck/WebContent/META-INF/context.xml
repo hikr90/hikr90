@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- JMDI을 통해서 jdbc/oracle_test라는 계정에 접속 -->
+<!-- JMDI을 통해서 oracle_test라는 계정에 접속 -->
 <Context>
 	<Resource 
 	        auth="Container" 

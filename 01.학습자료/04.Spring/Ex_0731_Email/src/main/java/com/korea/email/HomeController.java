@@ -29,9 +29,7 @@ import mail.MailService;
  */
 @Controller
 public class HomeController {
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 	//
 	@Autowired
 	private MailService mailService; 
@@ -84,11 +82,11 @@ public class HomeController {
 			e.printStackTrace();
 		}
 
-		// 메일서비스 인터페이스에 있는 SEND 메소드의 파라미터
+		// 메일서비스 인터페이스에 있는 send 메소드의 파라미터
 		String subject = "삼성전자 노트북 제품 소개";
 
 		
-		/*	STRINGBULDER를 사용한 HTML 형식의 메일 전송	*/
+		/*	StringBuilder를 사용한 html형식의 메일 전송	*/
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html>");
 		sb.append("		<body>");

@@ -11,7 +11,7 @@
 	mvo.setPwd(request.getParameter("pwd"));
 	mvo.setEmail(request.getParameter("email"));
 	mvo.setAddr(request.getParameter("addr"));
-	
+	//
 	MemberDAO.getInstance().insert(mvo);
 	response.sendRedirect("jdbc_member.jsp");
 %>

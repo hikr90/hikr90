@@ -24,23 +24,22 @@ public class FileDownload extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("utf-8");
+		// 요청으로부터 파라미터 저장
 		String dir = request.getParameter("dir");
 		String fullpath = getServletContext().getRealPath(dir);
 		String filename = "";
 		filename = request.getParameter("filename");
 		String fullpathname = String.format("%s/%s", fullpath,filename);
-		//System.out.println(fullpathname);
+		//
 		File file = new File(fullpathname);
 		byte [] b = new byte[1024*1024*4];
 		
-		 // 사용자 브라우저 타입 얻어오기
+		// 클라이언트 브라우저 가져오기
+		//	- getHeader("User-Agent") : 브라우저 값을 가져온다. 	
         String strAgent = request.getHeader("User-Agent");
         String userCharset = request.getCharacterEncoding();
+        //
         if(userCharset==null)userCharset="utf-8";
-        
-        //System.out.println("filename:"+filename+"\nagent:"+strAgent+"\ncharset:"+userCharset);
-        //System.out.println("----------------------------------------------------------------");
         String value = "";
         // IE 일 경우
         if (strAgent.indexOf("MSIE") > -1) 
@@ -63,11 +62,10 @@ public class FileDownload extends HttpServlet {
                 else 
                 {
                     value = "attachment; filename=" + new String(filename.getBytes(userCharset), "ISO-8859-1");
-                   
                 }
             }
             else{
-            	//IE 8.0이상에서는 2회 호출된다.
+            	// IE 8.0이상에서는 2회 호출된다.
             	if ( userCharset.equalsIgnoreCase("UTF-8") ) 
                 {
                 	filename = URLEncoder.encode(filename,"utf-8");
@@ -81,23 +79,26 @@ public class FileDownload extends HttpServlet {
             }
             
         }else if(strAgent.indexOf("Firefox") > -1){
-        	//Firefox : 공백문자이후은 인식이 안된다.
+        	// Firefox : 공백문자이후은 인식이 안된다.
         	value = "attachment; filename=" + new String(filename.getBytes(), "ISO-8859-1");
         }
        else {
             // IE 를 제외한 브라우저
             value = "attachment; filename=" + new String(filename.getBytes(), "ISO-8859-1");
         }
-        
+        // Html에서 받는 정보의 캐시를 캐시에서 불러오지 않고 최신의 페이지만 보여주도록 한다.
         response.setContentType("Pragma: no-cache"); 
 
-		// 전송 데이터가 STREAM 처리되도록 : 웹상전송 문자셋은 : 8859_1
+		// 전송 데이터가 스트림에서 처리되도록 : 웹상전송 문자셋은 : 8859_1
 		response.setContentType("application/octet-stream;charset=8859_1;");
-		// 모든 파일에 대하고 다운로드 대화상자가 열리게 설정
-		// Content-Disposition : attachment
-		 response.setHeader("Content-Disposition", value);
-		// 전송타입은 binary(이진화일)
+
+		// 모든 파일에대하여 다운로드 대화상자가 열리게 설정
+		// 	- Content-Disposition : attachment
+		response.setHeader("Content-Disposition", value);
+		
+		// 전송타입은 바이너리 타입으로 설정
 		response.setHeader("Content-Transfer-Encoding", "binary;");
+		//
 		if(file.isFile())
 		{
 			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
@@ -109,9 +110,9 @@ public class FileDownload extends HttpServlet {
 				{
 					bos.write(b,0,i);
 				}
-			}catch(Exception e){
+			} catch(Exception e){
 				//e.printStackTrace();
-			}finally {
+			} finally {
 				if(bos!=null)bos.close();
 				if(bis!=null)bis.close();
 			}

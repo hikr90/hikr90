@@ -116,48 +116,30 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- SPRING-DBCP LIBRARY 
-				DEPENDENCIES가 끝나는 곳 바로 위에 복사한 내용을 붙여넣기한다. 
-				SPRING-DBCP : SPRING에서 데이터 베이스를 사용할 수 있게 해주는 라이브러리 
-				(저장하는 순간 인터넷을 통해서 다운로드가 시작된다.) 
-				
-				장점 : POM.XML에 넣어두면 없는 LIBARAY를 다 받아준다. 
-				단점 : 인터넷이 안되는 환경에서는 다운로드가 불가능하다. 
-				
-				LIBRARY에 설치가 완료되면 설치한 라이브러리의 클래스를 생성할 수 있다. -->
-		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
 		
-		<!-- 라이브러는 POM으로 다운받는 것이 좀 더 안정성이 좋다. -->
-		<!-- SPRING MYBATIS LIBARAY -->
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.4.5</version>
 		</dependency>
 
-		<!-- MYBATIS-SPRING LIBARAY -->
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.3.1</version>
 		</dependency>
 		
-		<!-- SPRING-JDBC LIBARAY -->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.2.2.RELEASE</version>
 		</dependency>
 		
-		<!-- LOG -->		
 		<dependency>  
             <groupId>org.lazyluke</groupId>  
             <artifactId>log4jdbc-remix</artifactId>  

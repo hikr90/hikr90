@@ -1,9 +1,10 @@
 package vo;
 
 public class BoardVO {
-	private int idx, readhit, ref, step, depth, del_info; // DEL_INFO (1:삭제)
+	//
+	private int idx, readhit, ref, step, depth, del_info; // del_info (1:삭제)
 	private String name, subject, content, pwd, ip, regdate;
-	
+	//
 	public int getDel_info() {
 		return del_info;
 	}

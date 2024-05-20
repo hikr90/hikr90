@@ -4,15 +4,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 메일 관련 빈 객체 생성
-			- HOST : 메일이 보내는 경우, 실제 수신자에게 메일을 보내는 HOST서버에 구글의 SMTP서버를 설정
-			- PORT : 구글 SMTP메일 서버의 포트로 값은  587이다.
-			- USERNAME & PASSWORD : 전송자가 될 자신의 구글 메일 계정과 비밀번호
-			- JAVAMAILPROPERTIES : 포트 관련 속성 (인증서 등)
+	<!-- JavaMailSenderImpl
+			- 메일을 보내는 빈객체를 생성할 클래스
+			
+			속성
+				- (1) host		: 실제 수신자에게 메일을 보내는 서버
+				- (2) port		: 구글 STMP 메일 서버의 포트번호
+				- (3) username	: 전송자가 될 메일 주소
+				- (4) password	: 전송자가 될 메일 비밀번호 (2차 인증 코드 값)
+				- (5) javaMailProperties : 포트 관련 속성 (인증서 등)
 	
-    	  메일 관련 에러 발생 시, 해결 방식이 두가지 존재한다.
-    	  	(1) 구글 계정 관리 > 보안에서 보안 수준이 낮은 앱 허용을 체크 (현재는 막힌 상태)
-    	  	(2) 구글 계정 관리 > 보안 > 앱비밀번호를 설정하여 비밀번호 PROPERTY값에 생성한 비밀번호를 추가
+    	 	[참고] 메일 관련 에러 발생 시, 해결 방식이 두가지 존재한다.
+    	  	(1) 구글 계정 관리 > 보안에서 보안 수준이 낮은 앱 허용을 체크 (현재는 안된다.)
+    	  	(2) 구글 계정 관리 > 보안 > 앱비밀번호를 설정하여 비밀번호 프로퍼티값에 생성한 비밀번호를 추가
 	 -->
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
@@ -28,12 +32,12 @@
 		</property>
 	</bean>
 
-	<!-- 생성자 방식으로 객체화해줄 빈 객체 생성 -->
+	<!-- 생성자 주입 -->
 	<bean id="mailService" class="mail.MailServiceImpl">
 		<constructor-arg ref="javaMailSender"/>
 	</bean>
 		
-	<!-- 파일 관련 추가 -->	
+	<!-- 셋터 주입 -->	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="52428800" />
 		<property name="maxInMemorySize" value="10485760" />

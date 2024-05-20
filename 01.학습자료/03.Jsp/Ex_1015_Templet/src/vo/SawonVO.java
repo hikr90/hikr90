@@ -1,12 +1,12 @@
 package vo;
 
 public class SawonVO {
-	
+	//
 	private int sabun;
 	private String saname;
 	private int deptno;
 	private int sapay;
-
+	//
 	public int getSabun() {
 		return sabun;
 	}
@@ -31,6 +31,4 @@ public class SawonVO {
 	public void setSapay(int sapay) {
 		this.sapay = sapay;
 	}
-	
-	
 }

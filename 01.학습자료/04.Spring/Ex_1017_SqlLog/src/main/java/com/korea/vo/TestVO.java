@@ -1,9 +1,9 @@
 package com.korea.vo;
 
 public class TestVO {
-	
+	//
 	private String test_no, test_nm, disp_order, remark;
-
+	//
 	public String getTest_no() {
 		return test_no;
 	}
@@ -35,5 +35,4 @@ public class TestVO {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
 }

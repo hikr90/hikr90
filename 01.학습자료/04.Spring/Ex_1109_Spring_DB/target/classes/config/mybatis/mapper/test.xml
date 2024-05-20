@@ -4,26 +4,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test">
 	
-	<!-- MAPPER (XML)
+	<!-- Mapper (XML)
 			- 마이바티스를 통해서 자바 객체와 SQL문을 연동해주는 파일
-			- 맵퍼에서는 SELECT, UPDATE, DELETE등의 DML 쿼리 태그를 사용할 수 있다.
+			- 맵퍼에서는 Select, Update, Delete등의 DML 쿼리 태그를 사용할 수 있다.
 			
-			- ID : 쿼리문의 식별값으로 DAO와 해당 ID값으로 호출한다.
-			- RESULTTYPE :  쿼리문 동작 시 리턴값의 자료형
-				- UPDATE, DELETE의 경우 결과값은 숫자이므로 작성하지 않는다.
-				- SELECT문의 경우 VO클래스(TYPEALIAS태그에서 지정한 축약어로도 사용가능) 혹은 HASHMAP등이 사용된다.
-			
-			- PARAMETERTYPE : 쿼리문에 삽입되는 파라미터의 자료형
-				- JAVA.LANG.STRING
-				- JAVA.UTIL.HASHMAP
-				- 기본 자료형의 경우 INT등으로 입력한다.
-				- 입력값은 WHERE COLUM = #{값} 의 형태로 사용되며 
-				- MYBATIS의 경우 ORACLE사용 시 NULL 처리를 위해서 JDBCTYPE=VARCHAR를 입력한다. 
+			속성
+				(1) id : 쿼리문의 식별값
+				(2) resultType : 쿼리문 수행 시 리턴 값의 자료형
+					(2.1) update, delete인 경우 결과는 변화된 행의 숫자
+					(2.2) select인 경우 결과는 HashMap, VO 등 typeAlias에서 지정한 축약어가 도니다.	
 
-			- 쿼리문의 마지막에는 세미 콜론 (;)을 사용하지 않는다.
+				(3) parameterType : 으로 기입 시에는 패키지를 포함한 클래스 전체를 적어준다.
+						- 쿼리문에 사용되는 파라미터의 자료형
+						- 기본 자료형은 int처럼 그대로 기입한다.
+						- 클래스 자료형은 String을 제외하고는 패키지를 포함하여 작성한다.
+							예1)	int : int					
+							예2) String : java.lang.String 혹은 String
+							예3) HashMap : java.util.HashMap
+			
+			- 입력 형태는 #{값} 으로도 가능하나 Mybatis의 경우 NULL 처리를 위해서 #{값 jdbcType=VARCHAR} 처럼 자료형을 붙여서 사용한다.
+			- 쿼리문의 마지막에는 세미콜론(;)을 사용하지 않는다.
+			
+			
+			동적 쿼리
+				(1) 조건문
+					- 조건문을 사용하는 속성
+					- 검색 조건 등을 추가하는 경우 사용한다.
+					- if 혹은 choose, when, otherwise를 사용할 수 있으며 test 값에는 조건문을 기입한다.
+				
+				(2) 반복문
+					- 배열 혹은 List객체 값을 반복자를 통해서 반복 입력하는 속성
+					- 쿼리문에서 동적으로 in을 표현하고자할 때 사용하며 foreach로 작성한다.
+					
+					속성
+						(1) item : 전달받은 배열 혹은 리스트의 축약어
+						(2) collection : 전달받은 배열 혹은 리스트
+						(3) open : 구문 시작 시 붙는 문자
+						(4) close : 구문 종료 시 붙는 문자
+						(5) separator : 각 인자 값이 반복할 때 사이에 들어가는 문자
+						(6) index : 반복마다 증가하는 인덱스 값으로 0부터 시작한다.
+					
+					예시
+						select * from test 
+							where test in 
+								<foreach item="약어" collection="List or Array" open="(" close=")" separator=",">
+									#{item.약어}														
+								</foreach>
 		-->
 	<select id="test_list" resultType="test" parameterType="java.util.HashMap">
-		select * from test where test_no = #{test, jdbcType=VARCHAR}
+		select * from test 
+		where 1=1
+			<if test="test != '' and test != null">
+				test_no = #{test, jdbcType=VARCHAR}
+			</if>
 	</select>
 
 </mapper>

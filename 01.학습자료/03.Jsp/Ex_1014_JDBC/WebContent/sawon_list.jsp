@@ -12,32 +12,30 @@
 
 <%
 	request.setCharacterEncoding("utf-8");
-
+	//
 	InitialContext ic = new InitialContext();
 	Context ctx = (Context)ic.lookup("java:comp/env");
 	DataSource ds = (DataSource)ctx.lookup("jdbc/oracle_test");
 	Connection conn = ds.getConnection();
+	//
 	String deptno = request.getParameter("deptno");
 	
-	// *로 해도 상관은 없다. (어차피 where절에서 조건 지정했으니)
+	// 쿼리문 작성
 	String sql = "select deptno, sabun, sajob, saname from SAWON where deptno = "+deptno;
-	
 	PreparedStatement pstmt = conn.prepareStatement(sql);
-	
 	ResultSet rs = pstmt.executeQuery();
-	
 	List<SawonVO> sawon_list = new ArrayList();
-	
+	//	
 	while(rs.next()){
 		SawonVO vo = new SawonVO();
 		vo.setDeptno(rs.getInt("deptno"));
 		vo.setSabun(rs.getInt("sabun"));
 		vo.setSajob(rs.getString("sajob"));
 		vo.setSaname(rs.getString("saname"));
-		
+		//
 		sawon_list.add(vo);
 	}
-
+	//
 	rs.close();
 	pstmt.close();
 	conn.close();
@@ -63,10 +61,10 @@
 				<th>성함</th>
 			</tr>
 			
-			<%
-							for(int i=0;i<sawon_list.size();i++){ 
-								SawonVO sv = sawon_list.get(i);
-						%>
+				<%
+				for(int i=0;i<sawon_list.size();i++){ 
+					SawonVO sv = sawon_list.get(i);
+				%>
 				<tr>
 				<td><%=sv.getDeptno() %></td>
 				<td><%=sv.getSabun() %></td>

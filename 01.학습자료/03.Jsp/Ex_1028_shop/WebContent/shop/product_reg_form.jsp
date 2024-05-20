@@ -9,6 +9,7 @@
 	
 		<script type="text/javascript">
 			function checkdata(f) {
+				//
 				var category = f.category.value;
 				var p_num = f.p_num.value;
 				var p_name = f.p_name.value;
@@ -18,7 +19,7 @@
 				var p_img_s = f.p_img_s.value;
 				var p_img_l = f.p_img_l.value;
 				var p_content = f.p_content.value;
-				
+				//
 				var category = f.category.value;
 				var p_num = f.p_num.value;
 				var p_name = f.p_name.value;
@@ -79,7 +80,7 @@
 					alert("제품 소개를 입력해주세요.");
 					return;
 				}
-				
+				//
 				f.submit();
 			}
 		</script>
@@ -98,7 +99,6 @@
 			<tr>
 				<td>제품 카테고리</td>
 				<td>
-				<!-- 어느 카테고리에 넣을지 비교할 파라미터 용도 -->
 					<select name="category">
 						<option value="">카테고리 선택</option>
 						<option value="com001">컴퓨터</option>
@@ -107,47 +107,38 @@
 					</select>
 				</td>
 			</tr>
-			
 			<tr>
 				<td>모델명</td>
 				<td><input name="p_num"></td>
 			</tr>
-
 			<tr>
 				<td>제품명</td>
 				<td><input name="p_name"></td>
 			</tr>
-
 			<tr>
 				<td>제조사</td>
 				<td><input name="p_company"></td>
 			</tr>
-
 			<tr>
 				<td>가격</td>
 				<td><input name="p_price"></td>
 			</tr>
-
 			<tr>
 				<td>할인가</td>
 				<td><input name="p_saleprice"></td>
 			</tr>
-
 			<tr>
 				<td>제품사진(작은 사진)</td>
 				<td><input type="file" name="p_img_s"></td>
 			</tr>
-
 			<tr>
 				<td>제품사진(상세 설명)</td>
 				<td><input type="file" name="p_img_l"></td>
 			</tr>
-
 			<tr>
 				<td>제품 소개</td>
 				<td><textarea name="p_content" row="5"></textarea></td>
 			</tr>
-
 			<tr>
 				<td colspan="2" align="center">
 					<input type="button" value="상품등록" onclick="checkdata(this.form);">

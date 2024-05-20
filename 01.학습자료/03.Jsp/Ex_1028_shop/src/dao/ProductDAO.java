@@ -10,13 +10,13 @@ import vo.ProductVO;
 
 public class ProductDAO {
 	static ProductDAO single = null;
-
+	//
 	public static ProductDAO getInstance() {
 		if (single == null)
 			single = new ProductDAO();
 		return single;
 	}
-
+	//
 	SqlSessionFactory factory = null;
 	
 	// 생성자
@@ -33,18 +33,19 @@ public class ProductDAO {
 		return list;
 	}
 	
-	// 상품 등록 (제품의 정보를 통째로 넣기에 VO객체에 담아서 보낸다.)
+	// 상품 등록
 	public int insert(ProductVO vo) {
-		// OPSESSION의 경우 RUD(UPDATE, INSERT, DELETE)등의 작업은 COMMIT을 해줘야하는데 TRUE가 그 기능을 담당한다.
+		// openSession의 true 값
+		// 	- DML(insert, update, delete) 작업은 작업 후 커밋(Commit)을 하여 작업을 확정지어야하는데
+		//	- true값이 이 기능을 대신한다.
 		SqlSession sqlSession = factory.openSession(true);
 		int cnt = sqlSession.insert("pro.product_insert", vo);
 		sqlSession.close();
 		return cnt;
 	}
 	
-	// IDX로 상품 한건에대한 정보만 가져오기
+	// 상품 단건 조회
 	public ProductVO selectone(int idx){
-		// NULL은 안해도 상관없지만 혹시나 정보가 도달하지 않을 가능성을 대비
 		ProductVO vo = null;
 		SqlSession sqlSession = factory.openSession();
 		vo = sqlSession.selectOne("pro.product_content", idx);

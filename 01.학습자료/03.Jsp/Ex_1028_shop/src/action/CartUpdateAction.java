@@ -24,7 +24,7 @@ public class CartUpdateAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// C_IDX와 C_CNT, SESSION영역에 저장된 유저의 일련 번호
+		// 세션영역의 유저 일련번호와 인덱스, 수량을 가져온다.
 		int c_idx = Integer.parseInt(request.getParameter("c_idx"));
 		int c_cnt = Integer.parseInt(request.getParameter("c_cnt"));
 		int m_idx = 1; // 회원번호
@@ -32,7 +32,7 @@ public class CartUpdateAction extends HttpServlet {
 		// 수량 업데이트
 		CartDAO.getInstance().update(c_idx, c_cnt, m_idx);
 				
-		// M_IDX는 1로 고정이므로 CART_LIST.DO로 보낸다.
+		// 포워딩
 		RequestDispatcher disp = request.getRequestDispatcher("cart_list.do");
 		disp.forward(request, response);
 	}

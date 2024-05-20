@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Ex1_work {
 
 	public static void main(String[] args) {
-		// 몇 월생입니까? : 7
-		// 7월은 31일까지 있습니다. 
-
-
+		
+		// 문제
+		// - 몇 월생입니까? : 7
+		// - 7월은 31일까지 있습니다. 
 		Scanner sc = new Scanner(System.in);
 		System.out.print("몇 월생 입니까? : ");
 		int month = sc.nextInt();

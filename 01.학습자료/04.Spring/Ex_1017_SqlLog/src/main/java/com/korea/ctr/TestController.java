@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.korea.daoImpl.TestDAOImpl;
+import com.korea.daoImpl.TestDaoImpl;
 import com.korea.service.TestService;
 import com.korea.serviceImpl.TestServiceImpl;
 import com.korea.vo.TestVO;
@@ -20,8 +20,8 @@ public class TestController {
 	@Autowired
 	TestService test_service;
 	
-	// 로그인 화면
-	@RequestMapping(value= {"/","/login.do"})
+	// 목록 조회
+	@RequestMapping(value= {"/","/test.do"})
 	public String list(Model model) throws Exception {
 		//
 		test_service.list(model);

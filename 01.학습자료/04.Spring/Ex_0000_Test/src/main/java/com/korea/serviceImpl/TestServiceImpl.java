@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import com.korea.daoImpl.TestDAO;
+import com.korea.dao.TestDao;
 import com.korea.service.TestService;
 import com.korea.vo.TestVO;
 
@@ -16,7 +16,7 @@ import com.korea.vo.TestVO;
 public class TestServiceImpl implements TestService{
 	
 	@Autowired
-	TestDAO test_dao;
+	TestDao test_dao;
 	
 	// 목록 조회
 	public void list(Model model) throws Exception{

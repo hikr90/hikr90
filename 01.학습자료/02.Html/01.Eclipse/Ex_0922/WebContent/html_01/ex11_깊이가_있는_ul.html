@@ -6,41 +6,36 @@
 	</head>
 	<body>
 	
-	<!-- ul안에 a를 ul를 추가로 넣는 것도 가능하다. -->
+	<!-- 이중 ul태그 -->
 	<ul>
 		<li>
 			<a href="#">HTML5</a>
-			
 			<ul>
 				<li>HTML5</li>
 				<li>CSS</li>
 			</ul>
-			
 		</li>
-			<a href="#">웹표준</a>
-			<ol>
-				<li>
-				Animation
-					<ol>
-						<!-- 3단계의 ol같은 경우, 숫자가 들어간다. -->
-						<li>Test1</li>
-						<li>Test2</li>
-					</ol>
-				</li>
-				<li>Modeling
-					<ul>
-						<li>Test3</li>
-								
-						
-					</ul>
-						<!-- 3단의 ul은 적용되지 않는다. -->
-						<ul>
-							<li>Test5</li>
-						</ul>
-					</li>				
-			</ol>
 			
+		<a href="#">웹표준</a>
+		<ol>
+			<li>
+			Animation
+				<ol>
+					<!-- 3단계의 ol같은 경우, 숫자가 들어간다. -->
+					<li>Test1</li>
+					<li>Test2</li>
+				</ol>
+			</li>
+			<li>Modeling
+				<ul>
+					<li>Test3</li>
+				</ul>
+				<!-- 3단의 ul은 적용되지 않는다. -->
+				<ul>
+					<li>Test5</li>
+				</ul>
+			</li>				
+		</ol>
 	</ul>
-	
 	</body>
 </html>

@@ -2,16 +2,16 @@ package vo;
 
 public class CartVO {
 	// 장바구니안에 들어갈 정보에대한 변수 (CART_VIEW에대한 내용)
-	private int p_idx; // 상품 일련번호
-	private int c_idx; // 카트 일련번호
-	private int p_price; // 상품가격
-	private int p_saleprice; // 할인가
-	private int amount; // 총계
-	private int m_idx; // 회원 일련번호
-	private int c_cnt; // 수량
-	private String p_num; // 모델명
-	private String p_name; // 제품명
-
+	private int p_idx; 			// 상품 일련번호
+	private int c_idx; 			// 카트 일련번호
+	private int p_price; 		// 상품가격
+	private int p_saleprice; 	// 할인가
+	private int amount; 		// 총계
+	private int m_idx; 			// 회원 일련번호
+	private int c_cnt; 			// 수량
+	private String p_num; 		// 모델명
+	private String p_name; 		// 제품명
+	//
 	public int getP_idx() {
 		return p_idx;
 	}
@@ -66,6 +66,4 @@ public class CartVO {
 	public void setP_name(String p_name) {
 		this.p_name = p_name;
 	}
-	
-	
 }

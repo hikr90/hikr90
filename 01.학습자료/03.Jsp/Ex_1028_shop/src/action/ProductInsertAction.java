@@ -20,7 +20,7 @@ public class ProductInsertAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// INSERT FORM으로 보내는 ACTION
+		// 포워딩
 		RequestDispatcher disp = request.getRequestDispatcher("product_reg_form.jsp");
 		disp.forward(request, response);	
 	}

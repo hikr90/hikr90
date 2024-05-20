@@ -1,22 +1,21 @@
 package vo;
 
 public class PersonVO {
-	
+	// 직접 작성한 생성자
 	public PersonVO(String name, int age, String tel) {
 		this.name = name;
 		this.age = age;
 		this.tel = tel;
 	}
-	
+	// 생성자
 	public PersonVO() {
 
 	}
-	
-	// 파라미터에 있는 정보를 담아줄 수 있는 VO객체
+	//
 	private String name;
 	private int age;
 	private String tel;
-
+	//
 	public String getName() {
 		return name;
 	}
@@ -35,7 +34,4 @@ public class PersonVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
-	
 }

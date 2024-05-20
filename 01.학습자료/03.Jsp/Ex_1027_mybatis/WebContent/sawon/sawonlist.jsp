@@ -8,9 +8,10 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script type="text/javascript">
-		function find() {
+	// 검색	
+	function find() {
 			var deptno = document.getElementById("deptno").value;
-			// 서버로 DEPTNO 전송 
+			// 서버로 부서번호 전송 
 			location.href="sawonlist.do?deptno="+deptno;
 		}
 	</script>

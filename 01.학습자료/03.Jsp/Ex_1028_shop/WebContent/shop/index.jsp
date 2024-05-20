@@ -12,8 +12,9 @@
 		</style>
 	</head>
 	<body>
-		
-		<!-- NOSHADE는 점선에 있는 그림자가 사라지는 기능을 뜻한다. -->
+		<!-- noShade
+				- 점선에 있는 그림자가 사라지는 기능
+		-->
 		<hr width="600px" border="1px" noshade="noshade" color="navy">
 		
 		<center>

@@ -20,25 +20,21 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
-	
 	<context:component-scan base-package="com.korea.*" />
-	
 	<context:annotation-config/>
 
-	<!-- 트랜젝션 -->	
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="ds"/>
 	</beans:bean>
 
 	<tx:annotation-driven />
 	
-	<!-- AOP:ASPECTJ-AUTOPROXY
-			- ASPECTJ는 스프링에서 사용하는 대표적인 AOP 프레임워크로서, JDK 프록시 기반으로 동작하므로 인터페이스를 구현한 클래스에서만 사용할 수 있다.
-			- AOP:ASPECTJ-AUTOPROXY태그는 ASPECT 어노테이션을 자동으로 인식할 수 있도록 돕는 기능이다.
+	<!-- aop:aspectj-autoproxy
+			- @Aspect는 스프링에서 사용하는 대표적인 AOP 프레임워크로서, JDK 프록시 기반으로 동작하므로 인터페이스를 구현한 클래스에서만 사용할 수 있다.
+			- 해당 속성은 @Aspect을 자동으로 인식할 수 있도록 돕는다. 
+			
+			사용 방식
+				- 하단의 namespaces에서 aop 항목을 체크한다.
 	-->
 	<aop:aspectj-autoproxy/>
 

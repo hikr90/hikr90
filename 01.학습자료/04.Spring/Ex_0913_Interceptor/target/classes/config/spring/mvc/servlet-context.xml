@@ -19,13 +19,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
-	
 	<context:component-scan base-package="com.korea.*" />
-	
 	<context:annotation-config/>
 	
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -34,21 +28,20 @@
 
 	<tx:annotation-driven />
 	
-	
-	<!-- INTERCEPTOR (인터셉터)
-			- 브라우저 요청 시 요청 메소드 호출 전과 후인 요청과 응답을 가로채어 개발자가 원하는 작업을 수행하는 기능을 뜻한다.
-			- 위의 전/후는 스프링에서 DispatcherServlet 이 컨트롤러를 요청하기 전과 후의 요청과 응답을 뜻한다.
-			- 주로 쿠키 제어등의 작업에 사용된다.
-			
-			# MVC:INTERCEPTORS
+	<!-- Interceptor
+			- 인터셉터는 브라우저의 요청 시 요청 메소드 호출 전과 후의 요청, 응답을 가로채어
+			- 개발자가 원하는 작업을 수행하는 기능을 뜻한다.
+			- 쿠키 제어 등의 작업에 사용된다.			
+
+			# mvc:interceptors
 				- 인터셉터 기능을 사용할 수 있도록 설정하는 태그
-				- MVC:MAPPING : 인터셉터를 동작할 맵핑 주소 형식을 지정하는 태그 (*는 전체에 해당한다.)
-				- MVC:EXCLUDING-MAPPING : 인터셉터를 동작하지 않을 맵핑 주소 형식을 지정하는 태그 
-				
-			# 참고
-				- 해당 태그를 사용하기위해서는 상단 BEANS 태그 내에 xmlns:mvc="http://www.springframework.org/schema/mvc 가 존재해야한다.
-				- MVC:EXCLUDING-MAPPING 태그는 스프링 MVC 3.2 이상부터 사용할 수 있으므로 스프링의 버젼을 높이거나 
-				- 인터셉터 클래스에서 분기 처리를 통해서 특정 요청 URL을 회피하도록 소스를 작성하여 처리할 수 있다.
+				- mvc:mapping : 인터셉터를 동작할 맵핑 주소 형식을 지정하는 태그 (*는 전체에 해당한다.)
+				- mvc:excluding-mapping : 인터셉터를 동작하지 않을 맵핑 주소 형식을 지정하는 태그 
+
+			[참고] excluding-mapping의 사용
+				- 해당 태그를 사용하기위해서는 상단 beans태그 내에 xmlns:mvc="http://www.springframework.org/schema/mvc 가 있어야한다.
+				- mvc:excluding-mapping 태그는 스프링 mvc 3.2 이상부터 사용할 수 있으므로 스프링의 버전을 높이거나
+				- 인터셉터 클래스에서 분기 처리를 통해서 특정 요청 url을 회피하도록 소스를 작성하여 처리할 수 있다.
 	-->
 	<mvc:interceptors>
 		<mvc:interceptor>

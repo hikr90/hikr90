@@ -4,50 +4,59 @@
 		<meta charset="UTF-8">
 		<title>자바스크립트의 메서드</title>
 		<script type="text/javascript">
-			/* 메서드는 script영역에서 작성이 가능하다.
-			자바 스크립트의 메서드는 void와 같이 반환형이 없고 그냥 생으로 return이 가능하다. */
+			/*	function 
+					- 자바스크립트의 메소드
+					- 함수라고 부르며, void 같은 변환형없이 return이 가능하다.
+			*/	
 			function test1() {
 				alert("버튼 1을 눌렀습니다.");
 			}
-			
-			/* 자바와 다르게 자바스크립트는 자료형이 없기 때문에 매개변수는 그냥 자료형을 적지 않는다. */
+			//
 			function test2(num) {
-				// body에서 원하는 객체(태그)를 검색해서 값을 전달하는 방법
-				// document = body로 접근
-				// id가 result인 태그에 접근한다.
+				// - body에서 원하는 객체(태그)를 검색해서 값을 전달하는 방법
+				// - document = body로 접근
+				// - id가 result인 태그에 접근한다.
 				var a = document.getElementById("result");
 				
-				// a는 입력상자의 주소값을 받게 된다. 즉 a와 입력상자 input은 같다.
-				// 입력상자의 값을 num으로 준다.
+				// - a는 입력상자의 주소값을 받게 된다. 즉 a와 입력상자 input은 같다.
+				// - 입력상자의 값을 num으로 준다.
 				a.value = num;
 			}
 			
 			// 입력상자에 써져있는 값을 body의 div로 출력
 			function test3() {
-				// 입력상자에 있는 텍스트 값 = value 
+				// - 입력상자에 있는 텍스트 값 = value 
 				var input = document.getElementById("result").value;
-				// div 태그 그 자체에 접근
+				// - div 태그 그 자체에 접근
 				var my_div = document.getElementById("my_div");
-				// div태그에는 value가 없으니 innerHTML을 사용한다.
+				// - div태그에는 value가 없으니 innerHTML을 사용한다.
 				my_div.innerHTML = input;
 			}
-			
-			/* 클래스로는 script로 검색이 안된다. */
-			
 		</script>
 	</head>
 	<body>
-		<!-- input : body에서 값을 받는 기능 (버튼등의 기능도 가능하다.) 
-		input은 대부분 인라인 요소이다. 
-		onClick은 버튼을 눌렀을 경우의 이벤트 처리이다. 
-		아래에서는 버튼을 누르는 경우 test1(); 의 메서드가 실행된다는 뜻이다. -->
+		<!-- input
+				- 값을 받는 태그
+				- 받은 값은 스크립트 영역의 함수에서 조작 가능하다.
+				- 인라인 요소이다.
+				- type에따라서 여러 타입의 input태그를 사용가능하다.
+				
+				속성
+					- type : 입력 방식으로 타입으로 기본은 text이며 checkBox, radio 등이 있다.
+					- value : 태그의 값을 의미한다.
+					- onClick : 버튼을 클릭했을 경우의 이벤트로 자바스크립트 영역의 함수를 호출할 수 있다.
+					- name : 폼태그 사용 시 넘어가는 값의 명칭
+					- readOnly : 입력 박스의 값을 수정할 수 없게하는 기능
+					- disable : 입력 박스의 값을 수정할 수 없게하며, 폼태그에서 전송도 되지 않도록 처리
+					- maxLength : 입력 박스의 입력 값의 최대 길이
+					- placeholder : 입력 값에대한 가이드 내용을 제공
+					- required : 해당 요소가 필수 값임을 표시
+					- auto-complete : 입력한 값을 캐시에 저장
+		-->
 		<input type="button" value="버튼1" onclick="test1();">
-		<!-- 버튼에서 값을 받고 경우 onClick의 ()안에 파라미터를 넣어주면 된다. -->
-		<input type="button" value="버튼2" onclick="test2(10)"><br>
+		<input type="button" value="버튼2" onclick="test2(10)">
+		<br>
 		
-		<!-- 입력상자(textfield) 
-		type 없으면 자동으로 text
-		value는 미리 써놓고 싶은 단어 영역이다. -->
 		<input type="text" value="" id="result">
 		<input type="button" value="버튼3" onclick="test3();">
 		<br>
@@ -55,6 +64,5 @@
 		<div id="my_div">
 			
 		</div>
-		
 	</body>
 </html>

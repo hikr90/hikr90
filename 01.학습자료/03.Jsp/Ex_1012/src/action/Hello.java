@@ -20,5 +20,4 @@ public class Hello extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("hi.do를 매핑으로 갖는 페이지");
 	}
-
 }

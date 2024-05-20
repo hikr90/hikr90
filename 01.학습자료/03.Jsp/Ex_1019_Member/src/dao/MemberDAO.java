@@ -11,31 +11,30 @@ import service.DBService;
 import vo.MemberVO;
 
 public class MemberDAO {
-	
-	// SINGLE-TON PATTERN 
+	//
 	static MemberDAO single = null;
-
+	//
 	public static MemberDAO getInstance() {
 		if (single == null)
 			single = new MemberDAO();
 		return single;
 	}
 	
-	
+	// 목록 조회
 	public List<MemberVO> selectList() {
-
+		//
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from member order by 1";
-
+		//
 		try {
+			//
 			conn = DBService.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
-
 			rs = pstmt.executeQuery();
-
+			//
 			while (rs.next()) {
 				MemberVO vo = new MemberVO();
 				vo.setIdx(rs.getInt("idx"));
@@ -44,7 +43,7 @@ public class MemberDAO {
 				vo.setPwd(rs.getString("pwd"));
 				vo.setEmail(rs.getString("email"));
 				vo.setAddr(rs.getString("addr"));
-
+				//
 				list.add(vo);
 			}
 
@@ -52,7 +51,7 @@ public class MemberDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-
+			//
 			try {
 				if (rs != null)
 					rs.close();
@@ -69,27 +68,26 @@ public class MemberDAO {
 		return list;
 	}
 	
+	// 삭제
 	public int delete(int idx) {
-		// TODO Auto-generated method stub
+		//
 		int res = 0;
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
 		String sql = "delete from member where idx = ?";
-
+		//
 		try {
+			//
 			conn = DBService.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-
 			res = pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-
+			//
 			try {
 				if (pstmt != null)
 					pstmt.close();
@@ -102,16 +100,15 @@ public class MemberDAO {
 		}
 		return res;
 	}
-	
-	public int insert(MemberVO mvo) {
-		// TODO Auto-generated method stub
-		int res = 0;
 
+	// 등록
+	public int insert(MemberVO mvo) {
+		//
+		int res = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
 		String sql = "insert into member values(seq_member_idx.nextVal,?,?,?,?,?)";
-
+		//
 		try {
 			conn = DBService.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -120,7 +117,6 @@ public class MemberDAO {
 			pstmt.setString(3, mvo.getPwd());
 			pstmt.setString(4, mvo.getEmail());
 			pstmt.setString(5, mvo.getAddr());
-
 			res = pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -141,16 +137,14 @@ public class MemberDAO {
 		return res;
 	}
 	
-	
+	// 수정
 	public int update(MemberVO mvo) {
-		// TODO Auto-generated method stub
+		//
 		int res = 0;
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
 		String sql = "update member set name=?,id=?,pwd=?,email=?,addr=? where idx=?";
-
+		//
 		try {
 			conn = DBService.getInstance().getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -160,7 +154,6 @@ public class MemberDAO {
 			pstmt.setString(4, mvo.getEmail());
 			pstmt.setString(5, mvo.getAddr());
 			pstmt.setInt(6, mvo.getIdx());
-
 			res = pstmt.executeUpdate();
 
 		} catch (Exception e) {

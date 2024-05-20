@@ -3,21 +3,23 @@ package ex4_array;
 public class Ex2_single_array {
 	
 	public static void main(String[] args) {
-	
+		//
 		char [] ch = new char[4];
-		
+		//
 		ch[0] = 'A';
 		ch[1] = 'B';
 		ch[2] = 'C';
 		ch[3] = 'D';
-		
+		//
 		for(int i=0;i<ch.length;i++) {
 			System.out.print(ch[i]);
 		}
 		System.out.println();
 		
 		
-		// ch 배열의 값을 개선된 for문으로 출력
+		// 개선된 반복문
+		// - 인덱스 상관없이 배열 내의 모든 인덱스를 보여주는데 용이하다.
+		// - 배열의 각 인덱스에대한 수정과 삭제 등의 작업이 불가능하다.
 		for(char c : ch) {
 			System.out.print(c);
 		}
@@ -35,20 +37,9 @@ public class Ex2_single_array {
 		
 		System.out.println("------------------");
 		
-		
-		// 개선된 for문(향상된 for문)
+		// 개선된 반복문
 		for(String s : strs) {
 			System.out.println(s);
 		}
-		
-		
-		/* 개선된 for문의 장단점
-		 개선된 for문
-		 장점 : 전체적으로 출력하는데 용이하다.
-		 단점 : 배열의 각 index에대한 수정과 삭제가 불가능하다.
-		
-		 */ 
-		
-		
 	}
 }

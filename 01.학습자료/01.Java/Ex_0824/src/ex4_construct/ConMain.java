@@ -4,16 +4,9 @@ public class ConMain {
 
 	public static void main(String[] args) {
 		
-		
-		// Const(); 
-		// 기본적으로 메서드는 첫글자 소문자에, ();가 뒤에 붙는다.
-		// 컨트롤 누르고 Const누르면 생성자로 간다.
-		
-		// 생성자는 new를 통해서 최초로 호출할 때, 딱 한번만 만들어진다.
-		// 추가적으로 .을 넣어서 호출하는 것은 불가능하다.
+		// 클래스 생성
+		// - 생성자가 호출된다.
+		// - 호출과 동시에 값을 초기화시키는데, Const.java에서는 더이상 변경할 수 없는 setter의 역할을 한다고 봐도 된다.
 		Const con = new Const();
-		
-	
-		
 	}
 }

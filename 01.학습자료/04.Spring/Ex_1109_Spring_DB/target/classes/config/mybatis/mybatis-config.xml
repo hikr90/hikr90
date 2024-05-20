@@ -8,18 +8,10 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 	</settings>
 	
-	<!-- TYPEALIASES
-			- 맵퍼 동작 시, VO의 명칭을 축약하여 사용할 수 있도록 돕는 태그
-			- VO.TESTVO의 객체를 맵퍼에서 TEST로 사용할 수 있다.
-	-->
 	<typeAliases>
 		<typeAlias type="vo.TestVO" alias="test"/>
 	</typeAliases>
 	
-	<!-- MAPPERS
-			- CONFIG.MYBATIS.CONTEXT에서 사용할 맵퍼 XML파일을 등록한다.
-			- 등록된 맵퍼는 CONTEXT-2에서 FACTORYBEAN객체의 CONFIGLOCATION속성값에 적용되어 사용할 수 있게된다.
-	-->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/test.xml"/>
 	</mappers>

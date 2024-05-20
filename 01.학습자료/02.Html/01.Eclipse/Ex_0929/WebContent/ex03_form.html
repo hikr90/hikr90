@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<!-- form태그 : 서버로 값을 전달
-			form 태그를 이용해서 서버에 값을 전달하는 방법은 세가지가 있다. -->
 		<title>자바 스크립트의 form 태그를 사용하여 서버에 값 전달 2</title>
 		
 		<script type="text/javascript">
+			// form태그의 2번 방식
+			// 	- form태그 내 속성을 미리 지정해둔 뒤 스크립트에서 해당 객체를 로드하여 사용하는 방법
+			//	- 페이지를 구분하여 사용할 수 없지만 1번 방식처럼 배열 값을 따로 찾을 필요가 없다.
 			function check1() {
 				
-				// ff라는 이름을 가진 form에 접근
+				// form태그에 name값을 지정한 뒤 form태그에 접근
 				var f = document.ff;
-				
+				//				
 				var id = f.id.value;
 				var pwd = f.pwd.value.trim(); 
 				var blood_type = f.blood.value;
@@ -19,45 +20,34 @@
 				// 유효성 체크
 				if(id.trim()==''){
 					alert("아이디를 입력하세요.");
-					// id 입력상자로 포커스 전환 (경고창 후에 아이디를 입력할 준비가 되어짐)
-					f.id.focus();
+					f.id.focus();	// 특정 객체에 포커스를 주는 기능
 					return;
 				}
-				
 				if(blood_type=="혈액형을 선택해주세요."){
 					alert("한가지는 선택하세요.");
 				}
-				
+				// 이미 속성으로 action, name 속성이 있어서 바로 submit으로 전송한다.
 				f.submit();
-				
-				
 			}
 		</script>
 				
 	</head>
 	<body>
-		<!-- 폼 태그 안에 존재하는 name 속성이 파라미터를 통해서 서버 측으로 전달되도록 되어있다. 
-				폼 태그안에 전송방식, 전송페이지를 미리 작성할 수 있다. 단, submit은 안됨-->
+		<!-- form태그 내에 submit을 제외한 action, name 값을 미리 지정해두는 방식 -->
 		<form method="get"
 				action="login.jsp"
 				name="ff">
 			<table border="1">
 				<tr>
 					<th>아이디</th>
-					<!-- input은 form태그의 자식이다. 
-							name은 -->
 					<td><input type='text' name="id"></td>
 				</tr>
-
 				<tr>
 					<th>비밀번호</th>
-					<!-- pwd를 입력하는 input의 경우는 type을 password로 주면 된다. -->
 					<td><input type='password' name="pwd"></td>
 				</tr>
-
 				<tr>
 					<th>혈액형</th>
-					<!-- select는 자바의 choice와 같다. select안에는 option이라는 보조 태그가 있다.-->
 					<td><select name="blood">
 						<option>혈액형을 선택해주세요.</option>
 						<option>A형</option>
@@ -68,16 +58,10 @@
 				</tr>				
 			</table>
 			
-			<!-- 체크박스는 뒤에 단어를 입력해줘야한다. -->
 			<input type="checkbox" value="n" name="check">낚시
 			<input type="checkbox" value="d" name="check">독서
 
-			<!-- submit은 button과 외형은 같으나 폼태그안에 있는 name(자식)의 현재 선택된 값 혹은 들어가있는 파라미터로 넘긴다.
-				jsp에서는 위와 같이 잡은 name값들을 파라미터라고 부른다. 
-				아무런 내용을 넣지 않아도 submit은 name속성의 값을 그대로 넘긴다. -->
 			<input type="button" value="폼 버튼" onclick="check1();">
-			
-			
 		</form>
 	</body>
 </html>

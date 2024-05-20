@@ -9,11 +9,10 @@ public class VisitVO {
 	private String pwd;
 	private String ip;
 	private String regdate;
-	
-	// 방명록에 이미지 파일을 추가하기위한 새로운 속성
+	//
 	private MultipartFile photo;
 	private String filename;
-	
+	//
 	public MultipartFile getPhoto() {
 		return photo;
 	}
@@ -62,6 +61,5 @@ public class VisitVO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
-	
+
 }

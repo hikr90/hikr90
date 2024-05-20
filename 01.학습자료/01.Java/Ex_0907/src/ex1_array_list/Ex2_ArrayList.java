@@ -6,20 +6,20 @@ import java.util.Scanner;
 public class Ex2_ArrayList {
 	public static void main(String[] args) {
 		
-		/* 문제
-		// id : aaa
-		// [aaa]
-		// id : bbb
-		// [aaa, bbb]
-		// id : aaa
-		// 할 경우, 중복된 아이디 입니다.
-		 id : */
+		// 문제
+		// - id : aaa
+		// - [aaa]
 		
+		// - id : bbb
+		// - [aaa, bbb]
+		
+		// - id : aaa 로 중복된 값 추가 시
+		// - 중복된 아이디입니다. 라고 보여주세요.
 		Scanner sc = new Scanner(System.in);
 		ArrayList<String> list = new ArrayList<String>();
-		
+		//
 		out : while(true) {
-			
+			//
 			System.out.println("id : ");
 			String id = sc.next();
 			
@@ -30,19 +30,9 @@ public class Ex2_ArrayList {
 					continue out;
 				}
 			}
-			
+			//
 			list.add(id);
 			System.out.println(list);
-			
-			}
-			
-
-			
-			
-			
-	
-		
-		
-		
+		}
 	}
 }

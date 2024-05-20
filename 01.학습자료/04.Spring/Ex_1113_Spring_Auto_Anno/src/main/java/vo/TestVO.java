@@ -1,9 +1,10 @@
 package vo;
 
 public class TestVO {
+	//
 	private String test_no, test_nm, remark;
 	private int disp_order;
-	
+	//
 	public String getTestNo() {
 		return test_no;
 	}

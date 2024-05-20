@@ -8,28 +8,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- SPRING FRAMEWORK에서의 CSS접근
-		- CSS등의 참조 파일은 WEBAPP/RESOURCES의 위치에 저장되고 관리된다.
-		- 해당 경로에 접근하기위해서는 WEBAPP의 경로에 접근해야하는데 EL표기법을 통해서 접근이 가능하다.
+<!-- Spring Framework의 CSS
+		- 참조 파일은 webapp/resources에 저장된다.
+		- 해당 경로에 접근하기위해서는 EL표기법을 사용한다.
 		
-		PAGECONTEXT.REQUEST.CONTEXTPATH
-			- 웹 애플리케이션의 상대 경로 (프로젝트 내 WEBAPP 경로)
-			- PAGECONTEXT : 웹 컨테이너가 JSP 동작 시 자동으로 생성하는 내장 객체 (Javax.Servlet.PageContext)
-			
-			# 프로젝트 PATH 접근
-				- (EL표기법) pageContext.request.contextPath 
-				- (JAVA) request.getContextPath
-				- (예시) : /test
-			
-			# 프로젝트와 화면 경로 접근 (LOCALHOST 포함)
-				- (EL표기법) pageContext.request.requestURL
-				- (자바) request.getRequestURL
-				- (예시) http://localhost:8080/test/WEB-INF/views/test.jsp
+			# 경로 접근
+				(1) 프로젝트 경로 접근 (pageContext.Request.ContextPath)
+					- 웹 애플리케이션의 상대 경로 (프로젝트 내 webapp)
+					- 화면 : pageContext는 웹 컨테이너가 Jsp 동작 시 자동으로 생성하는 내장 객체
+					- 서버 : request.getContextPath
+					- 예시 : /test
 				
-			# 프로젝트와 파일 경로 접근 (LOCALHOST 미포함)
-				- (EL표기법) pageContext.request.requestURI
-				- (JAVA) request.getRequestURI
-				- (예시) /test/WEB-INF/view/test.jsp
+				(2) 프로젝트와 화면 접근 (localhost 포함)
+					- 화면 : pageContext.request.requestURL
+					- 서버 : request.getRequestURL
+					- 예시 : http://localhost:8080/test/WEB-INF/views/test.jsp
+			
+				(3) 프로젝트와 파일 경로 접근 (localhost 미포함)
+					- 화면 : pageContext.request.requestURI
+					- 서버 : request.getRequestURI
+					- 예시 : /test/WEB-INF/view/test.jsp
 -->
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/visit.css">
 <script src="${ pageContext.request.contextPath }/resources/js/httpRequest.js"></script>
@@ -65,7 +63,7 @@
 			return;
 		}
 		
-		// 비밀번호가 일치하는 경우 AJAX를 통해서 삭제 결과를 받아온다.
+		// 비밀번호가 일치하는 경우 Ajax를 통해서 삭제 결과를 받아온다.
 		var url = "delete.do";
 		var param = "idx="+f.idx.value;
 		
@@ -73,11 +71,31 @@
 		sendRequest(url,param,resultFn,"GET");
 	}
 	
-	// DEL의 콜백 메소드
+	// 콜백 메소드
 	function resultFn() {
 		if(xhr.readyState==4 && xhr.status==200){ // 정상적으로 값을 전달받은 상태
 			
-			// RESPONSETEXT는 맵핑된 컨트롤러에서 리턴받은 데이터를 뜻한다.
+			/* 속성
+				- (1) readyState
+						- 서버 통신의 진행 상황을 알려주는 속성
+						- 0(오류) : 초기화되지 않은 상태
+						- 1(오류) : send메소드가 동작하지 않은, 로드되지 않은 상태
+						- 2(오류) : send메소드를 통해서 요청은 했으나 응답을 받지 못한 상태
+						- 3(정상) : 상호작용 상태로서 데이터의 일부분만 받은 상태
+						- 4(정상) : 모든 데이터를 받은 완료 상태
+						
+				- (2) status
+						- 서버의 응답 상태를 알려주는 속성
+						- 200 (정상) : 이상없음, 정상적으로 처리되어 데이터가 넘어온 상태
+						- 404 (오류) : 경로없음, 코드에 오류가 존재하는 상황
+						- 500 (오류) : 데이터가 없음, 서버 관련 코드에 오류가 존재하는 상황
+					
+				- (3) responseText
+					- 서버 응답의 결과(데이터)를 받는 속성
+					- JSON 등의 형태로 받을 수 있다.
+			*/
+			
+			// responseText는 맵핑된 컨트롤러에서 리턴받은 데이터를 받는 함수이다.
 			var data = xhr.responseText;
 			
 			// 삭제 실패
@@ -100,7 +118,7 @@
 		<h1>::방명록 리스트::</h1>
 		
 		<div align="center">
-			<!-- 입력 폼인 INSERT_FORM.DO로 이동 -->
+			<!-- 입력 폼인 insert_form.do로 이동 -->
 			<input type="button" value="글쓰기" onclick="location.href='insert_form.do'">
 		</div>
 		
@@ -108,10 +126,9 @@
 			
 			<div class="visit_box">
 				<div class="type_content"><pre>${ vo.content }</pre>
-				<!-- 사진이 존재하지 않는 경우, 엑박 대신 문자로 보여주기위해서 NO_FILE 문자 추가  -->
-				<c:if test="${ vo.filename ne 'no_file' }">
-					<img src="resources/upload/${ vo.filename }" width="200px">
-				</c:if>
+					<c:if test="${ vo.filename ne 'no_file' }">
+						<img src="resources/upload/${ vo.filename }" width="200px">
+					</c:if>
 				</div>
 
 				<div class="type_name">작성자:${ vo.name }(${ vo.ip })</div>
@@ -119,7 +136,6 @@
 				
 				<div>
 					<form>
-						<!-- 브라우저에서 사용자에게 노출하지 않고 특정한 값을 전송받아야하는 경우, INPUT태그의 HIDDEN속성을 사용한다. -->
 						<input type="hidden" name="idx" value="${ vo.idx }">
 						<input type="hidden" name="pwd" value="${ vo.pwd }">
 						비밀번호 : <input type="password" name="c_pwd">

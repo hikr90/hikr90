@@ -1,9 +1,5 @@
 package ex1_class_array;
 
-/* 클래스 배열
- * */
-
-
 public class ArrayTest {
 	
 	// 클래스 안에서 Getter, Setter 생성
@@ -22,9 +18,4 @@ public class ArrayTest {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
-	
-	
-	
 }

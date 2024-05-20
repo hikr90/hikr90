@@ -10,15 +10,15 @@
 		<title>Insert title here</title>
 	
 		<script type="text/javascript">
+			// 검색
 			function search() {
 				var search = document.getElementById("search").value;
-				
+				//				
 				if(search==""){
 					search = "all";	
 				}
-				
+				//
 				location.href="gogek_list.do?search="+encodeURIComponent(search);
-				
 			}
 		</script>
 	</head>

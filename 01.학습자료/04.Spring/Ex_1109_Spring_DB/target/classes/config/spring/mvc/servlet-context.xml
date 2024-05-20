@@ -16,18 +16,10 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
-	
-	<!-- 주석 처리후 수동 주입 -->
-	<!-- <context:component-scan base-package="com.korea.db" />-->
-	
-	<!-- 수동 주입 
-			- DB연동에 관련된 정보는 CONTEXT-1>2>3을 통해서 CONTEXT-4인 서비스가 받았으므로
-			- TEST_SERVICE객체를 컨트롤러에 주입한다.
-			- 주입된 TEST_SERVICE는 컨트롤러에서 생성자로 받아준다.
+	<!-- 수동 주입 설명
+			- (1) DB연동에 관련된 정보는 context-1 ~ 3을 통해서 context-4인 서비스가 받았으므로
+			- (2) test-service객체가 컨트롤러에 주입된다.
+			- (3) 주입된 객체는 컨트롤러에서 생성자로 받는다.
 	-->
 	<beans:bean id="test_serviceBean" class="controller.TestController">
 		<beans:constructor-arg ref="test_service"/>

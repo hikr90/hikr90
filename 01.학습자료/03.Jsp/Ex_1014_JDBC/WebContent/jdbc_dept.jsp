@@ -10,76 +10,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!-- MODEL 1 : 한곳에서 JSP, HTML의 작업을 전부 처리하는 경우로
-		MODEL 1은 기본적으로는 잘 사용하지 않지만 특히 대규모 프로젝트에서는 절대 사용하지 않는다. 
-		
-		왜 JSP에서 동적 데이터를 처리할 수 있는가?
-		DB로 접속하기위한 작업은 자바 코드로 처리하는데 JSP에서 자바 코드를 사용할 수 있는 스크립트 릿을 사용한다.
-		마찬가지로 HTML은 자바 코드가 불가능하므로 사용할 수 없다.
+<!-- Model 1
+		- 한 곳에서 Jsp를 사용하여 서블릿없이 서버, 화면의 작업을 전부 처리하는 방식
+		- 소스가 복잡해지므로 잘 사용하지는 않으나 소규모로 빠르게 작업을 처리해야하는 경우 사용하기도 한다.
  -->
-
 <%
-	
-	/*	JNDI 검색
-			톰캣이 참조할 자원 (계정과 비밀번호)을 찾아야만 접속이 가능하다. */
-			
-	// JNDI서비스를 제공하는 객체 생성
+	// InitialContext
+	// - JNDI서비스를 제공하는 객체 생성
 	InitialContext ic = new InitialContext();
 	
-	// JNDI 검색을 위한 상수값 지정 (JAVAX.NAMING으로 IMPORT)
-	// CONTEXT.XML의 CONTEXT태그에 접근
-	// JAVA:COMP/ENV는 톰캣에서 참조파일 (리소스)을 관리하는 가상의 주소로서, JDBC/ORACLE_TEST는 CONTEXT.XML에 등록한 계정 정보이다.
+	// 컨텍스트 객체 생성
+	// - java:comp/env는 톰캣에서 리소스를 관리하는 가상의 주소이다.
+	// - lookup함수는 JNDI의 메소드로서 name과 key값의 정보를 통해서 데이터소스의 객체를 얻는다.
 	// LOOKUP은 JNDI의 메소드로서 NAME과 KEY값을 통해서 DATASOURCE의 객체를 얻는다.
 	Context ctx = (Context)ic.lookup("java:comp/env");
 	
-
-	// 검색한 CONEXT에서 NAME을 검색하여 " "의 명칭으로 리소스하여 어떤 DB로 접속할지를 결정 (JAVAX.SQL을 IMPORT)
-	// ctx를 검색한 객체를 통해서 name을 검색하여 ""안의 명칭으로 리소스 하겠다.
+	// DB객체 생성
+	// - jdbc/oracle_test는 context.xml에 등록한 계정 정보를 뜻한다.
 	DataSource ds = (DataSource)ctx.lookup("jdbc/oracle_test");
 	
-	// DB에 연결 (JAVAX.SQL을 IMPORT)
+	// 커넥션 객체 생성
+	// - getConnection은 DB연동을 가져오는 메소드이다.
 	Connection conn = ds.getConnection();
 	
-	// 연결 유무를 파악하기위한 SYSO
+	// 커넥션 유무 파악
 	System.out.println("--DB연결 성공--");
 	
-	// DEPT의 정보를 얻기위한 SQL 쿼리문 동작 
+	// 쿼리문 생성
 	String sql = "select * from dept";
 	
-	
-	/* PREPAREDSTATEMENT
-			STATEMENT를 상속하는 인터페이스로 SQL쿼리문을 동작시키는 객체
-			동일한 DB문장을 효율적으로 반복 사용하게하는 역할
-			접속 계정의 정보를 알기위해서 CONN이 있어야한다. 
-			(TEST 계정에 접근하여 SQL을 검색하는 것이 가능해진 상태) */
+	// PreparedStatement
+	// 	- statement를 상속하는 인터페이스로 Sql 쿼리문을 동작시키는 객체
+	//	- 쿼리문을 반복해서 사용할 수 있도록 돕는다.
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	
-	// EXECUTEQUERY는 ​SQL문의 결과를 저장하는 객체이다.
-	// PSTMT를 통해서 수행이 완료된 결과를 VO객체에 저장
-	// (동작한 순간 DEPTNO 테이블에 가상의 커서를 잡는 상태가 된다.) 
+	// executeQuery
+	// 	- Sql 처리 결과를 저장하는 객체
+	//	- next 메소드는 쿼리 결과의 행 데이터가 존재하는지를 뜻한다.
+	//	- 값이 있는 경우 true, 없는 경우 false를 반환한다.
 	ResultSet rs = pstmt.executeQuery();
 	List<DeptVO> dept_list = new ArrayList();
-	
-	// WHILE문과 NEXT로 SQL문의 결과를 테이블의 행단위로 로드  
-	// 	RS.NEXT는 다음 요소가 존재하면 TRUE (더이상 다음 행이 없다면 FALSE)
-	// 	RS.NEXT는 실행시마다 다음라인으로 이동한다. 
-
+	// 
 	while(rs.next()){
 		DeptVO vo = new DeptVO();
-		// 접근한 행에서 DEPTNO라는 컬럼에 들어간 값(RS.GETINT)를 VO에 저장한다.
+		// getInt : 쿼리의 결과를 숫자 타입으로 받는다.
+		// getString : 쿼리의 결과를 문자열 타입으로 받는다.
 		vo.setDeptno(rs.getInt("deptno"));
 		vo.setdName(rs.getString("dname"));
 		vo.setLoc(rs.getString("loc"));
+		// add를 사용하여 ArrayList에 저장한다.
 		dept_list.add(vo);
 	}
 	
-	
-	/* 기본적으로 웹 브라우저에서 새로고침시마다 접속 인원수가 증가하지만 따로 나가는 작업이 없기에
-			MAXACTIVE가 최대치를 넘어서는 순간 사이트에서 500 에러가 나게된다.  
-			DB에 연결한 후, 원하는 작업을 마무리했다면 CLOSE를 통해서 DB접속을 해제해줘야 다음 유저가 접속할 수 있다.
-			STREAM과 마찬가지로 닫을 때는 역순으로 닫아줘야한다. 
-		
-			(만약 CLOSE가 되지 않으면 PROJECT메뉴의 CLEAN으로 서버 초기화하거나 하단의 SERVER탭에서 내용을 DELETE하고 다시 동작시키면 된다. */
+	// close는 DB연동을 종료하는 메소드이다.
+	// 스트림과 마찬가지로 닫을 때는 역순으로 닫아준다.
 	rs.close();
 	pstmt.close();
 	conn.close();
@@ -95,8 +79,7 @@
 	</style>
 	<script type="text/javascript">
 		function send(no) {
-			// alert(no);
-			// submit할 form과 no의 값을 hid에 넣어줄 hid 입력상자를 지정 
+			// 받은 값을 인풋태그(히든)의 값으로 지정해준 뒤 서버 전송을 할 수 있다.
 			var f = document.getElementById("m_form");
 			var hid = document.getElementById("hid");
 			hid.value = no;
@@ -105,7 +88,7 @@
 	</script>
 	</head>
 	<body>
-		<!-- 파라미터로 this.form을 못넘기니 id가 있어야한다. 해당 파라미터를 가지고 sawon_list.jsp로 넘어간다. -->
+		<!-- 버튼 태그 내 폼 태그를 보내지 못하므로 대신 아이디 값을 넘긴다. -->
 		<form id="m_form" action="sawon_list.jsp">
 		<table border="1">
 			<caption>:: 부서 테이블 ::</caption>
@@ -114,17 +97,17 @@
 					<th>부서명</th>
 					<th>위치</th>
 				</tr>
-				<%
-									for(int i=0;i<dept_list.size();i++){
-												DeptVO vo = dept_list.get(i);
-								%>
+					<%
+					for(int i=0;i<dept_list.size();i++){
+						DeptVO vo = dept_list.get(i);
+					%>
 					<tr>
 						<td><%= vo.getDeptno() %></td>
 						<td>
-							<!--	JAVASCRIPT:메소드
-										입력태그가 아닌 A태그에서 값을 전송하고자하는 경우
-										FORM태그를 사용할 수 없으므로  위 방식을 사용해서 A태그의 SEND함수로 VO값을 넘길 수 있다.
-										많이 사용하는 방식은 아니다.
+							<!-- [참고] a태그에서 값 전송
+									- 폼 태그를 사용할 수 없으므로 a태그의 send함수를 통해서 VO의 값을 넘긴다.
+									- javascript:함수를 사용하여 받은 파라미터 값을 히든 태그의 값으로 보내주는 함수를 통해 서버로 값을 전송한다. 
+									- 자주 사용하는 방식은 아니다.
  							-->
 							<a href="javascript:send('<%=vo.getDeptno()%>')">	
 								<%= vo.getdName() %>
@@ -135,10 +118,10 @@
 				<% }%>
 		</table>
 		
-		<!-- A태그로 파라미터를 보내기 힘든 경우
-				INPUT태그의 HIDDEN속성을 사용하기도 한다.
-				A태그로는 파라미터를 보낼 수 없으므로 대신 눈에 보이지 않는 INPUT태그를 하나 더 만들어서 필요한 값을 넘기는 것이 가능하다. 
-				TYPE을 HIDDEN으로 주게되면 입력상자가 눈에 보이지 않게 된다. -->
+		<!-- [참고] 인풋태그의 히든 타입
+				- 타입이 히든인 인풋타입은 화면 상에서 보이지 않는다.
+				- 히든타입은 개발자가 사용자가 확인할 수 없는 방식으로 값을 넘길 때 사용한다.
+		-->
 		<input type="hidden" id="hid" name="deptno">
 		</form>
 	</body>

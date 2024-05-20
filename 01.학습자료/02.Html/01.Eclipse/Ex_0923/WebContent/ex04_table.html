@@ -5,15 +5,17 @@
 		<title>table</title>
 	</head>
 	<body>
-	
 		<h2>표 생성(1행 1열)</h2>
-		<!-- border=1로 선을 표현 -->
+		<!-- table태그
+				- 표 태그
+				- 자식태그로 tr태그는 행, td태그는 열을 의미한다.
+				- border는 표의 서식에관한 속성으로서 1은 테두리를 의미한다. (표 태그는 기본적으로 테두리가 없다.)
+		-->
 		<table border="1">
-			<tr>	<!-- 행(y)  -->
-			<td>1행 1열</td>	<!-- 열(x) -->
+			<tr>	
+				<td>1행 1열</td>
 			</tr>
 		</table>	
-	
 		<hr>
 		
 		<h2>표 생성(1행 2열)</h2>
@@ -21,20 +23,20 @@
 			<tr>
 				<td>1열</td>			
 				<td>2열</td>						
-			
 			</tr>
 		</table>
-		
 		<hr>
 		
 		<h2>표 생성(2행 1열)</h2> 
 		<table border="1">
-			<tr></tr>
+			<tr>
 				<td>1행 1열</td>
-			<tr></tr>
+			</tr>
+			<tr>
 				<td>2행 1열</td>
+			</tr>
 		</table>
-
+		<hr>
 		
 		<h2>표 생성(2행 2열)</h2>
 		<table border="1">
@@ -42,12 +44,10 @@
 				<td>1행 1열</td>
 				<td>1행 2열</td>
 			</tr>
-
 			<tr>
 				<td>2행 1열</td>
 				<td>2행 2열</td>
 			</tr>
 		</table>
-		
 	</body>
 </html>

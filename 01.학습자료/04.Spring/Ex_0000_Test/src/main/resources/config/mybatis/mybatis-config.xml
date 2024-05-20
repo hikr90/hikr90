@@ -8,10 +8,18 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 	</settings>
 	
+	<!-- typeAliases
+			- 맵퍼 동작 시 VO의 명칭을 축약하여 사용할 수 있도록 하는 속성
+			- 축약된 단어는 맵퍼에서 resultType을 입력하는데 사용된다.
+	-->	
 	<typeAliases>
 		<typeAlias type="com.korea.vo.TestVO" alias="test"/>
 	</typeAliases>
 	
+	<!-- mappers
+			- config.mybatis.context에서 사용할 맵퍼 파일을 등록한다.
+			- 등록된 맵퍼는 context-2-mybatis에서 factoryBean객체의 configLocation속성 값에 적용되어 사용할 수 있다. 	
+	-->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/test.xml"/>
 	</mappers>

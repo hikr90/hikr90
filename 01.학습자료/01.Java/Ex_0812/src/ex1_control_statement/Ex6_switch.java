@@ -3,9 +3,9 @@ package ex1_control_statement;
 public class Ex6_switch {
 	
 	public static void main(String[] args) {
-		
+		//
 		char ch = 'Çö';
-		
+		//
 		switch (ch) {
 		case 'Ãµ' :
 			System.out.println("ÇÏ´Ã Ãµ");

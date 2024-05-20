@@ -24,28 +24,26 @@ public class GogekListAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//
 		response.setCharacterEncoding("utf-8");
+		//
 		String search = "all";
 		String str_goaddr = request.getParameter("search");
-		
-		// 정상적으로 값이 들어온 경우 str_goaddr을 search에 넣어준다.
+		// 
 		if(str_goaddr!=null && !str_goaddr.isEmpty()) {
 			search = str_goaddr;
 		}
-
+		//
 		List<GogekVO> list = null;
-		
+		//
 		if(search.equals("all")) {
 			list = GogekDAO.getInstance().select();
 		}else {
 			list = GogekDAO.getInstance().select(str_goaddr);
 		}
-		
+		//
 		request.setAttribute("list", list);
-		
 		RequestDispatcher disp = request.getRequestDispatcher("gogek_list.jsp");
 		disp.forward(request, response);
 	}
-
 }

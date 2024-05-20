@@ -10,7 +10,4 @@ public class JsonVO {
 	public void setCheckYn(String checkYn) {
 		this.checkYn = checkYn;
 	}
-	
-	
-
 }

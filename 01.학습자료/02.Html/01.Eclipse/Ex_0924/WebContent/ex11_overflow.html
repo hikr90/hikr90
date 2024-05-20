@@ -4,22 +4,24 @@
 		<meta charset="UTF-8">
 		<title>overflow</title>
 	
-	<style type="text/css">
-		p{border: 1px solid black;
-			padding: 5px;
-			width: 150px;
-			height: 70px;}
-				
-		.o1{overflow: hidden;} /* hidden : 정해진 사이즈안에서만 내용을 표시하고 넘치면 다 자른다. */	
-		.o2{overflow: scroll;} /* scroll : 스크롤로 넘치는 내용을 확인, 내려갈게 없어도 항상 보여진다. */
-		.o3{overflow: auto;} /* auto : 내용이 넘치는 경우만 스크롤이 생긴다. */
-		.o4{overflow: visible;} /* visible : 기본값으로 영역 상관없이 내용이 넘쳐도 모두 표시 */
-		
-	</style>
+		<style type="text/css">
+			p{border: 1px solid black;
+				padding: 5px;
+				width: 150px;
+				height: 70px;}
+					
+			/* overflow
+				- 부모 객체 내 자식 객체가 부모 객체의 범위를 넘어서는 경우
+				- 어떤 식으로 처리할지를 결정하는 기능
+			*/
+			.o1{overflow: hidden;} 		/* hidden : 정해진 사이즈안에서만 내용을 표시하고 넘치면 다 자른다. */	
+			.o2{overflow: scroll;} 		/* scroll : 스크롤로 넘치는 내용을 확인, 내려갈게 없어도 항상 보여진다. */
+			.o3{overflow: auto;} 		/* auto : 내용이 넘치는 경우만 스크롤이 생긴다. */
+			.o4{overflow: visible;} 	/* visible : 기본값으로 영역 상관없이 내용이 넘쳐도 모두 표시 */
+		</style>
 	
 	</head>
 	<body>
-	
 		<p class="o1">이별 후 그 시간은 지겹도록 더디고 이별 후 그 마음은 언제나 시리고 해볼 만큼 했었는데도
 			처음보다 아프다 이별 후의 시간은 지겹도록 더디다</p>
 		<p class="o2">이별 후 그 시간은 지겹도록 더디고 이별 후 그 마음은 언제나 시리고 해볼 만큼 했었는데도
@@ -28,7 +30,5 @@
 			처음보다 아프다 이별 후의 시간은 지겹도록 더디다</p>
 		<p class="o4">이별 후 그 시간은 지겹도록 더디고 이별 후 그 마음은 언제나 시리고 해볼 만큼 했었는데도
 			처음보다 아프다 이별 후의 시간은 지겹도록 더디다</p>
-	
-	
 	</body>
 </html>

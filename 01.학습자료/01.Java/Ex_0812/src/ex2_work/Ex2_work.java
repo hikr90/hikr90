@@ -6,15 +6,11 @@ public class Ex2_work {
 
 	public static void main(String[] args) {
 
-		/*
-		 숙제 :: switch문을 이용한 계산기
-		 수 1 : 15
-		 수2 : 5
-		 연산자 : + 
-		 15 + 5 = 20
-		 (스위치 사용)
-		 */
-
+		// 문제
+		// - switch를 통한 계산기 작성
+		// - 수1 : 15
+		// - 수2 : 5
+		// - 연산자 : +
 		Scanner sc = new Scanner(System.in);
 		System.out.println("수1 : ");
 		int num1 = sc.nextInt();
@@ -46,6 +42,5 @@ public class Ex2_work {
 			System.out.println("정확한 연산자를 입력해주세요.");
 			break;
 		}
-
 	}
 }

@@ -4,10 +4,10 @@ public class Ex3_else_if {
 
 	public static void main(String[] args) {
 		
-		// 다중 if문(else if) : 여러개의 조건비교가 필요한 경우 사용하는 제어문
-		// else if문은 조건이 거짓인 경우 식을 뛰어넘고, 참인 경우부터는 그 이후의 코드를 검토하지 않고 그대로 else if문을 종료한다.
-		// else : 위쪽의 조건이 모두 거짓인 경우 무조건 실행되는 영역을 뜻한다.
-		
+		// else if
+		// - 여러 조건 중 맞는 조건의 값을 찾아내는 분기문
+		// - 다중 if문이라고 부르며 여러 조건 비교가 필요한 경우 사용하는 분기문
+		// - 조건이 거짓인 경우 해당 구문을 넘기고, 참인 경우 그 이후의 코드를 검토하지 않고 그대로 분기문을 종료한다.
 		int num = 67;
 		String str = "";
 		
@@ -24,11 +24,6 @@ public class Ex3_else_if {
 		}
 		
 		System.out.printf("당신의 학점은 %s입니다.",str);
-		
-		
-		
-		
-		
 		
 	}
 }

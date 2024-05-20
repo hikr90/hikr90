@@ -4,12 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- list에 있는 정보 확인 
-	 -->
 <%
-	// singleton처리가 되어있으니 new말고 getInstance로 생성
+	// 싱글톤 객체 생성
 	DeptDAO dao = DeptDAO.getInstance();
-	
 	List<DeptVO> dept_list = dao.selectList();
 %>
 
@@ -21,7 +18,6 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-	
 		<table border="1">
 			<caption>부서목록</caption>
 			<tr>
@@ -29,7 +25,6 @@
 				<th>부서명</th>
 				<th>부서위치</th>
 			</tr>
-		
 			<%for(int i=0;i<dept_list.size();i++){ 
 					DeptVO vo = dept_list.get(i);%>
 				<tr>
@@ -39,6 +34,5 @@
 				</tr>
 			<%} %>
 		</table>
-		
 	</body>
 </html>

@@ -1,7 +1,7 @@
 package vo;
 
 public class ProductVO {
-	
+	//
 	private int idx;
 	private String category;
 	private String p_num;
@@ -13,7 +13,7 @@ public class ProductVO {
 	private String p_image_l;
 	private String p_content;
 	private String p_date;
-
+	//
 	public int getIdx() {
 		return idx;
 	}
@@ -81,19 +81,16 @@ public class ProductVO {
 		this.p_date = p_date;
 	}
 	
-	// 할인율에대한 변수 추가
-	// 받아서 사용하는 것이니 GETTER만 있으면 된다.
+	// 할인율
+	//	- 값을 지정할 상황은 없으니 getter만 추가
 	private int salerate;
-
+	//
 	public int getSalerate() {
 		// 할인율 구하는 공식 : (정가 - 할인가) / 정가 * 100 
 		if(p_price==0) {
 			return 0;
 		}
-		// 마지막에는 20.몇퍼센트가 되는 것을 20%으로 보여주기위해서 마지막에 int로 캐스팅을 한다.
+		// 20%로 보여지도록 숫자형으로 형변환을 한다.
 		return (int)((p_price - p_saleprice)/(double)p_price * 100);
 	}
-
-	
-	
 }

@@ -23,7 +23,7 @@ public class TestController {
 	HttpSession session;
 	
 	// 로그인 테스트 화면
-	@RequestMapping(value= {"/","/test_login.do"})
+	@RequestMapping(value= {"/","/test.do"})
 	public String testLogin(Model model) throws Exception {
 		//
 		return VIEW_PATH + "test_login.jsp";
@@ -55,6 +55,6 @@ public class TestController {
 		// 세션 제거
 		session.removeAttribute("loginVO");
 		// 로그인 정보 세션 삭제 후 로그인 화면으로 이동
-		return "redirect:test_login.do";
+		return "redirect:test.do";
 	}
 }

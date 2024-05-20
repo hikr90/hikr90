@@ -5,29 +5,19 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// 익명 내부 클래스
 public class Ex2_Anonymous_inner {
 	public static void main(String[] args) {
-		
-		// 테두리
+		//
 		Frame f = new Frame();
-		// 버튼
 		Button btn = new Button("뭘 할래?");
-		// 사이즈
+		//
 		f.setSize(300,300);
 		f.add(btn);
-		// true면 보인다. (기본값 false)
 		f.setVisible(true);
 		
-		// 인터페이스는 인스턴스를 직접 가질 수 없어서, 자식을 통해서 만들지 않으면(new로 만들면) 재정의해야한다.
-		// 괄호안에 즉석에서 이름을 없는 객체를 익명 내부 클래스라고 한다. 
-		
-		// 이벤트 : 버튼 클릭시, 요청한 것에대한 피드백
-		// 이벤트 감지자 : 이벤트 클릭시 하고자하는 이벤트
-		// ()안에  actionlistener를 넣어야하는데 인터페이스이다.
-		// 인터페이스는 인스턴스를 가질 수 없어서 그냥 new로 만들면 오버라이딩 메서드가 올라온다.
-		// addactionlistener : 버튼을 클릭
-		// (new actionlistener)는 익명 내부 클래스
+		// 인터페이스의 익명 클래스
+		// - 인터페이스는 인스턴스를 직접 가지지못하므로, 자식을 통해서 선언하는 방법이 아닌 New 키워드로 선언할 경우
+		// - 오버라이딩 메소드를 구현하도록 익명 클래스가 생성된다.
 		btn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -37,14 +27,5 @@ public class Ex2_Anonymous_inner {
 				System.exit(0);
 			}
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }

@@ -6,26 +6,22 @@
 		
 		<style type="text/css">
 			/* backgruond : 배경 속성 */
-			p{ border: 5px solid red;
-				background: yellow;}
+			p{ border: 5px solid red; background: yellow;}
 			
-			/* 마진과 패딩 속성은 합쳐지지 않는다. 즉 위에서 지정하는 값과 아래에서 지정하는 값중 더 큰 값으로 마진 값을 지정한다. */
-			.box1{margin: 20px;} /* 상하좌우 모두 적용 */
-			.box2{margin: 40px 50px;} /* 상하, 좌우 적용 */
-			.box3{margin: 20px 50px 30px;} /* 상, 좌우, 하 적용 */
-			.box4{margin: 10px 20px 30px 40px;} /* 상에서부터 시계방향 적용  */
-							
+			/* margin
+				- 바깥쪽에 여백을 두는 기능
+				- 마진과 패딩 속성은 합쳐지지 않으며 두 값 중 더 큰 값으로 지정한다.
+			*/
+			.box1{margin: 20px;} 					/* 상하좌우 모두 적용 */
+			.box2{margin: 40px 50px;} 				/* 상하,좌우 적용 */
+			.box3{margin: 20px 50px 30px;} 			/* 상,좌우,하 적용 */
+			.box4{margin: 10px 20px 30px 40px;} 	/* 상,하,좌,우에서부터 시계방향 적용 */
 		</style>
-		
 	</head>
 	<body>
-	
-	<p class="box1">마진 속성 부여1</p>
-	<p class="box2">마진 속성 부여2</p>
-	<p class="box3">마진 속성 부여3</p>
-	<p class="box4">마진 속성 부여4</p>
-	
-	
-	
+		<p class="box1">마진 속성 부여1</p>
+		<p class="box2">마진 속성 부여2</p>
+		<p class="box3">마진 속성 부여3</p>
+		<p class="box4">마진 속성 부여4</p>
 	</body>
 </html>

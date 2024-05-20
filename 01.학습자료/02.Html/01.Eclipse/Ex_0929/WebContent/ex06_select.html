@@ -5,27 +5,22 @@
 		<title>select태그의 동적처리</title>
 		
 		<script type="text/javascript">
-			/* 자바 스크립트에서는 []으로 선언 초기화를 동시에 할 수 있다. */
+			//	자바스크립트에서는 [값,값,값] 방식으로 선언과 초기화를 동시에 할 수 있다.
 			var sido_arr = ["서울","대전","대구","부산"];
 			
-			/* window.onlad : 이름이 없는 익명 메서드
-			 현재 html 페이지가 완전히 로드되면 자동으로 호출되는 메서드 영역 */
+			/*	window.onload 
+					- 이름이 없는 익명메소드
+					- 현재 html페이지가 완전히 로드되면 자동으로 호출되는 메소드 영역
+			*/
 			window.onload = function () {
 				var sido = document.getElementById("sido");
-				
-			/* createElement는 태그 생성의 뜻을 가진다. 
-			my_option이 <option></option>으로 생성이 된다. */
-			for(var i=0;i<sido_arr.length;i++){
-				var my_option = document.createElement("option");
-				
-				// 생성된 option태그에 sido_arr의 배열방에 있는 값을 순차적으로 입력
-				my_option.innerHTML = sido_arr[i];
-				// my_option.value = i; 식으로하면 서울은 submit으로 넘기는 값이 1이 될 것이다.
-				
-				// select 태그에 자식으로 option태그를 추가시킨다.
-				sido.appendChild(my_option);
-			}
-				
+				//
+				for(var i=0;i<sido_arr.length;i++){
+					// createElement는 태그를 생성하는 함수로서 파라미터인 option태그가 생성된다.
+					var my_option = document.createElement("option");
+					my_option.innerHTML = sido_arr[i];	// innerHtml은 특정 태그에 text값을 추가하는 함수이다. (value와 다르다.)
+					sido.appendChild(my_option);	// appendChild는 특정 태그에 자식태그를 붙이는 함수이다.
+				}
 			}
 		</script>
 	

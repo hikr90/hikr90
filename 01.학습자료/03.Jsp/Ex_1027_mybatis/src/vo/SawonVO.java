@@ -1,7 +1,6 @@
 package vo;
 
-// MYBATIS 사용시 변수명과 DB의 컬럼명이 무조건 같아야한다.
-// (SETTER, GETTER을 사용하지 않으므로)
+// Mybatis 사용 시 변수명과 DB의 컬럼명이 같아야한다.
 public class SawonVO {
 	private int sabun;
 	private String saname;
@@ -11,7 +10,7 @@ public class SawonVO {
 	private int samgr;
 	private int deptno;
 	private int sapay;
-
+	//
 	public int getSapay() {
 		return sapay;
 	}

@@ -1,7 +1,7 @@
 package vo;
 
 public class SungjukVO {
-	
+	//
 	private String name;
 	private int kor;
 	private int eng;
@@ -59,7 +59,4 @@ public class SungjukVO {
 	public void setMat(int mat) {
 		this.mat = mat;
 	}
-	
-	
-	
 }

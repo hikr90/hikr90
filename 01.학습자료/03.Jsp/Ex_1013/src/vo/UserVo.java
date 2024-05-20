@@ -1,11 +1,11 @@
 package vo;
 
 public class UserVo {
-	
+	//
 	private String id;
 	private int pwd;
 	private int age;
-	
+	//
 	public String getId() {
 		return id;
 	}
@@ -24,8 +24,4 @@ public class UserVo {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
-	
-	
 }

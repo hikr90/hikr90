@@ -4,16 +4,14 @@
 
 <%	
 	request.setCharacterEncoding("utf-8");
-	
- 	// delete에 해당하는 자료형에 맞게 파라미터를 가지고 오자
+	//	요청 객체 내의 값을 받아온다.
 	int no = Integer.parseInt(request.getParameter("no"));
+	int res = SungjukDAO.getInstance().delete(no);	// 삭제 메소드 (지운 행의 수를 반환한다.)
 	
- 	// 삭제 (잘 지웠으면 1, 못지웠으면 0으로 반환)
-	int res = SungjukDAO.getInstance().delete(no);
-	
-	// 자바코드로 화면 전환하는 방법 (html의 경우에는 location)
+	// sendRedirect
+	// 	- 특정 화면 혹은 주소로 이동하는 방식
+	//	- html에서 location.href를 사용한다면 자바에서는 sendRedirect를 사용한다.
 	response.sendRedirect("jdbc_Sungjuk.jsp");
-	
 %>
 
 <!DOCTYPE html>

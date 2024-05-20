@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.korea.daoImpl.TestDAOImpl;
+import com.korea.daoImpl.TestDaoImpl;
 import com.korea.service.TestService;
 import com.korea.serviceImpl.TestServiceImpl;
 import com.korea.vo.TestVO;
@@ -33,9 +33,9 @@ public class TestController {
 	//
 	private static final Logger LOG = LoggerFactory.getLogger(TestController.class);
 	
-	/*	@PATHVARIABLE
-	 		- 브라우저에서 요청하는 URL로 전달된 매개변수를 가져오는 어노테이션
-	 		- { } 내의 값이 @PATHVARIABLE로 지정되어 요청 URL에서 지정된 값이 { } 에 자동으로 할당된다.
+	/*	@PathVariable
+	 		- 브라우저에서 요청하는 url로 전달된 매개변수를 가져오는 어노테이션
+	 		- { } 내의 값이 @PathVariable로 지정되어 요청 url에서 지정된 값이 { } 에 자동으로 할당된다.
 	 		- NULL이나 공백이 들어가는 값은 인식하지 못한다.
 	 		- 메소드의 데이터 타입과 다른 타입의 값이 들어가는 경우 오류가 발생한다.
 	*/
@@ -45,9 +45,9 @@ public class TestController {
 		return test_no;
 	}
 	
-	/*	@REQUESTBODY
+	/*	@RequestBody
 			- 브라우저에서 전달되는 JSON 데이터를 객체로 자동 변환해주는 어노테이션
-			- HTML화면의 BODY 영역 전체를 받아오는 방식으로, BODY가 없는 GET 방식으로는 받아올 수 없다.
+			- Html화면의 바디 영역 전체를 받아오는 방식으로, 바디가 없는 get 방식으로는 받아올 수 없다.
 	*/
 	@RequestMapping("/test/sendData")
 	public void sendData(@RequestBody TestVO vo) {
@@ -58,9 +58,9 @@ public class TestController {
 		LOG.warn("getRemark : "+vo.getRemark());
 	}
 	
-	/*	@RESPONSEBODY
+	/*	@ResponseBody
 			- 데이터 타입 리턴 메소드임을 명시하는 어노테이션
-			- 해당 어노테이션이 있는 메소드는 JSP가 아닌 텍스트나 JSON타입으로 결과를 반환한다.
+			- 해당 어노테이션이 있는 메소드는 Jsp가 아닌 텍스트나 JSON타입으로 결과를 반환한다.
 	 */
 	@RequestMapping("/test/res")
 	@ResponseBody
@@ -75,9 +75,9 @@ public class TestController {
 		return vo;
 	}
 	
-	/*	RESPONSEENTITY
-			- @RESTCONTROLLER 사용 시, 데이터 전달 과정에서 발생하는 예외를 제어하는 클래스
-			- 데이터 전송 중 예외가 발생한 경우 해당 클래스에서 HTTP 상태 코드를 반환하는 등의 예외 처리 작업이 가능하다.
+	/*	ResponseEntity
+			- @RestController 사용 시, 데이터 전달 과정에서 발생하는 예외를 제어하는 클래스
+			- 데이터 전송 중 예외가 발생한 경우 해당 클래스에서 Http 상태 코드를 반환하는 등의 예외 처리 작업이 가능하다.
 	 */
 	@RequestMapping("/test/entity")
 	public ResponseEntity<List<TestVO>> list() throws Exception{

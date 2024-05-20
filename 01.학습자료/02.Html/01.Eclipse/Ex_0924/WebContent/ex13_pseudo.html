@@ -4,22 +4,20 @@
 		<meta charset="UTF-8">
 		<title>슈도(Pseudo)클래스</title>
 	
-	<style type="text/css">
-		li{list-style: none;
-			display: inline;
-			margin-left: 10px;}
-			
-		/* 슈도 클래스는 nth-child로 시작한다. */
-		li:nth-child(odd) {color: red;} /* 홀수 번호 적용 */
-		li:nth-child(even) {color: green;} /* 짝수 번호 적용 */
-		li:nth-child(4n) {background: orange;} /* 숫자n 배수 적용 */
-		li:nth-child(10){background: fuchsia;} /* 특정 순서의 태그만 변경 */
-			
-	</style>
-	
+		<style type="text/css">
+			li{list-style: none;
+				display: inline;
+				margin-left: 10px;}
+				
+			/* 슈도클래스는 nth-child로 시작한다. */
+			li:nth-child(odd) {color: red;} 			/* 홀수 번호 적용 */
+			li:nth-child(even) {color: green;} 		/* 짝수 번호 적용 */
+			li:nth-child(4n) {background: orange;} 	/* 숫자n 배수 적용 */
+			li:nth-child(10){background: fuchsia;} 	/* 특정 순서의 태그만 변경 */
+				
+		</style>
 	</head>
 	<body>
-	
 		<ul>
 			<li>1</li>
 			<li>2</li>
@@ -32,6 +30,5 @@
 			<li>9</li>
 			<li>10</li>
 		</ul>
-	
 	</body>
 </html>

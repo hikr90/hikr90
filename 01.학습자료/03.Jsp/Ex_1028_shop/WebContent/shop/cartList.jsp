@@ -25,11 +25,12 @@
 				f.submit();
 			}
 			
-			// 삭제 (장바구니에서 물품만 삭제하는 것이므로 C_IDX를 지워야한다.)
+			// 삭제
 			function del(c_idx) {
 				if(!confirm("정말로 삭제하시겠습니까?")){
 					return;
 				}
+				//
 				location.href="cart_delete.do?c_idx="+c_idx;
 			}
 		</script>
@@ -51,36 +52,35 @@
 			</tr>
 			
 			<c:forEach var="vo" items="${ list }">
-			<tr align="center">
-				<td>${ vo.p_num }</td>
-				<td>${ vo.p_name }</td>
-				<td>
-					단가 : <fmt:formatNumber value="${ vo.p_price }"/><br>
-					<font color="red">
-						(할인가 : <fmt:formatNumber value="${ vo.p_saleprice }"/>)
-					</font>
-				</td>
-
-				<td>
-					<!-- 수량의 변화에따라 값을 다르게해야므로 폼 처리한다. CART_UPDATE.DO로 수량(C_CNT)을 몇개 보낼 것인지, 어느 M_IDX로 보낼 것인지 정한다. -->
-					<form action="cart_update.do">
-						<input type="hidden" name="c_idx" value="${ vo.c_idx }">
-						<input name="c_cnt" size="4" align="center" value="${ vo.c_cnt }">
-						<input type="submit" value="수정" onclick="modify(this.form);">
-					</form>
-				</td>
-			
-				<td><fmt:formatNumber value="${ vo.c_cnt * vo.p_saleprice }"/></td>
-				<td>
-					<input type="button" value="삭제" onclick="del(${vo.c_idx});">
-				</td>
-			</tr>
+				<tr align="center">
+					<td>${ vo.p_num }</td>
+					<td>${ vo.p_name }</td>
+					<td>
+						단가 : <fmt:formatNumber value="${ vo.p_price }"/><br>
+						<font color="red">
+							(할인가 : <fmt:formatNumber value="${ vo.p_saleprice }"/>)
+						</font>
+					</td>
+	
+					<td>
+						<form action="cart_update.do">
+							<input type="hidden" name="c_idx" value="${ vo.c_idx }">
+							<input name="c_cnt" size="4" align="center" value="${ vo.c_cnt }">
+							<input type="submit" value="수정" onclick="modify(this.form);">
+						</form>
+					</td>
+				
+					<td><fmt:formatNumber value="${ vo.c_cnt * vo.p_saleprice }"/></td>
+					<td>
+						<input type="button" value="삭제" onclick="del(${vo.c_idx});">
+					</td>
+				</tr>
 			</c:forEach>			
 			
 			<c:if test="${ empty list }">			
-			<tr>
-				<td colspan="6" align="center">장바구니가 비어있습니다.</td>
-			</tr>
+				<tr>
+					<td colspan="6" align="center">장바구니가 비어있습니다.</td>
+				</tr>
 			</c:if>
 			
 			<tr>

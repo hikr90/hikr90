@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.korea.daoImpl.TestDAOImpl;
+import com.korea.daoImpl.TestDaoImpl;
 import com.korea.service.TestService;
 import com.korea.serviceImpl.TestServiceImpl;
 import com.korea.vo.TestVO;

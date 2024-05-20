@@ -4,27 +4,27 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		
-		<!-- 외부 스타일 시트를 사용하는 이유 
-		*{margin:0;padding:0}이나 li 점 제거등 항상 사용하는 코드들을 최소화하기 위하여 -->
-		
-		<!-- 외부 스타일 참조 -->
+		<!-- link태그
+				- 외부 스타일 시트 태그
+				- 웹문서에서 모든 객체에 공통으로 적용되는 CSS코드를 최소화하기위해서 사용된다.
+				- rel 속성은 참조하려는 문서타입과 href로 파일의 경로를 지정한다.
+				
+				- [참고] CSS 참조 파일은 WebContent 폴더 안에 반드시 존재하여야하며 보통 관리가 용이하도록 CSS폴더를 생성하여 관리한다.
+		-->
 		<link rel="stylesheet" href="css/ex03_css.css">
 		<link rel="stylesheet" href="css/reset.css">
 		
 		<style type="text/css">
 			a{text-decoration: underline;}
 		</style>
-		
 	</head>
 	<body>
 		<p><a href="#" alt="임시">링크 걸기</a></p>
-		
 		<ul>
 			<li>A</li>
 			<li>B</li>
 			<li>C</li>
 		</ul>
-		
 		<h1>외부 스타일 연습</h1>
 	</body>
 </html>

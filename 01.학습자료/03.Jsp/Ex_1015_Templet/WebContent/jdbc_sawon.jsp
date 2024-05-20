@@ -24,7 +24,6 @@
 				<th>부서번호</th>
 				<th>급여</th>
 			</tr>
-		
 			<%for(int i=0;i<sawon_list.size();i++){ 
 				SawonVO vo = sawon_list.get(i);
 			%>
@@ -36,6 +35,5 @@
 				</tr>
 			<% } %>
 		</table>
-			
 	</body>
 </html>

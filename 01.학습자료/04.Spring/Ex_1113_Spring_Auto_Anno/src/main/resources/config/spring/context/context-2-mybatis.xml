@@ -4,29 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-	<!-- CONTEXT-2-MYBATIS
-			- CONTEXT-1에서 생성한 DB 객체를 사용하여 자바 객체와 SQL간 맵핑을 돕는 마이바티스 객체를 주입
-			- 마이바티스 사용 시, MYBATIS, MYBATIS-SPRING, SPRING-JDBC 세가지의 라이브러리가 POM.XML에 저장되어야한다.
-	 -->
-	 
-	 <!-- 
-	 		SQLSESSIONFACTORYBEAN
-	 			- DB 연동 정보를 가지고있는 DS객체를 참조 (어떤 DB에 접속할 것인가)
-	 			- 맵퍼 설정에 관련된 정보를 가지고있는 MYBATIS-CONFIG.XML를 참조 (어떤 맵퍼를 사용하여 SQL문과 연동할 것인가)
-	 -->
 	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
 		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
 	</bean>	 
 	
-	<!-- SQLSESSIONTEMPLATE
-			- SQLSESSION 인터페이스를 SINGLETON방식으로 구현하는 클래스
-			- 위에서 생성한 FACTORYBEAN 객체를 SQLSESSIONTEMPLATE 객체에 주입하여
-			- MYBATIS-CONFIG에 등록되어있는 맵퍼(XML) 를 등록해주는 역할을 한다.
-			- DB와 MYBATIS의 정보를 참조하는 SQLSESSIONBEAN 빈객체를 생성
-			- SQLSESSIONTEMPLATE클래스는 파라미터를 받는 생성자만 있어서 생성자 인젝션으로 주입해야한다.
-	-->
 	<bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="factoryBean"/>
 	</bean>

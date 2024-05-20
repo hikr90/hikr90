@@ -5,22 +5,25 @@
     pageEncoding="UTF-8"%>
 
 <%
+	/* VO의 EL표기법
+		- 전체 표현 : ${영역.객체.getName()}
+		- 영역 생략 : ${객체["값"]}
+		- 가장 보편적인 형태 : ${객체.값}		// 따로 getter와 setter가 있어야 사용 가능하다.
+	*/
 	PersonVO vo = new PersonVO("김태현",31);
-	/* 객체를 저장 */
 	request.setAttribute("vo", vo);
-	
+	//	
 	PersonVO vo2 = new PersonVO("김나영",28);
 	request.setAttribute("vo2", vo2);
-	
-	/* arrayList 생성 */
+
+	/* List의 EL표기법
+		- 가장 보편적인 형태 : ${list[인덱스].값}
+	*/
 	List<PersonVO> arr_list = new ArrayList();
-	
+	//	
 	arr_list.add(vo);
 	arr_list.add(vo2);
-	
-	/* arr_list를 통째로 저장한다 */
 	request.setAttribute("m_arr", arr_list);
-	
 %>
 
 <!DOCTYPE html>
@@ -30,18 +33,16 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		풀코딩(안씀) : ${requestScope.vo.getName() }<br>
+		# VO
+		전체 표현 : ${requestScope.vo.getName() }<br>
 		<hr>
-		약간 줄인 코딩(가끔 씀)(\${ vo['name']}) : ${ vo['name']}<br>
+		영역 생략 : ${ vo['name']}<br>
 		<hr>
-		<!-- 아래의 방식을 사용하기위해서는 Setter와 Getter가 반드시 있어야한다. -->
-		최종형태(\${ vo.age }) : ${ vo.name }<br>
+		가장 보편적인 형태 : : ${ vo.name }<br>
 		
-		<hr>
-		<hr>
-		<!-- 배열 처리하듯이 데이터를 꺼내오는 것이 가능하다. -->
-		ArrayList m_arr에 담겨있는 정보 출력(\${ m_arr[0].name }) : ${ m_arr[0].name }<br>
-		
-				
+		<hr><hr>
+
+		# List
+		가장 보편적인 형태 : ${ m_arr[0].name }<br>
 	</body>
 </html>

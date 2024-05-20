@@ -6,19 +6,17 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class DBService {
-	
-	// SINGLE-TON PATTERN 
+	//
 	static DBService single = null;
-	
+	//
 	public static DBService getInstance() {
 		if (single == null)
 			single = new DBService();
 		return single;
 	}
-	
-	
+	//
 	DataSource ds;
-	
+	// 생성자
 	private DBService() {
 		try {
 			InitialContext ic = new InitialContext();
@@ -28,7 +26,8 @@ public class DBService {
 
 		}
 	} 
-	
+
+	// DB 연동
 	public Connection getConnection() {
 		Connection conn = null;
 		

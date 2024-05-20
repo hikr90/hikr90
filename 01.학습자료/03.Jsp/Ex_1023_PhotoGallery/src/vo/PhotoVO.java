@@ -1,13 +1,14 @@
 package vo;
 
 public class PhotoVO {
+	//
 	private int idx;
 	private String title;
 	private String filename;
 	private String pwd;
 	private String ip;
 	private String regidate;
-
+	//
 	public int getIdx() {
 		return idx;
 	}
@@ -44,6 +45,4 @@ public class PhotoVO {
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
-	
-	
 }

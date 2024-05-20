@@ -14,7 +14,6 @@
 	
 	</head>
 	<body>
-		
 		<table border="1" align="center" width="700px"
 				style="border-collapse: collapse;">
 			
@@ -34,11 +33,11 @@
 				
 				<td>
 				<!-- 댓글 들여쓰기
-						- 댓글은 DEPTH의 값에따라 알 수 있다. 
+						- 댓글은 Depth의 값에따라 알 수 있다. 
 						- 댓글인 경우 1, 대댓글인 경우 2 
 				-->
 				<c:forEach begin="1" end="${ vo.depth }">
-					&nbsp; <!-- 들여쓰기위한 공백 -->
+					&nbsp;
 				</c:forEach>
 				
 				<!-- 댓글 기호 -->
@@ -54,8 +53,8 @@
 				</c:if>
 				
 				<!-- 삭제 처리되지 않은 항목
-						- 처음 실행시 PAGE는 NULL값이므로 삼항연산자를 통해서 NULL인 경우 1페이지를 LIST.DO에 반환할 수 있어야한다. 
-						- 특정 페이지에 PAGE값이 있는 경우 해당 값을 LIST.DO로 반환하여 작업이 완료된 후 해당 페이지에 머물도록 한다.   
+						- 처음 실행시 Page는 NULL값이므로 삼항연산자를 통해서 NULL인 경우 1페이지를 list.do에 반환할 수 있어야한다. 
+						- 특정 페이지에 Page값이 있는 경우 해당 값을 list.do로 반환하여 작업이 완료된 후 해당 페이지에 머물도록 한다.   
 				-->
 				<c:if test="${ vo.del_info eq 0 }">
 				<a href="view.do?idx=${ vo.idx }&page=${ empty param.page ? 1 : param.page }">
@@ -81,19 +80,14 @@
 			<!-- 페이지 목록 -->
 			<tr align="center">
 				<td colspan="5">
-				<!-- 하단 페이지에 PAGEMENU를 불러온다. -->
+					<!-- 하단 페이지에 pageMenu를 불러온다. -->
 					${ pageMenu }
 				</td>
 			</tr>
 			
 			<tr>
 				<td colspan="5">
-				<!-- CURSOR:POINTER
-						- 이미지에 마우스를 올렸을 때, 손가락 아이콘으로 변경되는 기능
-				-->
-					<img src="${pageContext.request.contextPath}/resources/img/btn_reg.gif" align="right"
-						onclick="location.href='insert_form.do'"
-						style="cursor:pointer;"> 
+					<img src="${pageContext.request.contextPath}/resources/img/btn_reg.gif" align="right" onclick="location.href='insert_form.do'" style="cursor:pointer;"> 
 				</td>
 			</tr>
 		</table>

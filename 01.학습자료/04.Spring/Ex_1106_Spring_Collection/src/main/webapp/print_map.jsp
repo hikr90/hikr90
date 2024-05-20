@@ -7,7 +7,6 @@
 <%
 	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application);
 	MyMap MyMap = (MyMap)wac.getBean("MyMapBean");
-	
 	request.setAttribute("map", MyMap.getMap());
 %>
 

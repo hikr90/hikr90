@@ -25,17 +25,15 @@ public class ProductViewAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 제품 모델의 작은 사진을 눌렀을 때 나오는 ACTION영역
-		// 받아온 IDX값을 파라미터로 받는다.
+		// 제품의 썸네일 사진을 클릭한 경우
+		// 받아온 인덱스 값을 파라미터로 사용
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
-		// IDX에 맞춰서 해당 정보를 로드
+		// 인덱스에 해당하는 제품 정보 조회
 		ProductVO vo = ProductDAO.getInstance().selectone(idx);
 		request.setAttribute("vo", vo);
-		
-		// 바인딩, 포워딩
+		//
 		RequestDispatcher disp = request.getRequestDispatcher("product_content.jsp");
 		disp.forward(request, response);
 	}
-
 }

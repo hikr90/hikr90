@@ -10,7 +10,7 @@ import com.korea.dao.TestDao;
 import com.korea.vo.TestVO;
 
 @Repository
-public class TestDAOImpl implements TestDao{
+public class TestDaoImpl implements TestDao{
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -29,7 +29,7 @@ public class TestDAOImpl implements TestDao{
 		return res;
 	}
 
-	
+	// 테스트 변경 2
 	public int updateTest2() {
 		//
 		int res = sqlSession.update("test.test_update2","TEST_0002");

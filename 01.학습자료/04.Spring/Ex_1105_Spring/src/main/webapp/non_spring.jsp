@@ -2,9 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- SPRING방식이 아닌 JSP형식의 구조
-		- REQUSET에 저장하여 BODY에서 EL표기법으로 사용 
-		- (기존에 JSP에서 사용하던 방식)
+<!-- [참고] Spring방식이 아닌 Jsp 구조
+		- Request에 저장하여 바디 영역에서 EL표기법으로 사용
 -->
 
 <%

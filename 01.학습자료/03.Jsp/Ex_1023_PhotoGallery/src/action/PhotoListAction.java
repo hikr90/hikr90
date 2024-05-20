@@ -24,18 +24,11 @@ public class PhotoListAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 사진 목록 가져오기
+		// 목록 조회
 		List<PhotoVO> list = PhotoDAO.getInstance().selectList();
-		
-		// 바인딩
-		request.setAttribute("list", list);
-		// photo_list.jsp로 결과값을 포워딩
+		request.setAttribute("list", list);		// 바인딩
+		//
 		RequestDispatcher disp = request.getRequestDispatcher("photo_list.jsp");
-		disp.forward(request, response);
-		
-	
-		
+		disp.forward(request, response);		// 포워딩
 	}
-
 }

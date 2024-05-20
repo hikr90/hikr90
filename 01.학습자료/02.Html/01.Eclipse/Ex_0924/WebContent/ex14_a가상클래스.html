@@ -4,35 +4,25 @@
 		<meta charset="UTF-8">
 		<title>a태그의 가상 클래스들</title>
 		<style type="text/css">
-			li{list-style: none;
-				margin: 5px 0;}
+			li{list-style: none; margin: 5px 0;}
+			a{text-decoration: none; color: gray;}
 			
-			a{text-decoration: none;
-				color: gray;}
-			
-/* 			visited (방문시, 클릭하고 난 뒤의 표현) 
-			a:visited{color: fuchsia;} */
-			
-			/* hover (마우스 댄 경우) */
-			a:hover{color: orange;
-					text-decoration: line-through;}	
-			
-			/* active (클릭감지, 마우스로 클릭한 경우) */
-			/* 주의사항 :: hover와 active를 같이 사용하는 경우 반드시 hover가 더 위에 있어야한다. */
-			a:active{color: red;}
-			
-			
-			
+			/*	가상클래스 
+					- 특정 행위를 감지하는 태그
+					- : 기호를 사용하여 동작한다.
+			*/
+
+			/* 	a:visited{color: fuchsia;} visited : 페이지 방문 후의 표시 */
+			a:hover{color: orange; text-decoration: line-through;} /* hover : 마우스를 가져다댄 경우 */
+			a:active{color: red;} /* active : 마우스로 클릭한 경우, hover와 active를 같이 사용하는 경우 반드시 hover가 더 위에 있어야한다. */
 		</style>
 	</head>
 	<body>
-	
 		<ul>
 			<li><a href="#">HOME</a></li>		
 			<li><a href="#">JOIN</a></li>		
 			<li><a href="#">MAP</a></li>				
 			<li><a href="#">LANGUAGE</a></li>				
 		</ul>
-	
 	</body>
 </html>

@@ -1,7 +1,7 @@
 package ex2_array_list;
 
 public class User {
-	
+	//
 	private String name;
 	private int age;
 

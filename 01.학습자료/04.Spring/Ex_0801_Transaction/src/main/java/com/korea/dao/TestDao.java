@@ -9,5 +9,4 @@ public interface TestDao {
 	//
 	int updateTest1() throws Exception;
 	int updateTest2() throws Exception;
-	
 }

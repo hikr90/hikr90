@@ -1,4 +1,4 @@
-package action;
+package action; 
 
 import java.io.File;
 import java.io.IOException;
@@ -26,59 +26,73 @@ public class FileUploadAction extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// multipart를 할 경우 request.setCharacterEncoding("utf-8"); 을 쓰지 않는다.
+		/* 파일 업로드 
+		 * 	- 자바에서는 문서의 이미지등의 파일을 실제 DB에 저장하지 않는다.
+		 * 	- 실제 사진이나 문서 등은 파일의 서버 (개발자의 PC)에 저장하고 DB에는 저장 파일에대한 위치 정보를 저장한다.
+		 * 	- 필요한 경우 DB에서 경로를 통해서 해당 파일을 가져오는 방식으로 사용한다.
+		 * 
+		 * 	라이브러리 등록
+		 * 		(1) http://www.servlet.com 접속 후 cos file upload 선택하여 cos.zip 다운로드
+		 * 		(2) 해당 파일을 프로젝트 내 경로 WEB-INF > lib 폴더 내 저장
+		 * 
+		 * 	MultipartRequest
+		 * 		- 파일 업로드 클래스
+		 * 		- 파라미터로는 요청, 저장경로, 최대용량, 인코딩타입, 동일파일명 정책 설정등을 넣는다.
+		 * 		- 객체 사용 시, 같이 전송하는 데이터중에 파일 형식이 아닌 데이터도 multipartRequest를 사용하여 받아야한다.
+		 * 		- 해당 클래스 사용 시 setCharacterEncoding("utf-8")을 사용하지 않는다.
+		 * 
+		 * 		파라미터
+		 * 			(1) request 			: 요청 객체 
+		 * 			(2) saveDirectory		: 업로드 파일을 저장할 경로
+		 * 			(3) maxPostSize			: 업로드 파일의 최대 크기 (높이*너비*최대용량)
+		 * 			(4) encoding			: 인코딩 타입
+		 * 			(5) policy				: 동일 파일명 정책 (중복처리)
+		 * 
+		 * 		메소드 
+		 * 			(1) getFile(String name) 				: 업로드된 파일을 파일 형식의 객체 타입으로 반환
+		 * 			(2) getParameter(String name) 			: name속성에 해당하는 파라미터 리턴 (단, 파일형식이 아닌 경우 사용)
+		 * 			(3) getOriginalFileName(String name) 	: 업로드한 파일명의 원래 명칭을 반환 
+		 */
 		
-		// 서버(PC) 어느 폴더에 저장할지에대한 경로 (상대경로)
+		// 상대 경로 지정
 		String web_path = "/upload/";
 		
-		// ServletContext : 현재 웹 애플리케이션을 관리하는 객체
+		/*	ServletContext
+		 *		- 현재 웹 애플리케이션을 관리하는 객체 
+		 *		- getRealPath는 프로젝트 상의 상대경로를 절대경로로 변환하는 코드
+		 */
 		ServletContext applicaion = request.getServletContext();
-		// 프로젝트상의 상대경로를 절대경로로 변환하는 코드
-		String path = applicaion.getRealPath(web_path); // (절대경로)
+		String path = applicaion.getRealPath(web_path);
 		System.out.println("경로 : "+path);
 		
-		
-		// MAX_SIZE : 파일의 최대 업로드 용량 (높이,너비,최대용량 ) (서버가 허락하는한 더 크게 잡을 수 있다.)
-		// BUFFERED STREAM을 사용해서 업로드할 때만 일시적으로 공간을 잡는 것이여서 최대 100MB를 잡는 것이지 1MB 파일을 올리면 1MB의 공간만 잡게된다.
+		// 파일의 최대 용량
+		//	- 최대용량보다 작은 파일의 경우 최대용량과 상관없이 파일의 최대용량만큼의 용량만 잡는다.
 		int max_size = 1024*1024*100; 
 		
-		// MultipartRequest : 파일을 포함하고 있는 데이터를 수신하고 처리하기위한 클래스
-		// cos라이브러리를 다운받아 넣지 않았다면 MutipartRequest는 사용할 수 없다. (import com.oreilly.servlet.MultipartRequest; : cos의 라이브러리)
-		
-		// MultipartRequest(요청처리객체 request, 업로드위치, 최대업로드 용량, 인코딩 타입, 동일파일명정책)
-		// <re는 일반파라미터는 받아도 파일형식을 못받는다. 그래서 파일을 받을 수 있도록 MultipartRequest 객체를 줄테니 참고해서 mr로 받아줘 (request위임)>
-		// 동일 파일명 정책  : 파일명이 중복되었을 때, 넘버링해서 자동으로 파일명을 바꿔주는 클래스
-		MultipartRequest mr = new MultipartRequest(request, path, max_size, "utf-8",
-				new DefaultFileRenamePolicy());
-		
+		// 파일 클래스 선언
+		MultipartRequest mr = new MultipartRequest(request, path, max_size, "utf-8", new DefaultFileRenamePolicy());
 		
 		// 업로드된 파일정보(제목, 파일명) 얻어오기
 		String filename = "no_file";
-		
-		// 파일의 경로를 받음
-		// 파일을 받을때는 파일형태로 받아야하므로 (Multipart)mr.getfile로 받아야한다. (c:/upload/파일명.jpg (파일명이 아닌 파일의 정보를 가지고옴))
-		File f = mr.getFile("photo");
-		
-		// 파일이 정상적으로 업로드되었다 : !=null
+		File f = mr.getFile("photo");		// 파일 객체를 가져온다.
+		//
 		if(f!=null) {
-			// f.getName : 파일의 명칭
+			// f.getName은 파일의 명칭을 가져오는 메소드이다.
 			filename = f.getName();
 		}
 		
-		// 파일의 제목을 받음
-		// Multipart로 파일을 보내는 순간부터는 절대로 일반 파라미터받듯이 request.getparameter로 못받는다. (일반파라미터도 request로 담겨져 Multipart로 위임하여 처리하는 것으로 약속했기때문이다.)
+		// 파일의 제목
+		// 	- MultipartFile로 요청을 받는 순간부터 일반 파라미터 역시 request.getParamter로 받을 수 없다.
+		// 	- mr.getParamter메소드로만 받을 수 있다.
 		String title = mr.getParameter("title");
 		
 		// 바인딩
-		// 파일명과 제목의 값을 받았으니 result.jsp에서 el표기법으로 사용할 수 있도록 바인딩(저장)시킨다.
 		request.setAttribute("title", title);
 		request.setAttribute("filename", filename);
 		
 		// 포워딩
-		// 위에서 바인딩 해놓은 값을 result.jsp에서 el표기법으로 가져다 사용할 수 있게 만든다.
+		//	- result.jsp에서 방니딩한 값을 사용할 수 있도록 한다.
 		RequestDispatcher disp = request.getRequestDispatcher("result.jsp");
 		disp.forward(request, response);
-		
 	}
-
 }

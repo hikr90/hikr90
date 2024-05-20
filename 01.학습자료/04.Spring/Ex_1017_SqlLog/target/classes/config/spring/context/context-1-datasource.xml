@@ -16,6 +16,10 @@
 		<property name="maxActive" value="20"/>
 	</bean>
 	
+	<!-- Log4jdbcProxyDataSource
+			- db.properties를 통해서 가져온 DB접근 객체를 해당 클래스를 사용하여
+			- 로그 출력을 하는 클래스로 생성자 주입을 통하여 객체를 생성한다.
+	-->
 	<bean id="ds" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 	    <constructor-arg ref="dataSourceSpied" />
 	    <property name="logFormatter">

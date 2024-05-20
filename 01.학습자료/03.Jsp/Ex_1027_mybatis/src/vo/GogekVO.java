@@ -1,12 +1,13 @@
 package vo;
 
 public class GogekVO {
+	//
 	private int gobun;
 	private String goname;
 	private String goaddr;
 	private String gojumin;
 	private int godam;
-
+	//
 	public int getGobun() {
 		return gobun;
 	}
@@ -37,6 +38,4 @@ public class GogekVO {
 	public void setGodam(int godam) {
 		this.godam = godam;
 	}
-	
-	
 }

@@ -1,13 +1,14 @@
 package vo;
 
 public class MemberVO {
+	//
 	private int idx;
 	private String name;
 	private String id;
 	private String pwd;
 	private String email;
 	private String addr;
-
+	//
 	public int getIdx() {
 		return idx;
 	}
@@ -44,5 +45,4 @@ public class MemberVO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	
 }

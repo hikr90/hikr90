@@ -2,71 +2,83 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<!-- form태그 : 서버로 값을 전달
-			form 태그를 이용해서 서버에 값을 전달하는 방법은 세가지가 있다. -->
 		<title>자바 스크립트의 form 태그를 사용하여 서버에 값 전달 1</title>
 		
 		<script type="text/javascript">
+			/*	form태그
+					- 사용자로부터 정보를 입력받기위해서 사용하는 태그
+					- input, select 등 form태그의 name 명칭과 value값이 key, value 값을 쌍으로 이뤄 action의 주소로 전송한다.
+					- form태그를 사용하여 서버로 데이터를 보내는 방식은 총 세가지가 있다.
+					
+					속성
+						- action : 데이터를 전송할 주소
+						- method : 전송 방식
+							(1) get
+								- 기본 값
+								- url에 값을 붙여서 전송되는 방식으로 속도가 높으나 사용자에게 변수가 노출되어 보안이 약하다.
+								- 문자열 형식의 데이터 전송
+								
+							(2) post
+								- url에 값을 노출하지 않는 방식으로 속도가 느리고 한글 전송 시 인코딩을 해야한다.
+								- 문자열, 바이너리 형식의 데이터 전송
+								- 데이터 길이에 제한이 없다.
+								
+					에러
+						- 404 : 전송하는 페이지를 찾지 못하는 에러
+						- 500 : 전송 값이 잘못되는 경우 등의 서버 에러
+			*/
+			
+			// form태그의 1번 방식
+			//	- document 객체에서 form단위 인덱스 배열로 form태그를 찾은 뒤 스크립트 내에서 원하는대로 사용하는 방식
 			function check1() {
-				/* body안에 존재하는 form태그를 배열형식으로 저장해두고 원하는 form태그를 찾아내는 구조 
-				body안에 있는 form의 순서에따라서 []안의 숫자가 결정된다.
-				아래의 식은 id, pwd, blood 입력태그를 가지고있는 폼 태그 그 자체이다. */
+							
+				// form태그 사용 시 document.forms에 form단위 인덱스로 배열 형태에 저장된다.
 				var f = document.forms[0];
 				
-				/* name이 id인 입력상자(f.id)의 값(f.id.value)을 id변수로 이동 */
+				// input태그 중 name값이 id, pwd인 값을 저장
 				var id = f.id.value;
 				var pwd = f.pwd.value;
-				
-				/* 유효성 체크 
-				유효성 체크는 형식에 맞는 값이 왔는지 판단하는 작업으로 클라이언트에서 하는 것이 빠르다. */
+
+				// 유효성 검증
+				// - 유효성 체크는 형식에 맞는 값이 왔는지 화면 단에서 판단하는 작업이다.
 				if(id==''){
 					alert("아이디를 입력해야합니다.");
-					/* 값을 다시 받아야하므로 return을 만나서 메서드를 그냥 나오게 해야한다. (서버로 값이 넘어가지 않도록) */
+					// 검증에 실패하였으므로 return을 만나 메소드를 그냥 나오게 한다.
 					return;
 				}
-				
 				if(pwd==''){
 					alert("비밀번호를 입력해야합니다.");
 					return;
 				}
 				
-				/* 전송 방식 
-					GET : URL 노출 (속도가 빠르지만 보안성이 낮다.)
-					POST : URL 노출 X (속도가 느리고 한글을 받는 경우 특정한 인코딩이 필요하지만 보안성이 높다.) */
+				// 전송 방식
 				f.method = "get";
 				
-				/* 파라미터를 전달할 페이지 (가지고 어떤 페이지로 가는지) */
+				// 파라미터를 전달한 주소
 				f.action = "login.jsp";
 				
-				/* 서버로 파라미터를 전송 */
+				// submit 
+				// - 파라미터를 가진 채 서버로 전송
 				f.submit();
-				
-				// 404 오류 : 파라미터를 넘기는 페이지의 주소를 찾을 수 없는 경우
-				
 			}
 		</script>
 				
 	</head>
 	<body>
-		<!-- 폼 태그 안에 존재하는 name 속성이 파라미터를 통해서 서버 측으로 전달되도록 되어있다. -->
 		<form action="">
 			<table border="1">
 				<tr>
 					<th>아이디</th>
-					<!-- input은 form태그의 자식이다. 
-							name은 -->
 					<td><input type='text' name="id"></td>
 				</tr>
 
 				<tr>
 					<th>비밀번호</th>
-					<!-- pwd를 입력하는 input의 경우는 type을 password로 주면 된다. -->
 					<td><input type='password' name="pwd"></td>
 				</tr>
 
 				<tr>
 					<th>혈액형</th>
-					<!-- select는 자바의 choice와 같다. select안에는 option이라는 보조 태그가 있다.-->
 					<td><select name="blood">
 						<option>혈액형을 선택해주세요.</option>
 						<option>A형</option>
@@ -77,16 +89,12 @@
 				</tr>				
 			</table>
 			
-			<!-- submit은 button과 외형은 같으나 폼태그안에 있는 name(자식)의 현재 선택된 값 혹은 들어가있는 파라미터로 넘긴다.
-				jsp에서는 위와 같이 잡은 name값들을 파라미터라고 부른다. 
-				아무런 내용을 넣지 않아도 submit은 name속성의 값을 그대로 넘긴다. -->
+			<!-- submit & button 차이
+					- submit은 스크립트 진입 없이 form태그 내에 있는 form 요소 (input 등) 의 name과 value값을 action주소로 넘긴다.
+					- button은 스크립트 영역에서 함수를 통해서 전송
+			-->
 			<input type="submit" value="폼 예제1">
 			<input type="button" value="폼 버튼" onclick="check1();">
-			
-			<!-- submit과 button의 차이
-				submit은 유효성 검사 없이 칸이 비어있던 없던 그대로 값이 넘어간다.
-				button은 메서드를 사용하여 메서드를 통해 유효성 검사를 한 뒤, 올바른 값을 서버로 보내는 것이 가능하다. -->
-			
 		</form>
 	</body>
 </html>

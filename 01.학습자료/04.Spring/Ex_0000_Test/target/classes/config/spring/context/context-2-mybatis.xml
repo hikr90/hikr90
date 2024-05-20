@@ -4,13 +4,29 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- context-2-mybatis.xml
+			- context-1-datasource.xml에서 생성한 DB객체를 사용하여
+			- 자바 객체와 Sql간 맵핑하는 mybatis 객체를 주입한다.
+			- mybatis, mybatis-spring, spring-jdbc 세가지 라이브러리가 pom.xml 에 있어야한다.
+	-->
+	
+	<!-- sqlSessionFactroyBean
+			- DB연동 정보를 가지고있는 ds객체를 참조하여 군집을 생성하는 클래스
+			- DB설정 정보 및 맵퍼 정보를 가지고있는 mybatis-config.xml 파일을 파라미터로 받는다.
+	-->
 	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
 		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
 	</bean>	 
 	
+	<!-- sqlSessionTemplate
+			- sqlSession 인터페이스를 싱글톤 방식으로 구현하는 클래스
+			- DB와 mybatis의 정보를 참조하는 sqlSessionBean 객체를 생성한다.
+			- factoryBean객체를 sqlSessionTemplate 객체에 주입하여 mybatis-config.xml에 있는 맵퍼를 등록하는 역할을 한다.
+			- 해당 클래스는 생성자만 존재해서 생성자 인젝션으로만 주입해야한다.
+	-->	
 	<bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="factoryBean"/>
 	</bean>
-	
 </beans>

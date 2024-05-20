@@ -71,12 +71,12 @@
 		</tr>
 		
 		<c:forEach var="list" items="${ list }">
-		<tr>
-			<td>${ list.test_no }</td>
-			<td>${ list.test_nm }</td>
-			<td>${ list.disp_order }</td>
-			<td>${ list.remark }</td>
-		</tr>
+			<tr>
+				<td>${ list.test_no }</td>
+				<td>${ list.test_nm }</td>
+				<td>${ list.disp_order }</td>
+				<td>${ list.remark }</td>
+			</tr>
 		</c:forEach>
 	</table>
 </form>

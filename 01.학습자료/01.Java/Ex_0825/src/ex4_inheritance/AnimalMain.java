@@ -3,7 +3,7 @@ package ex4_inheritance;
 public class AnimalMain {
 	
 	public static void main(String[] args) {
-		
+		//
 		Cat cat = new Cat();
 		System.out.println("---고양이---");
 		System.out.println("다리 : "+cat.getLeg());
@@ -19,7 +19,7 @@ public class AnimalMain {
 		System.out.println("특징 : "+ele.nose);
 
 		System.out.println("------------------");
-	
+		//
 		Lion lion = new Lion();
 		System.out.println("---사자---");
 		System.out.println("다리 : "+lion.getLeg());
@@ -27,7 +27,7 @@ public class AnimalMain {
 		System.out.println("특징 : "+lion.galgi);
 	
 		System.out.println("------------------");
-
+		//
 		Snake sn = new Snake();
 		System.out.println("---뱀---");
 		System.out.println("다리 : "+sn.getLeg());
@@ -35,7 +35,7 @@ public class AnimalMain {
 		System.out.println("특징 : "+sn.sence);
 		
 		System.out.println("------------------");
-
+		//
 		Spider sp = new Spider();
 		System.out.println("---거미---");
 		System.out.println("다리 : "+sp.getLeg());

@@ -9,7 +9,7 @@ import com.korea.dao.TestDao;
 import com.korea.vo.TestVO;
 
 @Repository
-public class TestDAOImpl implements TestDao{
+public class TestDaoImpl implements TestDao{
 	
 	@Autowired
 	SqlSession sqlSession;

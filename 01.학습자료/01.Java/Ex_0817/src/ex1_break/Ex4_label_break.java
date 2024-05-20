@@ -3,10 +3,9 @@ package ex1_break;
 public class Ex4_label_break {
 
 	public static void main(String[] args) {
-
+		//
 		int n = 1;
-
-		
+		//
 		sj : while(true) {
 			System.out.println(n);
 
@@ -18,21 +17,9 @@ public class Ex4_label_break {
 			case 2:
 				System.out.println("2ÂïÀ½");
 				break sj;
-
 			}
-
+			//
 			n++;
 		}
-
-
-
-
-
-
-
-
-
-
-
 	}
 }

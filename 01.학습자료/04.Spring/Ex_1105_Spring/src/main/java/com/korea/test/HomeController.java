@@ -30,15 +30,18 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		
-		/* MODEL 
-		 	- REQUEST의 역할을 대신한다.
-		 	- ADDATTRIBUTE를 통해서 데이터를 바인딩 가능하다.
+		/* Model 
+		 	- Request의 역할을 대신한다.
+		 	- addAttribute를 통해서 데이터를 바인딩 가능하다.
 		*/
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("hello","spring시작을 환영합니다.");
-		// RETURN을 통해서 화면(JSP)으로 FORWARDING이 가능하다.
-		// MODEL에 저장한 값을 HOME.JSP로 보내준다. 
-		// (SERVLET-CONTEXT에서 JSP값을 자동으로 붙여주도록 지정되어있어 HOME만으로도 전송이 가능하다.)
+		
+		/*	Return 역할
+		 * 		- 화면으로 이동하는 Forwarding의 역할을 한다.
+		 * 		- Model에 저장한 값을 home.jsp로 보내준다.
+		 * 		- Servlet-context.xml에서 Jsp값을 자동으로 붙여주도록 설정이 되어있어 명칭만으로도 포워딩이 가능하다.
+		 */
 		return "home";
 	}
 	

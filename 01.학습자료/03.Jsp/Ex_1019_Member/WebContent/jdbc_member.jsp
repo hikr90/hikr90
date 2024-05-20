@@ -15,24 +15,28 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script type="text/javascript">
+		// 삭제
 		function del(idx) {
 			if(!confirm("정말로 삭제하시겠습니까?")){
 				return;
 			}
-			
+			//			
 			location.href = "member_del.jsp?idx="+idx;
 		}
 		
+		// 등록
 		function register() {
 			var disp = document.getElementById("disp");
 			disp.style.display = "block";
 		}
-		
+
+		// 취소
 		function cancel() {
 			var disp = document.getElementById("disp");
 			disp.style.display = "none";
 		}
 		
+		// 등록
 		function send(f) {
 			var name = f.name.value;
 			var id = f.id.value;
@@ -41,7 +45,7 @@
 			var addr = f.addr.value;
 			var pwd_pattern = /^[0-9]+$/;
 			var email_pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			
+			//			
 			if(name==""){
 				alert("이름을 입력해주세요.");
 				return;
@@ -62,35 +66,34 @@
 				alert("이메일의 형식에 맞지 않습니다.");
 				return;
 			}
-			
+			//
 			f.method="POST";
 			f.action = "member_register.jsp";
 			f.submit();
-			
 		}
-		
+
+		// 수정
 		function update(idx,name,id,pwd,email,addr) {
 			var disp2 = document.getElementById("disp2");
 			disp2.style.display = "block";
-			
+			//			
 			document.getElementsByName("name2")[0].value = name;
 			document.getElementsByName("id2")[0].value = id;
 			document.getElementsByName("pwd2")[0].value = pwd;
 			document.getElementsByName("email2")[0].value = email;
 			document.getElementsByName("addr2")[0].value = addr;
 			document.getElementsByName("idx")[0].value = idx;
-			
-			
 		}
-		
+
+		// 수정 영역 제거
 		function cancel_update() {
 			var disp2 = document.getElementById("disp2");
 			disp2.style.display = "none";
 		}
 		
-	
+		// 등록	
 		function send2(f) {
-			
+			//
 			var name = f.name2.value;
 			var id = f.id2.value;
 			var pwd = f.pwd2.value;
@@ -98,7 +101,7 @@
 			var addr = f.addr2.value; 
 			var pwd_pattern = /^[0-9]+$/;
 			var email_pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			
+			//			
 			if(name==""){
 				alert("이름을 입력해주세요.");
 				return;
@@ -119,19 +122,15 @@
 				alert("이메일의 형식에 맞지 않습니다.");
 				return;
 			}
-
-			
+			//
 			f.action = "member_update.jsp";
 			f.method = "POST"; 
 			f.submit();
-
 		}
-		
 	</script>
 	
 	</head>
 	<body>
-	
 		<table border="1">
 			<caption>::회원정보::</caption>
 			<tr>
@@ -143,7 +142,6 @@
 				<th>주소</th>
 				<th colspan="2">비고</th>
 			</tr>
-			
 				<% for(int i=0;i<member_list.size();i++){ 
 					MemberVO vo = member_list.get(i);
 				%>
@@ -167,7 +165,6 @@
 				<td colspan="8"><input type="button" value="회원 등록" onclick="register()"></td>
 			</tr>	
 		</table>
-	
 		
 		<div id="disp" style="display:none;">
 			<form>

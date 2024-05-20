@@ -1,8 +1,7 @@
 package vo;
 
 public class TestVO {
-	
-	/*	CAMEL표기법등의 처리가 없는 경우, DB 컬럼과 VO변수 명칭은 같아야한다. */
+	/*	카멜표기법 세팅이 되어있는 경우 DB 컬럼과 VO변수 명칭은 같아야한다. */
 	private String test_no, test_nm, remark;
 	private int disp_order;
 	//

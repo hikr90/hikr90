@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	//
 	function sendData() {
-		// DATA
+		// Data
 		var data = {
 				test_no:"TEST_0001",
 				test_nm:"TEST",
@@ -20,7 +20,7 @@
 				remark:"NULL"
 		}
 		
-		// AJAX
+		// Ajax
 		$.ajax({
 			type:"post",
 			url:"${pageContext.request.contextPath}/test/sendData",

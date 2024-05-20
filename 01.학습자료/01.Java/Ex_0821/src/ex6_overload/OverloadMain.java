@@ -1,40 +1,21 @@
 package ex6_overload;
 
 public class OverloadMain {
+
 	public static void main(String[] args) {
+		// 메소드 선언
+		Ex_Overload ov = new Ex_Overload();
 		
-	Ex_Overload ov = new Ex_Overload();
-	
-	// 같은 메서드를 호출해도 파라미터의 여부에따라서 다른 결과값이 나온다. 
-	ov.result();
-	ov.result(20);
-	ov.result('A');
-	// 파라미터를 받는 순서도 일치해야한다. 
-	ov.result("dd",10);
-	ov.result(10,"dd");
-	
-	// syso도 오버로딩을 사용해서 만들어진 메서드이다.
-	System.out.println();
+		// - 같은 메소드를 호출하더라도
+		// - 파라미터의 여부, 파라미터의 순서 등에따라서 다른 메소드가 노출된다.
+		ov.result();
+		ov.result(20);
+		ov.result('A');
+		ov.result("dd",10);
+		ov.result(10,"dd");
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// - System.out.println 역시 오버로딩의 대표적인 메소드이다.
+		// - 여러 타입의 파라미터를 받을 수 있으며 변수가 있지 않은 경우도 받을 수 있다.
+		System.out.println();
 	}
 }

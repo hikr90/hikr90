@@ -7,36 +7,37 @@
 		<script type="text/javascript">
 			var num = 1;
 			var path = "image/img";
-			
+			//
 			function prev() {
-					num--;									
+				//
+				num--;									
+				//
 				if(num==0){
 					num = 7;
 				}
-			/* 이미지 태그의 src에 접근한다. 
-			대체로 검색 코드(태그변수)는 전역변수로는 선언하지 않는다. */
-			document.getElementById("gallery").src = path+num+'.jpg';
+				//
+				document.getElementById("gallery").src = path+num+'.jpg';
 			}
-			
-			
+			//			
 			function next() {
-					num++;
+				//
+				num++;
+				//
 				if(num==8){
 					num = 1;
 				}
-			document.getElementById("gallery").src = path+num+'.jpg';
+				//
+				document.getElementById("gallery").src = path+num+'.jpg';
 			}
 			
 			/* setInterval : 메서드를 시간 간격으로 동작 */
 			setInterval("next()",1000);
-			
 		</script>
 	
 	</head>
 	<body>
 		<div id="galleryWrap">
 			<p>
-				
 				<a href="#" alt="임시" onclick="prev();">
 					<img alt="이전" src="image/left_btn.png">
 				</a>

@@ -64,7 +64,7 @@ public class VisitController {
 		// 업로드된 파일 정보 가져오기
 		MultipartFile photo = vo.getPhoto();
 		String filename = "no_file";
-		
+		//
 		if(!photo.isEmpty()) {
 			filename = photo.getOriginalFilename();
 			File saveFile = new File(savePath, filename);
@@ -76,18 +76,18 @@ public class VisitController {
 				filename = String.format("%d_%s", time,filename);
 				saveFile = new File(savePath, filename);
 			}
-			
+			//
 			photo.transferTo(saveFile);
 		}
-		
+		//
 		vo.setFilename(filename);
 		
 		int res = visit_dao.insert(vo);
 		
-		/*	REDIRECT
-				- 컨트롤러 내에 있는 타 맵핑주소의 메소드를 바로 호출하는 기능	
-				- 만약 아래의 리턴값을 JSP명칭으로 할 경우 데이터 처리 없이 화면으로 이동하므로 빈 화면만 보이게 된다.
-		*/
+		/*	redirect
+		 *		- 컨트롤러 내에 있는 타 맵핑주소의 메소드를 바로 호출하는 기능
+		 *		- 만약 아래의 리턴값을 Jsp명칭으로 할 경우 데이터 처리 없이 화면으로 이동하므로 빈 화면만 보이게 된다.
+		 */
 		return "redirect:list.do";
 	}
 	
@@ -95,32 +95,29 @@ public class VisitController {
 	@RequestMapping("/delete.do")
 	
 	
-	/*	RESPONSERBODY	
-			- AJAX로 요청받은 URL맵핑 메소드는 반드시 @RESPONSERBODY을 붙여줘야한다.
-			- 해당 어노테이션이 처리된 메소드는 RETURN의 값을 콜백 메소드로 반환되며 메소드의 리턴값이 반환된다.
-	*/
+	/*	@ResponseBody
+	 *		- Ajax로 요청받은 url맵핑 메소드는 반드시 해당 어노테이션을 붙여줘야한다.
+	 *		- 해당 어노테이션이 처리된 메소드는 return의 값을 콜백 메소드로 반환되며 메소드의 리턴값이 반환된다.
+	 */
 	@ResponseBody()
 	public String delete(int idx) {
-		
+		//
 		int res = visit_dao.delete(idx);
-		
-		// 결과를 저장할 변수
 		String result = "no";
-		// DML 처리 건수값으로 처리 여부를 파악
+		//
 		if(res==1) {
 			result = "yes";
 		}
-		
+		//
 		return result;
 	}
 	
 	// 방명록 수정 페이지로 이동 
 	@RequestMapping("/modify_form.do")
 	public String modify_form(int idx, Model model) {
-		// 수정할 정보를 검색
+		//
 		VisitVO vo = visit_dao.selectOne(idx);	
 		model.addAttribute("vo",vo);
-		//
 		return Util.Visit.VIEW_PATH + "visit_modify_form.jsp";
 	}
 	
@@ -152,7 +149,7 @@ public class VisitController {
 			//
 			photo.transferTo(saveFile);
 		}
-		// VO객체 파일 명칭 세팅
+		// 파일 명칭 저장
 		vo.setFilename(filename);
 		// 방명록 수정 처리
 		int res = visit_dao.update(vo);

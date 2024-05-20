@@ -1,13 +1,13 @@
 package com.korea.vo;
 
 public class TestVO {
-	
+	//
 	private String test_no, test_nm, disp_order, remark;
-
+	//
 	public String getTest_no() {
 		return test_no;
 	}
-
+	
 	public void setTest_no(String test_no) {
 		this.test_no = test_no;
 	}

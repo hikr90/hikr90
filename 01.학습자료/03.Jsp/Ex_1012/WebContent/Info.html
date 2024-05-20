@@ -6,40 +6,37 @@
 	
 		<script type="text/javascript">
 			function info(f) {
+				//
 				var id = f.id.value;
 				var pwd = f.pwd.value;
 				var gender = f.gender.value;
-				
-				
+				//				
 				if(id.trim()==""){
 					alert("모든 값을 입력해주세요.");
 					return;
 				}
-				
 				var pattern = /^[0-9]+$/;
-				
+				//				
 				if(!pattern.test(pwd)){
 					alert("비밀번호는 숫자만 가능합니다.");
 					return;
 				}
-				
+				//
 				f.submit();
 			}
 		</script>
-	
 	</head>
 	<body>
-		
 		<form action="info.do" method="POST" name="ff">
 			id : <input type="text" name="id"><br>
 			pwd : <input type="password" name="pwd"><br>
 			성함 : <input type="text" name="name"><br>
 			전화번호 : <input type="text" name="phone"><br>
+			
 			<input type="radio" name="gender" value="female">남자
 			<input type="radio" name="gender" value="male">여자<br>
 			
 			<input type="button" value="확인" onclick="info(this.form)">
 		</form>
-			
 	</body>
 </html>

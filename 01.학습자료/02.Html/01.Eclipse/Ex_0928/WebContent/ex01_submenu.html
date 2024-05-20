@@ -11,22 +11,64 @@
 					background: #666;
 					margin: 0 auto;
 					position: relative;}
+			
+			/* 선택자
+				- 특정 태그를 선택하는 용도의 구분자
+				- link태그를 사용하여 모든 웹페이지에 적용할 수 있다.
+				
+				종류
+					(1) 전체 선택자
+						- 모든 태그를 선택
+						- * {내용}
+						
+					(2) 태그 선택자
+						- 특정 태그 선택
+						- 태그 {내용}
 					
-			/* > : 자식 선택자 
-			기본적으로 아무 표식이 없으면 전체 선택자로 자식, 손자까지 전부 적용하는데 >는 직계 자식만 적용되게 한다. */			
+					(3) 클래스 선택자
+						- 특정 클래스 선택
+						- .클래스명 {내용}
+					
+					(4) 아이디 선택자
+						- 특정 아이디 선택
+						- #아이디명 {내용}
+					
+					(5) 복합 선택자
+						- 두개 이상의 선택자를 선택
+						- 복합 선택자 {내용}
+						
+						(5.1) 종류
+							- 하위 선택자 : a b {내용}
+								- a의 자손 태그인 b를 선택
+								- 자손 태그로 중간에 다른 태그가 있어도 선택
+								
+							- 자식 선택자 : a > b {내용}
+								- a의 자식 태그인 b를 선택
+								- 직계 자식이 아닌 경우 선택 X
+							
+							- 형제 선택자 : a ~ b {내용}
+								- a와 형제 관계에 있는 태그 중에서 a보다 뒤에 존재하는 모든 b를 선택
+								- 자손의 개념으로 중간에 다른 태그가 있어도 무방
+							
+							- 인접 형제 선택자 : a + b {내용}
+								- a와 형제 관계에 있는 태그 중에서 a보다 바로 뒤에 존재하는 모든 b 선택
+								- 자식의 개념으로 중간에 다른 태그가 존재하는 경우 선택 X
+					
+					(6) 속성 선택자
+						- 특정 속성 값을 가진 태그를 선택
+						- input 태그 등의 속성 값을 특정하여 선택하는 선택자
+						- 태그[속성=속성값]{내용}
+			*/
 			#nav > li{float: left;
 					margin: 3px 10px;
 					margin-left: 70px;
-					/* ul들이 직계 li에 맞춰서 위치를 잡도록 설정 */
 					position: relative;}
-					
 					
 			a{display: block;
 				font: 16px "고딕", "sans-serif";
 				color:  #e7e5e5;
 				padding: 10px 20px;}
 			
-			/* 최상 목록(li)에 마우스를 올렸을 때, a의 속성 변경 */
 			li:hover a{background: #fff;
 						color: black;}
 				
@@ -35,21 +77,14 @@
 				width: 150px;
 				border: 1px solid #b4b4b4;}
 				
-			/* 37분 */
 			#nav li ul {display: none;}
-				
-			/* li에 마우스 올렸을 때 하위가 목록이 있는 경우만 (안에 ul이 있는 경우) */
 			#nav li:hover ul{display: block;}
-			
 			#nav ul li:hover a{background: #ccc; font-weight: bold;}
-			
 		</style>
 	</head>
 	<body>
-	
 		<ul id="nav">
 			<li><a href="#" alt="처음으로">처음으로</a></li>
-			
 			<li>
 				<a href="#" alt="여행안내">여행 안내</a>
 				<ul>
@@ -57,7 +92,6 @@
 					<li><a href="#" alt="소개합니다">소개합니다.</a></li>
 				</ul>
 			</li>
-
 			<li>
 				<a href="#" alt="이용 방법">이용 방법</a>
 				<ul>
@@ -67,7 +101,6 @@
 					<li><a href="#" alt="예약확인">예약 확인</a></li>
 				</ul>
 			</li>
-
 			<li>
 				<a href="#" alt="게시판">게시판</a>
 				<ul>
@@ -75,11 +108,7 @@
 					<li><a href="#" alt="Q&A">Q&A</a></li>
 				</ul>
 			</li>
-			
 			<li><a href="#" alt="프로필">프로필</a></li>
-			
 		</ul>
-	
-	
 	</body>
 </html>

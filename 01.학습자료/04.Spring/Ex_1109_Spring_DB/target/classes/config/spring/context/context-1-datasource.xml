@@ -6,18 +6,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-	<!-- CONTEXT-1-DATASOURCE
-			- CONTEXT:PROPERTY-PLACEHOLDER태그를 사용하여
-			- DB.PROPPERTY의 값을 통해서 DB에 접근하는 빈 객체 생성
-	-->
 	<context:property-placeholder location="classpath:config/mybatis/db.properties"/>
-
-	<!-- DATASOURCE 객체 의존성 주입
-			- 각 속성의 값은 DB.PROPERTY의 값으로 지정된다.
-			- DB 관련 객체는 SINGLETON 방식으로 생성한다.
-			- 객체 속성의 CLASS값은 인터넷에서 검색하여 입력하며 저장 시 오류가 나지 않으면 정상적으로 라이브러리를 POM.XML에 넣었다는 뜻이다.
-	 -->
+	
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driver}"/>
 		<property name="url" value="${url}"/>

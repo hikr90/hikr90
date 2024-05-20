@@ -3,15 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- SPRING의 순서
-			1 RUN ON SERVER > WEB.XML 호출
-			2 WEB.XML에서 LISTENER이 두번째로 호출이 된다. (감지자 생성)
-			3 CONTEXT LOADER (감지자) : CONTEXT를 읽는데, CONTEXT-PARAM으로 파라미터를 타고 넘어간다.
-			4 CONTEXT를 참조하면서 WEB-INF/SPRING/ROOT-CONTEXT.XML이 실행된다.
-			5 ROOT-CONTEXT안에 있는 BEAN을 통해서 객체가 생성된다.
-			6 SERVLET-CONTEXT이 호출되어 CONTROLLER가 생성된다.
-			7 HOME CONTROLLER가 실행되며 RETURN HOME을 통해서 HOME.JSP가 실행된다.
+	<!-- spring의 순서
+			- (1) run on server > web.xml 호출
+			- (2) web.xml에서 listener가 두번째로 호출이 된다.
+			- (3) context loader (감지자) : context를 읽으며, context-param태그로 파라미터를 타고 넘어간다.
+			- (4) context를 참조하면서 WEB-INF/spring/root-context.xml이 실행된다.
+			- (5) root-context안에 있는 bean을 통해서 객체가 생성된다.
+			- (6) servlet-context이 호출되어 Controller가 생성된다.
+			- (7) Home Controller가 실행되며 return home을 통해서 home.jsp가 실행된다.
 	 -->
+	 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

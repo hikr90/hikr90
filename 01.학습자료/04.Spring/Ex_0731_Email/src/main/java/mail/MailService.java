@@ -7,7 +7,7 @@ public interface MailService {
      *  @param text 내용
      *  @param from 보내는 이 주소
      *  @param to 받는 이 주소
-     *  @param filePath FILEPATH 첨부파일 경로, 없는 경우 NULL **/
+     *  @param filePath 첨부파일 경로, 없는 경우 null **/
 	boolean send(String subject, String text, String from, String to, String filePath);
 	
 }

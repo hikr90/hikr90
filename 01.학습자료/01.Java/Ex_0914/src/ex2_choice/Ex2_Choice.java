@@ -11,11 +11,11 @@ import java.awt.event.WindowListener;
 
 public class Ex2_Choice {
 	public static void main(String[] args) {
-		
+		//
 		Frame f = new Frame(); 
 		f.setBounds(400, 100, 500, 250);
 		f.setLayout(null);
-		
+
 		// 선택상자
 		Choice bloodType = new Choice();
 		bloodType.add("혈액형은 무엇입니까?");
@@ -24,63 +24,23 @@ public class Ex2_Choice {
 		bloodType.add("O");
 		bloodType.add("AB");
 		
-		// choice는 높이(200)의 값이 의미가 없다. 
+		// - 초이스는 높이(200)의 값이 의미가 없다. 
 		bloodType.setBounds(50, 100, 200, 200);
 		bloodType.setBackground(Color.CYAN);
-
+		
+		// 이벤트 감지자 생성
 		bloodType.addItemListener(new ChoiceHandler());
-		
-		
-		
-		// 선택 상자의 이벤트 감지자 등록
-		// 따로 클래스로 생성해보자
-//		bloodType.addItemListener(new ItemListener() {
-//			
-//			@Override
-//			public void itemStateChanged(ItemEvent e) {
-//				// getSelectedItem은 항목에서 특정 항목을 선택했을 때, 해당 항목을 반환하는 메서드이다.
-//				System.out.println(bloodType.getSelectedItem());
-//				
-//			}
-//		});
-		
-		
-		
-		
-		
+		//
 		f.add(bloodType);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		//
 		f.addWindowListener(new WindowAdapter() {
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		
-		
-		
-		
-		
-		
-		
-		
+		//
 		f.setVisible(true);
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	} // main
 }

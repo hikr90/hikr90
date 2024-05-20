@@ -11,7 +11,7 @@
 	String email = request.getParameter("email2");
 	String addr = request.getParameter("addr2");
 	int idx = Integer.parseInt(request.getParameter("idx"));
-	
+	//
 	MemberVO mvo = new MemberVO();
 	mvo.setName(name);
 	mvo.setId(id);
@@ -19,7 +19,7 @@
 	mvo.setEmail(email);
 	mvo.setAddr(addr);
 	mvo.setIdx(idx);
-	
+	//	
 	int res = MemberDAO.getInstance().update(mvo);
 	response.sendRedirect("jdbc_member.jsp");
 %>

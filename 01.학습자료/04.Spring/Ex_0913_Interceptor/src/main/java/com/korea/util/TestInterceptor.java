@@ -8,18 +8,20 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.korea.vo.TestVO;
 
 public class TestInterceptor extends HandlerInterceptorAdapter{
-	/*	인터셉터가 동작하는 클래스 	
-			- SERVLET-CONTEXT에서 지정한 MVC:MAPPING PATH에 따라서
-			
-			# 인터셉터 관련 메소드
-				- PREHANDLE : 컨트롤러 실행 전 호출
-				- POSTHANDLE : 컨트롤러 실행 후 DISPATCHERSERVLET이 뷰로 보내기 전 호출
-				- AFTERCOMPLETION : 뷰가 수행되고 난 뒤 호출
-				
-			# PREHANDLE의 리턴값은 BOOLEAN타입으로 반환 값에대한 처리는 아래와 같다.
-				- TRUE : 컨트롤러 맵핑 주소로 이동
-				- FALSE : 이동하지 않음
-	*/
+	/*	인터셉터
+	 * 		- 브라우저 요청 시, 메소드 호출 전후의 요청과 응답을 가로채어 개발자가 원하는 작업을 수행하도록하는 기능을 뜻한다.
+	 * 		- 전후의 요청과 응답은 DispatcherServlet이 컨트롤러의 동작 전후의 요청과 응답을 뜻한다.
+	 * 		- 해당 기능은 HandlerInterceptorAdapter 클래스를 상속함으로서 사용한다.
+	 * 		- 쿠키 제어 등의 작업에 사용된다.
+	 * 
+	 * 		메소드
+	 * 			(1) preHandle : 컨트롤러 실행 전 호출되는 메소드로 참거짓을 반환한다.
+	 * 				(1.1) true : 컨트롤러 맵핑 주소로 이동
+	 * 				(1.2) false : 이동하지 않음
+	 * 
+	 * 			(2) postHandle : 컨트롤러 실행 후 DispatcherServlet이 뷰로 보내기 전 호출되는 메소드로 참거짓을 반환한다.
+	 * 			(3) afterCompletion : 뷰가 수행되고난 뒤 호출되는 메소드로 참거짓을 반환한다.
+ 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		// 
@@ -45,7 +47,7 @@ public class TestInterceptor extends HandlerInterceptorAdapter{
 			//
 			resYn = false;
 			System.out.println("세션 정보 미존재 : "+resYn);
-			response.sendRedirect("test_login.do");
+			response.sendRedirect("test.do");
 			return resYn;
 			
 		}

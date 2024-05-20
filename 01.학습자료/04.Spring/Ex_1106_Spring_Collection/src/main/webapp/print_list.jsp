@@ -7,7 +7,6 @@
 
 <%
 	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application);
-
 	MyList list = (MyList)wac.getBean("MyListBean");
 	request.setAttribute("list", list.getList());
 %>

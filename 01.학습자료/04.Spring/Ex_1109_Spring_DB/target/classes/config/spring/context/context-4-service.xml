@@ -5,10 +5,11 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- CONTEXT-4-SERVICE
-			- CONTEXT-3로부터 TEST_DAOBEAN을 받아서 서비스 객체를 주입
-			- TESTSERVICEIMPL TEST_SERVICE = NEW TESTSERVICEIMPL(TEST_DAOBEAN)
-	 -->
+	<!-- context-4-service.xml
+			- context-3-dao.xml으로부터 test_daoBean 객체를 받아 서비스 객체 주입
+ 	-->
+	 
+	<!-- testServiceImpl test_service = new testServiceImpl(test_daoBean); -->
 	<bean id="test_service" class="serviceImpl.TestServiceImpl">
 		<property name="test_dao" ref="test_daoBean"/>
 	</bean>

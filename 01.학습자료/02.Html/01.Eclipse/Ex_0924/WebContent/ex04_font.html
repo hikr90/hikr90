@@ -5,23 +5,25 @@
 		<title>Insert title here</title>
 		
 		<style type="text/css">
-			.a1{font-size: 50px} /* 글자 크기 */
-			.a2{font-style: italic;
-					font-size: 30px} /* 글자 스타일(기울임) */
-					
-			.a3{font-weight: bold;} /* 글자 두께(두껍게) */
+			/*	font 
+					- 글자 스타일을 지정하는 기능
+			*/
+			.a1{font-size: 50px} 						/* 글자 크기 */
+			.a2{font-style: italic;	font-size: 30px} 	/* 글자 스타일(기울임) */
+			.a3{font-weight: bold;} 					/* 글자 두께(두껍게) */
 			
-			/* font-family : 여러개의 글꼴을 마련해두고 브라우저에서 제공하는 글씨체라면 그대로 사용, 그렇지 않다면 순서대로 후보 글꼴을 적용 
-			글꼴은 후보군을 준비할 수 있고 궁서가 없다면 돋음체를 찾는다. 그 어떤 글체에도 해당하지 않을 것을 대비하여 가장 표준 글씨체인 sans-serif를 넣는다. */
+			/*	font-family 
+					- 여러개의 글꼴을 마련한 뒤 브라우저에서 제공하는 글꼴이면 그대로 사용하고
+					- 그렇지 않으면 다음 값에 지정한 글꼴을 제공한다.
+					- 여러 후보를 가져다둘 수 있으며 보통 마지막에는 기본 글꼴인 sans-serif를 사용한다.
+			*/
 			.a4{font-family: "궁서","돋음","굴림","sans-serif";}
 		</style>
 	</head>
 	<body>
-		
 		<p class="a1">글자 크기</p>
 		<p class="a2">글자 스타일</p>
 		<p class="a3">글자 두께</p>
 		<p class="a4">글꼴</p>
-	
 	</body>
 </html>
