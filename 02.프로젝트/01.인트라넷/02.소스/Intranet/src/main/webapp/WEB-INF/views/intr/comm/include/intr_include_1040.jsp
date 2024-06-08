@@ -1,7 +1,3 @@
-<!--명칭 : intr_include_1040
-	작성자 : 김태현
-	작성일자 : 2022.12.01
-	내용 : 파일 영역-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 

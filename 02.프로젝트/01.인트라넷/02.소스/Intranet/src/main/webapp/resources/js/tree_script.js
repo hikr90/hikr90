@@ -1,6 +1,5 @@
 /* 명칭 : setTree
  * 작성자 : 김태현
- * 작성일자 : 2023.01.06 
  * 내용 : 트리 세팅
  */
 function setTree(area) {

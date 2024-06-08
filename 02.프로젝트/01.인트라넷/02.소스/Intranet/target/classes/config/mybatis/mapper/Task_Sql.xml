@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="task">
-	<select id="intrTaskInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrTaskInqy10101010 : 업무일지 목록 조회 */
+	<select id="intrTaskInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy1010 : 업무일지 목록 조회 */
 		SELECT 
 			    T.TASK_CD
 			,   T.EMP_IDX
@@ -40,23 +40,23 @@
 		ORDER BY T.REG_DT DESC, T.REG_TM ASC, T.TASK_CD ASC
 	</select>
 	
-	<select id="intrTaskInqy10101011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrTaskInqy10101011 : 업무일지 목록 건수 조회 */
+	<select id="intrTaskInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy1020 : 업무일지 목록 건수 조회 */
 		SELECT 
 			COUNT(T.TASK_CD) AS LIST_CNT 
 		FROM INTR_TASK T
 		WHERE 1 = 1
 	</select>
 	
-	<delete id="intrTaskProc10101010" parameterType="java.util.HashMap">
-		/* intrTaskProc10101010 : 업무일지 삭제 처리 */
+	<delete id="intrTaskProc1010" parameterType="java.util.HashMap">
+		/* intrTaskProc1010 : 업무일지 삭제 처리 */
 		DELETE FROM INTR_TASK
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 				AND REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
 	</delete>
 	
-	<insert id="intrTaskProc10101011" parameterType="java.util.HashMap">
-		/* intrTaskProc10101011 : 업무일지 등록 처리 */
+	<insert id="intrTaskProc1020" parameterType="java.util.HashMap">
+		/* intrTaskProc1020 : 업무일지 등록 처리 */
 		INSERT INTO INTR_TASK
 		(
 				TASK_CD

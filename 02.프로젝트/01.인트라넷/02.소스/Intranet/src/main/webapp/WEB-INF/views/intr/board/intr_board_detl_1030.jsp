@@ -1,7 +1,3 @@
-<!--명칭 : intr_board_detl_1030
-	작성자 : 김태현
-	작성일자 : 2022.12.01
-	내용 : 공지사항 수정-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>

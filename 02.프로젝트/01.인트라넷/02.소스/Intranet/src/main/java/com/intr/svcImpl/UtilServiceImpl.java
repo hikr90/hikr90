@@ -17,8 +17,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -28,10 +26,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.intr.comm.Path;
 import com.intr.dao.MainDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
+import com.intr.util.Path;
 
 @Service
 @Transactional
@@ -46,11 +44,8 @@ public class UtilServiceImpl implements UtilService{
     @Autowired
     JavaMailSenderImpl javaMailSender;
 
-	//
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-    
 	// 파일 경로 조회
-	public String intrFileInqy101010(HashMap<String, Object> paramMap) {
+	public String intrFileInqy1010(HashMap<String, Object> paramMap) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
@@ -64,13 +59,12 @@ public class UtilServiceImpl implements UtilService{
 		}
 		//
 		workPath = intrFileInqy101012(paramMap, workPath);
-		logger.debug("WorkPath : " + workPath);
 		//
 		return workPath;
 	}
 	
 	// (임시)파일 경로 조회
-	public String intrFileInqy101011(HashMap<String, Object> paramMap) {
+	public String intrFileInqy1020(HashMap<String, Object> paramMap) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
@@ -81,7 +75,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 운영 체제 조회
-	public String intrFileInqy101012(HashMap<String, Object> paramMap, String workPath) {
+	public String intrFileInqy101012(HashMap<String, Object> paramMap, String workPath) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
@@ -97,7 +91,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 메일 전송
-	public String intrMailProc101010(Model model, HashMap<String, Object> paramMap) {
+	public String intrMailProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = ""; // 결과 전달 JSON
 		String resStr = "NO";	// 결과값
@@ -112,7 +106,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrLoginInqy10301010(paramMap);
+			defaultInfo = mainDao.intrLoginInqy1030(paramMap);
 			//
 			if(defaultInfo!=null) {
 				// 값 저장
@@ -130,14 +124,14 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 메일 전송 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		//
 		return defaultStr;
 	}
 
 	// 메일 발송
-	private String sendMail(HashMap<String, Object> paramMap) {
+	private String sendMail(HashMap<String, Object> paramMap) throws Exception {
 		//
         MimeMessage message = javaMailSender.createMimeMessage();
         //
@@ -178,7 +172,7 @@ public class UtilServiceImpl implements UtilService{
             //--------------------------------------------------------------------------------------------
 			// 관리자 메일 조회
 			//--------------------------------------------------------------------------------------------
-            defaultInfo = mainDao.intrLoginInqy10201010();
+            defaultInfo = mainDao.intrLoginInqy1020();
             //
             sender 		= String.valueOf(defaultInfo.get("empEmail"));
             receiver 	= String.valueOf(paramMap.get("findEmail"));
@@ -200,18 +194,17 @@ public class UtilServiceImpl implements UtilService{
             // 전송 완료
             javaMailSender.send(message);
             //
-            logger.debug("[처리 결과] 메일 전송  : 성공");
             
         } catch (Exception e) {
             //
-        	logger.error("[처리 결과] 메일 전송 실패 : "+e.getMessage());
+        	throw new Exception(e.getMessage());
         }
         
 		return joinCode;
     }
 	
 	// 파일 업로드 & 수정
-	public String intrFileProc101010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrFileProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		long fileSize = 0;
@@ -230,14 +223,14 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 경로 조회
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqy101010(paramMap);
+			workPath = this.intrFileInqy1010(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정 처리 (CONTENT_IDX)
 			//--------------------------------------------------------------------------------------------
 			if(!String.valueOf(paramMap.get("modCnt")).equals("0")) {
 				// 전체 N처리
-				utilDao.intrFileProc10101020(paramMap);
+				utilDao.intrFileProc1030(paramMap);
 				//
 				int modCnt = Integer.valueOf((String)paramMap.get("modCnt"));
 				for(int i=0;i<modCnt;i++) {
@@ -248,7 +241,7 @@ public class UtilServiceImpl implements UtilService{
 						//--------------------------------------------------------------------------------------------
 						// 파일 수정 처리 (FILE_IDX)
 						//--------------------------------------------------------------------------------------------
-						utilDao.intrFileProc10101021(tempMap);
+						utilDao.intrFileProc1040(tempMap);
 					}
 				}
 			}
@@ -284,7 +277,7 @@ public class UtilServiceImpl implements UtilService{
 					tempMap.put("fileType", fileType);
 					tempMap.put("fileSize", fileSize);
 					//
-					utilDao.intrFileProc10101010(tempMap);
+					utilDao.intrFileProc1010(tempMap);
 					
 				} // FOR
 				
@@ -295,19 +288,17 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 파일 업로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		
 		return resStr;
 	}
 
 	// 파일 다운로드
-	public void fileDownProc(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) {
+	public void fileDownProc(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String value = "";
 		String fullPathNm = String.format("%s/%s", path, fileNm);
-		
-		logger.debug("다운로드 전체경로 : "+fullPathNm);
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -322,8 +313,6 @@ public class UtilServiceImpl implements UtilService{
 			if(userCharSet==null) {
 				userCharSet="utf-8";
 			}
-			
-			logger.debug("userCharset : "+userCharSet);
 			
 	        // IE인 경우
 	        if(strAgent.indexOf("MSIE") > -1){
@@ -344,7 +333,7 @@ public class UtilServiceImpl implements UtilService{
 	                    value = "attachment; filename=" + new String(fileNm.getBytes(userCharSet), "ISO-8859-1");
 	                }
 	            }else{
-	            	//IE8.0 이상의 경우 
+	            	// IE8.0 이상의 경우 
 	            	if(userCharSet.equalsIgnoreCase("UTF-8")){
 	            		//
 	            		fileNm = URLEncoder.encode(fileNm,"utf-8");
@@ -357,7 +346,7 @@ public class UtilServiceImpl implements UtilService{
 	            }
 	            
 	        }else if(strAgent.indexOf("Firefox") > -1){
-	        	// 파이어폭스(공백문자 이후 인식이 안되는 현상)
+	        	// 파이어폭스 (공백문자 이후 인식이 안되는 현상)
 	        	value = "attachment; filename=" + new String(fileNm.getBytes(), "ISO-8859-1");
 	        }else{
 	            // IE 제외 (브라우저)
@@ -385,7 +374,7 @@ public class UtilServiceImpl implements UtilService{
 						
 				}catch(Exception ex){
 					//
-					logger.debug("파일 다운로드 처리 중 에러가 발생했습니다. (" + ex.getMessage() + ")");
+					throw new Exception(ex.getMessage());
 					
 				} finally {
 					//
@@ -396,14 +385,14 @@ public class UtilServiceImpl implements UtilService{
 
 		} catch (Exception e) {
 			//
-			logger.debug("파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 
 	}
 	
 	
 	// 파일 다운로드
-	public void intrFileProc102010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	public void intrFileProc1020(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String workPath = "";
@@ -413,7 +402,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보 조회 (FILE_IDX)
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.intrFileInqy101011(model, paramMap);
+			defaultInfo = utilDao.intrFileInqy1020(model, paramMap);
 			//
 			String contentIdx = (String)defaultInfo.get("contentIdx");
 			String fileNm = (String)defaultInfo.get("fileOrglNm");
@@ -422,7 +411,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 생성
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqy101010(paramMap);
+			workPath = this.intrFileInqy1010(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
@@ -432,12 +421,12 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 전체 다운로드
-	public void intrFileProc103010(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	public void intrFileProc1030(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String workPath = "";
 		String tempPath = "";
@@ -448,7 +437,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 로드
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqy101010(paramMap);
+			workPath = this.intrFileInqy1010(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 생성
@@ -467,12 +456,12 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 전체 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 
 	// 압축 파일 생성
-	public String makeZip(HashMap<String, Object> paramMap, String workPath) {
+	public String makeZip(HashMap<String, Object> paramMap, String workPath) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -487,13 +476,12 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 임시파일 경로 생성
 			//--------------------------------------------------------------------------------------------
-			tempPath = this.intrFileInqy101011(paramMap);
-			logger.debug("임시 경로 : " + tempPath);
+			tempPath = this.intrFileInqy1020(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy101010(null, paramMap);
+			defaultList = utilDao.intrFileInqy1010(null, paramMap);
 					
 			if(defaultList!=null) {
 				//--------------------------------------------------------------------------------------------
@@ -511,9 +499,6 @@ public class UtilServiceImpl implements UtilService{
 				
 				// 압축할 파일을 임시 경로에 생성
 				for(int i=0;i<defaultList.size();i++) {
-					//
-					logger.debug("압축 대상 : " + defaultList.get(i).get("fileOrglNm"));
-					
 					//
 					File f = new File(workPath + File.separator + (String)defaultList.get(i).get("fileOrglNm"));
 					fis = new FileInputStream(f); // 압축 대상 스트림 오픈
@@ -541,7 +526,8 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 압축 파일 생성 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
+			
 		} finally {
 			//
 			try { if(fis != null)fis.close(); } catch (IOException ex1) {System.out.println(ex1.getMessage());}
@@ -554,7 +540,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 경로 삭제
-	public void removePath(String path) {
+	public void removePath(String path) throws Exception {
 		//
 		try {
 			//
@@ -586,7 +572,95 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 디렉토리 삭제 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
+	
+	// 페이징 메뉴 생성
+		public String intPageInqy1010(HashMap<String, Object> paramMap) throws Exception {
+			//
+			String srchNm = (String)paramMap.get("srchNm")!=null?(String)paramMap.get("srchNm"):"";
+			String srchSdt = (String)paramMap.get("srchSdt")!=null?(String)paramMap.get("srchSdt"):""; 
+			String srchEdt = (String)paramMap.get("srchEdt")!=null?(String)paramMap.get("srchEdt"):"";
+			// 
+			String pageURL = (String)paramMap.get("pageURL");
+			Integer nowPage = Integer.valueOf(String.valueOf(paramMap.get("nowPage")));
+			Integer rowTotal = Integer.valueOf(String.valueOf(paramMap.get("rowTotal"))); 
+			Integer blockList = Integer.valueOf(String.valueOf(paramMap.get("blockList")));
+			Integer blockPage = Integer.valueOf(String.valueOf(paramMap.get("blockPage")));
+			//
+			boolean isPrevPage,isNextPage;
+			StringBuffer sb; 
+			//
+			pageURL = pageURL+"?srchNm="+srchNm+"&srchSdt="+srchSdt+"&srchEdt="+srchEdt;
+			int totalPage,		/* 전체 페이지수 */
+	            startPage,		/* 시작 페이지 번호 */
+	            endPage;		/* 마지막 페이지 번호 */
+			
+			// 전체 페이지 수
+			isPrevPage=isNextPage=false;
+			totalPage = (int)(rowTotal/blockList);
+			if(rowTotal%blockList!=0)totalPage++;
+			
+			// 현재 페이지 수가 전체 페이지 수를 초과할 경우 현재 페이지값을 전체 페이지 값으로 변경
+			if(nowPage > totalPage)nowPage = totalPage;
+			
+			// 시작 페이지와 마지막 페이지
+			startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
+			endPage = startPage + blockPage - 1; 
+			// 
+			if(endPage > totalPage)endPage = totalPage; // 마지막 페이지 수가 전체 페이지 수보다 크면 마지막 페이지 값을 변경
+			if(endPage < totalPage)isNextPage = true; // 마지막 페이지가 전체 페이지보다 작을 경우 다음 페이징이 적용할 수 있도록 변수 값 설정
+			if(startPage > 1)isPrevPage = true; // 시작 페이지의 값이 1보다 작으면 이전 페이지 적용
+			
+			// HTML 코드 작성
+			sb = new StringBuffer();
+
+			//--------------------------------------------------------------------------------------------
+			// < (이전) 표시 페이지 처리
+			//--------------------------------------------------------------------------------------------
+			if(isPrevPage){
+				sb.append("<a class=\"pageBtn _prev\" href='"+pageURL+"&page=");
+				sb.append( startPage-1 );
+				sb.append("'>이전 페이지로 이동</a>");
+			} else {
+				// < (클릭이 되지 않음)
+				sb.append("<a class=\"pageBtn _first\" href=\"#none\">이전 페이지로 이동</a>");
+			}
+			//--------------------------------------------------------------------------------------------
+			// 페이지 목록 출력
+			//--------------------------------------------------------------------------------------------
+			sb.append("&nbsp;");
+			for(int i=startPage; i<= endPage ;i++){
+				if(i>totalPage)break;
+				// 현재 선택된 페이지
+				if(i == nowPage){ 
+					sb.append("<li class=\"_active\"><a>");
+					sb.append(i); // 페이지 숫자
+					sb.append("</a></li>");
+				} else {
+					// 선택되지 않은 페이지
+					sb.append("<li class=\"\"><a href='"+pageURL+"&page=");
+					sb.append(i);
+					sb.append("'>");
+					sb.append(i);
+					sb.append("</a></li>");
+				}
+			}
+			//
+			sb.append("&nbsp;&nbsp;");
+			
+			//--------------------------------------------------------------------------------------------
+			// > (다음) 표시 페이지 처리
+			//--------------------------------------------------------------------------------------------
+			if(isNextPage){
+				sb.append("<a class=\"pageBtn _next\" href='"+pageURL+"&page=");
+				sb.append(endPage + 1);
+				sb.append("'>다음 페이지로 이동</a>"); // 클릭이 되는 화살표
+			} else {
+				sb.append("<a class=\"pageBtn _last\" href=\"#none\">다음 페이지로 이동</a>"); // 클릭이 안되는 화살표
+			}
+			//
+			return sb.toString();
+		}
 }

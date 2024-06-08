@@ -1,7 +1,3 @@
-<!--명칭 : intr_board_list_1010
-	작성자 : 김태현
-	작성일자 : 2022.12.07
-	내용 : 공지사항 관리 목록-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    

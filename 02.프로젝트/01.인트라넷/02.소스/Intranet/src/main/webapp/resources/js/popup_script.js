@@ -1,6 +1,5 @@
 /* 명칭 : ajaxPopup
  * 작성자 : 김태현
- * 작성일자 : 2022.11.02
  * 내용 : 기본 팝업 
  */
 function ajaxPopup(obj, width, height, mappingId, i){
@@ -45,7 +44,6 @@ function ajaxPopup(obj, width, height, mappingId, i){
 
 /* 명칭 : chgPopup
  * 작성자 : 김태현
- * 작성일자 : 2022.11.02 
  * 내용 : 아이디, 비밀번호 찾기 화면 전환
  */
 var EmaChkYn = false; 	// 인증 여부 체크
@@ -73,7 +71,6 @@ function chgPopup(mappingId){
 
 /* 명칭 : popClose
  * 작성자 : 김태현
- * 작성일자 : 2022.11.11 
  * 내용 : 팝업 닫기
  */
 function popClose(area){

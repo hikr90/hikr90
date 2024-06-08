@@ -1,7 +1,3 @@
-<!--명칭 : intr_main_inqy_1010
-	작성자 : 김태현
-	작성일자 : 2022.12.01
-	내용 : 사용자 메인 화면-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,10 +9,9 @@
 <head></head>
 <body id="main">
 <form id="form" name="form" method="POST" onsubmit="return false;">
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<!-- MAIN TOP -->
 	<article id="_mainArticle">
 		<div id="_content" style="margin-top: 50px;">
 			<input type="hidden" id="contentIdx" name="contentIdx" value="">

@@ -6,19 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.intr.comm.Paging;
 import com.intr.dao.AuthDao;
 import com.intr.dao.MainDao;
 import com.intr.svc.BoardService;
 import com.intr.svc.MainService;
+import com.intr.svc.UtilService;
+import com.intr.util.Paging;
 import com.intr.vo.EmpVO;
 
 @Service 
@@ -40,11 +38,11 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	BoardService boardService;
 	
-	// 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-
+	@Autowired
+	UtilService utilService;
+	
 	// 메뉴 조회
-	public void intrMainInqy101010(Model model, HashMap<String, Object> paramMap) {
+	public void intrMainInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		EmpVO empInfo = null;
@@ -72,17 +70,17 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mainDao.intrMainInqy10101010(model, paramMap);
+			defaultList = mainDao.intrMainInqy1010(model, paramMap);
 			model.addAttribute("menuList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 메뉴 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 
 	// 메뉴 세션 저장
-	public void intrMainInqy101020(String menuIdx) {
+	public void intrMainInqy1030(String menuIdx) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -94,12 +92,12 @@ public class MainServiceImpl implements MainService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 메뉴 세션 저장 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 
 	// 전체 메뉴 조회
-	public void intrMainInqy101030(Model model, HashMap<String, Object> paramMap) {
+	public void intrMainInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -107,17 +105,17 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 전체 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mainDao.intrMainInqy10103010(model, paramMap);
+			defaultList = mainDao.intrMainInqy1020(model, paramMap);
 			model.addAttribute("tMenuList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 전체 메뉴 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 페이징 처리
-	public void intrMainInqy102010(Model model, HashMap<String, Object> paramMap) {
+	public void intrMainInqy1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		int nowPage = 1; // 페이지 기본 값 (첫 동작)
 		Integer page = null; // 현재 페이지
@@ -148,105 +146,17 @@ public class MainServiceImpl implements MainService{
 			paramMap.put("blockPage",Paging.BLOCKPAGE);
 
 			// 페이지 메뉴 구성
-			String pageMenu = this.getPaging(paramMap);
+			String pageMenu = utilService.intPageInqy1010(paramMap);
 			model.addAttribute("pageMenu", pageMenu);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 페이징 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
-	}
-	
-	// 페이징 메뉴 생성
-	public String getPaging(HashMap<String, Object> paramMap){
-		//
-		String srchNm = (String)paramMap.get("srchNm")!=null?(String)paramMap.get("srchNm"):"";
-		String srchSdt = (String)paramMap.get("srchSdt")!=null?(String)paramMap.get("srchSdt"):""; 
-		String srchEdt = (String)paramMap.get("srchEdt")!=null?(String)paramMap.get("srchEdt"):"";
-		// 
-		String pageURL = (String)paramMap.get("pageURL");
-		Integer nowPage = Integer.valueOf(String.valueOf(paramMap.get("nowPage")));
-		Integer rowTotal = Integer.valueOf(String.valueOf(paramMap.get("rowTotal"))); 
-		Integer blockList = Integer.valueOf(String.valueOf(paramMap.get("blockList")));
-		Integer blockPage = Integer.valueOf(String.valueOf(paramMap.get("blockPage")));
-		//
-		boolean isPrevPage,isNextPage;
-		StringBuffer sb; 
-		//
-		pageURL = pageURL+"?srchNm="+srchNm+"&srchSdt="+srchSdt+"&srchEdt="+srchEdt;
-		int totalPage,		/* 전체 페이지수 */
-            startPage,		/* 시작 페이지 번호 */
-            endPage;		/* 마지막 페이지 번호 */
-		
-		// 전체 페이지 수
-		isPrevPage=isNextPage=false;
-		totalPage = (int)(rowTotal/blockList);
-		if(rowTotal%blockList!=0)totalPage++;
-		
-		// 현재 페이지 수가 전체 페이지 수를 초과할 경우 현재 페이지값을 전체 페이지 값으로 변경
-		if(nowPage > totalPage)nowPage = totalPage;
-		
-		// 시작 페이지와 마지막 페이지
-		startPage = (int)(((nowPage-1)/blockPage)*blockPage+1);
-		endPage = startPage + blockPage - 1; 
-		// 
-		if(endPage > totalPage)endPage = totalPage; // 마지막 페이지 수가 전체 페이지 수보다 크면 마지막 페이지 값을 변경
-		if(endPage < totalPage)isNextPage = true; // 마지막 페이지가 전체 페이지보다 작을 경우 다음 페이징이 적용할 수 있도록 변수 값 설정
-		if(startPage > 1)isPrevPage = true; // 시작 페이지의 값이 1보다 작으면 이전 페이지 적용
-		
-		// HTML 코드 작성
-		sb = new StringBuffer();
-
-		//--------------------------------------------------------------------------------------------
-		// < (이전) 표시 페이지 처리
-		//--------------------------------------------------------------------------------------------
-		if(isPrevPage){
-			sb.append("<a class=\"pageBtn _prev\" href='"+pageURL+"&page=");
-			sb.append( startPage-1 );
-			sb.append("'>이전 페이지로 이동</a>");
-		} else {
-			// < (클릭이 되지 않음)
-			sb.append("<a class=\"pageBtn _first\" href=\"#none\">이전 페이지로 이동</a>");
-		}
-		//--------------------------------------------------------------------------------------------
-		// 페이지 목록 출력
-		//--------------------------------------------------------------------------------------------
-		sb.append("&nbsp;");
-		for(int i=startPage; i<= endPage ;i++){
-			if(i>totalPage)break;
-			// 현재 선택된 페이지
-			if(i == nowPage){ 
-				sb.append("<li class=\"_active\"><a>");
-				sb.append(i); // 페이지 숫자
-				sb.append("</a></li>");
-			} else {
-				// 선택되지 않은 페이지
-				sb.append("<li class=\"\"><a href='"+pageURL+"&page=");
-				sb.append(i);
-				sb.append("'>");
-				sb.append(i);
-				sb.append("</a></li>");
-			}
-		}
-		//
-		sb.append("&nbsp;&nbsp;");
-		
-		//--------------------------------------------------------------------------------------------
-		// > (다음) 표시 페이지 처리
-		//--------------------------------------------------------------------------------------------
-		if(isNextPage){
-			sb.append("<a class=\"pageBtn _next\" href='"+pageURL+"&page=");
-			sb.append(endPage + 1);
-			sb.append("'>다음 페이지로 이동</a>"); // 클릭이 되는 화살표
-		} else {
-			sb.append("<a class=\"pageBtn _last\" href=\"#none\">다음 페이지로 이동</a>"); // 클릭이 안되는 화살표
-		}
-		//
-		return sb.toString();
 	}
 	
 	// 검색 조건 저장
-	public void intrMainInqy103010(Model model, HashMap<String, Object> paramMap) {
+	public void intrMainInqy1060(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -256,12 +166,12 @@ public class MainServiceImpl implements MainService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 검색 조건 저장 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 로그인 처리
-	public String intrLoginProc101010(Model model, HashMap<String, Object> paramMap) {
+	public String intrLoginProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "";
@@ -271,7 +181,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrLoginInqy10101010(model, paramMap);
+			defaultInfo = mainDao.intrLoginInqy1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 아이디 / 비밀번호 체크
@@ -298,14 +208,14 @@ public class MainServiceImpl implements MainService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 로그인 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		
 		return defaultStr;
 	}
 
 	// 로그인 권한 사용자 조회
-	public void intrMainInqy104010(Model model) {
+	public void intrMainInqy1040(Model model) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -313,12 +223,12 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy40101010(model);
+			defaultList = authDao.intrAuthInqy1060(model);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 로그인 권한 사용자 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 }

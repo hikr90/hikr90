@@ -1,0 +1,585 @@
+@charset "utf-8";
+/* menu.css */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "나눔스퀘어";
+}
+
+/* ��� <ul> �±׿� ���� */
+ul{
+	margin-top:0;
+	padding:0;
+	list-style:none; 
+	color:black; 
+	font-family: "나눔스퀘어";
+}
+
+
+
+/********** MAIN �޴� �׸� **********/
+
+#wrap{
+	margin:0 auto;
+	width:1280px;
+	height: auto;
+}
+
+
+#objectbanner {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	min-width: 1280px;
+	height: 300px;
+	z-index: 1;
+	
+	
+}
+
+
+#objectbanner img{
+	width: 100%;
+	height:300px;
+	min-height: 300px;
+	min-width: 1280px;
+	position: relative;
+	text-align: center;
+	margin-top: -90px;
+	z-index: 1;
+	
+}
+
+#bannertxt {
+	position: relative;
+	top:90px;
+	width:167px;
+	height: 50px;
+	z-index: 10;
+	margin: 0 auto;
+	font-family: "나눔스퀘어";
+	color: #fff;
+	font-size: 50px;
+	font-weight: bolder;
+	z-index: 10;
+	
+}
+
+
+
+#consultfull {
+	height: auto;
+	float: left;
+	margin-bottom: 50px;
+	
+}
+
+
+#notice {
+	float: left;
+	height: 642px;
+	width: 480px;
+	position: relative;
+	left: 50px;
+	margin-right: 50px;
+}
+.noticetxt1 {
+	height: 642px;
+	width: 480px;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+.notice h2 {
+	text-align: left;
+	font-size: 20px;
+}
+
+.noticetxt1 p {
+	margin-top: 10px;
+}
+
+
+
+#consult {
+	float: left;
+	height: 742px;
+	width: 622px;
+	margin-left: 80px;
+}
+h2 {
+	padding-left: 50px;
+	line-height: 40px;
+	text-align: left;
+	font-size: 28px;
+}
+#consultform {
+	width:520px;
+	height: 400px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform1 {
+	width:520px;
+	height: 400px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform1 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+	margin-left: 50px;
+}
+
+
+#consultform2 {
+	width:520px;
+	height: 400px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform2 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform3 {
+	width:520px;
+	height: 400px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform3 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform4 {
+	width:520px;
+	height: 400px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform4 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform5 {
+	width:520px;
+	height: 250px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform5 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform6 {
+	width:520px;
+	height: 250px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform6 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 20px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform7 {
+	width:520px;
+	height: 300px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform7 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+#consultform8 {
+	width:520px;
+	height: 300px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+#consultform8 th {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 21px;
+	font-family: "나눔스퀘어";
+	border: 1px solid #ccc;
+}
+
+
+#slidecontent  {      
+    width:622px; 
+	height:742px;
+	text-align:center;
+	overflow:hidden;
+	position: relative;
+	z-index: 1;
+	
+   }
+ 
+#slidePanel {
+	position:relative;
+	width: 4354px;
+	height:742px;
+	z-index: 1;
+	left: 500px;
+}
+
+.panel1 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel2 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel3 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel4 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel5 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+
+.panel6 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel7 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.panel7 textarea {
+	width: 430px;
+	height: 160px;
+	resize:none;
+}
+
+.panel8 {
+	float:left;
+	width: 620px;
+	height:640px;
+	border-top: 3px;
+	border-top-style: solid;
+	border-top-color: #046508;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+#name {
+	width: 200px;
+	height: 25px;
+}
+
+#phone {
+	width: 200px;
+	height: 25px;
+}
+
+#email {
+	width: 200px;
+	height: 25px;
+}
+
+.sub {
+	font-size: 19px;
+	color: #000000;
+	line-height: 20px;
+}
+
+#prevNextButtonBox1 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton1 {
+	position: absolute;
+	left: 300px;
+	z-index: 2;
+}
+#nextButton1 {
+	position: absolute;
+	left: 420px;
+	z-index: 2;
+}
+
+#prevNextButtonBox2 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton2 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton2 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+#prevNextButtonBox3 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton3 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton3 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+#prevNextButtonBox4 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton4 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton4 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+#prevNextButtonBox5 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton5 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton5 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+#prevNextButtonBox6 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton6 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton6 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+#prevNextButtonBox7 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton7 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton7 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+
+#prevNextButtonBox8 {
+	position: relative;
+	z-index: 2;
+}
+#prevButton8 {
+	position: absolute;
+	left: 350px;
+	z-index: 2;
+}
+#nextButton8 {
+	position: absolute;
+	left: 470px;
+	z-index: 2;
+}
+
+
+
+
+#process {
+	float: left;
+	height: 300px;
+	width: 1280px;
+	text-align: center;
+}
+.processimg {
+	height: 209px;
+	width: 1200px;
+	margin-top: 30px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+.img1 {
+	float: left;
+	height: 200px;
+	width: 134px;
+	text-align: center;
+
+}
+.img2 {
+	float: left;
+	height: 130px;
+	width: 134px;
+	text-align: center;
+
+}
+
+.next {
+	float: left;
+	width: 132px;
+	height: 200px;
+	text-align: center;
+}
+.imgtext {
+	height: 50px;
+	width: 130px;
+	margin-top: 30px;
+	font-size: 18px;
+}
+
+.imgtext1 {
+	height: 50px;
+	width: 130px;
+	margin-top: 25px;
+	font-size: 18px;
+}
+
+
+#review {
+	height: 500px;
+	width: 1120px;
+	margin-top: 80px;
+	padding-right: 50px;
+	padding-left: 50px;
+	margin-bottom: 40px;
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #C8C8C8;
+	
+	
+}
+
+
+

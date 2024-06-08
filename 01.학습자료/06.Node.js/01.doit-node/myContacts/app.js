@@ -147,13 +147,17 @@ app.use(router);
 
 // contentRoutes를 미들웨어로 사용
 const express = require("express");
+const dbConnect = require("./config/dbconnect");
 const app = express();
+
+// DB연동
+dbConnect();
 
 // 바디파서 미들웨어 등록
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", require("./routes/contentRoutes"));
+app.use("/contacts", require("./routes/contentRoutes"));
 
 app.listen(3000, () => {
   console.log("서버 실행중");

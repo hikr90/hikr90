@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	/* 명칭 : 메뉴 동적 메소드
 	 * 작성자 : 김태현
-	 * 작성일자 : 2022.11.02 
 	 * 내용 : 메뉴 동적 메소드
 	 */
 	$('header #_nav .li_1').on('mouseenter focusin', function () {        
@@ -17,7 +16,6 @@ $(document).ready(function(){
 
 /* 명칭 : formSubmit
  * 작성자 : 김태현
- * 작성일자 : 2022.12.18 
  * 내용 : 폼 태그 동작
  */ 
 function formSubmit(mappingId){
@@ -29,7 +27,6 @@ function formSubmit(mappingId){
 
 /* 명칭 : setContentIdx
  * 작성자 : 김태현
- * 작성일자 : 2023.08.16 
  * 내용 : 목록 선택 시 인덱스값 부여
  */ 
 function setContentIdx(contentIdx, mappingId){
@@ -40,7 +37,6 @@ function setContentIdx(contentIdx, mappingId){
 
 /* 명칭 : logout
  * 작성자 : 김태현
- * 작성일자 : 2022.12.03 
  * 내용 : 로그아웃
  */
 function logout() {
@@ -51,7 +47,6 @@ function logout() {
 
 /* 명칭 : pushListKey
  * 작성자 : 김태현
- * 작성일자 : 2022.11.26 
  * 내용 : 엔터 입력 (조회)
  */
 function pushListKey(f) {
@@ -63,7 +58,6 @@ function pushListKey(f) {
 
 /* 명칭 : pushLoginKey
  * 작성자 : 김태현
- * 작성일자 : 2022.11.26 
  * 내용 : 엔터 입력 (로그인)
  */
 function pushLoginKey(f) {
@@ -76,7 +70,6 @@ function pushLoginKey(f) {
 
 /* 명칭 : delArea
  * 작성자 : 김태현
- * 작성일자 : 2022.12.30
  * 내용 : 영역 제거
  */
 function delArea(area) {
@@ -87,7 +80,6 @@ function delArea(area) {
 
 /* 명칭 : inputNum
  * 작성자 : 김태현
- * 작성일자 : 2023.01.09
  * 내용 : 연락처 자동 입력 함수
  */
 function inputNum(inputNum) {
@@ -132,7 +124,6 @@ function inputNum(inputNum) {
 
 /* 명칭 : initData
  * 작성자 : 김태현
- * 작성일자 : 2022.11.11 
  * 내용 : 데이터 초기화
  */
 function initData(area){
@@ -148,7 +139,6 @@ function initData(area){
 
 /* 명칭 : validation
  * 작성자 : 김태현
- * 작성일자 : 2022.11.17 
  * 내용 : input 태그 (text, password) 유효성 검증 (공통)
  */
 function validation(){
@@ -194,7 +184,6 @@ function validation(){
 
 /* 명칭 : srchAddr
  * 작성자 : 김태현
- * 작성일자 : 2023.01.14 
  * 내용 : 주소 조회 (API)
  */
 function srchAddr() {

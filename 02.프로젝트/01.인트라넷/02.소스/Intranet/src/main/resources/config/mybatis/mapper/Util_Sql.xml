@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="util">
-	<select id="intrFileInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy10101010 : 컨텐츠 파일 데이터 조회 */
+	<select id="intrFileInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy1010 : 컨텐츠 파일 데이터 조회 */
 		SELECT 
 		    F.FILE_IDX,
 		    F.CONTENT_IDX,
@@ -18,8 +18,8 @@
 			AND F.USE_YN = 'Y'
 	</select>
 
-	<select id="intrFileInqy10101011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy10101011 : 단건 파일 데이터 조회 */
+	<select id="intrFileInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy1020 : 단건 파일 데이터 조회 */
 		SELECT 
 		    F.FILE_IDX,
 		    F.CONTENT_IDX, 
@@ -35,8 +35,8 @@
 			AND F.USE_YN = 'Y'
 	</select>
 	
-	<insert id="intrFileProc10101010" parameterType="java.util.HashMap">
-		/* intrFileProc10101010 : 파일 데이터 저장 */
+	<insert id="intrFileProc1010" parameterType="java.util.HashMap">
+		/* intrFileProc1010 : 파일 데이터 저장 */
 		INSERT INTO INTR_FILE
 		(
 				FILE_IDX
@@ -71,23 +71,23 @@
 		)
 	</insert>
 	
-	<update id="intrFileProc10101020" parameterType="java.util.HashMap">
-		/* intrFileProc10101020 : 파일 데이터 수정 (CONTENT_IDX N처리) */
+	<update id="intrFileProc1030" parameterType="java.util.HashMap">
+		/* intrFileProc1030 : 파일 데이터 수정 (CONTENT_IDX N처리) */
 		UPDATE INTR_FILE F1
 			SET F1.USE_YN = 'N'
 		WHERE F1.CONTENT_IDX = #{contentIdx, jdbcType=VARCHAR}
 	</update>
 
-	<update id="intrFileProc10101021" parameterType="java.util.HashMap">
-		/* intrFileProc10101020 : 파일 데이터 수정 (FILE_IDX Y처리) */
+	<update id="intrFileProc1040" parameterType="java.util.HashMap">
+		/* intrFileProc1040 : 파일 데이터 수정 (FILE_IDX Y처리) */
 		UPDATE INTR_FILE F1
 			SET F1.USE_YN = 'Y'
 		WHERE F1.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
 	</update>
 
 
-	<update id="intrFileProc10101030" parameterType="java.util.HashMap">
-		/* intrFileProc10101030 : 파일 데이터 삭제 */
+	<update id="intrFileProc1050" parameterType="java.util.HashMap">
+		/* intrFileProc1050 : 파일 데이터 삭제 */
 		UPDATE INTR_FILE
 			SET USE_YN = 'N'
 		WHERE CONTENT_IDX IN

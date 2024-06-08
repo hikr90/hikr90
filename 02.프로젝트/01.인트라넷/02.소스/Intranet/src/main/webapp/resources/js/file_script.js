@@ -6,7 +6,6 @@ $(function() {
 	var fileCnt = 0;
 	/* 명칭 : fileUpd
 	 * 작성자 : 김태현
-	 * 작성일자 : 2022.12.07
 	 * 내용 : 파일 업로드
 	 */
 	$("#fileUpd").on('change', function() {
@@ -36,7 +35,6 @@ $(function() {
 	
 	/* 명칭 : everyChk
 	 * 작성자 : 김태현
-	 * 작성일자 : 2022.12.07
 	 * 내용 : 전체 체크박스 동작
 	 */
 	$('.everyChk').click(function() {
@@ -49,7 +47,6 @@ $(function() {
 	
 	/* 명칭 : fileDel
 	 * 작성자 : 김태현
-	 * 작성일자 : 2022.12.07
 	 * 내용 : 파일 삭제
 	 */
 	$("#fileDel").on('click', function() {
@@ -77,7 +74,6 @@ $(function() {
 
 	/* 명칭 : profileImg
 	 * 작성자 : 김태현
-	 * 작성일자 : 2023.01.14
 	 * 내용 : 사원 사진 변경 이벤트
 	 */
 	$("#profileImg").change(function(e) {
@@ -123,7 +119,6 @@ $(function() {
 
 /* 명칭 : setFileList
  * 작성자 : 김태현
- * 작성일자 : 2022.12.07
  * 내용 : 파일 목록 세팅
  */
 function setFileList(){
@@ -139,7 +134,6 @@ function setFileList(){
 
 /* 명칭 : setFileArea
  * 작성자 : 김태현
- * 작성일자 : 2023.01.10
  * 내용 : 파일 영역 세팅
  */
 function setFileArea(){
@@ -157,7 +151,6 @@ function setFileArea(){
 
 /* 명칭 : fileProc
  * 작성자 : 김태현
- * 작성일자 : 2024.04.13
  * 내용 : 파일 다운로드 (단건)
  */
 function fileProc(fileIdx){
@@ -166,7 +159,6 @@ function fileProc(fileIdx){
 		
 /* 명칭 : zipProc
  * 작성자 : 김태현
- * 작성일자 : 2024.04.13
  * 내용 : 파일 다운로드 (전체)
  */
 function zipProc(){

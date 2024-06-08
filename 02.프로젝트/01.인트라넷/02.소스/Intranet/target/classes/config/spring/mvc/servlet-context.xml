@@ -18,18 +18,18 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	
-	<!-- AUTOWIRED -->
+	<!-- autowired -->
 	<context:component-scan base-package="com.intr.*" />
 	<context:annotation-config/> 
 
-	<!-- TRANSACTION -->
+	<!-- transaction -->
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="ds"/>
 	</beans:bean>
 	
 	<tx:annotation-driven />
 
-	<!-- INTERCEPTOR -->
+	<!-- interceptor -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/*.do"/>
@@ -40,7 +40,7 @@
 		</interceptor>
 	</interceptors>
 	
-	<!-- MESSAGE -->
+	<!-- message -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<beans:property name="defaultEncoding" value="UTF-8" />
 		<beans:property name="fallbackToSystemLocale" value="false" />
@@ -52,7 +52,7 @@
 		</beans:property>
 	</beans:bean>
 	
-	<!-- CKEDITOR -->
+	<!-- ckeditor -->
 	<resources mapping="/ckeditor/**" location="/ckeditor4/" />
 	
 	<beans:bean id="localResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">

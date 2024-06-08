@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,11 +36,8 @@ public class EmpServiceImpl implements EmpService{
 	@Autowired
 	HttpServletRequest request;
 	
-	//
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-
 	// 사원 목록 조회
-	public void intrEmpInqy101010(Model model, HashMap<String, Object> paramMap) {
+	public void intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -50,7 +45,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10101010(model, paramMap);
+			defaultList = empDao.intrEmpInqy1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
@@ -66,12 +61,12 @@ public class EmpServiceImpl implements EmpService{
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 관리자 사원 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 사원 목록 건수 조회
-	public void intrEmpInqy101011(Model model, HashMap<String, Object> paramMap) {
+	public void intrEmpInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -79,7 +74,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy10101011(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy1020(model, paramMap);
 			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
 
 			//--------------------------------------------------------------------------------------------
@@ -90,12 +85,12 @@ public class EmpServiceImpl implements EmpService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사원 목록 건수 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 부서, 직급 조회
-	public void intrEmpInqy101012(Model model, HashMap<String, Object> paramMap) {
+	public void intrEmpInqy1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -103,24 +98,24 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 부서 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10101210(model, paramMap);
+			defaultList = empDao.intrEmpInqy1030(model, paramMap);
 			model.addAttribute("deptList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 부서 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10101211(model, paramMap);
+			defaultList = empDao.intrEmpInqy1040(model, paramMap);
 			model.addAttribute("gradeList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 부서, 직급 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 
 	
 	// 사원 아이디 중복 조회
-	public String intrEmpInqy101110(Model model, HashMap<String, Object> paramMap) {
+	public String intrEmpInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		String defaultStr = "";
@@ -130,7 +125,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 아이디 중복 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10111010(model, paramMap);
+			defaultList = empDao.intrEmpInqy1050(model, paramMap);
 			//
 			if(defaultList.size()>0) {
 				resStr = "YES";
@@ -143,14 +138,14 @@ public class EmpServiceImpl implements EmpService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 관리자 사원 아이디 중복 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		//
 		return defaultStr;
 	}
 	
 	// 사원 상세 조회
-	public void intrEmpInqy102010(Model model, HashMap<String, Object> paramMap) {
+	public void intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -159,23 +154,23 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy10102010(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy1060(model, paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy101010(model, paramMap);
+			defaultList = utilDao.intrFileInqy1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 관리자 사원 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 부서 사원 트리 조회
-	public void intrEmpInqy103010(Model model) {
+	public void intrEmpInqy1060(Model model) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -183,17 +178,17 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10301010(model);
+			defaultList = empDao.intrEmpInqy1070(model);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 부서 사원 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 
 	// 부서 사원 수 조회
-	public void intrEmpInqy104010(Model model, HashMap<String, Object> paramMap) {
+	public void intrEmpInqy1070(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -201,17 +196,17 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy10401010(model, paramMap);
+			defaultList = empDao.intrEmpInqy1080(model, paramMap);
 			model.addAttribute("deptEmpList",defaultList);
 
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 부서 사원 수 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
 	// 사원 등록
-	public String intrEmpProc101010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrEmpProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -222,13 +217,13 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 시퀀스 채번 (사원)
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrMainInqy10301011();
+			defaultInfo = mainDao.intrMainInqy1030();
 			paramMap.put("contentIdx", defaultInfo.get("contentIdx"));
 
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록
 			//--------------------------------------------------------------------------------------------
-			resInt = empDao.intrEmpProc10101010(paramMap);
+			resInt = empDao.intrEmpProc1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -238,7 +233,7 @@ public class EmpServiceImpl implements EmpService{
 			// 파일 등록 (INTR_FILE)
 			//--------------------------------------------------------------------------------------------
 			if(!request.getFiles("fileList").isEmpty()) {
-				resStr = utilService.intrFileProc101010(model, paramMap, request);
+				resStr = utilService.intrFileProc1010(model, paramMap, request);
 			}
 
 			//--------------------------------------------------------------------------------------------
@@ -248,14 +243,14 @@ public class EmpServiceImpl implements EmpService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사원 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		
 		return defaultStr;
 	}
 	
 	// 사원 수정
-	public String intrEmpProc102010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrEmpProc1020(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -265,7 +260,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = empDao.intrEmpProc10201010(paramMap);
+			resInt = empDao.intrEmpProc1020(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -274,7 +269,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록 (INTR_FILE)
 			//--------------------------------------------------------------------------------------------
-			resStr = utilService.intrFileProc101010(model, paramMap, request);
+			resStr = utilService.intrFileProc1010(model, paramMap, request);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -283,14 +278,14 @@ public class EmpServiceImpl implements EmpService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사원 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		
 		return defaultStr;
 	}
 	
 	// 사원 복직, 퇴사 처리
-	public String intrEmpProc103010(Model model, HashMap<String, Object> paramMap) {
+	public String intrEmpProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -300,7 +295,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 복직, 퇴사 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = empDao.intrEmpProc10301010(paramMap);
+			resInt = empDao.intrEmpProc1030(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -313,7 +308,7 @@ public class EmpServiceImpl implements EmpService{
 			
 		} catch (Exception e) {
 			//
-			logger.debug("[서비스] 사원 복직, 퇴사 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			throw new Exception(e.getMessage());
 		}
 		
 		return defaultStr;

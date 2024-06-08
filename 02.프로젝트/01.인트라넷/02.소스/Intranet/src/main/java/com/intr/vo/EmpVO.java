@@ -2,11 +2,12 @@ package com.intr.vo;
 
 public class EmpVO {
 	//--------------------------------------------------------------------------------------------
+	// 직원 정보
+	//--------------------------------------------------------------------------------------------
 	private String empIdx, deptCd, deptNm, gradeCd, gradeNm, empNm,
 					empGender, empPhone, empMail, empAddr, empAddrInfo,
 					empId, empPwd, empHireDate, empResiDate, authYn;
-	//--------------------------------------------------------------------------------------------
-
+	//
 	public String getEmpIdx() {
 		return empIdx;
 	}

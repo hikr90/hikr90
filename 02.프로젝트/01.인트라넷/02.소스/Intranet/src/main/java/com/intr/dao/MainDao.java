@@ -17,59 +17,59 @@ public class MainDao {
 	SqlSession sqlsession;
 	
 	// 메뉴 조회
-	public List<HashMap<String, Object>> intrMainInqy10101010(Model model, HashMap<String,Object> paramMap) {
+	public List<HashMap<String, Object>> intrMainInqy1010(Model model, HashMap<String,Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("main.intrMainInqy10101010", paramMap);
+		defaultList = sqlsession.selectList("main.intrMainInqy1010", paramMap);
 		return defaultList;
 	}
 
 	// 전체 메뉴 조회
-	public List<HashMap<String, Object>> intrMainInqy10103010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrMainInqy1020(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("main.intrMainInqy10103010", paramMap);
+		defaultList = sqlsession.selectList("main.intrMainInqy1020", paramMap);
 		return defaultList;
 	}
 
 	
 	// 시퀀스 (컨텐츠) 생성 
-	public HashMap<String, Object> intrMainInqy10301010() throws Exception {
+	public HashMap<String, Object> intrMainInqy1030() throws Exception {
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("main.intrMainInqy10301010");
+		defaultInfo = sqlsession.selectOne("main.intrMainInqy1030");
 		//
 		return defaultInfo;
 	}
 
 	// 시퀀스 (사원) 생성 
-	public HashMap<String, Object> intrMainInqy10301011() throws Exception {
+	public HashMap<String, Object> intrMainInqy1040() throws Exception {
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("main.intrMainInqy10301011");
+		defaultInfo = sqlsession.selectOne("main.intrMainInqy1040");
 		//
 		return defaultInfo;
 	}
 	
 	// 로그인 사용자 조회
-	public EmpVO intrLoginInqy10101010(Model model, HashMap<String, Object> paramMap) {
+	public EmpVO intrLoginInqy1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		EmpVO defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("main.intrLoginInqy10101010", paramMap);
+		defatulInfo = sqlsession.selectOne("main.intrLoginInqy1010", paramMap);
 		//
 		return defatulInfo;
 	}
 	
 	// 관리자 계정 조회
-	public HashMap<String, Object> intrLoginInqy10201010() {
+	public HashMap<String, Object> intrLoginInqy1020() {
 		HashMap<String, Object> defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("main.intrLoginInqy10201010");
+		defatulInfo = sqlsession.selectOne("main.intrLoginInqy1020");
 		//
 		return defatulInfo;
 	}
 
 	// 사용자 정보 조회
-	public HashMap<String, Object> intrLoginInqy10301010(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrLoginInqy1030(HashMap<String, Object> paramMap) {
 		HashMap<String, Object> defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("main.intrLoginInqy10301010", paramMap);
+		defatulInfo = sqlsession.selectOne("main.intrLoginInqy1030", paramMap);
 		//
 		return defatulInfo;
 	}

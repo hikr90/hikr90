@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auth">
-	<select id="intrAuthInqy10101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy10101010 : 권한 목록 조회 */
+	<select id="intrAuthInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1010 : 권한 목록 조회 */
 		SELECT 
 					AUTH_CD
 				,	AUTH_NM
@@ -17,8 +17,8 @@
 		ORDER BY AUTH_CD
 	</select>
 	
-	<select id="intrAuthInqy10201010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy10201010 : 권한 상세 조회 */
+	<select id="intrAuthInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1020 : 권한 상세 조회 */
 		SELECT 
 					AUTH_CD
 				,	AUTH_NM
@@ -29,8 +29,8 @@
 		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="intrAuthInqy20101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy20101010 : 메뉴 권한 목록 조회 */
+	<select id="intrAuthInqy1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1030 : 메뉴 권한 목록 조회 */
 		SELECT 
 					DATA.*
 				,	LEVEL AS LV
@@ -57,8 +57,8 @@
 			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD	
 	</select>
 
-	<select id="intrAuthInqy30101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy30101010 : 사용자 목록 조회 */
+	<select id="intrAuthInqy1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1040 : 사용자 목록 조회 */
 		WITH INTR_MAIN AS 
 			(
 				SELECT 
@@ -107,8 +107,8 @@
 					) INTR_SUB 
 	</select>
 
-	<select id="intrAuthInqy30101020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy30101020 : 사용자 권한 목록 조회 */
+	<select id="intrAuthInqy1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1050 : 사용자 권한 목록 조회 */
 		SELECT 
 					DATA.*
 		FROM (
@@ -136,8 +136,8 @@
             ORDER BY DATA.EMP_NM, DATA.EMP_IDX
 	</select>
 	
-		<insert id="intrAuthProc10101010" parameterType="java.util.HashMap">
-		/* intrAuthProc10101010 : 권한 등록 처리 */
+		<insert id="intrAuthProc1010" parameterType="java.util.HashMap">
+		/* intrAuthProc1010 : 권한 등록 처리 */
 		INSERT INTO INTR_AUTH
 		(
 					AUTH_CD
@@ -163,8 +163,8 @@
 		)
 	</insert>
 
-	<update id="intrAuthProc10201010" parameterType="java.util.HashMap">
-		/* intrAuthProc10201010 : 권한 수정 처리 */
+	<update id="intrAuthProc1020" parameterType="java.util.HashMap">
+		/* intrAuthProc1020 : 권한 수정 처리 */
 		UPDATE INTR_AUTH
 			SET		AUTH_NM = #{authNm, jdbcType=VARCHAR}
 				,	USE_YN = #{useYn, jdbcType=VARCHAR}
@@ -172,20 +172,20 @@
 		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="intrAuthProc10301010" parameterType="java.util.HashMap">
-		/* intrAuthProc10301010 : 권한 삭제 처리 */
+	<delete id="intrAuthProc1030" parameterType="java.util.HashMap">
+		/* intrAuthProc1030 : 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<delete id="intrAuthProc20101010" parameterType="java.util.HashMap">
-		/* intrAuthProc20101010 : 메뉴 권한 삭제 처리 */
+	<delete id="intrAuthProc1040" parameterType="java.util.HashMap">
+		/* intrAuthProc1040 : 메뉴 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH_MENU
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<insert id="intrAuthProc20101020" parameterType="java.util.HashMap">
-		/* intrAuthProc20101020 : 메뉴 권한 등록 처리 */
+	<insert id="intrAuthProc1050" parameterType="java.util.HashMap">
+		/* intrAuthProc1050 : 메뉴 권한 등록 처리 */
 		INSERT INTO INTR_AUTH_MENU
 		(
 					AUTH_CD
@@ -208,14 +208,14 @@
 		)
 	</insert>
 	
-	<delete id="intrAuthProc30101010" parameterType="java.util.HashMap">
-		/* intrAuthProc30101010 : 사용자 권한 삭제 처리 */
+	<delete id="intrAuthProc1060" parameterType="java.util.HashMap">
+		/* intrAuthProc1060 : 사용자 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH_EMP
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<insert id="intrAuthProc30101020" parameterType="java.util.HashMap">
-		/* intrAuthProc30101020 : 사용자 권한 등록 처리 */
+	<insert id="intrAuthProc1070" parameterType="java.util.HashMap">
+		/* intrAuthProc1070 : 사용자 권한 등록 처리 */
 		INSERT INTO INTR_AUTH_EMP
 		(
 					AUTH_CD
@@ -238,8 +238,8 @@
 		)
 	</insert>
 	
-	<select id="intrAuthInqy40101010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy40101010 : 로그인 권한 사용자 목록 조회 */
+	<select id="intrAuthInqy1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqy1060 : 로그인 권한 사용자 목록 조회 */
 		SELECT 
                     E.EMP_IDX
                 ,   E.EMP_NM

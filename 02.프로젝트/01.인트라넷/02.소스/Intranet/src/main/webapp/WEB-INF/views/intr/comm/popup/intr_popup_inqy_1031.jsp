@@ -1,7 +1,3 @@
-<!--명칭 : intr_popup_inqy_1031
-	작성자 : 김태현
-	작성일자 : 2022.12.01
-	내용 : 팝업 결재선 트리 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>

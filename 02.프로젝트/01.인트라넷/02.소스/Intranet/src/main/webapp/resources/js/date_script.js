@@ -64,7 +64,6 @@ $(function() {
 
 /* 명칭 : leadingZeros
  * 작성자 : 김태현
- * 작성일자 : 2022.12.26
  * 내용 : 월 표현 함수 (0포함)
  */
 function leadingZeros(n, digits) {
@@ -82,7 +81,6 @@ function leadingZeros(n, digits) {
 
 /* 명칭 : getTimeStamp
  * 작성자 : 김태현
- * 작성일자 : 2022.12.26
  * 내용 : 시간 표현 함수
  */
 function getTimeStamp(d) {
@@ -93,7 +91,6 @@ function getTimeStamp(d) {
 
 /* 명칭 : getDateStamp
  * 작성자 : 김태현
- * 작성일자 : 2022.12.26
  * 내용 : 날짜 표현 함수
  */
 function getDateStamp(d) {

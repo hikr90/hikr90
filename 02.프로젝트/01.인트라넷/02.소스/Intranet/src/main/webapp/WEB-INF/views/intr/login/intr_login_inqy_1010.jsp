@@ -10,7 +10,7 @@
 	<script type="text/javascript">
    		// 정보 찾기 팝업
    		function popCall(){
-   			// 정보 찾기 팝업 (WIDTH, HEIGTH, MAPPINGID)
+   			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
    			var obj = new Object();
    			ajaxPopup(obj,"650","360","intrPopupInqy1021.do","");
    		}
@@ -83,7 +83,7 @@
 										<col class="auto">
 										<col class="w60per">
 									</colgroup>
-										<thead>
+									<thead>
 										<tr>
 											<th scope="col">소유자</th>
 											<th scope="col">권한</th>

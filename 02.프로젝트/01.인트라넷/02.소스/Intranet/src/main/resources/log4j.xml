@@ -32,31 +32,26 @@
 		<level value="info" />
 	</logger>
 
-	<!-- SQL TIMING -->
 	<logger name="jdbc.sqltiming" additivity="false">
 		<level value="debug" />
 		<appender-ref ref="console"/> 
 	</logger>
 
-	<!-- SQL ONLY -->
 	<logger name="jdbc.sqlonly" additivity="false"> 
 		<level value="debug"/> 
 		<appender-ref ref="console"/> 
 	</logger>
 
-	<!-- AUDIT -->
 	<logger name="jdbc.audit" additivity="false"> 
 		<level value="debug"/>  
 		<appender-ref ref="console"/> 
 	</logger> 
 
-	<!-- RESULTSET -->
 	<logger name="jdbc.resultset" additivity="false">
 		<level value="debug" />
 		<appender-ref ref="console"/> 
 	</logger>
 
-	<!-- RESULT SET TABLE -->
 	<logger name="jdbc.resultsettable" additivity="false"> 
 		<level value="debug"/>  
 		<appender-ref ref="console"/> 

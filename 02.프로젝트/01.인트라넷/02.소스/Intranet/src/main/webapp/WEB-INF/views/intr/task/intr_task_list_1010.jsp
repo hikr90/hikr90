@@ -1,7 +1,3 @@
-<!--명칭 : intr_task_inqy_1010
-	작성자 : 김태현
-	작성일자 : 2023.06.13
-	내용 : 관리자 업무일지 조회 화면-->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
