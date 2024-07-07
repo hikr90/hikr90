@@ -1,13 +1,11 @@
-// 파일 관련 배열
 var fileTemp	= []; // 업로드 파일
 
 // 함수
 $(function() {
+	//
 	var fileCnt = 0;
-	/* 명칭 : fileUpd
-	 * 작성자 : 김태현
-	 * 내용 : 파일 업로드
-	 */
+
+	// 업로드
 	$("#fileUpd").on('change', function() {
 		// 파일, 화면 내 파일 추가
 		var thisFiles = this.files; 
@@ -33,10 +31,7 @@ $(function() {
 		fileCnt++;
 	});	
 	
-	/* 명칭 : everyChk
-	 * 작성자 : 김태현
-	 * 내용 : 전체 체크박스 동작
-	 */
+	// 전체 체크 박스
 	$('.everyChk').click(function() {
 		if($(".everyChk").is(":checked")){
 			$("input[type=checkbox]").prop("checked", true);
@@ -45,15 +40,10 @@ $(function() {
 	    }
 	});
 	
-	/* 명칭 : fileDel
-	 * 작성자 : 김태현
-	 * 내용 : 파일 삭제
-	 */
+	// 파일 삭제
 	$("#fileDel").on('click', function() {
 		// 체크된 항목이 없는 경우
 		if($("input[name='checkIdx']:checked").length==0){
-			// 전체 체크 해제
-			$("input:checkbox[name='everyChk']").prop("checked", false);
 			alert("체크된 항목이 없습니다.");
 			return;
 		}
@@ -72,10 +62,7 @@ $(function() {
 		$(".everyChk").prop("checked", false);
 	});
 
-	/* 명칭 : profileImg
-	 * 작성자 : 김태현
-	 * 내용 : 사원 사진 변경 이벤트
-	 */
+	// 사원 이미지 변경
 	$("#profileImg").change(function(e) {
 		// 이미지 존재
 		if(this){
@@ -117,10 +104,7 @@ $(function() {
 	})
 });
 
-/* 명칭 : setFileList
- * 작성자 : 김태현
- * 내용 : 파일 목록 세팅
- */
+// 업로드 목록 세팅
 function setFileList(){
 	var fileList = new FormData(document.getElementById("form"));
 	// 
@@ -131,11 +115,7 @@ function setFileList(){
 	return fileList;
 }
 
-
-/* 명칭 : setFileArea
- * 작성자 : 김태현
- * 내용 : 파일 영역 세팅
- */
+// 업로드 영역 세팅
 function setFileArea(){
 	var fileStr = "";
 	//
@@ -148,20 +128,12 @@ function setFileArea(){
 	$("#fileArea").html(fileStr);
 }
 
-
-/* 명칭 : fileProc
- * 작성자 : 김태현
- * 내용 : 파일 다운로드 (단건)
- */
+// 단건 다운로드
 function fileProc(fileIdx){
 	formSubmit('intrFileProc1020.do?fileIdx='+fileIdx);
 }
-		
-/* 명칭 : zipProc
- * 작성자 : 김태현
- * 내용 : 파일 다운로드 (전체)
- */
+	
+// 전체 다운로드
 function zipProc(){
 	formSubmit('intrFileProc1030.do');
 }
-

@@ -4,9 +4,6 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<style>
-	._formArea .postWrite dl > dd, ._formArea .postView dl > dd{height: 63px;}
-</style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	// 취소
@@ -58,155 +55,163 @@
 </script>
 </head>
 <body id="main">
-	<!-- MENU -->
+<form id="form" name="form" method="POST">
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<form id="form" name="form" method="POST">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content" style="padding-bottom: 35px;">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">
-					<div class="_contentArea _formArea">
-						<div class="postWrap">
-							<input type="hidden" id="contentIdx" name="contentIdx" value="${param.contentIdx}">
-							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-							<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-							<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-							<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
-							<input type="hidden" id="modCnt" name="modCnt" value="0">
-      						<input type="hidden" name="fileIdx" value="${defaultList[0].fileIdx}">
-						
-							<div id="fileArea">
-							
-							</div>
-						
-							<!-- Form postWriteWrap  -->
-                            <div class="">
-                            <h2>사원 상세</h2>
-                                <div class="postWrite">
-                                    <dl style="height: 150px;">
-                                        <dt><label>프로필</label></dt>
-                                        <dd>
-                                        	<div style="display: -webkit-inline-box;">
-                                        	<div class="empProfile">
-                                        		<c:choose>
-                                        			<c:when test="${not empty defaultList}">
-                                        				<img class="empImg" id="empImg" src="intrEmpInqy1012.do?contentIdx=${defaultList[0].contentIdx}&fileOrglNm=${defaultList[0].fileOrglNm}">
-                                        			</c:when>
-                                        			<c:otherwise>
-		                                        		<img class="empImg" id="empImg" src="resources/images/icon/icon_emp.png">
-                                        			</c:otherwise>
-                                        		</c:choose>
-                                        	</div>
-                                        	<div class="profileBox" style="margin-left: 20px; display: grid;">
-                                        		<span id="profileSpan" style="margin-top: 20px;">사진을 등록해주세요.</span>
-	                                        	<div>
-	                                        		<label for="profileImg" class="stb-box-btn">등록</label>
-													<input type="file" name="profileImg" id="profileImg">
-                                        			<input type="button" class="stb-box-btn-grey" id="delProfileImg" value="삭제">
-                                        		</div>
-                                        	</div>
-                                        	</div>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>사원명</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" readonly="readonly">
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-                                    </dl>
-                                    <dl>
-                                    	<dt><label>부서</label></dt>
-                                        <dd class="sel_2part">
-											<select id="deptCd" name="deptCd">
-											<c:forEach var="list" items="${deptList}" varStatus="status">
-												<option value="${list.deptCd}" <c:if test="${defaultInfo.deptCd eq list.deptCd}">selected="selected"</c:if>>${list.deptNm}</option>
-											</c:forEach>
-											</select>
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-                                    </dl>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
 
-                                    <dl>
-                                    	<dt><label>직급</label></dt>
-                                        <dd class="sel_2part">
-											<select id="gradeCd" name="gradeCd">
-											<c:forEach var="list" items="${gradeList}" varStatus="status">
-												<option value="${list.gradeCd}" <c:if test="${defaultInfo.gradeCd eq list.gradeCd}">selected="selected"</c:if>>${list.gradeNm}</option>
-											</c:forEach>
-											</select>
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>연락처</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" value="${defaultInfo.empPhone}" onkeyup="inputNum(this);">
-                                        </dd>
-
-                                        <dt><label>성별</label></dt>
-                                        <dd class="sel_2part">
-                                        	<div class="_radioBox enter-chkBox">
-                                            	<span class="radio-area">
-                                                	<input type="radio" id="chk-local" class="empGender" name="empGender" value="M" <c:if test="${defaultInfo.empGender eq 'M'}">checked="checked"</c:if>></input>
-                                                	<label for="chk-local">남자<span></span></label>
-                                            	</span>
-                                            	<span class="radio-area">
-                                                	<input type="radio" id="chk-foreign" class="empGender" name="empGender" value="F" <c:if test="${defaultInfo.empGender eq 'F'}">checked="checked"</c:if>></input>
-                                                	<label for="chk-foreign">여자<span></span></label>
-                                            	</span>
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr" value="${defaultInfo.empAddr}">
-                                            <input type="button" class="stb-box-btn" value="주소 검색" onclick="srchAddr();" style="margin-bottom: 5px;">
-                                        </dd>
-                                        
-                                        <dt><label>상세 주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo" value="${defaultInfo.empAddrInfo}">
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>아이디</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly">
-                                        </dd>
-                                        
-                                        <dt><label>메일 주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail" value="${defaultInfo.empEmail}">
-                                        </dd>
-                                    </dl>
-								</div><!-- End postWriteWrap -->
-                                
-	                                <div class="btnWrap alignR">
-										<div class="floatR">
-											<input type="button" onclick="modProc('${empInfo.empIdx}')" class="_btn _gray" value="수정 완료">
-											<a class="_btn _line" onclick="detCall();">취소</a>
+		<div class="content_wrap">
+			<div class="content_area">
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">
+							<div class="form_area">
+								<div class="post_wrap">
+									<input type="hidden" id="contId" name="contId" value="${param.contId}">
+									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
+									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+									<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
+									<input type="hidden" id="modCnt" name="modCnt" value="0">
+		      						<input type="hidden" name="fileIdx" value="${defaultList[0].fileIdx}">
+								
+		                            <h2>사원 상세</h2><br>
+	                                <div class="post_write">
+	                                    <dl>
+	                                        <dt><label>프로필</label></dt>
+	                                        <dd>
+	                                        	<div class="profile_wrap disp_flex">
+		                                        	<div class="profile_area">
+		                                        		<c:choose>
+		                                        			<c:when test="${not empty defaultList}">
+		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileOrglNm=${defaultList[0].fileOrglNm}">
+		                                        			</c:when>
+		                                        			<c:otherwise>
+				                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
+		                                        			</c:otherwise>
+		                                        		</c:choose>
+		                                        	</div>
+	                                        	
+		                                        	<div class="profile_box mt10 ml20">
+		                                        		<br><span>사진을 등록해주세요.</span>
+			                                        	<div style="margin-top: 5px;">
+			                                        		<label for="profileImg" class="btn_blue">등록</label>
+															<input type="file" name="profileImg" id="profileImg">
+		                                        			<input type="button"class="btn_gray" id="delProfileImg" value="삭제">
+		                                        		</div>
+		                                        	</div>
+	                                        	</div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>사원명</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" readonly="readonly">
+	                                        </dd>
+	                                        
+	                                        <dt></dt>
+	                                        <dd></dd>
+	                                    </dl>
+	                                    <dl>
+	                                    	<dt><label>부서</label></dt>
+	                                        <dd class="sel_2part">
+												<div class="select_wrap">
+													<div id="deptList" class="sList select_box">${empty resultParam.deptNm ? '전체' : resultParam.deptNm}</div>
+													<input type="hidden" name="deptCd" value="${resultParam.deptCd}">
+													<input type="hidden" name="deptNm" value="${resultParam.deptNm}">
+												
+													<ul class="sUl select_ul">
+														<c:forEach var="list" items="${deptList}">
+															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+	                                        </dd>
+	                                        
+	                                        <dt><label>직급</label></dt>
+	                                        <dd class="sel_2part">
+												<div class="select_wrap">
+													<div id="gradeList" class="sList select_box">${empty resultParam.gradeNm ? '전체' : resultParam.gradeNm}</div>
+													<input type="hidden" name="gradeCd" value="${resultParam.gradeCd}">
+													<input type="hidden" name="gradeNm" value="${resultParam.gradeNm}">
+												
+													<ul class="sUl select_ul">
+														<c:forEach var="list" items="${gradeList}">
+															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>연락처</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" value="${defaultInfo.empPhone}" onkeyup="inputNum(this);">
+	                                        </dd>
+	
+	                                        <dt><label>성별</label></dt>
+	                                        <dd class="sel_2part">
+	                                        	<div class="radio_box enter-check_box">
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-yes" class="empGender" name="empGender" value="M" <c:if test="${defaultInfo.empGender eq 'M'}">checked="checked"</c:if>></input>
+	                                                	<label for="chk-yes">남자<span></span></label>
+	                                            	</span>
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-no" class="empGender" name="empGender" value="F" <c:if test="${defaultInfo.empGender eq 'F'}">checked="checked"</c:if>></input>
+	                                                	<label for="chk-no">여자<span></span></label>
+	                                            	</span>
+	                                            </div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr" value="${defaultInfo.empAddr}">
+	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
+	                                        </dd>
+	                                        
+	                                        <dt><label>상세 주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo" value="${defaultInfo.empAddrInfo}">
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>아이디</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly">
+	                                        </dd>
+	                                        
+	                                        <dt><label>메일 주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail" value="${defaultInfo.empEmail}">
+	                                        </dd>
+	                                    </dl>
+									</div>
+		                                
+	                                <div class="btn_wrap align_right">
+										<div class="float_right">
+											<button type="button" class="btn_navy_thin" onclick="modProc('${empInfo.empIdx}')">수정완료</button>
+											<button type="button" class="btn_gray_thin" onclick="detCall();">취소</button>
 										</div>
 									</div>
-								</div>
-                            </div><!-- End postWrap -->
-                        </div>
-					</div><!-- End _contentArea _formArea -->
-					
-				</div><!-- End _inner -->
-
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
-	</form>
+		                            </div><!-- End post_wrap -->
+		                        </div>
+							</div><!-- End form_area -->
+							
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
+</form>
 </body>
 	
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>

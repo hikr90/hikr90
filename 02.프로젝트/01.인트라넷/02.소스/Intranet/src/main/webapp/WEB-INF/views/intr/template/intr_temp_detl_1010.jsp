@@ -11,28 +11,26 @@
 	});
 </script>
 
-
-<!-- Form postWriteWrap  -->
-<div class="postWrite">
+<div class="post_write" style="margin-top: 0px;">
 	<dl>
 		<dt>
 			<label for="post-title">템플릿명</label>
 		</dt>
-		<dd style="width: 50%;">
-			<input type="text" id="templateNm" title="템플릿명" name="templateNm" value="${defaultInfo.templateNm}">
-			<input type="hidden" class="templateCd" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
+		<dd>
+			<input type="text" id="tempNm" title="템플릿명" name="tempNm" value="${defaultInfo.tempNm}">
+			<input type="hidden" class="tempCd" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
 		</dd>
 		<dt>
 			<label for="post-title">사용여부</label>
 		</dt>
 		<dd>
-			<div class="_radioBox enter-chkBox">
+			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id="chk-local" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
-					<label for="chk-local">예<span></span></label>
+					<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
+					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-foreign" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
-					<label for="chk-foreign">아니오<span></span></label>
+					<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
+					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>
 		</dd>
@@ -42,13 +40,13 @@
 			<label for="post-title">템플릿 내용</label>
 		</dt>
 		<dd>
-			<textarea id="editor" name="templateContent" title="템플릿 내용">${defaultInfo.templateContent}</textarea>
+			<textarea id="editor" name="tempCont" title="템플릿 내용">${defaultInfo.tempCont}</textarea>
 		</dd>
 	</dl>
 </div>
 
-<div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _line" onclick="modProc(this.form);" value="수정">
-	<input type="button" class="_btn _grep" onclick="delProc(this.form);" value="삭제">	
+<div class="btn_wrap align_right">
+	<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정</button>
+	<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제	</button>
 </div>
 	

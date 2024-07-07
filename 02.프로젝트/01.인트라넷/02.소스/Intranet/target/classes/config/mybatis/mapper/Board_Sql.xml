@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-	<select id="intrBoardInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBoardInqy1010 : 공지사항 목록 조회 */
+	<select id="intrBoardInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqyDao1010 : 공지사항 목록 조회 */
 		SELECT 
 		            SUB_DATA.NUM
-				,	SUB_DATA.BRD_IDX
+				,	SUB_DATA.CONT_ID
 				,	SUB_DATA.BRD_TITLE
 				,	SUB_DATA.EMP_NM
 				,	SUB_DATA.DEPT_NM
+				,	SUB_DATA.GRADE_NM
 				,	SUB_DATA.LIST_CNT
 				,	SUB_DATA.REG_DT
 				,	SUB_DATA.BRD_READHIT
@@ -18,28 +19,32 @@
                     END AS FILE_YN
 		FROM (
 				SELECT 
-		    			BRD.BRD_IDX
+		    			BRD.CONT_ID
 					,   BRD.BRD_TITLE
                     ,   BRD.EMP_IDX
 		    		,   EMP.EMP_NM
 		    		,   DEPT.DEPT_NM
+		    		,	GRADE.GRADE_NM
                     ,   BRD.REG_DT
                     ,   BRD.REG_TM
                     ,	BRD.BRD_READHIT
-                    ,	RANK() OVER(ORDER BY BRD.BRD_IDX DESC) AS NUM
-                    ,   COUNT(BRD.BRD_IDX) OVER() AS LIST_CNT
+                    ,	RANK() OVER(ORDER BY BRD.CONT_ID DESC) AS NUM
+                    ,   COUNT(BRD.CONT_ID) OVER() AS LIST_CNT
       				,	(SELECT 
-      							COUNT(CONTENT_IDX) 
+      							COUNT(CONT_ID) 
       						FROM INTR_FILE 
-      						WHERE CONTENT_IDX = BRD.BRD_IDX
+      						WHERE CONT_ID = BRD.CONT_ID
       							AND USE_YN = 'Y'
       					) AS FILE_CNT
 		        FROM INTR_BOARD BRD
-		        	LEFT OUTER JOIN INTR_EMP EMP
-		            	ON BRD.EMP_IDX = EMP.EMP_IDX
-		            LEFT OUTER JOIN INTR_DEPT DEPT
-		            	ON DEPT.DEPT_CD = EMP.DEPT_CD
-                        AND DEPT.USE_YN = 'Y'
+	        	LEFT OUTER JOIN INTR_EMP EMP
+	            	ON BRD.EMP_IDX = EMP.EMP_IDX
+	            LEFT OUTER JOIN INTR_DEPT DEPT
+	            	ON DEPT.DEPT_CD = EMP.DEPT_CD
+                       AND DEPT.USE_YN = 'Y'
+                LEFT OUTER JOIN INTR_GRADE GRADE
+	            	ON GRADE.GRADE_CD = EMP.GRADE_CD
+                    AND GRADE.USE_YN = 'Y'
 		        WHERE 
 		            1 = 1
 		            	AND BRD.USE_YN = 'Y'
@@ -55,6 +60,9 @@
 		  			<if test="deptCd != null and deptCd != ''">
 						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
 					</if>
+					<if test="gradeCd != null and gradeCd != ''">
+						AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					</if>
         	) SUB_DATA
  		WHERE 1=1 
  			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
@@ -63,11 +71,19 @@
         ORDER BY SUB_DATA.REG_DT DESC, SUB_DATA.REG_TM DESC
 	</select>	
 
-	<select id="intrBoardInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBoardInqy1020 : 공지사항 목록 건수 조회 */	
+	<select id="intrBoardInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqyDao1020 : 공지사항 목록 건수 조회 */	
 		SELECT 
-				COUNT(BRD.BRD_IDX) AS LIST_CNT 
+				COUNT(BRD.CONT_ID) AS LIST_CNT 
 		FROM INTR_BOARD BRD
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON BRD.EMP_IDX = EMP.EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+          	AND DEPT.USE_YN = 'Y'
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.DEPT_CD
+     	  	AND GRADE.USE_YN = 'Y'
 		WHERE 1 = 1
 			AND BRD.USE_YN = 'Y'
 		    <if test="srchNm != null and srchNm != ''">
@@ -79,12 +95,18 @@
 		    <if test="srchEdt != null and srchEdt !=''">
 		    	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		    </if>
+		    <if test="deptCd != null and deptCd != ''">
+				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+			</if>
+			<if test="gradeCd != null and gradeCd != ''">
+				AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+			</if>
 	</select>	
 	
-	<select id="intrBoardInqy1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBoardInqy1030 : 공지사항 상세 */
+	<select id="intrBoardInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBoardInqyDao1030 : 공지사항 상세 */
 		SELECT 
-					BRD.BRD_IDX
+					BRD.CONT_ID
 				,	BRD.BRD_TITLE
 				,	BRD.EMP_IDX
 				,	EMP.EMP_IDX
@@ -93,7 +115,7 @@
 				,	DEPT.DEPT_NM
 				,	EMP.GRADE_CD
 				,	GRADE.GRADE_NM
-				,	BRD.BRD_CONTENT
+				,	BRD.BRD_CONT
 				,	BRD.BRD_READHIT
 				,	BRD.REG_DT
 				,	BRD.REG_TM
@@ -109,17 +131,17 @@
 		LEFT OUTER JOIN INTR_GRADE GRADE
 			ON GRADE.GRADE_CD = EMP.GRADE_CD
 			AND GRADE.USE_YN = 'Y'
-		WHERE BRD.BRD_IDX = #{contentIdx, jdbcType=VARCHAR}
+		WHERE BRD.CONT_ID = #{contId, jdbcType=VARCHAR}
 	</select>
 	
-		<insert id="intrBoardProc1010" parameterType="java.util.HashMap" >
-		/* intrBoardProc1010 : 공지사항 등록 처리 */
+		<insert id="intrBoardProcDao1010" parameterType="java.util.HashMap" >
+		/* intrBoardProcDao1010 : 공지사항 등록 처리 */
 		INSERT INTO INTR_BOARD
 		(
-				BRD_IDX
+				CONT_ID
 			,	EMP_IDX
 			,	BRD_TITLE
-			,	BRD_CONTENT
+			,	BRD_CONT
 			,	BRD_READHIT
 			,	REG_DT
 			,	REG_TM
@@ -128,10 +150,10 @@
 		)
 		VALUES
 		(
-				#{contentIdx, jdbcType=VARCHAR}
+				#{contId, jdbcType=VARCHAR}
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{brdTitle, jdbcType=VARCHAR}
-			,	#{brdContent, jdbcType=VARCHAR}
+			,	#{brdCont, jdbcType=VARCHAR}
 			,	0
 			,	TO_CHAR(SYSDATE,'YYYYMMDD')
 			,	TO_CHAR(SYSDATE,'HH24MISS')
@@ -144,28 +166,28 @@
 		)
 	</insert>
 	
-	<update id="intrBoardProc1020" parameterType="java.util.HashMap">
-	/* intrBoardProc1020 : 공지사항 삭제 처리 */
+	<update id="intrBoardProcDao1020" parameterType="java.util.HashMap">
+	/* intrBoardProcDao1020 : 공지사항 삭제 처리 */
 		UPDATE INTR_BOARD
 			SET USE_YN = 'N'
-		WHERE BRD_IDX IN
+		WHERE CONT_ID IN
 		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
 			#{delIdx}	
 		</foreach>
 	</update>	
 	
-	<update id="intrBoardProc1030" parameterType="java.util.HashMap">
-	/* intrBoardProc1030 : 공지사항 수정 처리 */
+	<update id="intrBoardProcDao1030" parameterType="java.util.HashMap">
+	/* intrBoardProcDao1030 : 공지사항 수정 처리 */
 		UPDATE INTR_BOARD
 			SET 	BRD_TITLE = #{brdTitle, jdbcType=VARCHAR}
-				,	BRD_CONTENT = #{brdContent, jdbcType=VARCHAR}
-		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
+				,	BRD_CONT = #{brdCont, jdbcType=VARCHAR}
+		WHERE CONT_ID = #{contId, jdbcType=VARCHAR} 
 	</update>	
 
-	<update id="intrBoardProc1040" parameterType="java.util.HashMap">
-	/* intrBoardProc1040 : 공지사항 조회수 증가 */
+	<update id="intrBoardProcDao1040" parameterType="java.util.HashMap">
+	/* intrBoardProcDao1040 : 공지사항 조회수 증가 */
 		UPDATE INTR_BOARD
 			SET 	BRD_READHIT = BRD_READHIT + 1
-		WHERE BRD_IDX = #{contentIdx, jdbcType=VARCHAR} 
+		WHERE CONT_ID = #{contId, jdbcType=VARCHAR} 
 	</update>
 </mapper>

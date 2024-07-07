@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- Form postWriteWrap  -->
-<div class="postWrite">
+<div class="post_write" style="margin: 0px;">
 	<dl>
 		<dt>
 			<label for="post-title">권한명</label>
@@ -18,13 +17,13 @@
 			<label>사용여부</label>
 		</dt>
 		<dd>
-			<div class="_radioBox enter-chkBox">
+			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id="chk-local" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
-					<label for="chk-local">예<span></span></label>
+					<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
+					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-foreign" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
-					<label for="chk-foreign">아니오<span></span></label>
+					<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
+					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>
 		</dd>
@@ -39,7 +38,7 @@
 	</dl>
 </div>
 
-<div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _grey" onclick="modProc(this.form);" value="수정 완료">	
-	<a onclick="detCall('${defaultInfo.authCd}');" class="_btn _line">취소</a>
+<div class="btn_center align_right">
+	<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정완료</button>	
+	<button type="button" class="btn_gray_thin" onclick="detCall('${defaultInfo.authCd}');">취소</button>
 </div>

@@ -41,7 +41,7 @@ public class UtilController {
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.intrFileProc1020(model, paramMap, request, response);
+			utilService.intrFileProcService1020(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -57,7 +57,7 @@ public class UtilController {
 			//--------------------------------------------------------------------------------------------
 			// 전체 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.intrFileProc1030(model, paramMap, request, response);
+			utilService.intrFileProcService1030(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -76,7 +76,7 @@ public class UtilController {
 			//--------------------------------------------------------------------------------------------
 			// 메일 전송
 			//--------------------------------------------------------------------------------------------
-			defaultStr = utilService.intrMailProc1010(model, paramMap);
+			defaultStr = utilService.intrMailProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

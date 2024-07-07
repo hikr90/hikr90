@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- Form postWriteWrap  -->
-<div class="postWrite">
+<div class="post_write" style="margin: 0px;">
 	<dl>
 		<dt>
 			<label for="post-title">권한명</label>
@@ -27,14 +26,14 @@
 		<dt>
 			<label for="post-title">비고</label>
 		</dt>
-		<dd style="height: 120px; vertical-align: text-top;">
+		<dd>
 			${defaultInfo.remark}
 		</dd>
 	</dl>
 </div>
 
-<div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _line" onclick="modCall(this.form);" value="수정">
-	<input type="button" class="_btn _grep" onclick="delProc(this.form);" value="삭제">	
+<div class="btn_center align_right">
+	<button type="button" class="btn_navy_thin" onclick="modCall(this.form);">수정</button>
+	<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제</button>	
 </div>
 	

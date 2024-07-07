@@ -2,54 +2,43 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<header style="min-height: 100px;">
-	<div class="_wrap">
-		<div class="utilWrap">
-			<div class="login_state">
-				<ul class="utilList">
-
-				<!-- 메인 메뉴 출력-->
-				<c:choose>
-					<c:when test="${empVO.authYn eq 'Y'}">
-						<li><a href="intrMainInqy1020.do">사용자</a></li>
-						<li><a href="intrMainInqy1030.do">관리자</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="intrMainInqy1020.do">사용자</a></li>
-					</c:otherwise>
-				</c:choose>
+<header style="min-height: 130px;">
+	<div class="wrap">
+		<div class="header_wrap">
+			<div class="header_state">
+				<ul class="header_list">
+					<c:choose>
+						<c:when test="${empVO.authYn eq 'Y'}">
+							<li><a href="intrMainInqy1020.do">사용자</a></li>
+							<li><a href="intrMainInqy1030.do">관리자</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="intrMainInqy1020.do">사용자</a></li>
+						</c:otherwise>
+					</c:choose>
 					<li><a onclick="logout();">로그아웃</a></li>
-				</ul>
-				<br><br>
-				<div class="login_state_text">
+				</ul><br><br>
+				
+				<div class="header_state_text">
 					접속을 환영합니다.<br><br>
-					<a href=""><strong>${empVO.empNm}님</strong></a>
+					<a href="intrMainInqy1040.do?menuType=${menuType}&empIdx=${empVO.empIdx}"><strong>${empVO.empNm}님</strong></a>
 				</div>
 			</div>
 		</div>
 			
-		<div id="gnbWrap">
+		<div class="menu_wrap">
 			<div class="logo">
-				<img id="_logo" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png">
+				<img class="logo" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png" style="cursor: pointer;" onclick="location.href='${menuType eq '0' ? 'intrMainInqy1020.do' : 'intrMainInqy1030.do'}'">
 			</div>
 			
-			<nav id="_nav">
+			<nav class="nav">
 				<ul class="ul_1">
-					<c:forEach var="uMenu" items="${menuList}" varStatus="status">
-					<c:if test="${uMenu.lv eq 1}">
-						<li class="li_1">
-						<a class="a_1" href="${uMenu.mappingId eq null ? '#':uMenu.mappingId}">${uMenu.menuNm}</a>
-							<ul class="ul_2">
-								<c:forEach var="lMenu" items="${menuList}" varStatus="status">
-								<c:if test="${uMenu.menuCd eq lMenu.upprMenuCd}">
-									<li class="li_2" style="display: inline-block;">
-										<a class="a_2" href="${lMenu.mappingId}">${lMenu.menuNm}</a>
-									</li>
-								</c:if>
-								</c:forEach>
-							</ul>
-						</li>
-					</c:if>
+					<c:forEach var="list" items="${menuList}" varStatus="status">
+						<c:if test="${list.lv eq 1}">
+							<li class="li_1">
+								<a class="a_1" href="${list.mappingId}?menuSet=${list.menuCd}">${list.menuNm}</a>
+							</li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</nav>

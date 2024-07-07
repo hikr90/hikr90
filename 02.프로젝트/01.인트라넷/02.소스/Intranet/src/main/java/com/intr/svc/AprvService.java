@@ -7,15 +7,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface AprvService {
 	// 결재
-	void intrAprvInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 기안 목록
-	void intrAprvInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 상세
-	void intrAprvInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 목록
+	void intrAprvInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 기안 목록
+	void intrAprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 상세
+	void intrAprvInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 목록
 	
 	// 사용자 메인
-	void intrAprvInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception; // 나의 기안
-	void intrAprvInqy1050(Model model, HashMap<String, Object> paramMap) throws Exception; // 나의 결재
-
+	void intrAprvInqyService1040(Model model, HashMap<String, Object> paramMap) throws Exception; // 나의 기안
+	void intrAprvInqyService1050(Model model, HashMap<String, Object> paramMap) throws Exception; // 나의 결재
+	
+	// 건수 조회
+	void intrAprvInqyService1060(Model model, HashMap<String, Object> paramMap) throws Exception; // 기안 목록
+	void intrAprvInqyService1070(Model model, HashMap<String, Object> paramMap) throws Exception; // 결재 목록
+	
 	// 전자결재
-	String intrAprvProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; // 기안문 등록
-	String intrAprvProc1020(Model model, HashMap<String, Object> paramMap) throws Exception; // 결재 수신 처리
+	String intrAprvProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; // 기안문 등록
+	String intrAprvProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception; // 결재 수신 처리
+	String intrAprvProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception; // 결재 수신 처리
 }

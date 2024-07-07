@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 import com.intr.svc.TaskService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class TaskController {
@@ -26,6 +27,9 @@ public class TaskController {
 	
 	@Autowired
 	MainService mainService;
+	
+	@Autowired
+	EmpService empService;
 
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -38,27 +42,27 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy1030(model, paramMap);
-			
+			taskService.intrTaskInqyService1030(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1050(model, paramMap);
-			
+			mainService.intrMainInqyService1050(model, paramMap);
+			//--------------------------------------------------------------------------------------------
+			// 부서 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqyService1050(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy1010(model, paramMap);
-
+			taskService.intrTaskInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -77,12 +81,11 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 작성 화면 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy1020(model, paramMap);
+			taskService.intrTaskInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -104,7 +107,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc1010(model, paramList);
+			defaultStr = taskService.intrTaskProcService1010(model, paramList);
 			
 		} catch (Exception e) {
 			//

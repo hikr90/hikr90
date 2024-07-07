@@ -15,90 +15,90 @@ public class EmpDao {
 	SqlSession sqlsession;
 	
 	// 사원 목록
-	public List<HashMap<String, Object>> intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1010", paramMap);
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1010", paramMap);
 		return defaulList;
 	}
 	
 	// 사원 목록 건수 조회
-	public HashMap<String, Object> intrEmpInqy1020(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrEmpInqyDao1020(Model model, HashMap<String, Object> paramMap) {
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1020", paramMap);
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqyDao1020", paramMap);
 		return defaultInfo;
 	}
 
 	// 부서 목록 조회
-	public List<HashMap<String, Object>> intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1030(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1030", paramMap);
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1030", paramMap);
 		return defaulList;
 	}
 
 	// 직급 목록 조회
-	public List<HashMap<String, Object>> intrEmpInqy1040(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1040(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1040", paramMap);
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1040", paramMap);
 		return defaulList;
 	}
 	
 	// 사원 아이디 중복 조회
-	public List<HashMap<String, Object>> intrEmpInqy1050(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1050(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1050", paramMap);
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1050", paramMap);
 		return defaulList;
 	}
 
 	// 사원 상세 조회
-	public HashMap<String, Object> intrEmpInqy1060(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrEmpInqyDao1060(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1060",paramMap);
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqyDao1060",paramMap);
 		return defaultInfo;
 	}
 	
 	// 부서 사원 트리 조회
-	public List<HashMap<String, Object>> intrEmpInqy1070(Model model) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1070(Model model) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1070");
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1070");
 		return defaulList;
 	}
 	
 	// 부서 사원 수 조회
-	public List<HashMap<String, Object>> intrEmpInqy1080(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqyDao1080(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("emp.intrEmpInqy1080");
+		defaulList = sqlsession.selectList("emp.intrEmpInqyDao1080");
 		return defaulList;
 	}
 	
 	// 사원 등록
-	public int intrEmpProc1010(HashMap<String, Object> paramMap) {
+	public int intrEmpProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("emp.intrEmpProc1010", paramMap);
+		resInt = sqlsession.insert("emp.intrEmpProcDao1010", paramMap);
 		//
 		return resInt;
 	}
 	
 	// 사원 수정
-	public int intrEmpProc1020(HashMap<String, Object> paramMap) {
+	public int intrEmpProcDao1020(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("emp.intrEmpProc1020", paramMap);
+		resInt = sqlsession.update("emp.intrEmpProcDao1020", paramMap);
 		//
 		return resInt;
 	}
 	
 	// 사원 복직, 퇴사 처리
-	public int intrEmpProc1030(HashMap<String, Object> paramMap) {
+	public int intrEmpProcDao1030(HashMap<String, Object> paramMap) {
 		int resInt = 0;
-		resInt = sqlsession.update("emp.intrEmpProc1030", paramMap);
+		resInt = sqlsession.update("emp.intrEmpProcDao1030", paramMap);
 		//
 		return resInt;
 	}

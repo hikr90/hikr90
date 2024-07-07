@@ -17,43 +17,43 @@ public class MainDao {
 	SqlSession sqlsession;
 	
 	// 메뉴 조회
-	public List<HashMap<String, Object>> intrMainInqy1010(Model model, HashMap<String,Object> paramMap) {
+	public List<HashMap<String, Object>> intrMainInqyDao1010(Model model, HashMap<String,Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("main.intrMainInqy1010", paramMap);
+		defaultList = sqlsession.selectList("main.intrMainInqyDao1010", paramMap);
 		return defaultList;
 	}
 
 	// 전체 메뉴 조회
-	public List<HashMap<String, Object>> intrMainInqy1020(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrMainInqyDao1020(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("main.intrMainInqy1020", paramMap);
+		defaultList = sqlsession.selectList("main.intrMainInqyDao1020", paramMap);
 		return defaultList;
 	}
 
 	
-	// 시퀀스 (컨텐츠) 생성 
-	public HashMap<String, Object> intrMainInqy1030() throws Exception {
+	// 시퀀스 생성 
+	public HashMap<String, Object> intrMainInqyDao1030() throws Exception {
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("main.intrMainInqy1030");
+		defaultInfo = sqlsession.selectOne("main.intrMainInqyDao1030");
 		//
 		return defaultInfo;
 	}
 
 	// 시퀀스 (사원) 생성 
-	public HashMap<String, Object> intrMainInqy1040() throws Exception {
+	public HashMap<String, Object> intrMainInqyDao1040() throws Exception {
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("main.intrMainInqy1040");
+		defaultInfo = sqlsession.selectOne("main.intrMainInqyDao1040");
 		//
 		return defaultInfo;
 	}
 	
 	// 로그인 사용자 조회
-	public EmpVO intrLoginInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public EmpVO intrLoginInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		EmpVO defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("main.intrLoginInqy1010", paramMap);
+		defatulInfo = sqlsession.selectOne("main.intrLoginInqyDao1010", paramMap);
 		//
 		return defatulInfo;
 	}

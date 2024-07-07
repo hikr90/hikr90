@@ -16,7 +16,7 @@ import com.intr.dao.MainDao;
 import com.intr.svc.BoardService;
 import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
-import com.intr.util.Paging;
+import com.intr.utils.Paging;
 import com.intr.vo.EmpVO;
 
 @Service 
@@ -42,7 +42,7 @@ public class MainServiceImpl implements MainService{
 	UtilService utilService;
 	
 	// 메뉴 조회
-	public void intrMainInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrMainInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		EmpVO empInfo = null;
@@ -52,10 +52,19 @@ public class MainServiceImpl implements MainService{
 			// 메뉴 정보 세션 조회
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
-			String menuType = (String)session.getAttribute("menuType");
-			// 메뉴 정보가 들어있는 경우
+			String menuType = "";
+			String menuSet = "";
+
+			// (1) MenuType
+			menuType = (String)session.getAttribute("menuType");
 			if(menuType!=null) {
 				paramMap.put("menuType", menuType);
+			}
+			
+			// (2) menuSet
+			menuSet = paramMap.get("menuSet")!=null?(String)paramMap.get("menuSet"):null;
+			if(menuSet!=null) {
+				session.setAttribute("menuSet", menuSet);
 			}
 
 			//--------------------------------------------------------------------------------------------
@@ -70,7 +79,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mainDao.intrMainInqy1010(model, paramMap);
+			defaultList = mainDao.intrMainInqyDao1010(model, paramMap);
 			model.addAttribute("menuList", defaultList);
 			
 		} catch (Exception e) {
@@ -80,7 +89,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	// 메뉴 세션 저장
-	public void intrMainInqy1030(String menuIdx) throws Exception {
+	public void intrMainInqyService1030(String menuType) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -88,7 +97,7 @@ public class MainServiceImpl implements MainService{
 			// 	- 0 : 사용자 , 1 : 관리자
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
-			session.setAttribute("menuType", menuIdx);
+			session.setAttribute("menuType", menuType);
 			
 		} catch (Exception e) {
 			//
@@ -97,7 +106,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	// 전체 메뉴 조회
-	public void intrMainInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrMainInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -105,7 +114,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 전체 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mainDao.intrMainInqy1020(model, paramMap);
+			defaultList = mainDao.intrMainInqyDao1020(model, paramMap);
 			model.addAttribute("tMenuList", defaultList);
 			
 		} catch (Exception e) {
@@ -115,7 +124,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 페이징 처리
-	public void intrMainInqy1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrMainInqyService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		int nowPage = 1; // 페이지 기본 값 (첫 동작)
 		Integer page = null; // 현재 페이지
@@ -146,7 +155,7 @@ public class MainServiceImpl implements MainService{
 			paramMap.put("blockPage",Paging.BLOCKPAGE);
 
 			// 페이지 메뉴 구성
-			String pageMenu = utilService.intPageInqy1010(paramMap);
+			String pageMenu = utilService.intPageInqyService1010(paramMap);
 			model.addAttribute("pageMenu", pageMenu);
 			
 		} catch (Exception e) {
@@ -156,13 +165,13 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 검색 조건 저장
-	public void intrMainInqy1060(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrMainInqyService1060(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			model.addAttribute("srchMap", paramMap);
+			model.addAttribute("resultParam", paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -171,7 +180,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 로그인 처리
-	public String intrLoginProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrLoginProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "";
@@ -181,7 +190,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrLoginInqy1010(model, paramMap);
+			defaultInfo = mainDao.intrLoginInqyDao1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 아이디 / 비밀번호 체크
@@ -215,7 +224,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	// 로그인 권한 사용자 조회
-	public void intrMainInqy1040(Model model) throws Exception {
+	public void intrMainInqyService1040(Model model) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -223,7 +232,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1060(model);
+			defaultList = authDao.intrAuthInqyDao1060(model);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {

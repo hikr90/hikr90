@@ -16,8 +16,8 @@ import com.intr.svc.AprvService;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class PopupController {
@@ -48,12 +48,11 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
-
+			tempService.intrTempInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -69,6 +68,7 @@ public class PopupController {
 		//
 		try {
 			//
+			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(아이디 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -100,7 +100,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 부서 및 사원 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1060(model);
+			empService.intrEmpInqyService1060(model);
 			
 		} catch (Exception e) {
 			//
@@ -121,7 +121,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1030(model, paramMap);
+			defaultList = aprvDao.intrAprvInqyDao1030(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {

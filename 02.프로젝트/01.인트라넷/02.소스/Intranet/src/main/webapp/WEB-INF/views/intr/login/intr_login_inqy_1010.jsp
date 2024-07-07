@@ -12,7 +12,7 @@
    		function popCall(){
    			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
    			var obj = new Object();
-   			ajaxPopup(obj,"650","360","intrPopupInqy1021.do","");
+   			ajaxPopup(obj,"650","300","intrPopupInqy1021.do","");
    		}
    		
    		// 로그인
@@ -57,49 +57,54 @@
 </head>
 <body id="sub">
 	<!-- 정보 찾기 -->
- 	<div id="popupArea" class="popupArea hidden">
+ 	<div id="popupArea" class="popup_area hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1020.jsp"></c:import>	
 	</div>
 
 	<!-- 로그인 화면 -->
 	<form id="form" method="post" enctype="multipart/form-data">
-		<div class="_body">
-			<div class="_tbl">
-				<div class="_login_wrap _sty2">
-					<div class="login-wrap">
-						<div class="login-area">
-							<h3>LOGIN</h3>
-							<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);" value="ADMIN">
-							<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);" value="ADMIN">
-							<input type="button" class="login-btn" value="로그인" onclick="loginCall(this.form);">
-	                        <input type="button" class="btn-find-info" value="아이디/비밀번호 찾기" onclick="popCall();">
-						</div>
-						
-						<div class="auth-area">
-							<div class="scrollTableWrap">
-								<table class="postTable">
-									<caption>로그인 권한 목록 조회</caption>
-									<colgroup>
-										<col class="auto">
-										<col class="w60per">
-									</colgroup>
-									<thead>
+		<div class="body">
+			<div class="login_wrap">
+				<div class="login_area">
+					<h3>LOGIN</h3>
+					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);" value="ADMIN">
+					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);" value="ADMIN">
+					<input type="button"class="login_btn" value="로그인" onclick="loginCall(this.form);">
+                       <input type="button"class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
+				</div>
+					
+				<div class="auth_area">
+					<div class="post_table_wrap">
+						<table class="post_table">
+							<caption>로그인 권한 목록 조회</caption>
+							<colgroup>
+								<col class="auto">
+								<col class="w60per">
+							</colgroup>
+							<thead>
+								<tr style="border-bottom: none;">
+									<th scope="col">권한</th>
+									<th scope="col">소유자</th>
+								</tr>
+							</thead>
+							<tbody>
+                                <c:forEach var="list1" items="${defaultList}" varStatus="status1">
+									<c:if test="${list1.authCd ne defaultList[status1.index + 1].authCd}">
 										<tr>
-											<th scope="col">소유자</th>
-											<th scope="col">권한</th>
+											<td class="align_center">${list1.authNm}</td>
+											<td class="title align_left">
+												<c:forEach var="list2" items="${defaultList}" varStatus="status2">
+													<c:if test="${list1.authCd eq list2.authCd}">
+														<a href="javascript:setInfo('${list2.empId}','${list2.empPwd}');" style="color: #214b97;">${list2.empNm}</a>
+														&nbsp;
+													</c:if>
+												</c:forEach>
+											</td>
 										</tr>
-									</thead>
-									<tbody>
-		                                <c:forEach var="list" items="${defaultList}" varStatus="status"> 
-											<tr>
-												<td class="_title"><a href="javascript:setInfo('${list.empId}','${list.empPwd}');" style="color: #214b97;">${list.empNm}</a></td>
-												<td>${list.authNm}</td>
-											</tr>
-		                               </c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</div>
+									</c:if>
+                               </c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

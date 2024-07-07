@@ -8,6 +8,9 @@
 		    	,	APRV.CURR_APRV_SNO
 		    	,	APRV.EMP_IDX
 		    	,	DEPT.DEPT_CD
+		    	,	DEPT.DEPT_NM
+		    	,	GRADE.GRADE_CD
+		    	,	GRADE.GRADE_NM
 		    	,	'[연차] '||DEPT.DEPT_NM||' '||EMP.EMP_NM AS "TITLE"
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
@@ -19,14 +22,18 @@
 			ON LINE.APRV_IDX = APRV.APRV_IDX
 			AND LINE.LAST_APRV_YN = 'Y'
 			AND LINE.APRV_RSLT_DT IS NOT NULL
-			AND TEMPLATE_CD = 'TEMP_0001'
 		LEFT OUTER JOIN INTR_EMP EMP
 			ON EMP.EMP_IDX = APRV.EMP_IDX
 		LEFT OUTER JOIN INTR_DEPT DEPT
 			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
 		WHERE 1=1
 			<if test="deptCd != null and deptCd != ''">
 				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+			</if>
+			<if test="gradeCd != null and gradeCd != ''">
+				AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
 			</if>
 	</select>
 </mapper>

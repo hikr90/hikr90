@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="emp">
-	<select id="intrEmpInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1010 : 사원 목록 조회 */
+	<select id="intrEmpInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1010 : 사원 목록 조회 */
 		SELECT 
 		            SUB_DATA.*
 		FROM (
@@ -47,6 +47,9 @@
 		            <if test="deptCd != null and deptCd != ''">
 						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
 					</if>
+					<if test="gradeCd != null and gradeCd != ''">
+						AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					</if>
         	) SUB_DATA
  		WHERE 1=1 
  			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
@@ -55,11 +58,15 @@
         ORDER BY SUB_DATA.EMP_HIRE_DATE DESC, SUB_DATA.EMP_NM
 	</select>
 
-	<select id="intrEmpInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1020 : 사원 목록 건수 조회 */	
+	<select id="intrEmpInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1020 : 사원 목록 건수 조회 */	
 		SELECT 
 				COUNT(EMP.EMP_IDX) AS LIST_CNT 
 		FROM INTR_EMP EMP
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
 		WHERE 1 = 1
 			AND EMP.EMP_RESI_DATE IS NULL
 		    <if test="srchNm != null and srchNm != ''">
@@ -71,10 +78,25 @@
 		    <if test="srchEdt != null and srchEdt !=''">
 		    	AND EMP.EMP_HIRE_DATE &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		    </if>
+		    <if test="deptCd != null and deptCd != ''">
+				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+			</if>
+			<if test="gradeCd != null and gradeCd != ''">
+				AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+			</if>
 	</select>	
 
-	<select id="intrEmpInqy1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1030 : 부서 목록 조회 */
+	<select id="intrEmpInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1030 : 부서 목록 조회 */
+	SELECT 
+				'' AS DEPT_CD
+			,	'전체' AS DEPT_NM
+			,	'' AS UPPR_DEPT_CD
+			,	'Y' AS USE_YN 
+			,	0 AS DISP_ORDER
+			, '' AS REMARK
+		FROM DUAL
+		UNION
 		SELECT
 					DEPT_CD
 				,	DEPT_NM
@@ -82,11 +104,20 @@
 				,	USE_YN
 				,	DISP_ORDER
 				,	REMARK
-		FROM INTR_DEPT	
+		FROM INTR_DEPT
+		ORDER BY DISP_ORDER ASC
 	</select>
 
-	<select id="intrEmpInqy1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1040 : 직급 목록 조회 */
+	<select id="intrEmpInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1040 : 직급 목록 조회 */
+		SELECT 
+				'' AS GRADE_CD
+			,	'전체' AS GRADE_NM
+			,	'Y' AS USE_YN 
+			,	0 AS DISP_ORDER
+			, '' AS REMARK
+		FROM DUAL
+		UNION
 		SELECT
 					GRADE_CD
 				,	GRADE_NM
@@ -94,10 +125,11 @@
 				,	DISP_ORDER
 				,	REMARK
 		FROM INTR_GRADE
+		ORDER BY DISP_ORDER ASC
 	</select>
 	
-	<select id="intrEmpInqy1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1050 : 사원 아이디 중복 조회 */
+	<select id="intrEmpInqyDao1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1050 : 사원 아이디 중복 조회 */
 		SELECT
 					EMP_IDX
 				,	DEPT_CD
@@ -116,8 +148,8 @@
 		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
 	</select>
 
-	<select id="intrEmpInqy1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1060 : 사원 상세 조회 */
+	<select id="intrEmpInqyDao1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1060 : 사원 상세 조회 */
 		SELECT
 					EMP.EMP_IDX
 				,	EMP.DEPT_CD
@@ -147,8 +179,8 @@
 		WHERE EMP.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</select>
 
-	<select id="intrEmpInqy1070" resultType="CamelHashMap">
-		/* intrEmpInqy1070 : 부서 사원 트리 조회 */
+	<select id="intrEmpInqyDao1070" resultType="CamelHashMap">
+		/* intrEmpInqyDao1070 : 부서 사원 트리 조회 */
 		SELECT 
 				    SUB_DATA.*
 				,   CASE WHEN SUB_DATA.EMP_NM IS NULL
@@ -197,8 +229,8 @@
    		    ORDER BY SUB_DATA.DEPT_CD ASC , SUB_DATA.LV ASC
 	</select>
 	
-	<select id="intrEmpInqy1080" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy1080 : 부서 사원 수 조회 */
+	<select id="intrEmpInqyDao1080" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqyDao1080 : 부서 사원 수 조회 */
 		SELECT 
 					DEPT.DEPT_CD
                 ,   DEPT.DEPT_NM
@@ -213,8 +245,8 @@
         ORDER BY DEPT_CD ASC
 	</select>
 	
-	<insert id="intrEmpProc1010" parameterType="java.util.HashMap">
-		/* intrEmpProc1010 : 사원 등록 처리 */
+	<insert id="intrEmpProcDao1010" parameterType="java.util.HashMap">
+		/* intrEmpProcDao1010 : 사원 등록 처리 */
 		INSERT INTO INTR_EMP
 		(
 				EMP_IDX
@@ -233,7 +265,7 @@
 		)
 		VALUES
 		(
-				'EMP_' || #{contentIdx, jdbcType=VARCHAR}
+				'EMP_' || #{contId, jdbcType=VARCHAR}
 			,	#{deptCd, jdbcType=VARCHAR}
 			,	#{gradeCd, jdbcType=VARCHAR}
 			,	#{empNm, jdbcType=VARCHAR}
@@ -249,8 +281,8 @@
 		)
 	</insert>
 	
-	<update id="intrEmpProc1020" parameterType="java.util.HashMap">
-		/* intrEmpProc1020 : 사원 수정 처리 */
+	<update id="intrEmpProcDao1020" parameterType="java.util.HashMap">
+		/* intrEmpProcDao1020 : 사원 수정 처리 */
 		UPDATE INTR_EMP
 			SET 	DEPT_CD = #{deptCd, jdbcType=VARCHAR}
 				,	GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
@@ -262,8 +294,8 @@
 		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="intrEmpProc1030" parameterType="java.util.HashMap">
-		/* intrEmpProc1030 : 사원 복직, 퇴사 처리 */
+	<update id="intrEmpProcDao1030" parameterType="java.util.HashMap">
+		/* intrEmpProcDao1030 : 사원 복직, 퇴사 처리 */
 		UPDATE INTR_EMP
 			SET EMP_RESI_DATE =
 				CASE WHEN EMP_RESI_DATE IS NULL

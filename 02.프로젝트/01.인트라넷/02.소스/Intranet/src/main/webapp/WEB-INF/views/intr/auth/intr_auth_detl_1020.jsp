@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring"  uri="http://www.springframework.org/tags" %>
 
-<!-- Form postWriteWrap  -->
-<div class="postWrite">
+<div class="post_write" style="margin: 0px;">
 	<dl>
 		<dt>
 			<label for="post-title">권한명</label>
@@ -19,13 +18,13 @@
 			<label>사용여부</label>
 		</dt>
 		<dd class="sel_2part">
-			<div class="_radioBox enter-chkBox">
+			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id="chk-local" name="useYn" checked="checked" value="Y"> 
-					<label for="chk-local">예<span></span></label>
+					<input type="radio" id="chk-yes" name="useYn" checked="checked" value="Y"> 
+					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-foreign" name="useYn" value="N"> 
-					<label for="chk-foreign">아니오<span></span></label>
+					<input type="radio" id="chk-no" name="useYn" value="N"> 
+					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>
 		</dd>
@@ -41,7 +40,7 @@
 	</dl>
 </div>
 
-<div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _grey" onclick="regProc(this.form);" value="등록">	
-	<a onclick="delArea('treeInfo');" class="_btn _line">취소</a>
+<div class="btn_center align_right">
+	<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
+	<button type="button" class="btn_gray_thin" onclick="delArea('tree_info');">취소</button>
 </div>

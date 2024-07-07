@@ -26,7 +26,7 @@ public class TaskServiceImpl implements TaskService{
 	HttpSession session;
 
 	// 업무일지 조회 화면
-	public void intrTaskInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTaskInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -35,7 +35,7 @@ public class TaskServiceImpl implements TaskService{
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("empIdx", "");
-			defaultList = taskDao.intrTaskInqy1010(model, paramMap);
+			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 작성 화면
-	public void intrTaskInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTaskInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -59,7 +59,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy1010(model, paramMap);
+			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 목록 건수 조회
-	public void intrTaskInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTaskInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -77,7 +77,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqy1020(model, paramMap);
+			defaultInfo = taskDao.intrTaskInqyDao1020(model, paramMap);
 			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
 
 			//--------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 등록
-	public String intrTaskProc1010(Model model, @RequestBody List<HashMap<String, Object>> paramList) throws Exception {
+	public String intrTaskProcService1010(Model model, @RequestBody List<HashMap<String, Object>> paramList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -101,12 +101,12 @@ public class TaskServiceImpl implements TaskService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 업무 일지 전체 삭제 (INTR_TASK)
+			// 업무 일지 전체 삭제
 			//--------------------------------------------------------------------------------------------
-			taskDao.intrTaskProc1010(paramList.get(0));
+			taskDao.intrTaskProcDao1010(paramList.get(0));
 			
 			//--------------------------------------------------------------------------------------------
-			// 업무 일지 등록 (INTR_TASK)
+			// 업무 일지 등록
 			//--------------------------------------------------------------------------------------------
 			int addCnt = paramList.size();
 			HashMap<String, Object> tempMap = null;
@@ -117,9 +117,9 @@ public class TaskServiceImpl implements TaskService{
 				tempMap.put("empIdx", paramList.get(i).get("empIdx"));
 				tempMap.put("regDt", paramList.get(i).get("regDt"));
 				tempMap.put("regTm", paramList.get(i).get("regTm"));
-				tempMap.put("taskContent", paramList.get(i).get("taskContent"));
+				tempMap.put("taskCont", paramList.get(i).get("taskCont"));
 				//
-				resInt += taskDao.intrTaskProc1020(tempMap);
+				resInt += taskDao.intrTaskProcDao1020(tempMap);
 			}
 			//
 			if(resInt==addCnt) {

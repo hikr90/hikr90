@@ -19,7 +19,7 @@ public class TempServiceImpl implements TempService{
 	TempDao tempDao;
 	
 	// 템플릿 목록 조회
-	public void intrTempInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTempInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -27,7 +27,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = tempDao.intrTempInqy1010(model, paramMap);
+			defaultList = tempDao.intrTempInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -37,7 +37,7 @@ public class TempServiceImpl implements TempService{
 	}
 	
 	// 템플릿 상세 조회
-	public void intrTempInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTempInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -45,7 +45,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = tempDao.intrTempInqy1020(model, paramMap);
+			defaultInfo = tempDao.intrTempInqyDao1020(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class TempServiceImpl implements TempService{
 	}
 
 	// (메인)템플릿 목록 조회
-	public void intrTempInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTempInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -63,7 +63,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// (메인)템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = tempDao.intrTempInqy1010(model, paramMap);
+			defaultList = tempDao.intrTempInqyDao1010(model, paramMap);
 			model.addAttribute("tempList", defaultList);
 			
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class TempServiceImpl implements TempService{
 	}
 	
 	// 템플릿 등록
-	public String intrTempProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrTempProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -83,7 +83,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 등록
 			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1010(paramMap);
+			resInt = tempDao.intrTempProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -103,7 +103,7 @@ public class TempServiceImpl implements TempService{
 	}
 	
 	// 템플릿 수정
-	public String intrTempProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrTempProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -113,7 +113,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1020(paramMap);
+			resInt = tempDao.intrTempProcDao1020(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -133,7 +133,7 @@ public class TempServiceImpl implements TempService{
 	}
 	
 	// 템플릿 삭제
-	public String intrTempProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrTempProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -143,7 +143,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 삭제
 			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1030(paramMap);
+			resInt = tempDao.intrTempProcDao1030(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";

@@ -11,7 +11,7 @@
 	//
 	$(document).ready(function() {
 		// 업무 삭제
-		$(document).on("click", "#taskDel", function() {
+		$(document).on("click", "#task_del", function() {
 			$(this).parent().parent().remove();
 		});
 		//
@@ -27,21 +27,21 @@
 		var taskStr = "";
 		//
 		taskStr += "<tr class='setListTr'>";
-		taskStr += 		"<td class='first-td'>";
+		taskStr += 		"<td class='first_td'>";
 		taskStr += 			"<span class='date'>" + today + " " + time + "</span>";
 		taskStr += 			"<input type='hidden' id='regDt' name='regDt' value='" + today.replaceAll('-','') + "'>"
 		taskStr += 			"<input type='hidden' id='regTm' name='regTm' value='" + time.replaceAll(':','') + "'>"
 		taskStr += 		"</td>";
 		taskStr += 		"<td>";
-		taskStr += 			"<input type='text' id='taskContent' name='taskContent' value='' style='height: 33px; text-align: left; width: 100%;'>";
+		taskStr += 			"<input type='text' id='taskCont' name='taskCont' value='' style='height: 33px; text-align: left; width: 100%;'>";
 		taskStr += 		"</td>";
 		taskStr += 		"<td>";
-		taskStr += 			"<span id='taskDel' class='taskDel'></span>";
+		taskStr += 			"<span id='task_del' class='task_del'></span>";
 		taskStr += 		"</td>";
 		taskStr += "</tr>";
 		//
 		addCnt++;
-		$(".postTable").append(taskStr);
+		$(".post_table_wrap .post_table").append(taskStr);
 	}
 
 	// 목록 초기화
@@ -68,7 +68,7 @@
 				var data = {};
 				data.regDt = $(this).find('input[name="regDt"]').val();
 				data.regTm = $(this).find('input[name="regTm"]').val();
-				data.taskContent = $(this).find('input[name="taskContent"]').val();
+				data.taskCont = $(this).find('input[name="taskCont"]').val();
 				data.empIdx = $("#empIdx").val();
 				//
 				dataJson.push(data);
@@ -103,81 +103,86 @@
 	}
 </script>
 <body id="main">
-	<!-- MENU -->
+<form id="form" name="form" method="POST" onsubmit="return false;">
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
-	<form id="form" name="form" method="POST" onsubmit="return false;">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner">					
-					<div class="_contentArea _formArea">
-						<!-- Form srchWrap  -->
-						<div class="listWrap">
-						</div><!-- End listWrap -->
-						<!-- Form postWrap  -->
-						<div class="postWrap" style="height: 710px;">
-							<h2>업무 일지 작성</h2>
-							<div class="f-srchWrap">
-								<div class="alignC">
-									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-								
-									<input type="button" class="stb-box-btn-grey" value="추가" onclick="addTask(this.form);" style="margin-top: 1px;">
-									<input type="button" class="stb-box-btn" value="초기화" onclick="initTask(this.form);">
-                                	<input type="button" class="stb-box-btn" value="저장" onclick="regProc(this.form);" style="float: right;">
-								</div>
-							</div>
-							
-							<div class="postTableWrap">
-							<div class="scrollTableWrap" style="height: 520px;">
-								<table class="postTable">
-									<caption>업무일지 목록</caption>
-									<colgroup>
-										<col class="w15per">
-										<col class="wAutoper">
-										<col class="w8per">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col">작성일</th>
-											<th scope="col">업무</th>
-											<th scope="col">삭제</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:if test="${ not empty defaultList }">
-										<c:forEach var="list" items="${defaultList}" varStatus="status"> 
-										<tr class='setListTr'>
-											<td class="first-td">
-												<span class="date">
-													<fmt:parseDate value="${list.regDtTm}" var="parseDtTm" pattern="yyyyMMddHHmmss"/>
-													<fmt:formatDate value="${parseDtTm}" var="fomatDtTm" pattern="yyyy-MM-dd HH:mm:ss"/>
-													${fomatDtTm} 
-
-													<input type="hidden" id='regDt' name="regDt" value="${list.regDt}">
-													<input type="hidden" id='regTm' name="regTm" value="${list.regTm}">
-												</span>
-											</td>
-											<td>
-												<input type="text" id="taskContent" name="taskContent" value="${list.taskContent}" style="height: 33px; text-align: left; width: 100%;">
-											</td>
-											<td>
-												<span id="taskDel" class="taskDel"></span>
-											</td>
-                                        </tr>
-                                        </c:forEach>
-                                        </c:if>
-									</tbody>
-								</table>
-							</div>
-							</div>
-						</div><!-- End postWrap -->
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
-	</form>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+	
+		<div class="content_wrap">
+			<div class="content_area">	
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">					
+							<div class="form_area">
+								<div class="post_wrap">
+									<h2>업무 일지 작성</h2><br>
+									<div class="srch_wrap">
+										<div class="align_center">
+											<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
+										
+											<button type="button" class="btn_navy" onclick="addTask(this.form);">추가</button>
+											<button type="button" class="btn_gray" onclick="initTask(this.form);">초기화</button>
+		                                	<button type="button" class="btn_blue float_right" onclick="regProc(this.form);">저장</button>
+										</div>
+									</div>
+									
+									<div class="post_table_wrap">
+										<table class="post_table">
+											<caption>업무일지 목록</caption>
+											<colgroup>
+												<col class="w15per">
+												<col class="wAutoper">
+												<col class="w8per">
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col">작성일</th>
+													<th scope="col">업무</th>
+													<th scope="col">삭제</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:if test="${not empty defaultList}">
+												<c:forEach var="list" items="${defaultList}" varStatus="status"> 
+												<tr class='setListTr'>
+													<td class="first_td">
+														<span class="date">
+															<fmt:parseDate value="${list.regDtTm}" var="parseDtTm" pattern="yyyyMMddHHmmss"/>
+															<fmt:formatDate value="${parseDtTm}" var="fomatDtTm" pattern="yyyy-MM-dd HH:mm:ss"/>
+															${fomatDtTm} 
+		
+															<input type="hidden" id='regDt' name="regDt" value="${list.regDt}">
+															<input type="hidden" id='regTm' name="regTm" value="${list.regTm}">
+														</span>
+													</td>
+													<td>
+														<input type="text" id="taskCont" name="taskCont" value="${list.taskCont}" style="height: 33px; text-align: left; width: 100%;">
+													</td>
+													<td>
+														<span id="task_del" class="task_del"></span>
+													</td>
+		                                        </tr>
+		                                        </c:forEach>
+		                                        </c:if>
+											</tbody>
+										</table>
+									</div>
+								</div><!-- End post_wrap -->
+							</div><!-- End content_area form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
+</form>
 </body>
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>	

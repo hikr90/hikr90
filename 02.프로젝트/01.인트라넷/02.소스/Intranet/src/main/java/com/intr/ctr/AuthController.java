@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.AuthService;
 import com.intr.svc.MainService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class AuthController {
@@ -36,17 +36,15 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1010(model, paramMap);
-
+			authService.intrAuthInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -64,18 +62,15 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-			
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1010(model, paramMap);
-
+			authService.intrAuthInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
-			
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -93,7 +88,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
+			mainService.intrMainInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -111,12 +106,11 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1020(model, paramMap);
+			authService.intrAuthInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -134,12 +128,11 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1020(model, paramMap);
+			authService.intrAuthInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -157,22 +150,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1010(model, paramMap);
-
+			authService.intrAuthInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 목록 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1020(model, paramMap);
-			
+			mainService.intrMainInqyService1020(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -190,17 +180,15 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1030(model, paramMap);
-
+			authService.intrAuthInqyService1030(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -218,22 +206,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1010(model, paramMap);
-
+			authService.intrAuthInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1040(model, paramMap);
-			
+			authService.intrAuthInqyService1040(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -251,22 +236,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-			
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1010(model, paramMap);
-
+			authService.intrAuthInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1050(model, paramMap);
-			
+			authService.intrAuthInqyService1050(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -287,7 +269,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.intrAuthProc1010(model, paramMap);
+			defaultStr = authService.intrAuthProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -309,7 +291,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.intrAuthProc1020(model, paramMap);
+			defaultStr = authService.intrAuthProcService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -330,7 +312,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.intrAuthProc1030(model, paramMap);
+			defaultStr = authService.intrAuthProcService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -351,7 +333,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 저장
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.intrAuthProc1040(model, paramMap);
+			defaultStr = authService.intrAuthProcService1040(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -372,7 +354,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 저장
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.intrAuthProc1050(model, paramMap);
+			defaultStr = authService.intrAuthProcService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//

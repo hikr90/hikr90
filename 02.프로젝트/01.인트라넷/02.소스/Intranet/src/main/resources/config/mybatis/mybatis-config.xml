@@ -10,7 +10,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.intr.vo.EmpVO" alias="emp"/>
-		<typeAlias type="com.intr.util.CamelHashMap" alias="CamelHashMap"/>
+		<typeAlias type="com.intr.utils.CamelHashMap" alias="CamelHashMap"/>
 	</typeAliases>
 	
 	<mappers>

@@ -14,7 +14,7 @@
 		//
 		if(defaultYn==true){
 			// 체크한 건이 없는 경우
-			var checkedIdx = $("input[id=radioIdx]:checked");
+			var checkedIdx = $("input[name=radioIdx]:checked");
 			if(checkedIdx.length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
@@ -30,7 +30,7 @@
 			str += "	<td>" + deptNm + "</td>";
 			str += "	<td>" + empNm + "</td>";
 			str += "	<td>";
-			str += "		<select style='width:90%; height:25px; text-align:left;'>";
+			str += "		<select class='step_select'>";
 			str += "			<option value='STEP_0002' selected>결재</option>";
 			str += "			<option value='STEP_0003'>참조</option>";
 			str += "		</select>";
@@ -44,7 +44,7 @@
 			str += "	<td>${empVO.deptNm}</td>";
 			str += "	<td>${empVO.empNm}</td>";
 			str += "	<td>";
-			str += "		<select disabled style='width:90%; height:25px; text-align:left;'>";
+			str += "		<select disabled class='step_select'>";
 			str += "			<option value='STEP_0001' selected>기안</option>";
 			str += "		</select>";
 			str += "	</td>";
@@ -99,7 +99,7 @@
 		if(confirm("등록하시겠습니까?")){
 			// 에디터 내용 저장
 			var getData = CKEDITOR.instances.editor.getData();
-			document.getElementById("aprvContent").setAttribute('value',getData);
+			document.getElementById("aprvCont").setAttribute('value',getData);
 			// 태그 내 변수 저장
 			var fileList = setFileList();
 			//
@@ -132,8 +132,8 @@
 </script>
 
 <!-- 부서 사용자 트리 -->
-<div class="treeWrap" style="display: inline;">
-	<div class="treeArea" id="treeArea" style="width: 350px;"> 
+<div class="tree_wrap">
+	<div class="tree_area" id="tree_area"> 
 		<div class="tree">
 			<ul class="ul_1">
 											
@@ -149,7 +149,7 @@
 					<c:set var="spanNm"	value="${list.empNm}"/>
 				</c:if>
 												
-				<c:if test="${ empty list.lv }">
+				<c:if test="${empty list.lv }">
 					<c:set var="nextLv"	value="1"/>
 				</c:if>
 													
@@ -160,13 +160,15 @@
 							<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
 							<c:if test="${list.isleaf eq 'Y'}">
-								<input type="radio" id="radioIdx" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
-							</c:if>${spanNm}
+								<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
+							</c:if>
+							<label for="radio${status.index}">${spanNm}</label>
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
 						<c:if test="${list.isleaf eq 'Y'}">
-							<input type="radio" id="radioIdx" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
-						</c:if>${spanNm}
+							<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
+						</c:if>
+						<label for="radio${status.index}">${spanNm}</label>
 					</c:when>
 				</c:choose>
 		
@@ -195,13 +197,13 @@
 </div>
 
 <!-- 이동 화살표 -->
-<div id="treeArrow" class="treeArrow" style="cursor: pointer;" onclick="setAprvLine(true);"></div>
+<div id="treeArrow" class="tree_arrow" onclick="setAprvLine(true);"></div>
 
 <!-- 결재선 목록 -->
-<div id="treeInfo" class="treeInfo" style="width: 560px; margin-left: 0px; margin-bottom: 2%; height: 468px; overflow: hidden; display: inline-block;">
-	<div class="postWrap" style="padding-top: 20px;">
-		<div class="scrollTableWrap">
-			<table class="postTable aprvLineTbl">
+<div id="tree_info" class="tree_info" style="width: 670px;">
+	<div class="post_wrap">
+		<div class="scroll_wrap" style="height: 425px;">
+			<table class="post_table aprvLineTbl">
 				<caption>결재선 목록</caption>
 				<colgroup>
 					<col class="w30per">
@@ -214,13 +216,13 @@
 						<th scope="col">부서</th>
 						<th scope="col">이름</th>
 						<th scope="col">단계</th>
-						<th scope="col">비고</th>
+						<th scope="col">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 결재선 추가 -->
+					<!-- 결재선 추가 -->
 				</tbody>
 			</table>
 		</div>
-	</div><!-- End postWrap -->
+	</div><!-- End post_wrap -->
 </div>

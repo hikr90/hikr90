@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main">
-	<select id="intrMainInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrMainInqy1010 : 메뉴 조회 */
+	<select id="intrMainInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrMainInqyDao1010 : 메뉴 조회 */
 		WITH A_DATA AS 
 			(
 				SELECT 
@@ -32,7 +32,9 @@
 						    ,   M.MENU_NM
 						    ,   M.UPPR_MENU_CD
 						    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
-						    ,   M.MAPPING_ID
+						    ,   CASE WHEN M.MAPPING_ID IS NULL
+						    		THEN LEAD(M.MAPPING_ID) OVER(ORDER BY M.MENU_CD ASC) 
+						    		ELSE M.MAPPING_ID END AS MAPPING_ID
 						    ,   M.USE_YN
 						    ,   M.DISP_ORDER
 						    ,   M.REMARK
@@ -54,8 +56,8 @@
 				ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
 	</select>
 		
-	<select id="intrMainInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrMainInqy1020 : 전체 메뉴 조회 */
+	<select id="intrMainInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrMainInqyDao1020 : 전체 메뉴 조회 */
 		SELECT 
 				DATA.*
 			,	LEVEL AS LV
@@ -80,18 +82,18 @@
 			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
 	</select>
 	
-	<select id="intrMainInqy1030" resultType="CamelHashMap">
-		/* intrMainInqy1030 : 시퀀스 (컨텐츠) 생성 */
-		SELECT TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(SEQ_CONTENT_IDX.NEXTVAL,4,0) AS CONTENT_IDX FROM DUAL
+	<select id="intrMainInqyDao1030" resultType="CamelHashMap">
+		/* intrMainInqyDao1030 : 시퀀스 (컨텐츠) 생성 */
+		SELECT TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(SEQ_CONT_ID.NEXTVAL,4,0) AS CONT_ID FROM DUAL
 	</select>
 
-	<select id="intrMainInqy1040" resultType="CamelHashMap">
-		/* intrMainInqy1040 : 시퀀스 (사원) 생성 */
-		SELECT LPAD(SEQ_EMP_IDX.NEXTVAL,4,0) AS CONTENT_IDX FROM DUAL
+	<select id="intrMainInqyDao1040" resultType="CamelHashMap">
+		/* intrMainInqyDao1040 : 시퀀스 (사원) 생성 */
+		SELECT LPAD(SEQ_EMP_IDX.NEXTVAL,4,0) AS CONT_ID FROM DUAL
 	</select>
 
-	<select id="intrLoginInqy1010" resultType="emp" parameterType="java.util.HashMap"> 
-		/* intrLoginInqy1010 : 로그인 사용자 조회 */
+	<select id="intrLoginInqyDao1010" resultType="emp" parameterType="java.util.HashMap"> 
+		/* intrLoginInqyDao1010 : 로그인 사용자 조회 */
 		SELECT 
 				EMP.EMP_IDX
 			,	EMP.DEPT_CD
@@ -124,8 +126,8 @@
 		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
 	</select>
 
-	<select id="intrLoginInqy1020" resultType="CamelHashMap">
-		/* intrLoginInqy1020 : 관리자 계정 조회 */
+	<select id="intrLoginInqyDao1020" resultType="CamelHashMap">
+		/* intrLoginInqyDao1020 : 관리자 계정 조회 */
 		SELECT 
 				EMP_IDX
 			,	DEPT_CD
@@ -144,8 +146,8 @@
 		WHERE UPPER(EMP_ID) = 'ADMIN'
 	</select>
 
-	<select id="intrLoginInqy1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrLoginInqy1030 : 사용자 정보 찾기 */
+	<select id="intrLoginInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrLoginInqyDao1030 : 사용자 정보 찾기 */
 		SELECT 
 				EMP_IDX
 			,	DEPT_CD

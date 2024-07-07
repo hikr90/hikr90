@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.ScheService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class ScheController {
@@ -39,22 +39,19 @@ public class ScheController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
-			//--------------------------------------------------------------------------------------------
-			// 부서, 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1050(model, paramMap);
-			
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 일정 목록 조회
 			//--------------------------------------------------------------------------------------------
 			scheService.intrScheInqy1010(model, paramMap);
-
+			//--------------------------------------------------------------------------------------------
+			// 부서 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqyService1050(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//

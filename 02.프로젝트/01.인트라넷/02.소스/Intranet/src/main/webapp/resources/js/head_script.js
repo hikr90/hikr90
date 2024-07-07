@@ -1,23 +1,44 @@
-$(document).ready(function(){
-	/* 명칭 : 메뉴 동적 메소드
-	 * 작성자 : 김태현
-	 * 내용 : 메뉴 동적 메소드
-	 */
-	$('header #_nav .li_1').on('mouseenter focusin', function () {        
+$(function(){
+	// -- 셀렉트 박스 -----------------------------------------------------------------------
+	// 전체 선택
+	$("body").on("click", ".sList", function (e) {
 		//
-	    $(this).addClass('_open').siblings('.li_1').removeClass('_open');
+		var targetUl = $("#" + e.target.id).siblings('ul');
+		//		
+		if($(targetUl).css("display") != "block") {
+			$(targetUl).css('display','block');
+		} else {
+			$(targetUl).css('display','none');
+		}
+	});
+
+	// 항목 선택
+	$(".sUl li").on("click", function () {
+	    var setNm = $(this).attr("setNm");
+	    var setCd = $(this).attr("setCd");
+
+		// 값 지정
+		$(this).closest('div').find('div').text(setNm);
+		$(this).closest('div').find('input').val(setCd);
+		$(this).closest('div').find('input').next().val(setNm);
+
+		// 목록 닫기
+		$(".sUl").css("display","none");
 	});
 	
-	//
-	$('header').on('mouseleave focusout', function () {
-		//
+	// 외부 선택
+	$("body").on("click", function(e){
+	    if($(".select_wrap").has(e.target).length == 0) $(".sUl").css('display','none');
+	});
+	
+	// Hover 이벤트
+	$(".sUl li").hover(function(){
+		$(".sUl li").removeClass("hover");
+		$(this).addClass("hover");
 	});
 });
 
-/* 명칭 : formSubmit
- * 작성자 : 김태현
- * 내용 : 폼 태그 동작
- */ 
+// 폼 태그 동작
 function formSubmit(mappingId){
 	//
 	var f = document.getElementById('form');
@@ -25,30 +46,21 @@ function formSubmit(mappingId){
 	f.submit();
 }
 
-/* 명칭 : setContentIdx
- * 작성자 : 김태현
- * 내용 : 목록 선택 시 인덱스값 부여
- */ 
-function setContentIdx(contentIdx, mappingId){
+// 선택 목록 인덱스 값 부여
+function setContentIdx(contId, mappingId){
 	//
-	$("#contentIdx").val(contentIdx);
+	$("#contId").val(contId);
 	formSubmit(mappingId);
 }
 
-/* 명칭 : logout
- * 작성자 : 김태현
- * 내용 : 로그아웃
- */
+// 로그아웃
 function logout() {
 	//
 	alert("로그아웃 되었습니다.");
 	location.href = "intrLoginProc1030.do";
 }
 
-/* 명칭 : pushListKey
- * 작성자 : 김태현
- * 내용 : 엔터 입력 (조회)
- */
+// 목록 조회 (엔터)
 function pushListKey(f) {
 	//
 	if(event.keyCode==13){
@@ -56,10 +68,7 @@ function pushListKey(f) {
 	}
 }
 
-/* 명칭 : pushLoginKey
- * 작성자 : 김태현
- * 내용 : 엔터 입력 (로그인)
- */
+// 로그인 (엔터)
 function pushLoginKey(f) {
 	//
 	if(event.keyCode==13){
@@ -67,21 +76,13 @@ function pushLoginKey(f) {
 	}
 }
 
-
-/* 명칭 : delArea
- * 작성자 : 김태현
- * 내용 : 영역 제거
- */
+// 영역 제거
 function delArea(area) {
 	//
 	$("#"+area).html("");
 }
 
-
-/* 명칭 : inputNum
- * 작성자 : 김태현
- * 내용 : 연락처 자동 입력 함수
- */
+// 연락처 자동 입력
 function inputNum(inputNum) {
 	// 입력창에 입력된 값
     var input = inputNum.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 값
@@ -121,11 +122,7 @@ function inputNum(inputNum) {
     inputNum.value = output;
 }
 
-
-/* 명칭 : initData
- * 작성자 : 김태현
- * 내용 : 데이터 초기화
- */
+// 입력 값 초기화
 function initData(area){
 	//
 	var textInput = $("#"+area+" input[type=text]");
@@ -137,14 +134,13 @@ function initData(area){
 }
 
 
-/* 명칭 : validation
- * 작성자 : 김태현
- * 내용 : input 태그 (text, password) 유효성 검증 (공통)
- */
+
+// 입력 값 유효성 검증 (공통)
 function validation(){
 	// 유효성 검사
 	var chkYn		= true; 
-	// INPUT
+	
+	// Input
 	$("#"+"form"+" input").each(function(idx, tag){
 		//
 		var type = $(this).attr('type');
@@ -161,7 +157,7 @@ function validation(){
 		}
 	});
 	
-	// TEXTAREA
+	// TextArea
 	if(chkYn!=false){
 		$("#"+"form"+" textarea").each(function(idx, tag){
 			//
@@ -181,11 +177,7 @@ function validation(){
 	return chkYn;
 }
 
-
-/* 명칭 : srchAddr
- * 작성자 : 김태현
- * 내용 : 주소 조회 (API)
- */
+// 주소 조회 (api) 
 function srchAddr() {
 	new daum.Postcode({
         oncomplete: function(data) {

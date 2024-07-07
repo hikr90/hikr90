@@ -60,7 +60,7 @@
 			if($(".setListTr").length==0){
 				// 첫 시작
 				var obj = new Object();
-				ajaxPopup(obj,"1100","650","intrPopupInqy1031.do","");
+				ajaxPopup(obj,"1100","620","intrPopupInqy1031.do","");
 				
 			} else {
 				// 숨김 해제
@@ -75,73 +75,80 @@
 	</script>
 </head>
 <body id="main">
-	<form id="form" method="POST" enctype="multipart/form-data">
-
+<form id="form" method="POST" enctype="multipart/form-data">
 	<!-- 결재선 -->
  	<div id="popupArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
 	</div>
 
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 		
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
-					<div class="_contentArea _formArea">
-					<div class="postCon">
-						<div class="postWrap">
-							<!-- Form postWriteWrap  -->
-							<h2>재사용등록</h2>
-							<input type="hidden" id="aprvLine" name="aprvLine" value="">
-							<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.aprvIdx}">
-							<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-							<input type="hidden" id="modCnt" name="modCnt" value="0">
-							<input type="hidden" id="templateCd" name="templateCd" value="${aprvDetInfo.templateCd}">
-							
-							<div class="postWrite">
-								<dl>
-									<dt><label for="post-title">제목</label></dt>
-									<dd style="width: 45%;">
-										<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${aprvDetInfo.aprvTitle}">
-									</dd>
-									<dt>시행일자</dt>
-									<dd>
-										<input type="text" id="srchSdt" class="srch-cdt-date" name="efctSdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
-										~
-										<input type="text" id="srchEdt" class="srch-cdt-date" name="efctEdt" title="시행일자" readonly="readonly" style="width: 22%;"/>
-									</dd>
-								</dl>
-								<dl class="post-info">
-									<dt>부서</dt>
-									<dd style="width: 45%;">${empVO.deptNm}</dd>
-									<dt>직급</dt>
-									<dd>${empVO.gradeNm}</dd>
-									<dt>작성자</dt>
-									<dd>${empVO.empNm}</dd>
-								</dl>								
-								<dl>
-									<dt><label for="post_text">내용</label></dt>
-									<dd class="post_text">
-										<textarea id="editor" title="템플릿 내용">${aprvDetInfo.aprvContent}</textarea>
-										<input type="hidden" id="aprvContent" title="템플릿 내용" name="aprvContent" value="">
-									</dd>
-								</dl>
-							</div><!-- End postWriteWrap -->
-
-							<div class="btnWrap alignR">
-								<input type="button" class="_btn _grey" onclick="aprvLineCall(this.form);" value="등록">
-								<a onclick="location.href='intrAprvInqy1010.do'" class="_btn _line">취소</a>
-							</div>
-						</div><!-- End postWrap -->
-						</div>
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
-	</form>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+		
+		<div class="content_wrap">
+			<div class="content_area">
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">					
+							<div class="form_area">
+								<div class="post_wrap">
+									<h2>재사용등록</h2><br>
+									<input type="hidden" id="aprvLine" name="aprvLine" value="">
+									<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.aprvIdx}">
+									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
+									<input type="hidden" id="modCnt" name="modCnt" value="0">
+									<input type="hidden" id="tempCd" name="tempCd" value="${aprvDetInfo.tempCd}">
+									
+									<div class="post_write">
+										<dl>
+											<dt><label for="post-title">제목</label></dt>
+											<dd>
+												<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${aprvDetInfo.aprvTitle}">
+											</dd>
+											<dt>시행일자</dt>
+											<dd>
+												<input type="text" id="srchSdt" class="srch_cdt_date width20" name="efctSdt" title="시행일자" readonly="readonly"/>
+												~
+												<input type="text" id="srchEdt" class="srch_cdt_date width20" name="efctEdt" title="시행일자" readonly="readonly"/>
+											</dd>
+										</dl>
+										<dl class="post_info">
+											<dt>부서</dt>
+											<dd>${empVO.deptNm}</dd>
+											<dt>작성자</dt>
+											<dd>${empVO.gradeNm} ${empVO.empNm}</dd>
+										</dl>								
+										<dl>
+											<dt>
+												<label for="post_text">내용</label>
+											</dt>
+											<dd class="post_text">
+												<textarea id="editor" title="템플릿 내용">${aprvDetInfo.aprvCont}</textarea>
+												<input type="hidden" id="aprvCont" title="템플릿 내용" name="aprvCont" value="">
+											</dd>
+										</dl>
+									</div><!-- End post_write -->
+		
+									<div class="btn_wrap align_right">
+										<button type="button" class="btn_navy_thin" onclick="aprvLineCall();">등록</button>
+										<button type="button" class="btn_gray_thin" onclick="location.href='intrAprvInqy1010.do'">취소</button>
+									</div>
+								</div><!-- End post_wrap -->
+							</div><!-- End form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
+</form>
 </body>
 </html>
 	

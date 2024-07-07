@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="util">
-	<select id="intrFileInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1010 : 컨텐츠 파일 데이터 조회 */
+	<select id="intrFileInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqyDao1010 : 컨텐츠 파일 데이터 조회 */
 		SELECT 
 		    F.FILE_IDX,
-		    F.CONTENT_IDX,
+		    F.CONT_ID,
 		    F.FILE_SNO, 
 		    F.FILE_ORGL_NM, 
 		    F.FILE_TYPE, 
@@ -14,15 +14,15 @@
 		    F.DISP_ORDER,
 		    F.REMARK
 		FROM INTR_FILE F
-		WHERE F.CONTENT_IDX = #{contentIdx, jdbcType=VARCHAR}
+		WHERE F.CONT_ID = #{contId, jdbcType=VARCHAR}
 			AND F.USE_YN = 'Y'
 	</select>
 
-	<select id="intrFileInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1020 : 단건 파일 데이터 조회 */
+	<select id="intrFileInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqyDao1020 : 단건 파일 데이터 조회 */
 		SELECT 
 		    F.FILE_IDX,
-		    F.CONTENT_IDX, 
+		    F.CONT_ID, 
 		    F.FILE_SNO, 
 		    F.FILE_ORGL_NM, 
 		    F.FILE_TYPE, 
@@ -35,12 +35,12 @@
 			AND F.USE_YN = 'Y'
 	</select>
 	
-	<insert id="intrFileProc1010" parameterType="java.util.HashMap">
-		/* intrFileProc1010 : 파일 데이터 저장 */
+	<insert id="intrFileProcDao1010" parameterType="java.util.HashMap">
+		/* intrFileProcDao1010 : 파일 데이터 저장 */
 		INSERT INTO INTR_FILE
 		(
 				FILE_IDX
-			,	CONTENT_IDX
+			,	CONT_ID
 			,	FILE_SNO
 			,	FILE_ORGL_NM
 			,	FILE_TYPE
@@ -52,11 +52,11 @@
 		VALUES
 		(
 				'FILE_'||LPAD(SEQ_FILE_IDX.NEXTVAL,4,0)
-			,	#{contentIdx, jdbcType=VARCHAR}
+			,	#{contId, jdbcType=VARCHAR}
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(FILE_SNO),0) + 1,4,0)
-					FROM INTR_FILE WHERE CONTENT_IDX = #{contentIdx, jdbcType=VARCHAR}
+					FROM INTR_FILE WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 				)
 			,	#{fileOrglNm, jdbcType=VARCHAR}
 			,	#{fileType, jdbcType=VARCHAR}
@@ -71,26 +71,26 @@
 		)
 	</insert>
 	
-	<update id="intrFileProc1030" parameterType="java.util.HashMap">
-		/* intrFileProc1030 : 파일 데이터 수정 (CONTENT_IDX N처리) */
+	<update id="intrFileProcDao1030" parameterType="java.util.HashMap">
+		/* intrFileProcDao1030 : 파일 데이터 수정 (CONT_ID N처리) */
 		UPDATE INTR_FILE F1
 			SET F1.USE_YN = 'N'
-		WHERE F1.CONTENT_IDX = #{contentIdx, jdbcType=VARCHAR}
+		WHERE F1.CONT_ID = #{contId, jdbcType=VARCHAR}
 	</update>
 
-	<update id="intrFileProc1040" parameterType="java.util.HashMap">
-		/* intrFileProc1040 : 파일 데이터 수정 (FILE_IDX Y처리) */
+	<update id="intrFileProcDao1040" parameterType="java.util.HashMap">
+		/* intrFileProcDao1040 : 파일 데이터 수정 (FILE_IDX Y처리) */
 		UPDATE INTR_FILE F1
 			SET F1.USE_YN = 'Y'
 		WHERE F1.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
 	</update>
 
 
-	<update id="intrFileProc1050" parameterType="java.util.HashMap">
-		/* intrFileProc1050 : 파일 데이터 삭제 */
+	<update id="intrFileProcDao1050" parameterType="java.util.HashMap">
+		/* intrFileProcDao1050 : 파일 데이터 삭제 */
 		UPDATE INTR_FILE
 			SET USE_YN = 'N'
-		WHERE CONTENT_IDX IN
+		WHERE CONT_ID IN
 		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
 			#{delIdx}	
 		</foreach>

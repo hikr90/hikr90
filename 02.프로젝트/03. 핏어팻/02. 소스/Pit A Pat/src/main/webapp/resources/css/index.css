@@ -1,0 +1,501 @@
+@charset "utf-8";
+
+/* ================== Wrap ================== */ 
+.wrap { margin: 0 auto; width: 100%; margin-top: 500px; }
+
+/* ================== Main ================== */ 
+.main_box { width: 1500px; padding: 100px 0 120px 0; }
+.main_title { text-align: left; font-size: 30px; }
+
+/* ================== Sub ================== */ 
+.sub_title { padding-top: 5px; }
+.sub_title ul { display: inline-block; padding-bottom: 20px; }
+.sub_title li { float: left; margin-left: 20px; }
+.sub_desc { font-size: 14px; margin-top: 10px; }
+
+/* ================== Box ================== */ 
+.item_box { display: contents; }
+.background_box { height: 900px; background-color: #d7d0c0; }
+
+
+/* ================== KTH ================== */ 
+#content1 {
+	text-align: center;
+	height: 190px;
+	width: 100%;
+	margin: 0 auto;
+	min-width: 1280px;
+}
+
+.text1 {
+	text-align: center;
+	font-family: '나눔스퀘어';
+	font-size: 35px;
+	color: #000;
+	font-weight: bolder;
+}
+
+.text2 {
+	text-align: center;
+	font-family: "나눔스퀘어";
+	font-size: 22px;
+	color: #000;
+	margin-top: 25px;
+	line-height: 35px;
+}
+
+.text3 {
+	text-align: center;
+	font-family: "나눔스퀘어";
+	font-size: 19px;
+	color: #000;
+	line-height: 27px;
+	margin-top: 25px;
+	line-height: 30px;
+}
+
+.text4 {
+	text-align: center;
+	font-family: "나눔스퀘어";
+	font-size: 35px;
+	color: #000;
+	margin-top: 30px;
+	font-weight: bold;
+}
+
+.underbar {
+	text-align: center;
+	width: 140px;
+	margin-top: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 30px;
+}
+
+#content2 {
+	text-align: center;
+	height: 450px;
+	width: 1280px;
+	margin: 0 auto;
+	min-width: 1280px;
+}
+
+.pic1 {
+	float: left;
+	margin-top: 60px;
+	margin-right: 52px;
+	margin-left: 50px;
+	width: 210px;
+	text-align: center;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	height: 350px;
+}
+
+.bar {
+	float: left;
+	margin-top: 50px;
+	text-align: center;
+	width: 8px;
+	height: 190px;
+}
+
+.servive {
+	height: 120px;
+	width: 140px;
+}
+
+.servivetext {
+	height: 25px;
+	width: 180px;
+	margin-top: 40px;
+	font-weight: bold;
+	font-size: 28px;
+}
+
+.product {
+	height: 120px;
+	width: 120px;
+}
+
+.personal {
+	height: 120px;
+	width: 120px;
+}
+
+.sustainable {
+	height: 120px;
+	width: 120px;
+}
+
+.pic2 {
+	float: left;
+	margin-top: 60px;
+	margin-right: 52px;
+	margin-left: 52px;
+	width: 210px;
+	text-align: center;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	height: 350px;
+}
+
+.pic3 {
+	float: left;
+	margin-top: 60px;
+	margin-right: 52px;
+	margin-left: 52px;
+	width: 210px;
+	text-align: center;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	height: 350px;
+}
+
+.pic4 {
+	float: left;
+	margin-top: 60px;
+	margin-left: 52px;
+	width: 210px;
+	text-align: center;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	height: 350px;
+}
+
+.notice {
+	height: 500px;
+	width: 1280px;
+	margin-top: 50px;
+	text-align: left;
+}
+
+
+
+
+
+.new2 {
+	float: left;
+	height: 360px;
+	width: 370px;
+	margin-right: 40px;
+}
+
+.new3 {
+	float: left;
+	height: 350px;
+	width: 360px;
+}
+
+.newstext {
+	height: 80px;
+	width: 370px;
+	margin-top: 20px;
+}
+
+.newstext h2 {
+	font-size: 25px;
+}
+
+.newstext p {
+	margin-top: 10px;
+	font-size: 19px;
+	line-height: 30px;
+}
+
+.subnews1 {
+	height: 72px;
+	width: 360px;
+	margin-bottom: 17px;
+}
+
+.subnews2 {
+	height: 72px;
+	width: 360px;
+	margin-bottom: 17px;
+}
+
+.subnews3 {
+	height: 72px;
+	width: 360px;
+}
+
+.subimg {
+	float: left;
+	width: 110px;
+	height: 72px;
+}
+
+.subtext {
+	float: left;
+	height: 70px;
+	width: 220px;
+	margin-left: 20px;
+}
+
+.subtext h3 {
+	font-size: 20px;
+}
+
+.subtext p {
+	margin-top: 8px;
+	font-size: 17px;
+	line-height: 23px;
+}
+
+#content3 {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.banner img {
+	width: 100%;
+	min-width: 1280px;
+}
+
+#objectbanner {
+	width: 100%;
+	position: relative;
+	min-width: 1280px;
+	height: 450px;
+	z-index: 1;
+}
+
+#objectbanner img {
+	width: 100%;
+	min-height: 450px;
+	min-width: 1280px;
+	position: relative;
+	text-align: center;
+	z-index: 1;
+	margin-top: -90px;
+}
+
+.txtfull {
+	position: relative;
+	top: 213px;
+	width: 1000px;
+	height: 50px;
+	z-index: 10;
+	margin: 0 auto;
+}
+
+.bannertxt {
+	position: absolute;
+	width: 200px;
+	z-index: 10;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	z-index: 10;
+	float: left;
+	text-align: center;
+	left: -100px;
+}
+
+.bannertxt2 {
+	position: relative;
+	width: 200px;
+	z-index: 10;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	z-index: 10;
+	float: left;
+	text-align: center;
+	left: 220px;
+}
+
+.bannertxt3 {
+	position: relative;
+	width: 200px;
+	z-index: 10;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	z-index: 10;
+	float: left;
+	text-align: center;
+	left: 370px;
+}
+
+.bannertxt4 {
+	position: relative;
+	width: 200px;
+	z-index: 10;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	z-index: 10;
+	float: left;
+	text-align: center;
+	left: 500px;
+}
+
+#content4 {
+	height: 550px;
+	width: 1280px;
+	margin: 0 auto;
+	margin-top: 60px;
+	min-width: 1280px;
+}
+
+.inside {
+	height: 312px;
+	width: 312px;
+}
+
+.insidetxt {
+	height: 27px;
+	width: 200px;
+	font-weight: bold;
+	font-size: 28px;
+	margin-top: 25px;
+	font-family: "나눔스퀘어";
+	text-align: center;
+}
+
+.viewmore {
+	height: 20px;
+	width: 312px;
+	margin-top: 20px;
+}
+
+.viewmore a {
+	font-size: 17px;
+	color: #00860B;
+	font-weight: bolder;
+}
+
+.viewmore a:hover {
+	font-size: 17px;
+	color: #00570C;
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+.pic5 {
+	float: left;
+	margin-top: 70px;
+	margin-right: 58px;
+	margin-left: 50px;
+	margin-bottom: 20px;
+	text-align: center;
+	width: 312px;
+	height: 481px;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+}
+
+.pic6 {
+	float: left;
+	margin-top: 70px;
+	margin-right: 58px;
+	margin-bottom: 20px;
+	margin-left: 65px;
+	text-align: center;
+	width: 312px;
+	height: 481px;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	/* [disabled]margin-left: 0px; */
+}
+
+.pic7 {
+	float: left;
+	margin-top: 70px;
+	margin-bottom: 20px;
+	margin-left: 70px;
+	text-align: center;
+	width: 300px;
+	height: 481px;
+	font-family: "나눔스퀘어";
+	color: #4b3114;
+	font-size: 25px;
+	/* [disabled]margin-left: 0px; */
+}
+
+#content5 {
+	height: 900px;
+	width: 100%;
+	margin-top: 130px;
+	min-width: 1280px;
+	background-color: #d7d0c0;
+	float: left;
+	margin-bottom: 50px;
+}
+
+.port1 {
+	width: 380px;
+	height: 435px;
+	float: left;
+}
+
+.pf {
+	float: left;
+	overflow: hidden;
+	vertical-align: top;
+	margin-bottom: 15px;
+}
+
+.pf:hover img {
+	margin: -5px;
+}
+
+.pf:hover {
+	border: 5px solid white;
+}
+
+.porttxt {
+	width: 315px;
+	height: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#indexfooter {
+	width: 100%;
+	min-width: 1280px;
+	height: 175px;
+	margin-bottom: 50px;
+	margin: 0 auto;
+}
+
+.bgfooter {
+	width: 100%;
+	min-width: 1280px;
+	height: 50px;
+}
+
+.footercontent {
+	width: 700px;
+	height: 175px;
+	z-index: 10;
+	margin: 0 auto;
+}
+
+.footerlogo {
+	float: left;
+	height: 100px;
+	width: 170px;
+	z-index: 10;
+}
+
+.company {
+	float: left;
+	height: 100px;
+	width: 500px;
+	z-index: 10;
+	font-size: 15px;
+	line-height: 25px;
+	margin-left: 30px;
+	font-family: "나눔스퀘어";
+}
+

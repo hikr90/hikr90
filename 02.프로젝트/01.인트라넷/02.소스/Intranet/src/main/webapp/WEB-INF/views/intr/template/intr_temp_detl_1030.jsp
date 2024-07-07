@@ -2,16 +2,14 @@
 <%@ taglib prefix="c" 	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- Form postWriteWrap  -->
-<h2 style="display: table;">정보 수정</h2>
-<div class="postWrite">
+<div class="post_write" style="margin-top: 0px;">
 	<dl>
 		<dt>
 			<label for="post-title">템플릿명</label>
 		</dt>
 		<dd>
-			<input type="text" id="templateNm" title="템플릿명" name="templateNm" value="${defaultInfo.templateNm}">
-			<input type="hidden" class="templateCd" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
+			<input type="text" id="tempNm" title="템플릿명" name="tempNm" value="${defaultInfo.tempNm}">
+			<input type="hidden" class="tempCd" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
 		</dd>
 	</dl>
 	<dl>
@@ -19,11 +17,11 @@
 			<label for="post-title">상위 템플릿명</label>
 		</dt>
 		<dd>
-			<input type="text" id="upprTemplateNm" class="upprTemplateNm" title="상위 템플릿명" readonly="readonly" value="${defaultInfo.upprTemplateNm}" style="width: 75%;">
+			<input type="text" id="upprTemplateNm" class="upprTemplateNm" title="상위 템플릿명" readonly="readonly" value="${defaultInfo.upprTemplateNm}">
 			<input type="hidden" class="upprTemplateCd" id="upprTemplateCd" name="upprTemplateCd" value="${defaultInfo.upprTemplateCd}">
 
-			<input type="button" class="stb-box-btn" value="선택" style="margin-left: 3px; margin-right: 5px; margin-bottom: 5px;" onclick="popCall();">
-			<input type="button" class="stb-box-btn-grey" value="삭제" style="margin-right: -15px; margin-bottom: 5px;" onclick="delPopCall();">
+			<input type="button"class="btn_blue" value="선택" onclick="popCall();">
+			<input type="button"class="btn_gray" value="삭제" onclick="delPopCall();">
 		</dd>
 	</dl>
 	<dl>
@@ -31,13 +29,13 @@
 			<label>사용여부</label>
 		</dt>
 		<dd>
-			<div class="_radioBox enter-chkBox">
+			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id="chk-local" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
-					<label for="chk-local">예<span></span></label>
+					<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
+					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-foreign" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
-					<label for="chk-foreign">아니오<span></span></label>
+					<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
+					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>
 		</dd>
@@ -52,7 +50,7 @@
 	</dl>
 </div>
 
-<div class="btnWrap alignR" style="float:right;">
-	<input type="button" class="_btn _grey" onclick="modProc(this.form);" value="수정 완료">	
-	<a onclick="detCall('${defaultInfo.templateCd}');" class="_btn _line">취소</a>
+<div class="btn_wrap align_right">
+	<button type="button" class="btn_navy" onclick="modProc(this.form);">수정완료</button>
+	<button type="button" class="btn_gray" onclick="detCall('${defaultInfo.tempCd}');">취소</button>
 </div>

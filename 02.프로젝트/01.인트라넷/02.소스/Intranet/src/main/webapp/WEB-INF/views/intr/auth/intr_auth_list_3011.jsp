@@ -47,8 +47,8 @@
 				var str = "";
 				//
 				str += "<tr>"
-				str += "	<td class='first-td'>";
-				str += "		<span class='_chkBox'>";
+				str += "	<td class='first_td'>";
+				str += "		<span class='check_box'>";
 				str += "		<input type='checkbox' class='checkbox' id='authEmpIdx' value='" + empIdx + "'/>"
 				str += "		<label for='chk_local'><span></span></label></span>";
 				str += "		<input type='hidden' name='authEmpIdx' value='" + empIdx + "'/>"
@@ -120,11 +120,11 @@
 	}
 </script>
 
-<div class="postWrap" style="padding: 0px;">
+<div class="post_wrap" style="height: 330px; padding: 0px;">
 	<input type="hidden" id="authCd" name="authCd" value="">
 	
-	<div class="scrollTableWrap" style="max-height: 380px; height: auto;">
-		<table class="postTable authEmpTbl">
+	<div class="scroll_wrap" style="max-height: 380px; height: auto;">
+		<table class="post_table authEmpTbl">
 			<caption>사용자 목록 테이블</caption>
 			<colgroup>
 				<col class="w7per">
@@ -134,9 +134,9 @@
 			<thead>
 				<tr>
 					<th scope="col">
-						<span class="_chkBox"> 
-						<input type="checkbox" class="checkbox empChk"> 
-						<label for="chk-local"><span></span></label></span>
+						<span class="check_box"> 
+						<input type="checkbox" class="check_box empChk"> 
+						<label for="chk-yes"><span></span></label></span>
 					</th>
 					<th scope="col">부서</th>
 					<th scope="col">사용자</th>
@@ -145,10 +145,10 @@
 			<tbody>
 				<c:forEach var="list" items="${authEmpList}" varStatus="status">
 					<tr>
-						<td class="first-td">
-							<span class="_chkBox"> 
-							<input type="checkbox" class="checkbox" id="authEmpIdx" value="${list.empIdx}"> 
-							<label for="chk-local"><span></span></label></span>
+						<td class="first_td">
+							<span class="check_box"> 
+							<input type="checkbox" class="check_box" id="authEmpIdx" value="${list.empIdx}"> 
+							<label for="chk-yes"><span></span></label></span>
 							<input type="hidden" name="authEmpIdx" value="${list.empIdx}">
 						</td>
 						<td>${list.deptNm}</td>
@@ -158,12 +158,11 @@
 			</tbody>
 		</table>
 	</div>
-</div> <!-- End postWrap -->
+</div> <!-- End post_wrap -->
 
-<div class="btnWrap alignL" style="float: left; margin-top: 36px;">
-	<input type="button" class="_btn _grey" value="삭제" onclick="delCall();">
-</div>
-<div class="btnWrap alignR" style="float: right; margin-top: 36px;">
-	<input type="button" class="_btn _grey" onclick="regProc(this.form);" value="저장"> 
-	<a onclick="setListCall();" class="_btn _line">새로고침</a>
+<div class="btn_center pt30">
+	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
+	<button type="button" class="btn_navy_thin float_right" style="margin-left: 5px;" onclick="regProc(this.form);">저장</button> 
+	
+	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</a>
 </div>

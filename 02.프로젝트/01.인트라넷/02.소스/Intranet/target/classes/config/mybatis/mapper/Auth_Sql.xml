@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auth">
-	<select id="intrAuthInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1010 : 권한 목록 조회 */
+	<select id="intrAuthInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1010 : 권한 목록 조회 */
 		SELECT 
 					AUTH_CD
 				,	AUTH_NM
@@ -17,8 +17,8 @@
 		ORDER BY AUTH_CD
 	</select>
 	
-	<select id="intrAuthInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1020 : 권한 상세 조회 */
+	<select id="intrAuthInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1020 : 권한 상세 조회 */
 		SELECT 
 					AUTH_CD
 				,	AUTH_NM
@@ -29,8 +29,8 @@
 		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="intrAuthInqy1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1030 : 메뉴 권한 목록 조회 */
+	<select id="intrAuthInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1030 : 메뉴 권한 목록 조회 */
 		SELECT 
 					DATA.*
 				,	LEVEL AS LV
@@ -57,13 +57,14 @@
 			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD	
 	</select>
 
-	<select id="intrAuthInqy1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1040 : 사용자 목록 조회 */
+	<select id="intrAuthInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1040 : 사용자 목록 조회 */
 		WITH INTR_MAIN AS 
 			(
 				SELECT 
 				        DATA.DEPT_CD
 				    ,   DATA.DEPT_NM
+				    ,	'' AS UPPR_DEPT_CD
 				    ,   '' AS EMP_IDX
 			    	,   '' AS EMP_NM
 			    	,   LEVEL AS LV
@@ -86,29 +87,37 @@
 					ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.DEPT_CD
 				)
 				SELECT 
-						IM.*
-				FROM INTR_MAIN IM
-				UNION ALL
-				SELECT 
-			        	INTR_SUB.*
-			        ,	'Y'
+					RESULT.* 
 				FROM (
 						SELECT 
-						        EMP.DEPT_CD
-						    ,   IM.DEPT_NM
-						    ,   EMP.EMP_IDX
-						    ,   EMP.EMP_NM
-						    ,   IM.LV + 1  AS LV
-						FROM INTR_EMP EMP
-						LEFT OUTER JOIN INTR_MAIN IM
-							ON IM.DEPT_CD = EMP.DEPT_CD
-						WHERE EMP_RESI_DATE IS NULL
-						ORDER BY EMP.EMP_NM
-					) INTR_SUB 
+								IM.*
+						FROM INTR_MAIN IM
+						UNION ALL
+						SELECT 
+					        	INTR_SUB.*
+					        ,	'Y'
+						FROM (
+								SELECT 
+								        '' AS DEPT_CD
+								    ,   IM.DEPT_NM
+								    ,	EMP.DEPT_CD AS UPPR_DEPT_CD
+								    ,   EMP.EMP_IDX
+								    ,   EMP.EMP_NM
+								    ,   IM.LV + 1  AS LV
+								FROM INTR_EMP EMP
+								LEFT OUTER JOIN INTR_MAIN IM
+									ON IM.DEPT_CD = EMP.DEPT_CD
+								WHERE EMP.EMP_RESI_DATE IS NULL
+								ORDER BY EMP.EMP_NM
+							) INTR_SUB
+					) RESULT
+				START WITH RESULT.UPPR_DEPT_CD IS NULL
+				CONNECT BY PRIOR RESULT.DEPT_CD = RESULT.UPPR_DEPT_CD
+				ORDER SIBLINGS BY RESULT.DEPT_NM ASC, RESULT.EMP_NM ASC
 	</select>
 
-	<select id="intrAuthInqy1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1050 : 사용자 권한 목록 조회 */
+	<select id="intrAuthInqyDao1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1050 : 사용자 권한 목록 조회 */
 		SELECT 
 					DATA.*
 		FROM (
@@ -136,8 +145,8 @@
             ORDER BY DATA.EMP_NM, DATA.EMP_IDX
 	</select>
 	
-		<insert id="intrAuthProc1010" parameterType="java.util.HashMap">
-		/* intrAuthProc1010 : 권한 등록 처리 */
+		<insert id="intrAuthProcDao1010" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1010 : 권한 등록 처리 */
 		INSERT INTO INTR_AUTH
 		(
 					AUTH_CD
@@ -163,8 +172,8 @@
 		)
 	</insert>
 
-	<update id="intrAuthProc1020" parameterType="java.util.HashMap">
-		/* intrAuthProc1020 : 권한 수정 처리 */
+	<update id="intrAuthProcDao1020" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1020 : 권한 수정 처리 */
 		UPDATE INTR_AUTH
 			SET		AUTH_NM = #{authNm, jdbcType=VARCHAR}
 				,	USE_YN = #{useYn, jdbcType=VARCHAR}
@@ -172,20 +181,20 @@
 		WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="intrAuthProc1030" parameterType="java.util.HashMap">
-		/* intrAuthProc1030 : 권한 삭제 처리 */
+	<delete id="intrAuthProcDao1030" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1030 : 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<delete id="intrAuthProc1040" parameterType="java.util.HashMap">
-		/* intrAuthProc1040 : 메뉴 권한 삭제 처리 */
+	<delete id="intrAuthProcDao1040" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1040 : 메뉴 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH_MENU
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<insert id="intrAuthProc1050" parameterType="java.util.HashMap">
-		/* intrAuthProc1050 : 메뉴 권한 등록 처리 */
+	<insert id="intrAuthProcDao1050" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1050 : 메뉴 권한 등록 처리 */
 		INSERT INTO INTR_AUTH_MENU
 		(
 					AUTH_CD
@@ -208,14 +217,14 @@
 		)
 	</insert>
 	
-	<delete id="intrAuthProc1060" parameterType="java.util.HashMap">
-		/* intrAuthProc1060 : 사용자 권한 삭제 처리 */
+	<delete id="intrAuthProcDao1060" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1060 : 사용자 권한 삭제 처리 */
 		DELETE FROM INTR_AUTH_EMP
 			WHERE AUTH_CD = #{authCd, jdbcType=VARCHAR}
 	</delete>
 	
-	<insert id="intrAuthProc1070" parameterType="java.util.HashMap">
-		/* intrAuthProc1070 : 사용자 권한 등록 처리 */
+	<insert id="intrAuthProcDao1070" parameterType="java.util.HashMap">
+		/* intrAuthProcDao1070 : 사용자 권한 등록 처리 */
 		INSERT INTO INTR_AUTH_EMP
 		(
 					AUTH_CD
@@ -238,24 +247,20 @@
 		)
 	</insert>
 	
-	<select id="intrAuthInqy1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAuthInqy1060 : 로그인 권한 사용자 목록 조회 */
+	<select id="intrAuthInqyDao1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAuthInqyDao1060 : 로그인 권한 사용자 목록 조회 */
 		SELECT 
-                    E.EMP_IDX
-                ,   E.EMP_NM
-                ,	E.EMP_ID
-                ,	E.EMP_PWD
-				,	IAE.AUTH_CD
-				,   IA.AUTH_NM
-				,	IA.USE_YN
-				,	IA.DISP_ORDER
-				,	IA.REMARK
+					IAE.AUTH_CD
+				, 	IA.AUTH_NM
+				,	E.EMP_ID
+				,	E.EMP_PWD
+				,	E.EMP_NM
 		FROM INTR_EMP E
         INNER JOIN INTR_AUTH_EMP IAE 
             ON IAE.EMP_IDX = E.EMP_IDX
         LEFT OUTER JOIN INTR_AUTH IA
             ON IA.AUTH_CD = IAE.AUTH_CD
 		WHERE 1=1
-		ORDER BY E.EMP_IDX ASC
+		ORDER BY IAE.AUTH_CD ASC, E.EMP_IDX
 	</select>
 </mapper>

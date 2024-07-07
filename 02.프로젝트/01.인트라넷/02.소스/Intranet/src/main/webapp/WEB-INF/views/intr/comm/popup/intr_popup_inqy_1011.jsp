@@ -4,8 +4,8 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<div class="scrollTableWrap" style="height: auto;">
-	<div class="popTree">
+<div class="scroll_wrap" style="height: auto;">
+	<div class="pop_tree">
 		<div class="tree">
 		<c:if test="${fn:length(defaultList)>0}">
 			<ul class="ul_1">
@@ -19,7 +19,7 @@
 					<c:set var="spanIcon" 	value="icon_list"/> 
 				</c:if>
 												
-				<c:if test="${ empty list.lv }">
+				<c:if test="${empty list.lv }">
 					<c:set var="nextLv"	value="1"/>
 				</c:if>
 													
@@ -29,14 +29,14 @@
 						<ul class="ul_${list.lv}">
 							<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
-							<input type="radio" name="templateCd" value="${list.templateCd}">
-							${list.templateNm}
+							<input type="radio" id="${list.tempCd}" name="tempCd" value="${list.tempCd}">
+							<label for="${list.tempCd}"><span class="align_top">${list.tempNm}</span></label>
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
 						<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
-							<input type="radio" name="templateCd" value="${list.templateCd}">
-							${list.templateNm}
+							<input type="radio" id="${list.tempCd}" name="tempCd" value="${list.tempCd}">
+							<label for="${list.tempCd}"><span class="align_top">${list.tempNm}</span></label>
 					</c:when>
 				</c:choose>
 		

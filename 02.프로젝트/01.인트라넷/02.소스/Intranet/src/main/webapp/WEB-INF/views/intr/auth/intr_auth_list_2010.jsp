@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <!DOCTYPE html>
-<html style="overflow: hidden;">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -16,7 +16,6 @@
 		$(document).on('click','.a_btn',function() {
 			//
 			$(".a_btn").each(function() {
-				//
 				$(this).removeClass('list_bg');
 			})
 			//
@@ -33,7 +32,7 @@
 		});
 		
 		// 권한 메뉴, 메뉴 목록 감춤
-		$(".menuArea").hide();
+		$("#menuArea").css("display","none");
 	});
 	
 	// 권한 조회
@@ -47,8 +46,8 @@
             dataType : 'html',
             success : function(data){
             	//
-            	$(".tree").html(data);
-            	$(".menuArea").hide();
+            	$("#authTree").html(data);
+            	$("#menuArea").css("display","inline-flex");
             },
             error : function(data){
             	//
@@ -70,8 +69,8 @@
             dataType : 'html',
             success : function(data){
      				//
-            	    $(".menuAuthInfo").html(data);
-            	    $(".menuArea").show();
+            	    $("#authInfo").html(data);
+            	    $("#menuArea").css("display","inline-flex");
             },
             error : function(data){
             	//
@@ -83,101 +82,112 @@
 </head>
 <body id="main">
 <form id="form" onsubmit="return false;">
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
-	 
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner">					
-					<div class="_contentArea _formArea" style="margin-bottom: 0px;">
-					
-						<div class="postWrap" style="padding-top: 60px;">
-							<input type="hidden" id="authCd" name="authCd" value="">
-						
-							<h2>메뉴 권한 관리</h2>
-                                <div class="f-srchWrap">
-									<div class="search_nav">
-									<div class="srchArea">
-										<label class="srcLabel">권한명</label>
-										<input type="text" id="srchNm" name="srchNm" class="srch-cdt-text" value="${srchMap.srchNm}" onkeydown="pushListKey(this.form);">
-									</div>
-									<div class="srchArea cdtArea noLabel">                                
-                                   		<input type="button" class="stb-box-btn" value="조회" onclick="listCall(this.form);">
-                                	</div>
-                                	</div>
-                                </div>
-                                <!-- end Form srchWrap  -->
-								
-								<div class="treeWrap">
-									<div id="treeArea" class="treeArea" style="margin-bottom: 5%; width: 385px;">
-										<div class="tree">
-											<ul class="ul_1">
-											<c:forEach var="list" items="${defaultList}" varStatus="status">
-			           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 	
-												<li class="li_1">
-												<span class="${spanIcon}"></span>
-												<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
-											</c:forEach>
-											</ul>
-										</div>	
-									</div>
-									
-									<div id="menuArea" class="menuArea" style="display: inline;">
-									<div id="treeInfo" class="treeInfo menuAuthInfo" style="width: 455px; margin-bottom: 5%; height: 448px; overflow: hidden;">
-										
-									</div>
-									
-									<div id="treeArrow" class="treeArrow" style="cursor: pointer; -webkit-transform: scaleX(-1);" onclick="moveBtn(this.form);"></div>
-									<div id="treeInfo" class="treeInfo" style="width: 455px; margin-left: 0px; margin-bottom: 5%; height: 468px; overflow: hidden;">
-										<div class="postWrap" style="padding-top: 20px;">
-											<div class="scrollTableWrap" style="height: 518px;">
-												<table class="postTable menuTbl" style="">
-													<caption>권한 목록 테이블</caption>
-													<colgroup>
-														<col class="w7per">
-														<col class="w30per">
-													</colgroup>
-													<thead>
-														<tr>
-															<th scope="col">
-																<span class="_chkBox">
-																	<input type="checkbox" class="checkbox menuChk"> 
-																	<label for="chk-local"><span></span></label>
-																</span>
-															</th>
-															<th scope="col">메뉴명</th>
-														</tr>
-													</thead>
-													<tbody>
-								                       	<c:forEach var="list" items="${tMenuList}" varStatus="status"> 
-														<tr>
-															<td class="first-td">
-						                                       <span class="_chkBox">
-																	<input type="checkbox" class="checkbox" id="menuCd" name="menuCd" value="${list.menuCd}" menuNm="${list.menuNm}" menutypeCd="${list.menutypeCd}" menuLv="${list.lv}"> 
-																	<label for="chk-local"><span></span></label>
-																</span>
-															</td>
-															<td style="text-align: left;">
-																<c:if test="${list.lv ne '1'}">&nbsp;&nbsp;ㄴ</c:if>
-																${list.menuNm}
-															</td>
-														</tr>
-						                                </c:forEach>
-													</tbody>
-												</table>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+		
+		<div class="content_wrap">
+			<div class="content_area"> 
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">					
+							<div class="form_area">
+								<div class="post_wrap">
+									<input type="hidden" id="authCd" name="authCd" value="">
+								
+									<h2>메뉴 권한 부여</h2><br>
+	                                <div class="srch_wrap">
+										<div class="right_srch_area">
+											<!-- 제목 -->
+											<div class="srch_area">
+												<label class="srch_label">제목</label>		
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+											
+												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 											</div>
-										</div><!-- End postWrap -->
+	                                	</div>
+	                                </div>
+										
+									<div class="tree_wrap mt20" style="height: 500px;">
+										<div id="tree_area" class="tree_area">
+											<div id="authTree" class="tree">
+												<ul class="ul_1">
+												<c:forEach var="list" items="${defaultList}" varStatus="status">
+				           						   	<c:set var="spanIcon" 	value="icon_list"/> 
+		
+													<li class="li_1">
+													<span class="${spanIcon}"></span>
+													<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+												</c:forEach>
+												</ul>
+											</div>	
+										</div>
+											
+										<div id="menuArea" class="menu_area" style="display: none;">
+											<!-- 권한 메뉴 목록 -->
+											<div id="menuInfo" class="tree_info ml20" style="width: 450px; height: 425px;">
+												<div class="post_wrap">
+													<div class="scroll_wrap">
+														<table class="post_table menuTbl">
+															<caption>권한 목록 테이블</caption>
+															<colgroup>
+																<col class="w7per">
+																<col class="w30per">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th scope="col">
+																		<span class="check_box">
+																			<input type="checkbox" class="check_box menuChk"> 
+																			<label for="chk-yes"><span></span></label>
+																		</span>
+																	</th>
+																	<th scope="col">메뉴명</th>
+																</tr>
+															</thead>
+															<tbody>
+										                       	<c:forEach var="list" items="${tMenuList}" varStatus="status"> 
+																<tr>
+																	<td class="first_td">
+								                                       <span class="check_box">
+																			<input type="checkbox" class="check_box" id="menuCd" name="menuCd" value="${list.menuCd}" menuNm="${list.menuNm}" menutypeCd="${list.menutypeCd}" menuLv="${list.lv}"> 
+																			<label for="chk-yes"><span></span></label>
+																		</span>
+																	</td>
+																	<td class="align_left">
+																		<c:if test="${list.lv ne '1'}">&nbsp;&nbsp;ㄴ</c:if>
+																		${list.menuNm}
+																	</td>
+																</tr>
+								                                </c:forEach>
+															</tbody>
+														</table>
+													</div>
+												</div><!-- End post_wrap -->
+											</div>
+											
+											<!-- 화살표 -->
+											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
+											
+											<!-- 권한 목록 -->
+											<div id="authInfo" class="tree_info" style="width: 450px; height: 425px;"></div>
+										</div> <!-- End menu_area -->
 									</div>
-									</div> <!-- MENU AREA -->
-								</div>
-						</div><!-- End postWrap -->
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
+								</div><!-- End post_wrap -->
+							</div><!-- End form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
 </form>
 </body>
 	

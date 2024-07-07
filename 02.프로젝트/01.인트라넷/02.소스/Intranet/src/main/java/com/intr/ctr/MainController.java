@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,8 @@ import com.intr.svc.BoardService;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class MainController {
@@ -60,7 +61,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1040(model);
+			mainService.intrMainInqyService1040(model);
 			
 		} catch (Exception e) {
 			//
@@ -78,27 +79,23 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1030("0");
-			
+			mainService.intrMainInqyService1030("0");
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 조회
 			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqy1010(model, paramMap);
-
+			boardService.intrBoardInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 나의 기안 목록
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy1040(model, paramMap);
-
+			aprvService.intrAprvInqyService1040(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 나의 결재 목록
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy1050(model, paramMap);
+			aprvService.intrAprvInqyService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -116,27 +113,23 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1030("1");
-
+			mainService.intrMainInqyService1030("1");
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 수 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1070(model, paramMap);
-
+			empService.intrEmpInqyService1070(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1030(model, paramMap);
-			
+			tempService.intrTempInqyService1030(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1050(model, paramMap);
+			authService.intrAuthInqyService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -145,6 +138,32 @@ public class MainController {
 		
 		//
 		return Path.VIEW_PATH_MAIN + Jsp.INTR_MAIN_INQY_2010;
+	}
+	
+	// 마이페이지 조회
+	@RequestMapping("/intrMainInqy1040.do")
+	public String intrMainInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 세션 저장
+			//--------------------------------------------------------------------------------------------
+			mainService.intrMainInqyService1030((String)paramMap.get("menuType"));
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			mainService.intrMainInqyService1010(model, paramMap);
+			//--------------------------------------------------------------------------------------------
+			// 사원 상세 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqyService1030(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 마이페이지 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Path.VIEW_PATH_MYPAGE + Jsp.INTR_MYPAGE_INQY_1010;
 	}
 	
 	// 로그인 처리
@@ -158,7 +177,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 로그인 처리
 			//-------------------------------------------------------------------------------------------
-			defaultStr = mainService.intrLoginProc1010(model, paramMap);	
+			defaultStr = mainService.intrLoginProcService1010(model, paramMap);	
 			
 		} catch (Exception e) {
 			//
@@ -185,10 +204,8 @@ public class MainController {
 			//
 			logger.debug("Exception : 로그아웃 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-		
 		//
 		return "redirect:/";
 
 	}
-
 }

@@ -1,7 +1,4 @@
-/* 명칭 : ajaxPopup
- * 작성자 : 김태현
- * 내용 : 기본 팝업 
- */
+// Ajax 팝업
 function ajaxPopup(obj, width, height, mappingId, i){
 	//
 	var zIndex = 9999;
@@ -41,12 +38,10 @@ function ajaxPopup(obj, width, height, mappingId, i){
 
 }
 
+//
+var mailChkYn = false; 	// 인증 여부 체크
 
-/* 명칭 : chgPopup
- * 작성자 : 김태현
- * 내용 : 아이디, 비밀번호 찾기 화면 전환
- */
-var EmaChkYn = false; 	// 인증 여부 체크
+// 정보 찾기 팝업
 function chgPopup(mappingId){
 	// 화면 전환
 	$.ajax({
@@ -55,7 +50,7 @@ function chgPopup(mappingId){
 		dataType:	"text" ,
 		success : function(data){
 			//
-			EmaChkYn = false;
+			mailChkYn = false;
 			$("#joinCode").val("");
 			$("#empId").val("");
 			$("#empPwd").val("");
@@ -69,10 +64,7 @@ function chgPopup(mappingId){
 	});
 }
 
-/* 명칭 : popClose
- * 작성자 : 김태현
- * 내용 : 팝업 닫기
- */
+// 팝업 종료
 function popClose(area){
 	//
 	$("#"+area).addClass('hidden');

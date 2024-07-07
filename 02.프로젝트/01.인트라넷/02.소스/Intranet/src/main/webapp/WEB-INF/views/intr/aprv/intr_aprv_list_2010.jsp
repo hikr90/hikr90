@@ -11,133 +11,139 @@
 	}
 	
 	// 품의문 상세 조회
-	function detCall(contentIdx) {
+	function detCall(contId) {
 		//
-		$("#contentIdx").val(contentIdx);
+		$("#contId").val(contId);
 		formSubmit("intrAprvInqy2020.do");
 	}
 </script>
 <body id="main">
 <form id="form" name="form" method="POST">
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">
-					<div class="_contentArea _formArea">
-						<!-- Form postWrap  -->
-						<div class="postWrap" style="height: 710px;">
-							<input type="hidden" id="page" name="page" value="${param.page}">
-							<input type="hidden" id="contentIdx" name="contentIdx" value="">
-							
-							<div class="tagWrap">
-								<h2>결재 목록</h2>
-							</div>
-							
-							<div class="f-srchWrap">
-								<div class="search_nav">
-									<!-- 부서 -->
-									<div class="srchArea">
-										<label class="srcLabel">부서</label>
-										
-										<select id="deptCd" name="deptCd" style="width: 200px;">
-											<option value="" <c:if test="${empty srchMap.deptCd}">selected</c:if>>전체</option>
-
-										<c:forEach var="list" items="${deptList}" varStatus="status">
-											<option value="${list.deptCd}" <c:if test="${srchMap.deptCd eq list.deptCd}">selected</c:if>>${list.deptNm}</option>
-										</c:forEach>
-										</select>
-									</div>
-
-									<!-- 작성일자 -->
-									<div class="srchArea">
-										<label class="srcLabel">작성일자</label>
-										<input type="text" id="srchSdt" class="srch-cdt-date" id="srchSdt" name="srchSdt" value="${srchMap.srchSdt}" readonly="readonly"/>
-										~
-										<input type="text" id="srchEdt" class="srch-cdt-date" id="srchEdt" name="srchEdt" value="${srchMap.srchEdt}" readonly="readonly"/>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+		
+		<div class="content_wrap">
+			<div class="content_area">
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">
+							<div class="form_area">
+								<div class="post_wrap">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="contId" name="contId" value="">
+									
+									<h2>결재 목록</h2><br>
+									<div class="srch_wrap">
+										<div class="right_srch_area">
+											<!-- 작성일자 -->
+											<div class="srch_area">
+												<label class="srch_label">작성일자</label>
+												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${resultParam.srchSdt}" readonly="readonly" />
+												~
+												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${resultParam.srchEdt}" readonly="readonly"/>
+											</div>
+											
+											<!-- 기안자명 -->
+											<div class="srch_area">
+												<label class="srch_label">기안자명</label>
+												<input type="text" id="srchNm" name="srchEnm" class="srch_cdt_text" value="${resultParam.srchEnm}" onkeydown="pushListKey(this.form);">
+											</div>
+		                                	
+		                                	<!-- 결재자명 -->
+											<div class="srch_area">
+												<label class="srch_label">결재자명</label>
+												<input type="text" id="srchNm" name="srchAnm" class="srch_cdt_text" value="${resultParam.srchAnm}" onkeydown="pushListKey(this.form);">
+											</div>
+											
+											<!-- 제목 -->
+											<div class="float_right">
+												<div class="srch_area">
+													<label class="srch_label">제목</label>
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+												
+													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+												</div>
+		                                	</div>
+		                                </div>
 									</div>
 									
-									<!-- 제목 -->
-									<div class="srchLeftArea">
-										<div class="srchArea">
-											<label class="srcLabel">제목</label>
-											<input type="text" id="srchNm" name="srchNm" class="srch-cdt-text" value="${srchMap.srchNm}" onkeydown="pushListKey(this.form);">
-										</div>
-										<div class="srchArea cdtArea noLabel">                                
-	                                   		<input type="button" class="stb-box-btn" value="조회" onclick="listCall(this.form);">
-	                                	</div>
-                                	</div>
-                                </div>
-							</div>
-							<div class="postTableWrap">
-								<table class="postTable">
-									<caption>결재내역 목록 조회</caption>
-									<colgroup>
-										<col class="w7per">
-										<col class="w12per">
-										<col class="auto">
-										<col class="w15per">
-										<col class="w15per">
-										<col class="w12per">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col">순번</th>
-											<th scope="col">진행 단계</th>
-											<th scope="col">품의문 제목</th>
-											<th scope="col">결재 진행자</th>
-											<th scope="col">결재 기안자</th>
-											<th scope="col">작성일자</th>
-										</tr>
-									</thead>
-									<tbody>
-                                       <c:forEach var="list" items="${defaultList}"> 
-										<tr>
-											<td class="first-td">${list.num}</td>
-											<td>${list.currStepNm}</td>
-											<td class="_title">
-												<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
-											</td>
-											<td>${list.aprvDeptNm} ${list.aprvEmpNm}</td>
-											<td>${list.empNm} ${list.deptNm}</td>
-											<td>
-												<span class="date">
-													<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>
-													<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-													${formatDt} 
-												</span>	
-											</td>
-                                        </tr>
-                                        </c:forEach>
-                                        
-                                        <!-- 글이 없는 경우 -->
-                                        <c:if test="${ empty defaultList }">
-                                            <tr>
-                                                <td align="center" colspan="6">
-                                              	      등록된 글이 없습니다.
-                                                </td>
-                                            </tr>
-                                        </c:if>
-									</tbody>
-								</table>
-							</div>
-						
-							<c:if test="${ not empty defaultList }">
-								<div class="pagingArea">
-								<div class="listCnt">총 건수 : ${defaultList[0].listCnt}건</div>
-									<ul class="paging">
-										<li class="">${pageMenu}</li>
-									</ul>
-								</div><!-- End pagingWrap -->
-							</c:if>	
-						</div><!-- End postWrap -->
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
+									<div class="post_table_wrap">
+										<table class="post_table">
+											<caption>결재내역 목록 조회</caption>
+											<colgroup>
+												<col class="w7per">
+												<col class="w12per">
+												<col class="auto">
+												<col class="w17per">
+												<col class="w17per">
+												<col class="w12per">
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col">순번</th>
+													<th scope="col">진행 단계</th>
+													<th scope="col">품의문 제목</th>
+													<th scope="col">결재 진행자</th>
+													<th scope="col">결재 기안자</th>
+													<th scope="col">작성일자</th>
+												</tr>
+											</thead>
+											<tbody>
+		                                    	<c:forEach var="list" items="${defaultList}"> 
+													<tr>
+														<td class="first_td">${list.num}</td>
+														<td>${list.currStepNm}</td>
+														<td class="_title">
+															<a class="show_view a_title" onclick="detCall('${list.aprvIdx}');">${list.aprvTitle}</a>
+														</td>
+														<td>${list.aprvDeptNm} ${list.aprvEmpNm} ${list.aprvGradeNm}</td>
+														<td>${list.empNm} ${list.deptNm} ${list.gradeNm}</td>
+														<td>
+															<span class="date">
+																<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>
+																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+																${formatDt} 
+															</span>	
+														</td>
+			                                        </tr>
+		                                        </c:forEach>
+		                                        
+		                                        <!-- 글이 없는 경우 -->
+		                                        <c:if test="${empty defaultList}">
+		                                            <tr>
+		                                                <td align="center" colspan="6">
+		                                              	      등록된 글이 없습니다.
+		                                                </td>
+		                                            </tr>
+		                                        </c:if>
+											</tbody>
+										</table>
+									</div>
+								
+									<c:if test="${not empty defaultList}">
+										<div class="paging_area">
+											<div class="list_cnt">총 건수 : ${defaultList[0].listCnt}건</div>
+											<ul class="paging">
+												<li class="">${pageMenu}</li>
+											</ul>
+										</div><!-- End paging_wrap -->
+									</c:if>	
+								</div><!-- End post_wrap -->
+							</div><!-- End form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
 </form>
 </body>
 

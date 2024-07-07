@@ -21,9 +21,9 @@
 	function popCall(aprvIdx){
 		//
 		var obj = new Object();
-		obj["contentIdx"] = aprvIdx;
+		obj["contId"] = aprvIdx;
 		//		
-		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do","");
+		ajaxPopup(obj,"1100","620","intrPopupInqy1032.do","");
 	}
 	
 	// 결재 처리
@@ -80,94 +80,101 @@
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
 	</div>
 
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
 	<form id="form" method="POST" onsubmit="return false;">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
-					<div class="_contentArea _formArea">
-						<input type="hidden" id="page" name="page" value="${param.page}">
-						<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-						<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-						<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-						<input type="hidden" id="contentIdx" name="contentIdx" value="${aprvDetInfo.aprvIdx}">
-						<input type="hidden" id="aprvGb" name="aprvGb" value="0">
-					
-						<div class="postCon">
-						<div class="postWrap">
-                            <h2>품의문 상세
-    	                        <span class="stb-box">
-                            		<a class="_btn _blue" onclick="listCall();">목록으로</a>
-								</span>
-                            </h2>
-                            
-							<!-- Form postViewWrap  -->
-							<div class="postView">
-								<dl>
-									<dt>제목</dt>
-									<dd style="width: 40%;">${aprvDetInfo.aprvTitle}</dd>
-									<dt>작성일</dt>
-									<dd>
-										<span class="date">
-											<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-											<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
-											${fomatDt} 
-										</span>	
-									</dd>
-									<dt>진행 단계</dt>
-									<dd>${aprvDetInfo.currStepNm}</dd>
-								</dl>
-								<dl class="post-info">
-									<dt>작성자</dt>
-									<dd style="width: 40%;">(${aprvDetInfo.deptNm}) ${aprvDetInfo.empNm} ${aprvDetInfo.gradeNm}</dd>
-									<dt>시행일자</dt>
-									<dd>
-										<span class="date">
-											<!-- 시행 시작일 --> 
-											<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
-											<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
+		<div class="main_wrap">
+			<!-- 좌측 메뉴 -->
+			<div class="left_wrap">
+				<div class="left_area">
+					<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				</div>
+			</div>
+			
+			<div class="content_wrap">
+				<div class="content_area">
+					<article class="sub_article">
+						<div class="content">
+							<div id="sub_content">					
+								<div class="form_area">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
+									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+									<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.aprvIdx}">
+									<input type="hidden" id="aprvGb" name="aprvGb" value="0">
+											
+									<div class="post_wrap">
+			                        	<h2>품의문 상세</h2><br>
+										<div class="post_view">
+											<dl>
+												<dt>제목</dt>
+												<dd>${aprvDetInfo.aprvTitle}</dd>
+												<dt>작성일</dt>
+												<dd>
+													<span class="date">
+														<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
+														${fomatDt} 
+													</span>	
+												</dd>
+												<dt>진행 단계</dt>
+												<dd>${aprvDetInfo.currStepNm}</dd>
+											</dl>
+											<dl class="post_info">
+												<dt>작성자</dt>
+												<dd>(${aprvDetInfo.deptNm}) ${aprvDetInfo.empNm} ${aprvDetInfo.gradeNm}</dd>
+												<dt>시행일자</dt>
+												<dd>
+													<span class="date">
+														<!-- 시행 시작일 --> 
+														<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
+			
+														<!-- 시행 종료일 --> 
+														<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
+														${formatSdt} ~ ${formatEdt}
+													</span>	
+												</dd>
+												<dt>결재선</dt>
+												<dd>
+				                            		<button type="button" class="btn_navy_thin" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</button>
+												</dd>
+											</dl>
+											<dl>
+												<dt>내용</dt>
+												<dd class="post_text">
+													<textarea id="editor" name="aprvCont" title="템플릿 내용">${aprvDetInfo.aprvCont}</textarea>
+												</dd>
+											</dl>
+										</div>
 
-											<!-- 시행 종료일 --> 
-											<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
-											<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
-											${formatSdt} ~ ${formatEdt}
-										</span>	
-									</dd>
-									<dt>결재선</dt>
-									<dd>
-	                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</a>
-									</dd>
-								</dl>
-								<dl>
-									<dt>내용</dt>
-									<dd class="post_text">
-										<textarea id="editor" name="aprvContent" title="템플릿 내용">${aprvDetInfo.aprvContent}</textarea>
-									</dd>
-								</dl>
-							</div><!-- End postViewWrap -->
-							
-							<div class="btnWrap alignR">
-								<div class="floatR">
-									<!-- 기안한 자이면서, 결재 취소할 수 있는 상황인 경우 -->
-									<c:if test="${empVO.empIdx eq currAprvInfo.empIdx and currAprvInfo.cancelYn eq 'Y'}">
-										<a class="_btn _gray" onclick="aprvCall('2');">결재 취소</a>
-									</c:if>
-									<!-- 기안한 자이면서, 반송 상태인 경우 -->
-									<c:if test="${empVO.empIdx eq aprvDetInfo.empIdx and (aprvDetInfo.stepCd eq 'STEP_0004' or aprvDetInfo.stepCd eq 'STEP_0005')}">
-										<a class="_btn _gray" onclick="reAprvCall();">재사용 등록</a>
-									</c:if>
-								</div>
-							</div>
-						</div><!-- End postWrap -->
-					</div>
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
+										<div class="btn_wrap">
+											<div class="float_left">
+												<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>											
+											</div>
+
+											<div class="float_right">
+												<!-- 기안자, 결재 취소할 수 있는 상황 -->
+												<c:if test="${empVO.empIdx eq currAprvInfo.empIdx and currAprvInfo.cancelYn eq 'Y'}">
+													<button type="button" class="btn_gray_thin" onclick="aprvCall('2');">결재 취소</button>
+												</c:if>
+												<!-- 기안자, 반송 상황 -->
+												<c:if test="${empVO.empIdx eq aprvDetInfo.empIdx and (aprvDetInfo.stepCd eq 'STEP_0004' or aprvDetInfo.stepCd eq 'STEP_0005')}">
+													<button type="button" class="btn_gray_thin" onclick="reAprvCall();">재사용 등록</button>
+												</c:if>
+											</div>
+										</div>
+									</div><!-- End post_wrap -->
+								</div><!-- End form_area -->
+							</div><!-- End sub_content -->
+						</div><!-- End content -->
+					</article>
+				</div>
+			</div>
+		</div>
 	</form>
 </body>		
 

@@ -36,7 +36,7 @@
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/intrLoginInqy1010.do"/>
 			<exclude-mapping path="/intrLoginProc1010.do"/>
-			<beans:bean class="com.intr.util.Interceptor" />
+			<beans:bean class="com.intr.utils.Interceptor" />
 		</interceptor>
 	</interceptors>
 	

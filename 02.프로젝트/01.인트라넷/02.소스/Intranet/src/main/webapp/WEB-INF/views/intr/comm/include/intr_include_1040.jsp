@@ -4,14 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <ul id="updUl">
-	<c:if test="${not empty defaultList and defaultList ne ''}">
-		<c:forEach var="list" items="${defaultList}" varStatus="status">
-			<li id="updLi${status.index}">
-				<input type='checkbox' class='_chkBox' name='checkIdx' value="${status.index}">
-				<input type="hidden" class="fileIdx" value="${list.fileIdx}">
-				<img src="resources/images/icon/icon_file.png">
-				<a>${list.fileOrglNm}</a>
-			</li>
-		</c:forEach>
-	</c:if>	
+	<c:forEach var="list" items="${defaultList}" varStatus="status">
+		<li id="updLi${status.index}" class="${status.index != 0 ? 'nbsp' : ''}">
+			<input type="hidden" class="fileIdx" value="${list.fileIdx}">
+			<img src="resources/images/icon/icon_file.png" width="15" height="15" >
+			<a>${list.fileOrglNm}</a>
+		</li>
+	</c:forEach>
 </ul>    

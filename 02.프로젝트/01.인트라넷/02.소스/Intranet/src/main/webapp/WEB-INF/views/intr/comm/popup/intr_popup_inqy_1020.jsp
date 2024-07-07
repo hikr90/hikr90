@@ -53,7 +53,7 @@
 		}
 		//
 		var param = $("#popForm").serialize(); // 파라미터 저장
-		EmaChkYn = false; // 인증 여부
+		mailChkYn = false; // 인증 여부
 		//
 		$.ajax({
 		    	type : 'post',
@@ -102,13 +102,13 @@
 		// 인증코드와 입력코드 비교
 		if(inputCode!=joinCode){
 			// 인증 실패
-			EmaChkYn = false;
+			mailChkYn = false;
 			alert("<spring:message code="CODE.NO.COINCIDE"/>");
 			return;
 			
 		} else {
 			// 인증 성공
-			EmaChkYn = true;
+			mailChkYn = true;
 			alert("<spring:message code="CODE.SUCCESS"/>");
 			return;	
 		}
@@ -117,7 +117,7 @@
 	// 찾기
 	function popConfirm(){
 		//
-		if(!EmaChkYn){
+		if(!mailChkYn){
 			alert("<spring:message code="FIND.CHECK.NONE"/>");
 			return;	
 		}
@@ -127,32 +127,30 @@
 	}
 </script>
 <form id="popForm">
-<div class="_popList">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner">					
-					<div class="_contentArea _formArea" style="margin-bottom: 0px;">
-                        <div class="_find_info_Wrap">
-                            <div class="postWrap" style="height: 350px;">
-                            	<input type="hidden" id="joinCode" value="">
-                            	<input type="hidden" id="empId" value="">
-                            	<input type="hidden" id="empPwd" value="">
+<div class="pop_area">
+	<article class="sub_article">
+		<div class="content">
+			<div id="sub_content">					
+				<div class="form_area">
+                       <div class="find_info_wrap">
+                           <div class="post_wrap">
+                           	<input type="hidden" id="joinCode" value="">
+                           	<input type="hidden" id="empId" value="">
+                           	<input type="hidden" id="empPwd" value="">
 
-                                <div id="postCon" style="height: 280px;">
-                                
-                                </div>
-                                
-                                <div class="btn_center">
-                                	<input type="button" class="_btn _grey" value="찾기" onclick="popConfirm();">
-                                    <input type="button" class="_btn _line" value="취소" onclick="popClose('popupArea');">
-                                </div>
-                            </div><!-- End postWrap -->
-                          </div> 
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
+                               <div id="postCon" class="post_con">
+                               
+                               </div>
+                               
+                               <div class="btn_center">
+                               	<input type="button"class="btn_blue_thin" value="찾기" onclick="popConfirm();">
+                                   <input type="button"class="btn_gray_thin" value="취소" onclick="popClose('popupArea');">
+                               </div>
+                           </div><!-- End post_wrap -->
+                         </div> 
+				</div><!-- End content_area form_area -->
+			</div><!-- End sub_content -->
+		</div><!-- End content -->
 	</article>
 </div>
 </form>

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.MainService;
 import com.intr.svc.TempService;
-import com.intr.util.Jsp;
-import com.intr.util.Path;
+import com.intr.utils.Jsp;
+import com.intr.utils.Path;
 
 @Controller
 public class TempController {
@@ -36,17 +36,15 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
-
+			tempService.intrTempInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -64,17 +62,15 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-			
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
-
+			tempService.intrTempInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 검색 조건 저장
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1060(model, paramMap);
+			mainService.intrMainInqyService1060(model, paramMap);
 			
 			
 		} catch (Exception e) {
@@ -93,7 +89,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
+			mainService.intrMainInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -111,12 +107,11 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model, paramMap);
-
+			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 상세 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1020(model, paramMap);
+			tempService.intrTempInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -137,7 +132,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProc1010(model, paramMap);
+			defaultStr = tempService.intrTempProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -158,7 +153,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProc1020(model, paramMap);
+			defaultStr = tempService.intrTempProcService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -179,7 +174,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProc1030(model, paramMap);
+			defaultStr = tempService.intrTempProcService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//

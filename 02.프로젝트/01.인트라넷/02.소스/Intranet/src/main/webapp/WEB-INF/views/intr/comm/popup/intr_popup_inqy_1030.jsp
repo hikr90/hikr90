@@ -4,35 +4,33 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<div class="_popList">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner">					
-					<div class="_contentArea _formArea" style="margin-bottom: 0px;">
-                        <div class="_find_info_Wrap">
-                            <div class="postWrap" style="height: 350px; width: 1050px;">
-								<div class="srchWrap">
-									<div class="search_nav">
-										<div class="srchArea">
-											<label class="srcLabel">결재선 관리</label>
-										</div>
+<div class="pop_area">
+	<article class="sub_article">
+		<div class="content">
+			<div id="sub_content">					
+				<div class="form_area">
+					<div class="find_aprv_wrap">
+	                	<h3>결재선 조회</h3><br>
+	                	<div class="post_wrap">
+							<div class="srch_wrap">
+								<div class="srch_area">
+									<div class="right_srch_area">
+										<label class="srch_label">결재선</label>
 									</div>
 								</div>
-                                
-                                <div id="postCon">
-
-                                </div>
-                                
-                                <div class="btn_center" style="text-align: center;">
-                               		<input type="button" class="_btn _grey" value="확인" onclick="popConfirm(this.form);">
-                                    <input type="button" class="_btn _line" value="닫기" onclick="popClose('popupArea');">
-                                </div>
-                            </div><!-- End postWrap -->
-                          </div> 
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
+							</div>
+	                        
+	                     	<!-- 결재선 목록 -->
+	                     	<div id="postCon" class="post_con disp_flex pt20"></div>
+	                        
+							<div class="btn_center">
+	                     		<button type="button" class="btn_navy_thin" onclick="popConfirm(this.form);">확인</button>
+	                      		<button type="button" class="btn_gray_thin" onclick="popClose('popupArea');">닫기</button>
+	                 		</div>
+	                 	</div><!-- End post_wrap -->
+	               	</div> 
+				</div><!-- End form_area -->
+			</div><!-- End sub_content -->
+		</div><!-- End content -->
 	</article>
 </div>

@@ -48,82 +48,91 @@
 	   			});
 			}
 		}
+		
+		// 목록으로
+		function listCall() {
+			formSubmit('intrBoardInqy1010.do');
+		}
 	</script>
 </head>
 <body id="main">
-	<form id="form" method="POST" enctype="multipart/form-data">
-	<!-- MENU -->
+<form id="form" method="POST" enctype="multipart/form-data">
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
-		
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">					
-					<div class="_contentArea _formArea">
-					<div class="postCon">
-						<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
-						<input type="hidden" id="modCnt" name="modCnt" value="0">
-						
-						<div class="postWrap">
-							<!-- Form postWriteWrap  -->
-							<h2>공지사항 등록</h2>
-							<div class="postWrite">
-								<dl>
-									<dt><label for="post-title">제목</label></dt>
-									<dd style="width: 45%;">
-										<input type="text" id="brdTitle" title="제목" name="brdTitle">
-									</dd>
-									<dt>부서</dt>
-									<dd>${empVO.deptNm}</dd>
-									<dt>작성자</dt>
-									<dd>${empVO.empNm}</dd>
-								</dl>
-								<dl class="post-info">
-									<dt>첨부 파일</dt>
-									<dd>
-										<div class="fileUpdBox">
-											<label for="fileUpd">업로드</label>
-											<input type="file" name="fileUpd" id="fileUpd">
-											<label for="fileDel" style="background-color:  #575757;">삭제</label>
-											<input type="button" id="fileDel" name="fileDel" value="삭제" style="display: none;">
-										</div>
-									</dd>
-								</dl>
-								<dl class="post-info">
-									<dt></dt>
-									<dd class="post_file">
-										<div class="scrollFileWrap">
-											<ul>
-												<li> 
-													<input type="checkbox" class="_chkBox everyChk" id="everyChk" name="everyChk" style="vertical-align: middle;">
-													<span style="font-size: 1.6rem; font-weight: 700; font-family: NanumSquare">전체 선택</span>
-												</li>
-											</ul>
-											<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
-												<c:param name="fileNm"></c:param>
-											</c:import>
-										</div>
-									</dd>
-								</dl>
-								<dl>
-									<dt><label for="post_text">내용</label></dt>
-									<dd class="post_text">
-										<textarea id="brdContent" title="내용" name="brdContent"></textarea>
-									</dd>
-								</dl>
-							</div><!-- End postWriteWrap -->
-							<div class="btnWrap alignR">
-									<input type="button" class="_btn _grey" onclick="regProc(this.form);" value="등록">
-									<a onclick="location.href='intrBoardInqy1010.do'" class="_btn _line">취소</a>
-							</div>
-						</div><!-- End postWrap -->
-						</div>
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
-	</form>
+	
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+
+		<div class="content_wrap">
+			<div class="content_area">
+			<article class="sub_article">
+				<div class="content">
+					<div class="sub_content">					
+						<div class=" form_area">
+							<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
+							<input type="hidden" id="modCnt" name="modCnt" value="0">
+							
+							<div class="post_wrap">
+								<h2>공지사항 등록</h2><br>
+								<div class="post_view">
+									<dl>
+										<dt>
+											<label for="post-title">제목</label>
+										</dt>
+										<dd style="width: 45%;">
+											<input type="text" id="brdTitle" title="제목" name="brdTitle">
+										</dd>
+										<dt>부서</dt>
+										<dd>${empVO.deptNm}</dd>
+										<dt>작성자</dt>
+										<dd>${empVO.empNm}</dd>
+									</dl>
+									<dl class="post_info">
+										<dt>첨부 파일</dt>
+										<dd>
+											<div class="file_box">
+												<label for="fileUpd">업로드</label>
+												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
+												<input type="button"id="fileDel" name="fileDel" class="btn_gray" value="삭제">
+											</div>
+										</dd>
+									</dl>
+									<dl class="post_info">
+										<dt></dt>
+										<dd class="post_file">
+											<div class="file_wrap">
+												<!-- 파일 목록 -->
+												<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
+													<c:param name="fileNm"></c:param>
+												</c:import>
+											</div>
+										</dd>
+									</dl>
+									<dl>
+										<dt><label for="post_text">내용</label></dt>
+										<dd class="post_text">
+											<textarea id="brdCont" title="내용" name="brdCont"></textarea>
+										</dd>
+									</dl>
+								</div><!-- End post_write -->
+								<div class="btn_wrap align_right">
+										<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
+										<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+								</div>
+							</div><!-- End post_wrap -->
+						</div><!-- End form_area -->
+					</div><!-- End sub_content -->
+				</div><!-- End content -->
+			</article>
+			</div>
+		</div>
+	</div>
+</form>
 </body>
 	
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>

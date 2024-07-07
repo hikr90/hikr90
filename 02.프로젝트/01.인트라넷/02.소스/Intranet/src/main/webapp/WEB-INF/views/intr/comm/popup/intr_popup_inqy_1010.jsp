@@ -8,7 +8,7 @@
 	// 템플릿 선택
 	function popConfirm(){
 		// 선택 여부 검증
-		if($("input[name=templateCd]:checked").length==0){
+		if($("input[name=tempCd]:checked").length==0){
 			alert("<spring:message code="RADIO.NONE"/>");
 			return;
 		}
@@ -17,40 +17,35 @@
 		formSubmit("intrAprvInqy1020.do");
 	}
 </script>
-<div id="popArea" class="_popList">
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content">
-				<div id="sub_content" class="_inner">					
-					<div class="_contentArea _formArea">
-                        <div class="_find_info_Wrap">
-                            <div class="postWrap" style="height: 350px;">
-								<div class="tagWrap">
-									<h2>템플릿 관리</h2>
-								</div>
-							
-								<div class="srchWrap">
-									<div class="search_nav">
-										<div class="srchArea">
-											<label class="srcLabel">목록 조회</label>
-										</div>
+
+<div id="popArea" class="pop_area">
+	<article class="sub_article">
+		<div class="content">
+			<div id="sub_content">					
+				<div class="form_area">
+					<div class="find_temp_wrap">
+						<h3>템플릿 조회</h3><br>
+						<div class="post_wrap">
+							<div class="srch_wrap">
+								<div class="srch_area">
+									<div class="right_srch_area">
+										<label class="srch_label">템플릿</label>
 									</div>
 								</div>
-                                
-                                <div id="postCon" style="min-height: 50%;">
-                                
-                                </div>
-                                
-                                <div class="btn_center">
-                                	<input type="button" class="_btn _grey" value="확인" onclick="popConfirm();">
-                                    <input type="button" class="_btn _line" value="취소" onclick="popClose('popupArea');">
-                                </div>
-                            </div><!-- End postWrap -->
-                          </div> 
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
+							</div>
+	                        
+	                        <!-- 템플릿 목록 -->
+	                        <div id="postCon" class="post_con"></div>
+							
+							<div class="btn_center">
+								<button type="button" class="btn_navy_thin" onclick="popConfirm();">확인</button>
+								<button type="button" class="btn_gray_thin" onclick="popClose('popupArea');">취소</button>
+	   						</div>
+						</div>
+					</div><!-- End post_wrap -->
+				</div><!-- End form_area -->
+			</div><!-- End sub_content -->
+		</div><!-- End content -->
 	</article>
 </div>
 </html>

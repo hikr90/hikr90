@@ -4,7 +4,6 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<style>._formArea .postWrite, ._formArea .postView {margin-bottom: 31px;}</style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	// 아이디 중복 여부
@@ -99,146 +98,166 @@
 	      	});
 		}		
 	}
+	
+	// 목록으로
+	function listCall() {
+		formSubmit('intrEmpInqy1010.do');
+	}
 </script>
 </head>
 <body id="main">
 <form id="form" method="POST" enctype="multipart/form-data">
-	<!-- MENU -->
+	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<article id="_subArticle">
-		<div class="_wrap">
-			<div id="_content" style="padding-bottom: 10px;">
-				<div id="sub_content" class="_inner" style="padding-top: 40px;">	
-					<div class="_contentArea _formArea">
-						<div class="postWrap">
-							<input type="hidden" id="modCnt" name="modCnt" value="0">
-
-							<!-- Form postWriteWrap  -->
-                            <div class="">
-                            <h2>사원 등록</h2>
-                                <div class="postWrite">
-                                    <dl style="height: 150px;">
-                                        <dt><label>사진 등록</label></dt>
-                                        <dd>
-                                        	<div style="display: -webkit-inline-box;">
-                                        	<div class="empProfile">
-                                        		<img class="empImg" id="empImg" src="resources/images/icon/icon_emp.png">
-                                        	</div>
-                                        	<div class="profileBox" style="margin-left: 20px; display: grid;">
-                                        		<span id="profileSpan" style="margin-top: 20px;">사진을 등록해주세요.</span>
-	                                        	<div>
-	                                        		<label for="profileImg" class="stb-box-btn">등록</label>
-													<input type="file" name="profileImg" id="profileImg">
-                                        			<input type="button" class="stb-box-btn-grey" id="delProfileImg" value="삭제">
-                                        		</div>
-                                        	</div>
-                                        	</div>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>사원명</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="사원명" id="empNm" name="empNm">
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-                                    </dl>
-
-                                    <dl>
-                                    	<dt><label>부서</label></dt>
-                                        <dd class="sel_2part">
-											<select id="deptCd" name="deptCd">
-											<c:forEach var="list" items="${deptList}" varStatus="status">
-												<option value="${list.deptCd}">${list.deptNm}</option>
-											</c:forEach>
-											</select>
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-                                    </dl>
-									<dl>
-                                    	<dt><label>직급</label></dt>
-                                        <dd class="sel_2part">
-											<select id="gradeCd" name="gradeCd">
-											<c:forEach var="list" items="${gradeList}" varStatus="status">
-												<option value="${list.gradeCd}">${list.gradeNm}</option>
-											</c:forEach>
-											</select>
-                                        </dd>
-                                        
-                                        <dt></dt>
-                                        <dd></dd>
-									</dl>
-                                    <dl>
-                                        <dt><label>연락처</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" onkeydown="inputNum(this);" >
-                                        </dd>
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+			</div>
+		</div>
+		
+		<div class="content_wrap">
+			<div class="content_area">
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">	
+							<div class="form_area">
+								<div class="post_wrap">
+									<input type="hidden" id="modCnt" name="modCnt" value="0">
+		
+		                            <h2>사원 등록</h2><br>
+	                                <div class="post_write">
+	                                    <dl>
+	                                        <dt>
+	                                        	<label>사진 등록</label>
+	                                        </dt>
+	                                        <dd>
+	                                        	<div class="profile_wrap disp_flex">
+		                                        	<div class="profile_area">
+		                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
+	                                        		</div>
+	    
+		                                        	<div class="profile_box mt10 ml20">
+		                                        		<br><span>사진을 등록해주세요.</span>
+			                                        	<div style="margin-top: 5px;">
+			                                        		<label for="profileImg" class="btn_blue">등록</label>
+															<input type="file" name="profileImg" id="profileImg">
+		                                        			<input type="button"class="btn_gray" id="delProfileImg" value="삭제">
+		                                        		</div>
+		                                        	</div>
+	                                        	</div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>사원명</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="사원명" id="empNm" name="empNm">
+	                                        </dd>
+	                                        
+	                                        <dt><label>성별</label></dt>
+	                                        <dd class="sel_2part">
+	                                        	<div class="radio_box enter-check_box">
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-yes" name="empGender" value="M" checked="checked">
+	                                                	<label for="chk-yes">남자<span></span></label>
+	                                            	</span>
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-no" name="empGender" value="F" >
+	                                                	<label for="chk-no">여자<span></span></label>
+	                                            	</span>
+	                                            </div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                    	<dt><label>부서</label></dt>
+	                                        <dd class="sel_2part">
+												<div class="select_wrap">
+													<div id="deptList" class="sList select_box">${empty resultParam.deptNm ? '전체' : resultParam.deptNm}</div>
+													<input type="hidden" name="deptCd" value="${resultParam.deptCd}">
+													<input type="hidden" name="deptNm" value="${resultParam.deptNm}">
+												
+													<ul class="sUl select_ul">
+														<c:forEach var="list" items="${deptList}">
+															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+	                                        </dd>
+	                                        
+	                                        <dt><label>직급</label></dt>
+	                                        <dd class="sel_2part">
+	                                        	<div class="select_wrap">
+													<div id="gradeList" class="sList select_box">${empty resultParam.gradeNm ? '전체' : resultParam.gradeNm}</div>
+													<input type="hidden" name="gradeCd" value="${resultParam.gradeCd}">
+													<input type="hidden" name="gradeNm" value="${resultParam.gradeNm}">
+												
+													<ul class="sUl select_ul">
+														<c:forEach var="list" items="${gradeList}">
+															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>연락처</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" onkeydown="inputNum(this);" >
+	                                        </dd>
+											
+											<dt></dt>
+											<dd></dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr">
+	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
+	                                        </dd>
+	                                        
+	                                        <dt><label>상세 주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo">
+	                                        </dd>
+	                                    </dl>
+	                                    <dl>
+	                                        <dt><label>아이디</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')">
+	                                            <input type="button"class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
+	                                        </dd>
+	                                        
+	                                        <dt><label>메일 주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail">
+	                                        </dd>
+	                                    </dl>
+										<dl>
+											<dt><label>비밀번호</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd">
+	                                        </dd>
+	                                        <dt><label>비밀번호 확인</label></dt>
+	                                        <dd class="sel_2part">
+	                                        	<input type="password" title="비밀번호 확인" id="chqPwd" name="chqPwd">
+	                                       	</dd>
+	                                    </dl>
+									</div><!-- End post_write -->
 										
-										<dt><label>성별</label></dt>
-                                        <dd class="sel_2part">
-                                        	<div class="_radioBox enter-chkBox">
-                                            	<span class="radio-area">
-                                                	<input type="radio" id="chk-local" name="empGender" value="M" checked="checked">
-                                                	<label for="chk-local">남자<span></span></label>
-                                            	</span>
-                                            	<span class="radio-area">
-                                                	<input type="radio" id="chk-foreign" name="empGender" value="F" >
-                                                	<label for="chk-foreign">여자<span></span></label>
-                                            	</span>
-                                            </div>
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr">
-                                            <input type="button" class="stb-box-btn" value="주소 검색" onclick="srchAddr();" style="margin-bottom: 5px;">
-                                        </dd>
-                                        
-                                        <dt><label>상세 주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo">
-                                        </dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><label>아이디</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')">
-                                            <input type="button" class="stb-box-btn" value="중복 확인" onclick="chqEmpId(this.form)" style="margin-bottom: 5px;">
-                                        </dd>
-                                        
-                                        <dt><label>메일 주소</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail">
-                                        </dd>
-                                    </dl>
-
-									<dl>
-										<dt><label>비밀번호</label></dt>
-                                        <dd class="sel_2part">
-                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd" style="margin-bottom: 5px;">
-                                        </dd>
-                                        <dt><label>비밀번호 확인</label></dt>
-                                        <dd class="sel_2part">
-                                        	<input type="password" title="비밀번호 확인" id="chqPwd" name="chqPwd" style="margin-bottom: 5px;">
-                                       	</dd>
-                                    </dl>
-									</div><!-- End postWriteWrap -->
-                                <div class="btnWrap alignR">
-                                	<input type="button" class="_btn _grey" onclick="regProc(this.form);" value="등록">
-                                    <a class="_btn _line" onclick="location.href='intrEmpInqy1010.do'">취소</a>
-                                </div>
-                            </div><!-- End postWrap -->
-                        </div>
-					</div><!-- End _contentArea _formArea -->
-				</div><!-- End _inner -->
-			</div><!-- End _content -->
-		</div><!-- End _wrap -->
-	</article>
+	                                <div class="btn_wrap align_right">
+	                                	<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
+	                                    <button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+	                                </div>
+		                        </div><!-- End post_wrap -->
+							</div><!-- End content_area form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
 </form>
 </body>
 	
