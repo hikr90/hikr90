@@ -215,25 +215,27 @@
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
 									<input type="button"class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>템플릿 관리</h2><br>
+									<h2>템플릿 관리
+										<span class="float_right">
+											<input type="button"class="btn_navy_thin" value="템플릿 등록" onclick="regCall();">
+										</span>
+									</h2><br>
+									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">
 											<!-- 제목 -->
 											<div class="srch_area">
 												<label class="srch_label">제목</label>		
-												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 											
 												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 											</div>
 										</div>
 		                            </div>
 									
-									<div class="pb10">
-										<input type="button"class="btn_navy_thin" value="템플릿 등록" onclick="regCall();">
-									</div>
-									
 									<div class="tree_wrap">
-										<div class="tree_area mr20" id="tree_area"> 
+										<div class="tree_area mr20" id="tree_area" style="width: 715px; height: 746px;"> 
 											<div class="tree">
 												<ul class="ul_1">
 												<c:forEach var="list" items="${defaultList}" varStatus="status">

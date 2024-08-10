@@ -41,14 +41,6 @@ public class MainDao {
 		return defaultInfo;
 	}
 
-	// 시퀀스 (사원) 생성 
-	public HashMap<String, Object> intrMainInqyDao1040() throws Exception {
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("main.intrMainInqyDao1040");
-		//
-		return defaultInfo;
-	}
-	
 	// 로그인 사용자 조회
 	public EmpVO intrLoginInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
@@ -72,5 +64,13 @@ public class MainDao {
 		defatulInfo = sqlsession.selectOne("main.intrLoginInqy1030", paramMap);
 		//
 		return defatulInfo;
+	}
+	
+	// 목록 건수 조회
+	public List<HashMap<String, Object>> intrMainInqyDao1050(HashMap<String, Object> paramMap) {
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("main.intrMainInqyDao1050", paramMap);
+		//
+		return defaultList;
 	}
 }

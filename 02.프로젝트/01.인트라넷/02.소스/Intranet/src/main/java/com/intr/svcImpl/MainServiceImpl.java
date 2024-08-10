@@ -71,9 +71,8 @@ public class MainServiceImpl implements MainService{
 			// 로그인 정보 세션 조회
 			//--------------------------------------------------------------------------------------------
 			empInfo = (EmpVO)session.getAttribute("empVO");
-			//
 			if(empInfo!=null) {
-				paramMap.put("empIdx", empInfo.getEmpIdx());
+				paramMap.put("setEmpIdx", empInfo.getEmpIdx());
 			}
 			
 			//--------------------------------------------------------------------------------------------
@@ -116,62 +115,6 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			defaultList = mainDao.intrMainInqyDao1020(model, paramMap);
 			model.addAttribute("tMenuList", defaultList);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 페이징 처리
-	public void intrMainInqyService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		int nowPage = 1; // 페이지 기본 값 (첫 동작)
-		Integer page = null; // 현재 페이지
-		String pageStr = (String)paramMap.get("page");
-		//
-		if(pageStr!=null && pageStr!="") page = Integer.valueOf(pageStr);
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 페이징 처리
-			//--------------------------------------------------------------------------------------------
-			if(page!=null) {
-				// 특정 페이지 값이 있는 경우 대체
-				nowPage = page;
-			}
-					
-			// 페이지 첫, 마지막 인덱스
-			int sIdx = (nowPage-1)*Paging.BLOCKLIST+1;
-			int endIdx = sIdx+Paging.BLOCKLIST-1;
-			//
-			//--------------------------------------------------------------------------------------------
-			// 페이지 변수 저장
-			//--------------------------------------------------------------------------------------------
-			paramMap.put("nowPage", nowPage);
-			paramMap.put("sIdx",sIdx);
-			paramMap.put("eIdx",endIdx);
-			paramMap.put("blockList",Paging.BLOCKLIST);
-			paramMap.put("blockPage",Paging.BLOCKPAGE);
-
-			// 페이지 메뉴 구성
-			String pageMenu = utilService.intPageInqyService1010(paramMap);
-			model.addAttribute("pageMenu", pageMenu);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 검색 조건 저장
-	public void intrMainInqyService1060(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			model.addAttribute("resultParam", paramMap);
 			
 		} catch (Exception e) {
 			//

@@ -30,6 +30,7 @@ a:link, a:active, a:visited { color: #333; }
 
 h1, h2, h3, h4, h5 { font-weight: normal; }
 h3 a { color: #333; }
+h2 { display: contents; }
 
 button, input[type="button"] { cursor: pointer; padding: 0; }
 button { border: 0; background-color: transparent; }
@@ -220,7 +221,7 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 .check_box input[type="checkbox"]:focus + label span { -webkit-box-shadow: 0px 0px 2px 1px rgba(52, 130, 254, 0.5); box-shadow: 0px 0px 2px 1px rgba(52, 130, 254, 0.5); }
 
 .radio_box { position: relative; display: inline-block; vertical-align: middle; z-index: 1; }
-.radio_box input[type="radio"] { position: absolute; top: 2px; right: 1px; margin: 0; width: 15px; height: 15px; z-index: -1; }
+.radio_box input[type="radio"] { position: absolute; top: 3px; right: 1px; margin: 0; width: 12px; height: 12px; z-index: -1; }
 .radio_box input[type="radio"] + label { cursor: pointer; font-size: 1.4rem; font-weight: 700; }
 .radio_box input[type="radio"] + label span { vertical-align: middle; display: inline-block; width: 16px; height: 16px; border-radius: 50%;  box-sizing: border-box; border: 1px solid #c5c5c5; background-color: #fff; margin: 0 0 0 10px; }
 .radio_box input[type="radio"]:checked + label span { border: 0; border: 5px solid #214b97; }
@@ -282,7 +283,7 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 
 /* ================== Bottom Box ================== */
-.bottom_box { background-color:#d3d3d3; padding: 50px 0; height: 385px; }
+.bottom_box { background-color:#d3d3d3; padding: 50px 0; height: 380px; }
 .bottom_box .bottom_wrap { margin-top: -15px; }
 .bottom_box .bottom_wrap .bottom_area { overflow: hidden; width: 458px; height: 420px; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 30px; box-sizing: border-box; margin: 0 auto; display: inline-block; }
 .bottom_box .bottom_wrap .bottom_area h3 { float: left; color: #214b97; font-size: 2.4rem; font-weight: 700; }
@@ -337,7 +338,7 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 /* ================== Paging ================== */
 .paging { display: inline-block; }
-.paging_area { overflow: hidden; min-height: 36px; text-align: center; vertical-align: middle; }
+.paging_area { overflow: hidden; min-height: 36px; text-align: center; vertical-align: middle; padding-right: 100px; }
 .paging_area a.pageBtn { overflow: hidden; display: inline-block; vertical-align: middle; text-indent: -5000px; background-image: url("../images/icon/icon_paging_arrow.png"); background-position: 13px 13px; background-repeat: no-repeat; }
 .paging_area a.pageBtn, .paging_area ul.paging > li > a { color: #666; width: 39px; height: 36px; border: 1px solid #bfbfbf; background-color: #fff;  box-sizing: border-box; }
 .paging_area a.pageBtn._first { background-position: -28px 12px; position:relative; top:9px; }
@@ -385,10 +386,6 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 .select_ul .hover { color: #ffffff; background-color: #727272; }
 
 .step_select { width:90%; height:30px; text-align:center; font-size:1.4rem; }
-
-/* ================== Post File ================== */
-.post_file ul { float: left; }
-.post_file ul li { display: inline-block; text-align: center; }
 
 
 /* ================== Full Calendar ================== */

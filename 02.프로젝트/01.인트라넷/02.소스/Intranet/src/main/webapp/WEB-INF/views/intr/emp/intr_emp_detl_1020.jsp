@@ -60,8 +60,16 @@
 		// 유효성 검증
 		if(!validation()){return;};
 		//
+		if($("#setDeptCd").val()==""){
+			alert("<spring:message code="EMP.DEPT.NONE"/>");
+			return;
+		}
+		if($("#setGradeCd").val()==""){
+			alert("<spring:message code="EMP.GRADE.NONE"/>");
+			return;
+		}
 		if(chqEmpYn!="Y"){
-			alert("<spring:message code="EMP.ID.CHECK"/>");
+			alert("<spring:message code="EMP.GRADE.NONE"/>");
 			return;
 		}
 		if($("#empPwd").val()!=$("#chqPwd").val()){
@@ -70,8 +78,8 @@
 		}
 		//
 		if(confirm("등록하시겠습니까?")){
-			//		
-			var fileList = setFileList();
+			var fileList = setFormData();
+			//
 			$.ajax({
 				url:"intrEmpProc1010.do",
 				processData : false,
@@ -84,7 +92,8 @@
 	     				if(json[0].res=='YES'){
    	   						//
    							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrEmpInqy1010.do";
+	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+	   						
 	     				} else {
 	     					//
 	     					alert("<spring:message code="PROC.FAIL"/>");
@@ -125,7 +134,8 @@
 						<div id="sub_content">	
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="modCnt" name="modCnt" value="0">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 		
 		                            <h2>사원 등록</h2><br>
 	                                <div class="post_write">
@@ -140,11 +150,12 @@
 	                                        		</div>
 	    
 		                                        	<div class="profile_box mt10 ml20">
-		                                        		<br><span>사진을 등록해주세요.</span>
+		                                        		<br><span id="profText">사진을 등록해주세요.</span>
 			                                        	<div style="margin-top: 5px;">
-			                                        		<label for="profileImg" class="btn_blue">등록</label>
-															<input type="file" name="profileImg" id="profileImg">
-		                                        			<input type="button"class="btn_gray" id="delProfileImg" value="삭제">
+			                                        		<label for="profBtn" class="btn_blue">등록</label> 
+															<input type="file" id="profBtn">
+															<input type="hidden" id="profImg" name="profImg" value="">
+		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
 		                                        		</div>
 		                                        	</div>
 	                                        	</div>
@@ -174,13 +185,13 @@
 	                                    	<dt><label>부서</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${empty resultParam.deptNm ? '전체' : resultParam.deptNm}</div>
-													<input type="hidden" name="deptCd" value="${resultParam.deptCd}">
-													<input type="hidden" name="deptNm" value="${resultParam.deptNm}">
+													<div id="deptList" class="sList select_box">부서를 선택해주세요.</div>
+													<input type="hidden" id="setDeptCd" name="setDeptCd" value="">
+													<input type="hidden" id="setDeptNm" name="setDeptNm" value="">
 												
 													<ul class="sUl select_ul">
 														<c:forEach var="list" items="${deptList}">
-															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
+															<c:if test="${not empty list.deptCd}"><li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
@@ -189,13 +200,13 @@
 	                                        <dt><label>직급</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${empty resultParam.gradeNm ? '전체' : resultParam.gradeNm}</div>
-													<input type="hidden" name="gradeCd" value="${resultParam.gradeCd}">
-													<input type="hidden" name="gradeNm" value="${resultParam.gradeNm}">
+													<div id="gradeList" class="sList select_box">직급을 선택해주세요.</div>
+													<input type="hidden" id="setGradeCd" name="setGradeCd" value="">
+													<input type="hidden" id="setGradeNm" name="setGradeNm" value="">
 												
 													<ul class="sUl select_ul">
 														<c:forEach var="list" items="${gradeList}">
-															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
+															<c:if test="${not empty list.gradeCd}"><li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>

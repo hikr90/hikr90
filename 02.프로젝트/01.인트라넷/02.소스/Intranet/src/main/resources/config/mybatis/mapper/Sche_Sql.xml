@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sche">
-	<select id="intrScheInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrScheInqy1010 : 일정 목록 조회 */
+	<select id="intrScheInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrScheInqyDao1010 : 일정 목록 조회 */
 		SELECT 
-		    		APRV.APRV_IDX
-		    	,	APRV.CURR_APRV_SNO
+		    		APRV.CONT_ID
+		    	,	APRV.CURR_CONT_SID
 		    	,	APRV.EMP_IDX
 		    	,	DEPT.DEPT_CD
 		    	,	DEPT.DEPT_NM
 		    	,	GRADE.GRADE_CD
 		    	,	GRADE.GRADE_NM
-		    	,	'[연차] '||DEPT.DEPT_NM||' '||EMP.EMP_NM AS "TITLE"
+		    	,	'[연차] '||DEPT.DEPT_NM||' '||EMP.EMP_NM || APRV.APRV_TITLE AS TITLE
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
 		    	,	APRV.USE_YN
@@ -19,7 +19,7 @@
 		    	,	APRV.REMARK
 		FROM INTR_APRV APRV
 		INNER JOIN INTR_APRV_LINE LINE
-			ON LINE.APRV_IDX = APRV.APRV_IDX
+			ON LINE.CONT_ID = APRV.CONT_ID
 			AND LINE.LAST_APRV_YN = 'Y'
 			AND LINE.APRV_RSLT_DT IS NOT NULL
 		LEFT OUTER JOIN INTR_EMP EMP
@@ -29,6 +29,15 @@
 		LEFT OUTER JOIN INTR_GRADE GRADE
 			ON GRADE.GRADE_CD = EMP.GRADE_CD
 		WHERE 1=1
+			 <if test="srchNm != null and srchNm != ''">
+            	AND REGEXP_REPLACE(LOWER(EMP.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            </if>
+            <if test="srchSdt != null and srchSdt !=''">
+            	AND APRV.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+            </if>
+            <if test="srchEdt != null and srchEdt !=''">
+            	AND APRV.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+            </if>
 			<if test="deptCd != null and deptCd != ''">
 				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
 			</if>

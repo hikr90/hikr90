@@ -4,49 +4,44 @@
 	<select id="intrTaskInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrTaskInqyDao1010 : 업무일지 목록 조회 */
 		SELECT 
-			    T.TASK_CD
-			,   T.EMP_IDX
-			,	E.EMP_NM
-			,	D.DEPT_NM
-			,	G.GRADE_NM
-			,	T.TASK_CONT
-			,   T.REG_DT || T.REG_TM AS REG_DT_TM
-			,	T.REG_DT
-			,	T.REG_TM
-			,	COUNT(TASK_CD) OVER() AS LIST_CNT	
-		FROM INTR_TASK T
-		LEFT OUTER JOIN INTR_EMP E
-			ON E.EMP_IDX = T.EMP_IDX
-		LEFT OUTER JOIN INTR_DEPT D
-			ON D.DEPT_CD = E.DEPT_CD
-		LEFT OUTER JOIN INTR_GRADE G
-			ON G.GRADE_CD = E.GRADE_CD
+			    TASK.TASK_CD
+			,   TASK.EMP_IDX
+			,	EMP.EMP_NM
+			,	DEPT.DEPT_NM
+			,	GRADE.GRADE_NM
+			,	TASK.TASK_CONT
+			,   TASK.REG_DT || TASK.REG_TM AS REG_DT_TM
+			,	TASK.REG_DT
+			,	TASK.REG_TM
+			,	COUNT(TASK.TASK_CD) OVER() AS LIST_CNT	
+		FROM INTR_TASK TASK
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON EMP.EMP_IDX = TASK.EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
 		WHERE 1=1 
 			<if test="empIdx != null and empIdx !=''">
-            	AND T.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				AND T.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+            	AND TASK.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND TASK.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
             </if>
             <if test="srchNm != null and srchNm != ''">
-            	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            	AND REGEXP_REPLACE(LOWER(TASK.TASK_CONT),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
             </if>
             <if test="srchSdt != null and srchSdt !=''">
-            	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+            	AND TASK.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
             </if>
             <if test="srchEdt != null and srchEdt !=''">
-            	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+            	AND TASK.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
             </if>
             <if test="deptCd != null and deptCd != ''">
 				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
 			</if>
-		ORDER BY T.REG_DT DESC, T.REG_TM ASC, T.TASK_CD ASC
-	</select>
-	
-	<select id="intrTaskInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrTaskInqyDao1020 : 업무일지 목록 건수 조회 */
-		SELECT 
-			COUNT(T.TASK_CD) AS LIST_CNT 
-		FROM INTR_TASK T
-		WHERE 1 = 1
+			 <if test="gradeCd != null and gradeCd != ''">
+				AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+			</if>
+		ORDER BY TASK.REG_DT DESC, TASK.REG_TM ASC, TASK.TASK_CD ASC
 	</select>
 	
 	<delete id="intrTaskProcDao1010" parameterType="java.util.HashMap">
@@ -68,7 +63,7 @@
 		)
 		VALUES
 		(
-				'TASK_' || LPAD(SEQ_TASK_IDX.NEXTVAL,4,0)
+				SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_CD,'TASK_')),0) + 1,4,0) FROM INTR_TASK
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{taskCont, jdbcType=VARCHAR}
 			,	#{regDt, jdbcType=VARCHAR}

@@ -17,24 +17,16 @@ public class BoardDao {
 	// 공지사항 목록
 	public List<HashMap<String, Object>> intrBoardInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
-		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("board.intrBoardInqyDao1010", paramMap);
-		return defaulList;
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("board.intrBoardInqyDao1010", paramMap);
+		return defaultList;
 	}
 	
-	// 공지사항 목록 건수 조회
+	// 공지사항 상세 조회
 	public HashMap<String, Object> intrBoardInqyDao1020(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("board.intrBoardInqyDao1020", paramMap);
-		return defaultInfo;
-	}
-
-	// 공지사항 상세 조회
-	public HashMap<String, Object> intrBoardInqyDao1030(Model model, HashMap<String, Object> paramMap) {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("board.intrBoardInqyDao1030", paramMap);
 		return defaultInfo;
 	}
 	

@@ -101,10 +101,14 @@
 								<div class="post_wrap">
 									<h2>재사용등록</h2><br>
 									<input type="hidden" id="aprvLine" name="aprvLine" value="">
-									<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.aprvIdx}">
+									<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.contId}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-									<input type="hidden" id="modCnt" name="modCnt" value="0">
 									<input type="hidden" id="tempCd" name="tempCd" value="${aprvDetInfo.tempCd}">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
+									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 									
 									<div class="post_write">
 										<dl>

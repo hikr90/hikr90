@@ -12,6 +12,15 @@
 <script type="text/javascript">
 	//
 	$(document).ready(function() {
+		// 권한 메뉴 목록 전체 체크
+		$('.menuChk').click(function() {
+			if($(".menuChk").is(":checked")){
+				$("input[name=menuCd]").prop("checked", true);
+		    } else {
+		    	$("input[name=menuCd]").prop("checked", false);	
+		    }
+		});
+		
 		// 선택 항목 음영 처리
 		$(document).on('click','.a_btn',function() {
 			//
@@ -20,15 +29,6 @@
 			})
 			//
 			$(this).addClass('list_bg');
-		});
-		
-		// 권한 메뉴 목록 전체 체크
-		$('.menuChk').click(function() {
-			if($(".menuChk").is(":checked")){
-				$("input[name=menuCd]").prop("checked", true);
-		    } else {
-		    	$("input[name=menuCd]").prop("checked", false);	
-		    }
 		});
 		
 		// 권한 메뉴, 메뉴 목록 감춤
@@ -108,21 +108,22 @@
 											<!-- 제목 -->
 											<div class="srch_area">
 												<label class="srch_label">제목</label>		
-												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 											
 												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 											</div>
 	                                	</div>
 	                                </div>
 										
-									<div class="tree_wrap mt20" style="height: 500px;">
+									<div class="tree_wrap" style="height: 500px;">
 										<div id="tree_area" class="tree_area">
 											<div id="authTree" class="tree">
 												<ul class="ul_1">
 												<c:forEach var="list" items="${defaultList}" varStatus="status">
 				           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 		
-													<li class="li_1">
+													<li class="li_1" style="margin-left: 15px;">
 													<span class="${spanIcon}"></span>
 													<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
 												</c:forEach>

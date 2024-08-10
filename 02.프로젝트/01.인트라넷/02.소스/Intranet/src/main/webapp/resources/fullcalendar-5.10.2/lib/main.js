@@ -8617,7 +8617,7 @@ var FullCalendar = (function (exports) {
             this.sliceEventStore = memoize(this._sliceEventStore);
             this.sliceEventDrag = memoize(this._sliceInteraction);
             this.sliceEventResize = memoize(this._sliceInteraction);
-            this.forceDayIfListItem = false; // hack
+            this.forceDayIfileUlItem = false; // hack
         }
         Slicer.prototype.sliceProps = function (props, dateProfile, nextDayThreshold, context) {
             var extraArgs = [];
@@ -8721,7 +8721,7 @@ var FullCalendar = (function (exports) {
         Slicer.prototype.sliceEventRange = function (eventRange, extraArgs) {
             var dateRange = eventRange.range;
             // hack to make multi-day events that are being force-displayed as list-items to take up only one day
-            if (this.forceDayIfListItem && eventRange.ui.display === 'list-item') {
+            if (this.forceDayIfileUlItem && eventRange.ui.display === 'list-item') {
                 dateRange = {
                     start: dateRange.start,
                     end: addDays(dateRange.start, 1),
@@ -12885,7 +12885,7 @@ var FullCalendar = (function (exports) {
         __extends(DayTableSlicer, _super);
         function DayTableSlicer() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.forceDayIfListItem = true;
+            _this.forceDayIfileUlItem = true;
             return _this;
         }
         DayTableSlicer.prototype.sliceRange = function (dateRange, dayTableModel) {

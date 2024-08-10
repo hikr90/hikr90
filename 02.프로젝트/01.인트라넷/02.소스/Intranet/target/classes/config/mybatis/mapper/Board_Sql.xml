@@ -72,39 +72,7 @@
 	</select>	
 
 	<select id="intrBoardInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBoardInqyDao1020 : 공지사항 목록 건수 조회 */	
-		SELECT 
-				COUNT(BRD.CONT_ID) AS LIST_CNT 
-		FROM INTR_BOARD BRD
-		LEFT OUTER JOIN INTR_EMP EMP
-			ON BRD.EMP_IDX = EMP.EMP_IDX
-		LEFT OUTER JOIN INTR_DEPT DEPT
-			ON DEPT.DEPT_CD = EMP.DEPT_CD
-          	AND DEPT.USE_YN = 'Y'
-		LEFT OUTER JOIN INTR_GRADE GRADE
-			ON GRADE.GRADE_CD = EMP.DEPT_CD
-     	  	AND GRADE.USE_YN = 'Y'
-		WHERE 1 = 1
-			AND BRD.USE_YN = 'Y'
-		    <if test="srchNm != null and srchNm != ''">
-		    	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-		    </if>
-		    <if test="srchSdt != null and srchSdt !=''">
-		    	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
-		    </if>
-		    <if test="srchEdt != null and srchEdt !=''">
-		    	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
-		    </if>
-		    <if test="deptCd != null and deptCd != ''">
-				AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
-			</if>
-			<if test="gradeCd != null and gradeCd != ''">
-				AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
-			</if>
-	</select>	
-	
-	<select id="intrBoardInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBoardInqyDao1030 : 공지사항 상세 */
+		/* intrBoardInqyDao1020 : 공지사항 상세 */
 		SELECT 
 					BRD.CONT_ID
 				,	BRD.BRD_TITLE

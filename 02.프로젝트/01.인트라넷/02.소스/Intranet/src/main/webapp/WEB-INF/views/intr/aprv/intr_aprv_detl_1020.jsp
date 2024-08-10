@@ -108,8 +108,9 @@
 									<h2>기안문 등록</h2><br>
 									<input type="hidden" id="aprvLine" name="aprvLine" value="">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-									<input type="hidden" id="modCnt" name="modCnt" value="0">
 									<input type="hidden" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									
 									<div class="post_write">
 										<dl>

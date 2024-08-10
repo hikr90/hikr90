@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* ================== Body ================== */
-.body { height: 895px; background: url("../images/bg/bg_login.jpg") center center no-repeat; background-size: cover; display: flex; justify-content: center; align-items: center; }
+.body { height: 890px; background: url("../images/bg/bg_login.jpg") center center no-repeat; background-size: cover; display: flex; justify-content: center; align-items: center; }
 
 
 /* ================== Login ================== */
@@ -82,3 +82,10 @@
 .form_area .post_write dl .profile_box input[type="file"] { position: absolute; overflow: hidden; clip:rect(0,0,0,0); }
 
 
+/* ================== File ================== */
+.post_file ul { float: left; }
+.post_file ul li { display: inline-block; text-align: center; }
+.post_file ul li { padding: 5px; padding-left: 10px; }
+.post_file ul li:nth-child(1) { padding-left: 0px; }
+
+.file_text { display: inline-block; padding: 5px; font-weight: bold; }

@@ -117,16 +117,17 @@
 							<div class="form_area">
 								<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
 							
-								<div class="post_wrap" style="padding-top: 60px;">
+								<div class="post_wrap">
 									<h2>사용자 권한 부여</h2><br>
 		                                <div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 제목 -->
 												<div class="srch_area">
 													<label class="srch_label">제목</label>		
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 												
 													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>

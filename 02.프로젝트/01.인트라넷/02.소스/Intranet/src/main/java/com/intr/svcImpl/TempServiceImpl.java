@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.TempDao;
+import com.intr.svc.MainService;
 import com.intr.svc.TempService;
+import com.intr.svc.UtilService;
 
 @Service
 @Transactional
@@ -17,6 +19,12 @@ public class TempServiceImpl implements TempService{
 	//
 	@Autowired
 	TempDao tempDao;
+	
+	@Autowired
+	MainService mainService;
+	
+	@Autowired
+	UtilService utilService;
 	
 	// 템플릿 목록 조회
 	public void intrTempInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {

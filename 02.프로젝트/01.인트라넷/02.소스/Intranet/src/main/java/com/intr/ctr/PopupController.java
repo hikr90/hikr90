@@ -16,6 +16,7 @@ import com.intr.svc.AprvService;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -27,6 +28,9 @@ public class PopupController {
 	
 	@Autowired
 	MainService mainService;
+	
+	@Autowired
+	UtilService utilService;
 	
 	@Autowired
 	EmpService empService;
@@ -49,10 +53,6 @@ public class PopupController {
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
 			tempService.intrTempInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//

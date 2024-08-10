@@ -36,7 +36,29 @@ $(function(){
 		$(".sUl li").removeClass("hover");
 		$(this).addClass("hover");
 	});
+	
+	// -- 전체 선택 -----------------------------------------------------------------------
+	$(".everyChk").on("click", function(e){
+		if($(this).is(":checked")) {
+			$("input[name=checkBox]").prop("checked", true);
+		} else {
+			$("input[name=checkBox ]").prop("checked", false)
+		}
+	});
 });
+
+// 검색 초기화
+function initCall(){
+	$("#gradeList").text("전체");
+	$("#deptList").text("전체");
+	$("input[name=srchNm]").val("");
+	$("input[name=srchSdt]").val("");
+	$("input[name=srchEdt]").val("");
+	$("input[name=deptCd]").val("");
+	$("input[name=gradeCd]").val("");
+	$("input[name=deptNm]").val("");
+	$("input[name=gradeNm]").val("");
+}
 
 // 폼 태그 동작
 function formSubmit(mappingId){
@@ -44,13 +66,6 @@ function formSubmit(mappingId){
 	var f = document.getElementById('form');
 	f.action = mappingId;
 	f.submit();
-}
-
-// 선택 목록 인덱스 값 부여
-function setContentIdx(contId, mappingId){
-	//
-	$("#contId").val(contId);
-	formSubmit(mappingId);
 }
 
 // 로그아웃

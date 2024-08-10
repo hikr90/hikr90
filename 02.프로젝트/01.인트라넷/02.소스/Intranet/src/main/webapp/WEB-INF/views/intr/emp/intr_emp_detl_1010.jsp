@@ -45,6 +45,38 @@
 	      	});
 		}
 	}
+	
+	// 사원 삭제 처리
+	function delProc(f){
+		//
+		if(confirm("삭제하시겠습니까?")){
+			//
+			var param = $("#form").serialize();
+			$.ajax({
+				url:"intrEmpProc1040.do",
+				data: param,
+				type : 'post',
+	            success : function(data){
+	     				//
+	     				var json = eval(data);
+	     				if(json[0].res=='YES'){
+   	   						//
+   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+	   						
+	     				} else {
+	     					//
+	     					alert("<spring:message code="PROC.FAIL"/>");
+							return;	
+	     				}
+	            },
+	            error : function(data){
+	            	//
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+		}		
+	}
 </script>
 </head>
 <body id="main">
@@ -67,11 +99,17 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+									<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
+									<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
+									<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
+									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 									<input type="hidden" id="contId" name="contId" value="${param.contId}">
-									<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
+									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 		
 		                            <h2>사원 상세</h2><br>
 	                                <div class="post_write">
@@ -82,7 +120,7 @@
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
 	                                        			<c:when test="${not empty defaultList}">
-	                                        				<img class="emp_img" id="emp_img" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileOrglNm=${defaultList[0].fileOrglNm}">
+	                                        				<img class="emp_img" id="emp_img" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
 			                                        		<img class="emp_img" id="emp_img" width="100" height="100" src="resources/images/icon/icon_emp.png">
@@ -154,16 +192,17 @@
 										<div class="float_right">
 											<c:choose>
 												<c:when test="${defaultInfo.resiYn eq 'N'}">
-													<button type="button" class="btn_navy_thin" onclick="resiProc(this.form);">복직처리</button>
+													<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제</button>
+													<button type="button" class="btn_navy_thin" onclick="resiProc(this.form);">복직 처리</button>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="btn_blue_thin" onclick="modCall('${defaultInfo.empIdx}')">수정</button>
-													<button type="button" class="btn_gray_thin" onclick="resiProc(this.form);">퇴사처리</button>
+													<button type="button" class="btn_gray_thin" onclick="modCall('${defaultInfo.empIdx}')">수정</button>
+													<button type="button" class="btn_navy_thin" onclick="resiProc(this.form);">퇴사 처리</button>
 												</c:otherwise>
 											</c:choose>
 										</div>
 										<div class="float_left">
-											<button type="button" class="btn_navy_thin" onclick="listCall();">목록으로</button>
+											<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>
 										</div>
 									</div>
 		                        </div><!-- End post_wrap -->

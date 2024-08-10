@@ -19,25 +19,14 @@ public class TaskDao {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqyDao1010", paramMap);
-		
 		return defaultList;
 	}
 
-	// 업무일지 목록 건수 조회
-	public HashMap<String, Object> intrTaskInqyDao1020(Model model, HashMap<String, Object> paramMap) {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("task.intrTaskInqyDao1020", paramMap);
-
-		return defaultInfo;
-	}
-	
 	// 업무일지 삭제
 	public int intrTaskProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
 		resInt = sqlsession.delete("task.intrTaskProcDao1010", paramMap);
-		//
 		return resInt;
 	}
 	
@@ -46,8 +35,6 @@ public class TaskDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.insert("task.intrTaskProcDao1020", paramMap);
-		//
 		return resInt;
 	}
-
 }

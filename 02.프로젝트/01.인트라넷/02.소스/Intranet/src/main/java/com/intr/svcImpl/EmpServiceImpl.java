@@ -15,6 +15,7 @@ import com.intr.dao.EmpDao;
 import com.intr.dao.MainDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.EmpService;
+import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
@@ -31,6 +32,9 @@ public class EmpServiceImpl implements EmpService{
 	UtilDao utilDao;
 	
 	@Autowired
+	MainService mainService;
+	
+	@Autowired
 	UtilService utilService;
 	
 	@Autowired
@@ -43,45 +47,18 @@ public class EmpServiceImpl implements EmpService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.intrPageInqyService1010(model, paramMap);
+			//--------------------------------------------------------------------------------------------
 			// 사원 목록
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
-			
 			//--------------------------------------------------------------------------------------------
-			// 페이지 변수 저장
+			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("pageURL", "intrEmpInqy2010.do");
-			//
-			if(defaultList!=null && !defaultList.isEmpty()) {
-				paramMap.put("rowTotal", defaultList.get(0).get("listCnt"));
-			} else {
-				paramMap.put("rowTotal", "0");				
-			}
-
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 사원 목록 건수 조회
-	public void intrEmpInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 사원 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqyDao1020(model, paramMap);
-			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
-
-			//--------------------------------------------------------------------------------------------
-			// 페이지 (사원) 변수 처리
-			//--------------------------------------------------------------------------------------------
-			paramMap.put("pageURL","intrEmpInqy2010.do");
-
+			this.intrEmpInqyService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -97,9 +74,14 @@ public class EmpServiceImpl implements EmpService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
+			// 부서 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			this.intrEmpInqyService1050(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
 			// 사원 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqyDao1060(model, paramMap);
+			defaultInfo = empDao.intrEmpInqyDao1050(model, paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
@@ -125,7 +107,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 아이디 중복 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqyDao1050(model, paramMap);
+			defaultList = empDao.intrEmpInqyDao1040(model, paramMap);
 			//
 			if(defaultList.size()>0) {
 				resStr = "YES";
@@ -153,13 +135,13 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 부서 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqyDao1030(model, paramMap);
+			defaultList = empDao.intrEmpInqyDao1020(model, paramMap);
 			model.addAttribute("deptList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 직급 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqyDao1040(model, paramMap);
+			defaultList = empDao.intrEmpInqyDao1030(model, paramMap);
 			model.addAttribute("gradeList", defaultList);
 			
 		} catch (Exception e) {
@@ -177,7 +159,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqyDao1070(model);
+			defaultList = empDao.intrEmpInqyDao1060(model);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -187,7 +169,7 @@ public class EmpServiceImpl implements EmpService{
 	}
 
 	// 부서 사원 수 조회
-	public void intrEmpInqyService1070(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrEmpInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -195,7 +177,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqyDao1080(model, paramMap);
+			defaultList = empDao.intrEmpInqyDao1070(model, paramMap);
 			model.addAttribute("deptEmpList",defaultList);
 
 		} catch (Exception e) {
@@ -214,9 +196,9 @@ public class EmpServiceImpl implements EmpService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 시퀀스 채번 (사원)
+			// 사원 인덱스 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrMainInqyDao1030();
+			defaultInfo = empDao.intrEmpInqyDao1011(model, paramMap);
 			paramMap.put("contId", defaultInfo.get("contId"));
 
 			//--------------------------------------------------------------------------------------------
@@ -231,9 +213,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록
 			//--------------------------------------------------------------------------------------------
-			if(!request.getFiles("fileList").isEmpty()) {
-				resStr = utilService.intrFileProcService1010(model, paramMap, request);
-			}
+			resStr = utilService.intrFileProcService1010(model, paramMap, request);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -312,5 +292,34 @@ public class EmpServiceImpl implements EmpService{
 		
 		return defaultStr;
 	}
-
+	
+	// 사원 삭제
+	public String intrEmpProcService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 삭제
+			//--------------------------------------------------------------------------------------------
+			resInt = empDao.intrEmpProcDao1040(paramMap);
+			//
+			if(resInt>0) {
+				resStr = "YES";
+			}
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		
+		return defaultStr;
+	}
 }

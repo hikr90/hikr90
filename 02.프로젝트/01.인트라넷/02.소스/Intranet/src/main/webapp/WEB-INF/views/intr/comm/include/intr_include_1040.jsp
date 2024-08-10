@@ -3,12 +3,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<ul id="updUl">
+<ul id="fileUl">
 	<c:forEach var="list" items="${defaultList}" varStatus="status">
-		<li id="updLi${status.index}" class="${status.index != 0 ? 'nbsp' : ''}">
-			<input type="hidden" class="fileIdx" value="${list.fileIdx}">
-			<img src="resources/images/icon/icon_file.png" width="15" height="15" >
-			<a>${list.fileOrglNm}</a>
+		<li id="fileLi${status.index}">
+			<input type="hidden" id="fileIdx${status.index}" name="none${status.index}" value="${list.fileIdx}">
+			<img src="resources/images/icon/icon_file.png" width="20" height="20" >
+			<a onclick="fileDel('delete','${status.index}');"><span>${list.fileNm}</span></a>
 		</li>
 	</c:forEach>
 </ul>    

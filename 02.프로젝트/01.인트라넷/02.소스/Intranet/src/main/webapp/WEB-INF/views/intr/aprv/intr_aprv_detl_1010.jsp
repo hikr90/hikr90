@@ -18,10 +18,10 @@
 	}
 	
 	// 결재선 조회 팝업
-	function popCall(aprvIdx){
+	function popCall(contId){
 		//
 		var obj = new Object();
-		obj["contId"] = aprvIdx;
+		obj["contId"] = contId;
 		//		
 		ajaxPopup(obj,"1100","620","intrPopupInqy1032.do","");
 	}
@@ -99,10 +99,11 @@
 							<div id="sub_content">					
 								<div class="form_area">
 									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.aprvIdx}">
+									<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.contId}">
 									<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 											
 									<div class="post_wrap">
@@ -140,7 +141,7 @@
 												</dd>
 												<dt>결재선</dt>
 												<dd>
-				                            		<button type="button" class="btn_navy_thin" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</button>
+				                            		<button type="button" class="btn_navy_thin" onclick="popCall(${aprvDetInfo.contId});">결재선</button>
 												</dd>
 											</dl>
 											<dl>
@@ -152,7 +153,7 @@
 										</div>
 
 										<div class="btn_wrap">
-											<div class="float_left">
+											<div class="float_right">
 												<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>											
 											</div>
 

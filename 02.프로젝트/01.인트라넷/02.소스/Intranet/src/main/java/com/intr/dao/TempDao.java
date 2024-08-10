@@ -17,9 +17,9 @@ public class TempDao {
 	// 템플릿 목록 조회
 	public List<HashMap<String, Object>> intrTempInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
-		List<HashMap<String, Object>> defaulList = null;
-		defaulList = sqlsession.selectList("temp.intrTempInqyDao1010", paramMap);
-		return defaulList;
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("temp.intrTempInqyDao1010", paramMap);
+		return defaultList;
 	}
 	
 	// 템플릿 상세 조회
@@ -36,7 +36,6 @@ public class TempDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.insert("temp.intrTempProcDao1010", paramMap);
-		//
 		return resInt;
 	}
 	
@@ -45,7 +44,6 @@ public class TempDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.update("temp.intrTempProcDao1020", paramMap);
-		//
 		return resInt;
 	}
 	
@@ -53,7 +51,6 @@ public class TempDao {
 	public int intrTempProcDao1030(HashMap<String, Object> paramMap) {
 		int resInt = 0;
 		resInt = sqlsession.delete("temp.intrTempProcDao1030", paramMap);
-		//
 		return resInt;
 	}
 

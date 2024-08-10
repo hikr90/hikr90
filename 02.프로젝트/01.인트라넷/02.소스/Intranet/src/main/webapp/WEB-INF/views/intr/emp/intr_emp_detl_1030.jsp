@@ -18,8 +18,7 @@
 		if(!validation()){return;};
 		//
 		if(confirm("수정하시겠습니까?")){
-			// 
-			var fileList = setFileList(); // 파일 목록 세팅
+			var fileList = setFormData();
 			//
    			$.ajax({
 				url:"intrEmpProc1020.do",
@@ -33,7 +32,8 @@
    						if(json[0].res=='YES'){
    	   						//
    							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrEmpInqy1010.do";
+	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+	   						
    						}else{
    	   						//
    							alert("<spring:message code="PROC.FAIL"/>");
@@ -46,10 +46,6 @@
    				}
    			});
 			
-		} else {
-			//
-			$("#modCnt").val("0");
-			$("#fileArea").html("");
 		}
 	}	
 </script>
@@ -74,12 +70,14 @@
 						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
+									<input type="hidden" id="page" name="page" value="${param.page}">
+									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
+									<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
+									<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
+									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 									<input type="hidden" id="contId" name="contId" value="${param.contId}">
-									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
-									<input type="hidden" id="modCnt" name="modCnt" value="0">
+									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 		      						<input type="hidden" name="fileIdx" value="${defaultList[0].fileIdx}">
 								
 		                            <h2>사원 상세</h2><br>
@@ -91,7 +89,7 @@
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
 		                                        			<c:when test="${not empty defaultList}">
-		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileOrglNm=${defaultList[0].fileOrglNm}">
+		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
 		                                        			</c:when>
 		                                        			<c:otherwise>
 				                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
@@ -100,11 +98,12 @@
 		                                        	</div>
 	                                        	
 		                                        	<div class="profile_box mt10 ml20">
-		                                        		<br><span>사진을 등록해주세요.</span>
+		                                        		<br><span id="profText">사진을 등록해주세요.</span>
 			                                        	<div style="margin-top: 5px;">
-			                                        		<label for="profileImg" class="btn_blue">등록</label>
-															<input type="file" name="profileImg" id="profileImg">
-		                                        			<input type="button"class="btn_gray" id="delProfileImg" value="삭제">
+			                                        		<label for="profBtn" class="btn_blue">등록</label> 
+															<input type="file" id="profBtn">
+															<input type="hidden" id="profImg" name="profImg" value="">
+		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
 		                                        		</div>
 		                                        	</div>
 	                                        	</div>
@@ -123,13 +122,13 @@
 	                                    	<dt><label>부서</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${empty resultParam.deptNm ? '전체' : resultParam.deptNm}</div>
-													<input type="hidden" name="deptCd" value="${resultParam.deptCd}">
-													<input type="hidden" name="deptNm" value="${resultParam.deptNm}">
+													<div id="deptList" class="sList select_box">${defaultInfo.deptNm}</div>
+													<input type="hidden" name="setDeptCd" value="${defaultInfo.deptCd}">
+													<input type="hidden" name="setDeptNm" value="${defaultInfo.deptNm}">
 												
 													<ul class="sUl select_ul">
 														<c:forEach var="list" items="${deptList}">
-															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
+															<c:if test="${not empty list.deptCd}"><li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
@@ -138,13 +137,13 @@
 	                                        <dt><label>직급</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${empty resultParam.gradeNm ? '전체' : resultParam.gradeNm}</div>
-													<input type="hidden" name="gradeCd" value="${resultParam.gradeCd}">
-													<input type="hidden" name="gradeNm" value="${resultParam.gradeNm}">
+													<div id="gradeList" class="sList select_box">${defaultInfo.gradeNm}</div>
+													<input type="hidden" name="setGradeCd" value="${defaultInfo.gradeCd}">
+													<input type="hidden" name="setGradeNm" value="${defaultInfo.gradeNm}">
 												
 													<ul class="sUl select_ul">
 														<c:forEach var="list" items="${gradeList}">
-															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
+															<c:if test="${not empty list.gradeCd}"><li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>

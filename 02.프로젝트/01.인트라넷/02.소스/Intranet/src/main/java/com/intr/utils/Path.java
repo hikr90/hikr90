@@ -28,8 +28,8 @@ public class Path {
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String FILE_PATH = "upload/file"; 	// 파일
-	public static final String TEMP_PATH = "upload/temp"; 	// 임시
-	public static final String EMP_PATH  = "upload/emp"; 	// 프로필 이미지
+	public static final String FILE_PATH = "upload\\file"; 	// 파일
+	public static final String TEMP_PATH = "upload\\temp"; 	// 임시
+	public static final String EMP_PATH  = "upload\\emp"; 	// 프로필 이미지
 	
 }

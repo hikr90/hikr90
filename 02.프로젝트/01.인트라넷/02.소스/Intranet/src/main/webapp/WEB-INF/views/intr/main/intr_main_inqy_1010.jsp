@@ -8,7 +8,7 @@
 <html>
 <head></head>
 <body id="main">
-<form id="form" name="form" method="POST" onsubmit="return false;">
+<form id="form" method="POST" onsubmit="return false;">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
@@ -25,9 +25,9 @@
 									<h3>공지사항</h3><br>
 									<a href="javascript:formSubmit('intrBoardInqy2010.do')" class="btn_more">전체보기</a>
 									<ul>
-										<c:forEach var="list" items="${defaultList}" begin="0" end="4">
+										<c:forEach var="list" items="${boardList}" begin="0" end="4">
 											<li>
-												<a href="javascript:setContentIdx('${list.contId}','intrBoardInqy2020.do')">
+												<a href="javascript:formSubmit('intrBoardInqy2020.do?contId=${list.contId}&pageUrl=intrBoardInqy2010.do')">
 													${list.brdTitle}
 													<c:if test="${list.fileYn eq 'Y'}">
 														<img id="updImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
@@ -37,7 +37,7 @@
 												</a>
 											</li>
 										</c:forEach>
-										<c:if test="${empty defaultList}">
+										<c:if test="${empty boardList}">
 											등록된 공지사항이 없습니다.
 										</c:if>
 									</ul>
@@ -64,7 +64,7 @@
 									<ul>
 										<c:forEach var="list" items="${aprvReqList}" begin="0" end="4">
 											<li>
-												<a href="javascript:setContentIdx('${list.aprvIdx}','intrAprvInqy1030.do')">
+												<a href="javascript:formSubmit('intrAprvInqy1030.do?contId=${list.contId}')">
 													(${list.currStepNm}) ${list.aprvTitle}
 													<fmt:parseDate value="${list.aprvRegDt}" var="formatDt" pattern="yyyyMMdd"/>
 													<span class="date"><fmt:formatDate value="${formatDt}"  pattern="yyyy-MM-dd"/></span>
@@ -83,7 +83,7 @@
 									<ul>
 										<c:forEach var="list" items="${aprvRecList}" begin="0" end="4">
 											<li>
-												<a href="javascript:setContentIdx('${list.aprvIdx}','intrAprvInqy2020.do')">
+												<a href="javascript:formSubmit('intrAprvInqy2020.do?contId=${list.contId}')">
 													(${list.currStepNm}) ${list.aprvTitle}
 													<fmt:parseDate value="${list.aprvRegDt}" var="formatDt" pattern="yyyyMMdd"/>
 													<span class="date"><fmt:formatDate value="${formatDt}"  pattern="yyyy-MM-dd"/></span>

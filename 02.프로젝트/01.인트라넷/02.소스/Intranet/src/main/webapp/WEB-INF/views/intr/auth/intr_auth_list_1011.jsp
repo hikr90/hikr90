@@ -7,7 +7,7 @@
 		<c:forEach var="list" items="${defaultList}" varStatus="status">
 			<c:set var="spanIcon" value="icon_list" />
 
-			<li class="li_1"><span class="${spanIcon}"></span> 
+			<li class="li_1" style="margin-left: 15px;"><span class="${spanIcon}"></span> 
 			<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
 		</c:forEach>
 	</ul>

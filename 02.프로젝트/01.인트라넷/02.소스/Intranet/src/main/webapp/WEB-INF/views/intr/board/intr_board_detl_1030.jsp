@@ -4,15 +4,12 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
+	// 첨부파일 수
+	var fileCnt = "${defaultList.size()}" != null && "${defaultList.size()}" != "" ? "${defaultList.size()}" : 0;
+	
 	// 취소
 	function detCall() {
-		//
 		formSubmit('intrBoardInqy1030.do');
 	}
 	
@@ -20,12 +17,10 @@
 	function modProc(f){
 		// 유효성 검증
 		if(!validation()){return;};
-		setFileArea();	// 파일 영역 세팅
+		var fileList = setFormData();
 		//
 		if(confirm("수정하시겠습니까?")){
 			// 
-			var fileList = setFileList(); // 파일 목록 세팅
-			//
    			$.ajax({
 				url:"intrBoardProc1030.do",
 				processData : false,
@@ -38,7 +33,8 @@
    						if(json[0].res=='YES'){
    	   						//
    							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrBoardInqy1010.do";
+	   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
+	   						
    						}else if(json[0].res=='NO'){
    	   						//
    							alert("<spring:message code="PROC.FAIL"/>");
@@ -54,11 +50,6 @@
    					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
-			
-		} else {
-			//
-			$("#modCnt").val("0");
-			$("#fileArea").html("");
 		}
 	}	
 
@@ -85,12 +76,16 @@
 							<div class="content_area form_area">
 								<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
 								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
+								<input type="hidden" id="page" name="page" value="${param.page}">
+								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+								<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
+								<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
+								<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
+								<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-								<input type="hidden" id="modCnt" name="modCnt" value="0">
-								
-								<div id="fileArea"></div>
+								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
 								
 								<div class="post_wrap">
 									<h2>공지사항 수정</h2><br>
@@ -108,8 +103,8 @@
 											<dd>
 												<div class="file_box">
 													<label for="fileUpd">업로드</label>
+													<h4 class="file_text">파일을 클릭하여, 업로드 대상 포함 여부를 선택 가능합니다.</h4>
 													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
-													<input type="button"id="fileDel" class="btn_gray" name="fileDel" value="삭제">
 												</div>
 											</dd>
 										</dl>

@@ -9,7 +9,6 @@ public interface TaskService {
 	// 업무일지
 	void intrTaskInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception; // 업무 조회
 	void intrTaskInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception; // 업무 작성
-	void intrTaskInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception; // 페이징 건수 조회
 	
 	String intrTaskProcService1010(Model model, List<HashMap<String,Object>> paramList) throws Exception; // 등록
 

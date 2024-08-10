@@ -9,8 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface UtilService {
+	// 傍烹
+	boolean isNull(String param) throws Exception;
+	
 	// 其捞瘤
-	String intPageInqyService1010(HashMap<String, Object> paramMap) throws Exception; // 老馆
+	void intrPageInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception; // 其捞隆 贸府
+	String intrPageInqyService1020(HashMap<String, Object> paramMap) throws Exception; // 其捞隆 格废 积己
+	String intrPageInqyService1021(HashMap<String, Object> paramMap) throws Exception; // 其捞瘤 URL 积己
 	
 	// 颇老 版肺 积己
 	String intrFileInqyService1010(HashMap<String, Object> paramMap) throws Exception; // 老馆

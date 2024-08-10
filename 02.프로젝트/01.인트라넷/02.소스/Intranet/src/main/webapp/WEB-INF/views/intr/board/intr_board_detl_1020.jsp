@@ -4,20 +4,18 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
 	<script type="text/javascript">
+		// 첨부파일 수
+		var fileCnt = "${defaultList.size()}" != null && "${defaultList.size()}" != "" ? "${defaultList.size()}" : 0;
+		
 		// 공지사항 등록 처리
 		function regProc(f){
   			// 유효성 검증
 			if(!validation()){return;};
-			//
 			if(confirm("등록하시겠습니까?")){
-				var fileList = setFileList();
 				//
+				var fileList = setFormData();
 	   			$.ajax({
 					url:"intrBoardProc1010.do",
 					processData : false,
@@ -30,7 +28,8 @@
 	   						if(json[0].res=='YES'){
 	   	   						//
 	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrBoardInqy1010.do";
+		   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
+		   						
 	   						}else if(json[0].res=='NO'){
 	   	   						//
 	   							alert("<spring:message code="PROC.FAIL"/>");
@@ -55,6 +54,7 @@
 		}
 	</script>
 </head>
+
 <body id="main">
 <form id="form" method="POST" enctype="multipart/form-data">
 	<!-- 메뉴 -->
@@ -75,7 +75,10 @@
 					<div class="sub_content">					
 						<div class=" form_area">
 							<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
-							<input type="hidden" id="modCnt" name="modCnt" value="0">
+							<input type="hidden" id="page" name="page" value="${param.page}">
+							<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+							<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+							<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
 							
 							<div class="post_wrap">
 								<h2>공지사항 등록</h2><br>
@@ -97,8 +100,8 @@
 										<dd>
 											<div class="file_box">
 												<label for="fileUpd">업로드</label>
+												<h4 class="file_text">파일을 클릭하여, 업로드 대상 포함 여부를 선택 가능합니다.</h4>
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
-												<input type="button"id="fileDel" name="fileDel" class="btn_gray" value="삭제">
 											</div>
 										</dd>
 									</dl>

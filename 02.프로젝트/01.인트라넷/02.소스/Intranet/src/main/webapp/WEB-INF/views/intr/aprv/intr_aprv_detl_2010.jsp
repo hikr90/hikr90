@@ -18,10 +18,10 @@
 	}
 	
 	// 결재선 조회 팝업
-	function popCall(aprvIdx){
+	function popCall(contId){
 		//
 		var obj = new Object();
-		obj["contId"] = aprvIdx;
+		obj["contId"] = contId;
 		//		
 		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do","");
 	}
@@ -112,11 +112,12 @@
 						<div id="sub_content">					
 							<div class="content_area form_area">
 								<input type="hidden" id="page" name="page" value="${param.page}">
+								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-								<input type="hidden" id="currAprvSno" name="currAprvSno" value="${aprvDetInfo.currAprvSno}">
-								<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.aprvIdx}">
+								<input type="hidden" id="currContSid" name="currContSid" value="${aprvDetInfo.currContSid}">
+								<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.contId}">
 								<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx?aprvDetInfo.lastAprvYn:'N'}">
 								<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 							
@@ -155,31 +156,9 @@
 											</dd>
 											<dt>결재선</dt>
 											<dd>
-			                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.aprvIdx});">결재선</a> 
+			                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.contId});">결재선</a> 
 											</dd>
 										</dl>
-		
-										<c:if test="${not empty defaultList and defaultList ne ''}">
-										<dl class="post_file">
-											<dt>첨부파일</dt>
-											<dd class="post_file">
-												<div class="file_wrap">
-													<ul id="updUl"> 
-													<c:forEach var="list" items="${defaultList}">
-														<li>
-															<img src='resources/images/icon/icon_file.png' width="15" height="15" />
-															<a href="#" onclick="fileProc('${list.fileIdx}');">${list.fileOrglNm}</a>
-															<input type="hidden" id="fileIdx" name="fileIdx" value="${list.fileIdx}">
-														</li>
-													</c:forEach>
-													</ul>
-												</div>
-											</dd>
-											<dt><a class="_btn" onclick="zipProc();">전체 다운로드</a></dt>
-											<dd></dd>
-										</dl>
-										</c:if>
-		
 										<dl>
 											<dt>내용</dt>
 											<dd class="post_text">

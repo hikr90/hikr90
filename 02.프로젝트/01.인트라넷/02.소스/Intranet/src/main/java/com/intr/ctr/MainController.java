@@ -2,6 +2,7 @@ package com.intr.ctr;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,13 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.intr.dao.AprvDao;
+import com.intr.dao.BoardDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
 import com.intr.svc.BoardService;
@@ -48,6 +50,12 @@ public class MainController {
 	AuthService authService;
 	
 	@Autowired
+	BoardDao boardDao;
+	
+	@Autowired
+	AprvDao aprvDao;
+	
+	@Autowired
 	HttpSession session;
 	
 	// 
@@ -75,27 +83,36 @@ public class MainController {
 	@RequestMapping("/intrMainInqy1020.do")
 	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1030("0");
+			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 조회
 			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqyService1010(model, paramMap);
+			defaultList = boardDao.intrBoardInqyDao1010(model, paramMap);
+			model.addAttribute("boardList",defaultList);
+			
 			//--------------------------------------------------------------------------------------------
 			// 나의 기안 목록
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1040(model, paramMap);
+			defaultList = aprvDao.intrAprvInqyDao1060(model, paramMap);
+			model.addAttribute("aprvReqList",defaultList);
+			
 			//--------------------------------------------------------------------------------------------
 			// 나의 결재 목록
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1050(model, paramMap);
+			defaultList = aprvDao.intrAprvInqyDao1070(model, paramMap);
+			model.addAttribute("aprvRecList",defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -114,18 +131,22 @@ public class MainController {
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1030("1");
+
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 수 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1070(model, paramMap);
+			empService.intrEmpInqyService1020(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
 			tempService.intrTempInqyService1030(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
@@ -149,10 +170,12 @@ public class MainController {
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1030((String)paramMap.get("menuType"));
+			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 조회
 			//--------------------------------------------------------------------------------------------

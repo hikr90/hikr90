@@ -7,7 +7,7 @@
 		    F.FILE_IDX,
 		    F.CONT_ID,
 		    F.FILE_SNO, 
-		    F.FILE_ORGL_NM, 
+		    F.FILE_NM, 
 		    F.FILE_TYPE, 
 		    F.FILE_SIZE,
 		    F.USE_YN,
@@ -24,7 +24,7 @@
 		    F.FILE_IDX,
 		    F.CONT_ID, 
 		    F.FILE_SNO, 
-		    F.FILE_ORGL_NM, 
+		    F.FILE_NM, 
 		    F.FILE_TYPE, 
 		    F.FILE_SIZE, 
 		    F.USE_YN,
@@ -42,7 +42,7 @@
 				FILE_IDX
 			,	CONT_ID
 			,	FILE_SNO
-			,	FILE_ORGL_NM
+			,	FILE_NM
 			,	FILE_TYPE
 			,	FILE_SIZE
 			,	USE_YN
@@ -51,14 +51,14 @@
 		)
 		VALUES
 		(
-				'FILE_'||LPAD(SEQ_FILE_IDX.NEXTVAL,4,0)
+				(SELECT 'FILE_' || LPAD(NVL(MAX(REPLACE(FILE_IDX,'FILE_')),0) + 1,4,0) FROM INTR_FILE)
 			,	#{contId, jdbcType=VARCHAR}
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(FILE_SNO),0) + 1,4,0)
 					FROM INTR_FILE WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 				)
-			,	#{fileOrglNm, jdbcType=VARCHAR}
+			,	#{fileNm, jdbcType=VARCHAR}
 			,	#{fileType, jdbcType=VARCHAR}
 			,	#{fileSize, jdbcType=VARCHAR}
 			,	'Y'
@@ -72,22 +72,21 @@
 	</insert>
 	
 	<update id="intrFileProcDao1030" parameterType="java.util.HashMap">
-		/* intrFileProcDao1030 : 파일 데이터 수정 (CONT_ID N처리) */
-		UPDATE INTR_FILE F1
-			SET F1.USE_YN = 'N'
-		WHERE F1.CONT_ID = #{contId, jdbcType=VARCHAR}
+		/* intrFileProcDao1030 : 파일 삭제 처리 (FILE_IDX) */
+		UPDATE INTR_FILE F
+			SET F.USE_YN = 'N'
+		WHERE F.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
 	</update>
-
+	
 	<update id="intrFileProcDao1040" parameterType="java.util.HashMap">
-		/* intrFileProcDao1040 : 파일 데이터 수정 (FILE_IDX Y처리) */
-		UPDATE INTR_FILE F1
-			SET F1.USE_YN = 'Y'
-		WHERE F1.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
+		/* intrFileProcDao1040 : 파일 삭제 처리 (단건 CONT_ID) */
+		UPDATE INTR_FILE F
+			SET F.USE_YN = 'N'
+		WHERE F.CONT_ID = #{contId, jdbcType=VARCHAR}
 	</update>
-
 
 	<update id="intrFileProcDao1050" parameterType="java.util.HashMap">
-		/* intrFileProcDao1050 : 파일 데이터 삭제 */
+		/* intrFileProcDao1050 : 파일 삭제 처리 (다건 CONT_ID) */
 		UPDATE INTR_FILE
 			SET USE_YN = 'N'
 		WHERE CONT_ID IN

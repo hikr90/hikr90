@@ -37,11 +37,18 @@
 					<div class="content">
 						<div id="sub_content">					
 							<div class="form_area">
+								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
+								<input type="hidden" id="page" name="page" value="${param.page}">
+								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+								<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
+								<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
+								<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
+								<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
-							
+								
 								<div class="post_wrap">
 		                            <h2>공지사항 상세</h2><br>
 									<div class="post_view">
@@ -68,11 +75,11 @@
 											<dt>첨부파일</dt>
 											<dd class="post_file">
 												<div class="file_wrap">
-													<ul id="updUl"> 
+													<ul id="fileUl"> 
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
 														<li class="${status.index != 0 ? 'nbsp' : ''}">
 															<img src='resources/images/icon/icon_file.png' width="15" height="15"/>
-															<a href="#" onclick="fileProc('${list.fileIdx}');">${list.fileOrglNm}</a>
+															<a href="#" onclick="fileProc('${list.fileIdx}');">${list.fileNm}</a>
 															<input type="hidden" id="fileIdx" name="fileIdx" value="${list.fileIdx}">
 														</li>
 													</c:forEach>

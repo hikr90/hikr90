@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.dao.AprvDao;
 import com.intr.dao.MainDao;
 import com.intr.svc.AprvService;
+import com.intr.svc.MainService;
+import com.intr.svc.UtilService;
 import com.intr.utils.AprvLine;
 
 @Service
@@ -24,12 +26,22 @@ public class AprvServiceImpl implements AprvService{
 	@Autowired
 	MainDao mainDao;
 	
+	@Autowired
+	MainService mainService;
+	
+	@Autowired
+	UtilService utilService;
+	
 	// 기안 목록 조회
 	public void intrAprvInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
+			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.intrPageInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
@@ -53,7 +65,6 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvDao.intrAprvInqyDao1020(model, paramMap);
 			model.addAttribute("aprvDetInfo", defaultInfo);
-
 			//--------------------------------------------------------------------------------------------
 			// 현재 결재 정보 조회
 			//--------------------------------------------------------------------------------------------
@@ -73,6 +84,10 @@ public class AprvServiceImpl implements AprvService{
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
+			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.intrPageInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
@@ -226,10 +241,10 @@ public class AprvServiceImpl implements AprvService{
 			for(int i=0;i<aprvLine.length;i++) {
 				// 품의문 정보
 				tempMap = new HashMap<String, Object>();
-				tempMap.put("aprvIdx", (String)paramMap.get("contId"));			// 컨텐츠 IDX
+				tempMap.put("contId", (String)paramMap.get("contId"));			// 컨텐츠 IDX
 				tempMap.put("empIdx", (String)paramMap.get("empIdx"));				// EMP IDX
 				tempMap.put("tempCd", (String)paramMap.get("tempCd"));		// 템플릿 CD
-				tempMap.put("aprvSno", i + 1);										// 컨텐츠 SNO
+				tempMap.put("contSid", i + 1);										// 컨텐츠 SNO
 				tempMap.put("aprvTitle", (String)paramMap.get("aprvTitle"));		// 품의문 제목
 				tempMap.put("aprvCont", (String)paramMap.get("aprvCont"));	// 품의문 내용
 				tempMap.put("efctSdt", (String)paramMap.get("efctSdt"));			// 시행일자 (시작)
@@ -358,7 +373,7 @@ public class AprvServiceImpl implements AprvService{
 			// 결재 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvDao.intrAprvInqyDao1080(model, paramMap);
-			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
+			paramMap.put("listCnt", defaultInfo.get("listCnt"));
 
 		} catch (Exception e) {
 			//
@@ -375,8 +390,8 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 기안 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqyDao1090(model, paramMap);
-			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
+			defaultInfo = aprvDao.intrAprvInqyDao1080(model, paramMap);
+			paramMap.put("listCnt", defaultInfo.get("listCnt"));
 
 		} catch (Exception e) {
 			//

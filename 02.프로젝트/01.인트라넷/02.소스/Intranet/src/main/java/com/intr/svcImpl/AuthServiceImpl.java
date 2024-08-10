@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 
 import com.intr.dao.AuthDao;
 import com.intr.svc.AuthService;
+import com.intr.svc.MainService;
+import com.intr.svc.UtilService;
 
 @Service
 @Transactional
@@ -17,6 +19,12 @@ public class AuthServiceImpl implements AuthService{
 	//
 	@Autowired
 	AuthDao authDao;
+	
+	@Autowired
+	MainService mainService;
+	
+	@Autowired
+	UtilService utilService;
 	
 	public void intrAuthInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -42,7 +50,7 @@ public class AuthServiceImpl implements AuthService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 공통코드 상세 조회
+			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = authDao.intrAuthInqyDao1020(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);

@@ -69,8 +69,8 @@
 					<h3>LOGIN</h3>
 					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);" value="ADMIN">
 					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);" value="ADMIN">
-					<input type="button"class="login_btn" value="로그인" onclick="loginCall(this.form);">
-                       <input type="button"class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
+					<input type="button" class="login_btn" value="로그인" onclick="loginCall(this.form);">
+                    <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>
 					
 				<div class="auth_area">

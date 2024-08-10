@@ -100,14 +100,12 @@
 			// 에디터 내용 저장
 			var getData = CKEDITOR.instances.editor.getData();
 			document.getElementById("aprvCont").setAttribute('value',getData);
-			// 태그 내 변수 저장
-			var fileList = setFileList();
 			//
    			$.ajax({
 				url:"intrAprvProc1010.do",
 				processData : false,
 				contentType : false,
-				data: fileList,
+				data: null,
 				type : 'post',
    				success : function(data){
    						//
@@ -115,7 +113,8 @@
    						if(json[0].res=='YES'){
    	   						//
    							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrAprvInqy1010.do";
+	   						location.href = "intrAprvInqy1010.do?pageUrl=AprvInqy1010";
+	   						
    						}else{
    	   						//
    							alert("<spring:message code="PROC.FAIL"/>");

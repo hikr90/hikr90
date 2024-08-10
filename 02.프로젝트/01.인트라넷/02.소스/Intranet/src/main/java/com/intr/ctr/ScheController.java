@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.intr.svc.MainService;
-import com.intr.svc.EmpService;
 import com.intr.svc.ScheService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
@@ -24,9 +23,6 @@ public class ScheController {
 	
 	@Autowired
 	ScheService scheService;
-
-	@Autowired
-	EmpService empService;
 	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -43,15 +39,7 @@ public class ScheController {
 			//--------------------------------------------------------------------------------------------
 			// 일정 목록 조회
 			//--------------------------------------------------------------------------------------------
-			scheService.intrScheInqy1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
+			scheService.intrScheInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

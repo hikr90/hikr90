@@ -38,23 +38,23 @@ public class UtilDao {
 		return res;
 	}
 	
-	// 颇老 单捞磐 荐沥 (CONT_ID N贸府)
+	// 颇老 昏力 贸府 (FILE_IDX)
 	public int intrFileProcDao1030(HashMap<String, Object> paramMap) {
 		//
 		int res = 0;
 		res = sqlsession.update("util.intrFileProcDao1030", paramMap);
 		return res;
 	}
-
-	// 颇老 单捞磐 荐沥 (FILE_IDX Y贸府)
-	public int intrFileProcDao1040(HashMap<String, Object> tempMap) {
+	
+	// 颇老 昏力 贸府 (窜扒 CONT_ID)
+	public int intrFileProcDao1040(HashMap<String, Object> paramMap) {
 		//
 		int res = 0;
-		res = sqlsession.update("util.intrFileProcDao1040", tempMap);
+		res = sqlsession.update("util.intrFileProcDao1040", paramMap);
 		return res;
 	}
-	
-	// 颇老 单捞磐 昏力
+
+	// 颇老 昏力 贸府 (促扒 CONT_ID)
 	public int intrFileProcDao1050(HashMap<String, Object> tempMap) {
 		//
 		int res = 0;

@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.intr.dao.TaskDao;
+import com.intr.svc.EmpService;
+import com.intr.svc.MainService;
 import com.intr.svc.TaskService;
-import com.intr.vo.EmpVO;
+import com.intr.svc.UtilService;
 
 @Service
 @Transactional
@@ -23,9 +25,18 @@ public class TaskServiceImpl implements TaskService{
 	TaskDao taskDao;
 
 	@Autowired
+	MainService mainService;
+	
+	@Autowired
+	UtilService utilService;
+	
+	@Autowired
+	EmpService empService;
+	
+	@Autowired
 	HttpSession session;
 
-	// 업무일지 조회 화면
+	// 업무일지 작성 조회 화면
 	public void intrTaskInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
@@ -34,7 +45,6 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("empIdx", "");
 			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
@@ -44,48 +54,29 @@ public class TaskServiceImpl implements TaskService{
 		}
 	}
 	
-	// 업무일지 작성 화면
+	// 업무일지 목록 조회
 	public void intrTaskInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 파라미터 세팅
+			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			EmpVO empVo = (EmpVO)session.getAttribute("empVO");
-			paramMap.put("empIdx", empVo.getEmpIdx());
-
+			utilService.intrPageInqyService1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
+			paramMap.put("empIdx", null);
 			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
-
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 업무일지 목록 건수 조회
-	public void intrTaskInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 업무일지 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqyDao1020(model, paramMap);
-			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
-
-			//--------------------------------------------------------------------------------------------
-			// 페이지 (업무일지) 변수 처리
-			//--------------------------------------------------------------------------------------------
-			paramMap.put("pageURL","intrTaskInqy1010.do");
-
 			
+			//--------------------------------------------------------------------------------------------
+			// 부서 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqyService1050(model, paramMap);
+
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());

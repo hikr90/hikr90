@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.BoardService;
-import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
@@ -26,9 +25,6 @@ public class BoardController {
 	
 	@Autowired
 	MainService mainService;
-	
-	@Autowired
-	EmpService empService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,14 +42,6 @@ public class BoardController {
 			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
 			boardService.intrBoardInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -73,7 +61,7 @@ public class BoardController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
-
+			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 공지사항 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -95,7 +83,7 @@ public class BoardController {
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqyService1030(model, paramMap);
+			boardService.intrBoardInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -118,7 +106,7 @@ public class BoardController {
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqyService1030(model, paramMap);
+			boardService.intrBoardInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -138,26 +126,11 @@ public class BoardController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 공지사항 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqyService1020(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 페이징 처리
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1050(model, paramMap);
+
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
 			boardService.intrBoardInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -180,7 +153,7 @@ public class BoardController {
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
-			boardService.intrBoardInqyService1030(model, paramMap);
+			boardService.intrBoardInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//

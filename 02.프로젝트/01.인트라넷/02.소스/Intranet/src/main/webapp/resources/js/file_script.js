@@ -1,133 +1,111 @@
-var fileTemp	= []; // 업로드 파일
+var tempList = new Array();
 
-// 함수
 $(function() {
-	//
-	var fileCnt = 0;
-
-	// 업로드
+	/* ================== 첨부파일 ================== */
+	// 파일 업로드
 	$("#fileUpd").on('change', function() {
 		// 파일, 화면 내 파일 추가
 		var thisFiles = this.files; 
 		var fileStr = "";
-		// 파일 정보 추가
-		fileTemp.push(thisFiles[0]);
+		
+		// 임시 목록 추가
+		tempList.push(thisFiles[0]);
 
 		// 파일명, 파일 사이즈, 파일 확장자
 		var fileIdx = thisFiles[0].name.toString().indexOf(".");
-		var fileSize = (thisFiles[0].size/(1024*1024)).toFixed(2) + "MB";
+		var fileSize = (thisFiles[0].size/(1024*1024)).toFixed(2) + "Mb";
 		var fileTypeNm = thisFiles[0].name.toString().substring(fileIdx+1).toUpperCase();
 				
 		// 화면 내 파일 추가
-		fileStr += "<li id='updLi"+fileCnt+"'>";
-		fileStr += "	<input type='checkbox' class='_chkBox' name='checkIdx' value='"+fileCnt+"'/>";
-		fileStr += "	<img src='resources/images/icon/icon_file.png' style='padding: 0 7px 0 7px'/>";
-		fileStr += "	<a>"+thisFiles[0].name+"</a>";
+		fileStr += "<li id='fileLi" + fileCnt + "'>";
+		fileStr += "	<input type='hidden' id='fileIdx" + fileCnt + "' name='insert" + fileCnt + "' />";
+		fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
+		fileStr += "	<a onClick=\"fileDel('insert','" + fileCnt + "');\"><span>"+thisFiles[0].name+"</span></a>";
 		fileStr += "</li>";
 			
 		// 추가 후 초기화 
-		$("#updUl").append(fileStr);
-		fileStr = "";		
+		$("#fileUl").append(fileStr);
+		fileStr = "";
 		fileCnt++;
-	});	
-	
-	// 전체 체크 박스
-	$('.everyChk').click(function() {
-		if($(".everyChk").is(":checked")){
-			$("input[type=checkbox]").prop("checked", true);
-	    } else {
-	    	$("input[type=checkbox]").prop("checked", false);	
-	    }
-	});
-	
-	// 파일 삭제
-	$("#fileDel").on('click', function() {
-		// 체크된 항목이 없는 경우
-		if($("input[name='checkIdx']:checked").length==0){
-			alert("체크된 항목이 없습니다.");
-			return;
-		}
-		
-		// 삭제 값 처리
-		$("input[name='checkIdx']:checked").each(function(i){
-			// 배열 내 제거
-			var checkVal = $(this).val();
-			fileTemp.splice(checkVal,1);
-			// 화면 내 제거
-			var updLi = document.getElementById("updLi"+checkVal); 
-			updLi.remove();
-		});
-		
-		// 전체 체크 해제
-		$(".everyChk").prop("checked", false);
 	});
 
-	// 사원 이미지 변경
-	$("#profileImg").change(function(e) {
-		// 이미지 존재
+	/* ================== 프로필 ================== */
+	// 프로필 변경
+	$("#profBtn").change(function(e) {
 		if(this){
-			//
-			var imgFile = $(this).val();
+			var thisFiles = this.files; 
+			var profImg = $(this).val();
 			var isFileYn = /(\.png|\.jpg|\.jpeg)$/i;
+			tempList = [];
+			
 			// 유효성 검증
-			if(!imgFile.match(isFileYn)){
+			if(!profImg.match(isFileYn)){
 				alert("사진(png, jpg, jpeg) 파일만 업로드 가능합니다.");
 				return;
 			}
 			
-			// 업로드 이미지 처리
+			// 프로필 업로드 처리
 			var reader = new FileReader();
 			reader.readAsDataURL(e.target.files[0]); // 바이너리 데이터 읽기 (이벤트 발생한 태그 자체)
+
 			// 콜백 함수 동작
 			reader.onload = function(f) {
 				// 화면 상 처리
 				$("#empImg").attr("src",f.target.result); // 이미지 미리보기
-				$("#profileSpan").text(e.target.files[0].name); // 이미지 명칭 입력
-				// 파일 저장
-				fileTemp.push(e.target.files[0]);
+				$("#profText").text(e.target.files[0].name); // 이미지 명칭 입력
 			}
-			//
-			$("#modCnt").val("1");
+			
+			// 파일 목록 추가
+			tempList.push(thisFiles[0]);
 		}
 	});
 	
-	// 이미지 삭제
-	$("#delProfileImg").click(function() {
+	// 프로필 삭제
+	$("#profDel").click(function() {
 		// 화면 상 처리
-		$("#profileImg").val("");
 		$("#empImg").attr("src","resources/images/icon/icon_emp.png");
-		$("#profileSpan").text("사진을 등록해주세요.");
-		$("#modCnt").val("1");
-		
-		// 파일 삭제
-		fileTemp = [];
-	})
+		$("#profText").text("사진을 등록해주세요.");
+		tempList = [];
+	});
 });
+ 
+/* ================== 첨부파일 삭제 ================== */
+function fileDel(status, idx){
+	var name = $("#fileIdx" + idx).attr("name");
+	//
+	if(status=='insert'){
+		if(name.indexOf("insert")>-1){
+			$("#fileLi"+idx).find("span").css('text-decoration','line-through');
+			$("#fileIdx"+idx).attr("name", name.replace(status ,"none"));
+		} else {
+			$("#fileLi"+idx).find("span").css('text-decoration','');
+			$("#fileIdx"+idx).attr("name", name.replace("none", status));
+		}
+	} else {
+		if(name.indexOf("none")>-1){
+			$("#fileLi"+idx).find("span").css('text-decoration','line-through');
+			$("#fileIdx"+idx).attr("name", name.replace("none" , status));
+		} else {
+			$("#fileLi"+idx).find("span").css('text-decoration','');
+			$("#fileIdx"+idx).attr("name", name.replace(status, "none"));
+		}
+	}
+}
 
-// 업로드 목록 세팅
-function setFileList(){
+
+/* ================== 폼데이터 생성 ================== */
+function setFormData(){
 	var fileList = new FormData(document.getElementById("form"));
-	// 
-	for(var i=0;i<fileTemp.length;i++){
-		fileList.append("fileList",fileTemp[i]);
+	//
+	for(var i=0;i<tempList.length;i++){
+		fileList.append("fileList", tempList[i]);
 	}
 	//
 	return fileList;
 }
 
-// 업로드 영역 세팅
-function setFileArea(){
-	var fileStr = "";
-	//
-	$(".fileIdx").each(function(idx, item){
-		//
-		fileStr += "<input type='hidden' id='fileIdx"+idx+"' name='fileIdx"+idx+"' value='"+item.value+"'>";
-	});
-	//
-	$("#modCnt").val($(".fileIdx").length);
-	$("#fileArea").html(fileStr);
-}
 
+/* ================== 다운로드 ================== */
 // 단건 다운로드
 function fileProc(fileIdx){
 	formSubmit('intrFileProc1020.do?fileIdx='+fileIdx);

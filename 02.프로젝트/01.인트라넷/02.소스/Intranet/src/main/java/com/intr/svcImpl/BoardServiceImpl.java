@@ -16,6 +16,8 @@ import com.intr.dao.BoardDao;
 import com.intr.dao.MainDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.BoardService;
+import com.intr.svc.EmpService;
+import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
@@ -27,6 +29,12 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	BoardDao boardDao;
+	
+	@Autowired
+	MainService mainService;
+	
+	@Autowired
+	EmpService empService;
 	
 	@Autowired
 	UtilService utilService;
@@ -44,22 +52,21 @@ public class BoardServiceImpl implements BoardService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.intrPageInqyService1010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록
 			//--------------------------------------------------------------------------------------------
 			defaultList = boardDao.intrBoardInqyDao1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 페이지 변수 저장
+			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("pageURL", "intrBoardInqy2010.do");
-			//
-			if(defaultList!=null && !defaultList.isEmpty() && defaultList.size()!=0) {
-				paramMap.put("rowTotal", defaultList.get(0).get("listCnt"));
-			} else {
-				paramMap.put("rowTotal", "0");				
-			}
-
+			empService.intrEmpInqyService1050(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 조회수 세션 초기화
 			//--------------------------------------------------------------------------------------------
@@ -71,31 +78,8 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 
-	// 공지사항 목록 건수 조회
-	public void intrBoardInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 공지사항 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqyDao1020(model, paramMap);
-			paramMap.put("rowTotal", defaultInfo.get("listCnt"));
-
-			//--------------------------------------------------------------------------------------------
-			// 페이지 (공지사항) 변수 처리
-			//--------------------------------------------------------------------------------------------
-			paramMap.put("pageURL","intrBoardInqy2010.do");
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
 	// 공지사항 상세화면 조회
-	public void intrBoardInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrBoardInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -104,7 +88,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqyDao1030(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqyDao1020(model, paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
@@ -124,7 +108,6 @@ public class BoardServiceImpl implements BoardService{
 				session.setAttribute("readhit", "hit");
 			}
 
-			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
@@ -138,7 +121,6 @@ public class BoardServiceImpl implements BoardService{
 		String defaultStr = "";
 		String resStr = "NO";
 		int resInt = 0;
-		
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -150,13 +132,14 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqyDao1030(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqyDao1020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 등록
 			//--------------------------------------------------------------------------------------------
 			if(defaultInfo!=null) {
 				resStr = "EXISTS";
+				
 			} else {
 				// 등록
 				resInt = boardDao.intrBoardProcDao1010(paramMap);
@@ -169,9 +152,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록
 			//--------------------------------------------------------------------------------------------
-			if(!request.getFiles("fileList").isEmpty()) {
-				resStr = utilService.intrFileProcService1010(model, paramMap, request);
-			}
+			resStr = utilService.intrFileProcService1010(model, paramMap, request);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환

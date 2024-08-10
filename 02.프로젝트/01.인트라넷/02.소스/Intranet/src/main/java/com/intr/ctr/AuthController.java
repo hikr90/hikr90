@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.AuthService;
 import com.intr.svc.MainService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -21,7 +22,10 @@ public class AuthController {
 	//
 	@Autowired
 	MainService mainService;
-	
+
+	@Autowired
+	UtilService utilService;
+
 	@Autowired
 	AuthService authService;
 
@@ -41,10 +45,6 @@ public class AuthController {
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
 			authService.intrAuthInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -67,10 +67,6 @@ public class AuthController {
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
 			authService.intrAuthInqyService1010(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -159,10 +155,6 @@ public class AuthController {
 			// 메뉴 목록 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1020(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -185,10 +177,6 @@ public class AuthController {
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
 			authService.intrAuthInqyService1030(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -215,10 +203,6 @@ public class AuthController {
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
 			authService.intrAuthInqyService1040(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -245,10 +229,6 @@ public class AuthController {
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
 			authService.intrAuthInqyService1050(model, paramMap);
-			//--------------------------------------------------------------------------------------------
-			// 검색 조건 저장
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1060(model, paramMap);
 			
 		} catch (Exception e) {
 			//

@@ -93,7 +93,7 @@ public class AprvDao {
 		return resInt;
 	}
 
-	// CURR_APRV_SNO 현 단계로 처리
+	// CURR_CONT_SID 현 단계로 처리
 	public int intrAprvProcDao1040(Model model, HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -133,19 +133,11 @@ public class AprvDao {
 		return resInt;
 	}
 	
-	// 결재 목록 건수 조회
+	// 기안 목록 건수 조회
 	public HashMap<String, Object> intrAprvInqyDao1080(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqyDao1080", paramMap);
-		return defaultInfo;
-	}
-
-	// 기안 목록 건수 조회
-	public HashMap<String, Object> intrAprvInqyDao1090(Model model, HashMap<String, Object> paramMap) {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqyDao1090", paramMap);
 		return defaultInfo;
 	}
 }

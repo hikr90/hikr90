@@ -54,7 +54,7 @@
    					if(json[0].res=="YES"){
    	   					//
    						alert("<spring:message code="PROC.SUCCESS"/>");
-   	   					location.href="intrBoardInqy1010.do";
+   	   					location.href="intrBoardInqy1010.do?pageUrl=Board";
    	   					
    					} else {
    						//
@@ -92,25 +92,33 @@
 								<div class="form_area">
 									<div class="post_wrap">
 										<input type="hidden" id="contId" name="contId" value="">
+										<input type="hidden" id="page" name="page" value="${param.page}">
+										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 			
-										<h2>공지사항 관리</h2><br>
+										<h2>공지사항 관리
+											<span class="float_right">
+												<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
+												<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
+											</span>
+										</h2><br>
+										
 										<div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 작성일자 -->
 												<div class="srch_area">
 													<label class="srch_label">작성일자</label>
-													<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${resultParam.srchSdt}" readonly="readonly" />
+													<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
 													~
-													<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${resultParam.srchEdt}" readonly="readonly"/>
+													<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
 												
 												<!-- 부서 -->
 												<div class="srch_area">
 													<label class="srch_label">부서</label>
 													<div class="select_wrap">
-														<div id="deptList" class="sList select_box">${empty resultParam.deptNm ? '전체' : resultParam.deptNm}</div>
-														<input type="hidden" name="deptCd" value="${resultParam.deptCd}">
-														<input type="hidden" name="deptNm" value="${resultParam.deptNm}">
+														<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
+														<input type="hidden" name="deptCd" value="${param.deptCd}">
+														<input type="hidden" name="deptNm" value="${param.deptNm}">
 													
 														<ul class="sUl select_ul">
 															<c:forEach var="list" items="${deptList}">
@@ -124,9 +132,9 @@
 												<div class="srch_area">
 													<label class="srch_label">직급</label>
 													<div class="select_wrap">
-														<div id="gradeList" class="sList select_box">${empty resultParam.gradeNm ? '전체' : resultParam.gradeNm}</div>
-														<input type="hidden" name="gradeCd" value="${resultParam.gradeCd}">
-														<input type="hidden" name="gradeNm" value="${resultParam.gradeNm}">
+														<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
+														<input type="hidden" name="gradeCd" value="${param.gradeCd}">
+														<input type="hidden" name="gradeNm" value="${param.gradeNm}">
 													
 														<ul class="sUl select_ul">
 															<c:forEach var="list" items="${gradeList}">
@@ -140,9 +148,10 @@
 												<div class="float_right">
 													<div class="srch_area">
 														<label class="srch_label">제목</label>
-														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 													
 														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>
@@ -163,7 +172,7 @@
 													<tr>
 														<th scope="col">
 															<span class="check_box">
-																<input type="checkbox" class="checkbox everyChk"> 
+																<input type="checkbox" class="check_box everyChk"> 
 																<label for="check_label"><span class="check_label"></span></label>
 															</span>
 														</th>
@@ -179,7 +188,7 @@
 													<tr>
 														<td class="first_td">
 					                                       <span class="check_box">
-																<input type="checkbox" class="checkbox delIdx" id="delIdx${status.index}" value="${list.contId}"> 
+																<input type="checkbox"  name="checkBox" class="check_box delIdx" id="delIdx${status.index}" value="${list.contId}"> 
 																<label for="check_label"><span></span></label>
 															</span>
 														</td>
@@ -221,12 +230,7 @@
 													</ul>
 												</div><!-- End paging_wrap -->
 											</c:if>
-											
-											<div class="float_right pt10 disp_inline">
-												<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
-												<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
-											</div>
-										</div><div class="scroll_area"></div>
+										</div>
 									</div><!-- End post_wrap -->
 								</div><!-- End form_area -->
 							</div><!-- End sub_content -->

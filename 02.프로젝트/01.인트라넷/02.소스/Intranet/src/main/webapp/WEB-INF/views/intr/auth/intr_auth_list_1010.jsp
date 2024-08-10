@@ -219,22 +219,24 @@
 								<input type="hidden" id="authCd" name="authCd" value="0">
 								<input type="button"class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>권한 관리</h2><br>
+									<h2>권한 관리
+										<span class="float_right">
+											<input type="button"class="btn_navy_thin" value="등록" onclick="regCall();">
+										</span>
+									</h2><br>
+									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">
 											<!-- 제목 -->
 											<div class="srch_area">
 												<label class="srch_label">제목</label>		
-												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultParam.srchNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 											
 												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 											</div>
 										</div>
 		                            </div>
-									
-									<div class="pb10">
-										<input type="button"class="btn_navy_thin" value="등록" onclick="regCall();">
-									</div>
 									
 									<div class="tree_wrap">
 										<div class="tree_area" id="tree_area"> 
@@ -243,7 +245,7 @@
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 			
-														<li class="li_1">
+														<li class="li_1" style="margin-left: 15px;">
 														<span class="${spanIcon}"></span>
 														<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
 													</c:forEach>
