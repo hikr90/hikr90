@@ -29,6 +29,8 @@
 
 /* ================== Pop ================== */
 .pop_area { background: #fff; }
+.pop_area .sub_article { border: 1px solid #f6f6f6; }
+
 .pop_area .srch_wrap { margin: 0px !important; padding-bottom: 0px !important; }
 .pop_area .find_temp_wrap .srch_wrap { padding: 10px !important; padding-bottom: 0px !important; }
 .pop_area .find_temp_wrap .srch_area { margin: 0px; }

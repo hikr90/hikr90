@@ -2,6 +2,7 @@ package com.intr.svc;
 
 import java.util.HashMap;
 
+import org.json.simple.JSONObject;
 import org.springframework.ui.Model;
 
 public interface ScheService {

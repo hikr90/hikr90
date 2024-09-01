@@ -26,7 +26,6 @@ public class TaskController {
 	
 	@Autowired
 	MainService mainService;
-
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -39,6 +38,7 @@ public class TaskController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 작성 조회
 			//--------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ public class TaskController {
 		return Path.VIEW_PATH_TASK + Jsp.INTR_TASK_LIST_1010;
 	}
 	
-	// 업무일지 목록 조회 화면
+	// 업무일지 목록 (관리자) 조회 화면
 	@RequestMapping("/intrTaskInqy2010.do")
 	public String intrTaskInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -62,8 +62,9 @@ public class TaskController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			mainService.intrMainInqyService1010(model, paramMap);
+
 			//--------------------------------------------------------------------------------------------
-			// 업무일지 목록 화면 조회
+			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
 			taskService.intrTaskInqyService1020(model, paramMap);
 			
@@ -71,7 +72,6 @@ public class TaskController {
 			//
 			logger.debug("Exception : 업무일지 목록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-		
 		//
 		return Path.VIEW_PATH_TASK + Jsp.INTR_TASK_LIST_2010;
 	}

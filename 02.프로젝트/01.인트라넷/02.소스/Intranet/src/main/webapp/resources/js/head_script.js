@@ -64,6 +64,7 @@ function initCall(){
 function formSubmit(mappingId){
 	//
 	var f = document.getElementById('form');
+	f.append("empIdx","${empVO.empIdx}");
 	f.action = mappingId;
 	f.submit();
 }

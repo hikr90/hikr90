@@ -11,10 +11,10 @@
 				<div class="form_area">
                 	<div class="find_info_wrap">
                     	<div class="post_wrap">
-                        	<div id="post_con"></div>
+                        	<div id="postCon1"></div>
                                
 							<div class="btn_center">
-                            	<input type="button"class="_btn _grey" value="확인" onclick="aprvProc();">
+                            	<input type="button"class="_btn btn_navy" value="확인" onclick="aprvProc();">
 								<input type="button"class="_btn btn_gray" value="취소" onclick="popClose('popupArea1');">
  							</div>
 						</div><!-- End post_wrap -->

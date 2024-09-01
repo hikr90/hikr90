@@ -14,7 +14,7 @@ public class TaskDao {
 	@Autowired
 	SqlSession sqlsession;
 	
-	// 업무일지 목록 조회
+	// 업무일지 작성 조회
 	public List<HashMap<String, Object>> intrTaskInqyDao1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
@@ -22,6 +22,14 @@ public class TaskDao {
 		return defaultList;
 	}
 
+	// 업무일지 목록 조회
+	public List<HashMap<String, Object>> intrTaskInqyDao1020(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("task.intrTaskInqyDao1020", paramMap);
+		return defaultList;
+	}
+	
 	// 업무일지 삭제
 	public int intrTaskProcDao1010(HashMap<String, Object> paramMap) {
 		//

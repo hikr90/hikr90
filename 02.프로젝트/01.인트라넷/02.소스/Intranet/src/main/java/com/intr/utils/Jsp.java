@@ -34,7 +34,7 @@ public class Jsp {
 
 	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";	// 결재의견 관리
 	public static final String INTR_POPUP_INQY_2011 = "intr_popup_inqy_2011.jsp";	// 결재의견 입력
-	
+
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------

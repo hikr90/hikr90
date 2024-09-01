@@ -2,29 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="aprv">
 	<resultMap type="HashMap" id="getAprvInfo">
-		<result property="contId" 		column="CONT_ID"/>
-		<result property="contSid" 		column="CONT_SID"/>
+		<result property="contId" 			column="CONT_ID"/>
+		<result property="contSid" 			column="CONT_SID"/>
 		<result property="currContSid"	column="CURR_CONT_SID"/>
-		<result property="aprvTitle" 	column="APRV_TITLE"/>
-		<result property="tempCd" 	column="TEMP_CD"/>
-		<result property="regDt" 		column="REG_DT"/>
-		<result property="regTm" 		column="REG_TM"/>
-		<result property="stepCd" 		column="STEP_CD"/>
-		<result property="stepNm" 		column="STEP_NM"/>
-		<result property="empIdx" 		column="EMP_IDX"/>
-		<result property="lastAprvYn" 	column="LAST_APRV_YN"/>
+		<result property="aprvTitle" 		column="APRV_TITLE"/>
+		<result property="tempCd" 			column="TEMP_CD"/>
+		<result property="regDt" 				column="REG_DT"/>
+		<result property="regTm" 			column="REG_TM"/>
+		<result property="stepCd" 			column="STEP_CD"/>
+		<result property="stepNm" 			column="STEP_NM"/>
+		<result property="empIdx" 			column="EMP_IDX"/>
+		<result property="lastAprvYn" 		column="LAST_APRV_YN"/>
 		<result property="aprvEmpIdx" 	column="APRV_EMP_IDX"/>
-		<result property="aprvRsltDt" 	column="APRV_RSLT_DT"/>
+		<result property="aprvRsltDt" 		column="APRV_RSLT_DT"/>
 		<result property="aprvRsltTm" 	column="APRV_RSLT_TM"/>
-		<result property="empNm" 		column="EMP_NM"/>
-		<result property="deptCd" 		column="DEPT_CD"/>
-		<result property="deptNm" 		column="DEPT_NM"/>
+		<result property="empNm" 			column="EMP_NM"/>
+		<result property="deptCd" 			column="DEPT_CD"/>
+		<result property="deptNm" 			column="DEPT_NM"/>
 		<result property="currStepNm" 	column="CURR_STEP_NM"/>
-		<result property="efctSdt" 		column="EFCT_SDT"/>
-		<result property="efctEdt" 		column="EFCT_EDT"/>
-		<result property="aprvCont" 	column="APRV_CONT" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="efctSdt" 			column="EFCT_SDT"/>
+		<result property="efctEdt" 			column="EFCT_EDT"/>
+		<result property="aprvCont" 		column="APRV_CONT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
-
+	
 	<select id="intrAprvInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqyDao1010 : 기안 목록 조회 */
 		SELECT 
@@ -638,4 +638,21 @@
 		WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 			AND CONT_SID = #{currContSid, jdbcType=VARCHAR}
 	</update>
+	
+		<select id="intrAprvInqyDao1090" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
+		/* intrAprvInqyDao1090 : 기안문 상세 조회 */
+		SELECT
+					APRV.CONT_ID
+				,	APRV.APRV_CONT
+				,	EMP.EMP_IDX
+				,	EMP.EMP_NM
+				,	APRV.APRV_TITLE
+				,	APRV.APRV_CONT
+				,	APRV.EFCT_SDT
+				,	APRV.EFCT_EDT
+		FROM INTR_APRV APRV
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON EMP.EMP_IDX = APRV.EMP_IDX
+		WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
+	</select>
 </mapper>

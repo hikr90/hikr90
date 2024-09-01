@@ -36,7 +36,7 @@
 					<c:forEach var="list" items="${menuList}" varStatus="status">
 						<c:if test="${list.lv eq 1}">
 							<li class="li_1">
-								<a class="a_1" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}">${list.menuNm}</a>
+								<a class="a_1" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
 							</li>
 						</c:if>
 					</c:forEach>

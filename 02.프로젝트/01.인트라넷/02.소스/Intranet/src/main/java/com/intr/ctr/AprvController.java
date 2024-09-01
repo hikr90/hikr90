@@ -200,7 +200,7 @@ public class AprvController {
 	// 기안문 등록 처리
 	@RequestMapping("/intrAprvProc1010.do")
 	@ResponseBody
-	public String intrAprvProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrAprvProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) {
 		//
 		String defaultStr = "";
 		//
@@ -208,7 +208,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 기안문 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProcService1010(model, paramMap, request);
+			defaultStr = aprvService.intrAprvProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

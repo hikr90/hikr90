@@ -21,15 +21,15 @@
 			<input type="hidden" class="tempCd" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
 		</dd>
 		<dt>
-			<label for="post-title">사용여부</label>
+			<label for="post-title">일정 등록 여부</label>
 		</dt>
 		<dd>
 			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked</c:if>> 
+					<input type="radio" id="chk-yes" name="calendarYn" value="Y" <c:if test="${defaultInfo.calendarYn eq 'Y'}">checked</c:if>> 
 					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn ne 'Y'}">checked</c:if>> 
+					<input type="radio" id="chk-no" name="calendarYn" value="N" <c:if test="${defaultInfo.calendarYn ne 'Y'}">checked</c:if>> 
 					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>

@@ -19,15 +19,15 @@
 			<input type="text" id="tempNm" class="tempNm" title="템플릿명" name="tempNm">
 		</dd>
 		<dt>
-			<label>사용여부</label>
+			<label>일정 등록 여부</label>
 		</dt>
 		<dd class="sel_2part">
 			<div class="radio_box enter-check_box">
 				<span class="radio-area"> 
-					<input type="radio" id=""chk-yes"" name="useYn" checked="checked" value="Y"> 
+					<input type="radio" id=""chk-yes"" name="calendarYn" checked="checked" value="Y"> 
 					<label for="chk-yes">예<span></span></label>
 					
-					<input type="radio" id="chk-no" name="useYn" value="N"> 
+					<input type="radio" id="chk-no" name="calendarYn" value="N"> 
 					<label for="chk-no" class="ml10">아니오<span></span></label>
 				</span> 
 			</div>

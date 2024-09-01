@@ -68,8 +68,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("empIdx", null);
-			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
+			defaultList = taskDao.intrTaskInqyDao1020(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------

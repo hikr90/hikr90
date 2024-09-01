@@ -2,6 +2,7 @@ package com.intr.svcImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -137,7 +138,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 기안문 등록
-	public String intrAprvProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String intrAprvProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";

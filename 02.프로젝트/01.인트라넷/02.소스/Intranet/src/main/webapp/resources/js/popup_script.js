@@ -7,8 +7,7 @@ function ajaxPopup(obj, width, height, mappingId, i){
 	popupArea.css({
 		 //
 		 position:	'fixed'	,																// 포지션
-		 boxShadow:	'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'	,	// 그림자 속성
-         zIndex: zIndex + 1	,																// Z-INDEX (백그라운드 레이어보다 위)
+         zIndex: zIndex + 1	,															// Z-INDEX (백그라운드 레이어보다 위)
          top:	'47%'	,
          left: 	'50%'	,
          width:	  width+'px' ,

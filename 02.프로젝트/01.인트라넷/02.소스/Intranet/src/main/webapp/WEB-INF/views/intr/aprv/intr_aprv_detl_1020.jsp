@@ -14,7 +14,7 @@
 	<script>
 		$(document).ready(function() {
 			// 에디터
-			CKEDITOR.replace('editor',{ height: 800});
+			CKEDITOR.replace('editor', {height: 800});
 			
 			// 기본 결재선 등록
 			setAprvLine();
@@ -70,7 +70,7 @@
 		
 		// 결재선 기본 등록
 		function setAprvLine(){
-			$("#aprvLine").val("${empVO.empIdx}@STAT_0002|");
+			$("#aprvLine").val("${empVO.empIdx}" + "@" + "STEP_0002" + "|");
 		}
 		
 		// 취소
@@ -121,17 +121,23 @@
 											
 											<dt>시행일자</dt>
 											<dd>
-												<input type="text" id="srchSdt" class="srch_cdt_date width20" name="efctSdt" title="시행일자" readonly="readonly"/>
+												<input type="text" id="srchSdt" class="srch_cdt_date width30" name="efctSdt" title="시행일자" readonly="readonly"/>
 												~
-												<input type="text" id="srchEdt" class="srch_cdt_date width20" name="efctEdt" title="시행일자" readonly="readonly"/>
+												<input type="text" id="srchEdt" class="srch_cdt_date width30" name="efctEdt" title="시행일자" readonly="readonly"/>
 											</dd>
+											
+											<dt>일정 등록 여부</dt>
+											<dd>${defaultInfo.calendarYn}</dd>
 										</dl>
 										<dl class="post_info">
 											<dt>부서</dt>
 											<dd>${empVO.deptNm}</dd>
+											
+											<dt>직급</dt>
+											<dd>${empVO.gradeNm}</dd>
 
 											<dt>작성자</dt>
-											<dd>${empVO.empNm} ${empVO.gradeNm}</dd>
+											<dd>${empVO.empNm}</dd>
 										</dl>
 										<dl>
 											<dt><label for="post_text">내용</label></dt>

@@ -100,12 +100,11 @@
 			// 에디터 내용 저장
 			var getData = CKEDITOR.instances.editor.getData();
 			document.getElementById("aprvCont").setAttribute('value',getData);
+   			var param = $("#form").serialize();
 			//
-   			$.ajax({
+			$.ajax({
 				url:"intrAprvProc1010.do",
-				processData : false,
-				contentType : false,
-				data: null,
+				data: param,
 				type : 'post',
    				success : function(data){
    						//
@@ -113,7 +112,7 @@
    						if(json[0].res=='YES'){
    	   						//
    							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrAprvInqy1010.do?pageUrl=AprvInqy1010";
+	   						location.href = "intrAprvInqy1010.do?pageUrl=AprvInqy1010&empIdx=${empVO.empIdx}";
 	   						
    						}else{
    	   						//

@@ -15,7 +15,7 @@
 						</c:when>
 						<c:otherwise>
 							&nbsp;&nbsp;ㄴ
-							<a class="a_title ${menuSet eq list.menuCd ? 'list_bg bold' : ''}" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}">${list.menuNm}</a>
+							<a class="a_title ${menuSet eq list.menuCd ? 'list_bg bold' : ''}" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
 						</c:otherwise>
 					</c:choose>
 				</td>

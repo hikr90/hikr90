@@ -31,8 +31,9 @@
 		// 결재 (0), 반송 (1), 취소(2)		
 		$("#aprvGb").val(aprvGb);
 		//
-		var param = $("#form").serialize();
 		if(confirm("진행하시겠습니까?")){
+			var param = $("#form").serialize();
+
 			$.ajax({
 		    	type : 'post',
 		    	url : "intrAprvProc1020.do",

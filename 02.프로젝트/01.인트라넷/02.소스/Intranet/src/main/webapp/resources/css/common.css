@@ -18,7 +18,6 @@ summary, time, mark, audio, video
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 
-
 /* ================== Default Property ================== */
 html, body{ height: 100% ; padding: 0px; margin: 0px; }
 body { font-size: 1.4rem; color: #727272; letter-spacing: -0.5px; }
@@ -233,7 +232,7 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 
 /* ================== Sub Article ================== */
 .wrap { width: 920px; box-sizing: border-box; margin: 0 auto; }
-.sub_article { height: 100%; overflow: hidden; background-color: #fff; position: relative; padding: 35px 25px 30px; }
+.sub_article { height: 100%; overflow: hidden; background-color: #fff; position: relative; padding: 35px 25px 35px; }
 .sub_article h2 {float: left; color: #214b97; font-size: 2.4rem; font-weight: 700;}
 
 

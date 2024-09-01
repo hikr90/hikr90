@@ -11,9 +11,10 @@
 		    	,	DEPT.DEPT_NM
 		    	,	GRADE.GRADE_CD
 		    	,	GRADE.GRADE_NM
-		    	,	'[연차] '||DEPT.DEPT_NM||' '||EMP.EMP_NM || APRV.APRV_TITLE AS TITLE
+		    	,	'[연차] '||DEPT.DEPT_NM||' '||EMP.EMP_NM || APRV.APRV_TITLE AS "TITLE"
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
 		    	,	TO_CHAR(TO_DATE(APRV.EFCT_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
+		    	,	APRV.CONT_ID AS "ID"
 		    	,	APRV.USE_YN
 		    	,	APRV.DISP_ORDER
 		    	,	APRV.REMARK

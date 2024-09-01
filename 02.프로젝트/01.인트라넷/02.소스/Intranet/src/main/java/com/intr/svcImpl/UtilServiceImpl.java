@@ -2,10 +2,14 @@ package com.intr.svcImpl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +17,7 @@ import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +39,7 @@ import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
 import com.intr.utils.Paging;
 import com.intr.utils.Path;
+import com.intr.utils.RestAPI;
 
 @Service
 @Transactional
@@ -756,6 +762,59 @@ public class UtilServiceImpl implements UtilService{
 		//
 		pageUrl = sb.substring(0, sb.length() -1).toString();
 		return pageUrl;
+	}
+	
+	// (REST) 기안문 조회
+	public JSONObject intrRestInqyService1010(HashMap<String, Object> paramMap) throws Exception {
+		//
+		int responseCode = 0;
+		JSONObject jObj = new JSONObject();
+		StringBuilder sb = new StringBuilder();
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 기안문 조회
+			//--------------------------------------------------------------------------------------------
+			// 요청 URL
+			String url = RestAPI.REST_URL;
+			
+			// URL 객체 생성
+			URL obj = new URL(url);
+			HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+			
+			// 설정 세팅
+			conn.setRequestMethod("GET");
+			
+			// 응답
+			responseCode = conn.getResponseCode();
+
+			logger.debug("[URL] : "+url);
+			logger.debug("[RESPONSE CODE] : "+responseCode);
+
+			// 정상 처리
+			if(responseCode == HttpURLConnection.HTTP_OK) {
+				//
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+				String line;
+				//
+				while ((line = br.readLine()) != null) {
+					sb.append(line).append("\n");
+				}
+				
+				//
+				br.close();
+				conn.disconnect();
+				
+			} else {
+				logger.debug("[ERROR] : "+conn.getResponseMessage());
+			}
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		
+		return jObj;
 	}
 	
 	// Null 체크

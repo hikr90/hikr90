@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="temp">
 	<resultMap type="HashMap" id="getTempInfo">
-		<result property="tempCd" column="TEMP_CD"/>
-		<result property="tempNm" column="TEMP_NM"/>
-		<result property="useYn" column="USE_YN"/>
-		<result property="tempCont" column="TEMP_CONT" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="tempCd" 			column="TEMP_CD"/>
+		<result property="tempNm" 			column="TEMP_NM"/>
+		<result property="calendarYn" 	column="CALENDAR_YN"/>
+		<result property="tempCont" 		column="TEMP_CONT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 
 	<select id="intrTempInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -13,16 +13,13 @@
 		SELECT 
 				TMP.TEMP_CD
 	        ,   TMP.TEMP_NM
-	        ,   TMP.USE_YN
+	        ,   TMP.CALENDAR_YN
 	        ,   TMP.DISP_ORDER
 	        ,   TMP.REMARK
 	        ,	'1' AS LV
 	        ,	'Y' AS ISLEAF
 		FROM INTR_TEMPLATE TMP
 		WHERE 1=1
-			<if test="srchNm != null and srchNm != ''">
-				AND REGEXP_REPLACE(LOWER(TMP.TEMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-	    	</if>
 	</select>
 	
 	<select id="intrTempInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getTempInfo">
@@ -31,7 +28,7 @@
 				TMP.TEMP_CD
 	        ,   TMP.TEMP_NM
 	        ,	TMP.TEMP_CONT
-	        ,	TMP.USE_YN
+	        ,	TMP.CALENDAR_YN
 		FROM INTR_TEMPLATE TMP
 		WHERE 1=1
 			AND TMP.TEMP_CD = #{tempCd, jdbcType=VARCHAR}
@@ -44,7 +41,7 @@
 				TEMP_CD
 			,	TEMP_NM
 			,	TEMP_CONT
-			,	USE_YN
+			,	CALENDAR_YN
 			,	DISP_ORDER
 			,	REMARK
 		)
@@ -55,7 +52,7 @@
 				FROM INTR_TEMPLATE)
 			,	#{tempNm, jdbcType=VARCHAR}
 			,	#{tempCont, jdbcType=VARCHAR}
-			,	#{useYn, jdbcType=VARCHAR}
+			,	#{calendarYn, jdbcType=VARCHAR}
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
@@ -70,7 +67,7 @@
 		UPDATE INTR_TEMPLATE
 			SET		TEMP_NM = #{tempNm, jdbcType=VARCHAR}
 				,	TEMP_CONT = #{tempCont, jdbcType=VARCHAR}
-				,	USE_YN = #{useYn, jdbcType=VARCHAR}
+				,	CALENDAR_YN = #{calendarYn, jdbcType=VARCHAR}
 		WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</update>
 	

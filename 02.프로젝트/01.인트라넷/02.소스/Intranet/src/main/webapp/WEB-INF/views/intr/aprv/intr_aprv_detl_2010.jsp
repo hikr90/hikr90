@@ -29,9 +29,8 @@
 	// 결재 처리
 	function aprvCall(aprvGb){
 		// 결재 수신처리 (반려:0, 결재:1, 회수:2)
-		$("#aprvGb").val(aprvGb);
-		//
 		var obj = new Object();
+		$("#aprvGb").val(aprvGb);
 		ajaxPopup(obj,"700","340","intrPopupInqy2011.do","1");
 	}
 	
@@ -170,8 +169,8 @@
 									<div class="btn_wrap align_right">
 										<div class="float_right">
 											<c:if test="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx and (aprvDetInfo.aprvRsltDt eq null or aprvDetInfo.aprvRsltDt eq '')}">
-												<button type="button" class="btn_gray_thin" onclick="aprvCall('0');">반려</button>
 												<button type="button" class="btn_navy_thin" onclick="aprvCall('1');">결재</button>
+												<button type="button" class="btn_gray_thin" onclick="aprvCall('0');">반려</button>
 											</c:if>
 										</div>
 										
