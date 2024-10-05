@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+	<select id="intrTaskInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqyDao1010 : 업무일지 작성 조회 */
+		SELECT 
+			    TASK.TASK_CD
+			,   TASK.EMP_IDX
+			,	EMP.EMP_NM
+			,	DEPT.DEPT_NM
+			,	GRADE.GRADE_NM
+			,	TASK.TASK_CONT
+			,   TASK.REG_DT || TASK.REG_TM AS REG_DT_TM
+			,	TASK.REG_DT
+			,	TASK.REG_TM
+			,	COUNT(TASK.TASK_CD) OVER() AS LIST_CNT	
+		FROM INTR_TASK TASK
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON EMP.EMP_IDX = TASK.EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE GRADE
+			ON GRADE.GRADE_CD = EMP.GRADE_CD
+		WHERE 1=1 
+            	AND TASK.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND TASK.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+		ORDER BY TASK.REG_DT DESC, TASK.REG_TM ASC, TASK.TASK_CD ASC
+	</select>
+	
+	<select id="intrTaskInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqyDao1020 : 업무일지 목록 조회 */
+		WITH 
+			UPPR_TASK AS 
+				(
+					SELECT
+								TASK.EMP_IDX
+							,	EMP.EMP_NM
+							,	DEPT.DEPT_CD
+							,	DEPT.DEPT_NM
+							,	1 AS LV
+							,	'[업무일지] ' || EMP.EMP_NM || ' ' || DEPT.DEPT_NM AS TASK_CONT
+							,	TASK.REG_DT
+					FROM
+							(
+								SELECT
+											TASK.EMP_IDX
+										,	TASK.REG_DT
+										,	'' AS TASK_CONT
+								FROM INTR_TASK TASK
+								GROUP BY TASK.EMP_IDX, TASK.REG_DT
+							) TASK
+					LEFT OUTER JOIN INTR_EMP EMP
+						ON EMP.EMP_IDX = TASK.EMP_IDX
+					LEFT OUTER JOIN INTR_DEPT DEPT
+						ON DEPT.DEPT_CD = EMP.DEPT_CD
+				)
+				SELECT
+							DATA.*
+				FROM (
+						SELECT
+									UT.REG_DT || UT.EMP_IDX AS TASK_IDX
+								,	UT.EMP_IDX
+								,	UT.EMP_NM
+								,	UT.DEPT_CD
+								,	UT.DEPT_NM
+								,	UT.TASK_CONT
+								,	UT.LV
+								,	UT.REG_DT
+								,	'' AS REG_TM
+								,	0 AS DISP_ORDER
+						FROM UPPR_TASK UT
+						UNION ALL
+						SELECT
+									UT.REG_DT || UT.EMP_IDX AS TASK_IDX
+								,	UT.EMP_IDX
+								,	UT.EMP_NM
+								,	UT.DEPT_CD
+								,	UT.DEPT_NM
+								,	LT.TASK_CONT
+								,	2 AS LV
+								,	LT.REG_DT
+								,	LT.REG_TM
+								,	ROW_NUMBER() OVER(PARTITION BY LT.EMP_IDX, LT.REG_DT ORDER BY LT.REG_DT ASC, LT.REG_TM ASC) AS DISP_ORDER
+						FROM UPPR_TASK UT
+						INNER JOIN INTR_TASK LT
+							ON UT.EMP_IDX = LT.EMP_IDX
+							AND UT.REG_DT = LT.REG_DT
+				) DATA
+				WHERE 1=1
+	            <if test="srchNm != null and srchNm != ''">
+	            	AND REGEXP_REPLACE(LOWER(DATA.EMP_IDX),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+	            </if>
+	            <if test="srchSdt != null and srchSdt !=''">
+	            	AND DATA.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+	            </if>
+	            <if test="srchEdt != null and srchEdt !=''">
+	            	AND DATA.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+	            </if>
+	            <if test="deptCd != null and deptCd != ''">
+					AND DATA.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+				</if>
+				 <if test="gradeCd != null and gradeCd != ''">
+					AND DATA.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+				</if>
+		ORDER BY DATA.DISP_ORDER ASC
+	</select>
+	
+	<delete id="intrTaskProcDao1010" parameterType="java.util.HashMap">
+		/* intrTaskProcDao1010 : 업무일지 삭제 처리 */
+		DELETE FROM INTR_TASK
+			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND REG_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	</delete>
+	
+	<insert id="intrTaskProcDao1020" parameterType="java.util.HashMap">
+		/* intrTaskProcDao1020 : 업무일지 등록 처리 */
+		INSERT INTO INTR_TASK
+		(
+				TASK_CD
+			,	EMP_IDX
+			,	TASK_CONT
+			,	REG_DT
+			,	REG_TM
+		)
+		VALUES
+		(
+				SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_CD,'TASK_')),0) + 1,4,0) FROM INTR_TASK
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	#{taskCont, jdbcType=VARCHAR}
+			,	#{regDt, jdbcType=VARCHAR}
+			,	#{regTm, jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>
