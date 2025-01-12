@@ -15,43 +15,43 @@ public class TempDao {
 	SqlSession sqlsession;
 
 	// 템플릿 목록 조회
-	public List<HashMap<String, Object>> intrTempInqyDao1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTempInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("temp.intrTempInqyDao1010", paramMap);
+		defaultList = sqlsession.selectList("temp.intrTempInqy1011", paramMap);
 		return defaultList;
 	}
 	
 	// 템플릿 상세 조회
-	public HashMap<String, Object> intrTempInqyDao1020(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrTempInqy1021(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("temp.intrTempInqyDao1020", paramMap);
+		defaultInfo = sqlsession.selectOne("temp.intrTempInqy1021", paramMap);
 		//
 		return defaultInfo;
 	}
 	
 	// 관리자 템플릿 등록
-	public int intrTempProcDao1010(HashMap<String, Object> paramMap) {
+	public int intrTempProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("temp.intrTempProcDao1010", paramMap);
+		resInt = sqlsession.insert("temp.intrTempProc1011", paramMap);
 		return resInt;
 	}
 	
 	// 관리자 템플릿 수정
-	public int intrTempProcDao1020(HashMap<String, Object> paramMap) {
+	public int intrTempProc1021(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("temp.intrTempProcDao1020", paramMap);
+		resInt = sqlsession.update("temp.intrTempProc1021", paramMap);
 		return resInt;
 	}
 	
 	// 관리자 템플릿 삭제 
-	public int intrTempProcDao1030(HashMap<String, Object> paramMap) {
+	public int intrTempProc1031(HashMap<String, Object> paramMap) {
+		//
 		int resInt = 0;
-		resInt = sqlsession.delete("temp.intrTempProcDao1030", paramMap);
+		resInt = sqlsession.delete("temp.intrTempProc1031", paramMap);
 		return resInt;
 	}
-
 }

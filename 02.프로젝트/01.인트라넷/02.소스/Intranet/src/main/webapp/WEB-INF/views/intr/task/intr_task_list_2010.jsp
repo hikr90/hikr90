@@ -8,7 +8,29 @@
 <script type="text/javascript">
 	// 목록 조회
 	function listCall(f){
-		formSubmit("intrTaskInqy2010.do");
+		formSubmit("inqAdminTaskList.do");
+	}
+	
+	// +/- 처리
+	function spreadProc(taskIdx){
+		// 
+		var sprGb = $("#"+taskIdx).attr("sprGb");
+		//		
+		if(sprGb=="Y") {
+			// close
+			$("."+taskIdx).removeClass('hide');
+			$("."+taskIdx).addClass('show');	
+			$("#"+taskIdx).find('a').text("-");	
+			$("#"+taskIdx).attr('sprGb','N');
+
+		} else {
+			// open
+			$("."+taskIdx).removeClass('show');
+			$("."+taskIdx).addClass('hide');	
+			$("#"+taskIdx).find('a').text("+");	
+			$("#"+taskIdx).attr('sprGb','Y');
+
+		}
 	}
 </script>
 <body id="main">
@@ -78,10 +100,10 @@
 													</div>
 												</div>
 												
-												<!-- 제목 -->
+												<!-- 작성자명 -->
 												<div class="float_right">
 													<div class="srch_area">
-														<label class="srch_label">제목</label>
+														<label class="srch_label">작성자명</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 														
 														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
@@ -94,42 +116,45 @@
 										<table class="post_table">
 											<caption>업무일지 조회</caption>
 											<colgroup>
-												<col class="w10per">
-												<col class="w10per">
-												<col class="w10per">
-												<col class="w10per">
+												<col class="w5per">
+												<col class="w15per">
 												<col class="auto">
+												<col class="w10per">
+												<col class="w10per">
 											</colgroup>
 											<thead>
 												<tr>
+													<th scope="col">+/-</th>
 													<th scope="col">작성일자</th>
-													<th scope="col">작성시간</th>
+													<th scope="col">업무</th>
 													<th scope="col">부서</th>
 													<th scope="col">작성자</th>
-													<th scope="col">업무</th>
 												</tr>
 											</thead>
 											<tbody>
 				                                <c:forEach var="list" items="${defaultList}" varStatus="status"> 
-												<tr>
-													<td class="first_td">
-														<span class="date">
-															<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-															<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-															${formatDt}
-														</span>
-													</td>
-													<td class="first_td">
-														<span class="date">
-															<fmt:parseDate value="${list.regTm}" var="parseTm" pattern="HHmmss"/>
-															<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm:ss"/>
-															${formatTm} 
-														</span>	
-													</td>
-													<td>${list.deptNm}</td>
-													<td>${list.empNm}</td>
-													<td class="_title">${list.taskCont}</td>
-			                                   </tr>
+														<tr id="${list.dispOrder eq 0 ? list.taskIdx : ''}" class="${list.dispOrder eq 0 ? '' : list.taskIdx} ${list.dispOrder eq 0 ? 'show' : 'hide'}" sprGb="${list.dispOrder eq 0 ? 'Y' : 'N'}">
+															<c:if test="${list.dispOrder eq 0}">
+																<td rowspan="${list.rowNum}">
+																	<c:if test="${list.dispOrder eq 0}"><a onclick="spreadProc('${list.taskIdx}');">+</a></c:if>
+																</td>
+															</c:if>
+															<td class="first_td">
+																<span class="date">
+																	<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+																	<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+																	
+																	<fmt:parseDate value="${list.regTm}" var="parseTm" pattern="HHmmss"/>
+																	<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm:ss"/>
+																	${formatDt} ${formatTm} 
+																</span>
+															</td>
+															<td class="_title"><c:if test="${list.dispOrder ne 0}">&nbsp;&nbsp;&nbsp;</c:if>${list.taskCont}</td>
+															<c:if test="${list.dispOrder eq 0}">
+																<td rowspan="${list.rowNum}">${list.deptNm}</td>
+																<td rowspan="${list.rowNum}">${list.empNm}</td>
+															</c:if>
+					                                   </tr>
 			                                   </c:forEach>
 			                                       
 			                                   <!-- 글이 없는 경우 -->

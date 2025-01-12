@@ -10,11 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.AprvService;
+import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
-import com.intr.svc.MainService;
 import com.intr.svc.TempService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
@@ -23,7 +22,7 @@ import com.intr.utils.Path;
 public class AprvController {
 	//
 	@Autowired
-	MainService mainService;
+	CoreService coreService;
 
 	@Autowired
 	AprvService aprvService;
@@ -44,12 +43,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1010(model, paramMap);
+			aprvService.intrAprvInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -67,12 +66,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 선택 기안문 상세 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqyService1020(model, paramMap);
+			tempService.intrTempInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -90,12 +89,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 품의문 정보 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1020(model, paramMap);
+			aprvService.intrAprvInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -114,11 +113,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1030(model, paramMap);
+			aprvService.intrAprvInqy2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -136,12 +136,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 품의문 정보 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1020(model, paramMap);
+			aprvService.intrAprvInqy1020(model, paramMap);
 
 		} catch (Exception e) {
 			//
@@ -152,19 +152,19 @@ public class AprvController {
 	}
 	
 	// 품의문 재사용등록 조회
-	@RequestMapping("/intrAprvInqy1040.do")
-	public String intrAprvInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrAprvInqy2030.do")
+	public String intrAprvInqy2030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 재사용 등록 품의문 정보 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1020(model, paramMap);
+			aprvService.intrAprvInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -172,29 +172,6 @@ public class AprvController {
 		}
 		//
 		return Path.VIEW_PATH_APRV + Jsp.INTR_APRV_DETL_1030;
-	}
-	
-	// 전체 결재 목록 조회
-	@RequestMapping("/intrAprvInqyService3010.do")
-	public String intrAprvInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 메뉴 조회
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
-			
-			//--------------------------------------------------------------------------------------------
-			// 전체 결재 목록 조회
-			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqyService1030(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 전체 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		//
-		return Path.VIEW_PATH_APRV + Jsp.INTR_APRV_LIST_2010;
 	}
 	
 	// 기안문 등록 처리
@@ -208,7 +185,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 기안문 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProcService1010(model, paramMap);
+			defaultStr = aprvService.intrAprvProc1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -229,7 +206,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 기안문 수신처리 진행
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProcService1020(model, paramMap);
+			defaultStr = aprvService.intrAprvProc1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//

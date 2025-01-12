@@ -23,7 +23,7 @@
 		var obj = new Object();
 		obj["contId"] = contId;
 		//		
-		ajaxPopup(obj,"1100","620","intrPopupInqy1032.do","");
+		ajaxPopup(obj,"1100","620","intrPopupInqy1050.do","");
 	}
 	
 	// 결재 처리
@@ -70,7 +70,7 @@
 	// 품의문 재사용 등록
 	function reAprvCall(){
 		if(confirm("진행하시겠습니까?")){
-			formSubmit('intrAprvInqy1040.do');
+			formSubmit('intrAprvInqy2030.do');
 		}
 	}
 </script>

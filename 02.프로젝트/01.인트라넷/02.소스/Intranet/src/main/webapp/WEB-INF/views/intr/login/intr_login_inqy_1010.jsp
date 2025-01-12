@@ -12,7 +12,7 @@
    		function popCall(){
    			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
    			var obj = new Object();
-   			ajaxPopup(obj,"650","300","intrPopupInqy1021.do","");
+   			ajaxPopup(obj,"650","300","intrPopupInqy1020.do","");
    		}
    		
    		// 로그인
@@ -23,7 +23,7 @@
 			var param = $("#form").serialize();
    			$.ajax({
    				type:	"post" , 
-   				url:	"intrLoginProc1010.do",
+   				url:	"intrMainProc1010.do",
    				data:	param,
    				dataType:	"text" ,
    				success : function(data){

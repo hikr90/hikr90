@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.intr.svc.MainService;
+import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
@@ -27,10 +27,10 @@ import com.intr.utils.Path;
 public class EmpController {
 	//
 	@Autowired
-	EmpService empService;
+	CoreService coreService;
 	
 	@Autowired
-	MainService mainService;
+	EmpService empService;
 	
 	@Autowired
 	UtilService utilService;
@@ -46,12 +46,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1010(model, paramMap);
+			empService.intrEmpInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -59,55 +59,6 @@ public class EmpController {
 		}
 		//
 		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_LIST_1010;
-	}
-	
-	// 사원 아이디 중복 조회
-	@RequestMapping("/intrEmpInqy1011.do")
-	@ResponseBody
-	public String intrEmpInqy1011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		String defaultStr = "";
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 사원 아이디 중복 조회
-			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpInqyService1040(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 사원 아이디 중복 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		//
-		return defaultStr;
-	}
-	
-	// 사원 프로필 사진 조회
-	@RequestMapping("/intrEmpInqy1012.do")
-	public void intrEmpInqy1012(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
-		//
-		String workPath = "";
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 사원 이미지 조회
-			//--------------------------------------------------------------------------------------------
-			workPath = utilService.intrFileInqyService1010(paramMap);
-
-			//--------------------------------------------------------------------------------------------
-			// URL객체 생성 (예외사항 추가)
-			//--------------------------------------------------------------------------------------------
-			URL fileUrl = new URL("file:"+workPath + File.separator + (String)paramMap.get("fileNm"));
-			
-			//--------------------------------------------------------------------------------------------
-			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)
-			//--------------------------------------------------------------------------------------------
-			IOUtils.copy(fileUrl.openStream(), response.getOutputStream());
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 사원 프로필 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
 	}
 	
 	// 사원 등록 화면
@@ -118,12 +69,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
+			empService.intrEmpInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -141,12 +92,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1030(model, paramMap);
+			empService.intrEmpInqy1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -164,12 +115,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1030(model, paramMap);
+			empService.intrEmpInqy1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -177,6 +128,34 @@ public class EmpController {
 		}
 		//
 		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_DETL_1030;
+	}
+	
+	// 사원 프로필 사진 조회
+	@RequestMapping("/intrEmpInqy1099.do")
+	public void intrEmpInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
+		//
+		String workPath = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 이미지 조회
+			//--------------------------------------------------------------------------------------------
+			workPath = utilService.setFilePath(paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// URL객체 생성 (예외사항 추가)
+			//--------------------------------------------------------------------------------------------
+			URL fileUrl = new URL("file:"+workPath + File.separator + (String)paramMap.get("fileNm"));
+			
+			//--------------------------------------------------------------------------------------------
+			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)
+			//--------------------------------------------------------------------------------------------
+			IOUtils.copy(fileUrl.openStream(), response.getOutputStream());
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 프로필 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
 	}
 	
 	// 사원 연락처 목록 화면
@@ -187,12 +166,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1010(model, paramMap);
+			empService.intrEmpInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -200,6 +179,27 @@ public class EmpController {
 		}
 		//
 		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_LIST_2010;
+	}
+	
+	// 사원 아이디 중복 조회
+	@RequestMapping("/intrEmpInqy2020.do")
+	@ResponseBody
+	public String intrEmpInqy2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 아이디 중복 조회
+			//--------------------------------------------------------------------------------------------
+			defaultStr = empService.intrEmpInqy2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 아이디 중복 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
 	}
 	
 	// 사원 등록 처리
@@ -213,7 +213,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProcService1010(model, paramMap, request);
+			defaultStr = empService.intrEmpProc1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -234,7 +234,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProcService1020(model, paramMap, request);
+			defaultStr = empService.intrEmpProc1020(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -255,7 +255,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 복직, 퇴사 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProcService1030(model, paramMap);
+			defaultStr = empService.intrEmpProc1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -276,7 +276,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProcService1040(model, paramMap);
+			defaultStr = empService.intrEmpProc1040(model, paramMap);
 			
 		} catch (Exception e) {
 			//

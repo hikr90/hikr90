@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="emp">
-	<select id="intrEmpInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1010 : 사원 목록 조회 */
+	<select id="intrEmpInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1011 : 사원 목록 조회 */
 		SELECT 
 		            SUB_DATA.*
 		FROM (
@@ -58,20 +58,62 @@
         ORDER BY SUB_DATA.EMP_HIRE_DATE DESC, SUB_DATA.EMP_NM
 	</select>
 	
-	<select id="intrEmpInqyDao1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1011 : 사원 인덱스 채번 */
-		SELECT LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS CONT_ID FROM INTR_EMP
+	<select id="intrEmpInqy1012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1012 : 사용자 정보 찾기 */
+		SELECT 
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		FROM INTR_EMP
+		WHERE 1=1 
+			AND UPPER(EMP_EMAIL) = UPPER(#{findEmail, jdbcType=VARCHAR})
+			<if test="findId != null and findId != ''">
+				AND UPPER(EMP_ID) = UPPER(#{findId, jdbcType=VARCHAR})
+			</if>
+			<if test="findNm != null and findNm != ''">
+				AND EMP_NM = #{findNm, jdbcType=VARCHAR}
+			</if>
 	</select>
-
-	<select id="intrEmpInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1020 : 부서 목록 조회 */
-	SELECT 
+	
+	<select id="intrEmpInqy1013" resultType="CamelHashMap">
+		/* intrEmpInqy1013 : 관리자 계정 조회 */
+		SELECT 
+				EMP_IDX
+			,	DEPT_CD
+			,	GRADE_CD
+			,	EMP_NM
+			,	EMP_GENDER
+			,	EMP_PHONE
+			,	EMP_ADDR
+			,	EMP_ADDR_INFO
+			,	EMP_EMAIL
+			,	EMP_ID
+			,	EMP_PWD
+			,	EMP_HIRE_DATE
+			,	EMP_RESI_DATE
+		FROM INTR_EMP
+		WHERE UPPER(EMP_ID) = 'ADMIN'
+	</select>
+	
+	<select id="intrEmpInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1021 : 부서 목록 조회 */
+		SELECT 
 				'' AS DEPT_CD
 			,	'전체' AS DEPT_NM
 			,	'' AS UPPR_DEPT_CD
 			,	'Y' AS USE_YN 
 			,	0 AS DISP_ORDER
-			, '' AS REMARK
+			, 	'' AS REMARK
 		FROM DUAL
 		UNION
 		SELECT
@@ -84,15 +126,15 @@
 		FROM INTR_DEPT
 		ORDER BY DISP_ORDER ASC
 	</select>
-
-	<select id="intrEmpInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1030 : 직급 목록 조회 */
+	
+	<select id="intrEmpInqy1022" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1022 : 직급 목록 조회 */
 		SELECT 
 				'' AS GRADE_CD
 			,	'전체' AS GRADE_NM
 			,	'Y' AS USE_YN 
 			,	0 AS DISP_ORDER
-			, '' AS REMARK
+			, 	'' AS REMARK
 		FROM DUAL
 		UNION
 		SELECT
@@ -105,28 +147,8 @@
 		ORDER BY DISP_ORDER ASC
 	</select>
 	
-	<select id="intrEmpInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1040 : 사원 아이디 중복 조회 */
-		SELECT
-					EMP_IDX
-				,	DEPT_CD
-				,	GRADE_CD
-				,	EMP_NM
-				,	EMP_GENDER
-				,	EMP_PHONE
-				,	EMP_ADDR
-				,	EMP_ADDR_INFO
-				,	EMP_EMAIL
-				,	EMP_ID
-				,	EMP_PWD
-				,	EMP_HIRE_DATE
-				,	EMP_RESI_DATE				
-		FROM INTR_EMP
-		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
-	</select>
-
-	<select id="intrEmpInqyDao1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1050 : 사원 상세 조회 */
+	<select id="intrEmpInqy1031" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1031 : 사원 상세 조회 */
 		SELECT
 					EMP.EMP_IDX
 				,	EMP.DEPT_CD
@@ -155,9 +177,29 @@
 			AND GRADE.USE_YN = 'Y'
 		WHERE EMP.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</select>
-
-	<select id="intrEmpInqyDao1060" resultType="CamelHashMap">
-		/* intrEmpInqyDao1060 : 부서 사원 트리 조회 */
+	
+	<select id="intrEmpInqy2021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy2021 : 사원 아이디 중복 조회 */
+		SELECT
+					EMP_IDX
+				,	DEPT_CD
+				,	GRADE_CD
+				,	EMP_NM
+				,	EMP_GENDER
+				,	EMP_PHONE
+				,	EMP_ADDR
+				,	EMP_ADDR_INFO
+				,	EMP_EMAIL
+				,	EMP_ID
+				,	EMP_PWD
+				,	EMP_HIRE_DATE
+				,	EMP_RESI_DATE				
+		FROM INTR_EMP
+		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
+	</select>
+	
+	<select id="intrEmpInqy2031" resultType="CamelHashMap">
+		/* intrEmpInqy2031 : 부서 사원 트리 조회 */
 		SELECT 
 				    SUB_DATA.*
 				,   CASE WHEN SUB_DATA.EMP_NM IS NULL
@@ -206,8 +248,8 @@
    		    ORDER BY SUB_DATA.DEPT_CD ASC , SUB_DATA.LV ASC
 	</select>
 	
-	<select id="intrEmpInqyDao1070" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqyDao1070 : 부서 사원 수 조회 */
+	<select id="intrEmpInqy2041" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy2041 : 부서 사원 수 조회 */
 		SELECT 
 					DEPT.DEPT_CD
                 ,   DEPT.DEPT_NM
@@ -222,8 +264,13 @@
         ORDER BY DEPT_CD ASC
 	</select>
 	
-	<insert id="intrEmpProcDao1010" parameterType="java.util.HashMap">
-		/* intrEmpProcDao1010 : 사원 등록 처리 */
+	<select id="intrEmpProc1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpProc1011 : 사원 인덱스 채번 */
+		SELECT LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS CONT_ID FROM INTR_EMP
+	</select>
+	
+	<insert id="intrEmpProc1012" parameterType="java.util.HashMap">
+		/* intrEmpProc1012 : 사원 등록 처리 */
 		INSERT INTO INTR_EMP
 		(
 				EMP_IDX
@@ -258,8 +305,8 @@
 		)
 	</insert>
 	
-	<update id="intrEmpProcDao1020" parameterType="java.util.HashMap">
-		/* intrEmpProcDao1020 : 사원 수정 처리 */
+	<update id="intrEmpProc1021" parameterType="java.util.HashMap">
+		/* intrEmpProc1021 : 사원 수정 처리 */
 		UPDATE INTR_EMP
 			SET 	DEPT_CD = #{setDeptCd, jdbcType=VARCHAR}
 				,	GRADE_CD = #{setGradeCd, jdbcType=VARCHAR}
@@ -271,8 +318,8 @@
 		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="intrEmpProcDao1030" parameterType="java.util.HashMap">
-		/* intrEmpProcDao1030 : 사원 복직, 퇴사 처리 */
+	<update id="intrEmpProc1031" parameterType="java.util.HashMap">
+		/* "intrEmpProc1031" : 사원 복직, 퇴사 처리 */
 		UPDATE INTR_EMP
 			SET EMP_RESI_DATE =
 				CASE WHEN EMP_RESI_DATE IS NULL
@@ -281,8 +328,8 @@
 		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="intrEmpProcDao1040" parameterType="java.util.HashMap">
-		/* intrEmpProcDao1040 : 사원 삭제 처리 */
+	<update id="intrEmpProc1041" parameterType="java.util.HashMap">
+		/* intrEmpProc1041 : 사원 삭제 처리 */
 		DELETE FROM INTR_EMP
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>

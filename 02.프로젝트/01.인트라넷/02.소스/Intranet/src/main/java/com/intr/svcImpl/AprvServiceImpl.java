@@ -2,30 +2,26 @@ package com.intr.svcImpl;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.AprvDao;
-import com.intr.dao.MainDao;
+import com.intr.dao.CoreDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 import com.intr.utils.AprvLine;
 
 @Service
-@Transactional
 public class AprvServiceImpl implements AprvService{
 	//
 	@Autowired
 	AprvDao aprvDao;
 	
 	@Autowired
-	MainDao mainDao;
+	CoreDao coreDao;
 	
 	@Autowired
 	MainService mainService;
@@ -34,7 +30,7 @@ public class AprvServiceImpl implements AprvService{
 	UtilService utilService;
 	
 	// 기안 목록 조회
-	public void intrAprvInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -42,11 +38,12 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			utilService.intrPageInqyService1010(model, paramMap);
+			utilService.setPaging(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqyDao1010(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy1011(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -56,7 +53,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 결재선 상세 정보 조회
-	public void intrAprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -64,23 +61,23 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 결재 상세 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqyDao1020(model, paramMap);
+			defaultInfo = aprvDao.intrAprvInqy1021(model, paramMap);
 			model.addAttribute("aprvDetInfo", defaultInfo);
+			
 			//--------------------------------------------------------------------------------------------
 			// 현재 결재 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqyDao1040(model, paramMap);
+			defaultInfo = aprvDao.intrAprvInqy2013(model, paramMap);
 			model.addAttribute("currAprvInfo", defaultInfo);
 			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
 		}
-
 	}
 	
 	// 결재 목록 조회
-	public void intrAprvInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -88,11 +85,12 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			utilService.intrPageInqyService1010(model, paramMap);
+			utilService.setPaging(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqyDao1050(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy2011(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -102,7 +100,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 
 	// 나의 기안 목록 조회
-	public void intrAprvInqyService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -110,7 +108,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 나의 기안 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqyDao1060(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy1031(model, paramMap);
 			model.addAttribute("aprvReqList", defaultList);
 
 		} catch (Exception e) {
@@ -120,7 +118,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 나의 결재 목록 조회
-	public void intrAprvInqyService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -128,7 +126,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 나의 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqyDao1070(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy1041(model, paramMap);
 			model.addAttribute("aprvRecList", defaultList);
 
 		} catch (Exception e) {
@@ -138,7 +136,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 기안문 등록
-	public String intrAprvProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrAprvProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -148,13 +146,13 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 시퀀스 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrMainInqyDao1030();
+			defaultInfo = coreDao.intrCoreInqy1022();
 			paramMap.put("contId", defaultInfo.get("contId"));
 
 			//--------------------------------------------------------------------------------------------
 			// 기안문 등록
 			//--------------------------------------------------------------------------------------------
-			resStr = this.intrAprvProcService1030(model, paramMap);
+			resStr = this.intrAprvProc1030(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -170,7 +168,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 
 	// 결재 수신 처리
-	public String intrAprvProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrAprvProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -186,23 +184,22 @@ public class AprvServiceImpl implements AprvService{
 				// 반려 처리 
 				//--------------------------------------------------------------------------------------------
 				paramMap.put("stepCd", AprvLine.STEP_0004);
-				resInt = this.intrAprvProcService1022(model, paramMap);
+				resInt = this.intrAprvProc1050(model, paramMap);
 				
 			} else if(aprvGb.equals("1")) {
 				//--------------------------------------------------------------------------------------------
 				// 결재 처리
 				//--------------------------------------------------------------------------------------------
 				paramMap.put("stepCd", AprvLine.STEP_0002);
-				resInt = this.intrAprvProcService1021(model, paramMap);
+				resInt = this.intrAprvProc1040(model, paramMap);
 				
 			} else {
 				//--------------------------------------------------------------------------------------------
 				// 결재 취소
 				//--------------------------------------------------------------------------------------------
 				paramMap.put("stepCd", AprvLine.STEP_0005);
-				resInt = this.intrAprvProcService1023(model, paramMap);
-			}; 
-			
+				resInt = this.intrAprvProc1060(model, paramMap);
+			}
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -224,7 +221,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 기안문 등록
-	public String intrAprvProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrAprvProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		int resInt = 0;
 		String resStr = "NO";
@@ -262,7 +259,7 @@ public class AprvServiceImpl implements AprvService{
 				//--------------------------------------------------------------------------------------------
 				if(flag.equals("N") && stepLine[1].equals(AprvLine.STEP_0002)) { // 첫번 째 결재 단계인 경우 저장
 					flag = "Y";
-					resInt = aprvDao.intrAprvProcDao1010(tempMap);
+					resInt = aprvDao.intrAprvProc1011(tempMap);
 				}
 				
 				//--------------------------------------------------------------------------------------------
@@ -275,7 +272,7 @@ public class AprvServiceImpl implements AprvService{
 				//--------------------------------------------------------------------------------------------
 				// 결재선 정보 등록
 				//--------------------------------------------------------------------------------------------
-				resInt = aprvDao.intrAprvProcDao1020(tempMap);
+				resInt = aprvDao.intrAprvProc1021(tempMap);
 			}
 			//
 			if(resInt>0) {
@@ -291,25 +288,25 @@ public class AprvServiceImpl implements AprvService{
 	}
 
 	// 결재 승인
-	private int intrAprvProcService1021(Model model, HashMap<String, Object> paramMap) throws Exception {
+	private int intrAprvProc1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		int resInt = 0;
 		
 		//--------------------------------------------------------------------------------------------
 		// 현재 결재 번호 수정
 		//--------------------------------------------------------------------------------------------
-		resInt = aprvDao.intrAprvProcDao1040(model, paramMap);
+		resInt = aprvDao.intrAprvProc1041(model, paramMap);
 
 		//--------------------------------------------------------------------------------------------
 		// 결과 수정
 		//--------------------------------------------------------------------------------------------
-		resInt = aprvDao.intrAprvProcDao1030(model, paramMap);
+		resInt = aprvDao.intrAprvProc1042(model, paramMap);
 		//
 		return resInt;
 	}
 
 	// 결재 반려
-	private int intrAprvProcService1022(Model model, HashMap<String, Object> paramMap) throws Exception {
+	private int intrAprvProc1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		int resInt = 0;
 		paramMap.put("tempStepCd", AprvLine.STEP_0004);
@@ -317,18 +314,18 @@ public class AprvServiceImpl implements AprvService{
 		//--------------------------------------------------------------------------------------------
 		// 현 단계 반송으로 변경 
 		//--------------------------------------------------------------------------------------------
-		resInt = aprvDao.intrAprvProcDao1070(model, paramMap);
+		resInt = aprvDao.intrAprvProc1051(model, paramMap);
 
 		//--------------------------------------------------------------------------------------------
 		// 현 단계 반송으로 변경 
 		//--------------------------------------------------------------------------------------------
-		resInt = aprvDao.intrAprvProcDao1080(model, paramMap);
+		resInt = aprvDao.intrAprvProc1052(model, paramMap);
 		//
 		return resInt;
 	}
 
 	// 결재 취소
-	private int intrAprvProcService1023(Model model, HashMap<String, Object> paramMap) throws Exception {
+	private int intrAprvProc1060(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String cancelYn = "";
@@ -337,7 +334,7 @@ public class AprvServiceImpl implements AprvService{
 		//--------------------------------------------------------------------------------------------
 		// 결재 상태 확인
 		//--------------------------------------------------------------------------------------------
-		defaultInfo = aprvDao.intrAprvInqyDao1040(model, paramMap);
+		defaultInfo = aprvDao.intrAprvInqy2013(model, paramMap);
 		paramMap.put("tempAprvSno", "0001");
 		paramMap.put("tempStepCd", AprvLine.STEP_0005);
 		//
@@ -346,14 +343,14 @@ public class AprvServiceImpl implements AprvService{
 			//
 			if(cancelYn.equals("Y")) {
 				//--------------------------------------------------------------------------------------------
-				// 현 단계 회수로 변경 
+				// 현 단계 회수로 변경 (INTR_APRV)
 				//--------------------------------------------------------------------------------------------
-				resInt = aprvDao.intrAprvProcDao1050(model, paramMap);
+				resInt = aprvDao.intrAprvProc1061(model, paramMap);
 
 				//--------------------------------------------------------------------------------------------
-				// 현 단계 회수로 변경 
+				// 현 단계 회수로 변경 (INTR_APRV_LINE)
 				//--------------------------------------------------------------------------------------------
-				resInt = aprvDao.intrAprvProcDao1060(model, paramMap);
+				resInt = aprvDao.intrAprvProc1062(model, paramMap);
 
 			} else {
 				//
@@ -362,41 +359,5 @@ public class AprvServiceImpl implements AprvService{
 		}
 		//
 		return resInt;
-	}
-	
-	// 결재 목록 건수
-	public void intrAprvInqyService1060(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 결재 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqyDao1080(model, paramMap);
-			paramMap.put("listCnt", defaultInfo.get("listCnt"));
-
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 기안 목록 건수 조회
-	public void intrAprvInqyService1070(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 기안 목록 건수 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqyDao1080(model, paramMap);
-			paramMap.put("listCnt", defaultInfo.get("listCnt"));
-
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
 	}
 }

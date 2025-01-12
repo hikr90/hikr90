@@ -64,7 +64,6 @@ function initCall(){
 function formSubmit(mappingId){
 	//
 	var f = document.getElementById('form');
-	f.append("empIdx","${empVO.empIdx}");
 	f.action = mappingId;
 	f.submit();
 }
@@ -73,7 +72,7 @@ function formSubmit(mappingId){
 function logout() {
 	//
 	alert("로그아웃 되었습니다.");
-	location.href = "intrLoginProc1030.do";
+	location.href = "intrMainProc1020.do";
 }
 
 // 목록 조회 (엔터)

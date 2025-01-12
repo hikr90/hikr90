@@ -29,10 +29,17 @@
 	        select: function(info) {
 				//
 			},
-			// RESTful API (기안문 조회)
+			// 기안문 정보 팝업
 			eventClick: function(info) {
+				//
+				var pw = "650";
+				var ph = "860";
+				var left = Math.ceil((window.screen.width - pw)/2);
+				var top = Math.ceil((window.screen.height - ph)/2) - 50;
+
 				// info.event.id
-				alert("kth : 진행 중");
+				var options = 'toolbar=no, scrollbars=no, resizeable=yes, status=no, menubar=no, width=' + pw + ', height=' + ph + ', top=' + top + ', left=' + left;
+				window.open("intrScheInqy1020.do?contId="+info.event.id, "_blank", options);
 			},
 			// 데이터
 			events : defaultList

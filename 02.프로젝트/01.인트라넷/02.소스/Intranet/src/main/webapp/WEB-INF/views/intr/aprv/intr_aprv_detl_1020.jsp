@@ -60,7 +60,7 @@
  			if($(".setListTr").length==0){
 				// 첫 시작
 				var obj = new Object();
-				ajaxPopup(obj,"1100","650","intrPopupInqy1031.do","");
+				ajaxPopup(obj,"1100","650","intrPopupInqy1040.do","");
 				
 			} else {
 				// 숨김 해제

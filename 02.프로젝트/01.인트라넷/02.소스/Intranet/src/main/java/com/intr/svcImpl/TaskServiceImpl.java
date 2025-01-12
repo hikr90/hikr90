@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,7 +17,6 @@ import com.intr.svc.TaskService;
 import com.intr.svc.UtilService;
 
 @Service
-@Transactional
 public class TaskServiceImpl implements TaskService{
 	//
 	@Autowired
@@ -37,7 +35,7 @@ public class TaskServiceImpl implements TaskService{
 	HttpSession session;
 
 	// 업무일지 작성 조회 화면
-	public void intrTaskInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTaskInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -45,7 +43,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqyDao1010(model, paramMap);
+			defaultList = taskDao.intrTaskInqy1011(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
@@ -55,7 +53,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 목록 조회
-	public void intrTaskInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrTaskInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -63,18 +61,18 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			utilService.intrPageInqyService1010(model, paramMap);
+			utilService.setPaging(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqyDao1020(model, paramMap);
+			defaultList = taskDao.intrTaskInqy1021(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
+			empService.intrEmpInqy1020(model, paramMap);
 
 		} catch (Exception e) {
 			//
@@ -83,7 +81,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 등록
-	public String intrTaskProcService1010(Model model, @RequestBody List<HashMap<String, Object>> paramList) throws Exception {
+	public String intrTaskProc1010(Model model, @RequestBody List<HashMap<String, Object>> paramList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -93,7 +91,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 일지 전체 삭제
 			//--------------------------------------------------------------------------------------------
-			taskDao.intrTaskProcDao1010(paramList.get(0));
+			taskDao.intrTaskProc1021(paramList.get(0));
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무 일지 등록
@@ -109,7 +107,7 @@ public class TaskServiceImpl implements TaskService{
 				tempMap.put("regTm", paramList.get(i).get("regTm"));
 				tempMap.put("taskCont", paramList.get(i).get("taskCont"));
 				//
-				resInt += taskDao.intrTaskProcDao1020(tempMap);
+				resInt += taskDao.intrTaskProc1011(tempMap);
 			}
 			//
 			if(resInt==addCnt) {
@@ -128,5 +126,4 @@ public class TaskServiceImpl implements TaskService{
 		//
 		return defaultStr;
 	}
-
 }

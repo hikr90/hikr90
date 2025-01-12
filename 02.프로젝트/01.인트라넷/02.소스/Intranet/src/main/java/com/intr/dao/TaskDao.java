@@ -15,34 +15,34 @@ public class TaskDao {
 	SqlSession sqlsession;
 	
 	// 업무일지 작성 조회
-	public List<HashMap<String, Object>> intrTaskInqyDao1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqyDao1010", paramMap);
+		defaultList = sqlsession.selectList("task.intrTaskInqy1011", paramMap);
 		return defaultList;
 	}
 
 	// 업무일지 목록 조회
-	public List<HashMap<String, Object>> intrTaskInqyDao1020(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy1021(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqyDao1020", paramMap);
+		defaultList = sqlsession.selectList("task.intrTaskInqy1021", paramMap);
 		return defaultList;
 	}
 	
-	// 업무일지 삭제
-	public int intrTaskProcDao1010(HashMap<String, Object> paramMap) {
+	// 업무일지 등록
+	public int intrTaskProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("task.intrTaskProcDao1010", paramMap);
+		resInt = sqlsession.insert("task.intrTaskProc1011", paramMap);
 		return resInt;
 	}
 	
-	// 업무일지 등록
-	public int intrTaskProcDao1020(HashMap<String, Object> paramMap) {
+	// 업무일지 삭제
+	public int intrTaskProc1021(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("task.intrTaskProcDao1020", paramMap);
+		resInt = sqlsession.delete("task.intrTaskProc1021", paramMap);
 		return resInt;
 	}
 }

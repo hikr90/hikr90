@@ -23,7 +23,7 @@
 		var obj = new Object();
 		obj["contId"] = contId;
 		//		
-		ajaxPopup(obj,"1100","650","intrPopupInqy1032.do","");
+		ajaxPopup(obj,"1100","650","intrPopupInqy1050.do","");
 	}
 	
 	// 결재 처리
@@ -31,7 +31,7 @@
 		// 결재 수신처리 (반려:0, 결재:1, 회수:2)
 		var obj = new Object();
 		$("#aprvGb").val(aprvGb);
-		ajaxPopup(obj,"700","340","intrPopupInqy2011.do","1");
+		ajaxPopup(obj,"700","340","intrPopupInqy1060.do","1");
 	}
 	
 	// 팝업 확인

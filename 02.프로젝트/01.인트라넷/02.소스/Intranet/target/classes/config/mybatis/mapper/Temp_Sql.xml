@@ -8,8 +8,8 @@
 		<result property="tempCont" 		column="TEMP_CONT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 
-	<select id="intrTempInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrTempInqyDao1010 : 템플릿 목록 조회 */
+	<select id="intrTempInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTempInqy1011 : 템플릿 목록 조회 */
 		SELECT 
 				TMP.TEMP_CD
 	        ,   TMP.TEMP_NM
@@ -22,8 +22,8 @@
 		WHERE 1=1
 	</select>
 	
-	<select id="intrTempInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getTempInfo">
-		/* intrTempInqyDao1020 : 템플릿 상세 조회 */
+	<select id="intrTempInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getTempInfo">
+		/* intrTempInqy1021 : 템플릿 상세 조회 */
 		SELECT 
 				TMP.TEMP_CD
 	        ,   TMP.TEMP_NM
@@ -34,8 +34,8 @@
 			AND TMP.TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="intrTempProcDao1010" parameterType="java.util.HashMap">
-		/* intrTempProcDao1010 : 템플릿 등록 처리 */
+	<insert id="intrTempProc1011" parameterType="java.util.HashMap">
+		/* intrTempProc1011 : 템플릿 등록 처리 */
 		INSERT INTO INTR_TEMPLATE
 		(
 				TEMP_CD
@@ -62,8 +62,8 @@
 		)
 	</insert>
 
-	<update id="intrTempProcDao1020" parameterType="java.util.HashMap">
-		/* intrTempProcDao1020 : 템플릿 수정 처리 */
+	<update id="intrTempProc1021" parameterType="java.util.HashMap">
+		/* intrTempProc1021 : 템플릿 수정 처리 */
 		UPDATE INTR_TEMPLATE
 			SET		TEMP_NM = #{tempNm, jdbcType=VARCHAR}
 				,	TEMP_CONT = #{tempCont, jdbcType=VARCHAR}
@@ -71,8 +71,8 @@
 		WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="intrTempProcDao1030" parameterType="java.util.HashMap">
-		/* intrTempProcDao1030 : 템플릿 삭제 처리 */
+	<delete id="intrTempProc1031" parameterType="java.util.HashMap">
+		/* intrTempProc1031 : 템플릿 삭제 처리 */
 		DELETE FROM INTR_TEMPLATE
 			WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</delete>

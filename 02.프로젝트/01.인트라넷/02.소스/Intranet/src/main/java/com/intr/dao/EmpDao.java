@@ -15,98 +15,114 @@ public class EmpDao {
 	SqlSession sqlsession;
 	
 	// 사원 목록
-	public List<HashMap<String, Object>> intrEmpInqyDao1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1010", paramMap);
+		defaultList = sqlsession.selectList("emp.intrEmpInqy1011", paramMap);
 		return defaultList;
 	}
 	
-	// 사원 인덱스 채번
-	public HashMap<String, Object> intrEmpInqyDao1011(Model model, HashMap<String, Object> paramMap) {
+	// 사용자 정보 조회 (정보 찾기)
+	public HashMap<String, Object> intrEmpInqy1012(HashMap<String, Object> paramMap) {
+		HashMap<String, Object> defatulInfo = null;
+		defatulInfo = sqlsession.selectOne("emp.intrEmpInqy1012", paramMap);
 		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqyDao1011", paramMap);
-		return defaultInfo;
+		return defatulInfo;
+	}
+	
+	// 관리자 계정 조회
+	public HashMap<String, Object> intrEmpInqy1013() {
+		HashMap<String, Object> defatulInfo = null;
+		defatulInfo = sqlsession.selectOne("emp.intrEmpInqy1013");
+		//
+		return defatulInfo;
 	}
 	
 	// 부서 목록 조회
-	public List<HashMap<String, Object>> intrEmpInqyDao1020(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqy1021(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1020", paramMap);
-		return defaultList;
-	}
-
-	// 직급 목록 조회
-	public List<HashMap<String, Object>> intrEmpInqyDao1030(Model model, HashMap<String, Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1030", paramMap);
+		defaultList = sqlsession.selectList("emp.intrEmpInqy1021", paramMap);
 		return defaultList;
 	}
 	
-	// 사원 아이디 중복 조회
-	public List<HashMap<String, Object>> intrEmpInqyDao1040(Model model, HashMap<String, Object> paramMap) {
+	// 직급 목록 조회
+	public List<HashMap<String, Object>> intrEmpInqy1022(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1040", paramMap);
+		defaultList = sqlsession.selectList("emp.intrEmpInqy1022", paramMap);
 		return defaultList;
 	}
-
+	
 	// 사원 상세 조회
-	public HashMap<String, Object> intrEmpInqyDao1050(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrEmpInqy1031(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqyDao1050",paramMap);
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1031",paramMap);
 		return defaultInfo;
 	}
 	
-	// 부서 사원 트리 조회
-	public List<HashMap<String, Object>> intrEmpInqyDao1060(Model model) {
+	// 사원 아이디 중복 조회
+	public List<HashMap<String, Object>> intrEmpInqy2021(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1060");
+		defaultList = sqlsession.selectList("emp.intrEmpInqy2021", paramMap);
+		return defaultList;
+	}
+	
+	// 부서 사원 트리 조회
+	public List<HashMap<String, Object>> intrEmpInqy2031(Model model) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy2031");
 		return defaultList;
 	}
 	
 	// 부서 사원 수 조회
-	public List<HashMap<String, Object>> intrEmpInqyDao1070(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrEmpInqy2041(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqyDao1070");
+		defaultList = sqlsession.selectList("emp.intrEmpInqy2041");
 		return defaultList;
 	}
 	
+	// 사원 인덱스 채번
+	public HashMap<String, Object> intrEmpProc1011(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("emp.intrEmpProc1011", paramMap);
+		return defaultInfo;
+	}
+	
 	// 사원 등록
-	public int intrEmpProcDao1010(HashMap<String, Object> paramMap) {
+	public int intrEmpProc1012(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("emp.intrEmpProcDao1010", paramMap);
+		resInt = sqlsession.insert("emp.intrEmpProc1012", paramMap);
 		return resInt;
 	}
 	
 	// 사원 수정
-	public int intrEmpProcDao1020(HashMap<String, Object> paramMap) {
+	public int intrEmpProc1021(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("emp.intrEmpProcDao1020", paramMap);
+		resInt = sqlsession.update("emp.intrEmpProc1021", paramMap);
 		return resInt;
 	}
 	
 	// 사원 복직, 퇴사 처리
-	public int intrEmpProcDao1030(HashMap<String, Object> paramMap) {
+	public int intrEmpProc1031(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("emp.intrEmpProcDao1030", paramMap);
+		resInt = sqlsession.update("emp.intrEmpProc1031", paramMap);
 		return resInt;
 	}
 	
 	// 사원 삭제 처리
-	public int intrEmpProcDao1040(HashMap<String, Object> paramMap) {
+	public int intrEmpProc1041(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("emp.intrEmpProcDao1040", paramMap);
+		resInt = sqlsession.update("emp.intrEmpProc1041", paramMap);
 		return resInt;
 	}
 }

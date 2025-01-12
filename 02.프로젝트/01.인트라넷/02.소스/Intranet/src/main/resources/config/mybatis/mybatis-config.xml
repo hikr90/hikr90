@@ -15,6 +15,7 @@
 	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/Temp_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Core_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Main_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Board_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Util_Sql.xml" />		

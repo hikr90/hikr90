@@ -50,7 +50,7 @@
 		//
 		$.ajax({
     		type : 'post',
-        	url : 'intrTempInqy1020.do',
+        	url : 'intrTempInqy1030.do',
             data : null,
             dataType : 'html',
             success : function(data){
@@ -110,7 +110,7 @@
 		//
 		$.ajax({
     		type : 'post',
-        	url : 'intrTempInqy1030.do',
+        	url : 'intrTempInqy1020.do',
             data : param,
             dataType : 'html',
             success : function(data){

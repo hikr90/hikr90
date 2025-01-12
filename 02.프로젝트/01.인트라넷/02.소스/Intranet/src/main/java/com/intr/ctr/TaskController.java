@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.svc.MainService;
+import com.intr.svc.CoreService;
 import com.intr.svc.TaskService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
@@ -22,10 +22,11 @@ import com.intr.utils.Path;
 public class TaskController {
 	//
 	@Autowired
-	TaskService taskService;
+	CoreService coreService;
 	
 	@Autowired
-	MainService mainService;
+	TaskService taskService;
+
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -37,12 +38,12 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 작성 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqyService1010(model, paramMap);
+			taskService.intrTaskInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -55,18 +56,18 @@ public class TaskController {
 	
 	// 업무일지 목록 (관리자) 조회 화면
 	@RequestMapping("/intrTaskInqy2010.do")
-	public String intrTaskInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrTaskInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqyService1020(model, paramMap);
+			taskService.intrTaskInqy2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -87,7 +88,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProcService1010(model, paramList);
+			defaultStr = taskService.intrTaskProc1010(model, paramList);
 			
 		} catch (Exception e) {
 			//

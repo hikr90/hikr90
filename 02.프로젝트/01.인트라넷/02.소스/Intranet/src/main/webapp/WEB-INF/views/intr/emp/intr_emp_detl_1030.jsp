@@ -89,7 +89,7 @@
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
 		                                        			<c:when test="${not empty defaultList}">
-		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1012.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
+		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1099.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
 		                                        			</c:when>
 		                                        			<c:otherwise>
 				                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">

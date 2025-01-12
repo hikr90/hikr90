@@ -32,7 +32,7 @@
 		var param = $("#form").serialize();
 		$.ajax({
     		type : 'post',
-        	url : 'intrEmpInqy1011.do',
+        	url : 'intrEmpInqy2020.do',
             data : param,
             dataType : 'html',
             success : function(data){

@@ -2,7 +2,6 @@ package com.intr.ctr;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
 import com.intr.svc.AprvService;
@@ -54,7 +52,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqyService1010(model, paramMap);
+			tempService.intrTempInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -65,8 +63,8 @@ public class PopupController {
 	}
 
 	// 아이디 찾기 팝업 조회
-	@RequestMapping("/intrPopupInqy1021.do")
-	public String intrPopupInqy1021(Model model) {
+	@RequestMapping("/intrPopupInqy1020.do")
+	public String intrPopupInqy1020(Model model) {
 		//
 		try {
 			//
@@ -81,8 +79,8 @@ public class PopupController {
 	}
 
 	// 비밀번호 찾기 팝업 조회 
-	@RequestMapping("/intrPopupInqy1022.do")
-	public String intrPopupInqy1022(Model model) {
+	@RequestMapping("/intrPopupInqy1030.do")
+	public String intrPopupInqy1030(Model model) {
 		//
 		try {
 			//
@@ -95,14 +93,14 @@ public class PopupController {
 	}
 	
 	// 결재선 팝업 선택 조회
-	@RequestMapping("/intrPopupInqy1031.do")
-	public String intrPopupInqy1031(Model model) {
+	@RequestMapping("/intrPopupInqy1040.do")
+	public String intrPopupInqy1040(Model model, HashMap<String, Object> paramMap) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 부서 및 사원 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1060(model);
+			empService.intrEmpInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -114,8 +112,8 @@ public class PopupController {
 	}
 	
 	// 결재선 팝업 목록 조회
-	@RequestMapping("/intrPopupInqy1032.do")
-	public String intrPopupInqy1032(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	@RequestMapping("/intrPopupInqy1050.do")
+	public String intrPopupInqy1050(Model model, @RequestParam HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -123,7 +121,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqyDao1030(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy2012(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -136,8 +134,8 @@ public class PopupController {
 	}
 	
 	// 결재 의견 팝업
-	@RequestMapping("/intrPopupInqy2011.do")
-	public String intrPopupInqy2011(Model model, HashMap<String, Object> paramMap) {
+	@RequestMapping("/intrPopupInqy1060.do")
+	public String intrPopupInqy1060(Model model, HashMap<String, Object> paramMap) {
 		//
 		try {
 			//

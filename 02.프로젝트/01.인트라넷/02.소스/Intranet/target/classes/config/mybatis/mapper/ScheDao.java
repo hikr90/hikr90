@@ -15,10 +15,10 @@ public class ScheDao {
 	SqlSession sqlsession;
 	
 	// 사용자 목록 조회
-	public List<HashMap<String, Object>> intrScheInqyDao1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrScheInqy1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("sche.intrScheInqyDao1010", paramMap);
+		defaultList = sqlsession.selectList("sche.intrScheInqy1010", paramMap);
 		return defaultList;
 	}
 }

@@ -57,7 +57,7 @@
 		//
 		$.ajax({
 		    	type : 'post',
-		    	url : "intrMailProc1010.do",
+		    	url : "sendMail.do",
 				data : param,
 				dataType : 'text',
 			success : function(data){

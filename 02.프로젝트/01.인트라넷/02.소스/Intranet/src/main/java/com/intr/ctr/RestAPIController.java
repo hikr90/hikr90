@@ -17,22 +17,44 @@ public class RestAPIController {
 	RestAPIService restAPIService;
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	// 기안문 전송 API
-	@RequestMapping("/{contId}")
-	public String intrRestInqy1010(@PathVariable("contId") String contId) throws Exception {
+	@RequestMapping("/list")
+	public String intrRestInqy1010(String reqObj) throws Exception {
+		String jStr = "";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 기안문 전체 목록 조회
 			//--------------------------------------------------------------------------------------------
-			System.out.println("kth : "+contId);
+			jStr = restAPIService.intrRestInqy1010(reqObj);
+			logger.debug("jStr : " + jStr);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 기안문 전송 API 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 기안문 목록 조회 (API) 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return "kth2";
+		return jStr;
+	}
+
+	// 기안문 상세 조회
+	@RequestMapping("/{contId}")
+	public String intrRestInqy1020(@PathVariable String contId) throws Exception {
+		String jStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 기안문 상세 조회
+			//--------------------------------------------------------------------------------------------
+			jStr = restAPIService.intrRestInqy1020(contId);
+			logger.debug("jStr : " + jStr);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안문 상세 조회 (API) 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return jStr;
 	}
 }

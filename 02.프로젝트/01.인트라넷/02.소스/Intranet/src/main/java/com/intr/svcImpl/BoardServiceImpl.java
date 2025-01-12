@@ -8,12 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.BoardDao;
-import com.intr.dao.MainDao;
+import com.intr.dao.CoreDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.BoardService;
 import com.intr.svc.EmpService;
@@ -21,14 +20,10 @@ import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
-@Transactional
 public class BoardServiceImpl implements BoardService{
 	//
 	@Autowired
-	MainDao mainDao;
-	
-	@Autowired
-	BoardDao boardDao;
+	HttpServletRequest request;
 	
 	@Autowired
 	MainService mainService;
@@ -40,13 +35,16 @@ public class BoardServiceImpl implements BoardService{
 	UtilService utilService;
 	
 	@Autowired
-	UtilDao utilDao;
+	BoardDao boardDao;
 	
 	@Autowired
-	HttpServletRequest request;
+	CoreDao coreDao;
+	
+	@Autowired
+	UtilDao utilDao;
 	
 	// 공지사항 목록 조회
-	public void intrBoardInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrBoardInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -54,18 +52,18 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
-			utilService.intrPageInqyService1010(model, paramMap);
+			utilService.setPaging(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = boardDao.intrBoardInqyDao1010(model, paramMap);
+			defaultList = boardDao.intrBoardInqy1011(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqyService1050(model, paramMap);
+			empService.intrEmpInqy1020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 조회수 세션 초기화
@@ -79,7 +77,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	// 공지사항 상세화면 조회
-	public void intrBoardInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrBoardInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -88,13 +86,13 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqyDao1020(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqy1021(model, paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqyDao1010(model, paramMap);
+			defaultList = utilDao.intrFileInqy1010(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -104,7 +102,7 @@ public class BoardServiceImpl implements BoardService{
 			String readhit = (String)session.getAttribute("readhit");
 			//
 			if(readhit==null) {
-				boardDao.intrBoardProcDao1040(model, paramMap);
+				boardDao.intrBoardProc1032(model, paramMap);
 				session.setAttribute("readhit", "hit");
 			}
 
@@ -115,7 +113,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 등록
-	public String intrBoardProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String intrBoardProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -126,13 +124,13 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 시퀀스 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrMainInqyDao1030();
+			defaultInfo = coreDao.intrCoreInqy1022();
 			paramMap.put("contId", defaultInfo.get("contId"));
 
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqyDao1020(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqy1021(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 등록
@@ -142,7 +140,7 @@ public class BoardServiceImpl implements BoardService{
 				
 			} else {
 				// 등록
-				resInt = boardDao.intrBoardProcDao1010(paramMap);
+				resInt = boardDao.intrBoardProc1011(paramMap);
 				//
 				if(resInt>0) {
 					resStr = "YES";
@@ -152,7 +150,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록
 			//--------------------------------------------------------------------------------------------
-			resStr = utilService.intrFileProcService1010(model, paramMap, request);
+			resStr = utilService.fileUpload(model, paramMap, request);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -168,7 +166,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 삭제
-	public String intrBoardProcService1020(Model model, String [] delIdxArr) throws Exception {
+	public String intrBoardProc1020(Model model, String [] delIdxArr) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -184,12 +182,12 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 삭제
 			//--------------------------------------------------------------------------------------------
-			resInt = boardDao.intrBoardProcDao1020(paramMap);
+			resInt = boardDao.intrBoardProc1021(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrFileProcDao1050(paramMap);
+			utilDao.intrFileProc1022(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -209,7 +207,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 수정
-	public String intrBoardProcService1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String intrBoardProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -219,12 +217,12 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = boardDao.intrBoardProcDao1030(paramMap);
+			resInt = boardDao.intrBoardProc1031(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정
 			//--------------------------------------------------------------------------------------------
-			resStr = utilService.intrFileProcService1010(model, paramMap, request);
+			resStr = utilService.fileUpload(model, paramMap, request);
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환

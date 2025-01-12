@@ -75,7 +75,7 @@
 							<div class="bottom_wrap">
 								<div class="bottom_area">
 							    	<h3>템플릿 관리</h3><br>
-							    	<a href="javascript:formSubmit('intrTempInqy1010.do')" class="btn_more">전체보기</a>
+							    	<a href="javascript:formSubmit('tempList.do')" class="btn_more">전체보기</a>
 									<ul>
 									<c:forEach var="list" items="${tempList}" begin="0" end="9">
 										<li><a href="javascript:#"><span class="date">${list.tempNm}</span></a></li>

@@ -108,10 +108,10 @@ function setFormData(){
 /* ================== 다운로드 ================== */
 // 단건 다운로드
 function fileProc(fileIdx){
-	formSubmit('intrFileProc1020.do?fileIdx='+fileIdx);
+	formSubmit('fileDownload.do?fileIdx='+fileIdx);
 }
 	
 // 전체 다운로드
 function zipProc(){
-	formSubmit('intrFileProc1030.do');
+	formSubmit('zipDownload.do');
 }

@@ -29,12 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.intr.dao.MainDao;
+import com.intr.dao.CoreDao;
+import com.intr.dao.EmpDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
 import com.intr.utils.Paging;
@@ -42,14 +42,16 @@ import com.intr.utils.Path;
 import com.intr.utils.RestAPI;
 
 @Service
-@Transactional
 public class UtilServiceImpl implements UtilService{
 	//
 	@Autowired
 	UtilDao utilDao;
+
+	@Autowired
+	CoreDao coreDao;
 	
 	@Autowired
-	MainDao mainDao;
+	EmpDao empDao;
 	
     @Autowired
     JavaMailSenderImpl javaMailSender;
@@ -57,7 +59,7 @@ public class UtilServiceImpl implements UtilService{
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 파일 경로 조회
-	public String intrFileInqyService1010(HashMap<String, Object> paramMap) throws Exception {
+	public String setFilePath(HashMap<String, Object> paramMap) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
@@ -70,28 +72,29 @@ public class UtilServiceImpl implements UtilService{
 			workPath = Path.EMP_PATH;
 		}
 		//
-		workPath = intrFileInqyService1021(paramMap, workPath);
+		workPath = setOsPath(paramMap, workPath);
 		//
 		return workPath;
 	}
 	
 	// (임시)파일 경로 조회
-	public String intrFileInqyService1020(HashMap<String, Object> paramMap) throws Exception {
+	public String setTempPath(HashMap<String, Object> paramMap) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
 		String workPath = Path.TEMP_PATH;
-		workPath = intrFileInqyService1021(paramMap, workPath);
+		workPath = setOsPath(paramMap, workPath);
 		//
 		return workPath;
 	}
 	
 	// 운영 체제 조회
-	public String intrFileInqyService1021(HashMap<String, Object> paramMap, String workPath) throws Exception {
+	public String setOsPath(HashMap<String, Object> paramMap, String workPath) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
 		String os = System.getProperty("os.name").toLowerCase();
+		
 		// # 1 윈도우 : C드라이브에서 FILE_PATH 사용 
 		// # 2 리눅스 : 그대로 진행
 		if(os.contains("win")) {
@@ -105,7 +108,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 메일 전송
-	public String intrMailProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = ""; // 결과 전달 JSON
 		String resStr = "NO";	// 결과값
@@ -116,11 +119,10 @@ public class UtilServiceImpl implements UtilService{
 		HashMap<String, Object> defaultInfo = null;
 		//
 		try {
-			
 			//--------------------------------------------------------------------------------------------
 			// 사용자 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrLoginInqy1030(paramMap);
+			defaultInfo = empDao.intrEmpInqy1012(paramMap);
 			//
 			if(defaultInfo!=null) {
 				// 값 저장
@@ -131,7 +133,7 @@ public class UtilServiceImpl implements UtilService{
 				//--------------------------------------------------------------------------------------------
 				// 메일 전송
 				//--------------------------------------------------------------------------------------------
-				joinCode = intrMailProcService1011(paramMap);
+				joinCode = sendMailProc(paramMap);
 			}
 			//
 			defaultStr = String.format("[{'res':'%s','joinCode':'%s','empId':'%s','empPwd':'%s'}]", resStr, joinCode, empId, empPwd);
@@ -145,7 +147,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 메일 발송
-	private String intrMailProcService1011(HashMap<String, Object> paramMap) throws Exception {
+	private String sendMailProc(HashMap<String, Object> paramMap) throws Exception {
 		//
         MimeMessage message = javaMailSender.createMimeMessage();
         //
@@ -186,7 +188,7 @@ public class UtilServiceImpl implements UtilService{
             //--------------------------------------------------------------------------------------------
 			// 관리자 메일 조회
 			//--------------------------------------------------------------------------------------------
-            defaultInfo = mainDao.intrLoginInqy1020();
+            defaultInfo = empDao.intrEmpInqy1013();
             //
             sender 		= String.valueOf(defaultInfo.get("empEmail"));
             receiver 	= String.valueOf(paramMap.get("findEmail"));
@@ -218,7 +220,7 @@ public class UtilServiceImpl implements UtilService{
     }
 	
 	// 파일 업로드 & 수정
-	public String intrFileProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String fileUpload(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		HashMap<String, Object> tempMap = null;
 		//
 		String resStr = "NO";
@@ -236,7 +238,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 경로 조회
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqyService1010(paramMap);
+			workPath = this.setFilePath(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// DB, 파일 처리
@@ -248,32 +250,32 @@ public class UtilServiceImpl implements UtilService{
 					// 1. DB 등록
 					if(!fileList.isEmpty()) {
 						file = fileList.get(fileCnt);
-						this.intrFileProcService1011(paramMap, file, fileCnt);
+						this.intrFileProc1010(paramMap, file, fileCnt);
 					}
 					
 					// 2. 파일 저장
-					this.intrFileProcService1012(workPath, file);
+					this.saveFile(workPath, file);
 					//
 					fileCnt++;
 					
 				} else if(key.contains("delete")) {
 					// 삭제
 					tempMap.put("fileIdx", (String)paramMap.get(key));
-					utilDao.intrFileProcDao1030(tempMap);
+					utilDao.intrFileProc1020(tempMap);
 					
 				} else if(key.contains("profImg")) {
 					// 사원 이미지
 					// 1. 사용여부 N 처리
-					utilDao.intrFileProcDao1040(paramMap);
+					utilDao.intrFileProc1021(paramMap);
 					
 					// 2. DB 등록
 					if(!fileList.isEmpty()) {
 						file = fileList.get(fileCnt);
-						this.intrFileProcService1011(paramMap, file, fileCnt);
+						this.intrFileProc1010(paramMap, file, fileCnt);
 					}
 					
 					// 3. 파일 저장
-					this.intrFileProcService1012(workPath, file);
+					this.saveFile(workPath, file);
 				}
 			}
 			
@@ -289,7 +291,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 파일 DB 저장
-	public void intrFileProcService1011(HashMap<String, Object> paramMap, MultipartFile file, int fileCnt)  throws Exception {
+	public void intrFileProc1010(HashMap<String, Object> paramMap, MultipartFile file, int fileCnt)  throws Exception {
 		HashMap<String, Object> tempMap = new HashMap<String, Object>();
 		//
 		try {
@@ -299,7 +301,7 @@ public class UtilServiceImpl implements UtilService{
 			tempMap.put("fileType", file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase());
 			tempMap.put("fileSize", file.getSize()); 
 			//
-			utilDao.intrFileProcDao1010(tempMap);
+			utilDao.intrFileProc1010(tempMap);
 			
 		} catch (Exception e) {
 			throw e;
@@ -307,7 +309,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 파일 저장
-	public void intrFileProcService1012(String workPath, MultipartFile file) throws Exception {
+	public void saveFile(String workPath, MultipartFile file) throws Exception {
 		File workFile = null;
 		//
 		try {
@@ -323,7 +325,7 @@ public class UtilServiceImpl implements UtilService{
 	
 	
 	// 파일 다운로드
-	public void intrFileProcService1032(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void fileDownload(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String value = "";
 		String fullPathNm = String.format("%s/%s", path, fileNm);
@@ -420,7 +422,7 @@ public class UtilServiceImpl implements UtilService{
 	
 	
 	// 파일 다운로드
-	public void intrFileProcService1020(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void fileDownload(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String workPath = "";
@@ -430,7 +432,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보 조회 (FILE_IDX)
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.intrFileInqyDao1020(model, paramMap);
+			defaultInfo = utilDao.intrFileInqy1020(model, paramMap);
 			//
 			String contId = (String)defaultInfo.get("contId");
 			String fileNm = (String)defaultInfo.get("fileNm");
@@ -439,12 +441,12 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 생성
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqyService1010(paramMap);
+			workPath = this.setFilePath(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			intrFileProcService1032(workPath, fileNm, request, response);
+			fileDownload(workPath, fileNm, request, response);
 			
 			
 		} catch (Exception e) {
@@ -454,7 +456,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 전체 다운로드
-	public void intrFileProcService1030(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void zipDownload(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String workPath = "";
 		String tempPath = "";
@@ -465,22 +467,22 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 로드
 			//--------------------------------------------------------------------------------------------
-			workPath = this.intrFileInqyService1010(paramMap);
+			workPath = this.setFilePath(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 생성
 			//--------------------------------------------------------------------------------------------
-			tempPath = intrFileProcService1031(paramMap, workPath);
+			tempPath = makeZip(paramMap, workPath);
 			
 			//--------------------------------------------------------------------------------------------
-			// 압축 파일 다운로드
+			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			intrFileProcService1032(tempPath, fileNm, request, response);
+			fileDownload(tempPath, fileNm, request, response);
 
 			//--------------------------------------------------------------------------------------------
 			// 임시 경로 삭제
 			//--------------------------------------------------------------------------------------------
-			intrFileProcService1033(tempPath);
+			delTempPath(tempPath);
 			
 		} catch (Exception e) {
 			//
@@ -489,7 +491,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 압축 파일 생성
-	public String intrFileProcService1031(HashMap<String, Object> paramMap, String workPath) throws Exception {
+	public String makeZip(HashMap<String, Object> paramMap, String workPath) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -504,12 +506,12 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 임시파일 경로 생성
 			//--------------------------------------------------------------------------------------------
-			tempPath = this.intrFileInqyService1020(paramMap);
+			tempPath = this.setTempPath(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqyDao1010(null, paramMap);
+			defaultList = utilDao.intrFileInqy1010(null, paramMap);
 					
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				//--------------------------------------------------------------------------------------------
@@ -568,7 +570,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 경로 삭제
-	public void intrFileProcService1033(String path) throws Exception {
+	public void delTempPath(String path) throws Exception {
 		//
 		try {
 			//
@@ -585,11 +587,11 @@ public class UtilServiceImpl implements UtilService{
 						//
 						if(f.isFile()) {
 							f.delete(); // 파일 삭제
-							intrFileProcService1033(f.getParent()); // 폴더 삭제
+							delTempPath(f.getParent()); // 폴더 삭제
 							
 						} else {
 							// 폴더 인 경우 재귀 반복
-							intrFileProcService1033(f.getPath());
+							delTempPath(f.getPath());
 						}
 					}
 				} else {
@@ -605,20 +607,20 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 페이징 처리
-	public void intrPageInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void setPaging(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		String listPage = String.valueOf(paramMap.get("page"));
 		String listCnt = "0";
 		//
 		int nowPage = 1; // 페이지 기본 값 (첫 동작)
-		Integer page = this.isNull(listPage) ? Integer.parseInt(listPage) : 0; // 현재 페이지
+		Integer page = this.isNull(listPage) ? 0 : Integer.parseInt(listPage); // 현재 페이지
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mainDao.intrMainInqyDao1050(paramMap);
+			defaultList = coreDao.intrCoreInqy1023(paramMap);
 			//
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				listCnt = String.valueOf(defaultList.get(0).get("listCnt"));
@@ -649,7 +651,7 @@ public class UtilServiceImpl implements UtilService{
 			paramMap.put("blockPage",Paging.BLOCKPAGE);
 
 			// 페이지 메뉴 구성
-			String pageMenu = this.intrPageInqyService1020(paramMap);
+			String pageMenu = this.setPageMenu(paramMap);
 			model.addAttribute("pageMenu", pageMenu);
 			
 		} catch (Exception e) {
@@ -659,12 +661,12 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 페이징 메뉴 생성
-	public String intrPageInqyService1020(HashMap<String, Object> paramMap) throws Exception {
+	public String setPageMenu(HashMap<String, Object> paramMap) throws Exception {
 		// 
 		//--------------------------------------------------------------------------------------------
 		// 변수 
 		//--------------------------------------------------------------------------------------------
-		String pageUrl = this.intrPageInqyService1021(paramMap);
+		String pageUrl = this.setPageUrl(paramMap);
 		//
 		Integer nowPage = Integer.valueOf(String.valueOf(paramMap.get("nowPage")));
 		Integer listCnt = Integer.valueOf(String.valueOf(paramMap.get("listCnt"))); 
@@ -746,7 +748,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 페이지 Url 생성
-	public String intrPageInqyService1021(HashMap<String, Object> paramMap) throws Exception {
+	public String setPageUrl(HashMap<String, Object> paramMap) throws Exception {
 		//
 		String pageUrl = "";
 		StringBuilder sb = new StringBuilder();
@@ -765,7 +767,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// (REST) 기안문 조회
-	public JSONObject intrRestInqyService1010(HashMap<String, Object> paramMap) throws Exception {
+	public JSONObject intrRestInqy1010(HashMap<String, Object> paramMap) throws Exception {
 		//
 		int responseCode = 0;
 		JSONObject jObj = new JSONObject();
@@ -818,19 +820,17 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// Null 체크
-	public boolean isNull(String param) throws Exception {
+	public boolean isNull(String str) throws Exception {
 		//
-		boolean res = true;
-		String s = param.trim();
+		boolean res = false;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// Null 체크
 			//--------------------------------------------------------------------------------------------
-			if(s == null) res = false;
-			if("".equals(s)) res = false;
-			if("null".equals(s)) res = false;
-			if(s.isEmpty()) res = false;
+			if(str == null) res = true;
+			if("".equals(str)) res = true;
+			if("null".equals(str)) res = true;
 			
 		} catch (Exception e) {
 			//

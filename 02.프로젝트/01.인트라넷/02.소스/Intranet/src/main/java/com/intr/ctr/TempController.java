@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.svc.MainService;
+import com.intr.svc.CoreService;
 import com.intr.svc.TempService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
@@ -20,10 +20,10 @@ import com.intr.utils.Path;
 public class TempController {
 	//
 	@Autowired
-	TempService tempService;
-
+	CoreService coreService;
+	
 	@Autowired
-	MainService mainService;
+	TempService tempService;
 
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -36,11 +36,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqyService1010(model, paramMap);
+			tempService.intrTempInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -58,11 +59,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
+
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqyService1010(model, paramMap);
+			tempService.intrTempInqy1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -72,7 +74,7 @@ public class TempController {
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_LIST_1011;
 	}
 	
-	// 템플릿 등록 화면
+	// 템플릿 상세 화면
 	@RequestMapping("/intrTempInqy1020.do")
 	public String intrTempInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -80,29 +82,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
+			coreService.intrCoreInqy1010(model, paramMap);
 			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 관리자 템플릿 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		//
-		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_DETL_1020;
-	}
-	
-	// 템플릿 상세 화면
-	@RequestMapping("/intrTempInqy1030.do")
-	public String intrTempInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 메뉴 조회
-			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqyService1010(model, paramMap);
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 상세 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqyService1020(model, paramMap);
+			tempService.intrTempInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -110,6 +95,24 @@ public class TempController {
 		}
 		//
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_DETL_1010;
+	}
+	
+	// 템플릿 등록 화면
+	@RequestMapping("/intrTempInqy1030.do")
+	public String intrTempInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 관리자 템플릿 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_DETL_1020;
 	}
 	
 	// 템플릿 등록 처리
@@ -123,7 +126,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProcService1010(model, paramMap);
+			defaultStr = tempService.intrTempProc1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -144,7 +147,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProcService1020(model, paramMap);
+			defaultStr = tempService.intrTempProc1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -165,7 +168,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 템플릿 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProcService1030(model, paramMap);
+			defaultStr = tempService.intrTempProc1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//

@@ -7,26 +7,26 @@
 		<result property="currContSid"	column="CURR_CONT_SID"/>
 		<result property="aprvTitle" 		column="APRV_TITLE"/>
 		<result property="tempCd" 			column="TEMP_CD"/>
-		<result property="regDt" 				column="REG_DT"/>
+		<result property="regDt" 			column="REG_DT"/>
 		<result property="regTm" 			column="REG_TM"/>
 		<result property="stepCd" 			column="STEP_CD"/>
 		<result property="stepNm" 			column="STEP_NM"/>
 		<result property="empIdx" 			column="EMP_IDX"/>
-		<result property="lastAprvYn" 		column="LAST_APRV_YN"/>
+		<result property="lastAprvYn" 	column="LAST_APRV_YN"/>
 		<result property="aprvEmpIdx" 	column="APRV_EMP_IDX"/>
-		<result property="aprvRsltDt" 		column="APRV_RSLT_DT"/>
+		<result property="aprvRsltDt" 	column="APRV_RSLT_DT"/>
 		<result property="aprvRsltTm" 	column="APRV_RSLT_TM"/>
 		<result property="empNm" 			column="EMP_NM"/>
 		<result property="deptCd" 			column="DEPT_CD"/>
-		<result property="deptNm" 			column="DEPT_NM"/>
+		<result property="deptNm" 		column="DEPT_NM"/>
 		<result property="currStepNm" 	column="CURR_STEP_NM"/>
-		<result property="efctSdt" 			column="EFCT_SDT"/>
-		<result property="efctEdt" 			column="EFCT_EDT"/>
+		<result property="efctSdt" 		column="EFCT_SDT"/>
+		<result property="efctEdt" 		column="EFCT_EDT"/>
 		<result property="aprvCont" 		column="APRV_CONT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 	
-	<select id="intrAprvInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1010 : 기안 목록 조회 */
+	<select id="intrAprvInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1011 : 기안 목록 조회 */
 		SELECT 
 			    	SUB_DATA.* 
 		    	,	CASE WHEN SUB_DATA.STEP_CD IN ('STEP_0004','STEP_0005')
@@ -112,142 +112,8 @@
 		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
 	</select>
 	
-	<select id="intrAprvInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
-		/* intrAprvInqyDao1020 : 결재 상세 조회 */
-			SELECT 
-			    	APRV.CONT_ID
-			    ,	APRV.CURR_CONT_SID 
-			    ,   APRV.EMP_IDX
-                ,   EMP.EMP_NM
-                ,	EMP.DEPT_CD
-                ,	DEPT.DEPT_NM
-                ,	GRDE.GRADE_NM
-			    ,	APRV.APRV_TITLE 
-			    ,	APRV.APRV_CONT 
-			    ,	APRV.TEMP_CD 
-			    ,	APRV.REG_DT
-			    ,	APRV.REG_TM
-			    ,	LINE.STEP_CD
-			    ,	LINE.APRV_EMP_IDX
-			    ,	LINE.LAST_APRV_YN
-			    ,	LINE.APRV_RSLT_DT
-			    ,	LINE.APRV_RSLT_TM
-			    ,	STEP.STEP_NM
-			    ,	APRV.EFCT_SDT
-			    ,	APRV.EFCT_EDT
-		    	,	CASE WHEN LINE.STEP_CD IN ('STEP_0004','STEP_0005')
-				    	THEN STEP.STEP_NM
-				    	ELSE 
-				    		CASE WHEN LINE.LAST_APRV_YN = 'N'
-	                 	       THEN STEP.STEP_NM || ' 진행 중'
-			                ELSE 
-            	                CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
-                	                THEN STEP.STEP_NM || ' 완료' 
-                    	            ELSE STEP.STEP_NM || ' 진행 중'
-                        		END 
-                        	END
-                        END CURR_STEP_NM		
-        FROM INTR_APRV APRV
-		INNER JOIN INTR_APRV_LINE LINE
-			ON LINE.CONT_ID = APRV.CONT_ID
-			AND LINE.CONT_SID = APRV.CURR_CONT_SID
-		LEFT OUTER JOIN INTR_STEP STEP
-			ON STEP.STEP_CD = LINE.STEP_CD
-        LEFT OUTER JOIN INTR_EMP EMP
-            ON EMP.EMP_IDX = APRV.EMP_IDX
-        LEFT OUTER JOIN INTR_DEPT DEPT
-            ON DEPT.DEPT_CD = EMP.DEPT_CD
-        LEFT OUTER JOIN INTR_GRADE GRDE
-            ON GRDE.GRADE_CD = EMP.GRADE_CD
-		WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
-	</select>
-
-	<select id="intrAprvInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1040 : 현재 결재 정보 조회 */
-		WITH NEXT_LINE AS
-    (
-        SELECT 
-                DATA.CONT_ID
-            ,   DATA.CONT_SID AS NEXT_CONT_SID
-            ,   DATA.APRV_RSLT_DT AS NEXT_RSLT_DT
-        FROM (
-                SELECT 
-                        APRV.CONT_ID, 
-                        LINE.CONT_SID,
-                        LINE.APRV_RSLT_DT,
-                        ROW_NUMBER() OVER(ORDER BY CONT_SID ASC) AS NUM
-                FROM INTR_APRV APRV
-                LEFT OUTER JOIN INTR_APRV_LINE LINE
-                    ON LINE.CONT_ID = APRV.CONT_ID
-                    AND LINE.STEP_CD = 'STEP_0002'
-                WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
-                ORDER BY LINE.CONT_SID ASC    
-            ) DATA
-        WHERE DATA.NUM = 1
-        )
-		SELECT 
-                DATA.*,
-                NL.*,
-                CASE WHEN NL.NEXT_CONT_SID = DATA.CONT_SID AND NEXT_RSLT_DT IS NULL 
-                    THEN 'Y' ELSE 'N' END AS CANCEL_YN                    
-        FROM 
-			(
-				SELECT
-							LINE.CONT_ID
-						, 	LINE.CONT_SID
-						,	LINE.STEP_CD
-						,	APRV.EMP_IDX
-						,	LINE.APRV_EMP_IDX
-						,	LINE.APRV_RSLT_DT
-						,	LINE.APRV_RSLT_TM
-						,	LINE.APRV_RSLT_RESN
-						,	LINE.USE_YN
-						, 	ROW_NUMBER() OVER(ORDER BY CONT_SID ASC) AS NUM
-				FROM INTR_APRV_LINE LINE
-				INNER JOIN INTR_APRV APRV
-					ON APRV.CONT_ID = LINE.CONT_ID
-					AND LINE.CONT_SID = APRV.CURR_CONT_SID
-			WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
-			) DATA 
-            INNER JOIN NEXT_LINE NL
-                ON NL.CONT_ID = DATA.CONT_ID
-		WHERE DATA.NUM = 1
-	</select>
-	
-	<select id="intrAprvInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1030 : 결재선 목록 조회 */
-		SELECT  
-		        LINE.CONT_ID
-		    ,   LINE.CONT_SID
-		    ,   RANK() OVER(ORDER BY LINE.CONT_SID ASC) AS NUM
-		    ,   LINE.STEP_CD
-		    ,   STEP.STEP_NM
-		    ,   LINE.APRV_EMP_IDX
-		    ,   EMP.EMP_NM
-		    ,   EMP.DEPT_CD
-		    ,   DEPT.DEPT_NM
-		    ,   EMP.GRADE_CD
-		    ,   GRDE.GRADE_NM
-		    ,   LINE.APRV_RSLT_DT
-		    ,   LINE.APRV_RSLT_TM
-		    ,   LINE.APRV_RSLT_RESN
-		    ,	LINE.USE_YN
-		    ,	LINE.DISP_ORDER
-		FROM INTR_APRV_LINE LINE
-		LEFT OUTER JOIN INTR_STEP STEP
-			ON LINE.STEP_CD = STEP.STEP_CD
-		LEFT OUTER JOIN INTR_EMP EMP
-			ON EMP.EMP_IDX = LINE.APRV_EMP_IDX
-		LEFT OUTER JOIN INTR_DEPT DEPT
-			ON DEPT.DEPT_CD = EMP.DEPT_CD
-		LEFT OUTER JOIN INTR_GRADE GRDE
-			ON GRDE.GRADE_CD = EMP.GRADE_CD
-		WHERE LINE.CONT_ID = #{contId, jdbcType=VARCHAR}
-		ORDER BY LINE.CONT_SID ASC
-	</select>
-	
-	<select id="intrAprvInqyDao1050" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1050 : 결재 목록 조회 */
+	<select id="intrAprvInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2011 : 결재 목록 조회 */
 		WITH MAIN_LINE AS
 		(
 		    SELECT 
@@ -347,8 +213,8 @@
 		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
 	</select>
 	
-	<select id="intrAprvInqyDao1060" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1060 : 나의 기안 목록 조회 */
+	<select id="intrAprvInqy1031" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1031 : 나의 기안 목록 조회 */
 		SELECT 
 			    	SUB_DATA.* 
 		    	,	CASE WHEN SUB_DATA.STEP_CD IN ('STEP_0004','STEP_0005')
@@ -399,8 +265,8 @@
 		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
 	</select>
 	
-	<select id="intrAprvInqyDao1070" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqyDao1070 : 나의 결재 목록 조회 */
+	<select id="intrAprvInqy1041" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1041 : 나의 결재 목록 조회 */
 		WITH MAIN_LINE AS
 		(
 		    SELECT 
@@ -471,8 +337,142 @@
 		ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC	
 	</select>
 	
-		<insert id="intrAprvProcDao1010" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1010 : 품의문 기본 정보 등록 처리 */
+	<select id="intrAprvInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
+		/* intrAprvInqy1021 : 결재 상세 조회 */
+			SELECT 
+			    	APRV.CONT_ID
+			    ,	APRV.CURR_CONT_SID 
+			    ,   APRV.EMP_IDX
+                ,   EMP.EMP_NM
+                ,	EMP.DEPT_CD
+                ,	DEPT.DEPT_NM
+                ,	GRDE.GRADE_NM
+			    ,	APRV.APRV_TITLE 
+			    ,	APRV.APRV_CONT 
+			    ,	APRV.TEMP_CD 
+			    ,	APRV.REG_DT
+			    ,	APRV.REG_TM
+			    ,	LINE.STEP_CD
+			    ,	LINE.APRV_EMP_IDX
+			    ,	LINE.LAST_APRV_YN
+			    ,	LINE.APRV_RSLT_DT
+			    ,	LINE.APRV_RSLT_TM
+			    ,	STEP.STEP_NM
+			    ,	APRV.EFCT_SDT
+			    ,	APRV.EFCT_EDT
+		    	,	CASE WHEN LINE.STEP_CD IN ('STEP_0004','STEP_0005')
+				    	THEN STEP.STEP_NM
+				    	ELSE 
+				    		CASE WHEN LINE.LAST_APRV_YN = 'N'
+	                 	       THEN STEP.STEP_NM || ' 진행 중'
+			                ELSE 
+            	                CASE WHEN LINE.APRV_RSLT_DT IS NOT NULL
+                	                THEN STEP.STEP_NM || ' 완료' 
+                    	            ELSE STEP.STEP_NM || ' 진행 중'
+                        		END 
+                        	END
+                        END CURR_STEP_NM		
+        FROM INTR_APRV APRV
+		INNER JOIN INTR_APRV_LINE LINE
+			ON LINE.CONT_ID = APRV.CONT_ID
+			AND LINE.CONT_SID = APRV.CURR_CONT_SID
+		LEFT OUTER JOIN INTR_STEP STEP
+			ON STEP.STEP_CD = LINE.STEP_CD
+        LEFT OUTER JOIN INTR_EMP EMP
+            ON EMP.EMP_IDX = APRV.EMP_IDX
+        LEFT OUTER JOIN INTR_DEPT DEPT
+            ON DEPT.DEPT_CD = EMP.DEPT_CD
+        LEFT OUTER JOIN INTR_GRADE GRDE
+            ON GRDE.GRADE_CD = EMP.GRADE_CD
+		WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="intrAprvInqy2012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2012 : 결재선 목록 조회 */
+		SELECT  
+		        LINE.CONT_ID
+		    ,   LINE.CONT_SID
+		    ,   RANK() OVER(ORDER BY LINE.CONT_SID ASC) AS NUM
+		    ,   LINE.STEP_CD
+		    ,   STEP.STEP_NM
+		    ,   LINE.APRV_EMP_IDX
+		    ,   EMP.EMP_NM
+		    ,   EMP.DEPT_CD
+		    ,   DEPT.DEPT_NM
+		    ,   EMP.GRADE_CD
+		    ,   GRDE.GRADE_NM
+		    ,   LINE.APRV_RSLT_DT
+		    ,   LINE.APRV_RSLT_TM
+		    ,   LINE.APRV_RSLT_RESN
+		    ,	LINE.USE_YN
+		    ,	LINE.DISP_ORDER
+		FROM INTR_APRV_LINE LINE
+		LEFT OUTER JOIN INTR_STEP STEP
+			ON LINE.STEP_CD = STEP.STEP_CD
+		LEFT OUTER JOIN INTR_EMP EMP
+			ON EMP.EMP_IDX = LINE.APRV_EMP_IDX
+		LEFT OUTER JOIN INTR_DEPT DEPT
+			ON DEPT.DEPT_CD = EMP.DEPT_CD
+		LEFT OUTER JOIN INTR_GRADE GRDE
+			ON GRDE.GRADE_CD = EMP.GRADE_CD
+		WHERE LINE.CONT_ID = #{contId, jdbcType=VARCHAR}
+		ORDER BY LINE.CONT_SID ASC
+	</select>
+	
+	<select id="intrAprvInqy2013" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2013 : 현재 결재 정보 조회 */
+		WITH NEXT_LINE AS
+    (
+        SELECT 
+                DATA.CONT_ID
+            ,   DATA.CONT_SID AS NEXT_CONT_SID
+            ,   DATA.APRV_RSLT_DT AS NEXT_RSLT_DT
+        FROM (
+                SELECT 
+                        APRV.CONT_ID, 
+                        LINE.CONT_SID,
+                        LINE.APRV_RSLT_DT,
+                        ROW_NUMBER() OVER(ORDER BY CONT_SID ASC) AS NUM
+                FROM INTR_APRV APRV
+                LEFT OUTER JOIN INTR_APRV_LINE LINE
+                    ON LINE.CONT_ID = APRV.CONT_ID
+                    AND LINE.STEP_CD = 'STEP_0002'
+                WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
+                ORDER BY LINE.CONT_SID ASC    
+            ) DATA
+        WHERE DATA.NUM = 1
+        )
+		SELECT 
+                DATA.*,
+                NL.*,
+                CASE WHEN NL.NEXT_CONT_SID = DATA.CONT_SID AND NEXT_RSLT_DT IS NULL 
+                    THEN 'Y' ELSE 'N' END AS CANCEL_YN                    
+        FROM 
+			(
+				SELECT
+							LINE.CONT_ID
+						, 	LINE.CONT_SID
+						,	LINE.STEP_CD
+						,	APRV.EMP_IDX
+						,	LINE.APRV_EMP_IDX
+						,	LINE.APRV_RSLT_DT
+						,	LINE.APRV_RSLT_TM
+						,	LINE.APRV_RSLT_RESN
+						,	LINE.USE_YN
+						, 	ROW_NUMBER() OVER(ORDER BY CONT_SID ASC) AS NUM
+				FROM INTR_APRV_LINE LINE
+				INNER JOIN INTR_APRV APRV
+					ON APRV.CONT_ID = LINE.CONT_ID
+					AND LINE.CONT_SID = APRV.CURR_CONT_SID
+			WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
+			) DATA 
+            INNER JOIN NEXT_LINE NL
+                ON NL.CONT_ID = DATA.CONT_ID
+		WHERE DATA.NUM = 1
+	</select>
+	
+	<insert id="intrAprvProc1011" parameterType="java.util.HashMap" >
+		/* intrAprvProc1011 : 품의문 기본 정보 등록 처리 */
 		INSERT INTO INTR_APRV
 		(
 				CONT_ID
@@ -511,8 +511,8 @@
 		)
 	</insert>
 	
-	<insert id="intrAprvProcDao1020" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1020 : 품의문 결재선 등록 처리 */
+	<insert id="intrAprvProc1021" parameterType="java.util.HashMap" >
+		/* intrAprvProc1021 : 품의문 결재선 등록 처리 */
 		INSERT INTO INTR_APRV_LINE
 		(
 				CONT_ID
@@ -555,8 +555,8 @@
 		)
 	</insert>
 	
-	<update id="intrAprvProcDao1030" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1030 : RSLT 데이터 NULL 처리 */
+	<update id="intrAprvProc1031" parameterType="java.util.HashMap" >
+		/* intrAprvProc1031 : RSLT 데이터 NULL 처리 */
 		UPDATE INTR_APRV_LINE
 			SET 	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
 				,	APRV_RSLT_TM = TO_CHAR(SYSDATE,'HH24MISS')
@@ -565,8 +565,8 @@
 			AND CONT_SID = #{currContSid, jdbcType=VARCHAR}
 	</update>	
 
-	<update id="intrAprvProcDao1040" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1040 : CURR_CONT_SID 현 단계로 처리 */
+	<update id="intrAprvProc1041" parameterType="java.util.HashMap" >
+		/* intrAprvProc1041 : CURR_CONT_SID 현 단계로 처리 */
 		UPDATE INTR_APRV APRV
 			SET APRV.CURR_CONT_SID = 
 				(
@@ -604,15 +604,15 @@
 				WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
 	</update>	
 	
-	<update id="intrAprvProcDao1050" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1050 : 현 단계 회수로 변경 (INTR_APRV) */
+	<update id="intrAprvProc1061" parameterType="java.util.HashMap" >
+		/* intrAprvProc1061 : 현 단계 회수로 변경 (INTR_APRV) */
 		UPDATE INTR_APRV
 			SET 	CURR_CONT_SID = #{tempAprvSno, jdbcType=VARCHAR}
 		WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 	</update>
 
-	<update id="intrAprvProcDao1060" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1060 : 현 단계 회수로 변경 (INTR_APRV_LINE)) */
+	<update id="intrAprvProc1062" parameterType="java.util.HashMap" >
+		/* intrAprvProc1062 : 현 단계 회수로 변경 (INTR_APRV_LINE)) */
 		UPDATE INTR_APRV_LINE
 			SET 	STEP_CD = #{tempStepCd, jdbcType=VARCHAR}
 				,	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
@@ -621,15 +621,15 @@
 			AND CONT_SID = '0001'
 	</update>
 
-	<update id="intrAprvProcDao1070" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1070 : 현 단계 반송으로 변경 (INTR_APRV) */
+	<update id="intrAprvProc1051" parameterType="java.util.HashMap" >
+		/* intrAprvProc1051 : 현 단계 반송으로 변경 (INTR_APRV) */
 		UPDATE INTR_APRV
 			SET 	CURR_CONT_SID = #{currContSid, jdbcType=VARCHAR}
 		WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 	</update>
 
-	<update id="intrAprvProcDao1080" parameterType="java.util.HashMap" >
-		/* intrAprvProcDao1080 : 현 단계 반송으로 변경 (INTR_APRV_LINE)) */
+	<update id="intrAprvProc1052" parameterType="java.util.HashMap" >
+		/* intrAprvProc1052 : 현 단계 반송으로 변경 (INTR_APRV_LINE)) */
 		UPDATE INTR_APRV_LINE
 			SET 	STEP_CD = #{tempStepCd, jdbcType=VARCHAR}
 				,	APRV_RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
@@ -638,21 +638,4 @@
 		WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
 			AND CONT_SID = #{currContSid, jdbcType=VARCHAR}
 	</update>
-	
-		<select id="intrAprvInqyDao1090" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
-		/* intrAprvInqyDao1090 : 기안문 상세 조회 */
-		SELECT
-					APRV.CONT_ID
-				,	APRV.APRV_CONT
-				,	EMP.EMP_IDX
-				,	EMP.EMP_NM
-				,	APRV.APRV_TITLE
-				,	APRV.APRV_CONT
-				,	APRV.EFCT_SDT
-				,	APRV.EFCT_EDT
-		FROM INTR_APRV APRV
-		LEFT OUTER JOIN INTR_EMP EMP
-			ON EMP.EMP_IDX = APRV.EMP_IDX
-		WHERE APRV.CONT_ID = #{contId, jdbcType=VARCHAR}
-	</select>
 </mapper>

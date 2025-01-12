@@ -35,7 +35,7 @@
 			                                    	<div class="emp_profile">
 			                                        	<c:choose>
 			                                        		<c:when test="${not empty defaultList}">
-				                                 				<img id="empImg" class="emp_img" width="150" height="150" src="intrEmpInqy1012.do?deptNm=${defaultInfo.deptNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
+				                                 				<img id="empImg" class="emp_img" width="150" height="150" src="intrEmpInqy1099.do?deptNm=${defaultInfo.deptNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
 			                                        		</c:when>
 			                                        		<c:otherwise>
 					                                        	<img id="empImg" class="emp_img" width="150" height="150" src="resources/images/icon/icon_emp.png">

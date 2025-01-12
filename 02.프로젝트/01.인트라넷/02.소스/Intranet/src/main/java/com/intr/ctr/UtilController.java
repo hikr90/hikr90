@@ -34,14 +34,14 @@ public class UtilController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 파일 다운로드
-	@RequestMapping("/intrFileProc1020.do")
-	public void intrFileProc1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/fileDownload.do")
+	public void fileDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.intrFileProcService1020(model, paramMap, request, response);
+			utilService.fileDownload(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -50,14 +50,14 @@ public class UtilController {
 	}
 	
 	// 전체 다운로드
-	@RequestMapping("/intrFileProc1030.do")
-	public void intrFileProc1030(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/zipDownload.do")
+	public void zipDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 전체 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.intrFileProcService1030(model, paramMap, request, response);
+			utilService.zipDownload(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -66,9 +66,9 @@ public class UtilController {
 	}
 
 	// 메일 전송
-	@RequestMapping(value="/intrMailProc1010.do")
+	@RequestMapping(value="/sendMail.do")
 	@ResponseBody
-	public String intrMailProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String sendMail(Model model, @RequestParam HashMap<String, Object> paramMap) {
 		//
 		String defaultStr = "";
 		//
@@ -76,7 +76,7 @@ public class UtilController {
 			//--------------------------------------------------------------------------------------------
 			// 메일 전송
 			//--------------------------------------------------------------------------------------------
-			defaultStr = utilService.intrMailProcService1010(model, paramMap);
+			defaultStr = utilService.sendMail(model, paramMap);
 			
 		} catch (Exception e) {
 			//

@@ -15,129 +15,121 @@ public class AprvDao {
 	SqlSession sqlsession;
 
 	// 기안 목록 조회
-	public List<HashMap<String, Object>> intrAprvInqyDao1010(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAprvInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("aprv.intrAprvInqyDao1010", paramMap);
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy1011", paramMap);
 		return defaultList;
 	}
 
 	// 결재 상세 정보 조회
-	public HashMap<String, Object> intrAprvInqyDao1020(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrAprvInqy1021(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqyDao1020", paramMap);
+		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqy1021", paramMap);
 		return defaultInfo;
-	}
-
-	// 결재선 목록 조회
-	public List<HashMap<String, Object>> intrAprvInqyDao1030(Model model, HashMap<String, Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("aprv.intrAprvInqyDao1030", paramMap);
-		return defaultList;
 	}
 	
-	// 현재 결재 상태 조회
-	public HashMap<String, Object> intrAprvInqyDao1040(Model model, HashMap<String, Object> paramMap) {
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqyDao1040", paramMap);
-		return defaultInfo;
-	}
-
-	// 결재 목록 조회
-	public List<HashMap<String, Object>> intrAprvInqyDao1050(Model model, HashMap<String, Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("aprv.intrAprvInqyDao1050", paramMap);
-		return defaultList;
-	}
-
 	// 나의 기안 목록 조회
-	public List<HashMap<String, Object>> intrAprvInqyDao1060(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAprvInqy1031(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("aprv.intrAprvInqyDao1060", paramMap);
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy1031", paramMap);
 		return defaultList;
 	}
 
 	// 나의 결재 목록 조회
-	public List<HashMap<String, Object>> intrAprvInqyDao1070(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAprvInqy1041(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("aprv.intrAprvInqyDao1070", paramMap);
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy1041", paramMap);
+		return defaultList;
+	}
+
+	// 결재 목록 조회
+	public List<HashMap<String, Object>> intrAprvInqy2011(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy2011", paramMap);
 		return defaultList;
 	}
 	
+	// 결재선 목록 조회
+	public List<HashMap<String, Object>> intrAprvInqy2012(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy2012", paramMap);
+		return defaultList;
+	}
+	
+	// 현재 결재 상태 조회
+	public HashMap<String, Object> intrAprvInqy2013(Model model, HashMap<String, Object> paramMap) {
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqy2013", paramMap);
+		return defaultInfo;
+	}
+
 	// 기안문 정보 등록
-	public int intrAprvProcDao1010(HashMap<String, Object> tempMap) {
+	public int intrAprvProc1011(HashMap<String, Object> tempMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("aprv.intrAprvProcDao1010", tempMap);
+		resInt = sqlsession.insert("aprv.intrAprvProc1011", tempMap);
 		return resInt;
 	}
 	
 	// 기안문 결재선 등록
-	public int intrAprvProcDao1020(HashMap<String, Object> tempMap) {
+	public int intrAprvProc1021(HashMap<String, Object> tempMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("aprv.intrAprvProcDao1020", tempMap);
+		resInt = sqlsession.insert("aprv.intrAprvProc1021", tempMap);
 		return resInt;
 	}
 	
 	// RSLT 데이터 NULL 처리
-	public int intrAprvProcDao1030(Model model, HashMap<String, Object> paramMap) {
+	public int intrAprvProc1042(Model model, HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1030", paramMap);
-		return resInt;
-	}
-
-	// CURR_CONT_SID 현 단계로 처리
-	public int intrAprvProcDao1040(Model model, HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1040", paramMap);
-		return resInt;
-	}
-
-	// 현 단계 회수로 변경 
-	public int intrAprvProcDao1050(Model model, HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1050", paramMap);
-		return resInt;
-	}
-
-	// 현 단계 회수로 변경 
-	public int intrAprvProcDao1060(Model model, HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1060", paramMap);
-		return resInt;
-	}
-
-	// 현 단계 반송으로 변경 
-	public int intrAprvProcDao1070(Model model, HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1070", paramMap);
-		return resInt;
-	}
-
-	// 현 단계 반송으로 변경 
-	public int intrAprvProcDao1080(Model model, HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("aprv.intrAprvProcDao1080", paramMap);
+		resInt = sqlsession.update("aprv.intrAprvProc1031", paramMap);
 		return resInt;
 	}
 	
-	// 기안 목록 건수 조회
-	public HashMap<String, Object> intrAprvInqyDao1080(Model model, HashMap<String, Object> paramMap) {
+	// CURR_CONT_SID 현 단계로 처리
+	public int intrAprvProc1041(Model model, HashMap<String, Object> paramMap) {
 		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqyDao1080", paramMap);
-		return defaultInfo;
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc1041", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 반송으로 변경 
+	public int intrAprvProc1051(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc1051", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 반송으로 변경 
+	public int intrAprvProc1052(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc1052", paramMap);
+		return resInt;
+	}
+	
+	// 현 단계 회수로 변경 
+	public int intrAprvProc1061(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc1061", paramMap);
+		return resInt;
+	}
+
+	// 현 단계 회수로 변경 
+	public int intrAprvProc1062(Model model, HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc1062", paramMap);
+		return resInt;
 	}
 }
