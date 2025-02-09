@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.BoardService;
 import com.intr.svc.CoreService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -25,6 +26,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	UtilService utilService;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -47,8 +51,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 공지사항 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_LIST_1010;
 	}
@@ -66,8 +70,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 공지사항 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1020;
 	}
@@ -90,8 +94,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 관리자 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1010;
 	}
@@ -114,8 +118,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 관리자 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1030;
 	}
@@ -138,8 +142,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_LIST_2010;
 	}
@@ -162,8 +166,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_2010;
 	}
@@ -171,7 +175,7 @@ public class BoardController {
 	// 공지사항 등록 처리
 	@RequestMapping("/intrBoardProc1010.do")
 	@ResponseBody
-	public String intrBoardProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrBoardProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -184,8 +188,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return defaultStr;
 	}
@@ -193,7 +197,7 @@ public class BoardController {
 	// 공지사항 삭제 처리
 	@RequestMapping("/intrBoardProc1020.do")
 	@ResponseBody
-	public String intrBoardProc1020(Model model, @RequestParam String [] delIdxArr) {
+	public String intrBoardProc1020(Model model, @RequestParam String [] delIdxArr, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -206,8 +210,8 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return defaultStr;
 	}
@@ -215,7 +219,7 @@ public class BoardController {
 	// 공지사항 수정 처리
 	@RequestMapping("/intrBoardProc1030.do")
 	@ResponseBody
-	public String intrBoardProc1030(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) {
+	public String intrBoardProc1030(Model model, @RequestParam HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -228,10 +232,9 @@ public class BoardController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 공지사항 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return defaultStr;
 	}
-
 }

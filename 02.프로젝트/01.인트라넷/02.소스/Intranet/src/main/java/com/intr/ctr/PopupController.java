@@ -46,7 +46,7 @@ public class PopupController {
 
 	// 템플릿 조회
 	@RequestMapping("/intrPopupInqy1010.do")
-	public String intrPopupInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public String intrPopupInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -57,6 +57,7 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 템플릿 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_1011;
@@ -64,7 +65,7 @@ public class PopupController {
 
 	// 아이디 찾기 팝업 조회
 	@RequestMapping("/intrPopupInqy1020.do")
-	public String intrPopupInqy1020(Model model) {
+	public String intrPopupInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//
@@ -72,21 +73,22 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(아이디 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_1021;
 	}
 
 	// 비밀번호 찾기 팝업 조회 
 	@RequestMapping("/intrPopupInqy1030.do")
-	public String intrPopupInqy1030(Model model) {
+	public String intrPopupInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(비밀번호 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_1022;
@@ -94,7 +96,7 @@ public class PopupController {
 	
 	// 결재선 팝업 선택 조회
 	@RequestMapping("/intrPopupInqy1040.do")
-	public String intrPopupInqy1040(Model model, HashMap<String, Object> paramMap) {
+	public String intrPopupInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -105,15 +107,15 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(결재선) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_1031;
 	}
 	
 	// 결재선 팝업 목록 조회
 	@RequestMapping("/intrPopupInqy1050.do")
-	public String intrPopupInqy1050(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrPopupInqy1050(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -127,15 +129,15 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(결재선) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_1032;
 	}
 	
 	// 결재 의견 팝업
 	@RequestMapping("/intrPopupInqy1060.do")
-	public String intrPopupInqy1060(Model model, HashMap<String, Object> paramMap) {
+	public String intrPopupInqy1060(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//
@@ -143,9 +145,9 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 의견 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_POPUP + Jsp.INTR_POPUP_INQY_2011;
 	}
-
 }

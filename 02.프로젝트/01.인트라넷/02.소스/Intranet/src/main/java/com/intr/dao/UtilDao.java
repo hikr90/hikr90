@@ -61,4 +61,12 @@ public class UtilDao {
 		res = sqlsession.update("util.intrFileProc1022", tempMap);
 		return res;
 	}
+	
+	// 예외 로그 저장
+	public int intrExptProc1010(HashMap<String, Object> tempMap) {
+		//
+		int res = 0;
+		res = sqlsession.insert("util.intrExptProc1010", tempMap);
+		return res;
+	}
 }

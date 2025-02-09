@@ -50,6 +50,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_1010;
@@ -73,6 +74,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_1011;
@@ -91,6 +93,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1020;
@@ -114,6 +117,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1010;
@@ -137,6 +141,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1030;
@@ -165,6 +170,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_2010;
@@ -188,6 +194,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_2011;
@@ -216,6 +223,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 사용자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_3010;
@@ -244,6 +252,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 사용자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_3011;
@@ -252,7 +261,7 @@ public class AuthController {
 	// 권한 등록 처리
 	@RequestMapping("/intrAuthProc1010.do")
 	@ResponseBody
-	public String intrAuthProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrAuthProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -265,6 +274,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -274,7 +284,7 @@ public class AuthController {
 	// 권한 수정 처리
 	@RequestMapping("/intrAuthProc1020.do")
 	@ResponseBody
-	public String intrAuthProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrAuthProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -287,6 +297,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -295,7 +306,7 @@ public class AuthController {
 	// 권한 삭제 처리
 	@RequestMapping("/intrAuthProc1030.do")
 	@ResponseBody
-	public String intrAuthProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrAuthProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -308,6 +319,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 권한 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -316,7 +328,7 @@ public class AuthController {
 	// 메뉴 권한 저장 처리
 	@RequestMapping("/intrAuthProc2010.do")
 	@ResponseBody
-	public String intrAuthProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrAuthProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -329,6 +341,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메뉴 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -337,7 +350,7 @@ public class AuthController {
 	// 사용자 권한 저장 처리
 	@RequestMapping("/intrAuthProc3010.do")
 	@ResponseBody
-	public String intrAuthProc3010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrAuthProc3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -350,6 +363,7 @@ public class AuthController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 사용자 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

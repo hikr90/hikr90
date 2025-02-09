@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public interface UtilService {
 	// 공통
 	boolean isNull(String param) throws Exception;
+	String nullToDefault(String param) throws Exception;
 	
 	// 페이지
 	void setPaging(Model model, HashMap<String, Object> paramMap) throws Exception; // 페이징 처리
@@ -30,4 +31,7 @@ public interface UtilService {
 	
 	// 메일 전송 관련
 	String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception;
+	
+	//
+	void exptProc(HashMap<String, Object> paramMap, Exception e) throws Exception;
 }

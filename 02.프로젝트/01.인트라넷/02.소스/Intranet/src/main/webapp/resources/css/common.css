@@ -410,7 +410,7 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 /* ================== Tree ================== */
 .tree .icon_total { background: url("../images/icon/icon_total.png"); background-size: cover; width: 20px; height: 20px; display: inline-block; vertical-align: middle; }
-.tree .icon_folder { background: url("../images/icon/icon_folder.png"); background-size: cover; width: 15px; height: 15px; display: inline-block; vertical-align: middle; }
+.icon_folder { background: url("../images/icon/icon_folder.png"); background-size: cover; width: 15px; height: 15px; display: inline-block; vertical-align: middle; }
 .tree .icon_list { background: url("../images/icon/icon_file.png"); background-size: cover; width: 15px; height: 15px; display: inline-block; vertical-align: middle; }
 .tree li { margin: 15px; margin-left: 35px; list-style: none; }
 .tree button { vertical-align: middle; margin-right: 10px; margin-left: -15px; border: 1px solid #575757; width: 15px; height: 15px; }

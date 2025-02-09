@@ -6,14 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:property-placeholder location="classpath:config/mybatis/db.properties"/>
-
+	<!-- Database Info
+			dev	: jdbc:oracle:thin:@10.33.176.80:1521:xe
+			local 	: jdbc:oracle:thin:@localhost:1521:xe
+	-->
  	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${driver}"/> 
-		<property name="url" value="${url}"/>
-		<property name="username" value="${user}"/>
-		<property name="password" value="${password}"/>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="intr"/>
+		<property name="password" value="1111"/>
 		<property name="maxActive" value="20"/>
 	</bean>
 

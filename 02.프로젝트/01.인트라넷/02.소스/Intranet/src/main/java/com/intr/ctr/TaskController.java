@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.CoreService;
 import com.intr.svc.TaskService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -27,6 +28,9 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 
+	@Autowired
+	UtilService utilService;
+	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -48,6 +52,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 일지 작성 조회 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		
 		//
@@ -72,6 +77,7 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 목록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_TASK + Jsp.INTR_TASK_LIST_2010;
@@ -80,7 +86,7 @@ public class TaskController {
 	// 업무일지 저장 처리
 	@RequestMapping("/intrTaskProc1010.do")
 	@ResponseBody
-	public String intrTaskProc1010(Model model, @RequestBody List<HashMap<String, Object>> paramList) throws Exception {
+	public String intrTaskProc1010(Model model, @RequestBody List<HashMap<String, Object>> paramList, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -93,9 +99,9 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
 	}
-	
 }

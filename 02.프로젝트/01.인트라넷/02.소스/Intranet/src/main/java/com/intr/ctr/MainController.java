@@ -26,6 +26,7 @@ import com.intr.svc.CoreService;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -60,6 +61,9 @@ public class MainController {
 	AprvDao aprvDao;
 	
 	@Autowired
+	UtilService utilService;
+	
+	@Autowired
 	HttpSession session;
 	
 	// 
@@ -67,7 +71,7 @@ public class MainController {
 	
 	// 로그인 화면 조회
 	@RequestMapping(value={"/","/intrMainInqy1010.do"})
-	public String intrMainInqy1010(Model model) throws Exception {
+	public String intrMainInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -78,6 +82,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_LOGIN + Jsp.INTR_LOGIN_INQY_1010;
@@ -121,6 +126,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_MAIN + Jsp.INTR_MAIN_INQY_1010;
@@ -159,8 +165,8 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return Path.VIEW_PATH_MAIN + Jsp.INTR_MAIN_INQY_2010;
 	}
@@ -188,6 +194,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 마이페이지 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_MYPAGE + Jsp.INTR_MYPAGE_INQY_1010;
@@ -196,7 +203,7 @@ public class MainController {
 	// 로그인 처리
 	@RequestMapping("/intrMainProc1010.do")
 	@ResponseBody
-	public String intrMainProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrMainProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -209,8 +216,8 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 처리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
-		
 		//
 		return defaultStr;
 	}
@@ -230,6 +237,7 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그아웃 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return "redirect:/";

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="core">
 	<select id="intrCoreInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1010 : 메뉴 조회 */
-		WITH A_DATA AS 
+		/* intrCoreInqy1011 : 메뉴 조회 */
+		WITH M_DATA AS 
 			(
 				SELECT 
 							DATA.*
@@ -13,7 +13,7 @@
 										AM.MENU_CD
 								FROM INTR_AUTH A
 								INNER JOIN INTR_EMP E
-									ON E.EMP_IDX = #{setEmpIdx, jdbcType=VARCHAR}
+									ON E.EMP_IDX = #{idxSet, jdbcType=VARCHAR}
 									AND A.USE_YN = 'Y'
                                 INNER JOIN INTR_AUTH_EMP AE
                                     ON AE.EMP_IDX = E.EMP_IDX
@@ -21,6 +21,7 @@
                                     ON AM.AUTH_CD = AE.AUTH_CD
                                 GROUP BY AM.MENU_CD
 							) DATA
+				WHERE 1=1
 			)
 			SELECT 
 						DATA.*
@@ -38,16 +39,16 @@
 						    ,   M.USE_YN
 						    ,   M.DISP_ORDER
 						    ,   M.REMARK
-					FROM A_DATA
+					FROM M_DATA
 					INNER JOIN INTR_MENU M
-					ON M.MENU_CD = A_DATA.MENU_CD
+					ON M.MENU_CD = M_DATA.MENU_CD
 					LEFT OUTER JOIN INTR_MENU UPPR_M
 						ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
 					WHERE 1=1
-						<if test="menuType != null and menuType != '' and menuType != 1">
+						<if test="menuType == 0">
 							AND M.MENUTYPE_CD = '0'
 						</if>
-						<if test="menuType != null and menuType != '' and menuType != 0">
+						<if test="menuType == 1">
 							AND M.MENUTYPE_CD = '1'
 						</if>
 				) DATA

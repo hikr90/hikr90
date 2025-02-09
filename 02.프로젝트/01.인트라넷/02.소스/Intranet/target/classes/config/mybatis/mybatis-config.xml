@@ -24,7 +24,6 @@
 		<mapper resource="config/mybatis/mapper/Auth_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Sche_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Aprv_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/RestAPI_Sql.xml" />
 	</mappers>
 	
 </configuration>

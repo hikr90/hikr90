@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import com.intr.dao.CoreDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
+import com.intr.svc.UtilService;
 import com.intr.vo.EmpVO;
 
 @Service 
@@ -27,6 +28,9 @@ public class CoreServiceImpl implements CoreService{
 	//
 	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
+	UtilService utilService;
 	
 	@Autowired
 	CoreDao coreDao;
@@ -52,6 +56,7 @@ public class CoreServiceImpl implements CoreService{
 	// 메뉴 조회
 	public void intrCoreInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
+		HashMap<String, Object> tempMap = new HashMap<String, Object>();
 		List<HashMap<String, Object>> defaultList = null;
 		EmpVO empInfo = null;
 		//
@@ -70,7 +75,7 @@ public class CoreServiceImpl implements CoreService{
 			}
 			
 			// (2) menuSet
-			menuSet = paramMap.get("menuSet")!=null?(String)paramMap.get("menuSet"):null;
+			menuSet =  utilService.nullToDefault((String)paramMap.get("menuSet"));
 			if(menuSet!=null) {
 				session.setAttribute("menuSet", menuSet);
 			}
@@ -80,14 +85,25 @@ public class CoreServiceImpl implements CoreService{
 			//--------------------------------------------------------------------------------------------
 			empInfo = (EmpVO)session.getAttribute("empVO");
 			if(empInfo!=null) {
-				paramMap.put("setEmpIdx", empInfo.getEmpIdx());
+				paramMap.put("idxSet", empInfo.getEmpIdx());
 			}
 			
 			//--------------------------------------------------------------------------------------------
-			// 메뉴 조회
+			// 상단 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreDao.intrCoreInqy1011(model, paramMap);
+			tempMap.put("idxSet", utilService.nullToDefault((String)paramMap.get("idxSet")));
+			tempMap.put("menuType", utilService.nullToDefault((String)paramMap.get("menuType")));
+			//
+			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
 			model.addAttribute("menuList", defaultList);
+
+			//--------------------------------------------------------------------------------------------
+			// 좌측 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			tempMap.put("upprMenuSet", utilService.nullToDefault((String)paramMap.get("upprMenuSet")));
+			//
+			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
+			model.addAttribute("leftList", defaultList);
 			
 		} catch (Exception e) {
 			//

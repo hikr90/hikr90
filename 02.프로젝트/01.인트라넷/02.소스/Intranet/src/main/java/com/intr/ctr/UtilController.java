@@ -35,7 +35,7 @@ public class UtilController {
 
 	// 파일 다운로드
 	@RequestMapping("/fileDownload.do")
-	public void fileDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	public void fileDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -46,12 +46,13 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 	}
 	
 	// 전체 다운로드
 	@RequestMapping("/zipDownload.do")
-	public void zipDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) {
+	public void zipDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -62,13 +63,14 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 	}
 
 	// 메일 전송
 	@RequestMapping(value="/sendMail.do")
 	@ResponseBody
-	public String sendMail(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String sendMail(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -81,9 +83,9 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 메일 전송 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
 	}
-	
 }

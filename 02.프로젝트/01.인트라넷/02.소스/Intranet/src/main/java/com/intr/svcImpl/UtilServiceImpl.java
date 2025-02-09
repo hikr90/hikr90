@@ -2,14 +2,10 @@ package com.intr.svcImpl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +13,6 @@ import java.util.Random;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,11 +34,13 @@ import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
 import com.intr.utils.Paging;
 import com.intr.utils.Path;
-import com.intr.utils.RestAPI;
 
 @Service
 public class UtilServiceImpl implements UtilService{
 	//
+	@Autowired
+	HttpServletRequest request;
+	
 	@Autowired
 	UtilDao utilDao;
 
@@ -766,59 +763,6 @@ public class UtilServiceImpl implements UtilService{
 		return pageUrl;
 	}
 	
-	// (REST) 기안문 조회
-	public JSONObject intrRestInqy1010(HashMap<String, Object> paramMap) throws Exception {
-		//
-		int responseCode = 0;
-		JSONObject jObj = new JSONObject();
-		StringBuilder sb = new StringBuilder();
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 기안문 조회
-			//--------------------------------------------------------------------------------------------
-			// 요청 URL
-			String url = RestAPI.REST_URL;
-			
-			// URL 객체 생성
-			URL obj = new URL(url);
-			HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-			
-			// 설정 세팅
-			conn.setRequestMethod("GET");
-			
-			// 응답
-			responseCode = conn.getResponseCode();
-
-			logger.debug("[URL] : "+url);
-			logger.debug("[RESPONSE CODE] : "+responseCode);
-
-			// 정상 처리
-			if(responseCode == HttpURLConnection.HTTP_OK) {
-				//
-				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-				String line;
-				//
-				while ((line = br.readLine()) != null) {
-					sb.append(line).append("\n");
-				}
-				
-				//
-				br.close();
-				conn.disconnect();
-				
-			} else {
-				logger.debug("[ERROR] : "+conn.getResponseMessage());
-			}
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-		
-		return jObj;
-	}
-	
 	// Null 체크
 	public boolean isNull(String str) throws Exception {
 		//
@@ -828,9 +772,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// Null 체크
 			//--------------------------------------------------------------------------------------------
-			if(str == null) res = true;
-			if("".equals(str)) res = true;
-			if("null".equals(str)) res = true;
+			if(str == null || "".equals(str) ||  "null".equals(str)) res = true;
 			
 		} catch (Exception e) {
 			//
@@ -838,5 +780,47 @@ public class UtilServiceImpl implements UtilService{
 		}
 		//
 		return res;
+	}
+
+	// Null 체크
+	public String nullToDefault(String str) throws Exception {
+		//
+		String res = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// Null 체크
+			//--------------------------------------------------------------------------------------------
+			if(str != null && !"".equals(str) &&  !"null".equals(str)) res = str;
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return res;
+	}
+	
+	// 예외 로그 저장 처리
+	public void exptProc(HashMap<String, Object> paramMap, Exception ex) throws Exception {
+		//
+		HashMap<String, Object> tempMap = new HashMap<String, Object>();
+		//
+		try {
+			//
+			tempMap.put("empIdx", 		String.valueOf(paramMap.get("idxSet")));
+			tempMap.put("mappingId", 	String.valueOf(request.getServletPath()));
+			tempMap.put("ipAddr", 			String.valueOf(request.getRemoteAddr()));
+			tempMap.put("errorMsg", 		ex.getMessage());
+
+			//--------------------------------------------------------------------------------------------
+			// 예외 로그 저장 처리
+			//--------------------------------------------------------------------------------------------
+			utilDao.intrExptProc1010(tempMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 예외 로그 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
 	}
 }

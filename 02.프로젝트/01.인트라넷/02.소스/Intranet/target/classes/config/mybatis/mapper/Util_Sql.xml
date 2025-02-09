@@ -94,4 +94,34 @@
 			#{delIdx}	
 		</foreach>
 	</update>
+	
+	<insert id="intrExptProc1010" parameterType="java.util.HashMap">
+		/* intrExptProc1010 : 예외 처리 로그 저장 */
+		INSERT INTO INTR_ERROR_LOG
+		(
+				EMP_IDX
+			,	MAPPING_ID
+			,	IP_ADDR
+			,	ERROR_MSG
+			,	REG_DT
+			,	REG_TM
+			,	DISP_ORDER
+			,	REMARK		
+		)
+		VALUES
+		(
+				#{empIdx, jdbcType=VARCHAR}
+			,	#{mappingId, jdbcType=VARCHAR}
+			,	#{ipAddr, jdbcType=VARCHAR}
+			,	#{errorMsg, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM INTR_ERROR_LOG WHERE REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+				)
+			,	NULL
+		)
+	</insert>
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.CoreService;
 import com.intr.svc.TempService;
+import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
 
@@ -24,6 +25,9 @@ public class TempController {
 	
 	@Autowired
 	TempService tempService;
+	
+	@Autowired
+	UtilService utilService;
 
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,6 +50,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_LIST_1010;
@@ -69,6 +74,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_LIST_1011;
@@ -92,6 +98,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_DETL_1010;
@@ -110,6 +117,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Path.VIEW_PATH_TEMP + Jsp.INTR_TEMP_DETL_1020;
@@ -118,7 +126,7 @@ public class TempController {
 	// 템플릿 등록 처리
 	@RequestMapping("/intrTempProc1010.do")
 	@ResponseBody
-	public String intrTempProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrTempProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -131,6 +139,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -139,7 +148,7 @@ public class TempController {
 	// 템플릿 수정 처리
 	@RequestMapping("/intrTempProc1020.do")
 	@ResponseBody
-	public String intrTempProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrTempProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -152,6 +161,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -160,7 +170,7 @@ public class TempController {
 	// 템플릿 삭제 처리
 	@RequestMapping("/intrTempProc1030.do")
 	@ResponseBody
-	public String intrTempProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) {
+	public String intrTempProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -173,6 +183,7 @@ public class TempController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 템플릿 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
