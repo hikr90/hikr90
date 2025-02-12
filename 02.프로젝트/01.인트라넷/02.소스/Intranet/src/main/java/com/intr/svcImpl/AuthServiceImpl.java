@@ -60,7 +60,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 메뉴 권한 목록 조회
-	public void intrAuthInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAuthInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1031(model, paramMap);
+			defaultList = authDao.intrAuthInqy2011(model, paramMap);
 			model.addAttribute("authMenuList", defaultList);
 
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 사용자 목록 조회
-	public void intrAuthInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAuthInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1041(model, paramMap);
+			defaultList = authDao.intrAuthInqy3011(model, paramMap);
 			model.addAttribute("empList", defaultList);
 
 		} catch (Exception e) {
@@ -96,7 +96,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 사용자 권한 목록 조회
-	public void intrAuthInqy1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAuthInqy4010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -104,7 +104,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1051(model, paramMap);
+			defaultList = authDao.intrAuthInqy4011(model, paramMap);
 			model.addAttribute("authEmpList", defaultList);
 
 		} catch (Exception e) {

@@ -10,7 +10,7 @@
 				FROM 
 							(
 								SELECT 
-										AM.MENU_CD
+										DISTINCT AM.MENU_CD
 								FROM INTR_AUTH A
 								INNER JOIN INTR_EMP E
 									ON E.EMP_IDX = #{idxSet, jdbcType=VARCHAR}

@@ -29,6 +29,7 @@ import com.intr.svc.TempService;
 import com.intr.svc.UtilService;
 import com.intr.utils.Jsp;
 import com.intr.utils.Path;
+import com.intr.vo.EmpVO;
 
 @Controller
 public class MainController {
@@ -95,6 +96,10 @@ public class MainController {
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
+			// EMP_IDX 저장
+			EmpVO emp = (EmpVO)session.getAttribute("empVO");
+			paramMap.put("empIdx", emp.getEmpIdx());
+			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
@@ -160,7 +165,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy1050(model, paramMap);
+			authService.intrAuthInqy4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

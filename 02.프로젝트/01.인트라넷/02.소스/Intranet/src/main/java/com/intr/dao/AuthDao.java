@@ -32,34 +32,34 @@ public class AuthDao {
 	}
 	
 	// 메뉴 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1031(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy2011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy1031", paramMap);
+		defaultList = sqlsession.selectList("auth.intrAuthInqy2011", paramMap);
 		return defaultList;
 	}
 	
 	// 사용자 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1041(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy3011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy1041", paramMap);
+		defaultList = sqlsession.selectList("auth.intrAuthInqy3011", paramMap);
 		return defaultList;
 	}
 	
 	// 사용자 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1051(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy4011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy1051", paramMap);
+		defaultList = sqlsession.selectList("auth.intrAuthInqy4011", paramMap);
 		return defaultList;
 	}
 	
 	// 로그인 권한 사용자 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1061(Model model) {
+	public List<HashMap<String, Object>> intrAuthInqy5011(Model model) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy1061");
+		defaultList = sqlsession.selectList("auth.intrAuthInqy5011");
 		return defaultList;
 	}
 	

@@ -42,6 +42,7 @@
 									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 									<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
+									<input type="hidden" id="brdTitle" name="brdTitle" value="${defaultInfo.brdTitle}">
 								
 									<div class="post_wrap">
 		                           		<h2>공지사항 상세</h2><br>

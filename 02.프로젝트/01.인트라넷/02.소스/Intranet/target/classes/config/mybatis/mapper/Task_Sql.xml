@@ -125,7 +125,7 @@
 		)
 		VALUES
 		(
-				SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_CD,'TASK_')),0) + 1,4,0) FROM INTR_TASK
+				(SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_CD,'TASK_')),0) + 1,4,0) FROM INTR_TASK)
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{taskCont, jdbcType=VARCHAR}
 			,	#{regDt, jdbcType=VARCHAR}

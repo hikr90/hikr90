@@ -95,9 +95,6 @@
 	
 	// 저장 처리
 	function regProc(){
-		// 권한 값 지정
-		$("#authCd").val($(".list_bg").attr('id'));
-		
 		// 권한 메뉴 추가
 		$("input[name=authMenuCd]").each(function(idx) {
 			$(this).attr("name","menuCd"+idx);
@@ -126,10 +123,7 @@
 	}
 
 </script>
-
 <div class="post_wrap" style="padding: 0px;">
-	<input type="hidden" id="authCd" name="authCd" value="">
-	
 	<div class="scroll_wrap" style="max-height: 425px;">
 		<table class="post_table authMenuTbl">
 			<caption>권한 목록 테이블</caption>

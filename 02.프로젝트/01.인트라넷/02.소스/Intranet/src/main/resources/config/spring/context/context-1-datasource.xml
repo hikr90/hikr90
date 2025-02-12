@@ -6,17 +6,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
-	<!-- Database Info
-			dev	: jdbc:oracle:thin:@10.33.176.80:1521:xe
-			local 	: jdbc:oracle:thin:@localhost:1521:xe
-	-->
+	<!-- Local -->
  	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="intr"/>
 		<property name="password" value="1111"/>
 		<property name="maxActive" value="20"/>
-	</bean>
+	</bean> 
+
+	<!-- Dev 
+ 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
+		<property name="url" value="jdbc:oracle:thin:@10.33.176.80:1521:xe"/>
+		<property name="username" value="intr"/>
+		<property name="password" value="1111"/>
+		<property name="maxActive" value="20"/>
+	</bean> -->
 
     <bean id="ds" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 	    <constructor-arg ref="dataSourceSpied" />

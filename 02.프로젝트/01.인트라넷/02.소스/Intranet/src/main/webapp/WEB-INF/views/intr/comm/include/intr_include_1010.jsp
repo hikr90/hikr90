@@ -36,3 +36,15 @@
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
 	<script src="${pageContext.request.contextPath }/resources/ckeditor4/ckeditor.js"></script>
 </head>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//
+		var session = "${empVO}";
+		//
+		if(session == null || session == ''){
+			alert("세션 정보가 없습니다.");
+			location.href = 'intrMainInqy1010.do';
+		}
+	});
+</script>

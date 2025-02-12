@@ -59,7 +59,7 @@
 	// 권한 상세보기
 	function detCall(authCd){
 		//
-		$("#authCd").val(authCd);
+		$(".authCd").val(authCd);
 		var param = $("#form").serialize();
 		//
 		$.ajax({
@@ -100,7 +100,7 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="authCd" name="authCd" value="">
+									<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
 								
 									<h2>메뉴 권한 부여</h2><br>
 	                                <div class="srch_wrap">

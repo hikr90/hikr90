@@ -28,7 +28,7 @@
 			
 		<div class="menu_wrap">
 			<div class="logo">
-				<img class="logo" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png" style="cursor: pointer;" onclick="location.href='${menuType eq '0' ? 'intrCoreInqy1020.do' : 'intrCoreInqy1030.do'}'">
+				<img class="logo" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png" style="cursor: pointer;" onclick="location.href='${menuType eq '0' ? 'intrMainInqy1020.do' : 'intrMainInqy1030.do'}'">
 			</div>
 			
 			<nav class="nav">

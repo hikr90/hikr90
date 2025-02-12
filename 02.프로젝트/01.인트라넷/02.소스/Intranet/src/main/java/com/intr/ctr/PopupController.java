@@ -100,9 +100,9 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 부서 및 사원 조회
+			// 부서 사원 트리 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
+			empService.intrEmpInqy2030(model, paramMap);
 			
 		} catch (Exception e) {
 			//

@@ -33,7 +33,7 @@
 			<label for="post-title">비고</label>
 		</dt>
 		<dd>
-			<textarea rows="5" cols="30" id="remark" title="비고" name="remark">${defaultInfo.remark}</textarea>
+			<textarea rows="10" cols="30" id="remark" title="비고" name="remark">${defaultInfo.remark}</textarea>
 		</dd>
 	</dl>
 </div>

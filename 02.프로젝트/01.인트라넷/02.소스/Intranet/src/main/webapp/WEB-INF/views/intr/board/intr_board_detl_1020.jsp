@@ -100,7 +100,7 @@
 										<dd>
 											<div class="file_box">
 												<label for="fileUpd">업로드</label>
-												<h4 class="file_text">파일을 클릭하여, 업로드 대상 포함 여부를 선택 가능합니다.</h4>
+												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
 											</div>
 										</dd>

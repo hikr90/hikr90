@@ -24,18 +24,18 @@ public class Jsp {
 	public static final String INTR_POPUP_INQY_1010 = "intr_popup_inqy_1010.jsp";		// 팝업 관리
 	public static final String INTR_POPUP_INQY_1011 = "intr_popup_inqy_1011.jsp";		// 팝업 (공통코드)
 	
-	public static final String INTR_POPUP_INQY_1020 = "intr_popup_inqy_1020.jsp";		// 회원정보 찾기 팝업
+	public static final String INTR_POPUP_INQY_1020 = "intr_popup_inqy_1020.jsp";	// 회원정보 찾기 팝업
 	public static final String INTR_POPUP_INQY_1021 = "intr_popup_inqy_1021.jsp";		// 팝업 (아이디 찾기)
-	public static final String INTR_POPUP_INQY_1022 = "intr_popup_inqy_1022.jsp";		// 팝업 (비밀번호 찾기)
+	public static final String INTR_POPUP_INQY_1022 = "intr_popup_inqy_1022.jsp";	// 팝업 (비밀번호 찾기)
 
-	public static final String INTR_POPUP_INQY_1030 = "intr_popup_inqy_1030.jsp";		// 결재선 팝업 관리
+	public static final String INTR_POPUP_INQY_1030 = "intr_popup_inqy_1030.jsp";	// 결재선 팝업 관리
 	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";		// 결재선 선택 팝업 트리
-	public static final String INTR_POPUP_INQY_1032 = "intr_popup_inqy_1032.jsp";		// 결재선 목록
+	public static final String INTR_POPUP_INQY_1032 = "intr_popup_inqy_1032.jsp";	// 결재선 목록
 
-	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";		// 결재의견 관리
+	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";	// 결재의견 관리
 	public static final String INTR_POPUP_INQY_2011 = "intr_popup_inqy_2011.jsp";		// 결재의견 입력
 
-	public static final String INTR_POPUP_INQY_3010 = "intr_popup_inqy_3010.jsp";		// 일정관리 상세
+	public static final String INTR_POPUP_INQY_3010 = "intr_popup_inqy_3010.jsp";	// 일정관리 상세
 
 	//--------------------------------------------------------------------------------------------
 	// 공지사항

@@ -7,5 +7,4 @@
 			<p class="copy">Copyrights (C) 2020 KOREA IT ACADEMY. ALL rights reserved.</p>
 		</div>
 	</div>
-</footer>
-    
+</footer>    

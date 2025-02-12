@@ -457,8 +457,8 @@ public class UtilServiceImpl implements UtilService{
 		//
 		String workPath = "";
 		String tempPath = "";
-		String contentNm = String.valueOf(paramMap.get("brdTitle")).replaceAll(" ", "");
-		String fileNm = contentNm + ".zip";
+		String fileNm = (String)paramMap.get("brdTitle") + ".zip";
+		fileNm = fileNm.replaceAll(" ", "");
 		//
 		try {
 			//--------------------------------------------------------------------------------------------

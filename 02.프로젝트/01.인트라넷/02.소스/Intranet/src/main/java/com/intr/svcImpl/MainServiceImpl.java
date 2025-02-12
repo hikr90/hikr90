@@ -47,7 +47,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1061(model);
+			defaultList = authDao.intrAuthInqy5011(model);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {

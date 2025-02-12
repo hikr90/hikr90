@@ -427,6 +427,6 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 /* ================== Tooltip ================== */
 .tooltip_area { position: relative; display: block; }
-.tooltip_area .tooltip_text { width: 180px; background-color: #ffffff; text-align: center; border-radius: 6px; padding: 5px 5px; position: absolute; z-index: 1; font-weight: bold; font-size: 1.2rem; border: 1px solid #000000; }
-.tooltip_area .tooltip_text { display: none; width: 150px; height: 100%; top: 40%; left: 70%; }
+.tooltip_area .tooltip_text { background-color: #ffffff; text-align: center; border-radius: 6px; padding: 5px 5px; position: absolute; z-index: 1; font-weight: bold; font-size: 1.2rem; border: 1px solid #000000; }
+.tooltip_area .tooltip_text { display: none; width: 100%; top: 40%; left: 70%; }
 
