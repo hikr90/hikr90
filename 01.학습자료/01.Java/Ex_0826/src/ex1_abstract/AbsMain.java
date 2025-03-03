@@ -4,7 +4,7 @@ public class AbsMain {
 
 	public static void main(String[] args) {
 		
-		// 자식 클래스를 객체화
+		// 자식 클래스 객체화
 		AbsChild c = new AbsChild();
 		c.setValue(30);
 		//

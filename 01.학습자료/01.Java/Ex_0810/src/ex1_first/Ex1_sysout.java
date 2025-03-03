@@ -3,6 +3,7 @@ package ex1_first;
 public class Ex1_sysout {
 	/* 메인 메소드
 	 * 	- 컴파일 시 가장 먼저 호출되는 영역으로 우선적으로 컴파일이 진행된다.
+	 * 	- 자바 애플리케이션 내에는 반드시 1개의 메인 메소드를 포함한 클래스가 있어야한다.
 	 */	
 		public static void main( String [] args) {
 
@@ -31,10 +32,21 @@ public class Ex1_sysout {
 			/* System.out.print
 			 * 	- 문자, 숫자, 문자열 등의 데이터를 개행 없이 출력하는 기능
 			 * 	
-			 *  System.out.printf
+			 *  (1) System.out.printf
 			 *  	- 변수의 타입에 따라서 변환하여 출력하는 기능
-			 *  	- 개행 기능이 없어 따로 개행문자 (\n)을 추가하여 사용한다. (참고 : \t는 탭이다.)
-			 *  	- 출력할 문장, %자료형, 값을 파라미터로 받는다.
+			 *  	- 개행 기능이 없어 따로 개행문자를 사용한다.
+  			 *  	- 출력할 문장, %자료형, 값을 파라미터로 받는다.
+  			 *  
+			 *  		(1.1) 개행문자의 종류		
+			 *  			- \n : line feed (New Line 새로운 라인)
+			 *  			- \t : tab
+			 *  			- \b : backspace
+			 *  			- \f : form feed (프린트 출력 시, 현재 페이지를 마침)
+			 *  			- \r : carriage return (맨 앞으로 이동하는 뜻)
+			 *  			- \\ : 역슬래쉬 (참고, 한글 윈도우에서는 역슬래쉬가 / 대신 \으로 표현되며 리눅스에서는 /으로 표현된다.
+			 *  			- \' : 작은 따옴표
+			 *  			- \" : 큰 따옴표
+			 *  			- \ + u + 숫자 : 유니코드 (예, char c = '\u0041')
 			 *  
 			 *  	포맷 자료형
 			 *  		- %s 	: 	String
@@ -58,6 +70,12 @@ public class Ex1_sysout {
 			
 			// float
 			float co = 36.5f;
-			System.out.printf("%f, %.2f, %.3f",co,co,co);			
+			System.out.printf("%f, %.2f, %.3f\n",co,co,co);			
+			
+			// 포맷의 앞에 숫자 값을 추가하는 경우 출력될 값이 차지할 공간을 숫자로 지정할 수 있다.
+			// 실수의 경우 . 도 한 자리를 차지한다.
+			System.out.printf("[%5d]\n", 10);			// 우측 정렬
+			System.out.printf("[%-5d]\n", 10);			// 좌측 정렬
+			System.out.printf("[%05d]\n", 10);			// 공백만큼 0으로 채움
 		}
 }

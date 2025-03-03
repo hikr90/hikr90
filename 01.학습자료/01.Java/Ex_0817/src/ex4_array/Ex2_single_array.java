@@ -27,8 +27,13 @@ public class Ex2_single_array {
 		
 		System.out.println("------------------");
 
-		
-		// 배열의 선언과 생성, 초기화를 한번에 하는 방법
+		/* String 배열 
+		 * 	- 참조형 변수의 기본 값은 null 이며, null은 어떤한 객체도 가르키고 있지 않음을 뜻한다.
+		 * 	- 참조형 변수 중, String 클래스만 특별히 new 키워드 없이 객체 생성이 가능하다.
+		 * 	- 참조형 배열의 경우 배열에 저장되는 값은 객체의 주소이다.
+		 */
+
+		// 선언과 생성, 초기화 동시 진행
 		String[] strs = {"hong","kim","lee","park"};
 	
 		for(int i=0;i<strs.length;i++) {

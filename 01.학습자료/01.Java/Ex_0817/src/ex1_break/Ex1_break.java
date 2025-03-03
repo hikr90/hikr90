@@ -6,7 +6,7 @@ public class Ex1_break {
 		
 		/*	break
 		 *		- 반복문 내에서 강제적으로 가까이에 있는 (break문을 감싸고있는) 반복문을 빠져나갈 때 사용하는 키워드	
-		 *		- for, while등의 문에서 사용 가능하다.
+		 *		- if, for, while등의 문에서 사용 가능하다.
 		 *		- break문장 아래에 코드가 있는 경우 에러가 발생한다. 
 		 */
 		for(int i=1;i<=2;i++) {

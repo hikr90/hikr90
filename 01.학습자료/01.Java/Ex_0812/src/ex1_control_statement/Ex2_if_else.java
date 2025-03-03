@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class Ex2_if_else {
 	public static void main(String[] args) {
-		
-		
 		// if else 문
 		// - 하나의 조건으로 조건이 참인 경우와 그 외에 해당하는 경우 두가지의 결과를 얻을 수 있는 문장
 		int n = 45;

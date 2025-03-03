@@ -31,5 +31,17 @@ public class Ex5_switch {
 			System.out.println("정확한 학점등급을 넣어주세요.");
 			break;
 		}
+		
+		// 예, 상황에따라 break 가 없어야하는 경우
+		//  break가 없는 경우 level의 값에따라서 하위 조건이 전부 수행되고 종료된다.
+		int level = 3;
+		switch (level) {
+			case 3 :
+				System.out.println("삭제 권한 부여");
+			case 2 :
+				System.out.println("수정 권한 부여");
+			case 1 :
+				System.out.println("등록 권한 부여");
+		}
 	}
 }

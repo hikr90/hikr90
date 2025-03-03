@@ -3,7 +3,6 @@ package ex3_method;
 public class MethodMain {
 	
 	public static void main(String[] args) {
-		
 		// 클래스 생성 후 메소드 실행
 		ValueTest v1 = new ValueTest();
 		v1.greet();
