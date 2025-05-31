@@ -14,7 +14,7 @@ public class TempDao {
 	@Autowired
 	SqlSession sqlsession;
 
-	// 템플릿 목록 조회
+	// 기안문 양식 목록 조회
 	public List<HashMap<String, Object>> intrTempInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
@@ -22,7 +22,7 @@ public class TempDao {
 		return defaultList;
 	}
 	
-	// 템플릿 상세 조회
+	// 기안문 양식 상세 조회
 	public HashMap<String, Object> intrTempInqy1021(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
@@ -31,7 +31,7 @@ public class TempDao {
 		return defaultInfo;
 	}
 	
-	// 관리자 템플릿 등록
+	// 기안문 양식 등록
 	public int intrTempProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -39,7 +39,7 @@ public class TempDao {
 		return resInt;
 	}
 	
-	// 관리자 템플릿 수정
+	// 기안문 양식 수정
 	public int intrTempProc1021(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -47,7 +47,7 @@ public class TempDao {
 		return resInt;
 	}
 	
-	// 관리자 템플릿 삭제 
+	// 기안문 양식 삭제 
 	public int intrTempProc1031(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;

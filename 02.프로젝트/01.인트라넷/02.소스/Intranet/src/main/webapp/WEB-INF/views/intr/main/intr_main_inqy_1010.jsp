@@ -4,9 +4,46 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
+<link href='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.css' rel='stylesheet' />
+<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
+
 <!DOCTYPE html>
 <html>
 <head></head>
+<script>
+//
+document.addEventListener('DOMContentLoaded', function() {
+	//
+	var calendar = document.getElementById('calendar');
+    var scheCont = new FullCalendar.Calendar(calendar, {
+    	//
+        locale: 'en',  							// 언어
+		eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
+		displayEventTime: false, 			// 이벤트 시간 여부
+		navLinks: true, 							// 날짜 선택할 경우 상세 데이터 조회 
+		selectable: false,						// 네모 선택 여부
+		height: 430,
+		headerToolbar: {
+			start: 'prev,next today',
+			center: 'title',
+		    end: 'dayGridMonth'
+		},
+		// 네모 선택 이벤트
+        select: function(info) {
+			//
+		},
+		// 선택 이벤트
+		eventClick: function(info) {
+			//
+			
+		},
+		// 데이터
+		events : ""
+	});
+    //
+    scheCont.render();
+});
+</script>
 <body id="main">
 <form id="form" method="POST" onsubmit="return false;">
 	<!-- 메뉴 -->
@@ -16,31 +53,50 @@
 		<div class="top_area">
 			<article class="main_article">
 				<div class="content">
-					<input type="hidden" id="contId" name="contId" value="">
+					<input type="hidden" id="brdId" name="brdId" value="">
+					<input type="hidden" id="aprvId" name="aprvId" value="">
 				
 					<div class="top_box">
 						<div class="wrap">
 							<div class="top_wrap">
+								<div class="top_area float_left">
+									<!-- full calendar -->
+									<div id="calendar">
+												
+									</div>
+								</div>
+								
 								<div class="top_area">
-									<h3>공지사항</h3><br>
-									<a href="javascript:formSubmit('intrBoardInqy2010.do')" class="btn_more">전체보기</a>
-									<ul>
-										<c:forEach var="list" items="${boardList}" begin="0" end="4">
-											<li>
-												<a href="javascript:formSubmit('intrBoardInqy2020.do?contId=${list.contId}&pageUrl=intrBoardInqy2010.do')">
-													${list.brdTitle}
-													<c:if test="${list.fileYn eq 'Y'}">
-														<img id="updImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
-													</c:if>
-													<fmt:parseDate value="${list.regDt}" var="formatDt" pattern="yyyyMMdd"/>
-													<span class="date"><fmt:formatDate value="${formatDt}"  pattern="yyyy-MM-dd"/></span>
-												</a>
-											</li>
-										</c:forEach>
-										<c:if test="${empty boardList}">
-											등록된 공지사항이 없습니다.
-										</c:if>
-									</ul>
+									<div class="area_title">
+										<h3>일정 관리</h3>
+									</div>
+									
+									<div class="area_content">
+										<a href="javascript:formSubmit('intrAprvInqy1010.do')" class="btn_more">전체보기</a>
+
+										<ul class="scroll_wrap">
+											<c:forEach var="list" items="${leavList}">
+												<li class="main_li">
+													<a class="main_a">[${list.leavtypeCd}] ${list.aprvTitle}</a>
+													<span class="date main_span">
+														<fmt:parseDate value="${list.leavjSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
+														${formatSdt}
+														~
+														<fmt:parseDate value="${list.leavEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
+														${formatEdt}
+													</span>
+												</li>
+											</c:forEach>
+											
+											<c:if test="${empty leavList}">
+												<li class="main_li">
+													등록된 글이 없습니다.
+												</li>												
+											</c:if>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div><!-- End wrap -->
@@ -59,41 +115,54 @@
 						<div class="wrap">
 							<div class="bottom_wrap">
 								<div class="bottom_area">
-							    	<h3>나의 기안</h3><br>
-									<a href="javascript:formSubmit('intrAprvInqy1010.do')" class="btn_more">전체보기</a>
-									<ul>
-										<c:forEach var="list" items="${aprvReqList}" begin="0" end="4">
-											<li>
-												<a href="javascript:formSubmit('intrAprvInqy1030.do?contId=${list.contId}')">
-													(${list.currStepNm}) ${list.aprvTitle}
-													<fmt:parseDate value="${list.aprvRegDt}" var="formatDt" pattern="yyyyMMdd"/>
-													<span class="date"><fmt:formatDate value="${formatDt}"  pattern="yyyy-MM-dd"/></span>
-												</a>
-											</li>
-										</c:forEach>
-										<c:if test="${empty aprvReqList}">
-											품의한 기안문이 없습니다.
-										</c:if>
-									</ul>
+							    	<div class="area_title">
+							    		<h3>공지사항</h3><br>
+									</div>
+									
+									<div class="area_content">
+										<a href="javascript:formSubmit('intrBoardInqy1010.do')" class="btn_more">전체보기</a>
+
+										<ul>
+											<c:forEach var="list" items="${boardList}" begin="0" end="2">
+												<li class="main_li">
+													<a class="main_a">${list.brdTitle}</a>
+													<span class="date main_ie">
+														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+														${formatDt} 
+													</span>
+												</li>
+											</c:forEach>
+											
+											<c:if test="${empty boardList}">
+												<li class="main_li">
+													등록된 글이 없습니다.
+												</li>												
+											</c:if>
+										</ul>
+									</div>
 								</div>
 								
 								<div class="bottom_area">
-						    		<h3>나의 결재</h3><br>
-									<a href="javascript:formSubmit('intrAprvInqy2010.do')" class="btn_more">전체보기</a>
-									<ul>
-										<c:forEach var="list" items="${aprvRecList}" begin="0" end="4">
-											<li>
-												<a href="javascript:formSubmit('intrAprvInqy2020.do?contId=${list.contId}')">
-													(${list.currStepNm}) ${list.aprvTitle}
-													<fmt:parseDate value="${list.aprvRegDt}" var="formatDt" pattern="yyyyMMdd"/>
-													<span class="date"><fmt:formatDate value="${formatDt}"  pattern="yyyy-MM-dd"/></span>
-												</a>
+						    		<div class="area_title">
+							    		<h3>나의 기안</h3><br>
+									</div>
+
+									<div class="area_content">
+										<a href="javascript:formSubmit('intrAprvInqy2010.do')" class="btn_more">전체보기</a>
+										
+										<ul>
+											<li style="line-height: 30px; margin-right: 15px;">
+												<a style="text-overflow: ellipsis;">[부서내결재중] 휴가신청서_테스트1</a>
 											</li>
-										</c:forEach>
-										<c:if test="${empty aprvRecList}">
-											결재할 기안문이 없습니다.
-										</c:if>
-									</ul>
+											<li style="line-height: 30px; margin-right: 15px;">
+												<a style="text-overflow: ellipsis;">[부서내결재중] 물품반입서_테스트1</a>
+											</li>
+											<li style="line-height: 30px; margin-right: 15px;">
+												<a style="text-overflow: ellipsis;">[부서내결재중] 가지급결의서_테스트1</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>

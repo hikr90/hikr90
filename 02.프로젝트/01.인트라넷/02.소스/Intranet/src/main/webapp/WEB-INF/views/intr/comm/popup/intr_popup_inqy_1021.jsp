@@ -9,10 +9,10 @@
 	<div class="post_write">
 		<dl>
 			<dt>
-				<label>이름</label>
+				<label>성함</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="이름" name="findNm" id="findNm">
+				<input type="text" title="성함" name="findNm" id="findNm">
 			</dd>
 		</dl>
 		<dl>

@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.intr.svc.CoreService;
 import com.intr.svc.ScheService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 
 @Controller
 public class ScheController {
@@ -48,11 +47,11 @@ public class ScheController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 일정 관리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 일정 관리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_SCHE + Jsp.INTR_SCHE_INQY_1010;
+		return Const.VIEW_PATH_SCHE + Const.INTR_SCHE_INQY_1010;
 	}
 
 	// 일정 상세 조회
@@ -67,10 +66,10 @@ public class ScheController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 일정 관리 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 일정 관리 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_SCHE + Jsp.INTR_SCHE_DETL_1010;
+		return Const.VIEW_PATH_SCHE + Const.INTR_SCHE_DETL_1010;
 	}
 }

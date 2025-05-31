@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
 import com.intr.dao.BoardDao;
+import com.intr.dao.EmpDao;
+import com.intr.dao.ProjDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
-import com.intr.svc.BoardService;
 import com.intr.svc.CoreService;
 import com.intr.svc.MainService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
+
 
 @Controller
 public class MainController {
@@ -39,9 +42,6 @@ public class MainController {
 	
 	@Autowired
 	MainService mainService;
-	
-	@Autowired
-	BoardService boardService;
 	
 	@Autowired
 	EmpService empService;
@@ -56,13 +56,19 @@ public class MainController {
 	AuthService authService;
 	
 	@Autowired
+	UtilService utilService;
+
+	@Autowired
+	AprvDao aprvDao;
+
+	@Autowired
 	BoardDao boardDao;
 	
 	@Autowired
-	AprvDao aprvDao;
+	EmpDao empDao;
 	
 	@Autowired
-	UtilService utilService;
+	ProjDao projDao;
 	
 	@Autowired
 	HttpSession session;
@@ -86,7 +92,7 @@ public class MainController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_LOGIN + Jsp.INTR_LOGIN_INQY_1010;
+		return Const.VIEW_PATH_LOGIN + Const.INTR_LOGIN_INQY_1010;
 	}
 
 	// 사용자 메인 조회
@@ -96,37 +102,37 @@ public class MainController {
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
-			// EMP_IDX 저장
+			// 사번 저장
 			EmpVO emp = (EmpVO)session.getAttribute("empVO");
 			paramMap.put("empIdx", emp.getEmpIdx());
 			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1030("0");
+			coreService.intrCoreInqy1030(Const.USER);
 			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			coreService.intrCoreInqy1010(model, paramMap);
+
+			//--------------------------------------------------------------------------------------------
+			// 휴가 목록 조회
+			//--------------------------------------------------------------------------------------------
+			aprvDao.intrAprvInqy1011(model, paramMap);
+			model.addAttribute("leavList", defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 공지사항 조회
+			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = boardDao.intrBoardInqy1011(model, paramMap);
 			model.addAttribute("boardList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 나의 기안 목록
+			// 나의 기안 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1031(model, paramMap);
-			model.addAttribute("aprvReqList",defaultList);
-			
-			//--------------------------------------------------------------------------------------------
-			// 나의 결재 목록
-			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1041(model, paramMap);
-			model.addAttribute("aprvRecList",defaultList);
+			aprvDao.intrAprvInqy1011(model, paramMap);
+			model.addAttribute("aprvList", defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -134,18 +140,22 @@ public class MainController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_MAIN + Jsp.INTR_MAIN_INQY_1010;
+		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_1010;
 	}
 
 	// 관리자 메인 조회
 	@RequestMapping("/intrMainInqy1030.do")
 	public String intrMainInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		JSONArray jAray = new JSONArray();
+		JSONObject jObj = null;
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1030("1");
+			coreService.intrCoreInqy1030(Const.ADMIN);
 
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
@@ -153,19 +163,31 @@ public class MainController {
 			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 부서 사원 수 조회
+			// 부서 현황
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy2040(model, paramMap);
+			defaultList = empDao.intrEmpInqy2041(model, paramMap);
+			//
+			for (int i=0;i<defaultList.size();i++) {
+				//
+		        jObj = new JSONObject();
+		        jObj.put("orgNm", defaultList.get(i).get("orgNm"));
+		        jObj.put("orgCnt", defaultList.get(i).get("orgCnt"));
+		        jAray.add(jObj);
+		    }
+			//
+			model.addAttribute("orgList", jAray.toJSONString());
 			
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 목록 조회
+			// 인사 요약
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1030(model, paramMap);
-			
+			defaultList = empDao.intrEmpInqy2042(model, paramMap);
+			model.addAttribute("empList", defaultList);
+
 			//--------------------------------------------------------------------------------------------
-			// 권한 목록 조회
+			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.intrAuthInqy4010(model, paramMap);
+			defaultList = projDao.intrProjInqy1011(model, paramMap);
+			model.addAttribute("projList", defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -173,7 +195,7 @@ public class MainController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_MAIN + Jsp.INTR_MAIN_INQY_2010;
+		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_2010;
 	}
 	
 	// 마이페이지 조회
@@ -202,7 +224,7 @@ public class MainController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_MYPAGE + Jsp.INTR_MYPAGE_INQY_1010;
+		return Const.VIEW_PATH_MYPAGE + Const.INTR_MYPAGE_INQY_1010;
 	}
 	
 	// 로그인 처리

@@ -11,9 +11,9 @@
 	}
 
 	// 공지사항 상세
-	function detCall(contId) {
+	function detCall(brdId) {
 		//
-		$("#contId").val(contId);
+		$("#sequenceId").val(brdId);
 		formSubmit("intrBoardInqy2020.do");
 	}
 </script>
@@ -37,7 +37,7 @@
 						<div class="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="contId" name="contId" value="">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								
@@ -47,41 +47,28 @@
 											<!-- 작성일자 -->
 											<div class="srch_area">
 												<label class="srch_label">작성일자</label>
-												<input type="text" id="srchSdt" class="srch_cdt_date" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly"/>
+												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
 												~
-												<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
+												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 											</div>
-
+											<br>
+											
 											<!-- 부서 -->
 											<div class="srch_area">
 												<label class="srch_label">부서</label>
-												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
-													<input type="hidden" name="deptCd" value="${param.deptCd}">
-													<input type="hidden" name="deptNm" value="${param.deptNm}">
-													
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${deptList}">
-															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
 											</div>
-											
+
 											<!-- 직급 -->
 											<div class="srch_area">
 												<label class="srch_label">직급</label>
-												<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
-													<input type="hidden" name="gradeCd" value="${param.gradeCd}">
-													<input type="hidden" name="gradeNm" value="${param.gradeNm}">
-												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${gradeList}">
-															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
+											</div>
+											
+											<!-- 작성자 -->
+											<div class="srch_area">
+												<label class="srch_label">작성자</label>
+												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushListKey(this.form);">
 											</div>
 											
 											<!-- 제목 -->
@@ -89,12 +76,12 @@
 												<div class="srch_area">
 													<label class="srch_label">제목</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
-													
+												
 													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
-		                                </div>
+										</div>
 									</div>
 									
 									<div class="post_table_wrap">
@@ -123,13 +110,13 @@
 												<tr>
 													<td class="first_td">${list.num}</td>
 													<td class="_title">
-														<a class="show_view a_title" onclick="detCall('${list.contId}');">${list.brdTitle}</a>
+														<a class="show_view a_title" onclick="detCall('${list.brdId}');">${list.brdTitle}</a>
 														<c:if test="${list.fileYn eq 'Y'}">
 															<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 														</c:if>
 													</td>
-													<td>${list.deptNm}</td>
-													<td>${list.empNm} ${list.gradeNm}</td>
+													<td>${list.orgNm}</td>
+													<td>${list.empNm} ${list.rankNm}</td>
 													<td>
 														<span class="date">
 															<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
@@ -137,7 +124,7 @@
 															${formatDt} 
 														</span>	
 													</td>
-													<td>${list.brdReadhit}</td>
+													<td>${list.readHit}</td>
 		                                        </tr>
 		                                        </c:forEach>
 		                                        

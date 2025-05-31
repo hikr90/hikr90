@@ -108,7 +108,7 @@
 									<h2>기안문 등록</h2><br>
 									<input type="hidden" id="aprvLine" name="aprvLine" value="">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-									<input type="hidden" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
+									<input type="hidden" id="templateCd" name="templateCd" value="${defaultInfo.templateCd}">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									
@@ -116,7 +116,7 @@
 										<dl>
 											<dt><label for="post-title">제목</label></dt>
 											<dd>
-												<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${defaultInfo.tempNm}">
+												<input type="text" id="aprvTitle" class="aprvTitle" title="기안문 양식명" name="aprvTitle" value="${defaultInfo.templateNm}">
 											</dd>
 											
 											<dt>시행일자</dt>
@@ -126,15 +126,15 @@
 												<input type="text" id="srchEdt" class="srch_cdt_date width30" name="efctEdt" title="시행일자" readonly="readonly"/>
 											</dd>
 											
-											<dt>일정 등록 여부</dt>
-											<dd>${defaultInfo.calendarYn}</dd>
+											<dt></dt>
+											<dd></dd>
 										</dl>
 										<dl class="post_info">
 											<dt>부서</dt>
-											<dd>${empVO.deptNm}</dd>
+											<dd>${empVO.orgNm}</dd>
 											
 											<dt>직급</dt>
-											<dd>${empVO.gradeNm}</dd>
+											<dd>${empVO.rankNm}</dd>
 
 											<dt>작성자</dt>
 											<dd>${empVO.empNm}</dd>
@@ -142,8 +142,8 @@
 										<dl>
 											<dt><label for="post_text">내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" title="템플릿 내용">${defaultInfo.tempCont}</textarea>
-												<input type="hidden" id="aprvCont" title="템플릿 내용" name="aprvCont" value="">
+												<textarea id="editor" title="기안문 양식 내용">${defaultInfo.templateCont}</textarea>
+												<input type="hidden" id="aprvCont" title="기안문 양식 내용" name="aprvCont" value="">
 											</dd>
 										</dl>
 									</div><!-- End post_write -->

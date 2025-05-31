@@ -116,8 +116,8 @@
 	                                	</div>
 	                                </div>
 										
-									<div class="tree_wrap" style="height: 500px;">
-										<div id="tree_area" class="tree_area">
+									<div class="tree_wrap">
+										<div id="tree_area" class="tree_area" style="width: 400px;">
 											<div id="authTree" class="tree">
 												<ul class="ul_1">
 												<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -133,7 +133,7 @@
 											
 										<div id="menuArea" class="menu_area" style="display: none;">
 											<!-- 권한 메뉴 목록 -->
-											<div id="menuInfo" class="tree_info ml20" style="width: 450px; height: 425px;">
+											<div id="menuInfo" class="tree_info ml20" style="width: 500px; height: 425px;">
 												<div class="post_wrap">
 													<div class="scroll_wrap">
 														<table class="post_table menuTbl">
@@ -150,7 +150,7 @@
 																			<label for="chk-yes"><span></span></label>
 																		</span>
 																	</th>
-																	<th scope="col">메뉴명</th>
+																	<th scope="col">전체 메뉴</th>
 																</tr>
 															</thead>
 															<tbody>
@@ -178,7 +178,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 권한 목록 -->
-											<div id="authInfo" class="tree_info" style="width: 450px; height: 425px;"></div>
+											<div id="authInfo" class="tree_info" style="width: 550px; height: 425px;"></div>
 										</div> <!-- End menu_area -->
 									</div>
 								</div><!-- End post_wrap -->

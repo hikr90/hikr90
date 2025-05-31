@@ -32,18 +32,18 @@
 						<div class="content">
 							<div class="sub_content">
 								<div class="form_area">
+									<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.brdId}">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-									<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
-									<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
-									<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
-									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
-									<input type="hidden" id="brdTitle" name="brdTitle" value="${defaultInfo.brdTitle}">
-								
+									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+									<input type="hidden" id="useYn" name="useYn" value="${param.useYn}">	
+									<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
+									
 									<div class="post_wrap">
 		                           		<h2>공지사항 상세</h2><br>
 									
@@ -60,13 +60,13 @@
 													</span>	
 												</dd>
 												<dt>조회수</dt>
-												<dd>${defaultInfo.brdReadhit}</dd>
+												<dd>${defaultInfo.readHit}</dd>
 											</dl>
 											<dl class="post_info">
 												<dt>부서</dt>
-												<dd>${defaultInfo.deptNm}</dd>
+												<dd>${defaultInfo.orgNm}</dd>
 												<dt>직급</dt>
-												<dd>${defaultInfo.gradeNm}</dd>
+												<dd>${defaultInfo.rankNm}</dd>
 												<dt>작성자</dt>
 												<dd>${defaultInfo.empNm}</dd>
 											</dl>

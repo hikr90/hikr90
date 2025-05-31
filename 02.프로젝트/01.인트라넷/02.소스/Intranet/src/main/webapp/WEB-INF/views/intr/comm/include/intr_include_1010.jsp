@@ -43,8 +43,8 @@
 		var session = "${empVO}";
 		//
 		if(session == null || session == ''){
-			alert("세션 정보가 없습니다.");
-			location.href = 'intrMainInqy1010.do';
+			//alert("세션 정보가 없습니다.");
+			//location.href = 'intrMainInqy1010.do';
 		}
 	});
 </script>

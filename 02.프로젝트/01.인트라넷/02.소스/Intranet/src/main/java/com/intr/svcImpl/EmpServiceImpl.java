@@ -56,10 +56,12 @@ public class EmpServiceImpl implements EmpService{
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
+			// 공통코드 (재직여부) 조회
 			//--------------------------------------------------------------------------------------------
-			this.intrEmpInqy1020(model, paramMap);
-			
+			paramMap.put("commcodeGcd", 	"USE");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("useList",defaultList);
+
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
@@ -76,13 +78,13 @@ public class EmpServiceImpl implements EmpService{
 			// 부서 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy1021(model, paramMap);
-			model.addAttribute("deptList", defaultList);
+			model.addAttribute("orgList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 직급 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy1022(model, paramMap);
-			model.addAttribute("gradeList", defaultList);
+			model.addAttribute("rankList", defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -98,11 +100,6 @@ public class EmpServiceImpl implements EmpService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			this.intrEmpInqy1020(model, paramMap);
-			
-			//--------------------------------------------------------------------------------------------
 			// 사원 상세 정보
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
@@ -111,7 +108,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1010(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
@@ -168,17 +165,17 @@ public class EmpServiceImpl implements EmpService{
 		}
 	}
 
-	// 부서 사원 수 조회
+	// 부서 현황
 	public void intrEmpInqy2040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 부서 사원 수 조회
+			// 부서 현황
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2041(model, paramMap);
-			model.addAttribute("deptEmpList",defaultList);
+			model.addAttribute("empCnt",defaultList);
 
 		} catch (Exception e) {
 			//
@@ -199,7 +196,7 @@ public class EmpServiceImpl implements EmpService{
 			// 사원 인덱스 채번
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpProc1011(model, paramMap);
-			paramMap.put("contId", defaultInfo.get("contId"));
+			paramMap.put("empIdx", defaultInfo.get("empIdx"));
 
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록

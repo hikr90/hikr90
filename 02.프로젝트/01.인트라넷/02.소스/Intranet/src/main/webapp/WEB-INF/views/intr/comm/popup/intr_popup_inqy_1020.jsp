@@ -31,7 +31,7 @@
 		//
 		if(findIdYn()=="Y" && $("#findNm").val()==""){
 			//
-			alert("이름을 입력해주세요.");
+			alert("성함을 입력해주세요.");
 			return;
 		} else if (findIdYn()=="N" && $("#findId").val()==""){
 			//
@@ -127,8 +127,8 @@
 	}
 </script>
 <form id="popForm">
-<div class="pop_area">
-	<article class="sub_article">
+<div class="pop_area" style="height: 100%;">
+	<article class="sub_article" style="height: 82%;">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">

@@ -49,15 +49,20 @@ $(function(){
 
 // 검색 초기화
 function initCall(){
-	$("#gradeList").text("전체");
-	$("#deptList").text("전체");
+	// 검색어
 	$("input[name=srchNm]").val("");
+	
+	// 검색 일자
 	$("input[name=srchSdt]").val("");
 	$("input[name=srchEdt]").val("");
-	$("input[name=deptCd]").val("");
-	$("input[name=gradeCd]").val("");
-	$("input[name=deptNm]").val("");
-	$("input[name=gradeNm]").val("");
+
+	// 부서, 직급
+	$("input[name=orgNm]").val("");
+	$("input[name=rankNm]").val("");
+
+	// 사용 여부
+	$("input[name=useNm]").val("전체");
+	$("input[name=useCd]").val("");
 }
 
 // 폼 태그 동작
@@ -98,9 +103,9 @@ function delArea(area) {
 }
 
 // 연락처 자동 입력
-function inputNum(inputNum) {
+function inputNum(num) {
 	// 입력창에 입력된 값
-    var input = inputNum.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 값
+    var input = num.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 값
     var output = "";
     var pattern = /[0-9]/g;
     
@@ -108,7 +113,7 @@ function inputNum(inputNum) {
     if(input.length < 4) {
         //
     	if(!pattern.test(input)){
-    		inputNum.value = "";
+    		num.value = "";
     	} else {
     		//
         	return input;
@@ -134,7 +139,7 @@ function inputNum(inputNum) {
     	output += input.substr(7);
     }
     // 값 지정
-    inputNum.value = output;
+    num.value = output;
 }
 
 // 입력 값 초기화
@@ -155,32 +160,32 @@ function validation(){
 	// 유효성 검사
 	var chkYn		= true; 
 	
-	// Input
+	// input
 	$("#"+"form"+" input").each(function(idx, tag){
 		//
 		var type = $(this).attr('type');
 		var id = $(this).attr('id');
 		//
-		if((type=="text" || type=="password") && !id.includes('srch') && !id.includes('uppr')){
-			//
-			if($(tag).val()=="" || $(tag).val()==null){
-				//
-				alert($(tag).attr("title")+"(을)를 입력해주세요.");
-				chkYn = false;
-				return false;
+		if((type=="text" || type=="password")) {
+			if(!id.includes('srch') && !id.includes('none')){
+				if($(tag).val()=="" || $(tag).val()==null){
+					//
+					alert($(tag).attr("title")+"(을)를 입력해주세요.");
+					chkYn = false;
+					return false;
+				}
 			}
 		}
 	});
 	
-	// TextArea
+	// textarea
 	if(chkYn!=false){
 		$("#"+"form"+" textarea").each(function(idx, tag){
 			//
 			var id = $(tag).attr('id');
+			//
 			if(id!='remark'){
-				//
 				if($(tag).val().length==0){
-					//
 					alert($(tag).attr("title")+"(을)를 입력해주세요.");
 					chkYn = false;
 					return false;
@@ -198,7 +203,36 @@ function srchAddr() {
         oncomplete: function(data) {
             // 주소 선택 후 동작
             var data = data.address;
-            $("#empAddr").val(data); 
+            $("#addr").val(data); 
         }
     }).open();
+}
+
+// 금액 입력
+function inputAmt(amt){
+	// 통화 처리
+	var value = amt.value.replace(/[^0-9]/g, ""); 				// 숫자만 남김
+  	var format = Number(value).toLocaleString("ko-KR"); 	// 쉼표 추가
+  	amt.value = value ? `₩${format}` : "";							// 템플릿 리터럴 (표현식)
+  	
+  	// 한글 처리
+  	var amtNm = "";
+  	//
+  	if (value >= 100000000) {
+    	amtNm = (value / 100000000).toFixed(1).replace(/\.0$/, '') + "억원";
+    } else if (value >= 10000000) {
+    	amtNm = (value / 10000000).toFixed(1).replace(/\.0$/, '') + "천만원";
+	} else if (value >= 10000) {
+		amtNm = (value / 10000).toFixed(1).replace(/\.0$/, '') + "만원";
+    } else {
+		amtNm = value.toLocaleString() + "원";
+    }
+	//  화면 표시
+	amt = "(" + amt + ")";
+  	$("#amtNm").text(amtNm);
+}
+
+function numberToKorean(num) {
+  const hanA = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+  return hanA[num] || num;
 }

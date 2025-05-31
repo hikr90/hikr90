@@ -63,7 +63,7 @@ public class AuthDao {
 		return defaultList;
 	}
 	
-	// 관리자 권한 등록
+	// 권한 등록
 	public int intrAuthProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -71,7 +71,7 @@ public class AuthDao {
 		return resInt;
 	}
 	
-	// 관리자 권한 수정
+	// 권한 수정
 	public int intrAuthProc1021(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -79,7 +79,7 @@ public class AuthDao {
 		return resInt;
 	}
 	
-	// 관리자 권한 삭제 
+	// 권한 삭제 
 	public int intrAuthProc1031(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -87,7 +87,7 @@ public class AuthDao {
 		return resInt;
 	}
 
-	// 관리자 메뉴 권한 삭제 처리
+	// 메뉴 권한 삭제 처리
 	public int intrAuthProc1041(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -95,7 +95,7 @@ public class AuthDao {
 		return resInt;
 	}
 
-	// 관리자 메뉴 권한 저장 처리
+	// 메뉴 권한 저장 처리
 	public int intrAuthProc1042(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -103,7 +103,7 @@ public class AuthDao {
 		return resInt;
 	}
 	
-	// 관리자 사용자 권한 삭제 처리
+	// 사용자 권한 삭제 처리
 	public int intrAuthProc1051(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -111,7 +111,7 @@ public class AuthDao {
 		return resInt;
 	}
 	
-	// 관리자 사용자 권한 저장 처리
+	// 사용자 권한 저장 처리
 	public int intrAuthProc1052(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;

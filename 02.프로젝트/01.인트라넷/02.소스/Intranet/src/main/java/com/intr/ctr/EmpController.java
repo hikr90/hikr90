@@ -20,8 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 
 @Controller
 public class EmpController {
@@ -59,7 +58,7 @@ public class EmpController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_LIST_1010;
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_1010;
 	}
 	
 	// 사원 등록 화면
@@ -83,7 +82,7 @@ public class EmpController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_DETL_1020;
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1020;
 	}
 	
 	// 사원 상세 조회
@@ -107,7 +106,7 @@ public class EmpController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_DETL_1010;
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1010;
 	}
 	
 	// 사원 수정 조회
@@ -121,6 +120,11 @@ public class EmpController {
 			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
+			// 부서 직급 정보 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy1020(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
 			// 사원 상세조회
 			//--------------------------------------------------------------------------------------------
 			empService.intrEmpInqy1030(model, paramMap);
@@ -130,7 +134,7 @@ public class EmpController {
 			logger.debug("Exception : 사원 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_DETL_1030;
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1030;
 	}
 	
 	// 사원 프로필 사진 조회
@@ -181,7 +185,7 @@ public class EmpController {
 			logger.debug("Exception : 사원 연락처 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Path.VIEW_PATH_EMP + Jsp.INTR_EMP_LIST_2010;
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_2010;
 	}
 	
 	// 사원 아이디 중복 조회

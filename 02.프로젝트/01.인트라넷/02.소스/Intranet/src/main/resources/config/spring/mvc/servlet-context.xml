@@ -29,17 +29,6 @@
 	
 	<tx:annotation-driven />
 
-	<!-- interceptor -->
-	<interceptors>
-		<interceptor>
-			<mapping path="/*.do"/>
-			<exclude-mapping path="/"/>
-			<exclude-mapping path="/intrMainInqy1010.do"/>
-			<exclude-mapping path="/intrMainProc1010.do"/>
-			<beans:bean class="com.intr.utils.Interceptor" />
-		</interceptor>
-	</interceptors>
-	
 	<!-- message -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<beans:property name="defaultEncoding" value="UTF-8" />

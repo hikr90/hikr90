@@ -239,7 +239,7 @@
 		                            </div>
 									
 									<div class="tree_wrap">
-										<div class="tree_area" id="tree_area"> 
+										<div class="tree_area" id="tree_area" style="width: 400px;"> 
 											<div class="tree">
 												<ul class="ul_1">
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -252,7 +252,7 @@
 												</ul>
 											</div>	
 										</div>
-										<div class="tree_info pl20" id="tree_info"></div>
+										<div class="tree_info pl20" id="tree_info" style="width: 1120px;"></div>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->

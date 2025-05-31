@@ -10,16 +10,16 @@
 				FROM 
 							(
 								SELECT 
-										DISTINCT AM.MENU_CD
-								FROM INTR_AUTH A
-								INNER JOIN INTR_EMP E
+										DISTINCT MA.MENU_CD
+								FROM AUTH A
+								INNER JOIN EMPINFO E
 									ON E.EMP_IDX = #{idxSet, jdbcType=VARCHAR}
 									AND A.USE_YN = 'Y'
-                                INNER JOIN INTR_AUTH_EMP AE
-                                    ON AE.EMP_IDX = E.EMP_IDX
-                                INNER JOIN INTR_AUTH_MENU AM
-                                    ON AM.AUTH_CD = AE.AUTH_CD
-                                GROUP BY AM.MENU_CD
+                                INNER JOIN EMP_AUTH EA
+                                    ON EA.EMP_IDX = E.EMP_IDX
+                                INNER JOIN MENU_AUTH MA
+                                    ON MA.AUTH_CD = EA.AUTH_CD
+                                GROUP BY MA.MENU_CD
 							) DATA
 				WHERE 1=1
 			)
@@ -32,18 +32,21 @@
 						    ,   M.MENUTYPE_CD
 						    ,   M.MENU_NM
 						    ,   M.UPPR_MENU_CD
-						    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
-						    ,   CASE WHEN M.MAPPING_ID IS NULL
+						    ,   UM.MENU_NM AS UPPR_MENU_NM
+						    ,   CASE WHEN M.UPPR_MENU_CD IS NULL
 						    		THEN LEAD(M.MAPPING_ID) OVER(ORDER BY M.MENU_CD ASC) 
 						    		ELSE M.MAPPING_ID END AS MAPPING_ID
+						    ,	CASE WHEN M.UPPR_MENU_CD IS NULL
+						    		THEN LEAD(M.MENU_CD) OVER(ORDER BY M.MENU_CD ASC)
+						    		ELSE M.MENU_CD END AS MENU_SET
 						    ,   M.USE_YN
 						    ,   M.DISP_ORDER
 						    ,   M.REMARK
 					FROM M_DATA
-					INNER JOIN INTR_MENU M
+					INNER JOIN MENU M
 					ON M.MENU_CD = M_DATA.MENU_CD
-					LEFT OUTER JOIN INTR_MENU UPPR_M
-						ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+					LEFT OUTER JOIN MENU UM
+						ON UM.MENU_CD = M.UPPR_MENU_CD
 					WHERE 1=1
 						<if test="menuType == 0">
 							AND M.MENUTYPE_CD = '0'
@@ -51,10 +54,16 @@
 						<if test="menuType == 1">
 							AND M.MENUTYPE_CD = '1'
 						</if>
+						
+						<!-- 
+						<if test="menuSet != null and menuSet != ''">
+							AND (M.MENU_CD = #{menuCd, jdbcType=VARCHAR} OR M.UPPR_MENU_CD = #{menuCd, jdbcType=VARCHAR})
+						</if>
+						 -->
 				) DATA
 				START WITH DATA.UPPR_MENU_CD IS NULL
 				CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
-				ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+				ORDER SIBLINGS BY DATA.MENU_CD
 	</select>
 	
 	<select id="intrCoreInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -68,235 +77,167 @@
 				    ,   M.MENUTYPE_CD
 				    ,   M.MENU_NM
 				    ,   M.UPPR_MENU_CD
-				    ,   UPPR_M.MENU_NM AS UPPR_MENU_NM
+				    ,   UM.MENU_NM AS UPPR_MENU_NM
 				    ,   M.MAPPING_ID
 				    ,   M.USE_YN
 				    ,   M.DISP_ORDER
 				    ,   M.REMARK
-				FROM INTR_MENU M
-				LEFT OUTER JOIN INTR_MENU UPPR_M
-				ON UPPR_M.MENU_CD = M.UPPR_MENU_CD
+				FROM MENU M
+				LEFT OUTER JOIN MENU UM
+				ON UM.MENU_CD = M.UPPR_MENU_CD
 				WHERE 1=1
 			) DATA 
 			START WITH DATA.UPPR_MENU_CD IS NULL
 			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
-			ORDER SIBLINGS BY DATA.DISP_ORDER, DATA.MENU_CD
+			ORDER SIBLINGS BY DATA.MENU_CD
 	</select>
 	
-	<select id="intrCoreInqy1022" resultType="CamelHashMap">
-		/* intrCoreInqy1022 : 시퀀스 (컨텐츠) 생성 */
-		SELECT TO_CHAR(SYSDATE,'YYYYMMDD') || LPAD(SEQ_CONT_ID.NEXTVAL,4,0) AS CONT_ID FROM DUAL
+	<select id="intrCoreInqy1041" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCoreInqy1041 : 시퀀스 채번 */
+		SELECT TO_DAY, SEQ_NO + 1 AS SEQ_NO, TO_DAY || LPAD(SEQ_NO + 1,4,0) AS SEQUENCE_ID FROM SEQUENCE
 	</select>
 	
-	<select id="intrCoreInqy1023" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1023 : 목록 건수 조회 */
+	<update id="intrCoreInqy1042" parameterType="java.util.HashMap">
+		/* intrCoreInqy1042 : 시퀀스 저장 */
+		UPDATE SEQUENCE
+			SET SEQ_NO = #{seqNo, jdbcType=VARCHAR}
+	</update>
+
+	<select id="intrCoreInqy1051" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCoreInqy1051 : 목록 건수 조회 */
 		<choose>
 			<when test="pageUrl.contains('Board')">
 				SELECT 
-					COUNT(BRD.CONT_ID) AS LIST_CNT 
-				FROM INTR_BOARD BRD
-				LEFT OUTER JOIN INTR_EMP EMP
-					ON BRD.EMP_IDX = EMP.EMP_IDX
-				LEFT OUTER JOIN INTR_DEPT DEPT
-					ON DEPT.DEPT_CD = EMP.DEPT_CD
-		          	AND DEPT.USE_YN = 'Y'
-				LEFT OUTER JOIN INTR_GRADE GRADE
-					ON GRADE.GRADE_CD = EMP.GRADE_CD
-		     	  	AND GRADE.USE_YN = 'Y'
+					COUNT(B.BRD_ID) AS LIST_CNT 
+				FROM BOARD B
+				LEFT OUTER JOIN EMPINFO E
+					ON B.EMP_IDX = E.EMP_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+		          	AND O.USE_YN = 'Y'
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+		     	  	AND R.USE_YN = 'Y'
 				WHERE 1 = 1
-					AND BRD.USE_YN = 'Y'
+					<if test="useYn != null and useYn != ''">
+						AND B.USE_YN = #{useYn, jdbcType=VARCHAR}
+					</if>
 				    <if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(BRD.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(B.BRD_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 				    </if>
 				    <if test="srchSdt != null and srchSdt !=''">
-				    	AND BRD.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    	AND B.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="srchEdt != null and srchEdt !=''">
-				    	AND BRD.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    	AND B.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 				    </if>
-				    <if test="deptCd != null and deptCd != ''">
-						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+				    <if test="orgNm != null and orgNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="gradeCd != null and gradeCd != ''">
-						AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="useCd != null and useCd != ''">
+						AND B.USE_YN = #{useCd, jdbcType=VARCHAR}
+					</if>
+					<if test="srchIdx != null and srchIdx != ''">
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 			</when>
 			<when test="pageUrl.contains('Emp')">
 				SELECT 
-						COUNT(EMP.EMP_IDX) AS LIST_CNT 
-				FROM INTR_EMP EMP
-				LEFT OUTER JOIN INTR_DEPT DEPT
-					ON DEPT.DEPT_CD = EMP.DEPT_CD
-				LEFT OUTER JOIN INTR_GRADE GRADE
-					ON GRADE.GRADE_CD = EMP.GRADE_CD
+						COUNT(E.EMP_IDX) AS LIST_CNT 
+				FROM EMPINFO E
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
 				WHERE 1 = 1
-					AND EMP.EMP_RESI_DATE IS NULL
 				    <if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(EMP.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 				    </if>
 				    <if test="srchSdt != null and srchSdt !=''">
-				    	AND EMP.EMP_HIRE_DATE &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    	AND E.HIRE_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="srchEdt != null and srchEdt !=''">
-				    	AND EMP.EMP_HIRE_DATE &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    	AND E.HIRE_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 				    </if>
-				    <if test="deptCd != null and deptCd != ''">
-						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+					<if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="gradeCd != null and gradeCd != ''">
-						AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="useCd != null and useCd != ''">
+						<if test="useCd equals('Y')">
+							AND E.LEAV_DT IS NULL
+						</if>
+						<if test="useCd equals('N')">
+							AND E.LEAV_DT IS NOT NULL
+						</if>
 					</if>
 			</when>
-			<when test="pageUrl.contains('AprvInqy1010')">
-				SELECT 
-					    	COUNT(SUB_DATA.CONT_ID) AS LIST_CNT
-				FROM (
-						SELECT 
-						        APRV.CONT_ID
-						    ,	APRV.CURR_CONT_SID
-						    ,   APRV.EMP_IDX
-		                    ,	LINE.STEP_CD
-						    ,	STEP.STEP_NM
-						    ,	LINE.LAST_APRV_YN
-						    ,   APRV_TITLE
-						    ,   APRV.REG_DT AS APRV_REG_DT
-						    ,   APRV.REG_TM AS APRV_REG_TM
-		                    ,   LINE.APRV_RSLT_DT
-		                    ,   LINE.APRV_RSLT_TM
-						    ,   RANK() OVER(ORDER BY APRV.CONT_ID) AS NUM
-						    ,   COUNT(APRV.CONT_ID) OVER() AS LIST_CNT
-						FROM INTR_APRV APRV
-		                INNER JOIN INTR_APRV_LINE LINE
-		                    ON LINE.CONT_ID = APRV.CONT_ID
-		                    AND LINE.CONT_SID = APRV.CURR_CONT_SID
-		                LEFT OUTER JOIN INTR_STEP STEP
-		                    ON STEP.STEP_CD = LINE.STEP_CD
-						LEFT OUTER JOIN INTR_EMP EMP
-						    ON APRV.EMP_IDX = EMP.EMP_IDX
-						LEFT OUTER JOIN INTR_DEPT DEPT
-						    ON DEPT.DEPT_CD = EMP.DEPT_CD
-						    AND DEPT.USE_YN = 'Y'
-						WHERE 
-							1=1
-						    	AND APRV.USE_YN = 'Y'
-					) SUB_DATA
-				WHERE 
-					1=1 
-						AND SUB_DATA.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
+			<when test="pageUrl.contains('Aprv')">
+				SELECT '0' AS LIST_CNT FROM DUAL
 			</when>
-			<when test="pageUrl.contains('AprvInqy2010')">
-				WITH MAIN_LINE AS
-				(
-				    SELECT 
-				    		APRV.CONT_ID
-		                , 	LISTAGG(LINE.APRV_EMP_IDX,',') WITHIN GROUP (ORDER BY LINE.CONT_SID) AS LINE_EMP_IDX
-				    FROM INTR_APRV APRV 
-				    INNER JOIN INTR_APRV_LINE LINE
-				        ON LINE.CONT_ID = APRV.CONT_ID 
-				    WHERE 1=1
-		            GROUP BY APRV.CONT_ID
-				)
+			<when test="pageUrl.contains('Proj')">
 				SELECT 
-					    	COUNT(SUB_DATA.CONT_ID) AS LIST_CNT
-				FROM (
-						SELECT 
-						        APRV.CONT_ID
-						    ,	APRV.CURR_CONT_SID
-						    ,   APRV.EMP_IDX
-		                    ,	LINE.STEP_CD
-						    ,	STEP.STEP_NM
-						    ,	LINE.LAST_APRV_YN
-						    ,   EMP.EMP_NM
-						    ,   DEPT.DEPT_NM
-						    ,	GRADE.GRADE_NM
-						    ,   APRV_TITLE
-						    ,   APRV.REG_DT AS APRV_REG_DT
-						    ,   APRV.REG_TM AS APRV_REG_TM
-		                    ,   LINE.APRV_RSLT_DT
-		                    ,   LINE.APRV_RSLT_TM
-		                    ,	APRV_EMP.EMP_NM AS APRV_EMP_NM
-		                    ,	APRV_DEPT.DEPT_NM AS APRV_DEPT_NM
-		                    ,	APRV_GRADE.GRADE_NM AS APRV_GRADE_NM
-		                    ,   ML.LINE_EMP_IDX
-						    ,   RANK() OVER(ORDER BY APRV.CONT_ID) AS NUM
-						    ,   COUNT(APRV.CONT_ID) OVER() AS LIST_CNT
-						FROM INTR_APRV APRV
-		                INNER JOIN INTR_APRV_LINE LINE
-		                    ON LINE.CONT_ID = APRV.CONT_ID
-		                    AND LINE.CONT_SID = APRV.CURR_CONT_SID
-		                LEFT OUTER JOIN INTR_STEP STEP
-		                    ON STEP.STEP_CD = LINE.STEP_CD
-						LEFT OUTER JOIN INTR_EMP EMP
-						    ON APRV.EMP_IDX = EMP.EMP_IDX
-						LEFT OUTER JOIN INTR_DEPT DEPT
-						    ON DEPT.DEPT_CD = EMP.DEPT_CD
-						    AND DEPT.USE_YN = 'Y'
-						LEFT OUTER JOIN INTR_GRADE GRADE
-							ON GRADE.GRADE_CD = EMP.GRADE_CD
-							AND GRADE.USE_YN = 'Y'
-		                LEFT OUTER JOIN MAIN_LINE ML
-		                    ON ML.CONT_ID = APRV.CONT_ID
-		                LEFT OUTER JOIN INTR_EMP APRV_EMP
-		                	ON APRV_EMP.EMP_IDX = LINE.APRV_EMP_IDX
-		   				LEFT OUTER JOIN INTR_DEPT APRV_DEPT
-							ON APRV_DEPT.DEPT_CD = APRV_EMP.DEPT_CD
-						LEFT OUTER JOIN INTR_GRADE APRV_GRADE
-							ON APRV_GRADE.GRADE_CD = APRV_EMP.GRADE_CD
-							AND APRV_GRADE.USE_YN = 'Y'
-						WHERE 
-							1=1
-						    	AND APRV.USE_YN = 'Y'
-						    	AND LINE.STEP_CD NOT IN ('STEP_0004', 'STEP_0005')
-						    <if test="srchNm != null and srchNm != ''">
-				            	AND REGEXP_REPLACE(LOWER(APRV.APRV_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-				            </if>
-				            <if test="srchSdt != null and srchSdt !=''">
-				            	AND APRV.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
-				            </if>
-				            <if test="srchEdt != null and srchEdt !=''">
-				            	AND APRV.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
-				            </if>
-				            <if test="srchEnm != null and srchEnm != ''">
-				            	AND REGEXP_REPLACE(LOWER(EMP.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchEnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-				            </if>
-				             <if test="srchAnm != null and srchAnm != ''">
-				            	AND REGEXP_REPLACE(LOWER(APRV_EMP.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchAnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-				            </if>
-					) SUB_DATA
-				WHERE 
-					1=1 
-						AND INSTR(SUB_DATA.LINE_EMP_IDX, #{empIdx, jdbcType=VARCHAR}) > 0
-					<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
-		 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
-		        	</if>
-				ORDER BY SUB_DATA.APRV_REG_DT DESC, SUB_DATA.APRV_REG_TM DESC
+					COUNT(P.PROJ_CD) AS LIST_CNT 
+				FROM PROJECT P
+				LEFT OUTER JOIN EMPINFO E
+					ON P.OWNER = E.EMP_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				WHERE 1 = 1
+					<if test="srchNm != null and srchNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    </if>
+				    <if test="srchDt != null and srchDt !=''">
+				    	AND T.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+				    </if>
+				    <if test="orgNm != null and orgNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="srchIdx != null and srchIdx != ''">
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="srchStatCd != null and srchStatCd != ''">
+						AND P.STATUS = #{srchStatCd, jdbcType=VARCHAR}
+					</if>
 			</when>
 			<when test="pageUrl.contains('Task')">
 				SELECT 
-					COUNT(TASK.TASK_CD) AS LIST_CNT 
-				FROM INTR_TASK TASK
-				LEFT OUTER JOIN INTR_EMP EMP
-					ON TASK.EMP_IDX = EMP.EMP_IDX
-				LEFT OUTER JOIN INTR_DEPT DEPT
-					ON DEPT.DEPT_CD = EMP.DEPT_CD
-				LEFT OUTER JOIN INTR_GRADE GRADE
-					ON GRADE.GRADE_CD = EMP.GRADE_CD
+					COUNT(T.TASK_ID) AS LIST_CNT 
+				FROM TASK T
+				LEFT OUTER JOIN EMPINFO E
+					ON T.EMP_IDX = E.EMP_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
 				WHERE 1 = 1
 					<if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(EMP.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 				    </if>
 				    <if test="srchSdt != null and srchSdt !=''">
-				    	AND TASK.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    	AND T.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="srchEdt != null and srchEdt !=''">
-				    	AND TASK.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    	AND T.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 				    </if>
-				    <if test="deptCd != null and deptCd != ''">
-						AND DEPT.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+				    <if test="srchDt != null and srchDt !=''">
+				    	AND T.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+				    </if>
+				    <if test="orgNm != null and orgNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="gradeCd != null and gradeCd != ''">
-						AND GRADE.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					<if test="rankNm != null and rankNm != ''">
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 			</when>
 		</choose>

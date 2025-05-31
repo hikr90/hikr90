@@ -12,9 +12,9 @@
 	}
 	
 	// 공지사항 상세
-	function detCall(contId) {
+	function detCall(brdId) {
 		//
-		$("#contId").val(contId);
+		$("#sequenceId").val(brdId);
 		formSubmit("intrBoardInqy1030.do");
 	}
 
@@ -67,7 +67,6 @@
    					alert("<spring:message code="PROC.ERROR"/>");
    				}
    			});
-
 		}
 	}	
 </script>
@@ -91,7 +90,7 @@
 							<div id="sub_content">					
 								<div class="form_area">
 									<div class="post_wrap">
-										<input type="hidden" id="contId" name="contId" value="">
+										<input type="hidden" id="sequenceId" name="sequenceId" value="">
 										<input type="hidden" id="page" name="page" value="${param.page}">
 										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 			
@@ -112,36 +111,39 @@
 													<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
 												
-												<!-- 부서 -->
+												<!-- 사용여부 -->
 												<div class="srch_area">
-													<label class="srch_label">부서</label>
+													<label class="srch_label">사용여부</label>
 													<div class="select_wrap">
-														<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
-														<input type="hidden" name="deptCd" value="${param.deptCd}">
-														<input type="hidden" name="deptNm" value="${param.deptNm}">
+														<div id="useList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
+														<input type="hidden" name="useCd" value="${param.useCd}">
+														<input type="hidden" name="useNm" value="${param.useNm}">
 													
-														<ul class="sUl select_ul">
-															<c:forEach var="list" items="${deptList}">
-																<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
+														<ul class="sUl select_ul scroll_wrap">
+															<c:forEach var="list" items="${useList}">
+																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 															</c:forEach>
 														</ul>
 													</div>
 												</div>
+												<br>
 												
+												<!-- 부서 -->
+												<div class="srch_area">
+													<label class="srch_label">부서</label>
+													<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
+												</div>
+
 												<!-- 직급 -->
 												<div class="srch_area">
 													<label class="srch_label">직급</label>
-													<div class="select_wrap">
-														<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
-														<input type="hidden" name="gradeCd" value="${param.gradeCd}">
-														<input type="hidden" name="gradeNm" value="${param.gradeNm}">
-													
-														<ul class="sUl select_ul">
-															<c:forEach var="list" items="${gradeList}">
-																<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
-															</c:forEach>
-														</ul>
-													</div>
+													<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
+												</div>
+												
+												<!-- 작성자 -->
+												<div class="srch_area">
+													<label class="srch_label">작성자</label>
+													<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushListKey(this.form);">
 												</div>
 												
 												<!-- 제목 -->
@@ -167,6 +169,7 @@
 													<col class="w12per">
 													<col class="w15per">
 													<col class="w7per">
+													<col class="w7per">
 												</colgroup>
 												<thead>
 													<tr>
@@ -181,6 +184,7 @@
 														<th scope="col">작성자</th>
 														<th scope="col">작성일자</th>
 														<th scope="col">조회수</th>
+														<th scope="col">사용여부</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -188,18 +192,18 @@
 													<tr>
 														<td class="first_td">
 					                                       <span class="check_box">
-																<input type="checkbox"  name="checkBox" class="check_box delIdx" id="delIdx${status.index}" value="${list.contId}"> 
+																<input type="checkbox"  name="checkBox" class="check_box delIdx" id="delIdx${status.index}" value="${list.brdId}"> 
 																<label for="check_label"><span></span></label>
 															</span>
 														</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.contId}');">${list.brdTitle}</a>
+															<a class="show_view a_title" onclick="detCall('${list.brdId}');">${list.brdTitle}</a>
 															<c:if test="${list.fileYn eq 'Y'}">
 																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 															</c:if>
 														</td>
-														<td>${list.deptNm}</td>
-														<td>${list.empNm} ${list.gradeNm}</td>
+														<td>${list.orgNm}</td>
+														<td>${list.empNm} ${list.rankNm}</td>
 														<td>
 															<span class="date">
 																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
@@ -207,14 +211,15 @@
 																${formatDt} 
 															</span>	
 														</td>
-														<td>${list.brdReadhit}</td>
+														<td>${list.readHit}</td>
+														<td>${list.useYn}</td>
 			                                        </tr>
 			                                        </c:forEach>
 			                                        
 			                                        <!-- 글이 없는 경우 -->
 			                                        <c:if test="${empty defaultList}">
 			                                            <tr>
-			                                                <td align="center" colspan="6">
+			                                                <td align="center" colspan="7">
 			                                              	      등록된 글이 없습니다.
 			                                                </td>
 			                                            </tr>

@@ -52,7 +52,6 @@
    			});
 		}
 	}	
-
 </script>
 </head>
 <body id="main">
@@ -74,39 +73,57 @@
 					<div class="content">
 						<div id="sub_content">
 							<div class="content_area form_area">
-								<input type="hidden" id="empIdx" name="empIdx" value="${defaultInfo.empIdx}">
-								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
+								<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
+								<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.brdId}">
 								<input type="hidden" id="page" name="page" value="${param.page}">
 								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-								<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
-								<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
-								<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
-								<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-								<input type="hidden" id="contId" name="contId" value="${defaultInfo.contId}">
+								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+								<input type="hidden" id="useCd" name="useCd" value="${param.useCd}">
+								<input type="hidden" id="useNm" name="useNm" value="${param.useNm}">
+								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
+								<input type="hidden" id="filetypeCd" name="filetypeCd" value="board">
 								
 								<div class="post_wrap">
 									<h2>공지사항 수정</h2><br>
 									<div class="post_write">
 										<dl>
-											<dt><label for="post-title">제목</label></dt>
-											<dd><input type="text" id="brdTitle" name="brdTitle" title="제목" value="${defaultInfo.brdTitle}"></dd>
+											<dt><label for="post-title">&#10003; 제목</label></dt>
+											<dd style="width: 35%;">
+												<input type="text" id="brdTitle" name="brdTitle" title="제목" value="${defaultInfo.brdTitle}">
+											</dd>
 											<dt>부서</dt>
-											<dd>${defaultInfo.deptNm}</dd>									
+											<dd>${defaultInfo.orgNm}</dd>									
 											<dt>작성자</dt>
 											<dd>${defaultInfo.empNm}</dd>
 										</dl>
 										<dl class="post_info">
 											<dt>첨부 파일</dt>
-											<dd>
+											<dd style="width: 35%;">
 												<div class="file_box">
 													<label for="fileUpd">업로드</label>
 													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
 													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
 												</div>
 											</dd>
+											
+											<dt>사용여부</dt>
+	                                        <dd class="sel_2part">
+	                                        	<div class="radio_box enter-check_box">
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked="checked"</c:if>>
+	                                                	<label for="chk-yes">Y<span></span></label>
+	                                            	</span>
+	                                            	<span class="radio-area">
+	                                                	<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn eq 'N'}">checked="checked"</c:if>>
+	                                                	<label for="chk-no">N<span></span></label>
+	                                            	</span>
+	                                            </div>
+	                                        </dd>
+									</dl>
 										</dl>
 										
 										<dl class="post_info">
@@ -122,7 +139,7 @@
 										</dl>
 										
 										<dl>
-											<dt><label for="post_text">내용</label></dt>
+											<dt><label for="post_text">&#10003; 내용</label></dt>
 											<dd class="post_text">
 												<textarea id="post_text" name="brdCont" title="내용">${defaultInfo.brdCont}</textarea>
 											</dd>

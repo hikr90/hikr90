@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="util">
-	<select id="intrFileInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1010 : 컨텐츠 파일 데이터 조회 */
+	<select id="intrFileInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy1011 : 컨텐츠 파일 데이터 조회 */
 		SELECT 
-		    F.FILE_IDX,
-		    F.CONT_ID,
-		    F.FILE_SNO, 
-		    F.FILE_NM, 
-		    F.FILE_TYPE, 
-		    F.FILE_SIZE,
-		    F.USE_YN,
-		    F.DISP_ORDER,
-		    F.REMARK
-		FROM INTR_FILE F
-		WHERE F.CONT_ID = #{contId, jdbcType=VARCHAR}
-			AND F.USE_YN = 'Y'
+		    FILE_ID,
+		    FILE_ID,
+		    FILE_SNO, 
+		    FILE_NM, 
+		    FILE_TYPE,
+		    FILE_EXT,
+		    FILE_SIZE,
+		    USE_YN,
+		    DISP_ORDER,
+		    REMARK
+		FROM WORKFILE
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+			AND USE_YN = 'Y'
 	</select>
 
-	<select id="intrFileInqy1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1020 : 단건 파일 데이터 조회 */
+	<select id="intrFileInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrFileInqy1021 : 단건 파일 데이터 조회 */
 		SELECT 
-		    F.FILE_IDX,
-		    F.CONT_ID, 
-		    F.FILE_SNO, 
-		    F.FILE_NM, 
-		    F.FILE_TYPE, 
-		    F.FILE_SIZE, 
-		    F.USE_YN,
-		    F.DISP_ORDER,
-		    F.REMARK
-		FROM INTR_FILE F
-		WHERE F.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
-			AND F.USE_YN = 'Y'
+		    FILE_ID,
+		    FILE_ID, 
+		    FILE_SNO, 
+		    FILE_NM, 
+		    FILE_TYPE,
+		    FILE_EXT,
+		    FILE_SIZE, 
+		    USE_YN,
+		    DISP_ORDER,
+		    REMARK
+		FROM WORKFILE
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			AND USE_YN = 'Y'
 	</select>
 	
-	<insert id="intrFileProc1010" parameterType="java.util.HashMap">
-		/* intrFileProc1010 : 파일 데이터 저장 */
-		INSERT INTO INTR_FILE
+	<insert id="intrFileProc1011" parameterType="java.util.HashMap">
+		/* intrFileProc1011 : 파일 등록 처리 */
+		INSERT INTO WORKFILE
 		(
-				FILE_IDX
-			,	CONT_ID
+				FILE_ID
 			,	FILE_SNO
 			,	FILE_NM
-			,	FILE_TYPE
+			,	FILE_PATH
+			,	FILETYPE_CD
+			,	FILE_EXT
 			,	FILE_SIZE
 			,	USE_YN
 			,	DISP_ORDER
@@ -51,53 +55,51 @@
 		)
 		VALUES
 		(
-				(SELECT 'FILE_' || LPAD(NVL(MAX(REPLACE(FILE_IDX,'FILE_')),0) + 1,4,0) FROM INTR_FILE)
-			,	#{contId, jdbcType=VARCHAR}
+				#{fileId, jdbcType=VARCHAR}
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(FILE_SNO),0) + 1,4,0)
-					FROM INTR_FILE WHERE CONT_ID = #{contId, jdbcType=VARCHAR}
+					FROM WORKFILE 
+					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 				)
 			,	#{fileNm, jdbcType=VARCHAR}
-			,	#{fileType, jdbcType=VARCHAR}
+			,	#{filePath, jdbcType=VARCHAR}
+			,	#{filetypeCd, jdbcType=VARCHAR}
+			,	#{fileExt, jdbcType=VARCHAR}
 			,	#{fileSize, jdbcType=VARCHAR}
 			,	'Y'
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM INTR_FILE
+					FROM WORKFILE
+					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 				)
 			,	NULL
 		)
 	</insert>
 	
-	<update id="intrFileProc1020" parameterType="java.util.HashMap">
-		/* intrFileProc1020 : 파일 삭제 처리 (FILE_IDX) */
-		UPDATE INTR_FILE F
-			SET F.USE_YN = 'N'
-		WHERE F.FILE_IDX = #{fileIdx, jdbcType=VARCHAR}
-	</update>
-	
 	<update id="intrFileProc1021" parameterType="java.util.HashMap">
-		/* intrFileProc1021 : 파일 삭제 처리 (단건 CONT_ID) */
-		UPDATE INTR_FILE F
-			SET F.USE_YN = 'N'
-		WHERE F.CONT_ID = #{contId, jdbcType=VARCHAR}
-	</update>
-
-	<update id="intrFileProc1022" parameterType="java.util.HashMap">
-		/* intrFileProc1022 : 파일 삭제 처리 (다건 CONT_ID) */
-		UPDATE INTR_FILE
+		/* intrFileProc1021 : 파일 삭제 처리 (수정) */
+		UPDATE WORKFILE
 			SET USE_YN = 'N'
-		WHERE CONT_ID IN
-		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
-			#{delIdx}	
-		</foreach>
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
 	</update>
 	
-	<insert id="intrExptProc1010" parameterType="java.util.HashMap">
-		/* intrExptProc1010 : 예외 처리 로그 저장 */
-		INSERT INTO INTR_ERROR_LOG
+	<delete id="intrFileProc1022" parameterType="java.util.HashMap">
+		/* intrFileProc1022 : 파일 삭제 처리 (삭제) */
+		DELETE WORKFILE
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
+	</delete>
+	
+	<insert id="intrExptProc1011" parameterType="java.util.HashMap">
+		/* intrExptProc1011 : 예외 처리 로그 저장 */
+		INSERT INTO ERROR_LOG
 		(
 				EMP_IDX
 			,	MAPPING_ID
@@ -110,18 +112,50 @@
 		)
 		VALUES
 		(
-				#{empIdx, jdbcType=VARCHAR}
-			,	#{mappingId, jdbcType=VARCHAR}
-			,	#{ipAddr, jdbcType=VARCHAR}
-			,	#{errorMsg, jdbcType=VARCHAR}
+				NVL(#{empIdx, jdbcType=VARCHAR},'')
+			,	NVL(#{mappingId, jdbcType=VARCHAR},'')
+			,	NVL(#{ipAddr, jdbcType=VARCHAR},'')
+			,	NVL(#{errorMsg, jdbcType=VARCHAR},'')
 			,	TO_CHAR(SYSDATE,'YYYYMMDD')
 			,	TO_CHAR(SYSDATE,'HH24MISS')
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM INTR_ERROR_LOG WHERE REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+					FROM ERROR_LOG WHERE REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
 				)
 			,	NULL
 		)
 	</insert>
+	
+	<select id="intrCodeInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrCodeInqy1011 : 공통코드 조회 */
+		SELECT 
+			DATA.*
+		FROM (
+			SELECT
+						'' AS COMMCODE_CD,
+						'전체' AS COMMCODE_NM,
+						#{commcodeGcd, jdbcType=VARCHAR} AS COMMCODE_GCD,
+						'' AS REG_DT,
+						'' AS REG_TM,
+						'Y' AS USE_YN,
+						'0' AS DISP_ORDER,
+						'' AS REMARK
+					FROM DUAL
+					UNION
+					SELECT 
+					    C.COMMCODE_CD,
+					    C.COMMCODE_NM,
+					    C.COMMCODE_GCD,
+					    C.REG_DT,
+					    C.REG_TM,
+					    C.USE_YN,
+					    C.DISP_ORDER,
+					    C.REMARK
+					FROM COMMCODE C
+					WHERE C.COMMCODE_GCD = #{commcodeGcd, jdbcType=VARCHAR}
+						AND C.USE_YN = 'Y'
+			) DATA
+		ORDER BY DATA.DISP_ORDER ASC
+	</select>
 </mapper>

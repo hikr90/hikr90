@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.svc.AuthService;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 
 @Controller
 public class AuthController {
@@ -49,11 +48,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_1010;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_1010;
 	}
 
 	// 권한 트리 목록 화면
@@ -73,11 +72,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_1011;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_1011;
 	}
 	
 	// 권한 등록 화면
@@ -92,11 +91,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1020;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1020;
 	}
 	
 	// 권한 상세 화면
@@ -116,11 +115,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1010;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1010;
 	}
 	
 	// 권한 수정 화면
@@ -140,11 +139,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_DETL_1030;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1030;
 	}
 	
 	// 권한 목록 조회
@@ -169,11 +168,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_2010;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_2010;
 	}
 	
 	// 메뉴 권한 목록 조회
@@ -193,11 +192,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_2011;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_2011;
 	}
 	
 	// 사용자 권한 목록 조회
@@ -222,11 +221,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 사용자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 사용자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_3010;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_3010;
 	}
 	
 	// 사용자 권한 트리 목록 화면
@@ -251,11 +250,11 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 사용자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 사용자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_AUTH + Jsp.INTR_AUTH_LIST_3011;
+		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_3011;
 	}
 	
 	// 권한 등록 처리
@@ -273,7 +272,7 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
@@ -296,7 +295,7 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
@@ -318,7 +317,7 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 권한 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 권한 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
@@ -340,7 +339,7 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 메뉴 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 메뉴 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
@@ -362,7 +361,7 @@ public class AuthController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 사용자 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 사용자 권한 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//

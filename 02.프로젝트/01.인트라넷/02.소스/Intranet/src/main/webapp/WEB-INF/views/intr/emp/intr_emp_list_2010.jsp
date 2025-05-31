@@ -46,43 +46,24 @@
 												~
 												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 											</div>
+											<br>
 											
 											<!-- 부서 -->
 											<div class="srch_area">
 												<label class="srch_label">부서</label>
-												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
-													<input type="hidden" name="deptCd" value="${param.deptCd}">
-													<input type="hidden" name="deptNm" value="${param.deptNm}">
-												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${deptList}">
-															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
 											</div>
-											
+
 											<!-- 직급 -->
 											<div class="srch_area">
 												<label class="srch_label">직급</label>
-												<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
-													<input type="hidden" name="gradeCd" value="${param.gradeCd}">
-													<input type="hidden" name="gradeNm" value="${param.gradeNm}">
-												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${gradeList}">
-															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
 											</div>
 											
-											<!-- 제목 -->
+											<!-- 사원명 -->
 											<div class="float_right">
 												<div class="srch_area">
-													<label class="srch_label">제목</label>
+													<label class="srch_label">사원명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 												
 													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
@@ -117,16 +98,16 @@
 													<tr>
 														<td class="first_td">
 															<span class="date">
-																<fmt:parseDate value="${list.empHireDate}" var="parseDt" pattern="yyyyMMdd"/>
+																<fmt:parseDate value="${list.hireDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 																${fomatDt} 
 															</span>
 														</td>
-														<td>${list.deptNm}</td>
-														<td>${list.gradeNm}</td>
+														<td>${list.orgNm}</td>
+														<td>${list.rankNm}</td>
 														<td>${list.empNm}</td>
-														<td>${list.empPhone}</td>
-														<td>${list.empEmail}</td>
+														<td>${list.mobNo}</td>
+														<td>${list.email}</td>
 			                                        </tr>
 		                                        </c:forEach>
 		                                        

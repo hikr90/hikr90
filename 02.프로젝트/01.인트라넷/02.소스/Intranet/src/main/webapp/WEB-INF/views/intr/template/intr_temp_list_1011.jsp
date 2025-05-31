@@ -8,7 +8,7 @@
 			<c:set var="spanIcon" value="icon_list" />
 
 			<li class="li_1"><span class="${spanIcon}"></span> 
-			<a class="a_btn" id="${list.tempCd}" href="javascript:" onclick="detCall('${list.tempCd}');">${list.tempNm}</a>
+			<a class="a_btn" id="${list.templateCd}" href="javascript:" onclick="detCall('${list.templateCd}');">${list.templateNm}</a>
 		</c:forEach>
 	</ul>
 </c:if>

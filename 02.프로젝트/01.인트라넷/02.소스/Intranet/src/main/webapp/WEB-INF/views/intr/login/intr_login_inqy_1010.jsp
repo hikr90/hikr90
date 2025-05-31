@@ -12,7 +12,7 @@
    		function popCall(){
    			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
    			var obj = new Object();
-   			ajaxPopup(obj,"650","300","intrPopupInqy1020.do","");
+   			ajaxPopup(obj,"650","360","intrPopupInqy1020.do","");
    		}
    		
    		// 로그인

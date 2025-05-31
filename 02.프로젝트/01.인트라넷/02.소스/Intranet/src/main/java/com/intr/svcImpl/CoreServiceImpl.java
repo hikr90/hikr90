@@ -16,12 +16,11 @@ import com.intr.dao.CoreDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
+import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
 
 @Service 
 public class CoreServiceImpl implements CoreService{
-	//
-	private final Logger logger = LoggerFactory.getLogger(getClass());
 	//
 	@Autowired
 	HttpServletRequest request;
@@ -35,25 +34,10 @@ public class CoreServiceImpl implements CoreService{
 	@Autowired
 	UtilDao utilDao;
 	
-	// 트랜젝션 시작
-	public void setTx(HashMap<String, Object> paramMap, boolean txYn) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 트랜젝션 처리
-			//--------------------------------------------------------------------------------------------
-			
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 트랜젝션 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-	}
-	
 	// 메뉴 조회
 	public void intrCoreInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
-		HashMap<String, Object> tempMap = new HashMap<String, Object>();
+		HashMap<String, Object> tempMap = null;
 		List<HashMap<String, Object>> defaultList = null;
 		EmpVO empInfo = null;
 		//
@@ -72,9 +56,11 @@ public class CoreServiceImpl implements CoreService{
 			}
 			
 			// (2) menuSet
-			menuSet =  utilService.nullToDefault((String)paramMap.get("menuSet"));
-			if(menuSet!=null) {
+			menuSet =  utilService.nvlProc((String)paramMap.get("menuSet"));
+			if(menuSet!="") {
 				session.setAttribute("menuSet", menuSet);
+			} else {
+				menuSet = (String)session.getAttribute("menuSet");
 			}
 
 			//--------------------------------------------------------------------------------------------
@@ -88,8 +74,9 @@ public class CoreServiceImpl implements CoreService{
 			//--------------------------------------------------------------------------------------------
 			// 상단 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			tempMap.put("idxSet", utilService.nullToDefault((String)paramMap.get("idxSet")));
-			tempMap.put("menuType", utilService.nullToDefault((String)paramMap.get("menuType")));
+			tempMap = new HashMap<String, Object>();
+			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
+			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
 			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
 			model.addAttribute("menuList", defaultList);
@@ -97,7 +84,11 @@ public class CoreServiceImpl implements CoreService{
 			//--------------------------------------------------------------------------------------------
 			// 좌측 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			tempMap.put("upprMenuSet", utilService.nullToDefault((String)paramMap.get("upprMenuSet")));
+			tempMap = new HashMap<String, Object>();
+			tempMap.put("menuSet", menuSet);
+			tempMap.put("menuCd", utilService.nvlProc((String)paramMap.get("menuCd")));
+			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
+			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
 			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
 			model.addAttribute("leftList", defaultList);
@@ -132,7 +123,8 @@ public class CoreServiceImpl implements CoreService{
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
-			// 	- 0 : 사용자 , 1 : 관리자
+			// 	- 0 : 사용자
+			//		- 1 : 관리자
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
 			session.setAttribute("menuType", menuType);
@@ -141,5 +133,30 @@ public class CoreServiceImpl implements CoreService{
 			//
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	// 시퀀스 채번
+	public HashMap<String, Object> intrCoreInqy1040() throws Exception {
+		//
+		HashMap<String, Object> paramMap = null;
+		
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 시퀀스 채번
+			//--------------------------------------------------------------------------------------------
+			paramMap = coreDao.intrCoreInqy1041();
+			
+			//--------------------------------------------------------------------------------------------
+			// 시퀀스 저장
+			//--------------------------------------------------------------------------------------------
+			coreDao.intrCoreInqy1042(paramMap);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return paramMap;
 	}
 }

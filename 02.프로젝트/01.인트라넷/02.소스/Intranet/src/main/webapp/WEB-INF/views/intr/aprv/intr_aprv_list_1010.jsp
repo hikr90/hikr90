@@ -10,17 +10,16 @@
 		formSubmit("intrAprvInqy1010.do");
 	}
 
-	// 템플릿 조회 팝업
+	// 기안문 양식 조회 팝업
 	function popCall(){
-		//
 		var obj = new Object();
 		ajaxPopup(obj,"650","360","intrPopupInqy1010.do","");
 	}
 	
 	// 품의문 상세 조회
-	function detCall(contId) {
+	function detCall(sequenceId) {
 		//
-		$("#contId").val(contId);
+		$("#sequenceId").val(sequenceId);
 		formSubmit("intrAprvInqy1030.do");
 	}
 </script>
@@ -29,7 +28,7 @@
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<!-- 템플릿 팝업 -->
+	<!-- 기안문 양식 팝업 -->
  	<div id="popupArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 	</div>
@@ -49,11 +48,11 @@
 						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="contId" name="contId" value="">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									
-									<h2>기안 목록
+									<h2>결재 조회
 										<span class="float_right">
 											<input type="button"class="btn_navy_thin" value="기안문 작성" onclick="popCall();">
 										</span>
@@ -110,10 +109,10 @@
 														<td class="first_td">${list.num}</td>
 														<td>${list.currStepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.contId}');">${list.aprvTitle}</a>
+															<a class="show_view a_title" onclick="detCall('${list.sequenceId}');">${list.aprvTitle}</a>
 														</td>
-														<td>${list.aprvDeptNm} ${list.aprvEmpNm} ${list.aprvGradeNm}</td>
-														<td>${list.deptNm} ${list.empNm} ${list.gradeNm}</td>
+														<td>${list.aprvorgNm} ${list.aprvEmpNm} ${list.aprvrankNm}</td>
+														<td>${list.orgNm} ${list.empNm} ${list.rankNm}</td>
 														<td>
 															<span class="date">
 																<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>

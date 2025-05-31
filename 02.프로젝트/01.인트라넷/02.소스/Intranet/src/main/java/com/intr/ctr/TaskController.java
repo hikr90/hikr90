@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.svc.CoreService;
 import com.intr.svc.TaskService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 
 @Controller
 public class TaskController {
@@ -34,7 +33,7 @@ public class TaskController {
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// 업무일지 작성 조회 화면
+	// 업무일지 조회
 	@RequestMapping("/intrTaskInqy1010.do")
 	public String intrTaskInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -45,7 +44,7 @@ public class TaskController {
 			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 업무일지 작성 조회
+			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
 			taskService.intrTaskInqy1010(model, paramMap);
 			
@@ -56,10 +55,10 @@ public class TaskController {
 		}
 		
 		//
-		return Path.VIEW_PATH_TASK + Jsp.INTR_TASK_LIST_1010;
+		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_1010;
 	}
 	
-	// 업무일지 목록 (관리자) 조회 화면
+	// 업무일지 목록 조회 화면
 	@RequestMapping("/intrTaskInqy2010.do")
 	public String intrTaskInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -80,7 +79,7 @@ public class TaskController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_TASK + Jsp.INTR_TASK_LIST_2010;
+		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_2010;
 	}
 	
 	// 업무일지 저장 처리

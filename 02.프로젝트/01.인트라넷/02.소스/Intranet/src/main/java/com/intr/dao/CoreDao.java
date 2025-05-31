@@ -30,19 +30,27 @@ public class CoreDao {
 		return defaultList;
 	}
 	
-	// 시퀀스 생성 
-	public HashMap<String, Object> intrCoreInqy1022() throws Exception {
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("core.intrCoreInqy1022");
+	// 시퀀스 채번
+	public HashMap<String, Object> intrCoreInqy1041() {
 		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("core.intrCoreInqy1041");
 		return defaultInfo;
 	}
 	
-	// 목록 건수 조회
-	public List<HashMap<String, Object>> intrCoreInqy1023(HashMap<String, Object> paramMap) {
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("core.intrCoreInqy1023", paramMap);
+	// 시퀀스 저장
+	public int intrCoreInqy1042(HashMap<String, Object> paramMap) {
 		//
+		int resInt = 0;
+		resInt = sqlsession.update("core.intrCoreInqy1042", paramMap);
+		return resInt;
+	}
+	
+	// 목록 수 조회
+	public List<HashMap<String, Object>> intrCoreInqy1051(HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("core.intrCoreInqy1051", paramMap);
 		return defaultList;
 	}
 }

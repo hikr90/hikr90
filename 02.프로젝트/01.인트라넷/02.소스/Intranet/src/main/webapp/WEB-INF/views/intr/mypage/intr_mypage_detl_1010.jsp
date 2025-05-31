@@ -35,7 +35,7 @@
 			                                    	<div class="emp_profile">
 			                                        	<c:choose>
 			                                        		<c:when test="${not empty defaultList}">
-				                                 				<img id="empImg" class="emp_img" width="150" height="150" src="intrEmpInqy1099.do?deptNm=${defaultInfo.deptNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
+				                                 				<img id="empImg" class="emp_img" width="150" height="150" src="intrEmpInqy1099.do?orgNm=${defaultInfo.orgNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
 			                                        		</c:when>
 			                                        		<c:otherwise>
 					                                        	<img id="empImg" class="emp_img" width="150" height="150" src="resources/images/icon/icon_emp.png">
@@ -59,11 +59,11 @@
 		                               		<dd class="sel_2part">
 		                               			<div class="radio_box">
 		                                        	<span class="radio_area">
-		                                            	<input type="radio" id="chk-yes" class="gender" name="gender" value="남자" <c:if test="${defaultInfo.empGender eq 'M'}">checked="checked"</c:if> disabled="disabled">
+		                                            	<input type="radio" id="chk-yes" class="gender" name="gender" value="남자" <c:if test="${defaultInfo.isMale eq 'Y'}">checked="checked"</c:if> disabled="disabled">
 		                                                <label for="chk-yes">남자<span></span></label>
 		                                            </span>
 		                                            <span class="radio_area ml10">
-		                                            	<input type="radio" id="chk-no" class="gender" name="gender" value="여자" <c:if test="${defaultInfo.empGender eq 'F'}">checked="checked"</c:if> disabled="disabled">
+		                                            	<input type="radio" id="chk-no" class="gender" name="gender" value="여자" <c:if test="${defaultInfo.isMale eq 'N'}">checked="checked"</c:if> disabled="disabled">
 		                                                <label for="chk-no">여자<span></span></label>
 		                                            </span>
 		                                       </div>
@@ -72,17 +72,17 @@
 		                              	<dl>
 		                              		<dt><label>부서</label></dt>
 		                                    <dd class="sel_2part">
-		                                    	${defaultInfo.deptNm}
+		                                    	${defaultInfo.orgNm}
 		                                    </dd>
 		                                    <dt><label>직급</label></dt>
 		                                    <dd class="sel_2part">
-			                                	${defaultInfo.gradeNm}
+			                                	${defaultInfo.rankNm}
 		                                    </dd>
 		                              	</dl>
 		                              	<dl>
 		                              		<dt><label>연락처</label></dt>
 		                                    <dd class="sel_2part">
-		                                    	<input type="text" title="연락처" name="phone" maxlength="13" value="${defaultInfo.phone}" onkeyup="ipNum(this);">
+		                                    	<input type="text" title="연락처" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="inputNum(this);">
 		                                    </dd>
 		                                        
 		                                    <dt><label>메일 주소</label></dt>

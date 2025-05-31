@@ -4,18 +4,17 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<div class="pop_area">
-	<article class="sub_article">
+<div class="pop_area" style="height: 100%;">
+	<article class="sub_article" style="height: 82%;">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
 					<div class="find_aprv_wrap">
-	                	<h3>결재선 조회</h3><br>
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">
 									<div class="right_srch_area">
-										<label class="srch_label">결재선</label>
+										<label class="srch_label">결재선 조회</label>
 									</div>
 								</div>
 							</div>

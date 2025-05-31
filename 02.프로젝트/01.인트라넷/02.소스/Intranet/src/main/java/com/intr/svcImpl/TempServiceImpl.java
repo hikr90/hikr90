@@ -24,14 +24,14 @@ public class TempServiceImpl implements TempService{
 	@Autowired
 	UtilService utilService;
 	
-	// 템플릿 목록 조회
+	// 기안문 양식 목록 조회
 	public void intrTempInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 목록 조회
+			// 기안문 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = tempDao.intrTempInqy1011(model, paramMap);
 			model.addAttribute("defaultList", defaultList);
@@ -42,14 +42,14 @@ public class TempServiceImpl implements TempService{
 		}
 	}
 	
-	// 템플릿 상세 조회
+	// 기안문 양식 상세 조회
 	public void intrTempInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 상세 조회
+			// 기안문 양식 상세 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = tempDao.intrTempInqy1021(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
@@ -60,14 +60,14 @@ public class TempServiceImpl implements TempService{
 		}
 	}
 
-	// 템플릿 목록 조회
+	// 기안문 양식 목록 조회
 	public void intrTempInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// (메인)템플릿 목록 조회
+			// (메인)기안문 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = tempDao.intrTempInqy1011(model, paramMap);
 			model.addAttribute("tempList", defaultList);
@@ -78,7 +78,7 @@ public class TempServiceImpl implements TempService{
 		}
 	}
 	
-	// 템플릿 등록
+	// 기안문 양식 등록
 	public String intrTempProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
@@ -87,7 +87,7 @@ public class TempServiceImpl implements TempService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 등록
+			// 기안문 양식 등록
 			//--------------------------------------------------------------------------------------------
 			resInt = tempDao.intrTempProc1011(paramMap);
 			//
@@ -108,7 +108,7 @@ public class TempServiceImpl implements TempService{
 		return defaultStr;
 	}
 	
-	// 템플릿 수정
+	// 기안문 양식 수정
 	public String intrTempProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
@@ -117,7 +117,7 @@ public class TempServiceImpl implements TempService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 수정
+			// 기안문 양식 수정
 			//--------------------------------------------------------------------------------------------
 			resInt = tempDao.intrTempProc1021(paramMap);
 			//
@@ -138,7 +138,7 @@ public class TempServiceImpl implements TempService{
 		return defaultStr;
 	}
 	
-	// 템플릿 삭제
+	// 기안문 양식 삭제
 	public String intrTempProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
@@ -147,7 +147,7 @@ public class TempServiceImpl implements TempService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 템플릿 삭제
+			// 기안문 양식 삭제
 			//--------------------------------------------------------------------------------------------
 			resInt = tempDao.intrTempProc1031(paramMap);
 			//

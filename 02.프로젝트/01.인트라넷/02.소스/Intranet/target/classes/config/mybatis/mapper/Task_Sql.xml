@@ -2,29 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="task">
 	<select id="intrTaskInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrTaskInqy1011 : 업무일지 작성 조회 */
+		/* intrTaskInqy1011 : 업무일지 조회 */
 		SELECT 
-			    TASK.TASK_CD
-			,   TASK.EMP_IDX
-			,	EMP.EMP_NM
-			,	DEPT.DEPT_NM
-			,	GRADE.GRADE_NM
-			,	TASK.TASK_CONT
-			,   TASK.REG_DT || TASK.REG_TM AS REG_DT_TM
-			,	TASK.REG_DT
-			,	TASK.REG_TM
-			,	COUNT(TASK.TASK_CD) OVER() AS LIST_CNT	
-		FROM INTR_TASK TASK
-		LEFT OUTER JOIN INTR_EMP EMP
-			ON EMP.EMP_IDX = TASK.EMP_IDX
-		LEFT OUTER JOIN INTR_DEPT DEPT
-			ON DEPT.DEPT_CD = EMP.DEPT_CD
-		LEFT OUTER JOIN INTR_GRADE GRADE
-			ON GRADE.GRADE_CD = EMP.GRADE_CD
+			    T.TASK_ID
+			,   T.EMP_IDX
+			,	E.EMP_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+			,	T.TASK_CONT
+			,   TO_CHAR(TO_DATE(T.REG_DT),'YYYY-MM-DD') AS REG_DT
+			,	TO_CHAR(TO_DATE(T.REG_TM, 'HH24MISS'), 'HH24:MI') AS REG_TM	
+			,	COUNT(T.TASK_ID) OVER() AS LIST_CNT	
+		FROM TASK T
+		LEFT OUTER JOIN EMPINFO E
+			ON E.EMP_IDX = T.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
 		WHERE 1=1 
-            	AND TASK.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				AND TASK.REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
-		ORDER BY TASK.REG_DT DESC, TASK.REG_TM ASC, TASK.TASK_CD ASC
+            	AND T.EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				AND T.REG_DT = CASE WHEN REPLACE(#{srchDt, jdbcType=VARCHAR},'-','') IS NULL
+												THEN TO_CHAR(SYSDATE,'YYYYMMDD') ELSE REPLACE(#{srchDt, jdbcType=VARCHAR},'-','') END 
+		ORDER BY T.REG_DT DESC, T.REG_TM ASC, T.TASK_ID ASC
 	</select>
 	
 	<select id="intrTaskInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -34,26 +34,26 @@
 				(
 					SELECT
 								TASK.EMP_IDX
-							,	EMP.EMP_NM
-							,	DEPT.DEPT_CD
-							,	DEPT.DEPT_NM
+							,	E.EMP_NM
+							,	O.ORG_CD
+							,	O.ORG_NM
 							,	1 AS LV
-							,	'[업무일지] ' || EMP.EMP_NM || ' ' || DEPT.DEPT_NM AS TASK_CONT
+							,	'[업무일지] ' || E.EMP_NM || ' ' || O.ORG_NM AS TASK_CONT
 							,	TASK.REG_DT
 							, 	COUNT(TASK.EMP_IDX) OVER() AS LIST_CNT
 					FROM
 							(
 								SELECT
-											TASK.EMP_IDX
-										,	TASK.REG_DT
+											T.EMP_IDX
+										,	T.REG_DT
 										,	'' AS TASK_CONT
-								FROM INTR_TASK TASK
-								GROUP BY TASK.EMP_IDX, TASK.REG_DT
+								FROM TASK T
+								GROUP BY T.EMP_IDX, T.REG_DT
 							) TASK
-					LEFT OUTER JOIN INTR_EMP EMP
-						ON EMP.EMP_IDX = TASK.EMP_IDX
-					LEFT OUTER JOIN INTR_DEPT DEPT
-						ON DEPT.DEPT_CD = EMP.DEPT_CD
+					LEFT OUTER JOIN EMPINFO E
+						ON E.EMP_IDX = TASK.EMP_IDX
+					LEFT OUTER JOIN ORG O
+						ON O.ORG_CD = E.ORG_CD
 				)
 				SELECT
 					RESULT.*
@@ -66,8 +66,8 @@
 										UT.REG_DT || UT.EMP_IDX AS TASK_IDX
 									,	UT.EMP_IDX
 									,	UT.EMP_NM
-									,	UT.DEPT_CD
-									,	UT.DEPT_NM
+									,	UT.ORG_CD
+									,	UT.ORG_NM
 									,	UT.TASK_CONT
 									,	UT.LV
 									,	UT.REG_DT
@@ -80,8 +80,8 @@
 										UT.REG_DT || UT.EMP_IDX AS TASK_IDX
 									,	UT.EMP_IDX
 									,	UT.EMP_NM
-									,	UT.DEPT_CD
-									,	UT.DEPT_NM
+									,	UT.ORG_CD
+									,	UT.ORG_NM
 									,	LT.TASK_CONT
 									,	2 AS LV
 									,	LT.REG_DT
@@ -89,7 +89,7 @@
 									,	ROW_NUMBER() OVER(PARTITION BY LT.EMP_IDX, LT.REG_DT ORDER BY LT.REG_DT ASC, LT.REG_TM ASC) AS DISP_ORDER
 									,	UT.LIST_CNT
 							FROM UPPR_TASK UT
-							INNER JOIN INTR_TASK LT
+							INNER JOIN TASK LT
 								ON UT.EMP_IDX = LT.EMP_IDX
 								AND UT.REG_DT = LT.REG_DT
 					) DATA
@@ -103,11 +103,11 @@
 		            <if test="srchEdt != null and srchEdt !=''">
 		            	AND DATA.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		            </if>
-		            <if test="deptCd != null and deptCd != ''">
-						AND DATA.DEPT_CD = #{deptCd, jdbcType=VARCHAR}
+		            <if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					 <if test="gradeCd != null and gradeCd != ''">
-						AND DATA.GRADE_CD = #{gradeCd, jdbcType=VARCHAR}
+					<if test="rankNm != null and rankNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 				) RESULT
 		ORDER BY RESULT.ROW_NUM ASC, RESULT.DISP_ORDER ASC
@@ -115,28 +115,48 @@
 	
 	<insert id="intrTaskProc1011" parameterType="java.util.HashMap">
 		/* intrTaskProc1011 : 업무일지 등록 처리 */
-		INSERT INTO INTR_TASK
+		INSERT INTO TASK
 		(
-				TASK_CD
+				TASK_ID
+			,	TASK_SNO
 			,	EMP_IDX
 			,	TASK_CONT
 			,	REG_DT
 			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
 		)
 		VALUES
 		(
-				(SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_CD,'TASK_')),0) + 1,4,0) FROM INTR_TASK)
+				(SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_ID,'TASK_')),0) + 1,4,0) FROM TASK)
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(TASK_SNO),0) + 1,4,0)
+					FROM TASK 
+					WHERE REG_DT = #{regDt, jdbcType=VARCHAR}
+						AND EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				)
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	#{taskCont, jdbcType=VARCHAR}
 			,	#{regDt, jdbcType=VARCHAR}
-			,	#{regTm, jdbcType=VARCHAR}
+			,	#{regTm, jdbcType=VARCHAR} || '00'
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM TASK
+					WHERE REG_DT = #{regDt, jdbcType=VARCHAR}
+						AND EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+				)
+			,	NULL
 		)
 	</insert>
 	
 	<delete id="intrTaskProc1021" parameterType="java.util.HashMap">
 		/* intrTaskProc1021 : 업무일지 삭제 처리 */
-		DELETE FROM INTR_TASK
+		DELETE FROM TASK
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				AND REG_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+				AND REG_DT = #{regDt, jdbcType=VARCHAR}
 	</delete>
 </mapper>

@@ -35,13 +35,13 @@
 		});	
 			
 		// 부서 체크 시 하위 자동 체크
-		$(document).on('click','.deptCd',function() {
+		$(document).on('click','.orgCd',function() {
 			//
 			var deptYn = $(this).is(':checked');
-			var deptCd = $(this).attr("deptCd");
+			var orgCd = $(this).attr("orgCd");
 			//			
 			$("input[name=empIdx]").each(function(){
-				if(deptCd==$(this).attr('deptCd')){
+				if(orgCd==$(this).attr('orgCd')){
 					$(this).prop('checked',deptYn)
 				};
 			});
@@ -134,7 +134,7 @@
 		                                <!-- end Form srch_wrap  -->
 										
 										<div class="tree_wrap">
-											<div id="treeArea" class="tree_area">
+											<div id="treeArea" class="tree_area" style="width: 400px;">
 												<div id="authTree" class="tree">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -151,7 +151,7 @@
 											
 											<div id="empArea" class="emp_area" style="display: none;">
 												<!-- 사용자 목록 -->
-												<div id="empInfo" class="tree_area ml20">
+												<div id="empInfo" class="tree_area ml20" style="width: 400px;">
 													<div class="tree">
 														<li class="li_1" style="margin-left: 15px;">
 															<input type="checkbox" id="totalIdx" class="totalIdx" name="totalIdx">
@@ -161,7 +161,7 @@
 																						
 														<c:forEach var="list" items="${empList}" varStatus="status">
 															<c:set var="spanIcon"	value="icon_folder"/>
-															<c:set var="listNm"		value="${list.deptNm}"/>
+															<c:set var="listNm"		value="${list.orgNm}"/>
 															<c:set var="nextLv"		value="${empList[status.index+1].lv}"/>
 															<c:set var="prevLv"		value=""/>
 															
@@ -182,15 +182,21 @@
 															<c:choose>
 																<c:when test="${list.lv gt prevLv}">
 																	<li class="li_${list.lv}">
-																	ㄴ<input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'deptCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" deptCd="${list.isleaf eq 'N' ? list.deptCd : list.upprDeptCd}" deptNm="${list.deptNm}">
-																	<span class="${spanIcon}"></span>
-																	${listNm}
+																		<c:if test="${list.isleaf eq 'Y'}">
+																			&nbsp;
+																			ㄴ <input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																		</c:if>
+																		<span class="${spanIcon}"></span>
+																		${listNm}
 																</c:when>
 																<c:when test="${list.lv eq prevLv}">
 																	<li class="li_${list.lv}">
-																	ㄴ<input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'deptCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" deptCd="${list.isleaf eq 'N' ? list.deptCd : list.upprDeptCd}" deptNm="${list.deptNm}">
-																	<span class="${spanIcon}"></span>
-																	${listNm}
+																		<c:if test="${list.isleaf eq 'Y'}">
+																			&nbsp;
+																			ㄴ <input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																		</c:if>
+																		<span class="${spanIcon}"></span>
+																		${listNm}
 																</c:when>
 															</c:choose>
 				
@@ -222,7 +228,7 @@
 												<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 												
 												<!-- 사용자 트리 -->
-												<div id="empTree" class="tree_info"></div>
+												<div id="empTree" class="tree_info" style="width: 646px;"></div>
 											</div><!-- End emp_area -->
 										</div><!-- End tree_wrap -->
 								</div><!-- End post_wrap -->

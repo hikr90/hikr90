@@ -16,10 +16,10 @@
 	    var scheCont = new FullCalendar.Calendar(calendar, {
 	    	//
 	        locale: 'en',  							// 언어
-			eventLimit: true,					// 이벤트 내용 초과 시, MORE로 표현
-			displayEventTime: false, 	// 이벤트 시간 여부
-			navLinks: true, 					// 날짜 선택할 경우 상세 데이터 조회 
-			selectable: false,				// 네모 선택 여부
+			eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
+			displayEventTime: false, 			// 이벤트 시간 여부
+			navLinks: true, 							// 날짜 선택할 경우 상세 데이터 조회 
+			selectable: false,						// 네모 선택 여부
 			headerToolbar: {
 				start: 'prev,next today',
 				center: 'title',
@@ -29,7 +29,7 @@
 	        select: function(info) {
 				//
 			},
-			// 기안문 정보 팝업
+			// 휴가 상세 팝업
 			eventClick: function(info) {
 				//
 				var pw = "650";
@@ -39,12 +39,11 @@
 
 				// info.event.id
 				var options = 'toolbar=no, scrollbars=no, resizeable=yes, status=no, menubar=no, width=' + pw + ', height=' + ph + ', top=' + top + ', left=' + left;
-				window.open("intrScheInqy1020.do?contId="+info.event.id, "_blank", options);
+				window.open("intrScheInqy1020.do?aprvId="+info.event.id, "_blank", options);
 			},
 			// 데이터
 			events : defaultList
 		});
-	    
 	    //
 	    scheCont.render();
 	});
@@ -78,44 +77,16 @@
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
-											<!-- 작성일자 -->
-											<div class="srch_area">
-												<label class="srch_label">작성일자</label>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
-												~
-												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
-											</div>
-											
 											<!-- 부서 -->
 											<div class="srch_area">
 												<label class="srch_label">부서</label>
-												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
-													<input type="hidden" name="deptCd" value="${param.deptCd}">
-													<input type="hidden" name="deptNm" value="${param.deptNm}">
-												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${deptList}">
-															<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
 											</div>
-											
+
 											<!-- 직급 -->
 											<div class="srch_area">
 												<label class="srch_label">직급</label>
-												<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
-													<input type="hidden" name="gradeCd" value="${param.gradeCd}">
-													<input type="hidden" name="gradeNm" value="${param.gradeNm}">
-												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${gradeList}">
-															<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
 											</div>
 											
 											<!-- 사원명 -->
@@ -133,7 +104,7 @@
 								
 									<div class="sche_wrap">
 										<div class="sche_area">
-											<div id="calendar" class="sche_content">
+											<div id="calendar">
 												
 											</div>
 										</div><!-- End post_write -->

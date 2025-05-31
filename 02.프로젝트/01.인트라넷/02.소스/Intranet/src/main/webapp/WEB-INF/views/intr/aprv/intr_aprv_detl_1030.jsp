@@ -101,9 +101,9 @@
 								<div class="post_wrap">
 									<h2>재사용등록</h2><br>
 									<input type="hidden" id="aprvLine" name="aprvLine" value="">
-									<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.contId}">
+									<input type="hidden" id="prevContentIdx" name="prevContentIdx" value="${aprvDetInfo.sequenceId}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
-									<input type="hidden" id="tempCd" name="tempCd" value="${aprvDetInfo.tempCd}">
+									<input type="hidden" id="templateCd" name="templateCd" value="${aprvDetInfo.templateCd}">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
@@ -114,7 +114,7 @@
 										<dl>
 											<dt><label for="post-title">제목</label></dt>
 											<dd>
-												<input type="text" id="aprvTitle" class="aprvTitle" title="템플릿명" name="aprvTitle" value="${aprvDetInfo.aprvTitle}">
+												<input type="text" id="aprvTitle" class="aprvTitle" title="기안문 양식명" name="aprvTitle" value="${aprvDetInfo.aprvTitle}">
 											</dd>
 											<dt>시행일자</dt>
 											<dd>
@@ -125,17 +125,17 @@
 										</dl>
 										<dl class="post_info">
 											<dt>부서</dt>
-											<dd>${empVO.deptNm}</dd>
+											<dd>${empVO.orgNm}</dd>
 											<dt>작성자</dt>
-											<dd>${empVO.gradeNm} ${empVO.empNm}</dd>
+											<dd>${empVO.rankNm} ${empVO.empNm}</dd>
 										</dl>								
 										<dl>
 											<dt>
 												<label for="post_text">내용</label>
 											</dt>
 											<dd class="post_text">
-												<textarea id="editor" title="템플릿 내용">${aprvDetInfo.aprvCont}</textarea>
-												<input type="hidden" id="aprvCont" title="템플릿 내용" name="aprvCont" value="">
+												<textarea id="editor" title="기안문 양식 내용">${aprvDetInfo.aprvCont}</textarea>
+												<input type="hidden" id="aprvCont" title="기안문 양식 내용" name="aprvCont" value="">
 											</dd>
 										</dl>
 									</div><!-- End post_write -->

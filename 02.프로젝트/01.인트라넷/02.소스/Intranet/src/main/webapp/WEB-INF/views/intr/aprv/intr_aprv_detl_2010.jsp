@@ -18,10 +18,10 @@
 	}
 	
 	// 결재선 조회 팝업
-	function popCall(contId){
+	function popCall(sequenceId){
 		//
 		var obj = new Object();
-		obj["contId"] = contId;
+		obj["sequenceId"] = sequenceId;
 		//		
 		ajaxPopup(obj,"1100","650","intrPopupInqy1050.do","");
 	}
@@ -116,7 +116,7 @@
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 								<input type="hidden" id="currContSid" name="currContSid" value="${aprvDetInfo.currContSid}">
-								<input type="hidden" id="contId" name="contId" value="${aprvDetInfo.contId}">
+								<input type="hidden" id="sequenceId" name="sequenceId" value="${aprvDetInfo.sequenceId}">
 								<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx?aprvDetInfo.lastAprvYn:'N'}">
 								<input type="hidden" id="aprvGb" name="aprvGb" value="0">
 							
@@ -139,7 +139,7 @@
 										</dl>
 										<dl class="post_info">
 											<dt>기안자</dt>
-											<dd>(${aprvDetInfo.deptNm}) ${aprvDetInfo.empNm}</dd>
+											<dd>(${aprvDetInfo.orgNm}) ${aprvDetInfo.empNm}</dd>
 											<dt>시행일자</dt>
 											<dd>
 												<span class="date">
@@ -155,13 +155,13 @@
 											</dd>
 											<dt>결재선</dt>
 											<dd>
-			                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.contId});">결재선</a> 
+			                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.sequenceId});">결재선</a> 
 											</dd>
 										</dl>
 										<dl>
 											<dt>내용</dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="템플릿 내용">${aprvDetInfo.aprvCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안문 양식 내용">${aprvDetInfo.aprvCont}</textarea>
 											</dd>
 										</dl>
 									</div>

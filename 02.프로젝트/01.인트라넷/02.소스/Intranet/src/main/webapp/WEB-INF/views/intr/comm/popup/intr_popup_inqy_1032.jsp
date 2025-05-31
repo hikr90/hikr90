@@ -44,7 +44,7 @@
 						<th scope="col">순번</th>
 						<th scope="col">진행 단계</th>
 						<th scope="col">부서</th>
-						<th scope="col">이름</th>
+						<th scope="col">성함</th>
 						<th scope="col">사유</th>
 						<th scope="col">처리 일자</th>
 					</tr>
@@ -55,7 +55,7 @@
 						<tr>
 							<td>${list.num}</td>
 							<td>${list.stepNm}</td>
-							<td>${list.deptNm}</td>
+							<td>${list.orgNm}</td>
 							<td>${list.empNm}</td>
 							<td>
 								<c:if test="${list.aprvRsltResn ne null and list.aprvRsltResn ne ''}">

@@ -11,9 +11,9 @@
 	}
 	
 	// 품의문 상세 조회
-	function detCall(contId) {
+	function detCall(sequenceId) {
 		//
-		$("#contId").val(contId);
+		$("#sequenceId").val(sequenceId);
 		formSubmit("intrAprvInqy2020.do");
 	}
 </script>
@@ -37,11 +37,11 @@
 						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="contId" name="contId" value="">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									
-									<h2>결재 목록</h2><br>
+									<h2>결재 조회</h2><br>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
 											<!-- 작성일자 -->
@@ -104,10 +104,10 @@
 														<td class="first_td">${list.num}</td>
 														<td>${list.currStepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.contId}');">${list.aprvTitle}</a>
+															<a class="show_view a_title" onclick="detCall('${list.sequenceId}');">${list.aprvTitle}</a>
 														</td>
-														<td>${list.aprvDeptNm} ${list.aprvEmpNm} ${list.aprvGradeNm}</td>
-														<td>${list.empNm} ${list.deptNm} ${list.gradeNm}</td>
+														<td>${list.aprvorgNm} ${list.aprvEmpNm} ${list.aprvrankNm}</td>
+														<td>${list.empNm} ${list.orgNm} ${list.rankNm}</td>
 														<td>
 															<span class="date">
 																<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>

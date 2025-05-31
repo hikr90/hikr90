@@ -32,9 +32,6 @@ public class ScheServiceImpl implements ScheService{
 	@Autowired
 	EmpService empService;
 	
-	//
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
 	// 일정 목록 조회
 	public void intrScheInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -47,11 +44,6 @@ public class ScheServiceImpl implements ScheService{
 			//--------------------------------------------------------------------------------------------
 			defaultList = scheInqyDao.intrScheInqy1011(model, paramMap);
 			model.addAttribute("defaultList", jAray.fromObject(defaultList));
-			
-			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -66,7 +58,7 @@ public class ScheServiceImpl implements ScheService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 일정 목록 조회
+			// 일정 상세 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = scheInqyDao.intrScheInqy1021(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);

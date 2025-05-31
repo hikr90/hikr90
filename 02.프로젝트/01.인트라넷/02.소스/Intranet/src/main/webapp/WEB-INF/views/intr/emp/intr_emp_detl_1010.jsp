@@ -103,12 +103,12 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-									<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
-									<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
-									<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
-									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
+									<input type="hidden" id="orgCd" name="orgCd" value="${param.orgCd}">
+									<input type="hidden" id="rankCd" name="rankCd" value="${param.rankCd}">
+									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="contId" name="contId" value="${param.contId}">
+									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 		
 		                            <h2>사원 상세</h2><br>
@@ -120,7 +120,7 @@
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
 	                                        			<c:when test="${not empty defaultList}">
-	                                        				<img class="emp_img" id="emp_img" width="100" height="100" src="intrEmpInqy1099.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
+	                                        				<img class="emp_img" id="emp_img" width="100" height="100" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
 			                                        		<img class="emp_img" id="emp_img" width="100" height="100" src="resources/images/icon/icon_emp.png">
@@ -131,7 +131,7 @@
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>사원명</label></dt>
+	                                        <dt><label>z사원명</label></dt>
 	                                        <dd class="sel_2part">
 	                                            ${defaultInfo.empNm}
 	                                        </dd>
@@ -139,7 +139,7 @@
 	                                        <dt><label>성별</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	<c:choose>
-	                                        		<c:when test="${defaultInfo.empGender eq 'M'}">남자</c:when>
+	                                        		<c:when test="${defaultInfo.isMale eq 'Y'}">남자</c:when>
 	                                        		<c:otherwise>여자</c:otherwise>
 	                                        	</c:choose>
 	                                        </dd>
@@ -147,32 +147,32 @@
 	                                    <dl>
 	                                    	<dt><label>부서</label></dt>
 	                                        <dd class="sel_2part">
-												${defaultInfo.deptNm}
+												${defaultInfo.orgNm}
 	                                        </dd>
 	                                        
 	                                    	<dt><label>직급</label></dt>
 	                                        <dd class="sel_2part">
-												${defaultInfo.gradeNm}
+												${defaultInfo.rankNm}
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
 	                                        <dt><label>연락처</label></dt>
 	                                        <dd class="sel_2part">
-												${defaultInfo.empPhone}
+												${defaultInfo.mobNo}
 	                                        </dd>
 	                                    
 	                                        <dt><label>재직 여부</label></dt>
-	                                        <dd>${defaultInfo.resiYn}</dd>
+	                                        <dd>${defaultInfo.leavYn}</dd>
 	                                    </dl>
 	                                    <dl>
 	                                        <dt><label>주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                        	${defaultInfo.empAddr}
+	                                        	${defaultInfo.addr}
 	                                        </dd>
 	                                        
 	                                        <dt><label>상세 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                        	${defaultInfo.empAddrInfo}
+	                                        	${defaultInfo.addrInfo}
 	                                        </dd>
 	                                    </dl>
 	                                	<dl>
@@ -183,7 +183,7 @@
 	                                		
 	                                		<dt><label>메일 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                        	${defaultInfo.empEmail}
+	                                        	${defaultInfo.email}
 	                                        </dd>
 	                                	</dl>    
 									</div>
@@ -191,7 +191,7 @@
 	                                <div class="btn_wrap align_right">
 										<div class="float_right">
 											<c:choose>
-												<c:when test="${defaultInfo.resiYn eq 'N'}">
+												<c:when test="${defaultInfo.leavYn eq 'N'}">
 													<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제</button>
 													<button type="button" class="btn_navy_thin" onclick="resiProc(this.form);">복직 처리</button>
 												</c:when>

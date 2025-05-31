@@ -15,8 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.svc.BoardService;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Jsp;
-import com.intr.utils.Path;
+import com.intr.utils.Const;
 
 @Controller
 public class BoardController {
@@ -33,7 +32,7 @@ public class BoardController {
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// 관리자 공지사항 목록 화면
+	// 공지사항 목록 화면
 	@RequestMapping("/intrBoardInqy1010.do")
 	public String intrBoardInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -50,14 +49,14 @@ public class BoardController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 공지사항 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 공지사항 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_LIST_1010;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_LIST_1010;
 	}
 	
-	// 관리자 공지사항 등록 화면
+	// 공지사항 등록 화면
 	@RequestMapping("/intrBoardInqy1020.do")
 	public String intrBoardInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -69,14 +68,14 @@ public class BoardController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 관리자 공지사항 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 공지사항 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1020;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_DETL_1020;
 	}
 	
-	// 관리자 공지사항 상세화면
+	// 공지사항 상세화면
 	@RequestMapping("/intrBoardInqy1030.do")
 	public String intrBoardInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -93,14 +92,14 @@ public class BoardController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 공지사항 관리자 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 공지사항 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1010;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_DETL_1010;
 	}
 
-	// 관리자 공지사항 수정화면
+	// 공지사항 수정화면
 	@RequestMapping("/intrBoardInqy1040.do")
 	public String intrBoardInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -117,11 +116,11 @@ public class BoardController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 공지사항 관리자 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 공지사항 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_1030;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_DETL_1030;
 	}
 	
 	// 공지사항 목록 조회
@@ -133,7 +132,7 @@ public class BoardController {
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			coreService.intrCoreInqy1010(model, paramMap);
-
+			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
@@ -145,7 +144,7 @@ public class BoardController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_LIST_2010;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_LIST_2010;
 	}
 	
 	// 공지사항 상세 조회
@@ -169,7 +168,7 @@ public class BoardController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Path.VIEW_PATH_BOARD + Jsp.INTR_BOARD_DETL_2010;
+		return Const.VIEW_PATH_BOARD + Const.INTR_BOARD_DETL_2010;
 	}
 	
 	// 공지사항 등록 처리

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<header style="min-height: 130px;">
+<header style="min-height: 110px;">
 	<div class="wrap">
 		<div class="header_wrap">
 			<div class="header_state">
@@ -36,7 +36,7 @@
 					<c:forEach var="list" items="${menuList}" varStatus="status">
 						<c:if test="${list.lv eq 1}">
 							<li class="li_1">
-								<a class="a_1" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
+								<a class="a_1" href="${list.mappingId}?menuCd=${list.menuCd}&menuSet=${list.menuSet}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
 							</li>
 						</c:if>
 					</c:forEach>

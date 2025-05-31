@@ -30,7 +30,7 @@ public class BoardDao {
 		return defaultInfo;
 	}
 	
-	// 관리자 공지사항 등록
+	// 공지사항 등록
 	public int intrBoardProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
@@ -38,15 +38,23 @@ public class BoardDao {
 		return resInt;
 	}
 
-	// 관리자 공지사항 삭제
+	// 공지사항 삭제 (수정)
 	public int intrBoardProc1021(HashMap<String,Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("board.intrBoardProc1020", paramMap);
+		resInt = sqlsession.update("board.intrBoardProc1021", paramMap);
+		return resInt;
+	}
+
+	// 공지사항 삭제 (삭제)
+	public int intrBoardProc1022(HashMap<String,Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.delete("board.intrBoardProc1022", paramMap);
 		return resInt;
 	}
 	
-	// 관리자 공지사항 수정
+	// 공지사항 수정
 	public int intrBoardProc1031(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;

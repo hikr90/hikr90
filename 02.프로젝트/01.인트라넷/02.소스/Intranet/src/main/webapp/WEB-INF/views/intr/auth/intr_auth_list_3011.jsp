@@ -27,7 +27,7 @@
 			// 사용자 관련 변수
 			var empIdx = $(this).val();
 			var empNm = $(this).attr("empNm");
-			var deptNm = $(this).attr("deptNm");
+			var orgNm = $(this).attr("orgNm");
 			
 			// 사용자 권한 목록 값
 			$("input[id=authEmpIdx]").each(function() {
@@ -53,7 +53,7 @@
 				str += "		<label for='chk_local'><span></span></label></span>";
 				str += "		<input type='hidden' name='authEmpIdx' value='" + empIdx + "'/>"
 				str += "	</td>";
-				str += "	<td>" + deptNm + "</td>";
+				str += "	<td>" + orgNm + "</td>";
 				str += "	<td>" + empNm + "</td>";
 				str += "</tr>";
 				
@@ -151,7 +151,7 @@
 							<label for="chk-yes"><span></span></label></span>
 							<input type="hidden" name="authEmpIdx" value="${list.empIdx}">
 						</td>
-						<td>${list.deptNm}</td>
+						<td>${list.orgNm}</td>
 						<td>${list.empNm}</td>
 					</tr>
 				</c:forEach>

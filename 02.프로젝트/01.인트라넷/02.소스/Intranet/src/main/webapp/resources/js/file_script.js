@@ -4,29 +4,29 @@ $(function() {
 	/* ================== 첨부파일 ================== */
 	// 파일 업로드
 	$("#fileUpd").on('change', function() {
+		// 초기화 
+		$("#fileUl").html("");
+	
 		// 파일, 화면 내 파일 추가
 		var thisFiles = this.files; 
 		var fileStr = "";
 		
-		// 임시 목록 추가
-		tempList.push(thisFiles[0]);
-
-		// 파일명, 파일 사이즈, 파일 확장자
-		var fileIdx = thisFiles[0].name.toString().indexOf(".");
-		var fileSize = (thisFiles[0].size/(1024*1024)).toFixed(2) + "Mb";
-		var fileTypeNm = thisFiles[0].name.toString().substring(fileIdx+1).toUpperCase();
-				
-		// 화면 내 파일 추가
-		fileStr += "<li id='fileLi" + fileCnt + "'>";
-		fileStr += "	<input type='hidden' id='fileIdx" + fileCnt + "' name='insert" + fileCnt + "' />";
-		fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
-		fileStr += "	<a onClick=\"fileDel('insert','" + fileCnt + "');\"><span>"+thisFiles[0].name+"</span></a>";
-		fileStr += "</li>";
+		// 다중 파일 처리 
+		for(var i=0;i<thisFiles.length;i++){
+			// 임시 목록 추가
+			tempList.push(thisFiles[i]);
 			
+			// 화면 내 파일 추가
+			fileStr += "<li id='fileLi" + i + "'>";
+			fileStr += "	<input type='hidden' id='fileIdx" + i + "' name='fileIdx" + i + "' />";
+			fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
+			fileStr += "	<a onClick='#'><span>"+thisFiles[i].name+"</span></a>";
+			fileStr += "</li>";
+		}		
+		
 		// 추가 후 초기화 
 		$("#fileUl").append(fileStr);
 		fileStr = "";
-		fileCnt++;
 	});
 
 	/* ================== 프로필 ================== */
@@ -108,10 +108,10 @@ function setFormData(){
 /* ================== 다운로드 ================== */
 // 단건 다운로드
 function fileProc(fileIdx){
-	formSubmit('fileDownload.do?fileIdx='+fileIdx);
+	formSubmit('fileDown.do?fileIdx='+fileIdx);
 }
 	
 // 전체 다운로드
 function zipProc(){
-	formSubmit('zipDownload.do');
+	formSubmit('zipDown.do');
 }

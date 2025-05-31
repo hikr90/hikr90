@@ -70,15 +70,13 @@
 						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
+									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-									<input type="hidden" id="deptCd" name="deptCd" value="${param.deptCd}">
-									<input type="hidden" id="gradeCd" name="gradeCd" value="${param.gradeCd}">
-									<input type="hidden" id="deptNm" name="deptNm" value="${param.deptNm}">
-									<input type="hidden" id="gradeNm" name="gradeNm" value="${param.gradeNm}">
-									<input type="hidden" id="contId" name="contId" value="${param.contId}">
-									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
-		      						<input type="hidden" name="fileIdx" value="${defaultList[0].fileIdx}">
+									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
+									<input type="hidden" id="fileType" name="fileType" value="emp">
 								
 		                            <h2>사원 상세</h2><br>
 	                                <div class="post_write">
@@ -89,7 +87,7 @@
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
 		                                        			<c:when test="${not empty defaultList}">
-		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1099.do?contId=${defaultList[0].contId}&fileNm=${defaultList[0].fileNm}">
+		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
 		                                        			</c:when>
 		                                        			<c:otherwise>
 				                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
@@ -110,7 +108,7 @@
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>사원명</label></dt>
+	                                        <dt><label>&#10003; 사원명</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" readonly="readonly">
 	                                        </dd>
@@ -119,77 +117,77 @@
 	                                        <dd></dd>
 	                                    </dl>
 	                                    <dl>
-	                                    	<dt><label>부서</label></dt>
+	                                    	<dt><label>&#10003; 부서</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">${defaultInfo.deptNm}</div>
-													<input type="hidden" name="setDeptCd" value="${defaultInfo.deptCd}">
-													<input type="hidden" name="setDeptNm" value="${defaultInfo.deptNm}">
+													<div id="orgList" class="sList select_box">${defaultInfo.orgNm}</div>
+													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
+													<input type="hidden" name="setorgNm" value="${defaultInfo.orgNm}">
 												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${deptList}">
-															<c:if test="${not empty list.deptCd}"><li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li></c:if>
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${orgList}">
+															<c:if test="${not empty list.orgCd}"><li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                        
-	                                        <dt><label>직급</label></dt>
+	                                        <dt><label>&#10003; 직급</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">${defaultInfo.gradeNm}</div>
-													<input type="hidden" name="setGradeCd" value="${defaultInfo.gradeCd}">
-													<input type="hidden" name="setGradeNm" value="${defaultInfo.gradeNm}">
+													<div id="rankList" class="sList select_box">${defaultInfo.rankNm}</div>
+													<input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
+													<input type="hidden" name="setRankNm" value="${defaultInfo.rankNm}">
 												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${gradeList}">
-															<c:if test="${not empty list.gradeCd}"><li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li></c:if>
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${rankList}">
+															<c:if test="${not empty list.rankCd}"><li setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>연락처</label></dt>
+	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" value="${defaultInfo.empPhone}" onkeyup="inputNum(this);">
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="inputNum(this);">
 	                                        </dd>
 	
 	                                        <dt><label>성별</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	<div class="radio_box enter-check_box">
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-yes" class="empGender" name="empGender" value="M" <c:if test="${defaultInfo.empGender eq 'M'}">checked="checked"</c:if>></input>
+	                                                	<input type="radio" id="chk-yes" class="isMale" name="isMale" value="Y" <c:if test="${defaultInfo.isMale eq 'Y'}">checked="checked"</c:if>>
 	                                                	<label for="chk-yes">남자<span></span></label>
 	                                            	</span>
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-no" class="empGender" name="empGender" value="F" <c:if test="${defaultInfo.empGender eq 'F'}">checked="checked"</c:if>></input>
+	                                                	<input type="radio" id="chk-no" class="isMale" name="isMale" value="N" <c:if test="${defaultInfo.isMale eq 'N'}">checked="checked"</c:if>>
 	                                                	<label for="chk-no">여자<span></span></label>
 	                                            	</span>
 	                                            </div>
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>주소</label></dt>
+	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr" value="${defaultInfo.empAddr}">
+	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}">
 	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
 	                                        </dd>
 	                                        
-	                                        <dt><label>상세 주소</label></dt>
+	                                        <dt><label>&#10003; 상세 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo" value="${defaultInfo.empAddrInfo}">
+	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" value="${defaultInfo.addrInfo}">
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>아이디</label></dt>
+	                                        <dt><label>&#10003; 아이디</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly">
 	                                        </dd>
 	                                        
-	                                        <dt><label>메일 주소</label></dt>
+	                                        <dt><label>&#10003; 메일 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail" value="${defaultInfo.empEmail}">
+	                                            <input type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}">
 	                                        </dd>
 	                                    </dl>
 									</div>

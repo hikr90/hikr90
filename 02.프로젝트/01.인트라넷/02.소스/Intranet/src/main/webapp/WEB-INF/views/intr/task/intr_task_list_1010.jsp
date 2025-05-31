@@ -5,8 +5,12 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
 	//
+	var d = new Date();
+	var today = getDateStamp(d);
 	var addCnt = 0;
 	//
 	$(document).ready(function() {
@@ -14,41 +18,109 @@
 		$(document).on("click", "#task_del", function() {
 			$(this).parent().parent().remove();
 		});
-		//
+		
+		// 오늘 지정
+		var srchDt = "${param.srchDt}";
+		if(srchDt=="") $("#srchSdt").val(today);
+		
+		// 데이터 조회
+		if("${defaultList}" != null) {
+			addTask(false); // 첫 시작
+		} else {
+			addTask(true); // 데이터 추가
+		}
 	});
 	
+	// 검색 조회
+	function listCall(f){
+		formSubmit("intrTaskInqy1010.do");
+	}
+	
 	// 목록 추가
-	function addTask(f) {
-		// 일자 값 생성
-		var d = new Date();
-		var time = getTimeStamp(d);
-		var today = getDateStamp(d);
-		// 문구 추가
+	function addTask(defYn) {
 		var taskStr = "";
+		// 추가 버튼
+		if(defYn){
+			//
+			taskStr += "<tr class='setListTr'>";
+			taskStr += 		"<td class='first_td'>";
+			taskStr += 			"<span class='date'>" + today + "</span>";
+			taskStr += 			"<input type='hidden' id='regDt' name='regDt' value='" + today.replaceAll('-','') + "'>"
+			taskStr += 		"</td>";
+			taskStr += 		"<td>";
+			taskStr += 			"<input type='text' id='regTm" + "" + "' name='regTm' style='width: 60px; height:33px;' readonly>"
+			taskStr += 		"</td>";
+			taskStr += 		"<td>";
+			taskStr += 			"<input type='text' id='taskCont' name='taskCont' value='' style='height: 33px; text-align: left; width: 100%;'>";
+			taskStr += 		"</td>";
+			taskStr += 		"<td>";
+			taskStr += 			"<span id='task_del' class='task_del'></span>";
+			taskStr += 		"</td>";
+			taskStr += "</tr>";
+			//
+			
+		} else {
+			// 첫 시작
+			if("${defaultList}" != null){
+				//
+				var defaultList = [];
+				// 배열에 저장
+			  	<c:forEach var="item" items="${defaultList}">
+				  	defaultList.push({
+				        regDt: "${item.regDt}",
+				        regTm: "${item.regTm}",
+				        taskCont: "${item.taskCont}"
+				      });
+  				</c:forEach>
+				//
+				for(var i=0;i<defaultList.length;i++) {
+					//
+					taskStr += "<tr class='setListTr'>";
+					taskStr += 		"<td class='first_td'>";
+					taskStr += 			"<span class='date'>" + defaultList[i].regDt + "</span>";
+					taskStr += 			"<input type='hidden' id='regDt" + "" + "' name='regDt' value='" + defaultList[i].regDt + "'>"
+					taskStr += 		"</td>";
+					taskStr += 		"<td>";
+					taskStr += 			"<input type='text' id='regTm' name='regTm' style='width: 60px; height:33px;' value='" + defaultList[i].regTm + "' readonly>"
+					taskStr += 		"</td>";
+					taskStr += 		"<td>";
+					taskStr += 			"<input type='text' id='taskCont' name='taskCont' style='height: 33px; text-align: left; width: 100%;' value='" + defaultList[i].taskCont + "'>";
+					taskStr += 		"</td>";
+					taskStr += 		"<td>";
+					taskStr += 			"<span id='task_del' class='task_del'></span>";
+					taskStr += 		"</td>";
+					taskStr += "</tr>";
+					//
+				}
+			}
+		}
 		//
-		taskStr += "<tr class='setListTr'>";
-		taskStr += 		"<td class='first_td'>";
-		taskStr += 			"<span class='date'>" + today + " " + time + "</span>";
-		taskStr += 			"<input type='hidden' id='regDt' name='regDt' value='" + today.replaceAll('-','') + "'>"
-		taskStr += 			"<input type='hidden' id='regTm' name='regTm' value='" + time.replaceAll(':','') + "'>"
-		taskStr += 		"</td>";
-		taskStr += 		"<td>";
-		taskStr += 			"<input type='text' id='taskCont' name='taskCont' value='' style='height: 33px; text-align: left; width: 100%;'>";
-		taskStr += 		"</td>";
-		taskStr += 		"<td>";
-		taskStr += 			"<span id='task_del' class='task_del'></span>";
-		taskStr += 		"</td>";
-		taskStr += "</tr>";
+		$(".post_table_wrap .post_table").append(taskStr);
+		
+		// flatpickr 생성
+	  	flatpickr("#regTm", {
+	  		enableTime: true,     // 시간 선택 활성화
+	  	    noCalendar: true,     // 달력 비활성화
+	  	    dateFormat: "H:i",    // 시:분 형식
+	  	    time_24hr: true       // 24시간제 (false면 AM/PM)
+	  	});
 		//
 		addCnt++;
-		$(".post_table_wrap .post_table").append(taskStr);
 	}
 
 	// 목록 초기화
 	function initTask(f){
 		//
-		addCnt = 0;
-		formSubmit('intrTaskInqy1010.do');
+		if(addCnt==0){
+			alert("<spring:message code="TAKS.NONE"/>");
+			return;
+		}
+		
+		if(confirm("초기화하시겠습니까?")){
+			//
+			addCnt = 0;
+			formSubmit('intrTaskInqy1010.do');
+		}
 	}
 	
 	// 목록 저장
@@ -59,21 +131,40 @@
 			return;
 		}
 		//
+		var dataJson = [];
+		var validate = true;
+		//
+		$(".setListTr").each(function(idx) {
+			// JSON 저장
+			var data = {};
+			var regDt = $(this).find('input[name="regDt"]').val().replaceAll("-","");
+			var regTm = $(this).find('input[name="regTm"]').val().replaceAll(":","");
+			var taskCont = $(this).find('input[name="taskCont"]').val();
+			//
+			if(regTm == null || regTm == ""){
+				alert((idx + 1) + "번째의 항목의 업무시간을 입력해주세요.");
+				validate = false;
+				return false;
+			}
+			if(taskCont == null || taskCont == ""){
+				alert((idx + 1) + "번째의 항목의 업무내용을 입력해주세요.");
+				validate = false;
+				return false;
+			}
+			//
+			data.regDt = regDt;
+			data.regTm = regTm;
+			data.taskCont = taskCont;
+			data.empIdx = $("#empIdx").val();
+			//
+			dataJson.push(data);
+		});
+		// 유효성 검증
+		if(!validate){
+			return false;
+		}
+		//
 		if(confirm("등록하시겠습니까?")){
-			//
-			var dataJson = [];
-			//
-			$(".setListTr").each(function() {
-				// JSON 저장
-				var data = {};
-				data.regDt = $(this).find('input[name="regDt"]').val();
-				data.regTm = $(this).find('input[name="regTm"]').val();
-				data.taskCont = $(this).find('input[name="taskCont"]').val();
-				data.empIdx = $("#empIdx").val();
-				//
-				dataJson.push(data);
-			});
-			//
 			$.ajax({
 			    	type : 'post',
 			    	url : "intrTaskProc1010.do",
@@ -125,13 +216,20 @@
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">						
-									
-									<h2>업무 일지 작성</h2><br>
+											
+									<h2>업무일지</h2><br>
 									<div class="srch_wrap">
-										<div class="align_center">
-											<button type="button" class="btn_navy" onclick="addTask(this.form);">추가</button>
+										<div class="srch_area">
+											<label class="srch_label">작성일자</label>
+											<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
+										
+											<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+										</div>
+										
+										<div class="srch_area float_right" style="padding-top: 25px;">
+											<button type="button" class="btn_navy" onclick="addTask(true);">추가</button>
 											<button type="button" class="btn_gray" onclick="initTask(this.form);">초기화</button>
-		                                	<button type="button" class="btn_blue float_right" onclick="regProc(this.form);">저장</button>
+											<button type="button" class="btn_blue" onclick="regProc(this.form);">저장</button>
 										</div>
 									</div>
 									
@@ -139,41 +237,20 @@
 										<table class="post_table">
 											<caption>업무일지 목록</caption>
 											<colgroup>
-												<col class="w15per">
+												<col class="w10per">
+												<col class="w8per">
 												<col class="wAutoper">
 												<col class="w8per">
 											</colgroup>
 											<thead>
 												<tr>
-													<th scope="col">작성일</th>
-													<th scope="col">업무</th>
+													<th scope="col">업무일자</th>
+													<th scope="col">업무시간</th>
+													<th scope="col">업무내용</th>
 													<th scope="col">삭제</th>
 												</tr>
 											</thead>
-											<tbody>
-												<c:if test="${not empty defaultList}">
-												<c:forEach var="list" items="${defaultList}" varStatus="status"> 
-												<tr class='setListTr'>
-													<td class="first_td">
-														<span class="date">
-															<fmt:parseDate value="${list.regDtTm}" var="parseDtTm" pattern="yyyyMMddHHmmss"/>
-															<fmt:formatDate value="${parseDtTm}" var="fomatDtTm" pattern="yyyy-MM-dd HH:mm:ss"/>
-															${fomatDtTm} 
-		
-															<input type="hidden" id='regDt' name="regDt" value="${list.regDt}">
-															<input type="hidden" id='regTm' name="regTm" value="${list.regTm}">
-														</span>
-													</td>
-													<td>
-														<input type="text" id="taskCont" name="taskCont" value="${list.taskCont}" style="height: 33px; text-align: left; width: 100%;">
-													</td>
-													<td>
-														<span id="task_del" class="task_del"></span>
-													</td>
-		                                        </tr>
-		                                        </c:forEach>
-		                                        </c:if>
-											</tbody>
+											<tbody></tbody>
 										</table>
 									</div>
 								</div><!-- End post_wrap -->

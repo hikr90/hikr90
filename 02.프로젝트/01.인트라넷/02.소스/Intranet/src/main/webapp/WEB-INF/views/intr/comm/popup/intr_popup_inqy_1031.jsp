@@ -24,10 +24,10 @@
 			var str = "";								// 결재선
 			var empIdx = checkedIdx.val();				// 사원 IDX
 			var empNm = checkedIdx.attr("empNm");		// 사원명
-			var deptNm = checkedIdx.attr("deptNm");		// 부서명
+			var orgNm = checkedIdx.attr("orgNm");		// 부서명
 			//
 			str += "<tr id='setListTr"+aprvCnt+"' class='setListTr' empIdx='"+empIdx+"'>"
-			str += "	<td>" + deptNm + "</td>";
+			str += "	<td>" + orgNm + "</td>";
 			str += "	<td>" + empNm + "</td>";
 			str += "	<td>";
 			str += "		<select class='step_select'>";
@@ -41,7 +41,7 @@
 		} else {
 			//
 			str += "<tr id='setListTr"+aprvCnt+"' class='setListTr' empIdx='${empVO.empIdx}'>"
-			str += "	<td>${empVO.deptNm}</td>";
+			str += "	<td>${empVO.orgNm}</td>";
 			str += "	<td>${empVO.empNm}</td>";
 			str += "	<td>";
 			str += "		<select disabled class='step_select'>";
@@ -137,7 +137,7 @@
 											
 			<c:forEach var="list" items="${defaultList}" varStatus="status">
 				<c:set var="spanIcon"	value="icon_folder"/>
-				<c:set var="spanNm"	value="${list.deptNm}"/>
+				<c:set var="spanNm"	value="${list.orgNm}"/>
 
 				<c:set var="nextLv"	value=""/>
 				<c:set var="prevLv"	value=""/>
@@ -158,13 +158,13 @@
 							<li class="li_${list.lv}">
 							<span class="${spanIcon}"></span>
 							<c:if test="${list.isleaf eq 'Y'}">
-								<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
+								<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}">
 							</c:if>
 							<label for="radio${status.index}">${spanNm}</label>
 					</c:when>
 					<c:when test="${list.lv eq prevLv}">
 						<c:if test="${list.isleaf eq 'Y'}">
-							<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" deptNm="${list.deptNm}" empNm="${list.empNm}">
+							<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}">
 						</c:if>
 						<label for="radio${status.index}">${spanNm}</label>
 					</c:when>
@@ -212,7 +212,7 @@
 				<thead>
 					<tr>
 						<th scope="col">부서</th>
-						<th scope="col">이름</th>
+						<th scope="col">성함</th>
 						<th scope="col">단계</th>
 						<th scope="col">삭제</th>
 					</tr>

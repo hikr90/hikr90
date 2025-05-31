@@ -16,7 +16,7 @@
 		});
 		
 		// 주소 입력란 클릭 시, 주소 검색 동작
-		$("#empAddr").on('click',function(){
+		$("#addr").on('click',function(){
 			srchAddr();
 		});
 	});
@@ -60,20 +60,16 @@
 		// 유효성 검증
 		if(!validation()){return;};
 		//
-		if($("#setDeptCd").val()==""){
-			alert("<spring:message code="EMP.DEPT.NONE"/>");
+		if($("#setOrgCd").val()==""){
+			alert("<spring:message code="EMP.ORG.NONE"/>");
 			return;
 		}
-		if($("#setGradeCd").val()==""){
-			alert("<spring:message code="EMP.GRADE.NONE"/>");
-			return;
-		}
-		if(chqEmpYn!="Y"){
-			alert("<spring:message code="EMP.GRADE.NONE"/>");
+		if($("#setRankCd").val()==""){
+			alert("<spring:message code="EMP.RANK.NONE"/>");
 			return;
 		}
 		if($("#empPwd").val()!=$("#chqPwd").val()){
-			alert("비밀번호가 일치하지 않습니다.");
+			alert("<spring:message code="EMP.PWD.DIFF"/>");
 			return;
 		}
 		//
@@ -134,8 +130,13 @@
 						<div id="sub_content">	
 							<div class="form_area">
 								<div class="post_wrap">
+									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
+									<input type="hidden" id="fileType" name="fileType" value="emp">
 		
 		                            <h2>사원 등록</h2><br>
 	                                <div class="post_write">
@@ -162,7 +163,7 @@
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>사원명</label></dt>
+	                                        <dt><label>&#10003; 사원명</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="사원명" id="empNm" name="empNm">
 	                                        </dd>
@@ -171,86 +172,86 @@
 	                                        <dd class="sel_2part">
 	                                        	<div class="radio_box enter-check_box">
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-yes" name="empGender" value="M" checked="checked">
+	                                                	<input type="radio" id="chk-yes" name="isMale" value="Y" checked="checked">
 	                                                	<label for="chk-yes">남자<span></span></label>
 	                                            	</span>
 	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-no" name="empGender" value="F" >
+	                                                	<input type="radio" id="chk-no" name="isMale" value="N" >
 	                                                	<label for="chk-no">여자<span></span></label>
 	                                            	</span>
 	                                            </div>
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                    	<dt><label>부서</label></dt>
+	                                    	<dt><label>&#10003; 부서</label></dt>
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
-													<div id="deptList" class="sList select_box">부서를 선택해주세요.</div>
-													<input type="hidden" id="setDeptCd" name="setDeptCd" value="">
-													<input type="hidden" id="setDeptNm" name="setDeptNm" value="">
+													<div id="orgList" class="sList select_box">부서를 선택해주세요.</div>
+													<input type="hidden" id="setOrgCd" name="setOrgCd" value="">
+													<input type="hidden" id="setorgNm" name="setorgNm" value="">
 												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${deptList}">
-															<c:if test="${not empty list.deptCd}"><li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li></c:if>
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${orgList}">
+															<c:if test="${not empty list.orgCd}"><li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                        
-	                                        <dt><label>직급</label></dt>
+	                                        <dt><label>&#10003; 직급</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	<div class="select_wrap">
-													<div id="gradeList" class="sList select_box">직급을 선택해주세요.</div>
-													<input type="hidden" id="setGradeCd" name="setGradeCd" value="">
-													<input type="hidden" id="setGradeNm" name="setGradeNm" value="">
+													<div id="rankList" class="sList select_box">직급을 선택해주세요.</div>
+													<input type="hidden" id="setRankCd" name="setRankCd" value="">
+													<input type="hidden" id="setRankNm" name="setRankNm" value="">
 												
-													<ul class="sUl select_ul">
-														<c:forEach var="list" items="${gradeList}">
-															<c:if test="${not empty list.gradeCd}"><li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li></c:if>
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${rankList}">
+															<c:if test="${not empty list.rankCd}"><li setNm="${list.rankNm}" setCd="${list.rankCd}">${list.rankNm}</li></c:if>
 														</c:forEach>
 													</ul>
 												</div>
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>연락처</label></dt>
+	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="empPhone" name="empPhone" maxlength="13" onkeydown="inputNum(this);" >
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="inputNum(this);" >
 	                                        </dd>
 											
 											<dt></dt>
 											<dd></dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>주소</label></dt>
+	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="empAddr" name="empAddr">
+	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr">
 	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
 	                                        </dd>
 	                                        
-	                                        <dt><label>상세 주소</label></dt>
+	                                        <dt><label>&#10003; 상세 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="empAddrInfo" name="empAddrInfo">
+	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo">
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>아이디</label></dt>
+	                                        <dt><label>&#10003; 아이디</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')">
 	                                            <input type="button"class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
 	                                        </dd>
 	                                        
-	                                        <dt><label>메일 주소</label></dt>
+	                                        <dt><label>&#10003; 메일 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="empEmail" name="empEmail">
+	                                            <input type="text" title="메일 주소" id="email" name="email">
 	                                        </dd>
 	                                    </dl>
 										<dl>
-											<dt><label>비밀번호</label></dt>
+											<dt><label>&#10003; 비밀번호</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd">
 	                                        </dd>
-	                                        <dt><label>비밀번호 확인</label></dt>
+	                                        <dt><label>&#10003; 비밀번호 확인</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	<input type="password" title="비밀번호 확인" id="chqPwd" name="chqPwd">
 	                                       	</dd>

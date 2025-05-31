@@ -23,7 +23,7 @@
 		})
 	});
 
-	// 템플릿 조회
+	// 기안문 양식 조회
 	function listCall(f){
 		//
 		var param = $("#form").serialize();
@@ -45,7 +45,7 @@
       	});
 	}
 
-	// 템플릿 등록
+	// 기안문 양식 등록
 	function regCall() {
 		//
 		$.ajax({
@@ -67,7 +67,7 @@
       	});
 	}
 	
-	// 템플릿 등록 처리
+	// 기안문 양식 등록 처리
 	function regProc(){
 		// 에디터 내용 저장
 		var editCont = CKEDITOR.instances.editor.getData();
@@ -102,10 +102,10 @@
 		}		
 	}
 	
-	// 템플릿 상세보기
-	function detCall(tempCd){
+	// 기안문 양식 상세보기
+	function detCall(templateCd){
 		//
-		$("#tempCd").val(tempCd);
+		$("#templateCd").val(templateCd);
 		var param = $("#form").serialize();
 		//
 		$.ajax({
@@ -124,7 +124,7 @@
       	});
 	}
 	
-	// 템플릿 수정 처리
+	// 기안문 양식 수정 처리
 	function modProc(f){
 		// 유효성 검증
 		if(!validation()){return;};
@@ -157,7 +157,7 @@
 
 	}
 	
-	// 템플릿 삭제 처리
+	// 기안문 양식 삭제 처리
 	function delProc(f){
 		//
 		if(!validation()){return;};
@@ -212,14 +212,10 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="tempCd" name="tempCd" value="0">
+									<input type="hidden" id="templateCd" name="templateCd" value="0">
 									<input type="button"class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>템플릿 관리
-										<span class="float_right">
-											<input type="button"class="btn_navy_thin" value="템플릿 등록" onclick="regCall();">
-										</span>
-									</h2><br>
+									<h2>기안문 양식 관리</h2><br>
 									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">
@@ -243,7 +239,7 @@
 		
 													<li class="li_1">
 													<span class="${spanIcon}"></span>
-													<a class="a_btn" id="${list.tempCd}" href="javascript:" onclick="detCall('${list.tempCd}');">${list.tempNm}</a>
+													<a class="a_btn" id="${list.templateCd}" href="javascript:" onclick="detCall('${list.templateCd}');">${list.templateNm}</a>
 												</c:forEach>
 												</ul>
 											</div>

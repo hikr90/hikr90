@@ -13,32 +13,18 @@
 <div class="post_write" style="margin-top: 0px;">
 	<dl>
 		<dt>
-			<label for="post-title">템플릿명</label>
+			<label for="post-title">&#10003; 양식명</label>
 		</dt>
 		<dd>
-			<input type="text" id="tempNm" class="tempNm" title="템플릿명" name="tempNm">
-		</dd>
-		<dt>
-			<label>일정 등록 여부</label>
-		</dt>
-		<dd class="sel_2part">
-			<div class="radio_box enter-check_box">
-				<span class="radio-area"> 
-					<input type="radio" id=""chk-yes"" name="calendarYn" checked="checked" value="Y"> 
-					<label for="chk-yes">예<span></span></label>
-					
-					<input type="radio" id="chk-no" name="calendarYn" value="N"> 
-					<label for="chk-no" class="ml10">아니오<span></span></label>
-				</span> 
-			</div>
+			<input type="text" id="templateNm" class="templateNm" title="양식명" name="templateNm">
 		</dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="post-title">내용</label>
+			<label for="post-title">&#10003; 양식 내용</label>
 		</dt>
 		<dd>
-			<textarea id="editor" name="tempCont" title="템플릿 내용"></textarea>
+			<textarea id="editor" name="templateCont" title="양식 내용"></textarea>
 		</dd>
 	</dl>
 </div>

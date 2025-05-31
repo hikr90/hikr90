@@ -34,7 +34,7 @@ public class TaskServiceImpl implements TaskService{
 	@Autowired
 	HttpSession session;
 
-	// 업무일지 작성 조회 화면
+	// 업무일지 조회 화면
 	public void intrTaskInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
@@ -68,11 +68,6 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			defaultList = taskDao.intrTaskInqy1021(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
-			
-			//--------------------------------------------------------------------------------------------
-			// 부서 직급 정보 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
 
 		} catch (Exception e) {
 			//

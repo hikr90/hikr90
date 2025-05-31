@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 
 import com.intr.dao.AuthDao;
 import com.intr.dao.MainDao;
-import com.intr.svc.BoardService;
 import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 import com.intr.vo.EmpVO;
@@ -31,9 +30,6 @@ public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	AuthDao authDao;
-	
-	@Autowired
-	BoardService boardService;
 	
 	@Autowired
 	UtilService utilService;

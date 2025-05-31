@@ -55,7 +55,7 @@
 									<div class="post_wrap">
 										<input type="hidden" id="page" name="page" value="${param.page}">
 										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-										<input type="hidden" id="contId" name="contId" value="">
+										<input type="hidden" id="taskId" name="taskId" value="">
 										
 										<h2>업무일지 조회</h2><br>
 										<div class="srch_wrap">
@@ -67,43 +67,24 @@
 													~
 													<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
+												<br>
 
 												<!-- 부서 -->
 												<div class="srch_area">
 													<label class="srch_label">부서</label>
-													<div class="select_wrap">
-														<div id="deptList" class="sList select_box">${empty param.deptNm ? '전체' : param.deptNm}</div>
-														<input type="hidden" name="deptCd" value="${param.deptCd}">
-														<input type="hidden" name="deptNm" value="${param.deptNm}">
-														
-														<ul class="sUl select_ul">
-															<c:forEach var="list" items="${deptList}">
-																<li setNm="${list.deptNm}" setCd="${list.deptCd}">${list.deptNm}</li>
-															</c:forEach>
-														</ul>
-													</div>
+													<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
 												</div>
-												
+
 												<!-- 직급 -->
 												<div class="srch_area">
 													<label class="srch_label">직급</label>
-													<div class="select_wrap">
-														<div id="gradeList" class="sList select_box">${empty param.gradeNm ? '전체' : param.gradeNm}</div>
-														<input type="hidden" name="gradeCd" value="${param.gradeCd}">
-														<input type="hidden" name="gradeNm" value="${param.gradeNm}">
-													
-														<ul class="sUl select_ul">
-															<c:forEach var="list" items="${gradeList}">
-																<li setNm="${list.gradeNm}" setCd="${list.gradeCd}">${list.gradeNm}</li>
-															</c:forEach>
-														</ul>
-													</div>
+													<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
 												</div>
 												
-												<!-- 작성자명 -->
+												<!-- 작성자 -->
 												<div class="float_right">
 													<div class="srch_area">
-														<label class="srch_label">작성자명</label>
+														<label class="srch_label">작성자</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
 														
 														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
@@ -117,7 +98,8 @@
 											<caption>업무일지 조회</caption>
 											<colgroup>
 												<col class="w5per">
-												<col class="w15per">
+												<col class="w10per">
+												<col class="w10per">
 												<col class="auto">
 												<col class="w10per">
 												<col class="w10per">
@@ -125,8 +107,9 @@
 											<thead>
 												<tr>
 													<th scope="col">+/-</th>
-													<th scope="col">작성일자</th>
-													<th scope="col">업무</th>
+													<th scope="col">업무일자</th>
+													<th scope="col">업무시간</th>
+													<th scope="col">업무내용</th>
 													<th scope="col">부서</th>
 													<th scope="col">작성자</th>
 												</tr>
@@ -138,20 +121,23 @@
 																<td rowspan="${list.rowNum}">
 																	<c:if test="${list.dispOrder eq 0}"><a onclick="spreadProc('${list.taskIdx}');">+</a></c:if>
 																</td>
-															</c:if>
-															<td class="first_td">
-																<span class="date">
-																	<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-																	<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+																<td rowspan="${list.rowNum}">
+																	<span class="date">
+																		<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+																		<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
 																	
-																	<fmt:parseDate value="${list.regTm}" var="parseTm" pattern="HHmmss"/>
-																	<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm:ss"/>
-																	${formatDt} ${formatTm} 
-																</span>
+																		${formatDt}
+																	</span>
+																</td>
+															</c:if>
+															<td>
+																<fmt:parseDate value="${list.regTm}" var="parseTm" pattern="HHmmss"/>
+																<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm"/>
+																	${formatTm}
 															</td>
 															<td class="_title"><c:if test="${list.dispOrder ne 0}">&nbsp;&nbsp;&nbsp;</c:if>${list.taskCont}</td>
 															<c:if test="${list.dispOrder eq 0}">
-																<td rowspan="${list.rowNum}">${list.deptNm}</td>
+																<td rowspan="${list.rowNum}">${list.orgNm}</td>
 																<td rowspan="${list.rowNum}">${list.empNm}</td>
 															</c:if>
 					                                   </tr>
@@ -160,7 +146,7 @@
 			                                   <!-- 글이 없는 경우 -->
 			                                   <c:if test="${empty defaultList}">
 			  	                                 <tr>
-			    					                 <td align="center" colspan="5">
+			    					                 <td align="center" colspan="6">
 			                  		             	      등록된 글이 없습니다.
 			                                         </td>
 			                                     </tr>

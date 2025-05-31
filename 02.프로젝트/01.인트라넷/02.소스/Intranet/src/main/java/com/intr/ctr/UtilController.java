@@ -34,14 +34,14 @@ public class UtilController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 파일 다운로드
-	@RequestMapping("/fileDownload.do")
-	public void fileDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/fileDown.do")
+	public void fileDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.fileDownload(model, paramMap, request, response);
+			utilService.fileDown(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -51,14 +51,14 @@ public class UtilController {
 	}
 	
 	// 전체 다운로드
-	@RequestMapping("/zipDownload.do")
-	public void zipDownload(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/zipDown.do")
+	public void zipDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 전체 다운로드
 			//--------------------------------------------------------------------------------------------
-			utilService.zipDownload(model, paramMap, request, response);
+			utilService.zipDown(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//

@@ -11,13 +11,13 @@
 				<td class="text_left" style="border: none;">
 					<c:choose> 
 						<c:when test="${list.lv eq '1'}">
-							<a class="a_title bold ${menuSet eq list.menuCd ? 'list_bg' : ''}" style="color: #214b97; font-size: 16px;" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}">${list.menuNm}</a>
+							<span class="a_title bold" style="color: #214b97; font-size: 16px;">${list.menuNm}</span>
 						</c:when>
 						<c:otherwise>
 							<c:forEach begin="0" end="1">
 								&nbsp;
 							</c:forEach>
-								ㄴ	<a class="a_title ${menuSet eq list.menuCd ? 'list_bg' : ''}" style="font-size: 16px;" href="${list.mappingId}?menuSet=${list.menuCd}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
+								ㄴ	<a class="a_title ${menuSet eq list.menuSet ? 'list_bg' : ''}" style="font-size: 16px;" href="${list.mappingId}?menuCd=${list.menuCd}&menuSet=${list.menuSet}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
 						</c:otherwise>
 					</c:choose>
 				</td>

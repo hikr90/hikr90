@@ -1,5 +1,6 @@
 package com.intr.svcImpl;
 
+import java.awt.Font;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,19 +8,34 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -30,9 +46,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.CoreDao;
 import com.intr.dao.EmpDao;
+import com.intr.dao.QueryDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
-import com.intr.utils.Paging;
+import com.intr.utils.Const;
+import com.intr.utils.Page;
 import com.intr.utils.Path;
 
 @Service
@@ -50,6 +68,9 @@ public class UtilServiceImpl implements UtilService{
 	@Autowired
 	EmpDao empDao;
 	
+	@Autowired
+	QueryDao queryDao;
+	
     @Autowired
     JavaMailSenderImpl javaMailSender;
     
@@ -60,26 +81,22 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String workPath = "";
-		String contId = (String)paramMap.get("contId");
+		String workPath = Const.FILE_PATH;
+		String filetypeCd = nvlProc((String)paramMap.get("filetypeCd"));
 		//
-		if(contId.length()>10) {
-			workPath = Path.FILE_PATH;
-		} else {
-			workPath = Path.EMP_PATH;
-		}
+		if(filetypeCd.equals("emp")) workPath = Const.EMP_PATH;
 		//
 		workPath = setOsPath(paramMap, workPath);
 		//
 		return workPath;
 	}
 	
-	// (임시)파일 경로 조회
+	// (임시) 파일 경로 조회
 	public String setTempPath(HashMap<String, Object> paramMap) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String workPath = Path.TEMP_PATH;
+		String workPath = Const.TEMP_PATH;
 		workPath = setOsPath(paramMap, workPath);
 		//
 		return workPath;
@@ -92,12 +109,12 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		String os = System.getProperty("os.name").toLowerCase();
 		
-		// # 1 윈도우 : C드라이브에서 FILE_PATH 사용 
-		// # 2 리눅스 : 그대로 진행
+		// # 1 윈도우 : C드라이브 시작 
+		// # 2 리눅스 : / 시작
 		if(os.contains("win")) {
-			workPath = "C:\\" + workPath + File.separator + (String)paramMap.get("contId"); 
+			workPath = "C:\\" + workPath + File.separator + (String)paramMap.get("fileId"); 
 		} else if(os.contains("linux")) {
-			workPath = "/" + workPath + File.separator + (String)paramMap.get("contId");
+			workPath = "/" + workPath + File.separator + (String)paramMap.get("fileId");
 			workPath = workPath.replace("\\", "/");
 		}
 		//
@@ -167,7 +184,7 @@ public class UtilServiceImpl implements UtilService{
 			joinCode = String.valueOf(random);
 			
 			//--------------------------------------------------------------------------------------------
-			// 제목 및 템플릿 생성
+			// 제목 및 기안문 양식 생성
 			//--------------------------------------------------------------------------------------------
 			subject = "[인트라넷] 정보 찾기 인증코드 발급 안내";
 			//
@@ -187,7 +204,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
             defaultInfo = empDao.intrEmpInqy1013();
             //
-            sender 		= String.valueOf(defaultInfo.get("empEmail"));
+            sender 		= String.valueOf(defaultInfo.get("email"));
             receiver 	= String.valueOf(paramMap.get("findEmail"));
 
             //--------------------------------------------------------------------------------------------
@@ -198,11 +215,10 @@ public class UtilServiceImpl implements UtilService{
             helper.setFrom(sender); // 발신자
             helper.setTo(receiver);	// 수신사
  
-			/* // 첨부 파일 처리 시
-			 * if (filePath != null) { // File file = new File(filePath); // if
-			 * (file.exists()) { helper.addAttachment(file.getName(), new File(filePath)); }
-			 * };
-			 */
+			// 첨부 파일 처리 시
+			// if (filePath != null) { // File file = new File(filePath); 
+            // if (file.exists()) { helper.addAttachment(file.getName(), new File(filePath)); }
+			// };
 
             // 전송 완료
             javaMailSender.send(message);
@@ -218,8 +234,8 @@ public class UtilServiceImpl implements UtilService{
 	
 	// 파일 업로드 & 수정
 	public String fileUpload(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
-		HashMap<String, Object> tempMap = null;
 		//
+		HashMap<String, Object> tempMap = null;
 		String resStr = "NO";
 		String workPath = "";
 		//
@@ -231,51 +247,40 @@ public class UtilServiceImpl implements UtilService{
 			// 파일 업로드
 			//--------------------------------------------------------------------------------------------
 			List<MultipartFile> fileList = request.getFiles("fileList");
-
-			//--------------------------------------------------------------------------------------------
-			// 경로 조회
-			//--------------------------------------------------------------------------------------------
-			workPath = this.setFilePath(paramMap);
 			
-			//--------------------------------------------------------------------------------------------
-			// DB, 파일 처리
-			//--------------------------------------------------------------------------------------------
-			for (String key : paramMap.keySet()) {
-				tempMap = new HashMap<String, Object>();
+			//
+			if(!fileList.isEmpty()) {
+				//--------------------------------------------------------------------------------------------
+				// 경로 조회
+				//--------------------------------------------------------------------------------------------
+				workPath = this.setFilePath(paramMap);
 
-				if(key.contains("insert")) {
-					// 1. DB 등록
-					if(!fileList.isEmpty()) {
+				//--------------------------------------------------------------------------------------------
+				// DB 삭제 처리 (삭제)
+				//--------------------------------------------------------------------------------------------
+				utilDao.intrFileProc1022(paramMap);
+				
+				//--------------------------------------------------------------------------------------------
+				// DB, 파일 등록 및 수정
+				//--------------------------------------------------------------------------------------------
+				for (String key : paramMap.keySet()) {
+					tempMap = new HashMap<String, Object>();
+
+					if(key.contains("fileIdx")) {
+						// 1. DB 등록
 						file = fileList.get(fileCnt);
-						this.intrFileProc1010(paramMap, file, fileCnt);
+						tempMap.put("fileId", nvlProc((String)paramMap.get("sequenceId")));
+						//
+						intrFileProc1010(tempMap, file, fileCnt);
+						
+						// 2. 파일 저장
+						saveFile(workPath, file);
+						
+						// 3. fileCnt 처리
+						fileCnt++;
 					}
-					
-					// 2. 파일 저장
-					this.saveFile(workPath, file);
-					//
-					fileCnt++;
-					
-				} else if(key.contains("delete")) {
-					// 삭제
-					tempMap.put("fileIdx", (String)paramMap.get(key));
-					utilDao.intrFileProc1020(tempMap);
-					
-				} else if(key.contains("profImg")) {
-					// 사원 이미지
-					// 1. 사용여부 N 처리
-					utilDao.intrFileProc1021(paramMap);
-					
-					// 2. DB 등록
-					if(!fileList.isEmpty()) {
-						file = fileList.get(fileCnt);
-						this.intrFileProc1010(paramMap, file, fileCnt);
-					}
-					
-					// 3. 파일 저장
-					this.saveFile(workPath, file);
 				}
 			}
-			
 			// 결과 조회
 			resStr = "YES";
 			
@@ -293,12 +298,12 @@ public class UtilServiceImpl implements UtilService{
 		//
 		try {
 			//
-			tempMap.put("contId", (String)paramMap.get("contId"));
-			tempMap.put("fileNm", file.getOriginalFilename());
-			tempMap.put("fileType", file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase());
-			tempMap.put("fileSize", file.getSize()); 
+			tempMap.put("fileId", 		(String)paramMap.get("fileId"));
+			tempMap.put("fileNm", 	file.getOriginalFilename());
+			tempMap.put("fileType", 	file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase());
+			tempMap.put("fileSize", 	file.getSize()); 
 			//
-			utilDao.intrFileProc1010(tempMap);
+			utilDao.intrFileProc1011(tempMap);
 			
 		} catch (Exception e) {
 			throw e;
@@ -320,9 +325,8 @@ public class UtilServiceImpl implements UtilService{
 		}
 	}
 	
-	
 	// 파일 다운로드
-	public void fileDownload(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void fileDownProc(String path, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String value = "";
 		String fullPathNm = String.format("%s/%s", path, fileNm);
@@ -417,9 +421,8 @@ public class UtilServiceImpl implements UtilService{
 
 	}
 	
-	
 	// 파일 다운로드
-	public void fileDownload(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void fileDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String workPath = "";
@@ -429,11 +432,11 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보 조회 (FILE_IDX)
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.intrFileInqy1020(model, paramMap);
+			defaultInfo = utilDao.intrFileInqy1021(model, paramMap);
 			//
-			String contId = (String)defaultInfo.get("contId");
+			String fileId = (String)defaultInfo.get("fileId");
 			String fileNm = (String)defaultInfo.get("fileNm");
-			paramMap.put("contId", contId);
+			paramMap.put("fileId", fileId);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 경로 생성
@@ -443,7 +446,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			fileDownload(workPath, fileNm, request, response);
+			fileDownProc(workPath, fileNm, request, response);
 			
 			
 		} catch (Exception e) {
@@ -453,7 +456,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 전체 다운로드
-	public void zipDownload(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void zipDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String workPath = "";
 		String tempPath = "";
@@ -474,7 +477,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			fileDownload(tempPath, fileNm, request, response);
+			fileDownProc(tempPath, fileNm, request, response);
 
 			//--------------------------------------------------------------------------------------------
 			// 임시 경로 삭제
@@ -508,7 +511,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1010(null, paramMap);
+			defaultList = utilDao.intrFileInqy1011(null, paramMap);
 					
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				//--------------------------------------------------------------------------------------------
@@ -603,6 +606,107 @@ public class UtilServiceImpl implements UtilService{
 		}
 	}
 
+	// 엑셀 다운로드
+	public void excelDown(List<Map<String, Object>> defaultList, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//
+		Set<String> allKeys = new HashSet<String>();
+		//
+		try {
+			 // 컬럼 목록
+			 for (Map<String, Object> map : defaultList) {
+			     allKeys.addAll(map.keySet());
+			 }
+			 //
+			 List<String> columList = new ArrayList<String>(allKeys);
+			  
+			 //---------------------------------------------------------------------------
+			 // 엑셀 생성
+			 //---------------------------------------------------------------------------
+			 XSSFWorkbook wb = new XSSFWorkbook(); Sheet sheet = wb.createSheet("query");
+
+			 // 서식 생성
+	        CellStyle headerStyle = wb.createCellStyle();
+	        headerStyle.setAlignment(CellStyle.ALIGN_CENTER);
+	        headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+	        
+	        XSSFFont headerFont = wb.createFont();
+	        headerFont.setBoldweight(headerFont.BOLDWEIGHT_BOLD); // 구버전에서 사용
+	        headerStyle.setFont(headerFont);
+	        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+	        headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+	        headerStyle.setBorderTop(CellStyle.BORDER_THIN);
+	        headerStyle.setBorderBottom(CellStyle.BORDER_THIN);
+	        headerStyle.setBorderLeft(CellStyle.BORDER_THIN);
+	        headerStyle.setBorderRight(CellStyle.BORDER_THIN);
+	        
+	        CellStyle bodyStyle = wb.createCellStyle();
+	        XSSFFont bodyFont = wb.createFont();
+	        bodyStyle.setFont(bodyFont);
+	        bodyStyle.setAlignment(CellStyle.ALIGN_CENTER);
+	        bodyStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+	        bodyStyle.setBorderTop(CellStyle.BORDER_THIN);
+	        bodyStyle.setBorderBottom(CellStyle.BORDER_THIN);
+	        bodyStyle.setBorderLeft(CellStyle.BORDER_THIN);
+	        bodyStyle.setBorderRight(CellStyle.BORDER_THIN);
+
+			//--------------------------------------------------------------------------------------------
+			// 헤더 생성
+			//--------------------------------------------------------------------------------------------
+			 sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, columList.size() - 1));
+			 Row row = sheet.createRow(0); 
+			 Cell cell = row.createCell(0);
+			 cell.setCellValue((String)paramMap.get("headTit"));
+			 cell.setCellStyle(headerStyle);
+	        
+			//--------------------------------------------------------------------------------------------
+			// 컬럼 생성
+			//--------------------------------------------------------------------------------------------
+	        Row sr = sheet.createRow(1);
+	        //
+	        for(int i=0;i<columList.size();i++) {
+	        	Cell cc = sr.createCell(i);
+	        	cc.setCellValue(columList.get(i));
+	            cc.setCellStyle(headerStyle);
+	        }
+
+			//--------------------------------------------------------------------------------------------
+			// 내용 생성
+			//--------------------------------------------------------------------------------------------
+	        for(int i=0;i<defaultList.size();i++) {
+		        Row tr = sheet.createRow(i + 2);
+		        //
+	        	for(int j=0;j<columList.size();j++) {
+	        		String colNm = columList.get(j);	// MENU_CD, MENU_NM...
+	        		String colData = nvlProc((String)defaultList.get(i).get(colNm)); // defaultList.get(i).get("MENU_CD")...
+	        		//
+		        	Cell rc = tr.createCell(j);
+		        	rc.setCellValue(colData);
+		        	rc.setCellStyle(bodyStyle);
+		        	
+		        	// 컬럼 사이즈 자동 조정
+		        	sheet.autoSizeColumn(j);
+		        	
+		        	// 추가로 넉넉하게 한글 보정
+		            int currentWidth = sheet.getColumnWidth(j);
+		            sheet.setColumnWidth(j, Math.min(currentWidth + 1024, 255 * 256)); // 보정치 추가
+	        	}
+	        }
+
+			//--------------------------------------------------------------------------------------------
+			// 엑셀 다운로드
+			//--------------------------------------------------------------------------------------------
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		    response.setHeader("Content-Disposition", "attachment; filename=\"data.xlsx\"");
+
+		     wb.write(response.getOutputStream());
+		     response.getOutputStream().flush();
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	// 페이징 처리
 	public void setPaging(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -617,7 +721,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreDao.intrCoreInqy1023(paramMap);
+			defaultList = coreDao.intrCoreInqy1051(paramMap);
 			//
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				listCnt = String.valueOf(defaultList.get(0).get("listCnt"));
@@ -635,8 +739,8 @@ public class UtilServiceImpl implements UtilService{
 			}
 					
 			// 페이지 첫, 마지막 인덱스
-			int sIdx = (nowPage-1)*Paging.BLOCKLIST+1;
-			int endIdx = sIdx+Paging.BLOCKLIST-1;
+			int sIdx = (nowPage-1)*Const.BLOCKLIST+1;
+			int endIdx = sIdx+Const.BLOCKLIST-1;
 			//
 			//--------------------------------------------------------------------------------------------
 			// 페이지 변수 저장
@@ -644,8 +748,8 @@ public class UtilServiceImpl implements UtilService{
 			paramMap.put("nowPage", nowPage);
 			paramMap.put("sIdx",sIdx);
 			paramMap.put("eIdx",endIdx);
-			paramMap.put("blockList",Paging.BLOCKLIST);
-			paramMap.put("blockPage",Paging.BLOCKPAGE);
+			paramMap.put("blockList",Const.BLOCKLIST);
+			paramMap.put("blockPage",Const.BLOCKPAGE);
 
 			// 페이지 메뉴 구성
 			String pageMenu = this.setPageMenu(paramMap);
@@ -783,7 +887,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// Null 체크
-	public String nullToDefault(String str) throws Exception {
+	public String nvlProc(String str) throws Exception {
 		//
 		String res = "";
 		//
@@ -810,13 +914,13 @@ public class UtilServiceImpl implements UtilService{
 			//
 			tempMap.put("empIdx", 		String.valueOf(paramMap.get("idxSet")));
 			tempMap.put("mappingId", 	String.valueOf(request.getServletPath()));
-			tempMap.put("ipAddr", 			String.valueOf(request.getRemoteAddr()));
+			tempMap.put("ipAddr", 		String.valueOf(request.getRemoteAddr()));
 			tempMap.put("errorMsg", 		ex.getMessage());
 
 			//--------------------------------------------------------------------------------------------
 			// 예외 로그 저장 처리
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrExptProc1010(tempMap);
+			utilDao.intrExptProc1011(tempMap);
 			
 		} catch (Exception e) {
 			//

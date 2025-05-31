@@ -4,34 +4,34 @@
 	<select id="intrMainInqy1011" resultType="emp" parameterType="java.util.HashMap"> 
 		/* intrMainInqy1011 : 로그인 사용자 조회 */
 		SELECT 
-				EMP.EMP_IDX
-			,	EMP.DEPT_CD
-			,	DEPT.DEPT_NM
-			,	EMP.GRADE_CD
-			,	GRADE.GRADE_NM
-			,	EMP.EMP_NM
-			,	EMP.EMP_GENDER
-			,	EMP.EMP_PHONE
-			,	EMP.EMP_ADDR
-			,	EMP.EMP_ADDR_INFO
-			,	EMP.EMP_EMAIL
-			,	EMP.EMP_ID
-			,	EMP.EMP_PWD
-			,	EMP.EMP_HIRE_DATE
-			,	EMP.EMP_RESI_DATE
-         	,   CASE WHEN AE.AUTH_CD IS NOT NULL
+				E.EMP_IDX
+			,	E.ORG_CD
+			,	O.ORG_NM
+			,	E.RANK_CD
+			,	R.RANK_NM
+			,	E.EMP_NM
+			,	E.IS_MALE
+			,	E.MOB_NO
+			,	E.ADDR
+			,	E.ADDR_INFO
+			,	E.EMAIL
+			,	E.EMP_ID
+			,	E.EMP_PWD
+			,	E.HIRE_DT
+			,	E.LEAV_DT
+         	,   CASE WHEN EA.AUTH_CD IS NOT NULL
                     THEN 'Y' 
                     ELSE 'N' END AS AUTH_YN
-		FROM INTR_EMP EMP
-		LEFT OUTER JOIN INTR_DEPT DEPT
-			ON DEPT.DEPT_CD = EMP.DEPT_CD
-			AND DEPT.USE_YN = 'Y'
-		LEFT OUTER JOIN INTR_GRADE GRADE
-			ON GRADE.GRADE_CD = EMP.GRADE_CD
-			AND GRADE.USE_YN = 'Y'
-        LEFT OUTER JOIN INTR_AUTH_EMP AE
-            ON AE.EMP_IDX = EMP.EMP_IDX
-            AND AE.AUTH_CD = 'AUTH_0001'
+		FROM EMPINFO E
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+			AND O.USE_YN = 'Y'
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+			AND R.USE_YN = 'Y'
+        LEFT OUTER JOIN EMP_AUTH EA
+            ON EA.EMP_IDX = E.EMP_IDX
+            AND EA.AUTH_CD = 'AUTH_0001'
 		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
 	</select>
 </mapper>
