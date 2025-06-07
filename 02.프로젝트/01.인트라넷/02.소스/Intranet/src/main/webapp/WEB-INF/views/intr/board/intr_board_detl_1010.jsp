@@ -76,11 +76,11 @@
 											<dd class="post_file">
 												<div class="file_wrap">
 													<ul id="fileUl"> 
-													<c:forEach var="list" items="${defaultList}" varStatus="status">
+													<c:forEach var="list" items="${fileList}" varStatus="status">
 														<li class="${status.index != 0 ? 'nbsp' : ''}">
 															<img src='resources/images/icon/icon_file.png' width="15" height="15"/>
-															<a href="#" onclick="fileProc('${list.fileIdx}');">${list.fileNm}</a>
-															<input type="hidden" id="fileIdx" name="fileIdx" value="${list.fileIdx}">
+															<a href="#" onclick="fileProc('${list.fileId}', '${list.fileSno}');">${list.fileNm}</a>
+															<input type="hidden" id="fileId" name="fileId" value="${list.fileId}">
 														</li>
 													</c:forEach>
 													</ul>

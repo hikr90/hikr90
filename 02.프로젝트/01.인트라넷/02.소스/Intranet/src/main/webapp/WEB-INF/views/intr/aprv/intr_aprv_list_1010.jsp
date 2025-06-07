@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>  
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
@@ -10,28 +11,28 @@
 		formSubmit("intrAprvInqy1010.do");
 	}
 
-	// 기안문 양식 조회 팝업
-	function popCall(){
-		var obj = new Object();
-		ajaxPopup(obj,"650","360","intrPopupInqy1010.do","");
-	}
-	
-	// 품의문 상세 조회
-	function detCall(sequenceId) {
+	// 양식 선택
+	function detCall(tempCd, temptypeCd){
 		//
-		$("#sequenceId").val(sequenceId);
-		formSubmit("intrAprvInqy1030.do");
+		var obj = new Object();
+		var typeProc = {
+		  Leav: "intr_aprv_detl_1010.jsp", 		// 휴가 신청서
+		  Exp:  "intr_aprv_detl_1011.jsp", 		// 가지급결의서
+		  Item: "intr_aprv_detl_1012.jsp", 		// 물품반입신청서
+		  Corp: "intr_aprv_detl_1013.jsp", 		// 법인카드정산서
+		};
+		//	
+		$("#temptypeCd").val(temptypeCd);
+		$("#returnUrl").val(typeProc[temptypeCd]);
+		//
+		formSubmit('intrAprvInqy1020.do');
 	}
 </script>
+
 <body id="main">
 <form id="form" name="form" method="POST">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
-
-	<!-- 기안문 양식 팝업 -->
- 	<div id="popupArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
-	</div>
 
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
@@ -48,77 +49,40 @@
 						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="sequenceId" name="sequenceId" value="">
-									<input type="hidden" id="page" name="page" value="${param.page}">
-									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
+									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
-									<h2>결재 조회
-										<span class="float_right">
-											<input type="button"class="btn_navy_thin" value="기안문 작성" onclick="popCall();">
-										</span>
-									</h2>
-									<br>
-									
+									<h2>기안 작성</h2><br>
 									<div class="srch_wrap">
-										<div class="right_srch_area">
-											<!-- 작성일자 -->
-											<div class="srch_area">
-												<label class="srch_label">작성일자</label>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
-												~
-												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
-											</div>
-											
-											<!-- 제목 -->
-											<div class="float_right">
-												<div class="srch_area">
-													<label class="srch_label">제목</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
-												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
-												</div>
-		                                	</div>
-		                                </div>
+										<!-- 제목 -->
+										<div class="srch_area">
+											<label class="srch_label">제목</label>
+											<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
+										
+											<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+											<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+										</div>
 									</div>
 									
-									<div class="post_table_wrap">
+									<div class="post_table_wrap scroll_wrap">
 										<table class="post_table">
 											<caption>결재내역 목록 조회</caption>
 											<colgroup>
 												<col class="w7per">
-												<col class="w12per">
 												<col class="auto">
-												<col class="w17per">
-												<col class="w17per">
-												<col class="w12per">
 											</colgroup>
 											<thead>
 												<tr>
 													<th scope="col">순번</th>
-													<th scope="col">진행 단계</th>
-													<th scope="col">품의문 제목</th>
-													<th scope="col">결재 진행자</th>
-													<th scope="col">결재 기안자</th>
-													<th scope="col">작성일자</th>
+													<th scope="col">양식명</th>
 												</tr>
 											</thead>
 											<tbody>
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
 														<td class="first_td">${list.num}</td>
-														<td>${list.currStepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.sequenceId}');">${list.aprvTitle}</a>
-														</td>
-														<td>${list.aprvorgNm} ${list.aprvEmpNm} ${list.aprvrankNm}</td>
-														<td>${list.orgNm} ${list.empNm} ${list.rankNm}</td>
-														<td>
-															<span class="date">
-																<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>
-																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-																${formatDt} 
-															</span>	
+															<a class="show_view a_title" onclick="detCall('${list.tempCd}','${list.temptypeCd}');">${list.tempNm}</a>
 														</td>
 			                                        </tr>
 		                                        </c:forEach>
@@ -126,7 +90,7 @@
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+		                                                <td align="center" colspan="2">
 		                                              	      등록된 글이 없습니다.
 		                                                </td>
 		                                            </tr>

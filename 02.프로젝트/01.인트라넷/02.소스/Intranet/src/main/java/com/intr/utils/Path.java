@@ -21,7 +21,7 @@ public interface Path {
 	public static final String VIEW_PATH_SCHE 			= INTR_PATH + "/sche/";		 	// 일정
 	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 			// 업무
 	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 			// 사원
-	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/template/";	 	// 기안문 양식
+	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 	// 기안문 양식
 	public static final String VIEW_PATH_AUTH 		= INTR_PATH + "/auth/";	 		// 권한
 	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 		// 결재
 	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 		// 쿼리
@@ -30,8 +30,8 @@ public interface Path {
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String FILE_PATH = "upload\\file"; 		// 파일
-	public static final String TEMP_PATH = "upload\\temp"; 	// 임시
-	public static final String EMP_PATH  = "upload\\emp"; 		// 이미지
+	public static final String FILE_PATH = "INTR\\FILE"; 		// 파일
+	public static final String TEMP_PATH = "INTR\\TEMP"; 	// 임시
+	public static final String EMP_PATH  = "INTR\\EMP"; 		// 사원 이미지
 	
 }

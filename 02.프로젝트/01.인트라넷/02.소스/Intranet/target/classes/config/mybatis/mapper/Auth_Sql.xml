@@ -104,7 +104,7 @@
 								    ,   E.EMP_IDX
 								    ,   E.EMP_NM
 								    ,   IM.LV + 1  AS LV
-								FROM EMPINFO E
+								FROM EMP_INFO E
 								LEFT OUTER JOIN INTR_MAIN IM
 									ON IM.ORG_CD = E.ORG_CD
 								WHERE E.LEAV_DT IS NULL
@@ -129,7 +129,7 @@
 				    ,	D.ORG_NM
 				    ,	EA.DISP_ORDER
 				FROM EMP_AUTH EA
-                LEFT OUTER JOIN EMPINFO E
+                LEFT OUTER JOIN EMP_INFO E
                     ON E.EMP_IDX = EA.EMP_IDX
 				LEFT OUTER JOIN AUTH A
 					ON A.AUTH_CD = EA.AUTH_CD
@@ -153,7 +153,7 @@
 				,	E.EMP_ID
 				,	E.EMP_PWD
 				,	E.EMP_NM
-		FROM EMPINFO E
+		FROM EMP_INFO E
         INNER JOIN EMP_AUTH EA 
             ON EA.EMP_IDX = E.EMP_IDX
         LEFT OUTER JOIN AUTH A

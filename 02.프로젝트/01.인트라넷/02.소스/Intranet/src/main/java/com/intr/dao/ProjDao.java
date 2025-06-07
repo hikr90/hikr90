@@ -13,6 +13,14 @@ public class ProjDao {
 	//
 	@Autowired
 	SqlSession sqlsession;
+	
+	// 프로젝트 시퀀스 조회
+	public HashMap<String, Object> intrProjInqy1010(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("proj.intrProjInqy1010", paramMap);
+		return defaultInfo;
+	}
 
 	// 프로젝트 목록 조회
 	public List<HashMap<String, Object>> intrProjInqy1011(Model model, HashMap<String, Object> paramMap) {

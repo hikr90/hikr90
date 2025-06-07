@@ -12,7 +12,7 @@
 								SELECT 
 										DISTINCT MA.MENU_CD
 								FROM AUTH A
-								INNER JOIN EMPINFO E
+								INNER JOIN EMP_INFO E
 									ON E.EMP_IDX = #{idxSet, jdbcType=VARCHAR}
 									AND A.USE_YN = 'Y'
                                 INNER JOIN EMP_AUTH EA
@@ -48,6 +48,7 @@
 					LEFT OUTER JOIN MENU UM
 						ON UM.MENU_CD = M.UPPR_MENU_CD
 					WHERE 1=1
+						AND M.USE_YN = 'Y'
 						<if test="menuType == 0">
 							AND M.MENUTYPE_CD = '0'
 						</if>
@@ -91,17 +92,6 @@
 			CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD
 			ORDER SIBLINGS BY DATA.MENU_CD
 	</select>
-	
-	<select id="intrCoreInqy1041" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1041 : 시퀀스 채번 */
-		SELECT TO_DAY, SEQ_NO + 1 AS SEQ_NO, TO_DAY || LPAD(SEQ_NO + 1,4,0) AS SEQUENCE_ID FROM SEQUENCE
-	</select>
-	
-	<update id="intrCoreInqy1042" parameterType="java.util.HashMap">
-		/* intrCoreInqy1042 : 시퀀스 저장 */
-		UPDATE SEQUENCE
-			SET SEQ_NO = #{seqNo, jdbcType=VARCHAR}
-	</update>
 
 	<select id="intrCoreInqy1051" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrCoreInqy1051 : 목록 건수 조회 */
@@ -110,7 +100,7 @@
 				SELECT 
 					COUNT(B.BRD_ID) AS LIST_CNT 
 				FROM BOARD B
-				LEFT OUTER JOIN EMPINFO E
+				LEFT OUTER JOIN EMP_INFO E
 					ON B.EMP_IDX = E.EMP_IDX
 				LEFT OUTER JOIN ORG O
 					ON O.ORG_CD = E.ORG_CD
@@ -119,6 +109,7 @@
 					ON R.RANK_CD = E.RANK_CD
 		     	  	AND R.USE_YN = 'Y'
 				WHERE 1 = 1
+					AND B.USE_YN = 'Y'
 					<if test="useYn != null and useYn != ''">
 						AND B.USE_YN = #{useYn, jdbcType=VARCHAR}
 					</if>
@@ -137,9 +128,6 @@
 					<if test="rankNm != null and rankNm != ''">
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="useCd != null and useCd != ''">
-						AND B.USE_YN = #{useCd, jdbcType=VARCHAR}
-					</if>
 					<if test="srchIdx != null and srchIdx != ''">
 		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
@@ -147,7 +135,7 @@
 			<when test="pageUrl.contains('Emp')">
 				SELECT 
 						COUNT(E.EMP_IDX) AS LIST_CNT 
-				FROM EMPINFO E
+				FROM EMP_INFO E
 				LEFT OUTER JOIN ORG O
 					ON O.ORG_CD = E.ORG_CD
 				LEFT OUTER JOIN RANK R
@@ -184,7 +172,7 @@
 				SELECT 
 					COUNT(P.PROJ_CD) AS LIST_CNT 
 				FROM PROJECT P
-				LEFT OUTER JOIN EMPINFO E
+				LEFT OUTER JOIN EMP_INFO E
 					ON P.OWNER = E.EMP_IDX
 				LEFT OUTER JOIN ORG O
 					ON O.ORG_CD = E.ORG_CD
@@ -214,7 +202,7 @@
 				SELECT 
 					COUNT(T.TASK_ID) AS LIST_CNT 
 				FROM TASK T
-				LEFT OUTER JOIN EMPINFO E
+				LEFT OUTER JOIN EMP_INFO E
 					ON T.EMP_IDX = E.EMP_IDX
 				LEFT OUTER JOIN ORG O
 					ON O.ORG_CD = E.ORG_CD

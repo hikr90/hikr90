@@ -76,11 +76,11 @@
 												<dd class="post_file">
 													<div class="file_wrap">
 														<ul id="fileUl"> 
-															<c:forEach var="list" items="${defaultList}" varStatus="status">
+															<c:forEach var="list" items="${fileList}" varStatus="status">
 																<li class="fileLi${status.index}">
 																	<img src='resources/images/icon/icon_file.png' width="20" height="20" />
-																	<a href="javascript:#" style="text-indent: 10px;" onclick="fileProc('${list.fileIdx}');">${list.fileNm}&nbsp;</a>
-																	<input type="hidden" id="fileIdx" name="fileIdx" value="${list.fileIdx}">
+																	<a href="javascript:#" style="text-indent: 10px;" onclick="fileProc('${list.fileId}', '${list.fileSno}');">${list.fileNm}&nbsp;</a>
+																	<input type="hidden" id="fileId" name="fileId" value="${list.fileId}">
 																</li>
 															</c:forEach>
 														</ul>
@@ -98,7 +98,7 @@
 									
 									<div class="btn_wrap align_right">
 										<div class="float_left">
-											<c:if test="${not empty defaultList and defaultList ne ''}">
+											<c:if test="${not empty fileList and fileList ne '' and fileList.size() > 1}">
 												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
 										</div>

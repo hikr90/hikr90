@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 에디터
-		CKEDITOR.replace('editor',{height: 500});
+		CKEDITOR.replace('editor',{height: 710});
 	});
 
 	// 목록으로
@@ -17,167 +17,187 @@
 		formSubmit('intrAprvInqy1010.do');
 	}
 	
-	// 결재선 조회 팝업
-	function popCall(sequenceId){
+	// 프로젝트 팝업
+	function projCall(){
 		//
 		var obj = new Object();
-		obj["sequenceId"] = sequenceId;
-		//		
-		ajaxPopup(obj,"1100","620","intrPopupInqy1050.do","");
-	}
-	
-	// 결재 처리
-	function aprvCall(aprvGb){
-		// 결재 (0), 반송 (1), 취소(2)		
-		$("#aprvGb").val(aprvGb);
 		//
-		if(confirm("진행하시겠습니까?")){
-			var param = $("#form").serialize();
-
-			$.ajax({
-		    	type : 'post',
-		    	url : "intrAprvProc1020.do",
-				data : param,
-				dataType : 'text',
-				success : function(data){
-					//
-					var json = eval(data);
-	   				if(json[0].res=="NO"){
-	   	   				// 결재 실패
-	   					alert("<spring:message code="APRV.LINE.EXSIT"/>");
-	   	   				return;
-	   	   				
-	   				} else if(json[0].res=="EXIST"){
-	   					// 이미 결재 완료된 상태
-	   					alert("<spring:message code="PROC.FAIL"/>");
-	   					return;
-	   					
-					} else {
-	   					// 결재 완료 후 새로고침
-	   					alert("<spring:message code="PROC.SUCCESS"/>");
-	   					location.reload();
-	   				}
-				},
-				error : function(xhr, status, error){
-			    	//
-					alert("<spring:message code="PROC.ERROR"/>");
-			    	return;
-			    }
-			});
-		}
+		obj["mappingId"] = "intrPopupInqy1030.do";
+		obj["areaType"] = "proj";
+		obj["width"] = "600"
+		obj["height"] = "370";
+		//		
+		ajaxPopup(obj);
 	}
 	
-	// 품의문 재사용 등록
-	function reAprvCall(){
-		if(confirm("진행하시겠습니까?")){
-			formSubmit('intrAprvInqy2030.do');
-		}
+	// 담당자 팝업
+	function empCall(){
+		var obj = new Object();
+		//
+		obj["mappingId"] = "intrPopupInqy1010.do";
+		obj["areaType"] = "emp";
+		obj["width"] = "550"
+		obj["height"] = "420";
+		//		
+		ajaxPopup(obj);
+	}
+	
+	// 결재선 등록 팝업
+	function lineCall(){
+		var obj = new Object();
+		//
+		obj["mappingId"] = "intrPopupInqy1041.do";
+		obj["areaType"] = "line";
+		obj["width"] = "1100";
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
 	}
 </script>
 </head>
 <body id="main">
-	<!-- 결재선 -->
- 	<div id="popupArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
-	</div>
-
+<form id="form" method="POST" onsubmit="return false;">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
+
+	<!-- 담당자 팝업 -->
+ 	<div id="empArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
+	</div>
+
+	<!-- 프로젝트 팝업 -->
+ 	<div id="projArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
+	</div>
 	
-	<form id="form" method="POST" onsubmit="return false;">
-		<div class="main_wrap">
-			<!-- 좌측 메뉴 -->
-			<div class="left_wrap">
-				<div class="left_area">
-					<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
-				</div>
-			</div>
-			
-			<div class="content_wrap">
-				<div class="content_area">
-					<article class="sub_article">
-						<div class="content">
-							<div id="sub_content">					
-								<div class="form_area">
-									<input type="hidden" id="page" name="page" value="${param.page}">
-									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="sequenceId" name="sequenceId" value="${aprvDetInfo.sequenceId}">
-									<input type="hidden" id="aprvGb" name="aprvGb" value="0">
-											
-									<div class="post_wrap">
-			                        	<h2>품의문 상세</h2><br>
-										<div class="post_view">
-											<dl>
-												<dt>제목</dt>
-												<dd>${aprvDetInfo.aprvTitle}</dd>
-												<dt>작성일</dt>
-												<dd>
-													<span class="date">
-														<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-														<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
-														${fomatDt} 
-													</span>	
-												</dd>
-												<dt>진행 단계</dt>
-												<dd>${aprvDetInfo.currStepNm}</dd>
-											</dl>
-											<dl class="post_info">
-												<dt>작성자</dt>
-												<dd>(${aprvDetInfo.orgNm}) ${aprvDetInfo.empNm} ${aprvDetInfo.rankNm}</dd>
-												<dt>시행일자</dt>
-												<dd>
-													<span class="date">
-														<!-- 시행 시작일 --> 
-														<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
-														<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
-			
-														<!-- 시행 종료일 --> 
-														<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
-														<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
-														${formatSdt} ~ ${formatEdt}
-													</span>	
-												</dd>
-												<dt>결재선</dt>
-												<dd>
-				                            		<button type="button" class="btn_navy_thin" onclick="popCall(${aprvDetInfo.sequenceId});">결재선</button>
-												</dd>
-											</dl>
-											<dl>
-												<dt>내용</dt>
-												<dd class="post_text">
-													<textarea id="editor" name="aprvCont" title="기안문 양식 내용">${aprvDetInfo.aprvCont}</textarea>
-												</dd>
-											</dl>
-										</div>
-
-										<div class="btn_wrap">
-											<div class="float_right">
-												<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>											
-											</div>
-
-											<div class="float_right">
-												<!-- 기안자, 결재 취소할 수 있는 상황 -->
-												<c:if test="${empVO.empIdx eq currAprvInfo.empIdx and currAprvInfo.cancelYn eq 'Y'}">
-													<button type="button" class="btn_gray_thin" onclick="aprvCall('2');">결재 취소</button>
-												</c:if>
-												<!-- 기안자, 반송 상황 -->
-												<c:if test="${empVO.empIdx eq aprvDetInfo.empIdx and (aprvDetInfo.stepCd eq 'STEP_0004' or aprvDetInfo.stepCd eq 'STEP_0005')}">
-													<button type="button" class="btn_gray_thin" onclick="reAprvCall();">재사용 등록</button>
-												</c:if>
-											</div>
-										</div>
-									</div><!-- End post_wrap -->
-								</div><!-- End form_area -->
-							</div><!-- End sub_content -->
-						</div><!-- End content -->
-					</article>
-				</div>
+	<!-- 결재선 팝업 -->
+ 	<div id="lineArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1040.jsp"></c:import>	
+	</div>
+	
+	<div class="main_wrap">
+		<!-- 좌측 메뉴 -->
+		<div class="left_wrap">
+			<div class="left_area">
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
 			</div>
 		</div>
-	</form>
+		
+		<div class="content_wrap">
+			<div class="content_area">
+				<article class="sub_article">
+					<div class="content">
+						<div id="sub_content">					
+							<div class="form_area">
+								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
+								<input type="hidden" id="tempCd" name="tempCd" value="${param.tempCd}">
+								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
+								<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}">
+								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
+										
+								<div class="post_wrap">
+		                        	<h2>휴가 신청서
+											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
+		                        	</h2><br>
+									<div class="post_view">
+										<dl>
+											<dt>
+												<label for="post-title">&#10003; 프로젝트명</label>
+											</dt>
+											<dd>
+												<input type="button"class="btn_blue align_top" value="선택" onclick="projCall();">
+												<input type="text" id="projPnm" title="프로젝트명" name="projTitle" style="width: 1320px;" readonly="readonly">
+												<input type="hidden" id="projPcd" name="projTitle" value="">
+											</dd>
+										</dl>
+										<dl>
+											<dt>&#10003; 결재선</dt>
+											<dd>
+												<input type="button"class="btn_gray align_top" value="선택" onclick="lineCall();">
+												<input type="hidden" id="aprvLine" name="aprvLine" value="">
+											</dd>
+											
+											<dt>&#10003; 휴가 타입</dt>
+											<dd class="sel_2part">
+									        	<div class="select_wrap">
+													<div id="leavList" class="sList select_box">${leavList[1].commcodeNm}</div>
+													<input type="hidden" id="leavtypeCd" name="leavtypeCd" value="${leavList[1].commcodeCd}">
+											
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${leavList}">
+															<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
+																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+															</c:if>
+														</c:forEach>
+													</ul>
+												</div>
+									    	</dd>
+										</dl>
+								        <dl>
+								        	<dt>&#10003; 휴가 기간</dt>
+											<dd>
+												<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="leavSdt" value="" readonly="readonly" style="width: 110px;" />
+													~
+												<input type="text" class="srch_cdt_date srchDt" id="srchEdt" name="leavEdt" value="" readonly="readonly" style="width: 110px;" />
+											</dd>
+											
+											<dt>&#10003; 대직자</dt>
+											<dd>
+												<input type="button"class="btn_blue align_top" value="선택" onclick="empCall();">
+												<input type="text" id="empPnm" title="담당자" value="" style="width: 30%;" disabled="disabled">
+												<input type="hidden" id="empPnm" name="leavSubst" value="">
+											</dd>
+								        </dl>
+								        <dl>
+								        	<dt>&#10003; 사유</dt>
+											<dd>
+												<input type="text" id="leavRsn" title="사유" name="leavRsn">
+											</dd>
+								        </dl>
+								        <dl>
+											<dt><label for="post_text">&#10003; 양식 내용</label></dt>
+											<dd class="post_text">
+												<textarea id="editor" name="aprvCont" title="양식 내용">${tempInfo.tempCont}</textarea>
+											</dd>
+										</dl>
+								        <dl class="post_info">
+											<dt>파일 첨부</dt>
+											<dd>
+												<div class="file_box">
+													<label for="fileUpd">업로드</label>
+													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
+													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
+												</div>
+											</dd>
+										</dl>
+										<dl class="post_info">
+											<dt></dt>
+											<dd class="post_file">
+												<div class="file_wrap">
+													<!-- 파일 목록 -->
+													<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
+														<c:param name="fileNm"></c:param>
+													</c:import>
+												</div>
+											</dd>
+										</dl>
+									</div><!-- End post_write -->
+									
+									<div class="btn_wrap">
+										<div class="float_right">
+											<button type="button" class="btn_gray_thin" onclick="aprvProc(this);">기안하기</button>
+										</div>
+									</div>
+									
+								</div><!-- End post_wrap -->
+							</div><!-- End form_area -->
+						</div><!-- End sub_content -->
+					</div><!-- End content -->
+				</article>
+			</div>
+		</div>
+	</div>
+</form>
 </body>		
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1020.jsp" %>

@@ -5,21 +5,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.CoreDao;
 import com.intr.dao.ProjDao;
 import com.intr.dao.UtilDao;
+import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.ProjService;
 import com.intr.svc.UtilService;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ProjServiceImpl implements ProjService{
 	//
 	@Autowired
 	UtilService utilService;
+
+	@Autowired
+	CoreService coreService;
 	
 	@Autowired
 	EmpService empService;
@@ -58,7 +64,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", 	"stat");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("statList",defaultList);
 			
@@ -77,7 +83,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", 	"stat");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("statList",defaultList);
 			
@@ -103,7 +109,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", 	"stat");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("statList",defaultList);
 			
@@ -111,7 +117,7 @@ public class ProjServiceImpl implements ProjService{
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
 			defaultList = utilDao.intrFileInqy1011(model, paramMap);
-			model.addAttribute("defaultList",defaultList);
+			model.addAttribute("fileList",defaultList);
 
 		} catch (Exception e) {
 			//
@@ -122,13 +128,20 @@ public class ProjServiceImpl implements ProjService{
 	// 프로젝트 등록 처리
 	public String intrProjProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
+		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
 		String resStr = "NO";
 		int resInt = 0;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 등록 처리
+			// 공지사항 채번
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = projDao.intrProjInqy1010(model, paramMap);
+			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
+			
+			//--------------------------------------------------------------------------------------------
+			// 프로젝트 등록 처리
 			//--------------------------------------------------------------------------------------------
 			resInt = projDao.intrProjProc1011(paramMap);
 			//

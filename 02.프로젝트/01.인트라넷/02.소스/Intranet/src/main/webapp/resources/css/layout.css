@@ -38,7 +38,7 @@
 
 .pop_area .find_aprv_wrap .srch_wrap { padding: 10px !important; padding-bottom: 0px !important; }
 .pop_area .find_aprv_wrap .srch_area { margin: 0px; }
-.pop_area .find_aprv_wrap .post_wrap .post_con { height: 426px; }
+.pop_area .find_aprv_wrap .post_wrap .post_con { height: 650px; }
 
 
 /* ================== Post Write ================== */
@@ -56,7 +56,7 @@
 .form_area .post_write textarea::-ms-input-placeholder, .form_area .post_view textarea::-ms-input-placeholder { color: #bababa; font-size: 1.5rem; }
 .form_area .post_write textarea::placeholder, .form_area .post_view textarea::placeholder { color: #bababa; font-size: 1.5rem; }
 .form_area .post_write dd.post_text, .form_area .post_view dd.post_text { vertical-align: top; height: 400px; }
-.form_area .post_write dd.post_text textarea, .form_area .post_view dd.post_text textarea { height: 95%; }
+.form_area .post_write dd.post_text textarea, .form_area .post_view dd.post_text textarea { height: 98%; }
 .form_area .post_write dd.post_file, .form_area .post_view dd.post_file { min-height: 100px; }
 .form_area .post_write dd.post_file textarea, .form_area .post_view dd.post_file textarea { height: 95%; }
 .form_area .post_write dl, .form_area .post_view dl { min-height: 60px; display: table; table-layout: fixed; width: 100%; border-bottom: 1px solid #d6d6d6; }

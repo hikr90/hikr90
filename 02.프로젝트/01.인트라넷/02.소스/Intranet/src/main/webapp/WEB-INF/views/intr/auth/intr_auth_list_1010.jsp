@@ -69,7 +69,7 @@
 	// 권한 등록 처리
 	function regProc(){
 		// 유효성 검증
-		if(!validation()){return;};
+		if(!valProc()){return;};
 		//
 		var param = $("#form").serialize();
 		if(confirm("등록하시겠습니까?")){
@@ -140,7 +140,7 @@
 	// 권한 수정 처리
 	function modProc(f){
 		// 유효성 검증
-		if(!validation()){return;};
+		if(!valProc()){return;};
 		//
 		var param = $("#form").serialize();
 		if(confirm("수정하시겠습니까?")){
@@ -169,7 +169,7 @@
 	
 	// 권한 삭제 처리
 	function delProc(f){
-		if(!validation()){return;};
+		if(!valProc()){return;};
 		//
 		var param = $("#form").serialize();
 		if(confirm("삭제하시겠습니까?")){
@@ -230,7 +230,7 @@
 											<!-- 제목 -->
 											<div class="srch_area">
 												<label class="srch_label">제목</label>		
-												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 											
 												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">

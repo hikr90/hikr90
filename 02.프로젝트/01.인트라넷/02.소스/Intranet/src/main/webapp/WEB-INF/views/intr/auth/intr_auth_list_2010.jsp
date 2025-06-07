@@ -108,7 +108,7 @@
 											<!-- 제목 -->
 											<div class="srch_area">
 												<label class="srch_label">제목</label>		
-												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 											
 												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
@@ -135,7 +135,7 @@
 											<!-- 권한 메뉴 목록 -->
 											<div id="menuInfo" class="tree_info ml20" style="width: 500px; height: 425px;">
 												<div class="post_wrap">
-													<div class="scroll_wrap">
+													<div class="scroll_wrap" style="max-height: 425px;">
 														<table class="post_table menuTbl">
 															<caption>권한 목록 테이블</caption>
 															<colgroup>

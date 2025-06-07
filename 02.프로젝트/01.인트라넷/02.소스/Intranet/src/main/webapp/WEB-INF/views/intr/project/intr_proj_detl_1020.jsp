@@ -9,13 +9,19 @@
 		// 담당자 선택
 		function popCall(){
 			var obj = new Object();
-			ajaxPopup(obj,"550","420","intrPopupInqy1010.do","");
+			//
+			obj["mappingId"] = "intrPopupInqy1010.do";
+			obj["areaType"] = "emp";
+			obj["width"] = "550"
+			obj["height"] = "420";
+			//		
+			ajaxPopup(obj);
 		}
 	
 		// 프로젝트 등록 처리
 		function regProc(f){
   			// 유효성 검증
-			if(!validation()){return;};
+			if(!valProc()){return;};
 			//
 			var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
 			var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
@@ -91,7 +97,7 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
 	<!-- 담당자 팝업 -->
- 	<div id="popupArea" class="popupArea hidden">
+ 	<div id="empArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 	</div>
 	
@@ -121,7 +127,7 @@
 							<input type="hidden" id="srchStatNm" name="srchStatNm" value="${param.srchStatNm}">
 							<input type="hidden" id="srchStatCd" name="srchStatCd" value="${param.srchStatCd}">					
 							<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
-							<input type="hidden" id="owner" name="owner" value="">
+							<input type="hidden" id="empPcd" name="owner" value="">
 								
 							<div class="post_wrap">
 								<h2>프로젝트 등록</h2><br>
@@ -136,7 +142,7 @@
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button"class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="ownNm" title="담당자" style="width: 50%;" disabled="disabled">
+											<input type="text" id="empPnm" title="담당자" style="width: 50%;" disabled="disabled">
 										</dd>
 										<dt>&#10003; 계약기간</dt>
 										<dd>
@@ -157,8 +163,8 @@
 										<dt>&#10003; 진행상태</dt>
 	                                        <dd class="sel_2part">
 	                                        	<div class="select_wrap">
-													<div id="statList" class="sList select_box">${empty param.srchStat ? '' : param.srchStat}</div>
-													<input type="hidden" id="status" name="status" value="${param.srchStat}">
+													<div id="statList" class="sList select_box">${statList[1].commcodeNm}</div>
+													<input type="hidden" id="status" name="status" value="${statList[1].commcodeCd}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${statList}">
@@ -190,7 +196,7 @@
 									<dl>
 										<dt>&#10003; 계약금</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="inputAmt(this);" style="width: 50%;">
+											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;">
 											&nbsp; <span id="amtNm">(원)</span>
 										</dd>
 										<dt>태그</dt>

@@ -6,20 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.CoreDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
-import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
 
-@Service 
+@Service
+@Transactional(rollbackFor = Exception.class)
 public class CoreServiceImpl implements CoreService{
 	//
 	@Autowired
@@ -133,30 +132,5 @@ public class CoreServiceImpl implements CoreService{
 			//
 			throw new Exception(e.getMessage());
 		}
-	}
-	
-	// 시퀀스 채번
-	public HashMap<String, Object> intrCoreInqy1040() throws Exception {
-		//
-		HashMap<String, Object> paramMap = null;
-		
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 시퀀스 채번
-			//--------------------------------------------------------------------------------------------
-			paramMap = coreDao.intrCoreInqy1041();
-			
-			//--------------------------------------------------------------------------------------------
-			// 시퀀스 저장
-			//--------------------------------------------------------------------------------------------
-			coreDao.intrCoreInqy1042(paramMap);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-		//
-		return paramMap;
 	}
 }

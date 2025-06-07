@@ -19,10 +19,7 @@
 	// 사원 상세보기
 	function detCall(empIdx){
 		//
-		var fileId = empIdx.replace('EMP_','');
 		$("#empIdx").val(empIdx);
-		$("#fileId").val(fileId);
-		//		
 		formSubmit("intrEmpInqy1030.do");
 	}
 </script>
@@ -50,7 +47,6 @@
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="empIdx" name="empIdx" value="">
-									<input type="hidden" id="fileId" name="fileId" value="">
 
 									<h2>사원 조회
 										<span class="float_right">
@@ -85,23 +81,25 @@
 											</div>
 											<br>
 												
+												
+												
 											<!-- 부서 -->
 											<div class="srch_area">
 												<label class="srch_label">부서</label>
-												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
 											</div>
 
 											<!-- 직급 -->
 											<div class="srch_area">
 												<label class="srch_label">직급</label>
-												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
 											</div>
 												
 											<!-- 사원명 -->
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">사원명</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
 													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">

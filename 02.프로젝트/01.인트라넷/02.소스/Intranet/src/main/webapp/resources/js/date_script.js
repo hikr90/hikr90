@@ -1,5 +1,5 @@
 $(function() {
-	// 시작 일자
+	// 달력 생성
 	$('input[id="srchSdt"],input[id="srchEdt"]').daterangepicker(
 			{
 				//
@@ -20,9 +20,7 @@ $(function() {
 	
 	// 입력 포맷
 	$('input[id="srchSdt"],input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
-	    $(this).val(picker.startDate.format('YYYY-MM-DD'));
-	});
-	$('input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
+		$(this).val(picker.startDate.format('YYYY-MM-DD'));
 		$(this).val(picker.endDate.format('YYYY-MM-DD'));
 	});
 });

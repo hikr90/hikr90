@@ -35,3 +35,5 @@
 	
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
 </head>
+
+<div id="overlay" class="overlay"></div>

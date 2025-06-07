@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.AuthDao;
@@ -13,6 +14,7 @@ import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AuthServiceImpl implements AuthService{
 	//
 	@Autowired

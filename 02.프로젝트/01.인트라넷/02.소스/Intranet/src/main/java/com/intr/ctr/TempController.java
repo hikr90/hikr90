@@ -119,7 +119,7 @@ public class TempController {
 			utilService.exptProc(paramMap, e);
 		}
 		//
-		return Const.VIEW_PATH_TEMP + Const.INTR_TEMP_DETL_1020;
+		return Const.VIEW_PATH_TEMP + Const.INTR_TEMP_DETL_1010;
 	}
 	
 	// 기안문 양식 등록 처리

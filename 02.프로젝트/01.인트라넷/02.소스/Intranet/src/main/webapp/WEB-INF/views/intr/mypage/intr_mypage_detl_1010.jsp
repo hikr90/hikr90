@@ -35,10 +35,10 @@
 			                                    	<div class="emp_profile">
 			                                        	<c:choose>
 			                                        		<c:when test="${not empty defaultList}">
-				                                 				<img id="empImg" class="emp_img" width="150" height="150" src="intrEmpInqy1099.do?orgNm=${defaultInfo.orgNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
+				                                 				<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?orgNm=${defaultInfo.orgNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
 			                                        		</c:when>
 			                                        		<c:otherwise>
-					                                        	<img id="empImg" class="emp_img" width="150" height="150" src="resources/images/icon/icon_emp.png">
+					                                        	<img id="empImg" class="emp_img" width="200" height="200" src="resources/images/icon/icon_profile.png">
 			                                        		</c:otherwise>
 			                                        	</c:choose>
 			                                        </div>
@@ -82,7 +82,7 @@
 		                              	<dl>
 		                              		<dt><label>연락처</label></dt>
 		                                    <dd class="sel_2part">
-		                                    	<input type="text" title="연락처" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="inputNum(this);">
+		                                    	<input type="text" title="연락처" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);">
 		                                    </dd>
 		                                        
 		                                    <dt><label>메일 주소</label></dt>
@@ -94,7 +94,7 @@
 		                             		<dt><label>주소</label></dt>
 		                                    <dd class="sel_2part">
 		                                    	<input type="text" title="주소" readonly="readonly" id="adrApi" name="adrApi" value="${defaultInfo.adr}">
-		                                        <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
+		                                        <input type="button"class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 		                                    </dd>
 		                                    <dt><label>상세 주소</label></dt>
 		                                    <dd class="sel_2part">

@@ -14,6 +14,14 @@ public class BoardDao {
 	@Autowired
 	SqlSession sqlsession;
 	
+	// 공지사항 시퀀스 조회
+	public HashMap<String, Object> intrBoardInqy1010(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("board.intrBoardInqy1010", paramMap);
+		return defaultInfo;
+	}
+	
 	// 공지사항 목록
 	public List<HashMap<String, Object>> intrBoardInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//

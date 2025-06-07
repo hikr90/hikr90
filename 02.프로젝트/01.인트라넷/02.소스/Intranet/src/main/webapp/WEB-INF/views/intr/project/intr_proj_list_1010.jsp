@@ -130,26 +130,26 @@
 												<!-- 부서 -->
 												<div class="srch_area">
 													<label class="srch_label">부서</label>
-													<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
 												</div>
 
 												<!-- 직급 -->
 												<div class="srch_area">
 													<label class="srch_label">직급</label>
-													<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
 												</div>
 												
 												<!-- 담당자 -->
 												<div class="srch_area">
 													<label class="srch_label">담당자</label>
-													<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushCall(this.form);">
 												</div>
 												
 												<!-- 프로젝트명 -->
 												<div class="float_right">
 													<div class="srch_area">
 														<label class="srch_label">프로젝트명</label>
-														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
+														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 													
 														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
@@ -185,7 +185,7 @@
 												</tr>
 											</thead>
 											<tbody>
-		                                    	<c:forEach var="list" items="${defaultList}"> 
+		                                    	<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 													<tr>
 														<td class="first_td">
 					                                       <span class="check_box">

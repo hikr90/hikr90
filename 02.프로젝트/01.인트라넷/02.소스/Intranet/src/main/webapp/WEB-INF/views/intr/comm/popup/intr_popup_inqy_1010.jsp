@@ -2,24 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!DOCTYPE html>
-<html>
-<script type="text/javascript">
-	// 팝업 내 선택
-	function popConfirm(popType){
-		// 선택 여부 검증
-		if($("input[name=popCd]:checked").length==0){
-			alert("<spring:message code="RADIO.NONE"/>");
-			return;
-		}
-		// 팝업 선택 후 종료
-		$("#"+popType).val($("input[name=popCd]:checked").attr("popCd"));
-		$("#"+popType+"Nm").val($("input[name=popCd]:checked").attr("popNm"));
-		//
-		popClose('popupArea');	
-	}
-</script>
-
+<!-- 
+	view : intr_popup_inqy_1010
+	title : 사원 관리 팝업
+-->
 <div id="popArea" class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 82%;">
 		<div class="content">
@@ -35,12 +21,12 @@
 								</div>
 							</div>
 	                        
-	                        <!-- 기안문 양식 목록 -->
-	                        <div id="postCon" class="post_con"></div>
+	                        <!-- 담당자 목록 -->
+	                        <div id="empCon" class="post_con"></div>
 							
 							<div class="btn_center">
-								<button type="button" class="btn_navy_thin" onclick="popConfirm('owner');">확인</button>
-								<button type="button" class="btn_gray_thin" onclick="popClose('popupArea');">취소</button>
+								<button type="button" class="btn_navy_thin" onclick="popConfirm('emp');">확인</button>
+								<button type="button" class="btn_gray_thin" onclick="popClose('emp');">취소</button>
 	   						</div>
 						</div>
 					</div><!-- End post_wrap -->

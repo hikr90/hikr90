@@ -12,13 +12,19 @@
    		function popCall(){
    			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
    			var obj = new Object();
-   			ajaxPopup(obj,"650","360","intrPopupInqy1020.do","");
+   			//
+   			obj["mappingId"] = "intrPopupInqy1021.do";
+   			obj["areaType"] = "find";
+   			obj["width"] = "650"
+   			obj["height"] = "360";
+   			//		
+   			ajaxPopup(obj);
    		}
    		
    		// 로그인
    		function loginCall(f){
    			// 유효성 검증
-			if(!validation()){return;};
+			if(!valProc()){return;};
 			//   			
 			var param = $("#form").serialize();
    			$.ajax({
@@ -57,7 +63,7 @@
 </head>
 <body id="sub">
 	<!-- 정보 찾기 -->
- 	<div id="popupArea" class="popup_area hidden">
+ 	<div id="findArea" class="popup_area hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1020.jsp"></c:import>	
 	</div>
 
@@ -67,8 +73,8 @@
 			<div class="login_wrap">
 				<div class="login_area">
 					<h3>LOGIN</h3>
-					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLoginKey(this.form);" value="ADMIN">
-					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLoginKey(this.form);" value="ADMIN">
+					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLogCall(this.form);" value="ADMIN">
+					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLogCall(this.form);" value="ADMIN">
 					<input type="button" class="login_btn" value="로그인" onclick="loginCall(this.form);">
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>

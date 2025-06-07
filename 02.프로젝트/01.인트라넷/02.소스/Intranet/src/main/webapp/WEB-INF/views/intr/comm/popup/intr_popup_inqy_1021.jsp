@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- 
+	view : intr_popup_inqy_1021
+	title : 아이디 찾기 팝업
+-->
 <h3>
-	<a class="list_bg" onclick="javascript:chgPopup('intrPopupInqy1020.do');">아이디 찾기</a>
-	<a onclick="javascript:chgPopup('intrPopupInqy1030.do');">비밀번호 찾기</a>
+	<a class="list_bg" onclick="javascript:chgPopup('intrPopupInqy1021.do');">아이디 찾기</a>
+	<a onclick="javascript:chgPopup('intrPopupInqy1022.do');">비밀번호 찾기</a>
 </h3>
 
 <div id="findYn" class="findYn">

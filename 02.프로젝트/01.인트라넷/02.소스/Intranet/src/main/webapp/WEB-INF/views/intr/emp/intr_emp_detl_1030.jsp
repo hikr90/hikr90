@@ -15,7 +15,7 @@
 	// 수정 처리
 	function modProc(f){
 		// 유효성 검증
-		if(!validation()){return;};
+		if(!valProc()){return;};
 		//
 		if(confirm("수정하시겠습니까?")){
 			var fileList = setFormData();
@@ -75,8 +75,8 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
-									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
-									<input type="hidden" id="fileType" name="fileType" value="emp">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
+									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 								
 		                            <h2>사원 상세</h2><br>
 	                                <div class="post_write">
@@ -87,15 +87,15 @@
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
 		                                        			<c:when test="${not empty defaultList}">
-		                                        				<img class="emp_img" id="empImg" width="100" height="100" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
+		                                        				<img class="emp_img" id="empImg" width="200" height="200" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
 		                                        			</c:when>
 		                                        			<c:otherwise>
-				                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
+				                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
 		                                        			</c:otherwise>
 		                                        		</c:choose>
 		                                        	</div>
 	                                        	
-		                                        	<div class="profile_box mt10 ml20">
+		                                        	<div class="profile_box ml20">
 		                                        		<br><span id="profText">사진을 등록해주세요.</span>
 			                                        	<div style="margin-top: 5px;">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
@@ -150,7 +150,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="inputNum(this);">
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);">
 	                                        </dd>
 	
 	                                        <dt><label>성별</label></dt>
@@ -171,7 +171,7 @@
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}">
-	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
+	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>
@@ -180,16 +180,23 @@
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
-	                                        <dt><label>&#10003; 아이디</label></dt>
-	                                        <dd class="sel_2part">
-	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly">
-	                                        </dd>
-	                                        
-	                                        <dt><label>&#10003; 메일 주소</label></dt>
+											<dt><label>&#10003; 메일 주소</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}">
 	                                        </dd>
+	                                        
+	                                        <dt></dt>
+	                                        <dd></dd>
 	                                    </dl>
+										<dl>
+	                                        <dt><label>&#10003; 아이디</label></dt>
+	                                        <dd class="sel_2part">
+	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly" st>
+	                                        </dd>
+	                                        
+	                                        <dt></dt>
+	                                        <dd></dd>
+										</dl>	                                    
 									</div>
 		                                
 	                                <div class="btn_wrap align_right">

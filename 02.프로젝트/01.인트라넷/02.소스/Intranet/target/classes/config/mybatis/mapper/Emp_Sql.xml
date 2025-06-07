@@ -27,7 +27,7 @@
 					,	CASE WHEN E.LEAV_DT IS NOT NULL
 						THEN 'N'
 						ELSE 'Y' END LEAV_YN
- 		        FROM EMPINFO E
+ 		        FROM EMP_INFO E
 		            LEFT OUTER JOIN ORG O
 		            	ON O.ORG_CD = E.ORG_CD
                         AND O.USE_YN = 'Y'
@@ -82,7 +82,7 @@
 			,	EMP_PWD
 			,	HIRE_DT
 			,	LEAV_DT
-		FROM EMPINFO
+		FROM EMP_INFO
 		WHERE 1=1 
 			AND UPPER(EMAIL) = UPPER(#{findEmail, jdbcType=VARCHAR})
 			<if test="findId != null and findId != ''">
@@ -109,7 +109,7 @@
 			,	EMP_PWD
 			,	HIRE_DT
 			,	LEAV_DT
-		FROM EMPINFO
+		FROM EMP_INFO
 		WHERE UPPER(EMP_ID) = 'ADMIN'
 	</select>
 	
@@ -159,7 +159,7 @@
 				,	CASE WHEN E.LEAV_DT IS NOT NULL
 						THEN 'N'
 						ELSE 'Y' END LEAV_YN
-		FROM EMPINFO E
+		FROM EMP_INFO E
 		LEFT OUTER JOIN ORG O
 			ON O.ORG_CD = E.ORG_CD
 			AND O.USE_YN = 'Y'
@@ -185,7 +185,7 @@
 				,	EMP_PWD
 				,	HIRE_DT
 				,	LEAV_DT
-		FROM EMPINFO
+		FROM EMP_INFO
 		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
 	</select>
 	
@@ -228,7 +228,7 @@
 				        ,   E.EMP_IDX
 				        ,   E.EMP_NM
                         ,   ROW_NUMBER() OVER(ORDER BY EMP_NM ASC) AS ROW_NUM
-				    FROM EMPINFO E 
+				    FROM EMP_INFO E 
 				    LEFT OUTER JOIN ORG O 
 				    	ON E.ORG_CD = O.ORG_CD
 				    LEFT OUTER JOIN RANK R
@@ -245,7 +245,7 @@
                   	O.ORG_NM
                 ,   COUNT(E.EMP_NM) AS ORG_CNT
 		FROM ORG O
-		LEFT OUTER JOIN EMPINFO E
+		LEFT OUTER JOIN EMP_INFO E
 			ON E.ORG_CD = O.ORG_CD
             AND O.USE_YN = 'Y'
             AND E.LEAV_DT IS NULL
@@ -260,31 +260,31 @@
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
-					FROM EMPINFO E
+					FROM EMP_INFO E
 					WHERE SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
 				) AS NEW_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
-					FROM EMPINFO E 
+					FROM EMP_INFO E 
 					WHERE E.LEAV_DT IS NOT NULL AND SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
 				) AS LEAV_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
-					FROM EMPINFO E
+					FROM EMP_INFO E
 				) AS EMP_CNT
 		FROM DUAL
 	</select>
 	
 	<select id="intrEmpProc1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrEmpProc1011 : 사원 인덱스 채번 */
-		SELECT LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS EMP_IDX FROM EMPINFO
+		SELECT LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS EMP_IDX FROM EMP_INFO
 	</select>
 	
 	<insert id="intrEmpProc1012" parameterType="java.util.HashMap">
 		/* intrEmpProc1012 : 사원 등록 처리 */
-		INSERT INTO EMPINFO
+		INSERT INTO EMP_INFO
 		(
 				EMP_IDX
 			,	ORG_CD
@@ -320,7 +320,7 @@
 	
 	<update id="intrEmpProc1021" parameterType="java.util.HashMap">
 		/* intrEmpProc1021 : 사원 수정 처리 */
-		UPDATE EMPINFO
+		UPDATE EMP_INFO
 			SET 	ORG_CD = #{setOrgCd, jdbcType=VARCHAR}
 				,	RANK_CD = #{setRankCd, jdbcType=VARCHAR}
 				,	IS_MALE = #{isMale, jdbcType=VARCHAR}
@@ -333,7 +333,7 @@
 	
 	<update id="intrEmpProc1031" parameterType="java.util.HashMap">
 		/* "intrEmpProc1031" : 사원 복직, 퇴사 처리 */
-		UPDATE EMPINFO
+		UPDATE EMP_INFO
 			SET LEAV_DT =
 				CASE WHEN LEAV_DT IS NULL
 					THEN TO_CHAR(SYSDATE,'YYYYMMDD')
@@ -343,7 +343,7 @@
 	
 	<update id="intrEmpProc1041" parameterType="java.util.HashMap">
 		/* intrEmpProc1041 : 사원 삭제 처리 */
-		DELETE FROM EMPINFO
+		DELETE FROM EMP_INFO
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>
 </mapper>

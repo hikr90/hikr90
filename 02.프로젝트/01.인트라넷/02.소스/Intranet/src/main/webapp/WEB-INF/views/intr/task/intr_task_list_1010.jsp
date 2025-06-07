@@ -112,12 +112,11 @@
 	function initTask(f){
 		//
 		if(addCnt==0){
-			alert("<spring:message code="TAKS.NONE"/>");
+			alert("<spring:message code="ADD.CNT.NONE"/>");
 			return;
 		}
-		
+		//
 		if(confirm("초기화하시겠습니까?")){
-			//
 			addCnt = 0;
 			formSubmit('intrTaskInqy1010.do');
 		}
@@ -127,7 +126,7 @@
 	function regProc(f){
 		//
 		if(addCnt==0){
-			alert("<spring:message code="TAKS.NONE"/>");
+			alert("<spring:message code="ADD.CNT.NONE"/>");
 			return;
 		}
 		//

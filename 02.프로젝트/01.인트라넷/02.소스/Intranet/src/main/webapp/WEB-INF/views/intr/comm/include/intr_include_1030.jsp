@@ -16,7 +16,7 @@
 							<li><a href="intrMainInqy1020.do">사용자</a></li>
 						</c:otherwise>
 					</c:choose>
-					<li><a onclick="logout();">로그아웃</a></li>
+					<li><a onclick="outProc();">로그아웃</a></li>
 				</ul><br><br>
 				
 				<div class="header_state_text">

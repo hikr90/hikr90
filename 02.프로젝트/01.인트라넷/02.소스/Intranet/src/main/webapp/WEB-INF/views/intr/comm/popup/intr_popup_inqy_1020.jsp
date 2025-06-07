@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<!-- 
+	view : intr_popup_inqy_1020
+	title : 정보 찾기 관리 팝업
+-->
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
@@ -138,13 +142,13 @@
                            	<input type="hidden" id="empId" value="">
                            	<input type="hidden" id="empPwd" value="">
 
-                               <div id="postCon" class="post_con">
+                               <div id="findCon" class="post_con">
                                
                                </div>
                                
                                <div class="btn_center">
                                	<input type="button"class="btn_blue_thin" value="찾기" onclick="popConfirm();">
-                                   <input type="button"class="btn_gray_thin" value="취소" onclick="popClose('popupArea');">
+                                   <input type="button"class="btn_gray_thin" value="취소" onclick="popClose('find');">
                                </div>
                            </div><!-- End post_wrap -->
                          </div> 

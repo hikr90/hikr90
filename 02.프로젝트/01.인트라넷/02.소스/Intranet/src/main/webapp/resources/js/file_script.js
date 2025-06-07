@@ -1,8 +1,8 @@
 var tempList = new Array();
 
 $(function() {
-	/* ================== 첨부파일 ================== */
-	// 파일 업로드
+	/* ================== file ================== */
+	// 업로드
 	$("#fileUpd").on('change', function() {
 		// 초기화 
 		$("#fileUl").html("");
@@ -18,9 +18,9 @@ $(function() {
 			
 			// 화면 내 파일 추가
 			fileStr += "<li id='fileLi" + i + "'>";
-			fileStr += "	<input type='hidden' id='fileIdx" + i + "' name='fileIdx" + i + "' />";
+			fileStr += "	<input type='hidden' id='fileId" + i + "' name='insert" + i + "' />";
 			fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
-			fileStr += "	<a onClick='#'><span>"+thisFiles[i].name+"</span></a>";
+			fileStr += "	<a href='#' onclick=\"fileDel('insert', '" + i + "');\"><span>"+thisFiles[i].name+"</span></a>";
 			fileStr += "</li>";
 		}		
 		
@@ -29,9 +29,15 @@ $(function() {
 		fileStr = "";
 	});
 
-	/* ================== 프로필 ================== */
+	/* ================== profile ================== */
+	// 초기화
+	$("#profBtn").on("click", function () {
+		$(this).val("");
+	});
+	
 	// 프로필 변경
 	$("#profBtn").change(function(e) {
+		//
 		if(this){
 			var thisFiles = this.files; 
 			var profImg = $(this).val();
@@ -63,7 +69,7 @@ $(function() {
 	// 프로필 삭제
 	$("#profDel").click(function() {
 		// 화면 상 처리
-		$("#empImg").attr("src","resources/images/icon/icon_emp.png");
+		$("#empImg").attr("src","resources/images/icon/icon_profile.png");
 		$("#profText").text("사진을 등록해주세요.");
 		tempList = [];
 	});
@@ -71,25 +77,19 @@ $(function() {
  
 /* ================== 첨부파일 삭제 ================== */
 function fileDel(status, idx){
-	var name = $("#fileIdx" + idx).attr("name");
 	//
-	if(status=='insert'){
-		if(name.indexOf("insert")>-1){
-			$("#fileLi"+idx).find("span").css('text-decoration','line-through');
-			$("#fileIdx"+idx).attr("name", name.replace(status ,"none"));
-		} else {
-			$("#fileLi"+idx).find("span").css('text-decoration','');
-			$("#fileIdx"+idx).attr("name", name.replace("none", status));
-		}
-	} else {
-		if(name.indexOf("none")>-1){
-			$("#fileLi"+idx).find("span").css('text-decoration','line-through');
-			$("#fileIdx"+idx).attr("name", name.replace("none" , status));
-		} else {
-			$("#fileLi"+idx).find("span").css('text-decoration','');
-			$("#fileIdx"+idx).attr("name", name.replace(status, "none"));
-		}
-	}
+	var fileLi = $("#fileLi" + idx);
+    var fileId = $("#fileId" + idx);
+    var fileProc = fileId.attr("name");
+    var isDelete = (status === "insert") ? fileProc.includes("insert") : fileProc.includes("none");
+    //
+    if (isDelete) {
+        fileLi.find("span").css("text-decoration", "line-through");
+        fileId.attr("name", fileProc.replace(status, "none"));
+    } else {
+        fileLi.find("span").css("text-decoration", "");
+        fileId.attr("name", fileProc.replace("none", status));
+    }
 }
 
 
@@ -106,12 +106,10 @@ function setFormData(){
 
 
 /* ================== 다운로드 ================== */
-// 단건 다운로드
-function fileProc(fileIdx){
-	formSubmit('fileDown.do?fileIdx='+fileIdx);
+function fileProc(fileId, fileSno){
+	formSubmit('fileDown.do?fileId='+fileId+'&fileSno='+fileSno);
 }
 	
-// 전체 다운로드
 function zipProc(){
 	formSubmit('zipDown.do');
 }

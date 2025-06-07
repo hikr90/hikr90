@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.AuthDao;
@@ -16,7 +17,8 @@ import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 import com.intr.vo.EmpVO;
 
-@Service 
+@Service
+@Transactional(rollbackFor = Exception.class)
 public class MainServiceImpl implements MainService{
 	//
 	@Autowired

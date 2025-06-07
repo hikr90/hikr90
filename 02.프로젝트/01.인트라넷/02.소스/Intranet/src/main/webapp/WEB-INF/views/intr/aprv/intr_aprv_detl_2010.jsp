@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 에디터
-		CKEDITOR.replace('editor',{height: 500});
+		CKEDITOR.replace('editor',{height: 710});
 	});
 
 	// 목록으로
@@ -17,84 +17,63 @@
 		formSubmit('intrAprvInqy2010.do');
 	}
 	
-	// 결재선 조회 팝업
-	function popCall(sequenceId){
+	// 프로젝트 팝업
+	function projCall(){
 		//
 		var obj = new Object();
-		obj["sequenceId"] = sequenceId;
+		//
+		obj["mappingId"] = "intrPopupInqy1030.do";
+		obj["areaType"] = "proj";
+		obj["width"] = "600"
+		obj["height"] = "370";
 		//		
-		ajaxPopup(obj,"1100","650","intrPopupInqy1050.do","");
+		ajaxPopup(obj);
 	}
 	
-	// 결재 처리
-	function aprvCall(aprvGb){
-		// 결재 수신처리 (반려:0, 결재:1, 회수:2)
+	// 담당자 팝업
+	function empCall(){
 		var obj = new Object();
-		$("#aprvGb").val(aprvGb);
-		ajaxPopup(obj,"700","340","intrPopupInqy1060.do","1");
+		//
+		obj["mappingId"] = "intrPopupInqy1010.do";
+		obj["areaType"] = "emp";
+		obj["width"] = "550"
+		obj["height"] = "420";
+		//		
+		ajaxPopup(obj);
 	}
 	
-	// 팝업 확인
-	function aprvProc(){
+	// 결재선 조회 팝업
+	function lineCall(){
+		var obj = new Object();
 		//
-		var aprvPwd = $("#aprvPwd").val().toUpperCase();
-		var aprvResn = $("#aprvResn").val();
-		var empPwd = "${empVO.empPwd}".toUpperCase();
-		//
-		if(aprvPwd==''){
-			alert("<spring:message code="APRV.PWD.NONE"/>");
-			return;
-		}
-		if(aprvPwd!=empPwd){
-			alert("<spring:message code="APRV.PWD.FAIL"/>");
-			return;
-		}
-		
-		// 처리
-		var param = $("#form").serialize();
-		if(confirm("진행하시겠습니까?")){
-			$.ajax({
-		    	type : 'post',
-		    	url : "intrAprvProc1020.do",
-				data : param,
-				dataType : 'text',
-				success : function(data){
-					//
-					var json = eval(data);
-	   				if(json[0].res=="NO"){
-	   	   				// 결재 실패
-	   					alert("<spring:message code="PROC.FAIL"/>");
-	   	   				return;
-	   				} else {
-	   					// 결재 완료 후 새로고침
-	   					alert("<spring:message code="PROC.SUCCESS"/>");
-	   					location.reload();
-	   				}
-				},
-				error : function(xhr, status, error){
-			    	//
-					alert("<spring:message code="PROC.ERROR"/>");
-			    	return;
-			    }
-			});
-		}
+		obj["mappingId"] = "intrPopupInqy1042.do";
+		obj["areaType"] = "line";
+		obj["width"] = "1100";
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
 	}
 </script>
 </head>
 <body id="main">
-<form id="form" name="form" method="POST" onsubmit="return false;">
-	<!-- 결재선 -->
- 	<div id="popupArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
-	</div>
-
-	<!-- 결재 의견 -->
- 	<div id="popupArea1" class="popupArea1 hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_2010.jsp"></c:import>	
-	</div>
-
+<form id="form" method="POST" onsubmit="return false;">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
+
+	<!-- 담당자 팝업 -->
+ 	<div id="empArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
+	</div>
+
+	<!-- 프로젝트 팝업 -->
+ 	<div id="projArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1030.jsp"></c:import>	
+	</div>
+	
+	<!-- 결재선 팝업 -->
+ 	<div id="lineArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1040.jsp"></c:import>	
+	</div>
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
@@ -103,79 +82,100 @@
 				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
 			</div>
 		</div>
-			
+		
 		<div class="content_wrap">
 			<div class="content_area">
 				<article class="sub_article">
 					<div class="content">
 						<div id="sub_content">					
-							<div class="content_area form_area">
-								<input type="hidden" id="page" name="page" value="${param.page}">
-								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+							<div class="form_area">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-								<input type="hidden" id="currContSid" name="currContSid" value="${aprvDetInfo.currContSid}">
-								<input type="hidden" id="sequenceId" name="sequenceId" value="${aprvDetInfo.sequenceId}">
-								<input type="hidden" id="lastAprvYn" name="lastAprvYn" value="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx?aprvDetInfo.lastAprvYn:'N'}">
-								<input type="hidden" id="aprvGb" name="aprvGb" value="0">
-							
+								<input type="hidden" id="tempCd" name="tempCd" value="${param.tempCd}">
+								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
+								<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}">
+								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
+										
 								<div class="post_wrap">
-		                            <h2>품의문 상세</h2><br>
+		                        	<h2>휴가 신청서
+											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
+		                        	</h2><br>
 									<div class="post_view">
 										<dl>
-											<dt>제목</dt>
-											<dd>${aprvDetInfo.aprvTitle}</dd>
-											<dt>작성일</dt>
+											<dt>
+												<label for="post-title">프로젝트명</label>
+											</dt>
 											<dd>
-												<span class="date">
-													<fmt:parseDate value="${aprvDetInfo.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-													<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
-													${fomatDt} 
-												</span>	
-											</dd>
-											<dt>진행 단계</dt>
-											<dd>${aprvDetInfo.currStepNm}</dd>
-										</dl>
-										<dl class="post_info">
-											<dt>기안자</dt>
-											<dd>(${aprvDetInfo.orgNm}) ${aprvDetInfo.empNm}</dd>
-											<dt>시행일자</dt>
-											<dd>
-												<span class="date">
-													<!-- 시행 시작일 --> 
-													<fmt:parseDate value="${aprvDetInfo.efctSdt}" var="parseSdt" pattern="yyyyMMdd"/>
-													<fmt:formatDate value="${parseSdt}" var="formatSdt" pattern="yyyy-MM-dd"/>
-		
-													<!-- 시행 종료일 --> 
-													<fmt:parseDate value="${aprvDetInfo.efctEdt}" var="parseEdt" pattern="yyyyMMdd"/>
-													<fmt:formatDate value="${parseEdt}" var="formatEdt" pattern="yyyy-MM-dd"/>
-													${formatSdt} ~ ${formatEdt}
-												</span>	
-											</dd>
-											<dt>결재선</dt>
-											<dd>
-			                            		<a class="_btn _gray" onclick="popCall(${aprvDetInfo.sequenceId});">결재선</a> 
+												${defaultInfo.aprvTitle}
 											</dd>
 										</dl>
 										<dl>
-											<dt>내용</dt>
+											<dt>결재선</dt>
+											<dd>
+												<input type="button"class="btn_gray align_top" value="조회" onclick="lineCall();">
+												<input type="hidden" id="aprvLine" name="aprvLine" value="">
+											</dd>
+											
+											<dt>휴가 타입</dt>
+											<dd class="sel_2part">
+									        	${defaultInfo.leavtypeNm}
+									    	</dd>
+										</dl>
+								        <dl>
+								        	<dt>휴가 기간</dt>
+											<dd>
+												<span class="date">
+													<fmt:parseDate value="${defaultInfo.leavSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+													<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
+													${fomatSdt} 
+													~
+													<fmt:parseDate value="${defaultInfo.leavEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+													<fmt:formatDate value="${parseEdt}" var="fomatEdt" pattern="yyyy-MM-dd"/>
+													${fomatEdt}
+												</span>	
+											</dd>
+											
+											<dt>대직자</dt>
+											<dd>
+												${defaultInfo.leavSubst}
+											</dd>
+								        </dl>
+								        <dl>
+								        	<dt>사유</dt>
+											<dd>
+												${defaultInfo.leavRsn}
+											</dd>
+								        </dl>
+								        <dl>
+											<dt><label for="post_text">양식 내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="기안문 양식 내용">${aprvDetInfo.aprvCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="양식 내용">${defaultInfo.aprvCont}</textarea>
 											</dd>
 										</dl>
-									</div>
+										<dl class="post_info">
+											<dt>첨부파일</dt>
+											<dd class="post_file">
+												<div class="file_wrap">
+													<!-- 파일 목록 -->
+													<c:import url="/WEB-INF/views/intr/comm/include/intr_include_1040.jsp">
+														<c:param name="fileNm"></c:param>
+													</c:import>
+												</div>
+											</dd>
+										</dl>
+									</div><!-- End post_write -->
 									
 									<div class="btn_wrap align_right">
-										<div class="float_right">
-											<c:if test="${empVO.empIdx eq aprvDetInfo.aprvEmpIdx and (aprvDetInfo.aprvRsltDt eq null or aprvDetInfo.aprvRsltDt eq '')}">
-												<button type="button" class="btn_navy_thin" onclick="aprvCall('1');">결재</button>
-												<button type="button" class="btn_gray_thin" onclick="aprvCall('0');">반려</button>
+										<div class="float_left">
+											<c:if test="${not empty fileList and fileList ne '' and fileList.size() > 1}">
+												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
 										</div>
 										
-										<button type="button" class="btn_blue_thin float_left" onclick="listCall();">목록으로</button>
+										<div class="float_right">
+											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
+										</div>
 									</div>
+									
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
 						</div><!-- End sub_content -->

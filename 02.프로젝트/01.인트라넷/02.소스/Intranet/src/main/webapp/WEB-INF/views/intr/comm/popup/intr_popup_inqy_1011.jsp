@@ -4,7 +4,11 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<div class="scroll_wrap">
+<!-- 
+	view : intr_popup_inqy_1011
+	title : 사원 트리 팝업
+-->
+<div class="scroll_wrap" style="height: 260px;">
 	<div class="pop_tree">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">
@@ -32,7 +36,7 @@
 						<li class="li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp; 
-								ㄴ <input type="radio" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="popCd" value="${list.empIdx}" popNm="${list.empNm}" popCd="${list.empIdx}" >
+								ㄴ <input type="radio" id="empPcd" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}" >
 							</c:if>
 							<span class="${spanIcon}"></span>
 							${listNm}
@@ -41,7 +45,7 @@
 						<li class="li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
 								&nbsp;
-								ㄴ <input type="radio" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="popCd" value="${list.empIdx}" popNm="${list.empNm}" popCd="${list.empIdx}">
+								ㄴ <input type="radio" id="empPcd" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empPcd" value="${list.empIdx}" empPnm="${list.empNm}" empPcd="${list.empIdx}">
 							</c:if>
 							<span class="${spanIcon}"></span>
 							${listNm}

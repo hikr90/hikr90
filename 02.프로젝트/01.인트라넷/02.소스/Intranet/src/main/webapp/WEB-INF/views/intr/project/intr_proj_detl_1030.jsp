@@ -12,7 +12,13 @@
 		// 담당자 선택
 		function popCall(){
 			var obj = new Object();
-			ajaxPopup(obj,"550","420","intrPopupInqy1010.do","");
+			
+			obj["mappingId"] = "intrPopupInqy1010.do";
+   			obj["areaType"] = "emp";
+   			obj["width"] = "550"
+   			obj["height"] = "420";
+   			//		
+   			ajaxPopup(obj);
 		}
 		
 		// 취소
@@ -23,7 +29,7 @@
 		// 수정 처리
 		function modProc(f){
 			// 유효성 검증
-			if(!validation()){return;};
+			if(!valProc()){return;};
 			//
 			var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
 			var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
@@ -95,7 +101,7 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
 	<!-- 담당자 팝업 -->
- 	<div id="popupArea" class="popupArea hidden">
+ 	<div id="empArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
 	</div>
 	
@@ -125,7 +131,7 @@
 							<input type="hidden" id="srchStatNm" name="srchStatNm" value="${param.srchStatNm}">
 							<input type="hidden" id="srchStatCd" name="srchStatCd" value="${param.srchStatCd}">					
 							<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
-							<input type="hidden" id="owner" name="owner" value="${defaultInfo.owner}">
+							<input type="hidden" id="empPcd" name="owner" value="${defaultInfo.owner}">
 								
 							<div class="post_wrap">
 								<h2>프로젝트 수정</h2><br>
@@ -140,7 +146,7 @@
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button"class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="ownNm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 50%;" disabled="disabled">
+											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 50%;" disabled="disabled">
 										</dd>
 										<dt>&#10003; 계약기간</dt>
 										<dd>
@@ -194,7 +200,7 @@
 									<dl>
 										<dt>&#10003; 계약금</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="inputAmt(this);" value="${defaultInfo.deposit}" style="width: 50%;">
+											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" value="${defaultInfo.deposit}" style="width: 50%;">
 											&nbsp; <span id="amtNm">${defaultInfo.depositNm}</span>
 										</dd>
 										<dt>태그</dt>

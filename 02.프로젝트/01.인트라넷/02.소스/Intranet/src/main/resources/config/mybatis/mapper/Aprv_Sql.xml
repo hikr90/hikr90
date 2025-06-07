@@ -12,8 +12,18 @@
 		<result property="remark" 			column="REMARK"/>
 	</resultMap>
 	
+		<select id="intrAprvInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1010 : 전자결재 시퀀스 조회 */
+		SELECT 'APRV_' || LPAD(NVL(MAX(REPLACE(APRV_ID,'APRV_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRVMAST
+	</select>
+	
 	<select id="intrAprvInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy1011 : 기안 목록 조회 */
+		/* intrAprvInqy1011 : 전자결재 목록 조회 */
+		SELECT * FROM APRVMAST
+	</select>
+	
+	<select id="intrAprvInqy2012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1012 : 결재 상세 조회 */
 		SELECT * FROM APRVMAST
 	</select>
 </mapper>

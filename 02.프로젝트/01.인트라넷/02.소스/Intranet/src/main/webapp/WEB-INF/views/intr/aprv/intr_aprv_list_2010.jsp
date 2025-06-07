@@ -5,9 +5,26 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <script type="text/javascript">
+	//
+	function testCall(temptypeCd, sequenceId){
+		//
+		var typeProc = {
+		  Leav: "intr_aprv_detl_2010.jsp", 		// 휴가 신청서
+		  Exp:  "intr_aprv_detl_2011.jsp", 		// 가지급결의서
+		  Item: "intr_aprv_detl_2012.jsp", 		// 물품반입신청서
+		  Corp: "intr_aprv_detl_2013.jsp", 		// 법인카드정산서
+		};
+		//	
+		$("#sequenceId").val(sequenceId);
+		$("#temptypeCd").val(temptypeCd);
+		$("#returnUrl").val(typeProc[temptypeCd]);
+		//
+		formSubmit("intrAprvInqy2020.do");
+	}
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrAprvInqy2010.do");
+		testCall('Item', '')
+		//formSubmit("intrAprvInqy2010.do");
 	}
 	
 	// 품의문 상세 조회
@@ -40,6 +57,8 @@
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
+									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
 									<h2>결재 조회</h2><br>
 									<div class="srch_wrap">
@@ -52,23 +71,61 @@
 												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 											</div>
 											
-											<!-- 기안자명 -->
+											<!-- 결재 단계 -->
 											<div class="srch_area">
-												<label class="srch_label">기안자명</label>
-												<input type="text" id="srchNm" name="srchEnm" class="srch_cdt_text" value="${param.srchEnm}" onkeydown="pushListKey(this.form);">
+												<label class="srch_label">업무</label>
+												<div class="select_wrap">
+													<div id="workList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
+													<input type="hidden" name="workCd" value="${param.workCd}">
+													<input type="hidden" name="workNm" value="${param.workNm}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${useList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
 											</div>
-		                                	
-		                                	<!-- 결재자명 -->
+											
 											<div class="srch_area">
-												<label class="srch_label">결재자명</label>
-												<input type="text" id="srchNm" name="srchAnm" class="srch_cdt_text" value="${param.srchAnm}" onkeydown="pushListKey(this.form);">
+												<label class="srch_label">업무단계</label>
+												<div class="select_wrap">
+													<div id="workList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
+													<input type="hidden" name="workCd" value="${param.workCd}">
+													<input type="hidden" name="workNm" value="${param.workNm}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${useList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+											<br>
+											
+											<!-- 부서 -->
+											<div class="srch_area">
+												<label class="srch_label">부서</label>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
+											</div>
+
+											<!-- 직급 -->
+											<div class="srch_area">
+												<label class="srch_label">직급</label>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
+											</div>
+											
+											<!-- 기안자 -->
+											<div class="srch_area">
+												<label class="srch_label">기안자</label>
+												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${empty param.srchIdx ? empVO.empNm : param.srchIdx}" onkeydown="pushCall(this.form);">
 											</div>
 											
 											<!-- 제목 -->
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">제목</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushListKey(this.form);">
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
 													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
 													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
@@ -82,19 +139,19 @@
 											<caption>결재내역 목록 조회</caption>
 											<colgroup>
 												<col class="w7per">
-												<col class="w12per">
+												<col class="w15per">
+												<col class="w15per">
 												<col class="auto">
-												<col class="w17per">
-												<col class="w17per">
-												<col class="w12per">
+												<col class="w15per">
+												<col class="w15per">
 											</colgroup>
 											<thead>
 												<tr>
 													<th scope="col">순번</th>
-													<th scope="col">진행 단계</th>
-													<th scope="col">품의문 제목</th>
-													<th scope="col">결재 진행자</th>
-													<th scope="col">결재 기안자</th>
+													<th scope="col">업무</th>
+													<th scope="col">업무단계</th>
+													<th scope="col">제목</th>
+													<th scope="col">기안자</th>
 													<th scope="col">작성일자</th>
 												</tr>
 											</thead>
@@ -102,17 +159,18 @@
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
 														<td class="first_td">${list.num}</td>
-														<td>${list.currStepNm}</td>
+														<td>${list.workNm}</td>
+														<td>${list.workstepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.sequenceId}');">${list.aprvTitle}</a>
+															<a class="show_view a_title" onclick="detCall('${temptypeCd}','${list.sequenceId}');"></a>
 														</td>
-														<td>${list.aprvorgNm} ${list.aprvEmpNm} ${list.aprvrankNm}</td>
-														<td>${list.empNm} ${list.orgNm} ${list.rankNm}</td>
+														<td>${list.aprvTitle}</td>
+														<td>${list.empNm}</td>
 														<td>
 															<span class="date">
-																<fmt:parseDate value="${list.aprvRegDt}" var="parseDt" pattern="yyyyMMdd"/>
+																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-																${formatDt} 
+																${formatDt}
 															</span>	
 														</td>
 			                                        </tr>

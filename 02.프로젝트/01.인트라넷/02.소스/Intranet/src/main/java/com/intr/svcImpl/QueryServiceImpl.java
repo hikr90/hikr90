@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.intr.dao.QueryDao;
@@ -17,6 +18,7 @@ import com.intr.svc.QueryService;
 import com.intr.svc.UtilService;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class QueryServiceImpl implements QueryService{
 	//
 	@Autowired

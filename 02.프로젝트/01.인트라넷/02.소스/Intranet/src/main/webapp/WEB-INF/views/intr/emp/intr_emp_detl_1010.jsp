@@ -103,13 +103,11 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 									<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-									<input type="hidden" id="orgCd" name="orgCd" value="${param.orgCd}">
-									<input type="hidden" id="rankCd" name="rankCd" value="${param.rankCd}">
 									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
 		
 		                            <h2>사원 상세</h2><br>
 	                                <div class="post_write">
@@ -119,11 +117,11 @@
 	                                        	<div>
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
-	                                        			<c:when test="${not empty defaultList}">
-	                                        				<img class="emp_img" id="emp_img" width="100" height="100" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
+	                                        			<c:when test="${not empty fileList}">
+	                                        				<img class="emp_img" id="emp_img" width="200" height="200" src="intrEmpInqy1099.do?fileId=${fileList[0].fileId}&fileNm=${fileList[0].fileNm}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
-			                                        		<img class="emp_img" id="emp_img" width="100" height="100" src="resources/images/icon/icon_emp.png">
+			                                        		<img class="emp_img" id="emp_img" width="200" height="200" src="resources/images/icon/icon_profile.png">
 	                                        			</c:otherwise>
 	                                        		</c:choose>
 	                                        	</div>
@@ -175,15 +173,16 @@
 	                                        	${defaultInfo.addrInfo}
 	                                        </dd>
 	                                    </dl>
+	                                    <dl>
+	                                    	<dt><label>메일 주소</label></dt>
+	                                        <dd class="sel_2part">
+	                                        	${defaultInfo.email}
+	                                        </dd>
+	                                    </dl>
 	                                	<dl>
 	                                        <dt><label>아이디</label></dt>
 	                                        <dd class="sel_2part">
 	                                        	${defaultInfo.empId}
-	                                        </dd>
-	                                		
-	                                		<dt><label>메일 주소</label></dt>
-	                                        <dd class="sel_2part">
-	                                        	${defaultInfo.email}
 	                                        </dd>
 	                                	</dl>    
 									</div>

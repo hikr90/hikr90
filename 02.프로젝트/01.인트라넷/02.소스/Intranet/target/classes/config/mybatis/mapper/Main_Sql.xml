@@ -22,7 +22,7 @@
          	,   CASE WHEN EA.AUTH_CD IS NOT NULL
                     THEN 'Y' 
                     ELSE 'N' END AS AUTH_YN
-		FROM EMPINFO E
+		FROM EMP_INFO E
 		LEFT OUTER JOIN ORG O
 			ON O.ORG_CD = E.ORG_CD
 			AND O.USE_YN = 'Y'

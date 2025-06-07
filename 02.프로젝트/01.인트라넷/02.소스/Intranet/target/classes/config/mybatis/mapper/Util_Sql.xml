@@ -8,13 +8,14 @@
 		    FILE_ID,
 		    FILE_SNO, 
 		    FILE_NM, 
-		    FILE_TYPE,
+		    FILETYPE_CD,
+		    FILE_PATH,
 		    FILE_EXT,
 		    FILE_SIZE,
 		    USE_YN,
 		    DISP_ORDER,
 		    REMARK
-		FROM WORKFILE
+		FROM FILE_INFO
 		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
 			AND USE_YN = 'Y'
 	</select>
@@ -26,27 +27,28 @@
 		    FILE_ID, 
 		    FILE_SNO, 
 		    FILE_NM, 
-		    FILE_TYPE,
+		    FILETYPE_CD,
+		    FILE_PATH,
 		    FILE_EXT,
 		    FILE_SIZE, 
 		    USE_YN,
 		    DISP_ORDER,
 		    REMARK
-		FROM WORKFILE
-		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+		FROM FILE_INFO
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
 			AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
 			AND USE_YN = 'Y'
 	</select>
 	
 	<insert id="intrFileProc1011" parameterType="java.util.HashMap">
 		/* intrFileProc1011 : 파일 등록 처리 */
-		INSERT INTO WORKFILE
+		INSERT INTO FILE_INFO
 		(
 				FILE_ID
 			,	FILE_SNO
 			,	FILE_NM
-			,	FILE_PATH
 			,	FILETYPE_CD
+			,	FILE_PATH
 			,	FILE_EXT
 			,	FILE_SIZE
 			,	USE_YN
@@ -59,20 +61,20 @@
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(FILE_SNO),0) + 1,4,0)
-					FROM WORKFILE 
+					FROM FILE_INFO 
 					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 				)
 			,	#{fileNm, jdbcType=VARCHAR}
-			,	#{filePath, jdbcType=VARCHAR}
 			,	#{filetypeCd, jdbcType=VARCHAR}
+			,	#{filePath, jdbcType=VARCHAR}
 			,	#{fileExt, jdbcType=VARCHAR}
 			,	#{fileSize, jdbcType=VARCHAR}
 			,	'Y'
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM WORKFILE
-					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+					FROM FILE_INFO
+					WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
 				)
 			,	NULL
 		)
@@ -80,21 +82,15 @@
 	
 	<update id="intrFileProc1021" parameterType="java.util.HashMap">
 		/* intrFileProc1021 : 파일 삭제 처리 (수정) */
-		UPDATE WORKFILE
+		UPDATE FILE_INFO
 			SET USE_YN = 'N'
-		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
-			<if test="fileSno != null and fileSno != ''">
-				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
-			</if>
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="intrFileProc1022" parameterType="java.util.HashMap">
 		/* intrFileProc1022 : 파일 삭제 처리 (삭제) */
-		DELETE WORKFILE
-		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
-			<if test="fileSno != null and fileSno != ''">
-				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
-			</if>
+		DELETE FILE_INFO
+		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
 	</delete>
 	
 	<insert id="intrExptProc1011" parameterType="java.util.HashMap">

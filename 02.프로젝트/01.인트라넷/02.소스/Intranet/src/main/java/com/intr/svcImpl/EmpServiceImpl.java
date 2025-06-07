@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -18,6 +19,7 @@ import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class EmpServiceImpl implements EmpService{
 	//
 	@Autowired
@@ -58,7 +60,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (재직여부) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"USE");
+			paramMap.put("commcodeGcd", 	"use");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("useList",defaultList);
 
@@ -109,7 +111,7 @@ public class EmpServiceImpl implements EmpService{
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
 			defaultList = utilDao.intrFileInqy1011(model, paramMap);
-			model.addAttribute("defaultList",defaultList);
+			model.addAttribute("fileList",defaultList);
 			
 		} catch (Exception e) {
 			//

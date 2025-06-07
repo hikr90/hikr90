@@ -1,17 +1,18 @@
-// Ajax 팝업
-function ajaxPopup(obj, width, height, mappingId, i){
+// modal
+function ajaxPopup(obj){
 	//
-	var zIndex = 9999;
-	var popupArea = $("#popupArea"+i);
-	//
-	popupArea.css({
+	var area = obj["areaType"] + "Area"; // projArea
+	var con =  obj["areaType"] + "Con";	// projCon
+	//	
+	var postArea = $("#" + area);
+	postArea.css({
 		 //
 		 position:	'fixed'	,																// 포지션
-         zIndex: zIndex + 1	,															// Z-INDEX (백그라운드 레이어보다 위)
-         top:	'47%'	,
-         left: 	'50%'	,
-         width:	  width+'px' ,
-         height:  height+'px' ,
+         zIndex: 9991 + 1,																	// z-index (백그라운드 레이어보다 위)
+         top:	'47%',
+         left: 	'50%',
+         width:	  obj["width"] + "px",
+         height:  obj["height"] + "px",
          transform:	'translate(-50%, -50%)'	,
          msTransform:	'translate(-50%, -50%)',
          webkitTransform:	'translate(-50%, -50%)'
@@ -20,21 +21,23 @@ function ajaxPopup(obj, width, height, mappingId, i){
 	// 동작 제어
 	$.ajax({
 		type:	"POST" , 
-		url:	mappingId,
+		url:	obj["mappingId"],
 		data:	obj,
 		dataType:	"text" ,
 		success : function(data){
 			//
-			$("#postCon"+i).html(data);
-			$("#popupArea"+i).removeClass("hidden");
-
+			$("#"+con).html(data);
+			$("#"+area).removeClass("hidden");
+			//
+			$("#overlay").show();
+		  	$("#"+area).show();
+  			$('body').css('overflow', 'hidden');
 		},
 		error : function(res, status, error){
 			//
 			alert("요청하신 작업을 실패하였습니다.\n관리자에게 문의해주세요.");
 		}
 	});
-
 }
 
 //
@@ -54,7 +57,7 @@ function chgPopup(mappingId){
 			$("#empId").val("");
 			$("#empPwd").val("");
 			//
-			$("#postCon").html(data);
+			$("#findCon").html(data);
 		},
 		error : function(res, status, error){
 			//
@@ -63,8 +66,29 @@ function chgPopup(mappingId){
 	});
 }
 
+// 팝업 내 선택
+function popConfirm(type){
+	var pcd = type + "Pcd";
+	var pnm = type + "Pnm";
+	var input = $("input[name=" + pcd + "]:checked"); 
+
+	// 선택 여부 검증
+	if(input.length==0){
+		alert("목록을 선택해주세요.");
+		return;
+	}
+	// 팝업 선택 후 종료
+	$("#" + pcd).val(input.attr(pcd));
+	$("#" + pnm).val(input.attr(pnm));
+	popClose(type);	
+}
+
 // 팝업 종료
-function popClose(area){
+function popClose(type){
 	//
+	var area = type + "Area";
 	$("#"+area).addClass('hidden');
+	$("#"+area).hide();
+	$('#overlay').hide();
+  	$('body').css('overflow', 'auto');
 }

@@ -17,7 +17,7 @@
 		
 		// 주소 입력란 클릭 시, 주소 검색 동작
 		$("#addr").on('click',function(){
-			srchAddr();
+			addrProc();
 		});
 	});
 	
@@ -58,7 +58,7 @@
 	// 사원 등록 처리
 	function regProc(f){
 		// 유효성 검증
-		if(!validation()){return;};
+		if(!valProc()){return;};
 		//
 		if($("#setOrgCd").val()==""){
 			alert("<spring:message code="EMP.ORG.NONE"/>");
@@ -135,8 +135,8 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
-									<input type="hidden" id="fileId" name="fileId" value="${param.fileId}">
-									<input type="hidden" id="fileType" name="fileType" value="emp">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
+									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 		
 		                            <h2>사원 등록</h2><br>
 	                                <div class="post_write">
@@ -147,10 +147,10 @@
 	                                        <dd>
 	                                        	<div class="profile_wrap disp_flex">
 		                                        	<div class="profile_area">
-		                                        		<img class="emp_img" id="empImg" width="100" height="100" src="resources/images/icon/icon_emp.png">
+		                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
 	                                        		</div>
 	    
-		                                        	<div class="profile_box mt10 ml20">
+		                                        	<div class="profile_box ml20">
 		                                        		<br><span id="profText">사진을 등록해주세요.</span>
 			                                        	<div style="margin-top: 5px;">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
@@ -216,7 +216,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="inputNum(this);" >
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="mobProc(this);" >
 	                                        </dd>
 											
 											<dt></dt>
@@ -226,7 +226,7 @@
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr">
-	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="srchAddr();">
+	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>

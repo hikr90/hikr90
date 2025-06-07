@@ -5,7 +5,7 @@ $(function(){
 		//
 		var targetUl = $("#" + e.target.id).siblings('ul');
 		//		
-		if($(targetUl).css("display") != "block") {
+		if($(targetUl).css("display") === "none") {
 			$(targetUl).css('display','block');
 		} else {
 			$(targetUl).css('display','none');
@@ -31,10 +31,9 @@ $(function(){
 	    if($(".select_wrap").has(e.target).length == 0) $(".sUl").css('display','none');
 	});
 	
-	// Hover 이벤트
+	// hover 이벤트
 	$(".sUl li").hover(function(){
-		$(".sUl li").removeClass("hover");
-		$(this).addClass("hover");
+		$(this).addClass("hover").siblings().removeClass("hover");
 	});
 	
 	// -- 전체 선택 -----------------------------------------------------------------------
@@ -52,7 +51,7 @@ function initCall(){
 	// 검색어
 	$("input[name=srchNm]").val("");
 	
-	// 검색 일자
+	// 검색일자
 	$("input[name=srchSdt]").val("");
 	$("input[name=srchEdt]").val("");
 
@@ -60,9 +59,13 @@ function initCall(){
 	$("input[name=orgNm]").val("");
 	$("input[name=rankNm]").val("");
 
-	// 사용 여부
+	// 사용여부
 	$("input[name=useNm]").val("전체");
 	$("input[name=useCd]").val("");
+	
+	// 진행단계
+	$("input[name=statNm]").val("전체");
+	$("input[name=statCd]").val("");
 }
 
 // 폼 태그 동작
@@ -74,23 +77,20 @@ function formSubmit(mappingId){
 }
 
 // 로그아웃
-function logout() {
-	//
+function outProc() {
 	alert("로그아웃 되었습니다.");
 	location.href = "intrMainProc1020.do";
 }
 
 // 목록 조회 (엔터)
-function pushListKey(f) {
-	//
+function pushCall(f) {
 	if(event.keyCode==13){
 		listCall(f);
 	}
 }
 
 // 로그인 (엔터)
-function pushLoginKey(f) {
-	//
+function pushLogCall(f) {
 	if(event.keyCode==13){
 		loginCall(f);
 	}
@@ -103,7 +103,7 @@ function delArea(area) {
 }
 
 // 연락처 자동 입력
-function inputNum(num) {
+function mobProc(num) {
 	// 입력창에 입력된 값
     var input = num.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 값
     var output = "";
@@ -142,21 +142,8 @@ function inputNum(num) {
     num.value = output;
 }
 
-// 입력 값 초기화
-function initData(area){
-	//
-	var textInput = $("#"+area+" input[type=text]");
-	
-	// 값 초기화
-	$.each(textInput, function(idx, input){
-		$(input).val("");		
-	});
-}
-
-
-
 // 입력 값 유효성 검증 (공통)
-function validation(){
+function valProc(){
 	// 유효성 검사
 	var chkYn		= true; 
 	
@@ -198,7 +185,7 @@ function validation(){
 }
 
 // 주소 조회 (api) 
-function srchAddr() {
+function addrProc() {
 	new daum.Postcode({
         oncomplete: function(data) {
             // 주소 선택 후 동작
@@ -209,11 +196,11 @@ function srchAddr() {
 }
 
 // 금액 입력
-function inputAmt(amt){
+function amtProc(tag){
 	// 통화 처리
-	var value = amt.value.replace(/[^0-9]/g, ""); 				// 숫자만 남김
+	var value = tag.value.replace(/[^0-9]/g, ""); 				// 숫자만 남김
   	var format = Number(value).toLocaleString("ko-KR"); 	// 쉼표 추가
-  	amt.value = value ? `₩${format}` : "";							// 템플릿 리터럴 (표현식)
+  	tag.value = value ? `₩${format}` : "";							// 템플릿 리터럴 (표현식)
   	
   	// 한글 처리
   	var amtNm = "";
@@ -228,11 +215,33 @@ function inputAmt(amt){
 		amtNm = value.toLocaleString() + "원";
     }
 	//  화면 표시
-	amt = "(" + amt + ")";
+	tag = "(" + tag + ")";
   	$("#amtNm").text(amtNm);
 }
 
-function numberToKorean(num) {
-  const hanA = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
-  return hanA[num] || num;
+// 카드 번호 입력 (마스킹)
+function cardProc(tag){
+	//
+    var raw = tag.value.replace(/[^0-9*]/g, ''); // 숫자와 *만 추출
+    var masked = '';
+	//
+    for (var i = 0; i < raw.length; i++) {
+        if (i >= 4 && i < 12) {
+            masked += '*';
+        } else {
+            masked += raw[i];
+        }
+
+        // 하이픈 추가
+        if ((i + 1) % 4 == 0 && i < 15) {
+            masked += '-';
+        }
+    }
+	// 번호 입력
+	tag.value = masked;
+}
+
+// 숫자 입력
+function numProc(num){
+	num.value = num.value.replace(/[^0-9]/g, '');
 }

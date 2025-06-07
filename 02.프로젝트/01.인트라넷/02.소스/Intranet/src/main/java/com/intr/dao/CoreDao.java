@@ -30,22 +30,6 @@ public class CoreDao {
 		return defaultList;
 	}
 	
-	// 시퀀스 채번
-	public HashMap<String, Object> intrCoreInqy1041() {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("core.intrCoreInqy1041");
-		return defaultInfo;
-	}
-	
-	// 시퀀스 저장
-	public int intrCoreInqy1042(HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("core.intrCoreInqy1042", paramMap);
-		return resInt;
-	}
-	
 	// 목록 수 조회
 	public List<HashMap<String, Object>> intrCoreInqy1051(HashMap<String, Object> paramMap) {
 		//

@@ -15,6 +15,14 @@ footer, header, hgroup, menu, nav, output, ruby, section,
 summary, time, mark, audio, video 
 { margin: 0; padding: 0; border: 0; vertical-align: baseline; }
 
+/* 헤더 고정 */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 
@@ -58,6 +66,7 @@ table col.w12per { width: 12%; }
 table col.w15per { width: 15%; }
 table col.w17per { width: 17%; }
 table col.w20per { width: 20%; }
+table col.w23per { width: 23%; }
 table col.w25per { width: 25%; }
 table col.w26per { width: 26%; }
 table col.w30per { width: 30%; }
@@ -68,7 +77,6 @@ table col.w70per { width: 70%; }
 table col.w80per { width: 80%; }
 table col.w90per { width: 90%; }
 table col.w100per { width: 100%; }
-table col.wAutoper { width: auto; }
 
 
 /* ================== Textarea ================== */
@@ -93,21 +101,21 @@ textarea { height: auto; line-height: 1.5; text-indent: 0; padding: 15px; }
 .ml30 { margin-left: 30px; }
 
 /* ================== Padding ================== */
-.pt10 { padding-top: 10px; }
-.pt20 { padding-top: 20px; }
-.pt30 { padding-top: 30px; }
+.pt10 { padding-top: 10px !important;}
+.pt20 { padding-top: 20px !important; }
+.pt30 { padding-top: 30px !important; }
 
-.pb10 { padding-bottom: 10px; }
-.pb20 { padding-bottom: 20px; }
-.pb30 { padding-bottom: 30px; }
+.pb10 { padding-bottom: 10px !important; }
+.pb20 { padding-bottom: 20px !important; }
+.pb30 { padding-bottom: 30px !important; }
 
-.pr10 { padding-right: 10px; }
-.pr20 { padding-right: 20px; }
-.pr30 { padding-right: 30px; }
+.pr10 { padding-right: 10px !important; }
+.pr20 { padding-right: 20px !important; }
+.pr30 { padding-right: 30px !important; }
 
-.pl10 { padding-left: 10px; }
-.pl20 { padding-left: 20px; }
-.pl30 { padding-left: 30px; }
+.pl10 { padding-left: 10px !important; }
+.pl20 { padding-left: 20px !important; }
+.pl30 { padding-left: 30px !important; }
 
 
 /* ================== Width ================== */
@@ -171,6 +179,8 @@ textarea { height: auto; line-height: 1.5; text-indent: 0; padding: 15px; }
 
 .btn_wrap { overflow: hidden; text-align: center; }
 .btn_center { margin-top: 20px; text-align: center; }
+.btn_left { margin-top: 20px; text-align: left; }
+.btn_right { margin-top: 20px; text-align: right; }
 
 
 /* ================== Class ================== */
@@ -227,7 +237,8 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 .radio_box input[type="radio"]:checked + label span { border: 0; border: 5px solid #214b97; }
 
 
-
+/* ================== Pre ================== */
+pre { font-family: 'NanumSquare'; font-size: 1.5rem; }
 
 
 
@@ -316,7 +327,7 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 
 /* ================== Left Wrap ================== */
-.left_wrap { display: inline-block; width: 300px; height: 749px; padding-top: 35px; }
+.left_wrap { display: inline-block; width: 300px; height: 749px; padding-top: 35px; overflow: auto; }
 .left_area { margin-left: 40px; }
 
 
@@ -360,39 +371,17 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 
 
 /* ================== Select Box ================== */
-.select_box {
-    background: #ffffff;
-    border: 1px solid #d7d7d7;
-    overflow: hidden;
-    font-size: 1.5rem;
-    color: #727272;
-    width: 180px;
-    height: 43px;
-    line-height: 43px;
-    text-indent: 10px;
-}
-
-.select_ul {
-	list-style-type: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-    font-size: 1.5rem;
-    color: #727272;
-    border: 1px solid #d7d7d7;
-    display: none;
-    position: absolute;
-    background: #ffffff;
-    border-top: none;
-    width: 180px;
-    line-height: 43px;
-    z-index: 2;
-    max-height: 300px;
-}
-
+.select_box { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 43px; text-indent: 10px; }
+.select_ul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
 .select_ul li { padding-left: 5px; }
 .select_ul .hover { color: #ffffff; background-color: #727272; }
 
-.step_select { width:90%; height:30px; text-align:center; font-size:1.5rem; }
+
+/* ================== Pop Select Box ================== */
+.pop_sbox { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 43px; text-indent: 10px; }
+.pop_sul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
+.pop_sul li { padding-left: 5px; }
+.pop_sul .hover { color: #ffffff; background-color: #727272; }
 
 
 /* ================== Full Calendar ================== */
@@ -402,6 +391,7 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 /* ================== Image ================== */
 .task_del { background: url("../images/icon/icon_delete.png") no-repeat center center; background-size: cover; width: 15px; height: 15px; display: inline-block; position: relative; cursor: pointer; vertical-align: middle; }
 .tree_arrow { background: url("../images/icon/icon_arrow.png") no-repeat center center; background-size: cover; width: 45px; height: 45px; display: inline-flex; position: relative; top: 40%; margin-left: 15px; margin-right: 15px; cursor: pointer; }
+.pop_close { background: url("../images/icon/icon_close.png") no-repeat center center; width: 15px; height: 15px; cursor: pointer; margin-top: 3px; }
 
 
 /* ================== Tree Wrap ================== */
@@ -438,3 +428,15 @@ header .menu_wrap .nav .ul_1 > .li_1 .ul_2 > .li_2._active .a_2 { color: #214b97
 .tooltip_area .tooltip_text { background-color: #ffffff; text-align: center; border-radius: 6px; padding: 5px 5px; position: absolute; z-index: 1; font-weight: bold; font-size: 1.2rem; border: 1px solid #000000; }
 .tooltip_area .tooltip_text { display: none; width: 100%; top: 40%; left: 70%; }
 
+
+/* ================== Overlay ================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5); /* 반투명한 배경 */
+  z-index: 9990;
+  display: none;
+}

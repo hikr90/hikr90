@@ -9,7 +9,7 @@
 		// 공지사항 등록 처리
 		function regProc(f){
   			// 유효성 검증
-			if(!validation()){return;};
+			if(!valProc()){return;};
 			if(confirm("등록하시겠습니까?")){
 				//
 				var fileList = setFormData();
@@ -79,10 +79,8 @@
 							<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 							<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 							<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
-							<input type="hidden" id="useCd" name="useCd" value="${param.useCd}">
-							<input type="hidden" id="useNm" name="useNm" value="${param.useNm}">
 							<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
-							<input type="hidden" id="filetypeCd" name="filetypeCd" value="board">
+							<input type="hidden" id="filetypeCd" name="filetypeCd" value="BOARD">
 								
 							<div class="post_wrap">
 								<h2>공지사항 등록</h2><br>
@@ -136,7 +134,7 @@
 									<dl>
 										<dt><label for="post_text">&#10003; 내용</label></dt>
 										<dd class="post_text">
-											<textarea id="brdCont" title="내용" name="brdCont"></textarea>
+											<textarea id="brdCont" name="brdCont" title="공지사항 내용"></textarea>
 										</dd>
 									</dl>
 								</div><!-- End post_write -->
