@@ -74,7 +74,7 @@
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
 					FROM FILE_INFO
-					WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+					WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 				)
 			,	NULL
 		)
@@ -84,13 +84,19 @@
 		/* intrFileProc1021 : 파일 삭제 처리 (수정) */
 		UPDATE FILE_INFO
 			SET USE_YN = 'N'
-		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
 	</update>
 	
 	<delete id="intrFileProc1022" parameterType="java.util.HashMap">
 		/* intrFileProc1022 : 파일 삭제 처리 (삭제) */
 		DELETE FILE_INFO
-		WHERE FILE_ID = #{sequenceId, jdbcType=VARCHAR}
+		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
+			<if test="fileSno != null and fileSno != ''">
+				AND FILE_SNO = #{fileSno, jdbcType=VARCHAR}
+			</if>
 	</delete>
 	
 	<insert id="intrExptProc1011" parameterType="java.util.HashMap">

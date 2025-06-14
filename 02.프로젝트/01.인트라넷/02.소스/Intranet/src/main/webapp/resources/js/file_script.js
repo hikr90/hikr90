@@ -4,9 +4,6 @@ $(function() {
 	/* ================== file ================== */
 	// 업로드
 	$("#fileUpd").on('change', function() {
-		// 초기화 
-		$("#fileUl").html("");
-	
 		// 파일, 화면 내 파일 추가
 		var thisFiles = this.files; 
 		var fileStr = "";
@@ -63,6 +60,7 @@ $(function() {
 			
 			// 파일 목록 추가
 			tempList.push(thisFiles[0]);
+			$("#profImg").val('Y');
 		}
 	});
 	
@@ -71,26 +69,39 @@ $(function() {
 		// 화면 상 처리
 		$("#empImg").attr("src","resources/images/icon/icon_profile.png");
 		$("#profText").text("사진을 등록해주세요.");
+		$("#profImg").val('N');
 		tempList = [];
 	});
 });
  
 /* ================== 첨부파일 삭제 ================== */
 function fileDel(status, idx){
-	//
-	var fileLi = $("#fileLi" + idx);
-    var fileId = $("#fileId" + idx);
-    var fileProc = fileId.attr("name");
-    var isDelete = (status === "insert") ? fileProc.includes("insert") : fileProc.includes("none");
-    //
-    if (isDelete) {
-        fileLi.find("span").css("text-decoration", "line-through");
-        fileId.attr("name", fileProc.replace(status, "none"));
-    } else {
-        fileLi.find("span").css("text-decoration", "");
-        fileId.attr("name", fileProc.replace("none", status));
-    }
+	var name = $("#fileId" + idx).attr("name");
+	// insert (등록), delete (삭제), none (작업 없음)
+	if(status=='insert'){
+		if(name.indexOf("insert")>-1){
+			// insert > none
+			$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
+			$("#fileId"+idx).attr("name", name.replace(status ,"none"));					// none 처리
+		} else {
+			// none > insert
+			$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
+			$("#fileId"+idx).attr("name", name.replace("none", status));					// insert 처리
+		}
+		//
+	} else {
+		if(name.indexOf("none")>-1){
+			// none > delete
+			$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
+			$("#fileId"+idx).attr("name", name.replace("none" , status));					// none 처리
+		} else {
+			// delete > none
+			$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
+			$("#fileId"+idx).attr("name", name.replace(status, "none"));					// delete 처리
+		}
+	}
 }
+
 
 
 /* ================== 폼데이터 생성 ================== */

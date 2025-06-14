@@ -19,6 +19,9 @@
 	<script src="${pageContext.request.contextPath }/resources/js/jquery/jquery-1.12.4.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/jquery/slick.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/jquery/jquery-ui-1.12.1.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -43,8 +46,8 @@
 		var session = "${empVO}";
 		//
 		if(session == null || session == ''){
-			//alert("세션 정보가 없습니다.");
-			//location.href = 'intrMainInqy1010.do';
+			alert("세션 정보가 없습니다.");
+			location.href = 'intrMainInqy1010.do';
 		}
 	});
 </script>

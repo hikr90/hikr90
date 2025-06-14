@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.intr.dao.AprvDao;
 import com.intr.dao.AuthDao;
 import com.intr.dao.EmpDao;
 import com.intr.dao.ProjDao;
@@ -59,6 +60,9 @@ public class PopupController {
 	
 	@Autowired
 	ProjDao projDao;
+	
+	@Autowired
+	AprvDao aprvDao;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -154,7 +158,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"type");
+			paramMap.put("commcodeGcd", 	"TYPE");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("typeList",defaultList);
 			
@@ -171,10 +175,14 @@ public class PopupController {
 	@RequestMapping("/intrPopupInqy1042.do")
 	public String intrPopupInqy1042(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 팝업 조회
 			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy1013(model, paramMap);
+			model.addAttribute("lineList", defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -225,10 +233,14 @@ public class PopupController {
 	@RequestMapping("/intrPopupInqy1062.do")
 	public String intrPopupInqy1062(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 물품 조회 팝업 조회
 			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy1014(model, paramMap);
+			model.addAttribute("itemList", defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -261,10 +273,14 @@ public class PopupController {
 	@RequestMapping("/intrPopupInqy1072.do")
 	public String intrPopupInqy1072(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 정산내역 조회 팝업 조회
 			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy1015(model, paramMap);
+			model.addAttribute("corpList", defaultList);
 			
 		} catch (Exception e) {
 			//

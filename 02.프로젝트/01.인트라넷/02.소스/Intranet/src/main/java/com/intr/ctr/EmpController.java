@@ -3,6 +3,7 @@ package com.intr.ctr;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.UtilService;
@@ -33,6 +35,9 @@ public class EmpController {
 	
 	@Autowired
 	UtilService utilService;
+	
+	@Autowired
+	UtilDao utilDao;
 	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -141,18 +146,18 @@ public class EmpController {
 	@RequestMapping("/intrEmpInqy1099.do")
 	public void intrEmpInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
 		//
-		String workPath = "";
+		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 사원 이미지 조회
 			//--------------------------------------------------------------------------------------------
-			workPath = utilService.setFilePath(paramMap);
-
+			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			
 			//--------------------------------------------------------------------------------------------
 			// URL객체 생성 (예외사항 추가)
 			//--------------------------------------------------------------------------------------------
-			URL fileUrl = new URL("file:"+workPath + File.separator + (String)paramMap.get("fileNm"));
+			URL fileUrl = new URL("file:" + (String)defaultList.get(0).get("filePath") + (String)defaultList.get(0).get("fileNm"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)

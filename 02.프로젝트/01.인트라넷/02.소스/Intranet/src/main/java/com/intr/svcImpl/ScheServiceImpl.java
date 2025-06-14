@@ -50,22 +50,4 @@ public class ScheServiceImpl implements ScheService{
 			throw new Exception(e.getMessage());
 		}
 	}
-
-	// 일정 상세 조회
-	public void intrScheInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 일정 상세 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = scheInqyDao.intrScheInqy1021(model, paramMap);
-			model.addAttribute("defaultInfo", defaultInfo);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
 }

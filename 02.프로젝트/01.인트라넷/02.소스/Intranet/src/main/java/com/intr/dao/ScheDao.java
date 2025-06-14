@@ -21,12 +21,4 @@ public class ScheDao {
 		defaultList = sqlsession.selectList("sche.intrScheInqy1011", paramMap);
 		return defaultList;
 	}
-
-	// 일정 상세 조회
-	public HashMap<String, Object> intrScheInqy1021(Model model, HashMap<String, Object> paramMap) {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("sche.intrScheInqy1021", paramMap);
-		return defaultInfo;
-	}
 }

@@ -80,6 +80,7 @@ function popConfirm(type){
 	// 팝업 선택 후 종료
 	$("#" + pcd).val(input.attr(pcd));
 	$("#" + pnm).val(input.attr(pnm));
+	
 	popClose(type);	
 }
 

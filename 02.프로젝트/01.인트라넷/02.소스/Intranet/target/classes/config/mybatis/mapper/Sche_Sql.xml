@@ -3,11 +3,36 @@
 <mapper namespace="sche">
 	<select id="intrScheInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrScheInqy1011 : 일정 목록 조회 */
-		SELECT * FROM APRV_REL_LEAV
-	</select>
-	
-	<select id="intrScheInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrScheInqy1021 : 일정 상세 조회 */
-		SELECT * FROM APRV_REL_LEAV
+		SELECT
+				AM.APRV_ID
+			,	AM.APRV_TITLE
+			,	AM.APRVSTEP_CD
+			,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
+			,	AL.LEAV_IDX
+			,	AL.LEAVTYPE_CD
+			,	CC_LEAV.COMMCODE_NM AS LEAVTYPE_NM
+			,	AL.LEAV_SDT
+			,	AL.LEAV_EDT
+			,	AL.LEAV_DAYS
+			,	AL.LEAV_RSN
+			,	AL.LEAV_SUBST
+			,	AM.APRV_ID AS ID
+			,	'[' || CC_LEAV.COMMCODE_NM || '] ' || AM.APRV_TITLE || '_' || E.EMP_NM AS TITLE
+			,	TO_CHAR(TO_DATE(AL.LEAV_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
+			,	TO_CHAR(TO_DATE(AL.LEAV_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
+			FROM APRVMAST AM
+			INNER JOIN APRV_REL_LEAV AL
+				ON AM.APRV_ID = AL.APRV_ID
+				AND AM.APRVSTEP_CD = 'STEP_0010'
+			LEFT OUTER JOIN EMP_INFO E
+				ON E.EMP_IDX = AL.LEAV_IDX
+			LEFT OUTER JOIN ORG O
+				ON O.ORG_CD = E.ORG_CD
+			LEFT OUTER JOIN RANK R
+				ON R.RANK_CD = E.RANK_CD
+			LEFT OUTER JOIN COMMCODE CC_STEP
+				ON CC_STEP.COMMCODE_CD = AM.APRVSTEP_CD
+			LEFT OUTER JOIN COMMCODE CC_LEAV
+				ON CC_LEAV.COMMCODE_CD = AL.LEAVTYPE_CD
 	</select>
 </mapper>

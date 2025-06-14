@@ -118,10 +118,10 @@
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
 	                                        			<c:when test="${not empty fileList}">
-	                                        				<img class="emp_img" id="emp_img" width="200" height="200" src="intrEmpInqy1099.do?fileId=${fileList[0].fileId}&fileNm=${fileList[0].fileNm}">
+	                                        				<img class="emp_img" id="empImg" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${fileList[0].fileId}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
-			                                        		<img class="emp_img" id="emp_img" width="200" height="200" src="resources/images/icon/icon_profile.png">
+			                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
 	                                        			</c:otherwise>
 	                                        		</c:choose>
 	                                        	</div>

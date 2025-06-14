@@ -25,24 +25,17 @@
 				center: 'title',
 			    end: 'dayGridMonth,listMonth'
 			},
-			// 네모 선택 이벤트
+			// 네모 선택 시
 	        select: function(info) {
 				//
 			},
-			// 휴가 상세 팝업
+			// 휴가 선택 시
 			eventClick: function(info) {
-				//
-				var pw = "650";
-				var ph = "860";
-				var left = Math.ceil((window.screen.width - pw)/2);
-				var top = Math.ceil((window.screen.height - ph)/2) - 50;
-
-				// info.event.id
-				var options = 'toolbar=no, scrollbars=no, resizeable=yes, status=no, menubar=no, width=' + pw + ', height=' + ph + ', top=' + top + ', left=' + left;
-				window.open("intrScheInqy1020.do?aprvId="+info.event.id, "_blank", options);
+				
 			},
 			// 데이터
-			events : defaultList
+			events : defaultList,
+			eventColor: '#214b97'
 		});
 	    //
 	    scheCont.render();

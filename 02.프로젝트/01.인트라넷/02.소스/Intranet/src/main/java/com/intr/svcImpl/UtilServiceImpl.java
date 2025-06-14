@@ -232,56 +232,66 @@ public class UtilServiceImpl implements UtilService{
 		HashMap<String, Object> tempMap = null;
 		String resStr = "NO";
 		String filePath = "";
-		//
-		int fileCnt = 0;
+		String prof = "";
 		MultipartFile file = null;
+		int num = 0;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 파일 업로드
 			//--------------------------------------------------------------------------------------------
 			List<MultipartFile> fileList = request.getFiles("fileList");
-			//
-			if(!fileList.isEmpty()) {
-				//--------------------------------------------------------------------------------------------
-				// 경로 조회
-				//--------------------------------------------------------------------------------------------
-				filePath = this.setFilePath(paramMap);
-				paramMap.put("filePath", filePath);
+			
+			//--------------------------------------------------------------------------------------------
+			// 경로 조회
+			//--------------------------------------------------------------------------------------------
+			filePath = this.setFilePath(paramMap);
+			paramMap.put("filePath", filePath);
 
-				//--------------------------------------------------------------------------------------------
-				// DB 삭제 처리 (삭제)
-				//--------------------------------------------------------------------------------------------
-				utilDao.intrFileProc1021(paramMap);
-				
-				//--------------------------------------------------------------------------------------------
-				// DB, 파일 등록 및 수정
-				//--------------------------------------------------------------------------------------------
-				for (String key : paramMap.keySet()) {
-					//
-					tempMap = new HashMap<String, Object>();
-					
+			//--------------------------------------------------------------------------------------------
+			// DB, 파일 등록 및 수정
+			//--------------------------------------------------------------------------------------------
+			for (String key : paramMap.keySet()) {
+				if(key.contains("insert")) {
 					// 등록
-					if(key.contains("insert")) {
-						// db 등록
-						if(!fileList.isEmpty()) {
-							file = fileList.get(fileCnt);
-							this.intrFileProc1010(paramMap, file, fileCnt);
-						}
-						
-						// file 저장
-						this.saveFile(filePath, file);
-						//
-						fileCnt++;
-						
+					if(!fileList.isEmpty()) {
+						num = Integer.parseInt(key.replace("insert",""));
+						file = fileList.get(num);
+						this.intrFileProc1010(paramMap, file);
+					}
+					
+					// file 저장
+					this.saveFile(filePath, file);
+					
+				} else if(key.contains("delete")) {
+					// 삭제
+					num = Integer.parseInt(key.replace("delete",""));
+					this.intrFileProc1020(paramMap, num);
+					
+				} else if(key.contains("profImg")) {
+					prof = this.nvlProc((String)paramMap.get(key));
+					// 사원 이미지
+					if(prof != null && prof != "") {
 						// 삭제
-					} else if(key.contains("delete")) {
-						//     
-						tempMap.put("fileId", (String)paramMap.get(key));
-						utilDao.intrFileProc1011(tempMap);
+						tempMap = new HashMap<String, Object>();
+						tempMap.put("fileId", 		this.nvlProc((String)paramMap.get("sequenceId")));
+						tempMap.put("fileSno", 	"");
+						//
+						utilDao.intrFileProc1021(tempMap);
+						
+						// 등록
+						if(prof.equals("Y")) {
+							file = fileList.get(0);
+							this.intrFileProc1010(paramMap, file);	// 등록
+							
+							// file 저장
+							file = fileList.get(num);
+							this.saveFile(filePath, file);
+						} 
 					}
 				}
 			}
+			
 			// 결과 조회
 			resStr = "YES";
 			
@@ -294,7 +304,7 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 파일 DB 저장
-	public void intrFileProc1010(HashMap<String, Object> paramMap, MultipartFile file, int fileCnt)  throws Exception {
+	public void intrFileProc1010(HashMap<String, Object> paramMap, MultipartFile file)  throws Exception {
 		//
 		HashMap<String, Object> tempMap = new HashMap<String, Object>();
 		String fileNm = file.getOriginalFilename();
@@ -309,6 +319,23 @@ public class UtilServiceImpl implements UtilService{
 			tempMap.put("fileSize", 			file.getSize());
 			//
 			utilDao.intrFileProc1011(tempMap);
+			
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	// 파일 DB 삭제
+	public void intrFileProc1020(HashMap<String, Object> paramMap, int num)  throws Exception {
+		//
+		HashMap<String, Object> tempMap = new HashMap<String, Object>();
+		//
+		try {
+			//
+			tempMap.put("fileId", 		this.nvlProc((String)paramMap.get("sequenceId")));
+			tempMap.put("fileSno", 	paramMap.get("delete" + num));
+			//
+			utilDao.intrFileProc1021(tempMap);
 			
 		} catch (Exception e) {
 			throw e;

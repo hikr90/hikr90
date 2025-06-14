@@ -22,6 +22,7 @@
 		  Corp: "intr_aprv_detl_1013.jsp", 		// 법인카드정산서
 		};
 		//	
+		$("#tempCd").val(tempCd);
 		$("#temptypeCd").val(temptypeCd);
 		$("#returnUrl").val(typeProc[temptypeCd]);
 		//
@@ -50,6 +51,7 @@
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
+									<input type="hidden" id="tempCd" name="tempCd" value="">
 									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
 									<h2>기안 작성</h2><br>

@@ -23,6 +23,10 @@
 				,	SUB_DATA.OWNER_NM
 				,	SUB_DATA.REG_DT
 				,	SUB_DATA.REG_TM
+				,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
+                        THEN 'Y'
+                        ELSE 'N'
+                    END AS FILE_YN
 				,	SUB_DATA.LIST_CNT
 		FROM (
 				SELECT 
@@ -40,6 +44,12 @@
                     ,   P.REG_DT
                     ,   P.REG_TM
                     ,	RANK() OVER(ORDER BY P.PROJ_CD DESC) AS NUM
+                    ,	(SELECT 
+      							COUNT(FILE_ID) 
+      						FROM FILE_INFO 
+      						WHERE FILE_ID = P.PROJ_CD
+      							AND USE_YN = 'Y'
+      					) AS FILE_CNT
                     ,   COUNT(P.PROJ_CD) OVER() AS LIST_CNT
 		        FROM PROJECT P
 	        	LEFT OUTER JOIN EMP_INFO E
@@ -151,7 +161,7 @@
 			,	REPLACE(#{projSdt, jdbcType=VARCHAR},'-','')
 			,	REPLACE(#{projEdt, jdbcType=VARCHAR},'-','')
 			,	#{status, jdbcType=VARCHAR}
-			,	#{owner, jdbcType=VARCHAR}
+			,	#{empPcd, jdbcType=VARCHAR}
 			,	#{deposit, jdbcType=VARCHAR}
 			,	#{tag, jdbcType=VARCHAR}
 			,	#{empIdx, jdbcType=VARCHAR}
@@ -167,8 +177,18 @@
 			)
 	</insert>
 	
-	<delete id="intrProjProc1021" parameterType="java.util.HashMap">
-		/* intrProjProc1021 : 프로젝트 삭제 처리 */
+	<update id="intrProcProc1021" parameterType="java.util.HashMap">
+		/* intrProjProc1021 : 프로젝트 삭제 처리 (수정)  */
+		UPDATE PROJECT
+			SET USE_YN = 'N'
+		WHERE PROJ_CD IN
+		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
+			#{delIdx}	
+		</foreach>
+	</update>	
+	
+	<delete id="intrProjProc1022" parameterType="java.util.HashMap">
+		/* intrProjProc1022 : 프로젝트 삭제 처리 (삭제) */
 		DELETE FROM PROJECT
 		WHERE PROJ_CD IN
 		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
@@ -177,13 +197,14 @@
 	</delete>	
 	
 	<update id="intrProjProc1031" parameterType="java.util.HashMap">
-		/* intrProjProc1031 : 공지사항 수정 처리 */
+		/* intrProjProc1031 : 프로젝트 수정 처리 */
 		UPDATE PROJECT
 			SET 	PROJ_TITLE = #{projTitle, jdbcType=VARCHAR}
 				,	PROJ_CONT = #{projCont, jdbcType=VARCHAR}
 				,	STATUS = #{status, jdbcType=VARCHAR}
 				,	PROJ_SDT = REPLACE(#{projSdt, jdbcType=VARCHAR},'-','')
 				,	PROJ_EDT = REPLACE(#{projEdt, jdbcType=VARCHAR},'-','')
+				,	OWNER = #{empPcd, jdbcType=VARCHAR}
 				,	DEPOSIT = #{deposit, jdbcType=VARCHAR}
 				,	TAG = #{tag, jdbcType=VARCHAR}
 				,	EMP_IDX = #{empIdx, jdbcType=VARCHAR}

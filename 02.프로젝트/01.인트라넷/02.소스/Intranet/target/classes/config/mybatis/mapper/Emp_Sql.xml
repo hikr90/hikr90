@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="emp">
+	<select id="intrEmpInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy1010 : 사원 인덱스 채번 */
+		SELECT 'EMP_' || LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS SEQUENCE_ID FROM EMP_INFO
+	</select>
+
 	<select id="intrEmpInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrEmpInqy1011 : 사원 목록 조회 */
 		SELECT 
@@ -51,10 +56,10 @@
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 					<if test="useCd != null and useCd != ''">
-						<if test="useCd equals('Y')">
+						<if test="useCd eq 'USE_0010'">
 							AND E.LEAV_DT IS NULL
 						</if>
-						<if test="useCd equals('N')">
+						<if test="useCd eq 'USE_0020'">
 							AND E.LEAV_DT IS NOT NULL
 						</if>
 					</if>
@@ -261,7 +266,7 @@
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
-					WHERE SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
+					WHERE E.LEAV_DT IS NULL AND SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
 				) AS NEW_CNT
 			,	(
 					SELECT 
@@ -273,17 +278,13 @@
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
+					WHERE SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
 				) AS EMP_CNT
 		FROM DUAL
 	</select>
 	
-	<select id="intrEmpProc1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpProc1011 : 사원 인덱스 채번 */
-		SELECT LPAD(NVL(MAX(REPLACE(EMP_IDX,'EMP_')),0) + 1,4,0) AS EMP_IDX FROM EMP_INFO
-	</select>
-	
-	<insert id="intrEmpProc1012" parameterType="java.util.HashMap">
-		/* intrEmpProc1012 : 사원 등록 처리 */
+	<insert id="intrEmpProc1011" parameterType="java.util.HashMap">
+		/* intrEmpProc1011 : 사원 등록 처리 */
 		INSERT INTO EMP_INFO
 		(
 				EMP_IDX
@@ -302,12 +303,12 @@
 		)
 		VALUES
 		(
-				'EMP_' || #{empIdx, jdbcType=VARCHAR}
+				#{sequenceId, jdbcType=VARCHAR}
 			,	#{setOrgCd, jdbcType=VARCHAR}
 			,	#{setRankCd, jdbcType=VARCHAR}
 			,	#{empNm, jdbcType=VARCHAR}
 			,	#{isMale, jdbcType=VARCHAR}
-			,	#{mobNo, jdbcType=VARCHAR}
+			,	REPLACE(#{mobNo, jdbcType=VARCHAR},'-','')
 			,	#{addr, jdbcType=VARCHAR}
 			,	#{addrInfo, jdbcType=VARCHAR}
 			,	#{email, jdbcType=VARCHAR}
@@ -324,7 +325,7 @@
 			SET 	ORG_CD = #{setOrgCd, jdbcType=VARCHAR}
 				,	RANK_CD = #{setRankCd, jdbcType=VARCHAR}
 				,	IS_MALE = #{isMale, jdbcType=VARCHAR}
-				,	MOB_NO = #{mobNo, jdbcType=VARCHAR}
+				,	MOB_NO = REPLACE(#{mobNo, jdbcType=VARCHAR},'-','')
 				,	ADDR = #{addr, jdbcType=VARCHAR}
 				,	ADDR_INFO = #{addrInfo, jdbcType=VARCHAR}
 				,	EMAIL = #{email, jdbcType=VARCHAR}

@@ -58,16 +58,25 @@
 	// 사원 등록 처리
 	function regProc(f){
 		// 유효성 검증
-		if(!valProc()){return;};
-		//
+		//if(!valProc()){return;};
+		// 부서
 		if($("#setOrgCd").val()==""){
 			alert("<spring:message code="EMP.ORG.NONE"/>");
 			return;
 		}
+		// 직급
 		if($("#setRankCd").val()==""){
 			alert("<spring:message code="EMP.RANK.NONE"/>");
 			return;
 		}
+		// 연락처
+		var regex = /^010-\d{4}-\d{4}$/;
+		
+		if(!regex.test($("#mobNo").val())){
+			alert("<spring:message code="EMP.MOB.FAIL"/>");
+			return;
+		}
+		// 계정
 		if($("#empPwd").val()!=$("#chqPwd").val()){
 			alert("<spring:message code="EMP.PWD.DIFF"/>");
 			return;
@@ -155,7 +164,7 @@
 			                                        	<div style="margin-top: 5px;">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
 															<input type="file" id="profBtn">
-															<input type="hidden" id="profImg" name="profImg" value="">
+															<input type="hidden" id="profImg" name="profImg" value="N">
 		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
 		                                        		</div>
 		                                        	</div>

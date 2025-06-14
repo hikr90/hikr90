@@ -131,7 +131,8 @@
 							<input type="hidden" id="srchStatNm" name="srchStatNm" value="${param.srchStatNm}">
 							<input type="hidden" id="srchStatCd" name="srchStatCd" value="${param.srchStatCd}">					
 							<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
-							<input type="hidden" id="empPcd" name="owner" value="${defaultInfo.owner}">
+							<input type="hidden" id="empPcd" name="empPcd" value="${defaultInfo.owner}">
+							<input type="hidden" id="filetypeCd" name="filetypeCd" value="PROJ">
 								
 							<div class="post_wrap">
 								<h2>프로젝트 수정</h2><br>

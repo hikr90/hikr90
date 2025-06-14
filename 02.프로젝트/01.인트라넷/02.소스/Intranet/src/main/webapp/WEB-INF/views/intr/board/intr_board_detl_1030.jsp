@@ -104,7 +104,7 @@
 												<div class="file_box">
 													<label for="fileUpd">업로드</label>
 													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
-													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue">
+													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
 												</div>
 											</dd>
 											

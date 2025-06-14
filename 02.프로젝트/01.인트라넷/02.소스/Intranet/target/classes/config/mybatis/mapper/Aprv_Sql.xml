@@ -3,27 +3,558 @@
 <mapper namespace="aprv">
 	<resultMap type="HashMap" id="getAprvInfo">
 		<result property="flowId" 			column="FLOW_ID"/>
-		<result property="aprvTitle" 			column="APRV_TITLE"/>
+		<result property="aprvTitle" 		column="APRV_TITLE"/>
 		<result property="aprvCont" 			column="APRV_CONT" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="projCd" 			column="PROJ_CD"/>
+		<result property="projTitle" 		column="PROJ_TITLE"/>
+		<result property="aprvstepCd" 		column="ARPVSTEP_CD"/>
+		<result property="aprvstepNm" 	column="APRVSTEP_NM"/>
+		<result property="tempCd" 			column="TEMP_CD"/>
+		<result property="tempNm" 			column="TEMP_NM"/>
+		<result property="temptypeCd" 	column="TEMPTYPE_CD"/>
+		<result property="currAprvSno" 	column="CURR_APRV_SNO"/>
+		<result property="regIdx" 			column="REG_IDX"/>
 		<result property="regDt" 				column="REG_DT"/>
-		<result property="regTm" 				column="REG_TM"/>
+		<result property="regTm" 			column="REG_TM"/>
 		<result property="useYn" 				column="USE_YN"/>
 		<result property="dispOrder" 		column="DISP_ORDER"/>
 		<result property="remark" 			column="REMARK"/>
+		<result property="empNm" 			column="EMP_NM"/>
+		<result property="orgNm" 			column="ORG_NM"/>
+		<result property="rankNm" 			column="RANK_NM"/>
+		<result property="leavtypeCd" 		column="LEAVTYPE_CD"/>
+		<result property="leavtypeNm" 	column="LEAVTYPE_NM"/>
+		<result property="leavSdt" 			column="LEAV_SDT"/>
+		<result property="leavEdt" 			column="LEAV_EDT"/>
+		<result property="leavDays" 			column="LEAV_DAYS"/>
+		<result property="leavRsn" 			column="LEAV_RSN"/>
+		<result property="leavSubst" 		column="LEAV_SUBST"/>
+		<result property="methodCd" 		column="METHOD_CD"/>
+		<result property="methodNm" 		column="METHOD_NM"/>
+		<result property="prepayAmt" 		column="PREPAY_AMT"/>
+		<result property="prepayDt" 		column="PREPAY_DT"/>
+		<result property="prepayRsn" 		column="PREPAY_RSN"/>
+		<result property="reqtypeCd" 		column="REQTYPE_CD"/>
+		<result property="reqtypeNm" 		column="REQTYPE_NM"/>
+		<result property="reqDt" 				column="REQ_DT"/>
+		<result property="cardNm" 			column="CARD_NM"/>
+		<result property="cardNo" 			column="CARD_NO"/>
 	</resultMap>
 	
-		<select id="intrAprvInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+	<select id="intrAprvInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqy1010 : 전자결재 시퀀스 조회 */
 		SELECT 'APRV_' || LPAD(NVL(MAX(REPLACE(APRV_ID,'APRV_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRVMAST
 	</select>
 	
 	<select id="intrAprvInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqy1011 : 전자결재 목록 조회 */
-		SELECT * FROM APRVMAST
+		SELECT
+				SUB_DATA.*
+			,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
+                        THEN 'Y'
+                        ELSE 'N'
+                    END AS FILE_YN	
+             , CASE 
+					WHEN SUB_DATA.TEMPTYPE_CD = 'Leav'
+						THEN 'intr_aprv_detl_2010.jsp'
+					WHEN SUB_DATA.TEMPTYPE_CD = 'Exp'
+						THEN 'intr_aprv_detl_2011.jsp'
+					WHEN SUB_DATA.TEMPTYPE_CD = 'Item'
+						THEN 'intr_aprv_detl_2012.jsp'
+					WHEN SUB_DATA.TEMPTYPE_CD = 'Corp'
+						THEN 'intr_aprv_detl_2013.jsp'
+					ELSE NULL END AS RETURN_URL
+		FROM (
+					SELECT 
+							A.APRV_ID
+						,	A.APRV_TITLE
+						,	A.TEMP_CD
+						,	A.APRVSTEP_CD
+						,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
+						,	A.CURR_APRV_SNO
+						,	T.TEMPTYPE_CD
+						,	A.REG_IDX
+						,	E.EMP_NM
+						,	O.ORG_NM
+						,	R.RANK_NM
+						,	A.REG_DT
+						,	A.REG_TM
+						,	RANK() OVER(ORDER BY A.APRV_ID DESC) AS NUM
+						,   COUNT(A.APRV_ID) OVER() AS LIST_CNT
+						,	(SELECT 
+      							COUNT(FILE_ID) 
+      						FROM FILE_INFO 
+      						WHERE FILE_ID = A.APRV_ID
+      							AND USE_YN = 'Y'
+      					) AS FILE_CNT
+					FROM APRVMAST A
+					LEFT OUTER JOIN EMP_INFO E
+						ON E.EMP_IDX = A.REG_IDX
+					LEFT OUTER JOIN ORG O
+			      		ON O.ORG_CD = E.ORG_CD
+			            AND O.USE_YN = 'Y'
+			        LEFT OUTER JOIN RANK R
+			      		ON R.RANK_CD = E.RANK_CD
+			            AND R.USE_YN = 'Y'
+			        LEFT OUTER JOIN TEMPLATE T
+			        	ON T.TEMP_CD = A.TEMP_CD
+			        LEFT OUTER JOIN COMMCODE CC_STEP
+			       		ON CC_STEP.COMMCODE_CD = A.APRVSTEP_CD
+					WHERE 1=1
+					<if test="srchNm != null and srchNm != ''">
+			           	AND REGEXP_REPLACE(LOWER(A.APRV_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			           </if>
+			           <if test="srchSdt != null and srchSdt !=''">
+			           	AND A.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+			           </if>
+			           <if test="srchEdt != null and srchEdt !=''">
+			           	AND A.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+			           </if>
+			 			<if test="orgNm != null and orgNm != ''">
+			 				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+			           	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="srchIdx != null and srchIdx != ''">
+			           	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="srchStepCd != null and srchStepCd != ''">
+			        	AND A.APRVSTEP_CD = #{srchStepCd, jdbcType=VARCHAR}
+					</if>
+			) SUB_DATA
+			WHERE 1=1 
+ 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
+ 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
+        	</if>
+        ORDER BY SUB_DATA.REG_DT DESC, SUB_DATA.REG_TM DESC
 	</select>
 	
-	<select id="intrAprvInqy2012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+	<select id="intrAprvInqy1012" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
 		/* intrAprvInqy1012 : 결재 상세 조회 */
-		SELECT * FROM APRVMAST
+		SELECT 
+				DATA.* 
+		FROM (
+				SELECT 
+						AM.APRV_ID
+					,	AM.APRV_TITLE
+					,	AM.APRV_CONT
+					,	AM.PROJ_CD
+					,	P.PROJ_TITLE
+					,	AM.TEMP_CD
+					,	T.TEMP_NM
+					,	T.TEMPTYPE_CD
+					,	AM.APRVSTEP_CD
+					,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
+					,	AM.CURR_APRV_SNO
+					,	AM.REG_IDX
+					,	AM.REG_DT
+					,	AM.REG_TM
+					,	E.EMP_NM
+					,	O.ORG_NM
+					,	R.RANK_NM
+					,	AL.LEAVTYPE_CD
+					,	CC_LEAV.COMMCODE_NM AS LEAVTYPE_NM
+					,	AL.LEAV_SDT
+					,	AL.LEAV_EDT
+					,	AL.LEAV_DAYS
+					,	AL.LEAV_RSN
+					,	AL.LEAV_SUBST
+					,	AE.METHOD_CD
+					,	CC_PAY.COMMCODE_NM AS METHOD_NM
+					,	AE.PREPAY_DT
+					,	AE.PREPAY_RSN
+					,	AE.PREPAY_AMT
+					,	AI.REQTYPE_CD
+					,	AI.REQ_DT
+					,	CC_REQ.COMMCODE_NM AS REQTYPE_NM
+					,	AC.CARD_NM
+					,	AC.CARD_NO
+					,	ROW_NUMBER() OVER(ORDER BY AM.APRV_ID ASC) AS ROW_NUM
+				FROM APRVMAST AM
+				LEFT OUTER JOIN EMP_INFO E
+					ON E.EMP_IDX = AM.REG_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				LEFT OUTER JOIN TEMPLATE T
+					ON T.TEMP_CD = AM.TEMP_CD
+				LEFT OUTER JOIN PROJECT P
+					ON P.PROJ_CD = AM.PROJ_CD
+				LEFT OUTER JOIN APRV_REL_LEAV AL
+					ON AL.APRV_ID = AM.APRV_ID
+				LEFT OUTER JOIN APRV_REL_EXP AE
+					ON AE.APRV_ID = AM.APRV_ID
+				LEFT OUTER JOIN APRV_REL_ITEM AI
+					ON AI.APRV_ID = AM.APRV_ID
+				LEFT OUTER JOIN APRV_REL_CORP AC
+					ON AC.APRV_ID = AM.APRV_ID
+				LEFT OUTER JOIN COMMCODE CC_STEP
+					ON CC_STEP.COMMCODE_CD = AM.APRVSTEP_CD
+				LEFT OUTER JOIN COMMCODE CC_LEAV
+					ON CC_LEAV.COMMCODE_CD = AL.LEAVTYPE_CD
+				LEFT OUTER JOIN COMMCODE CC_PAY
+					ON CC_PAY.COMMCODE_CD = AE.METHOD_CD
+				LEFT OUTER JOIN COMMCODE CC_REQ
+					ON CC_REQ.COMMCODE_CD = AI.REQTYPE_CD
+				WHERE AM.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+			) DATA
+		WHERE DATA.ROW_NUM = '1'
 	</select>
+	
+	<select id="intrAprvInqy1013" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1013 : 결재선 조회 */
+		SELECT 
+			DATA.*
+		FROM (
+				SELECT
+						AH.APRV_ID
+					,	AH.APRV_SNO
+					,	AH.APRVTYPE_CD
+					,	CC_TYPE.COMMCODE_NM AS APRVTYPE_NM
+					,	AH.APRV_IDX
+					,	E.EMP_NM
+					,	O.ORG_NM
+					,	R.RANK_NM
+					,	AH.RSLTTYPE_CD
+					,	CC_RSLT.COMMCODE_NM AS RSLTTYPE_NM
+					,	AH.RSLT_NOTE
+					,	AH.RSLT_DT
+					,	AH.RSLT_TM
+					,	AH.REG_DT
+					,	AH.REG_TM
+					,	AH.USE_YN
+					,	AH.DISP_ORDER
+					,	AH.REMARK
+					,	RANK() OVER(ORDER BY APRV_SNO ASC) AS NUM
+				FROM APRVHIST AH
+				LEFT OUTER JOIN EMP_INFO E
+					ON E.EMP_IDX = AH.APRV_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				LEFT OUTER JOIN COMMCODE CC_TYPE
+					ON CC_TYPE.COMMCODE_CD = AH.APRVTYPE_CD
+				LEFT OUTER JOIN COMMCODE CC_RSLT
+					ON CC_RSLT.COMMCODE_CD = AH.RSLTTYPE_CD
+				WHERE AH.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+		) DATA
+		ORDER BY DATA.APRV_SNO ASC
+	</select>
+
+	<select id="intrAprvInqy1014" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1014 : 물품 등록 조회 */
+		SELECT 
+				AI.APRV_ID 
+			,	AI.REQ_SNO
+			,	AI.REQTYPE_CD
+			,	AI.REQ_IDX
+			,	AI.REQ_DT
+			,	AI.REQ_RSN
+			,	AI.MGT_NO
+			,	AI.ITEM_NM
+			,	AI.ITEM_CNT
+		FROM APRV_REL_ITEM AI
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.EMP_IDX = AI.REQ_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		LEFT OUTER JOIN COMMCODE CC_REQ
+			ON CC_REQ.COMMCODE_CD = AI.REQTYPE_CD
+		WHERE AI.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+		ORDER BY AI.REQ_SNO ASC
+	</select>
+
+	<select id="intrAprvInqy1015" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy1015 : 정산내역 조회 */
+		SELECT 
+				AC.APRV_ID 
+			,	AC.CORP_SNO
+			,	AC.USE_LOC
+			,	AC.USE_AMT
+			,	AC.USE_RSN
+			,	AC.USE_DT
+		FROM APRV_REL_CORP AC
+		WHERE AC.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+		ORDER BY AC.CORP_SNO ASC
+	</select>
+
+	
+	<insert id="intrAprvProc1011" parameterType="java.util.HashMap">
+		/* intrAprvProc1011 : 결재 마스터 등록 (APRVMAST) */
+		INSERT INTO APRVMAST
+		(
+				APRV_ID
+			,	APRV_TITLE
+			,	APRV_CONT
+			,	PROJ_CD
+			,	TEMP_CD
+			,	APRVSTEP_CD
+			,	CURR_APRV_SNO
+			,	REG_IDX
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{aprvTitle, jdbcType=VARCHAR}
+			,	#{aprvCont, jdbcType=VARCHAR}
+			,	#{projPcd, jdbcType=VARCHAR}
+			,	#{tempCd, jdbcType=VARCHAR}
+			,	'STEP_0010'
+			,	'0001'
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRVMAST
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="intrAprvProc1012" parameterType="java.util.HashMap">
+		/* intrAprvProc1012 : 결재 이력 등록 (APRVHIST) */
+		INSERT INTO APRVHIST
+		(
+				APRV_ID
+			,	APRV_SNO
+			,	APRVTYPE_CD
+			,	APRV_IDX
+			,	RSLTTYPE_CD
+			,	RSLT_DT
+			,	RSLT_TM
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(APRV_SNO),0) + 1,4,0)
+					FROM APRVHIST
+					WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+				)
+			,	#{aprvtypeCd, jdbcType=VARCHAR}
+			,	#{aprvIdx, jdbcType=VARCHAR}
+			,	NULL
+			,	NULL
+			,	NULL
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRVHIST
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<update id="intrAprvProc1013" parameterType="java.util.HashMap">
+		/* intrAprvProc1013 : 현재 단계, 번호 수정 (APRVHIST) */
+		MERGE INTO APRVMAST AM
+		USING (
+						SELECT 
+								DATA.*
+						FROM (
+									SELECT 
+											APRV_ID
+										,	APRV_SNO
+										,	APRVTYPE_CD
+										,	APRV_IDX
+										,   ROW_NUMBER() OVER(ORDER BY DECODE(APRVTYPE_CD,'TYPE_0020',1) ASC) AS ROW_NUM
+									FROM APRVHIST
+									WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+						) DATA
+						WHERE DATA.ROW_NUM = '1'
+		) AI
+		ON (AM.APRV_ID = AI.APRV_ID)
+		WHEN MATCHED THEN
+			UPDATE SET AM.CURR_APRV_SNO = AI.APRV_SNO
+	</update>
+	
+	<insert id="intrAprvProc1014" parameterType="java.util.HashMap">
+		/* intrAprvProc1014 : 휴가 신청서 등록 (APRV_REL_LEAV) */
+		INSERT INTO APRV_REL_LEAV
+		(
+				APRV_ID
+			,	LEAVTYPE_CD
+			,	LEAV_IDX
+			,	LEAV_SDT
+			,	LEAV_EDT
+			,	LEAV_DAYS
+			,	LEAV_RSN
+			,	LEAV_SUBST
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{leavtypeCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	REPLACE(#{leavSdt, jdbcType=VARCHAR}, '-', '')
+			,	REPLACE(#{leavEdt, jdbcType=VARCHAR}, '-', '')
+			,	(TO_DATE(#{leavEdt, jdbcType=VARCHAR}) - TO_DATE(#{leavSdt, jdbcType=VARCHAR})) + 1
+			,	#{leavRsn, jdbcType=VARCHAR}
+			,	#{leavSubst, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_REL_LEAV
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="intrAprvProc1015" parameterType="java.util.HashMap">
+		/* intrAprvProc1015 : 가지급결의서 등록 (APRV_REL_EXP) */
+		INSERT INTO APRV_REL_EXP
+		(
+				APRV_ID
+			,	METHOD_CD
+			,	PREPAY_IDX
+			,	PREPAY_DT
+			,	PREPAY_AMT
+			,	PREPAY_RSN
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{methodCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	REPLACE(#{prepayDt, jdbcType=VARCHAR}, '-', '')
+			,	#{prepayAmt, jdbcType=VARCHAR}
+			,	#{prepayRsn, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_REL_EXP
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="intrAprvProc1016" parameterType="java.util.HashMap">
+		/* intrAprvProc1016 : 물품반출입 신청서 등록 (APRV_REL_ITEM) */
+		INSERT INTO APRV_REL_ITEM
+		(
+				APRV_ID
+			,	REQ_SNO
+			,	REQTYPE_CD
+			,	REQ_IDX
+			,	REQ_DT
+			,	REQ_RSN
+			,	MGT_NO
+			,	ITEM_NM
+			,	ITEM_CNT
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(REQ_SNO),0) + 1,4,0)
+					FROM APRV_REL_ITEM
+					WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+				)
+			,	#{reqtypeCd, jdbcType=VARCHAR}
+			,	#{empIdx, jdbcType=VARCHAR}
+			,	REPLACE(#{reqDt, jdbcType=VARCHAR}, '-', '')
+			,	#{reqRsn, jdbcType=VARCHAR}
+			,	#{mgtNo, jdbcType=VARCHAR}
+			,	#{itemNm, jdbcType=VARCHAR}
+			,	#{itemCnt, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_REL_ITEM
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="intrAprvProc1017" parameterType="java.util.HashMap">
+		/* intrAprvProc1017 : 법인카드 정산서 등록 (APRV_REL_CORP) */
+		INSERT INTO APRV_REL_CORP
+		(
+				APRV_ID
+			,	CORP_SNO
+			,	CARD_NM
+			,	CARD_NO
+			,	USE_LOC
+			,	USE_AMT
+			,	USE_RSN
+			,	USE_DT
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(CORP_SNO),0) + 1,4,0)
+					FROM APRV_REL_CORP
+					WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
+				)
+			,	#{cardNm, jdbcType=VARCHAR}
+			,	#{cardNo, jdbcType=VARCHAR}
+			,	#{useLoc, jdbcType=VARCHAR}
+			,	#{useAmt, jdbcType=VARCHAR}
+			,	#{useRsn, jdbcType=VARCHAR}
+			,	REPLACE(#{useDt, jdbcType=VARCHAR},'-', '')
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_REL_CORP
+				)
+			,	NULL
+			)
+	</insert>
 </mapper>

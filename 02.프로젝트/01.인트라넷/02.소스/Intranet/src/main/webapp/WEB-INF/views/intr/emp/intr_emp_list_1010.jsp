@@ -18,7 +18,7 @@
 	
 	// 사원 상세보기
 	function detCall(empIdx){
-		//
+		$("#sequenceId").val(empIdx);
 		$("#empIdx").val(empIdx);
 		formSubmit("intrEmpInqy1030.do");
 	}
@@ -46,6 +46,7 @@
 								<div class="post_wrap">
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="empIdx" name="empIdx" value="">
 
 									<h2>사원 조회

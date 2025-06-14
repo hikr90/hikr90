@@ -63,14 +63,9 @@ public class BoardServiceImpl implements BoardService{
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 부서, 직급 조회
-			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
-			
-			//--------------------------------------------------------------------------------------------
 			// 공통코드 (사용여부) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"use");
+			paramMap.put("commcodeGcd", 	"USE");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("useList",defaultList);
 			

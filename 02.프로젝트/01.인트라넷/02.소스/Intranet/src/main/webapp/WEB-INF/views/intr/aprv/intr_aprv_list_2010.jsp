@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 	//
-	function testCall(temptypeCd, sequenceId){
+	function detCall(temptypeCd, sequenceId){
 		//
 		var typeProc = {
 		  Leav: "intr_aprv_detl_2010.jsp", 		// 휴가 신청서
@@ -23,15 +23,7 @@
 	}
 	// 검색 조회
 	function listCall(f){
-		testCall('Item', '')
-		//formSubmit("intrAprvInqy2010.do");
-	}
-	
-	// 품의문 상세 조회
-	function detCall(sequenceId) {
-		//
-		$("#sequenceId").val(sequenceId);
-		formSubmit("intrAprvInqy2020.do");
+		formSubmit("intrAprvInqy2010.do");
 	}
 </script>
 <body id="main">
@@ -63,9 +55,9 @@
 									<h2>결재 조회</h2><br>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
-											<!-- 작성일자 -->
+											<!-- 기안일자 -->
 											<div class="srch_area">
-												<label class="srch_label">작성일자</label>
+												<label class="srch_label">기안일자</label>
 												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
 												~
 												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
@@ -73,29 +65,14 @@
 											
 											<!-- 결재 단계 -->
 											<div class="srch_area">
-												<label class="srch_label">업무</label>
+												<label class="srch_label">결재단계</label>
 												<div class="select_wrap">
-													<div id="workList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
-													<input type="hidden" name="workCd" value="${param.workCd}">
-													<input type="hidden" name="workNm" value="${param.workNm}">
+													<div id="workList" class="sList select_box">${empty param.srchStepNm ? '전체' : param.srchStepNm}</div>
+													<input type="hidden" name="srchStepCd" value="${param.srchStepCd}">
+													<input type="hidden" name="srchStepNm" value="${param.srchStepNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${useList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
-											</div>
-											
-											<div class="srch_area">
-												<label class="srch_label">업무단계</label>
-												<div class="select_wrap">
-													<div id="workList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
-													<input type="hidden" name="workCd" value="${param.workCd}">
-													<input type="hidden" name="workNm" value="${param.workNm}">
-												
-													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${useList}">
+														<c:forEach var="list" items="${stepList}">
 															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
@@ -118,7 +95,7 @@
 											<!-- 기안자 -->
 											<div class="srch_area">
 												<label class="srch_label">기안자</label>
-												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${empty param.srchIdx ? empVO.empNm : param.srchIdx}" onkeydown="pushCall(this.form);">
+												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="" onkeydown="pushCall(this.form);">
 											</div>
 											
 											<!-- 제목 -->
@@ -140,7 +117,6 @@
 											<colgroup>
 												<col class="w7per">
 												<col class="w15per">
-												<col class="w15per">
 												<col class="auto">
 												<col class="w15per">
 												<col class="w15per">
@@ -148,30 +124,33 @@
 											<thead>
 												<tr>
 													<th scope="col">순번</th>
-													<th scope="col">업무</th>
-													<th scope="col">업무단계</th>
+													<th scope="col">결재단계</th>
 													<th scope="col">제목</th>
 													<th scope="col">기안자</th>
-													<th scope="col">작성일자</th>
+													<th scope="col">기안일자</th>
 												</tr>
 											</thead>
 											<tbody>
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
 														<td class="first_td">${list.num}</td>
-														<td>${list.workNm}</td>
-														<td>${list.workstepNm}</td>
+														<td>${list.aprvstepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${temptypeCd}','${list.sequenceId}');"></a>
+															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}','${list.aprvId}');">${list.aprvTitle}</a>
+															<c:if test="${list.fileYn eq 'Y'}">
+																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
+															</c:if>
 														</td>
-														<td>${list.aprvTitle}</td>
-														<td>${list.empNm}</td>
+														<td>${list.orgNm} ${list.empNm} ${list.rankNm}</td>
 														<td>
 															<span class="date">
 																<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-																${formatDt}
-															</span>	
+																
+																<fmt:parseDate value="${list.regTm}" var="parseTm" pattern="HHmmss"/>
+																<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm:ss"/>
+																${formatDt} ${formatTm}
+															</span>
 														</td>
 			                                        </tr>
 		                                        </c:forEach>
@@ -179,7 +158,7 @@
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+		                                                <td align="center" colspan="5">
 		                                              	      등록된 글이 없습니다.
 		                                                </td>
 		                                            </tr>

@@ -36,6 +36,7 @@
 		//
 		obj["mappingId"] = "intrPopupInqy1042.do";
 		obj["areaType"] = "line";
+		obj["sequenceId"] = "${param.sequenceId}";
 		obj["width"] = "1100";
 		obj["height"] = "620";
 		//		
@@ -77,6 +78,12 @@
 								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
 								<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}">
 								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
+								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+								<input type="hidden" id="srchStepCd" name="srchStepCd" value="${param.srchStepCd}">								
+								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 										
 								<div class="post_wrap">
 		                        	<h2>가지급결의서
@@ -85,10 +92,18 @@
 									<div class="post_view">
 										<dl>
 											<dt>
-												<label for="post-title">프로젝트명</label>
+												<label for="post-title">기안명</label>
 											</dt>
 											<dd>
 												${defaultInfo.aprvTitle}
+											</dd>
+										</dl>
+										<dl>
+											<dt>
+												<label for="post-title">프로젝트명</label>
+											</dt>
+											<dd>
+												${defaultInfo.projTitle}
 											</dd>
 										</dl>
 										<dl>
@@ -100,7 +115,7 @@
 											
 											<dt>지급 방법</dt>
 											<dd class="sel_2part">
-									        	${defaultInfo.prepayMethodNm}
+									        	${defaultInfo.methodNm}
 									    	</dd>
 										</dl>
 								        <dl>
@@ -113,8 +128,7 @@
 											
 											<dt>청구 금액</dt>
 											<dd>
-												${defaultInfo.prepayAmt}
-												&nbsp; <span>${defaultInfo.prepayAmtNm}</span>
+												${defaultInfo.prepayAmt}		
 											</dd>
 								        </dl>
 								        <dl>
@@ -124,9 +138,9 @@
 											</dd>
 								        </dl>
 								        <dl>
-											<dt><label for="post_text">양식 내용</label></dt>
+											<dt><label for="post_text">기안내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="양식 내용">${defaultInfo.aprvCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안내용">${defaultInfo.aprvCont}</textarea>
 											</dd>
 										</dl>
 										<dl class="post_info">
@@ -148,12 +162,7 @@
 												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
 										</div>
-										
-										<div class="float_right">
-											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
-										</div>
 									</div>
-									
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
 						</div><!-- End sub_content -->

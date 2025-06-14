@@ -4,18 +4,6 @@
 	view : intr_popup_inqy_1060
 	title : 물품 등록 관리 팝업
 -->
-<script>
-	$(document).ready(function() {
-		// 등록, 조회 구분
-		if("${empty itemList}") {
-			$(".procBtn .viewBtn").removeClass('hidden');
-		} else {
-			$(".procBtn").addClass('hidden');
-			$(".viewBtn").removeClass('hidden');
-		}
-	});
-</script>
-
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 85%;">
 		<div class="content">
@@ -36,11 +24,11 @@
 	                        
 							<div class="btn_right" style="margin-top: 40px;">
 								<span style="float: left;">
-									<button type="button" class="btn_navy_thin procBtn" onclick="addItem();">추가</button>
+									<button type="button" class="btn_navy_thin procBtn" onclick="setItem('add');">추가</button>
 									<button type="button" class="btn_gray_thin procBtn" onclick="initItem(this.form);">초기화</button>
 								</span>
 							
-	                      		<button type="button" class="btn_blue_thin procBtn" onclick="#">저장</button>
+	                      		<button type="button" class="btn_blue_thin procBtn" onclick="itemProc('item');">저장</button>
 	                      		<button type="button" class="btn_gray_thin viewBtn" onclick="popClose('item');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->

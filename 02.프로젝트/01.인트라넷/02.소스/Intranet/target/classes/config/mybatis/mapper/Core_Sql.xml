@@ -132,6 +132,33 @@
 		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 			</when>
+			<when test="pageUrl.contains('Mtg')">
+				SELECT
+						COUNT(M.MTG_CD) AS LIST_CNT
+				FROM MEETING M
+				LEFT OUTER JOIN EMP_INFO E
+	            	ON M.MTG_IDX = E.EMP_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				WHERE M.USE_YN = 'Y'
+		            <if test="srchNm != null and srchNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(M.MTG_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            </if>
+		            <if test="srchDt != null and srchDt !=''">
+		            	AND M.MTG_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+		            </if>
+		  			<if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="rankNm != null and rankNm != ''">
+		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+					<if test="srchIdx != null and srchIdx != ''">
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+					</if>
+			</when>
 			<when test="pageUrl.contains('Emp')">
 				SELECT 
 						COUNT(E.EMP_IDX) AS LIST_CNT 
@@ -157,16 +184,52 @@
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
 					<if test="useCd != null and useCd != ''">
-						<if test="useCd equals('Y')">
+						<if test="useCd eq 'USE_0010'">
 							AND E.LEAV_DT IS NULL
 						</if>
-						<if test="useCd equals('N')">
+						<if test="useCd eq 'USE_0020'">
 							AND E.LEAV_DT IS NOT NULL
 						</if>
 					</if>
 			</when>
 			<when test="pageUrl.contains('Aprv')">
-				SELECT '0' AS LIST_CNT FROM DUAL
+				SELECT 
+					COUNT(A.APRV_ID) AS LIST_CNT 
+				FROM APRVMAST A
+				LEFT OUTER JOIN EMP_INFO E
+					ON E.EMP_IDX = A.REG_IDX
+				LEFT OUTER JOIN ORG O
+		      		ON O.ORG_CD = E.ORG_CD
+		            AND O.USE_YN = 'Y'
+		        LEFT OUTER JOIN RANK R
+		      		ON R.RANK_CD = E.RANK_CD
+		            AND R.USE_YN = 'Y'
+		        LEFT OUTER JOIN TEMPLATE T
+		        	ON T.TEMP_CD = A.TEMP_CD
+		        LEFT OUTER JOIN COMMCODE CC_STEP
+	       			ON CC_STEP.COMMCODE_CD = A.APRVSTEP_CD
+				WHERE 1=1
+				<if test="srchNm != null and srchNm != ''">
+		           	AND REGEXP_REPLACE(LOWER(A.APRV_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		           </if>
+		           <if test="srchSdt != null and srchSdt !=''">
+		           	AND A.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+		           </if>
+		           <if test="srchEdt != null and srchEdt !=''">
+		           	AND A.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+		           </if>
+		 			<if test="orgNm != null and orgNm != ''">
+		 				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				</if>
+				<if test="rankNm != null and rankNm != ''">
+		           	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				</if>
+				<if test="srchIdx != null and srchIdx != ''">
+		           	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				</if>
+				<if test="srchStepCd != null and srchStepCd != ''">
+			        	AND A.APRVSTEP_CD = #{srchStepCd, jdbcType=VARCHAR}
+					</if>
 			</when>
 			<when test="pageUrl.contains('Proj')">
 				SELECT 
@@ -219,7 +282,7 @@
 				    	AND T.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="srchDt != null and srchDt !=''">
-				    	AND T.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+				    	AND T.REG_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="orgNm != null and orgNm != ''">
 				    	AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'

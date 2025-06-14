@@ -95,18 +95,18 @@ public class EmpDao {
 	}
 	
 	// 사원 인덱스 채번
-	public HashMap<String, Object> intrEmpProc1011(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpProc1011", paramMap);
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1010", paramMap);
 		return defaultInfo;
 	}
 	
 	// 사원 등록
-	public int intrEmpProc1012(HashMap<String, Object> paramMap) {
+	public int intrEmpProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("emp.intrEmpProc1012", paramMap);
+		resInt = sqlsession.insert("emp.intrEmpProc1011", paramMap);
 		return resInt;
 	}
 	

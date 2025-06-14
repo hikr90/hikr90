@@ -12,6 +12,7 @@
 <head></head>
 <script>
 //
+var defaultList = JSON.parse('${mtgList}');
 document.addEventListener('DOMContentLoaded', function() {
 	//
 	var calendar = document.getElementById('calendar');
@@ -38,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 		},
 		// 데이터
-		events : ""
+		events : defaultList,
+		eventColor : '#214b97'
 	});
     //
     scheCont.render();
@@ -68,14 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								
 								<div class="top_area">
 									<div class="area_title">
-										<h3>일정 관리</h3>
+										<h3>회의 관리</h3>
 									</div>
 									
 									<div class="area_content">
-										<a href="javascript:formSubmit('intrAprvInqy1010.do')" class="btn_more">전체보기</a>
-
 										<ul class="scroll_wrap">
-											<c:forEach var="list" items="${leavList}">
+											<c:forEach var="list" items="${mtgList}">
 												<li class="main_li">
 													<a class="main_a">[${list.leavtypeCd}] ${list.aprvTitle}</a>
 													<span class="date main_span">
@@ -120,9 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									</div>
 									
 									<div class="area_content">
-										<a href="javascript:formSubmit('intrBoardInqy1010.do')" class="btn_more">전체보기</a>
-
-										<ul>
+										<ul class="area_ul">
 											<c:forEach var="list" items="${boardList}" begin="0" end="2">
 												<li class="main_li">
 													<a class="main_a">${list.brdTitle}</a>
@@ -145,22 +143,27 @@ document.addEventListener('DOMContentLoaded', function() {
 								
 								<div class="bottom_area">
 						    		<div class="area_title">
-							    		<h3>나의 기안</h3><br>
+							    		<h3>결재 조회</h3><br>
 									</div>
 
 									<div class="area_content">
-										<a href="javascript:formSubmit('intrAprvInqy2010.do')" class="btn_more">전체보기</a>
-										
-										<ul>
-											<li style="line-height: 30px; margin-right: 15px;">
-												<a style="text-overflow: ellipsis;">[부서내결재중] 휴가신청서_테스트1</a>
-											</li>
-											<li style="line-height: 30px; margin-right: 15px;">
-												<a style="text-overflow: ellipsis;">[부서내결재중] 물품반입서_테스트1</a>
-											</li>
-											<li style="line-height: 30px; margin-right: 15px;">
-												<a style="text-overflow: ellipsis;">[부서내결재중] 가지급결의서_테스트1</a>
-											</li>
+										<ul class="area_ul">
+											<c:forEach var="list" items="${aprvList}" begin="0" end="2">
+												<li class="main_li">
+													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}">${list.aprvTitle}</a>
+													<span class="date main_ie">
+														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+														${formatDt} 
+													</span>
+												</li>
+											</c:forEach>
+											
+											<c:if test="${empty aprvList}">
+												<li class="main_li">
+													등록된 글이 없습니다.
+												</li>												
+											</c:if>
 										</ul>
 									</div>
 								</div>

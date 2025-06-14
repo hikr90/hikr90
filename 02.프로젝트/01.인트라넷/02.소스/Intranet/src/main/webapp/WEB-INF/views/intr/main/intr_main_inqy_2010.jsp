@@ -115,9 +115,7 @@
 									</div>
 									
 									<div class="area_content">
-										<a href="javascript:formSubmit('intrProjInqy1010.do')" class="btn_more">전체보기</a>
-										
-										<ul>
+										<ul class="area_ul">
 											<c:forEach var="list" items="${projList}" begin="0" end="2">
 												<li class="main_li">
 													<a class="main_a">${list.projTitle}</a>

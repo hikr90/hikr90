@@ -16,6 +16,28 @@
 	function modProc(f){
 		// 유효성 검증
 		if(!valProc()){return;};
+		// 부서
+		if($("#setOrgCd").val()==""){
+			alert("<spring:message code="EMP.ORG.NONE"/>");
+			return;
+		}
+		// 직급
+		if($("#setRankCd").val()==""){
+			alert("<spring:message code="EMP.RANK.NONE"/>");
+			return;
+		}
+		// 연락처
+		var regex = /^010-\d{4}-\d{4}$/;
+		
+		if(!regex.test($("#mobNo").val())){
+			alert("<spring:message code="EMP.MOB.FAIL"/>");
+			return;
+		}
+		// 계정
+		if($("#empPwd").val()!=$("#chqPwd").val()){
+			alert("<spring:message code="EMP.PWD.DIFF"/>");
+			return;
+		}
 		//
 		if(confirm("수정하시겠습니까?")){
 			var fileList = setFormData();
@@ -86,8 +108,8 @@
 	                                        	<div class="profile_wrap disp_flex">
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
-		                                        			<c:when test="${not empty defaultList}">
-		                                        				<img class="emp_img" id="empImg" width="200" height="200" src="intrEmpInqy1099.do?fileId=${defaultList[0].fileId}&fileNm=${defaultList[0].fileNm}">
+		                                        			<c:when test="${not empty fileList}">
+		                                        				<img class="emp_img" id="empImg" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${fileList[0].fileId}">
 		                                        			</c:when>
 		                                        			<c:otherwise>
 				                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
@@ -96,7 +118,15 @@
 		                                        	</div>
 	                                        	
 		                                        	<div class="profile_box ml20">
-		                                        		<br><span id="profText">사진을 등록해주세요.</span>
+		                                        		<br>
+		                                        		<c:choose>
+		                                        			<c:when test="${empty fileList}">
+		                                        				<span id="profText">사진을 등록해주세요.</span>
+		                                        			</c:when>
+		                                        			<c:otherwise>
+		                                        				<span id="profText">${fileList[0].fileNm}</span>
+		                                        			</c:otherwise>
+		                                        		</c:choose>
 			                                        	<div style="margin-top: 5px;">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
 															<input type="file" id="profBtn">

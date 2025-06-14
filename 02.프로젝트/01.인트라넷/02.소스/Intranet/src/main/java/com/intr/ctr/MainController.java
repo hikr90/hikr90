@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.dao.AprvDao;
 import com.intr.dao.BoardDao;
 import com.intr.dao.EmpDao;
+import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
@@ -57,7 +58,7 @@ public class MainController {
 	
 	@Autowired
 	UtilService utilService;
-
+	
 	@Autowired
 	AprvDao aprvDao;
 
@@ -69,6 +70,9 @@ public class MainController {
 	
 	@Autowired
 	ProjDao projDao;
+	
+	@Autowired
+	MtgDao mtgDao;
 	
 	@Autowired
 	HttpSession session;
@@ -117,10 +121,15 @@ public class MainController {
 			coreService.intrCoreInqy1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
-			// 휴가 목록 조회
+			// 회의 일정 조회
 			//--------------------------------------------------------------------------------------------
-			aprvDao.intrAprvInqy1011(model, paramMap);
-			model.addAttribute("leavList", defaultList);
+			defaultList = mtgDao.intrMtgInqy1012(model, paramMap);
+			model.addAttribute("mtgInfo", defaultList);
+
+			//--------------------------------------------------------------------------------------------
+			// 회의 목록 조회
+			//--------------------------------------------------------------------------------------------
+
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
@@ -129,9 +138,9 @@ public class MainController {
 			model.addAttribute("boardList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// 나의 기안 조회
+			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			aprvDao.intrAprvInqy1011(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy1011(model, paramMap);
 			model.addAttribute("aprvList", defaultList);
 			
 		} catch (Exception e) {

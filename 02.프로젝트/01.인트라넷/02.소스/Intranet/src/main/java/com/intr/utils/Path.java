@@ -21,11 +21,12 @@ public interface Path {
 	public static final String VIEW_PATH_SCHE 			= INTR_PATH + "/sche/";		 	// 일정
 	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 			// 업무
 	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 			// 사원
-	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 	// 기안문 양식
+	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 		// 기안문 양식
 	public static final String VIEW_PATH_AUTH 		= INTR_PATH + "/auth/";	 		// 권한
 	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 		// 결재
 	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 		// 쿼리
 	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 		// 프로젝트
+	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 프로젝트
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로

@@ -6,54 +6,16 @@
 
 <head>
 	<script type="text/javascript">
-		// 담당자 선택
-		function popCall(){
-			var obj = new Object();
-			//
-			obj["mappingId"] = "intrPopupInqy1010.do";
-			obj["areaType"] = "emp";
-			obj["width"] = "550"
-			obj["height"] = "420";
-			//		
-			ajaxPopup(obj);
-		}
-	
-		// 프로젝트 등록 처리
+		// 회의 등록 처리
 		function regProc(f){
   			// 유효성 검증
 			if(!valProc()){return;};
-			//
-			var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
-			var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
-			var status = $("#statList").text();
-			
-			// 계약기간
-			if(projSdt == ''){
-				alert("<spring:message code="PROJ.SDT.NONE"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			if(projEdt == ''){
-				alert("<spring:message code="PROJ.EDT.NONE"/>");
-				$("#projEdt").focus();
-				return;
-			}
-			if(projSdt > projEdt){
-				alert("<spring:message code="PROJ.DT.PAST"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			// 진행상태
-			if(status == ''){
-				alert("<spring:message code="PROJ.STAT.NONE"/>");
-				return;
-			}
 			//
 			if(confirm("등록하시겠습니까?")){
 				//
 				var fileList = setFormData();
 	   			$.ajax({
-					url:"intrProjProc1010.do",
+					url:"intrMtgProc1010.do",
 					processData : false,
 					contentType : false,
 					data: fileList,
@@ -64,7 +26,7 @@
 	   						if(json[0].res=='YES'){
 	   	   						//
 	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrProjInqy1010.do?pageUrl=Proj";
+		   						location.href = "intrMtgInqy1010.do?pageUrl=Mtg";
 		   						
 	   						}else if(json[0].res=='NO'){
 	   	   						//
@@ -86,7 +48,7 @@
 		
 		// 목록으로
 		function listCall() {
-			formSubmit('intrProjInqy1010.do');
+			formSubmit('intrMtgInqy1010.do');
 		}
 	</script>
 </head>
@@ -95,11 +57,6 @@
 <form id="form" method="POST" enctype="multipart/form-data">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
-	
-	<!-- 담당자 팝업 -->
- 	<div id="empArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
-	</div>
 	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
@@ -116,66 +73,46 @@
 					<div class="sub_content">					
 						<div class=" form_area">
 							<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
-							<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.projCd}">
+							<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.mtgCd}">
 							<input type="hidden" id="page" name="page" value="${param.page}">
 							<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 							<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-							<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-							<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+							<input type="hidden" id="srchDt" name="srchDt" value="${param.srchDt}">
 							<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 							<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
-							<input type="hidden" id="srchStatNm" name="srchStatNm" value="${param.srchStatNm}">
-							<input type="hidden" id="srchStatCd" name="srchStatCd" value="${param.srchStatCd}">					
 							<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
-							<input type="hidden" id="empPcd" name="empPcd" value="">
-							<input type="hidden" id="filetypeCd" name="filetypeCd" value="PROJ">
+							<input type="hidden" id="filetypeCd" name="filetypeCd" value="MTG">
 								
 							<div class="post_wrap">
-								<h2>프로젝트 등록</h2><br>
+								<h2>회의 등록</h2><br>
 								<div class="post_view">
 									<dl>
 										<dt>
-											<label for="post-title">&#10003; 프로젝트명</label>
+											<label for="post-title">&#10003; 회의명</label>
 										</dt>
-										<dd style="width: 35%;">
-											<input type="text" id="projTitle" title="프로젝트명" name="projTitle">
-										</dd>
-										<dt>&#10003; 담당자</dt>
 										<dd>
-											<input type="button"class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" style="width: 50%;" disabled="disabled">
+											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle">
 										</dd>
-										<dt>&#10003; 계약기간</dt>
+										<dt>&#10003; 회의일자</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="projSdt" value="" readonly="readonly" style="width: 110px;" />
-												~
-											<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="projEdt" value="" readonly="readonly" style="width: 110px;" />
+											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="mtgDt" value="" readonly="readonly" style="width: 110px;" />
 										</dd>
 									</dl>
 									<dl class="post_info">
-										<dt>계약문서</dt>
-										<dd style="width: 35%;">
+										<dt>회의자료</dt>
+										<dd>
 											<div class="file_box">
 												<label for="fileUpd">업로드</label>
 												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
 											</div>
 										</dd>
-										<dt>&#10003; 진행상태</dt>
-	                                        <dd class="sel_2part">
-	                                        	<div class="select_wrap">
-													<div id="statList" class="sList select_box">${statList[1].commcodeNm}</div>
-													<input type="hidden" id="status" name="status" value="${statList[1].commcodeCd}">
-												
-													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${statList}">
-															<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
-																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
-															</c:if>
-														</c:forEach>
-													</ul>
-												</div>
-	                                        </dd>
+										<dt>&#10003; 회의시간</dt>
+										<dd>
+											<input type="text" id="timeSt" class="srch_cdt_date srchSdt align_center" name="mtgStm" value="" readonly="readonly" style="width: 110px;" />
+											~
+											<input type="text" id="timeEd" class="srch_cdt_date srchSdt align_center" name="mtgEtm" value="" readonly="readonly" style="width: 110px;" />
+										</dd>
 									</dl>
 									<dl class="post_info">
 										<dt></dt>
@@ -189,23 +126,28 @@
 										</dd>
 									</dl>
 									<dl>
-										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
+										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
 										<dd class="post_text" style="height: 330px;">
-											<textarea id="projCont" title="개요/설명" name="projCont"></textarea>
+											<textarea id="projCont" title="회의 개요" name="mtgCont"></textarea>
 										</dd>
 									</dl>
 									<dl>
-										<dt>&#10003; 계약금</dt>
+										<dt>
+											<label for="post-title">&#10003; 회의장소</label>
+										</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;">
-											&nbsp; <span id="amtNm">(원)</span>
+											<input type="text" id="mtgLoc" title="회의장소" name="mtgLoc">
 										</dd>
-										<dt>태그</dt>
+										<dt>
+											<label for="post-title">&#10003; 회의 참가자</label>
+										</dt>
 										<dd>
-											<input type="text" id="tag_none" title="태그" name="tag" placeholder="#SI, #SM, #운영 등.." value="">
+											<input type="text" id="mtgMbr" title="회의 참가자" name="mtgMbr">
 										</dd>
+										
 									</dl>
 								</div><!-- End post_write -->
+								
 								<div class="btn_wrap align_right">
 										<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
 										<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>

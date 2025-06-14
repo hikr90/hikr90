@@ -53,23 +53,4 @@ public class ScheController {
 		//
 		return Const.VIEW_PATH_SCHE + Const.INTR_SCHE_INQY_1010;
 	}
-
-	// 일정 상세 조회
-	@RequestMapping("/intrScheInqy1020.do")
-	public String intrScheInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 일정 상세 조회
-			//--------------------------------------------------------------------------------------------
-			scheService.intrScheInqy1020(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 일정 관리 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
-		}
-		//
-		return Const.VIEW_PATH_SCHE + Const.INTR_SCHE_DETL_1010;
-	}
 }

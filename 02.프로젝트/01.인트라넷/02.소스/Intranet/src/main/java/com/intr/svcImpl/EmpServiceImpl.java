@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.EmpDao;
@@ -60,7 +61,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (재직여부) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"use");
+			paramMap.put("commcodeGcd", 	"USE");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("useList",defaultList);
 
@@ -188,6 +189,7 @@ public class EmpServiceImpl implements EmpService{
 	// 사원 등록
 	public String intrEmpProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
+		List<MultipartFile> fileList = request.getFiles("fileList");
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
 		String resStr = "NO";
@@ -197,13 +199,13 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 사원 인덱스 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpProc1011(model, paramMap);
-			paramMap.put("empIdx", defaultInfo.get("empIdx"));
+			defaultInfo = empDao.intrEmpInqy1010(model, paramMap);
+			paramMap.put("sequenceId", defaultInfo.get("sequenceId"));
 
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록
 			//--------------------------------------------------------------------------------------------
-			resInt = empDao.intrEmpProc1012(paramMap);
+			resInt = empDao.intrEmpProc1011(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -212,7 +214,9 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록
 			//--------------------------------------------------------------------------------------------
-			resStr = utilService.fileUpload(model, paramMap, request);
+			if(fileList != null) {
+				resStr = utilService.fileUpload(model, paramMap, request);
+			}
 
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환

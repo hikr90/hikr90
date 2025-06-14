@@ -31,7 +31,7 @@
 					<td class='first_td'>${list.mgtNo}</td>
 		 			<td>${list.itemNm}</td>
 		 			<td>${list.itemCnt}</td>
-		 			<td>${list.itemRsn}</td>
+		 			<td style="text-align: left;">${list.reqRsn}</td>
 			    </tr>
 			</c:forEach>
 		</tbody>

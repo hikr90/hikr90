@@ -20,22 +20,22 @@
 					data: fileList,
 					type : 'post',
 	   				success : function(data){
-	   						//
-	   						var json = eval(data);
-	   						if(json[0].res=='YES'){
-	   	   						//
-	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
-		   						
-	   						}else if(json[0].res=='NO'){
-	   	   						//
-	   							alert("<spring:message code="PROC.FAIL"/>");
-								return;	   							
-	   						}else{
-	   	   						//
-	   							alert("<spring:message code="PROC.EXISTS"/>");
-								return;	   							
-	   						}
+   						//
+   						var json = eval(data);
+   						if(json[0].res=='YES'){
+   	   						//
+   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
+	   						
+   						}else if(json[0].res=='NO'){
+   	   						//
+   							alert("<spring:message code="PROC.FAIL"/>");
+							return;	   							
+   						}else{
+   	   						//
+   							alert("<spring:message code="PROC.EXISTS"/>");
+							return;	   							
+   						}
 	   				},
 	   				error : function(res, status, error){
 	   					//

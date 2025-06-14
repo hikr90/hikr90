@@ -9,12 +9,46 @@
 	<script type="text/javascript">
 		// 목록으로
 		function listCall() {
-			formSubmit('intrProjInqy1010.do');
+			formSubmit('intrMtgInqy1010.do');
 		}
 		
 		// 수정 화면
 		function modCall() {
-			formSubmit('intrProjInqy1040.do');
+			formSubmit('intrMtgInqy1040.do');
+		}
+		
+		// 삭제 처리
+		function delProc(sequenceId) {
+			//
+			if(confirm('삭제하시겠습니까?')){
+				//
+	   			$.ajax({
+	   				type:	"post" , 
+	   				traditional: true,
+	   				url:	"intrMtgProc1020.do",
+	   				data:	{
+	   					"sequenceId" : sequenceId
+	   				},
+	   				success : function(data){
+	   					//
+	   					var json = eval(data);
+	   					if(json[0].res=="YES"){
+	   	   					//
+	   						alert("<spring:message code="PROC.SUCCESS"/>");
+	   	   					location.href="intrMtgInqy1010.do?pageUrl=Mtg";
+	   	   					
+	   					} else {
+	   						//
+	   						alert("<spring:message code="PROC.ERROR"/>");
+	   						return;
+	   					}
+	   				},
+	   				error : function(res, status, error){
+	   					//
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
 		}
 	</script>
 </head>
@@ -38,40 +72,37 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<input type="hidden" id="empIdx" name="empIdx"  value="${empVO.empIdx}">
-								<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.projCd}">
+								<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.mtgCd}">
 								<input type="hidden" id="page" name="page" value="${param.page}">
 								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
-								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
-								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+								<input type="hidden" id="srchDt" name="srchDt" value="${param.srchDt}">
 								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
-								<input type="hidden" id="srchStatNm" name="srchStatNm" value="${param.srchStatNm}">
-								<input type="hidden" id="srchStatCd" name="srchStatCd" value="${param.srchStatCd}">					
 								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 								
 								<div class="post_wrap">
-		                            <h2>프로젝트 상세</h2><br>
+		                            <h2>회의 상세
+		                       			<span class="float_right">
+			                            	<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>
+		                            	</span>
+		                            </h2><br>
 									<div class="post_view">
 										<dl>
-											<dt>제목</dt>
-											<dd>${defaultInfo.projTitle}</dd>
-											<dt>담당자</dt>
-											<dd>${defaultInfo.orgNm} ${defaultInfo.ownerNm} ${defaultInfo.rankNm}</dd>
-											<dt>계약기간</dt>
+											<dt>회의명</dt>
+											<dd>${defaultInfo.mtgTitle}</dd>
+											<dt>회의일자</dt>
 											<dd>
 												<span class="date">
-													${defaultInfo.projSdt} ~ ${defaultInfo.projEdt}
+													<fmt:parseDate value="${defaultInfo.mtgDt}" var="parseDt" pattern="yyyyMMdd"/>
+													<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
+													${fomatDt} 
 												</span>	
 											</dd>
 										</dl>
-										<dl class="post_info">
-											<dt>진행상태</dt>
-											<dd>${defaultInfo.statusNm}</dd>
-										</dl>
 			
 										<dl class="post_file">
-											<dt>첨부파일</dt>
+											<dt>회의자료</dt>
 											<dd class="post_file">
 												<div class="file_wrap">
 													<ul id="fileUl"> 
@@ -86,29 +117,36 @@
 												</div>
 											</dd>
 										</dl>
-		
+			
 										<dl>
 											<dt>설명/개요</dt>
 											<dd class="post_text" style="height: 330px;">
-												<pre>${defaultInfo.projCont}</pre>
+												<pre>${defaultInfo.mtgCont}</pre>
 											</dd>
 										</dl>
-									
-										<dl>
-											<dt>계약금</dt>
+										
+										<dl class="post_info">
+											<dt>회의장소</dt>
+											<dd>${defaultInfo.mtgLoc}</dd>
+											
+											<dt>회의시간</dt>
 											<dd>
-												${defaultInfo.deposit}
-												&nbsp; <span id="amtNm">(${defaultInfo.depositNm})</span>
+												<fmt:parseDate value="${defaultInfo.mtgStm}" var="parseStm" pattern="HHmm"/>
+												<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
+
+												<fmt:parseDate value="${defaultInfo.mtgEtm}" var="parseEtm" pattern="HHmm"/>
+												<fmt:formatDate value="${parseEtm}" var="formatEtm" pattern="HH:mm"/>
+												${formatStm} ~ ${formatEtm}
 											</dd>
-											<dt>태그</dt>
-											<dd>${defaultInfo.tag}</dd>
 										</dl>
 									</div><!-- End post_view -->
 		
 									<div class="btn_wrap align_right">
 										<div class="float_right">
-											<button type="button" class="btn_navy_thin" onclick="modCall();">수정</button>
-											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
+											<c:if test="${empVO.empIdx eq defaultInfo.mtgIdx}">
+												<button type="button" class="btn_navy_thin" onclick="modCall();">수정</button>
+												<button type="button" class="btn_gray_thin" onclick="delProc('${defaultInfo.mtgCd}');">삭제</button>
+											</c:if>
 										</div>
 									</div>
 								</div><!-- End post_wrap -->

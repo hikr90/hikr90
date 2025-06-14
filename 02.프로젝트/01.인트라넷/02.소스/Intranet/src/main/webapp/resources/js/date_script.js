@@ -4,17 +4,17 @@ $(function() {
 			{
 				//
 				locale:{
-					"separator": " ~ ", 										// 구분자
-					"format": 'YYYY-MM-DD',						// 포맷
+					"separator": " ~ ", 											// 구분자
+					"format": 'YYYY-MM-DD',									// 포맷
 				    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
 				    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
 				},
-				autoUpdateInput: false,											// 값 자동 표시 여부
+				autoUpdateInput: false,										// 값 자동 표시 여부
 				timePicker: false,                        							// 시간 표시 여부
 			    showDropdowns: true,                     						// 년월 수동 여부
 			    autoApply: true,                         							// 확인, 취소 자동 여부
 			    timePicker24Hour: false,                  					// 24시 표시 여부
-			    timePickerSeconds: false,                 						// 초 표시 여부
+			    timePickerSeconds: false,                 					// 초 표시 여부
 			    singleDatePicker: true	                 						// 캘린더 한가지만 사용 여부
 	});
 	
@@ -22,6 +22,21 @@ $(function() {
 	$('input[id="srchSdt"],input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
 		$(this).val(picker.startDate.format('YYYY-MM-DD'));
 		$(this).val(picker.endDate.format('YYYY-MM-DD'));
+	});
+
+	// 시간 생성
+	flatpickr("#timeSt", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true
+	});
+	
+	flatpickr("#timeEd", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true
 	});
 });
 

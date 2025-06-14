@@ -133,4 +133,12 @@ public interface View {
 	public static final String INTR_PROJ_DETL_1010 = "intr_proj_detl_1010.jsp"	;		// 프로젝트 상세
 	public static final String INTR_PROJ_DETL_1020 = "intr_proj_detl_1020.jsp"	;		// 프로젝트 등록
 	public static final String INTR_PROJ_DETL_1030 = "intr_proj_detl_1030.jsp";			// 프로젝트 수정
+	
+	//--------------------------------------------------------------------------------------------
+	// 회의
+	//--------------------------------------------------------------------------------------------
+	public static final String INTR_MTG_LIST_1010 = "intr_mtg_list_1010.jsp"; 			// 회의 목록
+	public static final String INTR_MTG_DETL_1010 = "intr_mtg_detl_1010.jsp"	;		// 회의 상세
+	public static final String INTR_MTG_DETL_1020 = "intr_mtg_detl_1020.jsp"	;		// 회의 등록
+	public static final String INTR_MTG_DETL_1030 = "intr_mtg_detl_1030.jsp";			// 회의 수정
 }

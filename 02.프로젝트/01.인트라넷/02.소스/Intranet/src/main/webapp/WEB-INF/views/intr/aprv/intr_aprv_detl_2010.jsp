@@ -47,6 +47,7 @@
 		var obj = new Object();
 		//
 		obj["mappingId"] = "intrPopupInqy1042.do";
+		obj["sequenceId"] = "${param.sequenceId}";
 		obj["areaType"] = "line";
 		obj["width"] = "1100";
 		obj["height"] = "620";
@@ -94,6 +95,12 @@
 								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
 								<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}">
 								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
+								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
+								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
+								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
+								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
+								<input type="hidden" id="srchStepCd" name="srchStepCd" value="${param.srchStepCd}">								
+								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 										
 								<div class="post_wrap">
 		                        	<h2>휴가 신청서
@@ -102,10 +109,18 @@
 									<div class="post_view">
 										<dl>
 											<dt>
-												<label for="post-title">프로젝트명</label>
+												<label for="post-title">&#10003; 기안명</label>
 											</dt>
 											<dd>
 												${defaultInfo.aprvTitle}
+											</dd>
+										</dl>
+										<dl>
+											<dt>
+												<label for="post-title">프로젝트명</label>
+											</dt>
+											<dd>
+												${defaultInfo.projTitle}
 											</dd>
 										</dl>
 										<dl>
@@ -169,10 +184,6 @@
 											<c:if test="${not empty fileList and fileList ne '' and fileList.size() > 1}">
 												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
-										</div>
-										
-										<div class="float_right">
-											<button type="button" class="btn_gray_thin" onclick="listCall();">목록으로</button>
 										</div>
 									</div>
 									

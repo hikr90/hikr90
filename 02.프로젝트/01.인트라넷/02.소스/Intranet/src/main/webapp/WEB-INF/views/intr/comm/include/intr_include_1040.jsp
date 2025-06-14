@@ -6,7 +6,7 @@
 <ul id="fileUl">
 	<c:forEach var="list" items="${fileList}" varStatus="status">
 		<li id="fileLi${status.index}">
-			<input type="hidden" id="fileId${status.index}" name="none${status.index}" value="${list.fileId}">
+			<input type="hidden" id="fileId${status.index}" name="none${status.index}" value="${list.fileSno}">
 			<img src="resources/images/icon/icon_file.png" width="20" height="20" >
 			<a href="#" onclick="fileDel('delete',${status.index});"><span>${list.fileNm}</span></a>
 		</li>

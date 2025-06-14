@@ -8,20 +8,10 @@
 	title : 결재선 조회 팝업
 -->
 <script>
-	// 함수
-	$(document).ready(function(){
-		// 툴팁 클릭 시 결재 의견 노출
-		$(".tooltip_area").on("click", function(){
-			$(".tooltip_text").css("display","block");
-		});
-		
-		// 외부 영역 클릭 시 결재 의견 숨김
-		$("body").on("click", function(e){
-			if($(".tooltip_text").css("display") == "block"){
-		    	if($(".tooltip_area").has(e.target).length == 0) $(".tooltip_text").css('display','none');
-		    }
-		});
-	});
+	// 결재자 클릭
+	function viewNote(note){
+		$("#rsltRsn").text(note);
+	}
 
 	// 팝업 닫기
 	function popConfirm(){
@@ -66,16 +56,37 @@
 					</thead>
 					<tbody>
 						<!-- 결재선 목록 -->
-						<c:forEach var="list" items="${typeList}" varStatus="status">
+						<c:forEach var="list" items="${lineList}" varStatus="status">
 							<tr>
 								<td>${list.num}</td>
-								<td>${list.stepNm}</td>
-								<td>${list.orgNm}</td>
-								<td>${list.empNm}</td>
+								<td>${list.aprvtypeNm}</td>
+								<td>
+										<c:choose>
+											<c:when test="${not empty list.rsltNote}">
+												<a href="javascript:#" onclick="viewNote('${list.rsltNote}');" style="color: #214b97;">
+													${list.orgNm} ${list.empNm} ${list.rankNm}
+												</a>
+											</c:when>
+											<c:otherwise>
+												${list.orgNm} ${list.empNm} ${list.rankNm}
+											</c:otherwise>
+										</c:choose>
+										</td>
+								<td>${list.rsltTypeNm}</td>
+								<td>
+									<span class="date">
+										<fmt:parseDate value="${list.rsltDt}" var="parseDt" pattern="yyyyMMdd"/>
+										<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+										
+										<fmt:parseDate value="${list.rsltTm}" var="parseTm" pattern="HHmmss"/>
+										<fmt:formatDate value="${parseTm}" var="formatTm" pattern="HH:mm:ss"/>
+										${formatDt} ${formatTm}
+									</span>
+								</td>
 							</tr>
 						</c:forEach>
 						
-						<c:if test="${empty typeList}">
+						<c:if test="${empty lineList}">
 							<tr>
 								<td align="center" colspan="5">
                               	      결재내역이 없습니다.

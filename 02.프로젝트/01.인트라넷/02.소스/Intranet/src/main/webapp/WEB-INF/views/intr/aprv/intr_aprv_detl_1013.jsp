@@ -65,6 +65,45 @@
 		//		
 		ajaxPopup(obj);
 	}
+	
+	// 기안 등록 
+	function aprvProc(f){
+		// 유효성 검증
+		if(!valProc()){return;};
+		// 결재선
+		if($("#aprvLine").val() == ''){
+			alert("<spring:message code="APRV.LINE.NONE"/>");
+			return;
+		}
+		// 정산내역
+		if($("#corpLine").val() == ''){
+			alert("<spring:message code="APRV.CORP.NONE"/>");
+			return;
+		}
+		//
+		if(confirm("기안하시겠습니까?")){
+			// 에디터 내용 저장
+			var getData = CKEDITOR.instances.editor.getData();
+			$("#editor").val(getData);
+			var fileList = setFormData();
+			
+   			$.ajax({
+				url:"intrAprvProc1010.do?pageUrl=Aprv",
+				processData : false,
+				contentType : false,
+				data: fileList,
+				type : 'post',
+   				success : function(data){
+   					//
+   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
+   					listCall();
+   				},
+   				error : function(res, status, error){
+   					alert("<spring:message code="PROC.ERROR"/>");
+   				}
+   			});
+		}
+	}
 </script>
 </head>
 <body id="main">
@@ -101,6 +140,7 @@
 					<div class="content">
 						<div id="sub_content">					
 							<div class="form_area">
+								<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="tempCd" name="tempCd" value="${param.tempCd}">
 								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
@@ -114,12 +154,20 @@
 									<div class="post_view">
 										<dl>
 											<dt>
+												<label for="post-title">&#10003; 기안명</label>
+											</dt>
+											<dd>
+												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle">
+											</dd>
+										</dl>
+										<dl>
+											<dt>
 												<label for="post-title">&#10003; 프로젝트명</label>
 											</dt>
 											<dd>
 												<input type="button"class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projTitle" style="width: 1320px;" readonly="readonly">
-												<input type="hidden" id="projPcd" name="projTitle" value="">
+												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
+												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
 										<dl>
@@ -132,9 +180,12 @@
 											<dt>&#10003; 정산내역 등록</dt>
 											<dd>
 												<input type="button"class="btn_blue align_top" value="선택" onclick="corpCall();">
+												<input type="hidden" id="corpLine" name="corpLine" value="">
 											</dd>
 											<dt>총 정산금액</dt>
-											<dd><input type="text" id="total" name="total" value="3,000"  disabled="disabled"></dd>
+											<dd>
+												<input type="text" id="total" name="total" value="₩0"  disabled="disabled">
+											</dd>
 										</dl>
 								        <dl>
 								        	<dt>&#10003; 카드 회사명</dt>
@@ -148,9 +199,9 @@
 											</dd>
 								        </dl>
 								        <dl>
-											<dt><label for="post_text">&#10003; 양식 내용</label></dt>
+											<dt><label for="post_text">&#10003; 기안내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="양식 내용">${tempInfo.tempCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안내용">${tempInfo.tempCont}</textarea>
 											</dd>
 										</dl>
 								        <dl class="post_info">
