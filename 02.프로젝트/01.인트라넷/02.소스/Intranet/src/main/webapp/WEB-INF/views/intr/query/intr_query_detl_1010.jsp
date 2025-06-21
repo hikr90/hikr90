@@ -129,7 +129,7 @@
 								<div class="post_wrap">
 									<input type="hidden" id="headTit" name="headTit" value="쿼리 조회 목록">
 		                            
-		                            <h2>쿼리 입력
+		                            <h2>쿼리 조회
 										<span class="float_right">
 												<input type="button"class="btn_green_thin" value="Excel" onclick="excelDown();">
 											<input type="button"class="btn_blue_thin listCall" value="조회" onclick="listCall();">

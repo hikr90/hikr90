@@ -27,8 +27,8 @@
 	                     	<div id="lineCon" class="post_con disp_flex pt20" style="height: 425px;"></div>
 	                        
 							<div class="btn_right" style="margin-top: 40px;">
-	                      		<button type="button" class="btn_blue_thin" onclick="lineProc('line')">저장</button>
-	                      		<button type="button" class="btn_gray_thin" onclick="popClose('line');">닫기</button>
+	                      		<button type="button" class="btn_blue_thin procBtn" onclick="lineProc('line')">저장</button>
+	                      		<button type="button" class="btn_gray_thin viewBtn" onclick="popClose('line');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

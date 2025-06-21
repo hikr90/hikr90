@@ -114,7 +114,7 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd>
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineCall();">
+												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											
@@ -144,7 +144,7 @@
 											<dt>&#10003; 청구 금액</dt>
 											<dd>
 												<input type="text" id="prepayAmt" name="prepayAmt" title="청구 금액" placeholder="₩0" oninput="amtProc(this);" style="width: 181px;">
-												&nbsp; <span id="amtNm">(원)</span>
+												&nbsp; (<span id="amtNm">원</span>)
 											</dd>
 								        </dl>
 								        <dl>

@@ -10,6 +10,10 @@
 	$(document).ready(function() {
 		// 에디터
 		CKEDITOR.replace('editor',{height: 710});
+		
+		// 추가, 저장 감춤
+		$(".procBtn").addClass('hidden');
+		$(".viewBtn").removeClass('hidden');
 	});
 
 	// 목록으로

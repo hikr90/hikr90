@@ -124,13 +124,13 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd style="width: 645px;">
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineCall();">
+												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											
 											<dt>&#10003; 정산내역 등록</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="corpCall();">
+												<input type="button"class="btn_blue align_top" value="선택" onclick="corpReg();">
 												<input type="hidden" id="corpLine" name="corpLine" value="">
 											</dd>
 											<dt>총 정산금액</dt>

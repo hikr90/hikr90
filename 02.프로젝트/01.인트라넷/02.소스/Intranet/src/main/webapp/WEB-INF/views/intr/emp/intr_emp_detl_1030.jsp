@@ -11,7 +11,7 @@
 		//
 		formSubmit('intrEmpInqy1030.do');
 	}
-	
+
 	// 수정 처리
 	function modProc(f){
 		// 유효성 검증
@@ -140,7 +140,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 사원명</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" readonly="readonly">
+	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}">
 	                                        </dd>
 	                                        
 	                                        <dt></dt>
@@ -151,8 +151,8 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="orgList" class="sList select_box">${defaultInfo.orgNm}</div>
-													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 													<input type="hidden" name="setorgNm" value="${defaultInfo.orgNm}">
+													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${orgList}">
@@ -166,8 +166,8 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="rankList" class="sList select_box">${defaultInfo.rankNm}</div>
-													<input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
 													<input type="hidden" name="setRankNm" value="${defaultInfo.rankNm}">
+													<input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${rankList}">

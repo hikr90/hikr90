@@ -92,13 +92,12 @@
 	// 저장 처리
 	function regProc(){
 		//
-		$("#authCd").val($(".list_bg").attr('id'));
+		$("#authCd").val($("#authTree .list_bg").attr('id'));
 		$("input[name=authEmpIdx]").each(function(idx) {
 			$(this).attr("name","empIdx"+idx);
 		});
 		//
 		var param = $("#form").serialize();
-		//
 		if(confirm("저장하시겠습니까?")){
 			//
 			$.ajax({

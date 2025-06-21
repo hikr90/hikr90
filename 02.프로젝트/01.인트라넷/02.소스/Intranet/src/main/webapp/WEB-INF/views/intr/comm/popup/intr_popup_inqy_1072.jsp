@@ -18,7 +18,7 @@
 		</colgroup>
 		<thead>
 			<tr style="line-height: 10px;">
-				<th scope="col">사용일자</th>
+				<th scope="col">사용 일자</th>
 				<th scope="col">사용처</th>
 				<th scope="col">사용 금액</th>
 				<th scope="col">용도</th>

@@ -119,7 +119,7 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd>
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineCall();">
+												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											

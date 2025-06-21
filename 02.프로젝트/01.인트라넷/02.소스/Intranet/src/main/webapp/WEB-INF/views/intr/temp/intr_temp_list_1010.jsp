@@ -215,7 +215,7 @@
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
 									<input type="button"class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>기안문 관리</h2>
+									<h2>양식 관리</h2>
 									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">

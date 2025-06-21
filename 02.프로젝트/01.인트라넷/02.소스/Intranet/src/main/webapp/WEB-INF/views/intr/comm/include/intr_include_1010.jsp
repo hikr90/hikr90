@@ -75,7 +75,20 @@
 		//		
 		ajaxPopup(obj);
 	}
-	
+
+	// 결재선 등록 팝업
+	function lineReg(){
+		var obj = new Object();
+		//
+		obj["mappingId"] = "intrPopupInqy1041.do";
+		obj["areaType"] = "line";
+		obj["sequenceId"] = "${param.sequenceId}";
+		obj["width"] = "1100";
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
+	}
+
 	// 결재선 조회 팝업
 	function lineCall(){
 		var obj = new Object();
@@ -88,7 +101,20 @@
 		//		
 		ajaxPopup(obj);
 	}
-	
+
+	// 물품 등록 팝업
+	function itemReg(){
+		var obj = new Object();
+		//
+		obj["mappingId"] = "intrPopupInqy1061.do";
+		obj["areaType"] = "item";
+		obj["sequenceId"] = "${param.sequenceId}";
+		obj["width"] = "1100"
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
+	}
+
 	// 물품 조회 팝업
 	function itemCall(){
 		var obj = new Object();
@@ -102,6 +128,19 @@
 		ajaxPopup(obj);
 	}
 	
+	// 정산내역 등록 팝업
+	function corpReg(){
+		var obj = new Object();
+		//
+		obj["mappingId"] = "intrPopupInqy1071.do";
+		obj["areaType"] = "corp";
+		obj["sequenceId"] = "${param.sequenceId}";
+		obj["width"] = "1100"
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
+	}
+
 	// 정산내역 조회 팝업
 	function corpCall(){
 		var obj = new Object();

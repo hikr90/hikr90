@@ -16,7 +16,7 @@
 		setItem(isData);
 		
 		$(document).on("click", "#item_del", function() {
-		// 물품 삭제
+			// 물품 삭제
 			$(this).parent().parent().remove();
 		});
 	});

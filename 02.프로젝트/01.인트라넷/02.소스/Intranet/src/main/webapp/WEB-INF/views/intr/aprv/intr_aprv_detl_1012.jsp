@@ -124,13 +124,13 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd>
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineCall();">
+												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											
 											<dt>&#10003; 물품 등록</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="itemCall();">
+												<input type="button"class="btn_blue align_top" value="선택" onclick="itemReg();">
 												<input type="hidden" id="itemLine" name="itemLine" value="">
 											</dd>
 										</dl>

@@ -66,7 +66,7 @@
  			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
  				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
         	</if>
-        ORDER BY SUB_DATA.HIRE_DT DESC, SUB_DATA.EMP_NM
+        ORDER BY SUB_DATA.EMP_IDX ASC
 	</select>
 	
 	<select id="intrEmpInqy1012" resultType="CamelHashMap" parameterType="java.util.HashMap">

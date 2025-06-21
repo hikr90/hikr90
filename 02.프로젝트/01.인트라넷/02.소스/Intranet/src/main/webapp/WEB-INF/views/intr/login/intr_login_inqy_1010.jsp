@@ -74,7 +74,7 @@
 				<div class="login_area">
 					<h3>LOGIN</h3>
 					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLogCall(this.form);" value="ADMIN">
-					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLogCall(this.form);" value="ADMIN">
+					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLogCall(this.form);" value="1111">
 					<input type="button" class="login_btn" value="로그인" onclick="loginCall(this.form);">
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>
@@ -85,7 +85,7 @@
 							<caption>로그인 권한 목록 조회</caption>
 							<colgroup>
 								<col class="auto">
-								<col class="w60per">
+								<col class="w70per">
 							</colgroup>
 							<thead>
 								<tr style="border-bottom: none;">
