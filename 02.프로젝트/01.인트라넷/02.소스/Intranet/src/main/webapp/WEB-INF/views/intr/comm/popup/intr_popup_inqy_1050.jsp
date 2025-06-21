@@ -9,28 +9,29 @@
 	title : 결재의견 관리 팝업
 -->
 <div class="pop_area" style="height: 100%:">
-	<article class="sub_article" style="height: 82%;">
+	<article class="sub_article" style="padding-bottom: 20px;">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-                	<div class="find_info_wrap">
-                    	<div class="post_wrap">
-                    		<div class="srch_wrap">
+					<div class="find_aprv_wrap">
+	                	<div class="post_wrap">
+							<div class="srch_wrap">
 								<div class="srch_area">
 									<div class="right_srch_area">
 										<label class="srch_label">결재 의견 입력</label>
 									</div>
 								</div>
 							</div>
-                    	
-                        	<div id="opinCon"></div>
-                               
-							<div class="btn_center">
-                            	<input type="button"class="_btn btn_navy" value="확인" onclick="aprvProc('opin');">
-								<input type="button"class="_btn btn_gray" value="취소" onclick="popClose('opin');">
- 							</div>
-						</div><!-- End post_wrap -->
-					</div> 
+	                        
+	                     	<!-- 회의 상세 -->
+	                     	<div id="opinCon" class="post_con disp_flex" style="height: 240px;"></div>
+	                        
+							<div class="btn_right">
+	                      		<input type="button"class="btn_blue_thin" value="확인" onclick="opinConf('opin');">
+								<input type="button"class="btn_gray_thin" value="취소" onclick="popClose('opin');">
+	                 		</div>
+	                 	</div><!-- End post_wrap -->
+	               	</div> 
 				</div><!-- End form_area -->
 			</div><!-- End sub_content -->
 		</div><!-- End content -->

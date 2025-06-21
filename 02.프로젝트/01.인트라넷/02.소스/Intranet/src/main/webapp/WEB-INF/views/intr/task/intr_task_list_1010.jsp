@@ -216,7 +216,7 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">						
 											
-									<h2>업무일지</h2><br>
+									<h2>업무일지</h2>
 									<div class="srch_wrap">
 										<div class="srch_area">
 											<label class="srch_label">작성일자</label>

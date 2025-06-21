@@ -46,7 +46,6 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 	}
 	
@@ -63,7 +62,6 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 	}
 
@@ -83,7 +81,6 @@ public class UtilController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 메일 전송 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

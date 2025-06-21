@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.intr.dao.AprvDao;
 import com.intr.dao.AuthDao;
 import com.intr.dao.EmpDao;
+import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
@@ -64,6 +65,9 @@ public class PopupController {
 	@Autowired
 	AprvDao aprvDao;
 	
+	@Autowired
+	MtgDao mtgDao;
+	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -83,7 +87,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 담당자 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1011;
@@ -99,7 +102,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(아이디 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1021;
@@ -114,7 +116,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 팝업(비밀번호 찾기) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1022;
@@ -136,7 +137,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 목록 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1031;
@@ -165,7 +165,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 선택 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1041;
@@ -187,7 +186,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재선 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1042;
@@ -205,7 +203,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 의견 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1051;
@@ -223,7 +220,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 물품 등록 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1061;
@@ -245,7 +241,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 물품 조회 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1062;
@@ -263,7 +258,6 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 정산내역 등록 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1071;
@@ -285,9 +279,57 @@ public class PopupController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 정산내역 조회 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1072;
+	}
+	
+	// 일정 상세 팝업 조회
+	@RequestMapping("/intrPopupInqy1081.do")
+	public String intrPopupInqy1081(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 일정 관리 팝업 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = aprvDao.intrAprvInqy1012(model, paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 일정 상세 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1081;
+	}
+	
+	// 회의 상세 팝업 조회
+	@RequestMapping("/intrPopupInqy1091.do")
+	public String intrPopupInqy1091(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 일정 관리 팝업 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = mtgDao.intrMtgInqy1031(model, paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+			
+			//--------------------------------------------------------------------------------------------
+			// 파일 정보
+			//--------------------------------------------------------------------------------------------
+			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			model.addAttribute("fileList",defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 회의 상세 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1091;
 	}
 }

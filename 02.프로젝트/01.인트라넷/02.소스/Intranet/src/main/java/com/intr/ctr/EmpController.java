@@ -60,7 +60,6 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 정보 정정 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_1010;
@@ -84,7 +83,6 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1020;
@@ -108,7 +106,6 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_1010;

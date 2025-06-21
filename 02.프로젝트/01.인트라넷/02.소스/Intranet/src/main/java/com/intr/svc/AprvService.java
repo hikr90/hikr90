@@ -14,4 +14,7 @@ public interface AprvService {
 	void intrAprvInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 상세
 	
 	String intrAprvProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 기안 등록
+	void intrAprvProc2010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 기본 정보 처리
+	void intrAprvProc3010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 양식 유형 처리
+	void intrAprvProc4010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 결재 처리
 }

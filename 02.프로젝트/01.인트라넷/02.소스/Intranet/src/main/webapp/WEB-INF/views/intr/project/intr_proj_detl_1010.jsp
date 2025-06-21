@@ -51,7 +51,7 @@
 								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 								
 								<div class="post_wrap">
-		                            <h2>프로젝트 상세</h2><br>
+		                            <h2>프로젝트 상세</h2>
 									<div class="post_view">
 										<dl>
 											<dt>제목</dt>

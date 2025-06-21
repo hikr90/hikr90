@@ -14,6 +14,8 @@ import com.intr.dao.UtilDao;
 import com.intr.svc.MtgService;
 import com.intr.svc.UtilService;
 
+import net.sf.json.JSONArray;
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MtgServiceImpl implements MtgService{
@@ -89,7 +91,45 @@ public class MtgServiceImpl implements MtgService{
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	// 캘린더 조회
+	public void intrMtgInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		JSONArray jAray = new JSONArray();
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 캘린더 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = mtgDao.intrMtgInqy2011(model, paramMap);
+			model.addAttribute("calList", jAray.fromObject(defaultList));
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 캘린더 목록 조회
+	public void intrMtgInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 캘린더 목록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = mtgDao.intrMtgInqy2021(model, paramMap);
+			model.addAttribute("calInfo", defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
 
+	
 	// 회의 등록 처리
 	public String intrMtgProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//

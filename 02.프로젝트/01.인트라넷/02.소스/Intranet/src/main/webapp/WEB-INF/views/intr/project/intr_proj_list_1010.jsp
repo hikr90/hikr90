@@ -100,7 +100,6 @@
 											<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
 										</span>
 									</h2>
-									<br>
 									
 									<div class="srch_wrap">
 											<div class="right_srch_area">
@@ -114,9 +113,9 @@
 												<div class="srch_area">
 													<label class="srch_label">진행상태</label>
 													<div class="select_wrap">
-														<div id="statList" class="sList select_box">${empty param.statNm ? '전체' : param.statNm}</div>
-														<input type="hidden" name="srchStatNm" value="${param.statCd}">
-														<input type="hidden" name="srchStatCd" value="${param.statNm}">
+														<div id="statList" class="sList select_box">${empty param.srchStatNm ? '전체' : param.srchStatNm}</div>
+														<input type="hidden" name="srchStatNm" value="${param.statNm}">
+														<input type="hidden" name="srchStatCd" value="${param.statCd}">
 													
 														<ul class="sUl select_ul scroll_wrap">
 															<c:forEach var="list" items="${statList}">
@@ -125,7 +124,6 @@
 														</ul>
 													</div>
 												</div>
-												<br>
 												
 												<!-- 부서 -->
 												<div class="srch_area">

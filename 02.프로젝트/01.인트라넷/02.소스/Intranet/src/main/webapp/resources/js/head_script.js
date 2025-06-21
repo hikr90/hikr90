@@ -18,9 +18,12 @@ $(function(){
 	    var setCd = $(this).attr("setCd");
 
 		// 값 지정
-		$(this).closest('div').find('div').text(setNm);
-		$(this).closest('div').find('input').val(setCd);
-		$(this).closest('div').find('input').next().val(setNm);
+		var sw = $(this).closest(".select_wrap");
+		
+		// 텍스트 박스에 표시
+    	sw.find(".sList").text(setNm);           	// 표시용 div
+    	sw.find('input').val(setNm); 				// 이름 값
+    	sw.find('input').next().val(setCd); 		// 코드 값
 
 		// 목록 닫기
 		$(".sUl").css("display","none");

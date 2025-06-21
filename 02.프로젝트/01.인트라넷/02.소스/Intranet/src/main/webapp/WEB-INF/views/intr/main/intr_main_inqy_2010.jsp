@@ -22,7 +22,10 @@
 							<div class="top_wrap">
 								<div class="top_area" style="width: 1120px;">
 									<div class="area_title">
-										<h3>부서 현황</h3>
+										<h3>
+											<img src='resources/images/icon/icon_total.png' width="20" height="20"/>
+											부서 현황
+										</h3>
 									</div>
 									
 									<div class="area_content" style="margin-left: 30px;">
@@ -38,7 +41,7 @@
 											  data: {
 											    labels: labels,
 											    datasets: [{
-											      label: '부서별 인원 수',
+											      label: '사원 수',
 											      data: values,
 											      backgroundColor: ['#b7c2c9']
 											    }]
@@ -78,7 +81,10 @@
 							<div class="bottom_wrap">
 								<div class="bottom_area">
 							    	<div class="area_title">
-										<h3>인사 요약</h3>
+										<h3>
+											<img src='resources/images/icon/icon_temp.png' width="20" height="20"/>
+											인사 요약
+										</h3>
 									</div>
 									
 									<div class="area_content">
@@ -111,15 +117,18 @@
 								
 								<div class="bottom_area">
 						    		<div class="area_title">
-										<h3>프로젝트 관리</h3>
+										<h3>
+											<img src='resources/images/icon/icon_arrow.png' width="20" height="20"/>
+											프로젝트 관리
+										</h3><a href="intrProjInqy1010.do?pageUrl=Proj" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
 									</div>
 									
 									<div class="area_content">
 										<ul class="area_ul">
 											<c:forEach var="list" items="${projList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a">${list.projTitle}</a>
-													<span class="main_ie">${list.ownerNm}</span>
+													<a class="main_a" href="intrProjInqy1030.do?sequenceId=${list.projCd}&pageUrl=Proj">${list.projTitle}</a>
+													<span class="main_ie">${list.orgNm} ${list.ownerNm}</span>
 												</li>
 											</c:forEach>
 											

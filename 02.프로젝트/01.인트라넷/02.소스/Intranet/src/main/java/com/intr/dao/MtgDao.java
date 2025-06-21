@@ -30,20 +30,28 @@ public class MtgDao {
 		return defaultList;
 	}
 	
-	// 메인 회의 조회
-	public List<HashMap<String, Object>> intrMtgInqy1012(Model model, HashMap<String, Object> paramMap) {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("mtg.intrMtgInqy1012", paramMap);
-		return defaultList;
-	}
-	
 	// 회의 상세 조회
 	public HashMap<String, Object> intrMtgInqy1031(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("mtg.intrMtgInqy1031", paramMap);
 		return defaultInfo;
+	}
+	
+	// 캘린더 조회
+	public List<HashMap<String, Object>> intrMtgInqy2011(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("mtg.intrMtgInqy2011", paramMap);
+		return defaultList;
+	}
+
+	// 캘린더 목록 조회
+	public List<HashMap<String, Object>> intrMtgInqy2021(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("mtg.intrMtgInqy2021", paramMap);
+		return defaultList;
 	}
 	
 	// 회의 등록 처리

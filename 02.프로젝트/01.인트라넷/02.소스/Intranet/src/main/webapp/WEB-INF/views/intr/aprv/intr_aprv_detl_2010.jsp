@@ -16,44 +16,6 @@
 	function listCall() {
 		formSubmit('intrAprvInqy2010.do');
 	}
-	
-	// 프로젝트 팝업
-	function projCall(){
-		//
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1030.do";
-		obj["areaType"] = "proj";
-		obj["width"] = "600"
-		obj["height"] = "370";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 담당자 팝업
-	function empCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1010.do";
-		obj["areaType"] = "emp";
-		obj["width"] = "550"
-		obj["height"] = "420";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 결재선 조회 팝업
-	function lineCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1042.do";
-		obj["sequenceId"] = "${param.sequenceId}";
-		obj["areaType"] = "line";
-		obj["width"] = "1100";
-		obj["height"] = "620";
-		//		
-		ajaxPopup(obj);
-	}
 </script>
 </head>
 <body id="main">
@@ -76,6 +38,11 @@
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1040.jsp"></c:import>	
 	</div>
 	
+	<!-- 결재의견 팝업 -->
+	<div id="opinArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1050.jsp"></c:import>	
+	</div>
+	
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
@@ -90,6 +57,11 @@
 					<div class="content">
 						<div id="sub_content">					
 							<div class="form_area">
+								<input type="hidden" id="page" name="page" value="${param.page}">
+								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
+								<input type="hidden" id="sequenceId" name="sequenceId" value="${param.sequenceId}">
+								<input type="hidden" id="currAprvSno" name="currAprvSno" value="${defaultInfo.currAprvSno}">
+								<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
 								<input type="hidden" id="tempCd" name="tempCd" value="${param.tempCd}">
 								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
@@ -97,19 +69,16 @@
 								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
 								<input type="hidden" id="srchSdt" name="srchSdt" value="${param.srchSdt}">
 								<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
-								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
-								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
 								<input type="hidden" id="srchStepCd" name="srchStepCd" value="${param.srchStepCd}">								
-								<input type="hidden" id="srchIdx" name="srchIdx" value="${param.srchIdx}">
 										
 								<div class="post_wrap">
 		                        	<h2>휴가 신청서
 											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
-		                        	</h2><br>
+		                        	</h2>
 									<div class="post_view">
 										<dl>
 											<dt>
-												<label for="post-title">&#10003; 기안명</label>
+												<label for="post-title">기안명</label>
 											</dt>
 											<dd>
 												${defaultInfo.aprvTitle}
@@ -121,6 +90,12 @@
 											</dt>
 											<dd>
 												${defaultInfo.projTitle}
+											</dd>
+											<dt>
+												<label for="post-title">결재 단계</label>
+											</dt>
+											<dd>
+												${defaultInfo.aprvstepNm}
 											</dd>
 										</dl>
 										<dl>
@@ -184,6 +159,11 @@
 											<c:if test="${not empty fileList and fileList ne '' and fileList.size() > 1}">
 												<button type="button" class="btn_navy_thin" onclick="zipProc();">전체 다운로드</button>
 											</c:if>
+										</div>
+										
+										 <!-- 결재 단계 -->
+										<div class="float_right">
+											<c:import url="/WEB-INF/views/intr/comm/btn/intr_btn_inqy_1010.jsp"></c:import>	
 										</div>
 									</div>
 									

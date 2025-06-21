@@ -17,55 +17,6 @@
 		formSubmit('intrAprvInqy1010.do');
 	}
 	
-	// 프로젝트 팝업
-	function projCall(){
-		//
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1030.do";
-		obj["areaType"] = "proj";
-		obj["width"] = "600"
-		obj["height"] = "370";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 담당자 팝업
-	function empCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1010.do";
-		obj["areaType"] = "emp";
-		obj["width"] = "550"
-		obj["height"] = "420";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 결재선 조회 팝업
-	function lineCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1041.do";
-		obj["areaType"] = "line";
-		obj["width"] = "1100";
-		obj["height"] = "620";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 정산내역 등록 팝업
-	function corpCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1071.do";
-		obj["areaType"] = "corp";
-		obj["width"] = "1100"
-		obj["height"] = "620";
-		//		
-		ajaxPopup(obj);
-	}
-	
 	// 기안 등록 
 	function aprvProc(f){
 		// 유효성 검증
@@ -150,7 +101,7 @@
 								<div class="post_wrap">
 		                        	<h2>법인카드 정산서
 											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
-		                        	</h2><br>
+		                        	</h2>
 									<div class="post_view">
 										<dl>
 											<dt>

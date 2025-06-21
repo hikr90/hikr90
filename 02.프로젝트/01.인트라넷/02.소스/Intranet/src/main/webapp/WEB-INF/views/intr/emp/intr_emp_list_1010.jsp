@@ -53,7 +53,7 @@
 										<span class="float_right">
 											<input type="button"class="btn_navy_thin" value="등록" onclick="regCall();">
 										</span>
-									</h2><br>
+									</h2>
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
@@ -69,7 +69,7 @@
 											<div class="srch_area">
 												<label class="srch_label">재직여부</label>
 												<div class="select_wrap">
-													<div id="useList" class="sList select_box">${empty param.useNm ? '전체' : param.useNm}</div>
+													<div id="useList" class="sList select_box">${empty param.useCd ? '전체' : param.useCd}</div>
 													<input type="hidden" name="useCd" value="${param.useCd}">
 													<input type="hidden" name="useNm" value="${param.useNm}">
 												
@@ -80,9 +80,6 @@
 													</ul>
 												</div>
 											</div>
-											<br>
-												
-												
 												
 											<!-- 부서 -->
 											<div class="srch_area">

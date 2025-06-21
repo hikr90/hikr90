@@ -118,7 +118,7 @@
 								<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
 							
 								<div class="post_wrap">
-									<h2>사용자 권한 부여</h2><br>
+									<h2>사용자 권한 부여</h2>
 		                                <div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 제목 -->

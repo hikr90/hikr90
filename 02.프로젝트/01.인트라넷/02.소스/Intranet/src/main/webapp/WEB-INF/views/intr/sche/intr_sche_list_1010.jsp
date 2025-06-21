@@ -18,7 +18,7 @@
 	        locale: 'en',  							// 언어
 			eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
 			displayEventTime: false, 			// 이벤트 시간 여부
-			navLinks: true, 							// 날짜 선택할 경우 상세 데이터 조회 
+			navLinks: false, 						// 날짜 선택할 경우 상세 데이터 조회 
 			selectable: false,						// 네모 선택 여부
 			headerToolbar: {
 				start: 'prev,next today',
@@ -26,12 +26,20 @@
 			    end: 'dayGridMonth,listMonth'
 			},
 			// 네모 선택 시
-	        select: function(info) {
+			dateClick: function(info) {
 				//
 			},
 			// 휴가 선택 시
 			eventClick: function(info) {
-				
+				var obj = new Object();
+				//
+				obj["mappingId"] = "intrPopupInqy1081.do";
+				obj["areaType"] = "sche";
+				obj["sequenceId"] = info.event.id;
+				obj["width"] = "700"
+				obj["height"] = "460";
+				//		
+				ajaxPopup(obj);
 			},
 			// 데이터
 			events : defaultList,
@@ -51,6 +59,11 @@
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
+	<!-- 일정 팝업 -->
+ 	<div id="scheArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1080.jsp"></c:import>	
+	</div>
+
 	<div class="main_wrap">
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
@@ -66,10 +79,26 @@
 						<div class="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<h2>일정 관리</h2><br>
+									<h2>일정 관리</h2>
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
+											<!-- 휴가 타입 -->
+											<div class="srch_area">
+												<label class="srch_label">휴가 타입</label>
+												<div class="select_wrap">
+													<div id="leavList" class="sList select_box">${empty param.leavtypeNm ? '전체' : param.leavtypeNm}</div>
+													<input type="hidden" name="leavtypeNm" value="${param.leavtypeNm}">
+													<input type="hidden" name="leavtypeCd" value="${param.leavtypeCd}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${leavList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+											
 											<!-- 부서 -->
 											<div class="srch_area">
 												<label class="srch_label">부서</label>

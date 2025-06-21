@@ -16,7 +16,7 @@ public interface Path {
 	//--------------------------------------------------------------------------------------------
 	public static final String VIEW_PATH_MAIN 		= INTR_PATH + "/main/"; 			// 메인
 	public static final String VIEW_PATH_LOGIN 		= INTR_PATH + "/login/"; 			// 로그인
-	public static final String VIEW_PATH_MYPAGE 	= INTR_PATH + "/mypage/"; 		// 내 정보
+	public static final String VIEW_PATH_MYPAGE 		= INTR_PATH + "/mypage/"; 		// 내 정보
 	public static final String VIEW_PATH_BOARD 		= INTR_PATH + "/board/"; 			// 공지사항
 	public static final String VIEW_PATH_SCHE 			= INTR_PATH + "/sche/";		 	// 일정
 	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 			// 업무
@@ -26,13 +26,13 @@ public interface Path {
 	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 		// 결재
 	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 		// 쿼리
 	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 		// 프로젝트
-	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 프로젝트
+	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 회의
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
 	public static final String FILE_PATH = "INTR\\FILE"; 		// 파일
-	public static final String TEMP_PATH = "INTR\\TEMP"; 	// 임시
+	public static final String TEMP_PATH = "INTR\\TEMP"; 		// 임시
 	public static final String EMP_PATH  = "INTR\\EMP"; 		// 사원 이미지
 	
 }

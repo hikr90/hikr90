@@ -34,7 +34,4 @@ public interface UtilService {
 	
 	// 메일 전송 관련
 	String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception;
-	
-	// 에러 로그 처리
-	void exptProc(HashMap<String, Object> paramMap, Exception e) throws Exception;
 }

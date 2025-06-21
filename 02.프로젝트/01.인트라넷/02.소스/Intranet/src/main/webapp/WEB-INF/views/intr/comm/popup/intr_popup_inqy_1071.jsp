@@ -32,7 +32,7 @@
 			//
 			obj["useDt"] 		= "";
 			obj["useLoc"] 		= "";
-		    obj["useAmt"] 		= "₩0";
+		    obj["useAmt"] 		= "";
 		    obj["useRsn"] 		= "";
 			
 			addCorp(obj);
@@ -196,7 +196,7 @@
 			// 등록 건수
 			reqCnt++;
 			// 
-			corpLine += useLoc + "|" + useAmt + "|" + useRsn + useDt + "|";
+			corpLine += useLoc + "|" + useAmt + "|" + useRsn + "|" + useDt + "|";
     		corpLine += "@";
     		
     		// 합계 계산

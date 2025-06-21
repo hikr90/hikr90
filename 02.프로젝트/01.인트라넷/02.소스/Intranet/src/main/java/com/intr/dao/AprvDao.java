@@ -62,6 +62,22 @@ public class AprvDao {
 		return defaultList;
 	}
 	
+	// 결재 상태 조회
+	public HashMap<String, Object> intrAprvInqy2011(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqy2011", paramMap);
+		return defaultInfo;
+	}
+	
+	// 잔여 결재 조회
+	public HashMap<String, Object> intrAprvInqy3011(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqy3011", paramMap);
+		return defaultInfo;
+	}
+	
 	// 결재 마스터 등록 (APRVMAST)
 	public int intrAprvProc1011(HashMap<String, Object> paramMap) {
 		//
@@ -115,6 +131,30 @@ public class AprvDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.insert("aprv.intrAprvProc1017", paramMap);
+		return resInt;
+	}
+	
+	// 결재 단계 수정
+	public int intrAprvProc2011(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc2011", paramMap);
+		return resInt;
+	}
+
+	// 결재 처리 유형 수정
+	public int intrAprvProc2012(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc2012", paramMap);
+		return resInt;
+	}
+	
+	// 결재 일련번호 수정
+	public int intrAprvProc2013(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("aprv.intrAprvProc2013", paramMap);
 		return resInt;
 	}
 }

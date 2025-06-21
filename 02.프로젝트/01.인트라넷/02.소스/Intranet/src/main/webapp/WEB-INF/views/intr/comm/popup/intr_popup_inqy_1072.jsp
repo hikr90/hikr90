@@ -30,7 +30,7 @@
 					<td class='first_td'>${list.useDt}</td>
 		 			<td>${list.useLoc}</td>
 		 			<td>${list.useAmt}</td>
-		 			<td>${list.corpRsn}</td>
+		 			<td>${list.useRsn}</td>
 			    </tr>
 			</c:forEach>
 		</tbody>

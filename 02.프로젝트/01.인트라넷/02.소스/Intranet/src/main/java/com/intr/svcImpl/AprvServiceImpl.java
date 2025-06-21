@@ -15,6 +15,7 @@ import com.intr.dao.TempDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.UtilService;
+import com.intr.utils.Const;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -149,6 +150,12 @@ public class AprvServiceImpl implements AprvService{
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
+			// 결재 상태 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = aprvDao.intrAprvInqy2011(model, paramMap);
+			model.addAttribute("aprvInfo", defaultInfo);
+			
+			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
 			defaultList = utilDao.intrFileInqy1011(model, paramMap);
@@ -280,13 +287,13 @@ public class AprvServiceImpl implements AprvService{
 					tempMap = new HashMap<String, Object>();
 					
 					tempMap.put("sequenceId", 		(String)paramMap.get("sequenceId"));
-					tempMap.put("projCd", 			(String)paramMap.get("projCd"));
+					tempMap.put("projCd", 				(String)paramMap.get("projPcd"));
 					tempMap.put("reqDt", 				(String)paramMap.get("reqDt"));
 					tempMap.put("reqtypeCd", 		(String)paramMap.get("reqtypeCd"));
 					tempMap.put("mgtNo", 				arrLine2[0]);
 					tempMap.put("itemNm", 			arrLine2[1]);
 					tempMap.put("itemCnt", 			arrLine2[2]);
-					tempMap.put("reqRsn", 			arrLine2[3]);
+					tempMap.put("reqRsn", 				arrLine2[3]);
 					
 					aprvDao.intrAprvProc1016(tempMap);
 				}
@@ -302,17 +309,95 @@ public class AprvServiceImpl implements AprvService{
 					arrLine2 = arrLine[i].split("\\|");
 					tempMap = new HashMap<String, Object>();
 					
-					tempMap.put("sequenceId", 		(String)paramMap.get("sequenceId"));
-					tempMap.put("projCd", 			(String)paramMap.get("projCd"));
-					tempMap.put("cardNm", 			(String)paramMap.get("cardNm"));
-					tempMap.put("cardNo", 			(String)paramMap.get("cardNo"));
+					tempMap.put("sequenceId", 	(String)paramMap.get("sequenceId"));
+					tempMap.put("projCd", 			(String)paramMap.get("projPcd"));
+					tempMap.put("cardNm", 		(String)paramMap.get("cardNm"));
+					tempMap.put("cardNo", 		(String)paramMap.get("cardNo"));
 					tempMap.put("useLoc", 			arrLine2[0]);
 					tempMap.put("useAmt", 			arrLine2[1]);
 					tempMap.put("useRsn", 			arrLine2[2]);
-					tempMap.put("useDt",	 			arrLine2[3]);
+					tempMap.put("useDt",	 		arrLine2[3]);
 					
 					aprvDao.intrAprvProc1017(tempMap);
 				}
+			}
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 결재 처리
+	public void intrAprvProc4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> tempMap = null;
+		String sequenceId = utilService.nvlProc((String)paramMap.get("sequenceId"));
+		String currAprvSno = utilService.nvlProc((String)paramMap.get("currAprvSno"));
+		String rslttypeCd = utilService.nvlProc((String)paramMap.get("rslttypeCd"));
+		String rsltNote = utilService.nvlProc((String)paramMap.get("rsltNote"));
+		//
+		try {
+			// 결재 승인
+			if(rslttypeCd.equals(Const.RSLT_0010)) {
+				//--------------------------------------------------------------------------------------------
+				// 다음 결재 조회
+				//--------------------------------------------------------------------------------------------
+				tempMap = aprvDao.intrAprvInqy3011(model, paramMap);
+				
+				if(tempMap == null) {
+					tempMap = new HashMap<String, Object>();
+					tempMap.put("sequenceId", sequenceId);
+					tempMap.put("currAprvSno", currAprvSno);
+					tempMap.put("rslttypeCd", rslttypeCd);
+					
+					// APRVSTEP_CD 수정
+					paramMap.put("stepCd", Const.STEP_0020);		// 결재 완료
+					aprvDao.intrAprvProc2011(paramMap);
+					
+				}  else {
+					// CURR_APRV_SNO 수정
+					aprvDao.intrAprvProc2013(tempMap);
+				}
+				
+				// RSLT 수정
+				tempMap = new HashMap<String, Object>();
+				tempMap.put("sequenceId", sequenceId);
+				tempMap.put("currAprvSno", currAprvSno);
+				tempMap.put("rslttypeCd", rslttypeCd);
+				tempMap.put("rsltNote", rsltNote);
+
+				aprvDao.intrAprvProc2012(tempMap);
+				
+			} 
+			
+			// 결재 반송
+			else if(rslttypeCd.equals(Const.RSLT_0020)) {
+				// APRVSTEP_CD 수정
+				paramMap.put("stepCd", Const.STEP_0030);			// 결재반송
+				aprvDao.intrAprvProc2011(paramMap);
+				
+				// RSLT 수정
+				aprvDao.intrAprvProc2012(paramMap);
+			}
+			
+			// 결재 취소
+			else if(rslttypeCd.equals(Const.RSLT_0030)) {
+				// APRVSTEP_CD 수정
+				paramMap.put("stepCd", Const.STEP_0040);			// 결재취소
+				aprvDao.intrAprvProc2011(paramMap);
+				
+				// CURR_APRV_SNO 수정
+				paramMap.put("currAprvSno", "0001");						// 기안 단계 번호
+				aprvDao.intrAprvProc2013(paramMap);
+				
+				// RSLT 수정
+				aprvDao.intrAprvProc2012(paramMap);
+			}
+			
+			// 오류
+			else {
+				throw new Exception("Exception : 결재 처리 중 에러가 발생했습니다.");
 			}
 			
 		} catch (Exception e) {

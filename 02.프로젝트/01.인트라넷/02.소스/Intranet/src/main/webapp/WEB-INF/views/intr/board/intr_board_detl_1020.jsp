@@ -83,7 +83,7 @@
 							<input type="hidden" id="filetypeCd" name="filetypeCd" value="BOARD">
 								
 							<div class="post_wrap">
-								<h2>공지사항 등록</h2><br>
+								<h2>공지사항 등록</h2>
 								<div class="post_view">
 									<dl>
 										<dt>

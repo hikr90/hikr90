@@ -88,7 +88,7 @@
 							<input type="hidden" id="filetypeCd" name="filetypeCd" value="MTG">
 								
 							<div class="post_wrap">
-								<h2>회의 수정</h2><br>
+								<h2>회의 수정</h2>
 								<div class="post_view">
 									<dl>
 										<dt>

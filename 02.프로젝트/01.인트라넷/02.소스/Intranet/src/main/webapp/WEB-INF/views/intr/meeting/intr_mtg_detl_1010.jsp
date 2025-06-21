@@ -86,7 +86,7 @@
 		                       			<span class="float_right">
 			                            	<button type="button" class="btn_blue_thin" onclick="listCall();">목록으로</button>
 		                            	</span>
-		                            </h2><br>
+		                            </h2>
 									<div class="post_view">
 										<dl>
 											<dt>회의명</dt>

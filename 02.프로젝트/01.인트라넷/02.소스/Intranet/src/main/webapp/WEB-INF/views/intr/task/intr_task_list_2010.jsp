@@ -57,7 +57,7 @@
 										<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
-										<h2>업무일지 조회</h2><br>
+										<h2>업무일지 조회</h2>
 										<div class="srch_wrap">
 											<div class="right_srch_area">
 												<!-- 작성일자 -->
@@ -67,7 +67,6 @@
 													~
 													<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
-												<br>
 
 												<!-- 부서 -->
 												<div class="srch_area">

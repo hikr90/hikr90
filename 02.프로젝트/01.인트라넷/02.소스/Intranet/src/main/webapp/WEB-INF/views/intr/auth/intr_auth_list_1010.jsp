@@ -223,7 +223,7 @@
 										<span class="float_right">
 											<input type="button"class="btn_navy_thin" value="등록" onclick="regCall();">
 										</span>
-									</h2><br>
+									</h2>
 									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">

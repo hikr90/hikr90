@@ -80,17 +80,6 @@
         ORDER BY SUB_DATA.MTG_DT DESC
 	</select>
 
-	<select id="intrMtgInqy1012" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrMtgInqy1012 : 메인 회의 조회 */
-		SELECT 
-				'' AS TITLE
-			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
-			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "END"
-		FROM MEETING M
-		WHERE M.MTG_DT = #{mtgDt, jdbcType=VARCHAR}
-		GROUP BY M.MTG_DT
-	</select>
-		
 	<select id="intrMtgInqy1031" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrMtgInqy1031 : 회의 상세 */
 		SELECT
@@ -108,6 +97,7 @@
 							,	M.MTG_MBR
 							,	E.ORG_CD
 							,	O.ORG_NM
+							,	E.EMP_NM
 							,	E.RANK_CD
 							,	R.RANK_NM
 					FROM MEETING M
@@ -121,6 +111,47 @@
 						AND R.USE_YN = 'Y'
 					WHERE M.MTG_CD = #{sequenceId, jdbcType=VARCHAR}
 		) DATA
+	</select>
+	
+	<select id="intrMtgInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrMtgInqy2011 : 캘린더 조회 */
+		SELECT 
+				'' AS "TITLE"
+			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
+			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "END"
+		FROM MEETING M
+		GROUP BY M.MTG_DT
+	</select>
+	
+	<select id="intrMtgInqy2021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrMtgInqy2021 : 캘린더 목록 조회 */
+		SELECT
+				M.MTG_CD
+			,	M.MTG_TITLE
+			,	M.MTG_CONT
+			,	M.MTG_IDX
+			,	M.MTG_DT
+			,	E.EMP_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+			,	M.MTG_STM
+			,	M.MTG_ETM
+		FROM MEETING M
+		LEFT OUTER JOIN EMP_INFO E
+			ON M.MTG_IDX = E.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		WHERE 1=1
+			<choose>
+				<when test="mtgDt != null and mtgDt != ''">
+					AND M.MTG_DT = #{mtgDt, jdbcType=VARCHAR}
+				</when>
+				<otherwise>
+					AND M.MTG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
+				</otherwise>
+			</choose>
 	</select>
 	
 	<insert id="intrMtgProc1011" parameterType="java.util.HashMap">
@@ -177,7 +208,7 @@
 		UPDATE MEETING
 			SET 	MTG_TITLE = #{mtgTitle, jdbcType=VARCHAR}
 				,	MTG_CONT = #{mtgCont, jdbcType=VARCHAR}
-				,	MTG_IDX = #{mtgIdx, jdbcType=VARCHAR}
+				,	MTG_IDX = #{empIdx, jdbcType=VARCHAR}
 				,	MTG_DT = REPLACE(#{mtgDt, jdbcType=VARCHAR},'-','')
 				,	MTG_STM = REPLACE(#{mtgStm, jdbcType=VARCHAR},':','')
 				,	MTG_ETM = REPLACE(#{mtgEtm, jdbcType=VARCHAR},':','')

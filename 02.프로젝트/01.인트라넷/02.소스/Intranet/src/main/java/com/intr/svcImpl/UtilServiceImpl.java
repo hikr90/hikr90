@@ -929,27 +929,4 @@ public class UtilServiceImpl implements UtilService{
 		//
 		return res;
 	}
-	
-	// 예외 로그 저장 처리
-	public void exptProc(HashMap<String, Object> paramMap, Exception ex) throws Exception {
-		//
-		HashMap<String, Object> tempMap = new HashMap<String, Object>();
-		//
-		try {
-			//
-			tempMap.put("empIdx", 		this.nvlProc((String)paramMap.get("idxSet")));
-			tempMap.put("mappingId", 	this.nvlProc(request.getServletPath()));
-			tempMap.put("ipAddr", 		this.nvlProc(request.getRemoteAddr()));
-			tempMap.put("errorMsg", 		this.nvlProc(ex.getMessage()));
-
-			//--------------------------------------------------------------------------------------------
-			// 예외 로그 저장 처리
-			//--------------------------------------------------------------------------------------------
-			utilDao.intrExptProc1011(tempMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 예외 로그 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-	}
 }

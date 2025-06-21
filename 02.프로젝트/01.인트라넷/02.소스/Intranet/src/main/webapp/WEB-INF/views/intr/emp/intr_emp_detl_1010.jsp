@@ -109,7 +109,7 @@
 									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
 		
-		                            <h2>사원 상세</h2><br>
+		                            <h2>사원 상세</h2>
 	                                <div class="post_write">
 	                                    <dl>
 	                                        <dt><label>프로필</label></dt>

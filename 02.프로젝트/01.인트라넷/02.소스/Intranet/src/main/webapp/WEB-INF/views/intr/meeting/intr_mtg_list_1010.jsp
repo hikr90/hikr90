@@ -52,7 +52,6 @@
 											<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
 										</span>
 									</h2>
-									<br>
 									
 									<div class="srch_wrap">
 											<div class="right_srch_area">
@@ -67,7 +66,6 @@
 													<label class="srch_label">등록자</label>
 													<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushCall(this.form);">
 												</div>
-												<br>
 												
 												<!-- 부서 -->
 												<div class="srch_area">

@@ -91,5 +91,5 @@ function popClose(type){
 	$("#"+area).addClass('hidden');
 	$("#"+area).hide();
 	$('#overlay').hide();
-  	$('body').css('overflow', 'auto');
+  	$('body').css('overflow', '');
 }

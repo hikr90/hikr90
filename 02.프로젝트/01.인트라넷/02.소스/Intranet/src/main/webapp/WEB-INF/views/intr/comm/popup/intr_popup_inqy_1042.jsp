@@ -72,7 +72,7 @@
 											</c:otherwise>
 										</c:choose>
 										</td>
-								<td>${list.rsltTypeNm}</td>
+								<td>${list.rslttypeNm}</td>
 								<td>
 									<span class="date">
 										<fmt:parseDate value="${list.rsltDt}" var="parseDt" pattern="yyyyMMdd"/>

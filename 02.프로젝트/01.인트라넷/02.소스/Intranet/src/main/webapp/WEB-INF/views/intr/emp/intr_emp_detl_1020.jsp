@@ -147,7 +147,7 @@
 									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
 									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 		
-		                            <h2>사원 등록</h2><br>
+		                            <h2>사원 등록</h2>
 	                                <div class="post_write">
 	                                    <dl>
 	                                        <dt>

@@ -50,7 +50,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_LIST_1010;
@@ -74,7 +73,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1020;
@@ -98,7 +96,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1010;
@@ -122,10 +119,32 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1030;
+	}
+	
+	// 캘린더 목록 조회
+	@RequestMapping("/intrMtgInqy2020.do")
+	public String intrMtgInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 캘린더 목록 조회
+			//--------------------------------------------------------------------------------------------
+			mtgService.intrMtgInqy2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 캘린더 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_2010;
 	}
 
 	// 회의 등록 처리
@@ -144,7 +163,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -167,7 +185,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -189,7 +206,6 @@ public class MtgController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 회의 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

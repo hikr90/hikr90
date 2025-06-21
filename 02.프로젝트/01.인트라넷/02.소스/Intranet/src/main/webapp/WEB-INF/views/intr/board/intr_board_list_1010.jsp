@@ -99,7 +99,7 @@
 												<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
 												<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
 											</span>
-										</h2><br>
+										</h2>
 										
 										<div class="srch_wrap">
 											<div class="right_srch_area">
@@ -110,7 +110,6 @@
 													~
 													<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
-												<br>
 												
 												<!-- 부서 -->
 												<div class="srch_area">

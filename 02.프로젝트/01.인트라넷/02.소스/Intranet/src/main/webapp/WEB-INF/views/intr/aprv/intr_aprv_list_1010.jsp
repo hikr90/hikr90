@@ -54,7 +54,7 @@
 									<input type="hidden" id="tempCd" name="tempCd" value="">
 									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
-									<h2>기안 작성</h2><br>
+									<h2>기안 작성</h2>
 									<div class="srch_wrap">
 										<!-- 제목 -->
 										<div class="srch_area">

@@ -86,7 +86,7 @@
 								<input type="hidden" id="filetypeCd" name="filetypeCd" value="BOARD">
 								
 								<div class="post_wrap">
-									<h2>공지사항 수정</h2><br>
+									<h2>공지사항 수정</h2>
 									<div class="post_write">
 										<dl>
 											<dt><label for="post-title">&#10003; 제목</label></dt>

@@ -53,14 +53,6 @@ public class UtilDao {
 		res = sqlsession.update("util.intrFileProc1022", paramMap);
 		return res;
 	}
-
-	// 예외 로그 저장
-	public int intrExptProc1011(HashMap<String, Object> tempMap) {
-		//
-		int res = 0;
-		res = sqlsession.insert("util.intrExptProc1011", tempMap);
-		return res;
-	}
 	
 	// 공통코드 조회
 	public List<HashMap<String, Object>> intrCodeInqy1011(HashMap<String, Object> paramMap) {

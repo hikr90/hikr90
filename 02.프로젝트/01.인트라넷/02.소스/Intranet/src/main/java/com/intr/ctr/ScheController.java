@@ -48,7 +48,6 @@ public class ScheController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 일정 관리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_SCHE + Const.INTR_SCHE_INQY_1010;

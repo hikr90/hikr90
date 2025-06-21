@@ -47,7 +47,6 @@ public class QueryController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 쿼리 입력 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_QUERY + Const.INTR_QUERY_DETL_1010;
@@ -66,7 +65,6 @@ public class QueryController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 쿼리 입력 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_QUERY + Const.INTR_QUERY_DETL_1011;
@@ -85,7 +83,6 @@ public class QueryController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 엑셀 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 	}
 	
@@ -105,7 +102,6 @@ public class QueryController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 쿼리 입력 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

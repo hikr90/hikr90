@@ -58,7 +58,6 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_1010;
@@ -82,7 +81,6 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
@@ -106,7 +104,6 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_2010;
@@ -130,7 +127,6 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
@@ -145,16 +141,43 @@ public class AprvController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 공지사항 등록
+			// 기안 등록
 			//--------------------------------------------------------------------------------------------
 			defaultStr = aprvService.intrAprvProc1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
+	}
+	
+	// 결재 처리
+	@RequestMapping("/intrAprvProc1020.do")
+	public String intrAprvProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재 처리
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvProc4010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재 상세 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
 	}
 }

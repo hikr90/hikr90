@@ -17,43 +17,6 @@
 		formSubmit('intrAprvInqy1010.do');
 	}
 	
-	// 프로젝트 팝업
-	function projCall(){
-		//
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1030.do";
-		obj["areaType"] = "proj";
-		obj["width"] = "600"
-		obj["height"] = "370";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 결재선 조회 팝업
-	function lineCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1041.do";
-		obj["areaType"] = "line";
-		obj["width"] = "1100";
-		obj["height"] = "620";
-		//		
-		ajaxPopup(obj);
-	}
-	
-	// 물품 등록 팝업
-	function itemCall(){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1061.do";
-		obj["areaType"] = "item";
-		obj["width"] = "1100"
-		obj["height"] = "620";
-		//		
-		ajaxPopup(obj);
-	}
-	
 	// 기안 등록 
 	function aprvProc(f){
 		// 유효성 검증
@@ -138,7 +101,7 @@
 								<div class="post_wrap">
 		                        	<h2>물품반출입 신청서
 											<button type="button" class="btn_blue_thin main_ie" onclick="listCall();">목록으로</button>											
-		                        	</h2><br>
+		                        	</h2>
 									<div class="post_view">
 										<dl>
 											<dt>
@@ -181,6 +144,7 @@
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
 													<div id="statList" class="sList select_box">${reqList[1].commcodeNm}</div>
+													<input type="hidden" id="reqtypeNm" name="reqtypeNm" value="${reqList[1].commcodeNm}">
 													<input type="hidden" id="reqtypeCd" name="reqtypeCd" value="${reqList[1].commcodeCd}">
 											
 													<ul class="sUl select_ul scroll_wrap">

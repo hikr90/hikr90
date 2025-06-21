@@ -37,7 +37,7 @@
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
 									<input type="hidden" id="empIdx" name="empIdx" value="">
 								
-									<h2>사원 조회</h2><br>
+									<h2>사원 조회</h2>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
 											<!-- 입사일자 -->
@@ -47,7 +47,6 @@
 												~
 												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 											</div>
-											<br>
 											
 											<!-- 부서 -->
 											<div class="srch_area">

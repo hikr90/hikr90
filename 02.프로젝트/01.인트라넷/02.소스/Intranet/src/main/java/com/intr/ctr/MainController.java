@@ -28,6 +28,7 @@ import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
 import com.intr.svc.CoreService;
 import com.intr.svc.MainService;
+import com.intr.svc.MtgService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
 import com.intr.svc.UtilService;
@@ -58,6 +59,9 @@ public class MainController {
 	
 	@Autowired
 	UtilService utilService;
+	
+	@Autowired
+	MtgService mtgService;
 	
 	@Autowired
 	AprvDao aprvDao;
@@ -93,7 +97,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_LOGIN + Const.INTR_LOGIN_INQY_1010;
@@ -121,15 +124,14 @@ public class MainController {
 			coreService.intrCoreInqy1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
-			// 회의 일정 조회
+			// 캘린더 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy1012(model, paramMap);
-			model.addAttribute("mtgInfo", defaultList);
+			mtgService.intrMtgInqy2010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
-			// 회의 목록 조회
+			// 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-
+			mtgService.intrMtgInqy2020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
@@ -146,7 +148,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_1010;
@@ -201,7 +202,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 관리자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MAIN + Const.INTR_MAIN_INQY_2010;
@@ -230,7 +230,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 마이페이지 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_MYPAGE + Const.INTR_MYPAGE_INQY_1010;
@@ -252,7 +251,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그인 처리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -273,7 +271,6 @@ public class MainController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 로그아웃 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return "redirect:/";

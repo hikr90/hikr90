@@ -52,7 +52,7 @@
 									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
 									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
-									<h2>결재 조회</h2><br>
+									<h2>결재 조회</h2>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
 											<!-- 기안일자 -->
@@ -77,25 +77,6 @@
 														</c:forEach>
 													</ul>
 												</div>
-											</div>
-											<br>
-											
-											<!-- 부서 -->
-											<div class="srch_area">
-												<label class="srch_label">부서</label>
-												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
-											</div>
-
-											<!-- 직급 -->
-											<div class="srch_area">
-												<label class="srch_label">직급</label>
-												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
-											</div>
-											
-											<!-- 기안자 -->
-											<div class="srch_area">
-												<label class="srch_label">기안자</label>
-												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="" onkeydown="pushCall(this.form);">
 											</div>
 											
 											<!-- 제목 -->

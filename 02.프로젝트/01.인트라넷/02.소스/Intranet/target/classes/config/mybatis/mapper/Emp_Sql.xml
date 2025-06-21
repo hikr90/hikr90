@@ -55,13 +55,11 @@
 					<if test="rankNm != null and rankNm != ''">
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="useCd != null and useCd != ''">
-						<if test="useCd eq 'USE_0010'">
-							AND E.LEAV_DT IS NULL
-						</if>
-						<if test="useCd eq 'USE_0020'">
-							AND E.LEAV_DT IS NOT NULL
-						</if>
+					<if test="useCd == 'Y'.toString()">
+						AND E.LEAV_DT IS NULL
+					</if>
+					<if test="useCd == 'N'.toString()">
+						AND E.LEAV_DT IS NOT NULL
 					</if>
         	) SUB_DATA
  		WHERE 1=1 

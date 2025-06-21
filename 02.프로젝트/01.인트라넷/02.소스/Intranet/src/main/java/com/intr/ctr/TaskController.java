@@ -51,7 +51,6 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무 일지 작성 조회 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		
 		//
@@ -76,7 +75,6 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 목록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_2010;
@@ -98,7 +96,6 @@ public class TaskController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 업무일지 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

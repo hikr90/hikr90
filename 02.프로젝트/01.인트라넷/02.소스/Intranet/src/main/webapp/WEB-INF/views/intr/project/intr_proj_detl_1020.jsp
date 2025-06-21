@@ -131,7 +131,7 @@
 							<input type="hidden" id="filetypeCd" name="filetypeCd" value="PROJ">
 								
 							<div class="post_wrap">
-								<h2>프로젝트 등록</h2><br>
+								<h2>프로젝트 등록</h2>
 								<div class="post_view">
 									<dl>
 										<dt>
@@ -165,6 +165,7 @@
 	                                        <dd class="sel_2part">
 	                                        	<div class="select_wrap">
 													<div id="statList" class="sList select_box">${statList[1].commcodeNm}</div>
+													<input type="hidden" id="statusNm" name="statusNm" value="${statList[1].commcodeNm}">
 													<input type="hidden" id="status" name="status" value="${statList[1].commcodeCd}">
 												
 													<ul class="sUl select_ul scroll_wrap">

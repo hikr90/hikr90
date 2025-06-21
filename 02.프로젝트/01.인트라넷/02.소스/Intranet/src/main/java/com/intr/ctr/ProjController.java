@@ -50,7 +50,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_PROJ + Const.INTR_PROJ_LIST_1010;
@@ -74,7 +73,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_PROJ + Const.INTR_PROJ_DETL_1020;
@@ -98,7 +96,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_PROJ + Const.INTR_PROJ_DETL_1010;
@@ -122,7 +119,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 수정화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return Const.VIEW_PATH_PROJ + Const.INTR_PROJ_DETL_1030;
@@ -144,7 +140,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -166,7 +161,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;
@@ -188,7 +182,6 @@ public class ProjController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 프로젝트 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-			utilService.exptProc(paramMap, e);
 		}
 		//
 		return defaultStr;

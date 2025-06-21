@@ -24,7 +24,7 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-		                            <h2>My Page</h2><br>
+		                            <h2>My Page</h2>
 		                            <div class="post_write">
 		                            	<dl>
 			                           		<dt>
