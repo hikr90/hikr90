@@ -1,0 +1,101 @@
+게시판 DB
+-- 시퀀스 생성
+create sequence seq_board_idx;
+
+-- 테이블 생성
+create table board(
+	idx NUMBER(3) primary key, -- 게시글 일련번호
+	name VARCHAR2(50) not null, -- 작성자
+	subject VARCHAR2(255) not null, -- 게시글 제목
+	content CLOB, -- 게시글 내용
+	pwd VARCHAR2(100) not null,
+	ip VARCHAR2(50),
+	regdate DATE,
+	readhit NUMBER(4) default 0, -- 조회수
+	ref NUMBER(3), -- 기준글 번호(댓글을 달기위한 메인글의 번호)
+	step NUMBER(2), -- 댓글의 순서 (수직적인 순서)
+	depth NUMBER(2) -- 댓글의 깊이 (수평적인 댓글) 
+);
+
+
+step : 위에서 몇번째 댓글인지
+dept : 몇번 좌측에서 들어갔는가?
+중간에 글이 들어오면 step이 늘어난다. (특정 번호의 step이 들어오면 같거나 큰 애들을 1씩 늘려)
+
+테이블에대한 개념
+			ref	step	depth
+1. 첫번째 글		(1,	0,	0)		
+   ㄴ 3. 댓글1		(1,	1,	1)
+      ㄴ 7. 대댓 		(1, 	2, 	2)
+      ㄴ 8. 대댓 		(1, 	3, 	2)
+          ㄴ 11. 대대댓	(1, 	4, 	3) 
+   ㄴ 6. 댓글4 		(1,	5,	1)	
+
+2. 두번쨰 글		(2,	0,	0)
+   ㄴ 4. 댓글2 		(2,	1,	1) 
+      ㄴ 9.대댓		(2,	2,	2)
+      ㄴ 10. 대댓		(2,	3,	2)
+   ㄴ 5. 댓글3		(2,	4,	1)
+
+seq_board_idx.currVal (현재 시쿼스 값)
+
+-- 새글 샘플
+insert into board values(
+	seq_board_idx.nextVal,
+	'일길동',
+	'내가 1등',
+	'나는 1등이다.',
+	'1111',
+	'192.1.1.1',
+	sysdate,
+	0,
+	seq_board_idx.currVal,
+	0,
+	0
+);
+
+commit;
+
+-- 댓글
+insert into board values(
+	seq_board_idx.nextVal,
+	'이길동',
+	'댓글맨',
+	'나는 댓글 아니면 안해',
+	'1111',
+	'192.1.1.1',
+	sysdate,
+	1,
+	1,
+	1,
+	1
+);
+
+-- 댓글의 댓글
+insert into board values(
+	seq_board_idx.nextVal,
+	'삼길동',
+	'대댓글맨',
+	'나는 대댓글 아니면 안해',
+	'1111',
+	'192.1.1.1',
+	sysdate,
+	1,
+	1,
+	2,
+	2
+);
+
+commit;
+
+레퍼런스 : 내림차순 (최근 글을 볼 수 있도록)
+스탭 : 오름차순 
+
+-- 게시판의 정렬 구조
+select * from board order by ref DESC, step ASC;
+
+-- DB 삭제 여부 확인을 위한 컬럼 추가
+alter table board add(del_info NUMBER(2));
+
+-- 페이징 처리를 위한 쿼리문
+select * from (select rank() over(order by ref desc, step asc) no, b.* from (select * from board) b ) where no between 1 and 10;

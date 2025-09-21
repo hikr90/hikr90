@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 블록 & 인라인 요소
+				- Block : 브라우저의 너비만큼 가로 영역을 확보하는 요소
+				- Inline : 태그가 포장하고 있는 영역만큼만 가로 영역을 확보하는 요소
+				
+				[참고] 블록과 인라인 요소의 차이
+					(1) 블록 요소는 기본적으로 줄바꿈이 발생하나 인라인 요소는 줄바꿈이 없다.
+					(2) 블록 요소는 높이, 너비의 지정이 가능하나 인라인 요소는 높이, 너비 및 문자 정렬 등이 불가능하다.
+		-->
+		<meta charset="UTF-8">
+		<title>인라인을 블록으로 변경</title>
+
+		<style type="text/css">
+			li{list-style: none;}
+			span{background: #aaf; display: block;}
+		</style>
+
+	</head>
+	<body>
+		<ul>
+			<li>
+				<img alt="이미지" src="image/verticalAlign01.jpg">
+				<span>이미지1</span>
+				<span>내용</span>
+			</li>
+		</ul>
+	</body>
+</html>

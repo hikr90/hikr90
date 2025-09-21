@@ -1,0 +1,17 @@
+-- 회원관리 테이블
+-- 시퀀스 생성
+create sequence seq_myshop_idx;
+
+-- 테이블 생성
+create table myshop(
+	idx NUMBER(3) primary key,
+	name VARCHAR2(100) not null,
+	id VARCHAR2(50) not null,
+	pwd VARCHAR2(50) not null,
+	email VARCHAR2(100),
+	addr VARCHAR2(200)
+);
+
+insert into myshop values(seq_myshop_idx.nextVal,'일길동','one','1111','one@korea.com','서울시 관악구');
+
+commit;

@@ -1,0 +1,29 @@
+성적 테이블
+
+-- 시퀀스
+create sequence seq_sungtb_no;
+
+-- 테이블
+
+create table sungtb(
+	no NUMBER(3) primary key,
+	name VARCHAR2(50) not null,
+	kor NUMBER(3) default 0,
+	eng NUMBER(3) default 0,
+	mat NUMBER(3) default 0
+);
+
+-- 샘플 데이터
+insert into sungtb values(seq_sungtb_no.nextVal,'일길동',76,85,99);
+insert into sungtb values(seq_sungtb_no.nextVal,'이길동',51,82,66);
+insert into sungtb values(seq_sungtb_no.nextVal,'삼길동',95,71,100);
+commit;
+
+
+-- 총점과 평균 순위를 확인할 수 있는 조회 뷰
+create or replace view sungtb_view as
+select s.*, (kor+eng+mat) tot,
+	round((kor+eng+mat)/3,1) avg,
+	rank() over(order by (kor+eng+mat) desc) rank
+from (select * from sungtb) s
+order by no;

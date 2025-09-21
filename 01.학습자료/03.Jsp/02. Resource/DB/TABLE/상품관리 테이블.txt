@@ -1,0 +1,49 @@
+상품 관리 테이블
+--시퀀스
+create sequence seq_pro_idx;
+
+--테이블
+create table product(
+	idx NUMBER(3) primary key,
+	category VARCHAR2(100) not null, -- 카테고리
+	p_num VARCHAR2(100) unique not null, -- 모델명
+	p_name VARCHAR2(100) not null,
+	p_company VARCHAR2(100) not null,
+	p_price NUMBER(10) not null,
+	p_saleprice NUMBER(10) not null,
+	p_image_s VARCHAR2(255), -- 작은 상품 이미지
+	p_image_l VARCHAR2(255),  -- 큰 상품 이미지
+	p_content CLOB not null,
+	p_date DATE not null
+);
+
+-- 샘플데이터
+insert into product values(
+	seq_pro_idx.nextVal,
+	'sp003',
+	'rc-113',
+	'로체스 인라인',
+	'로체스',
+	32000,
+	25000,
+	'pds1.jpg',
+	'pds1_z.jpg',
+	'스피드왕 번개를 아는가? 당신도 번개가 될 수 있다.',
+	sysdate
+);
+
+insert into product values(
+	seq_pro_idx.nextVal,
+	'ele002',
+	'vc-13',
+	'샘숭 최신 브라운관 TV',
+	'샘숭',
+	1500000,
+	990000,
+	'pds4.jpg',
+	'pds4_z.jpg',
+	'김일 선생님이 박치기를 하시던 그 시절! 그 갬성 그대로!!',
+	sysdate
+);
+
+commit;

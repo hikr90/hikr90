@@ -1,0 +1,43 @@
+-- 장바구니 상품의 일련번호
+create sequence seq_cart_idx;
+
+-- 장바구니 테이블
+create table cart(
+	c_idx NUMBER(3) primary key, -- 장바구니 상품 일련번호
+	c_cnt NUMBER(3) not null, -- 수량
+	p_idx NUMBER(3), -- 상품의 번호 (product의 idx와 같음)
+	m_idx NUMBER(3) -- 회원번호 (로그인한 회원의 고유번호)
+);
+
+
+p_idx와 product의 idx가 겹치는 번호 : 카트에 담겼다.
+-- 상품테이블(product)의 idx와 p_idx간의 외래키 설정
+-- p_idx를 idx의 외래키로 지정하면 product의 idx가 실제로 존재하는 경우에만 p_idx를 검색하거나 사용이 가능하다.
+
+외래키 지정
+alter table cart add constraint fk_cart_p_idx foreign key(p_idx) references product(idx); 
+
+
+insert into cart values(seq_cart_idx.nextVal,1,3,1);
+
+-- 장바구니를 조회하기위한 전용 뷰
+create or replace view cart_view AS
+select idx p_idx, -- idx는 product의 컬럼인데 앞으로는 이를 p_idx로 변경해서 사용할 것이다.
+	c_idx,
+	p_num,
+	p_name,
+	p_price,
+	p_saleprice,
+	c_cnt,
+	m_idx, -- 등록된 회원의 번호
+	c_cnt * p_saleprice amount -- 구매한 만큼의 가격
+from product p inner join cart c
+on p.idx = c.p_idx;
+
+
+inner join : 외래키로 연결된 조건이 정확히 일치하는 경우 값을 가져온다.
+(equi join과 같다.)
+
+-- 장바구니 모든 상품의 총 금액
+select sum(amount) from cart_view;
+

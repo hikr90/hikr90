@@ -1,0 +1,13 @@
+-- 이미지 갤러리 테이블
+-- 시퀀스 생성
+create sequence seq_photo_idx;
+
+-- 테이블 생성
+create table photo(
+	idx NUMBER(3) primary key,
+	title VARCHAR2(100),
+	filename VARCHAR2(100),
+	pwd VARCHAR2(50),
+	ip VARCHAR2(50),
+	regidate DATE
+);
