@@ -1,4 +1,4 @@
-package ex4_work;
+package ex6_work;
 
 import java.io.File;
 

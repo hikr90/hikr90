@@ -1,4 +1,4 @@
-package ex5_work;
+package ex7_work;
 
 import java.io.File;
 import java.io.FileReader;
