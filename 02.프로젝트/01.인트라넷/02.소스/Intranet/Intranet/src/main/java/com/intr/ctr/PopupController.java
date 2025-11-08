@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
 import com.intr.dao.AuthDao;
@@ -119,6 +120,30 @@ public class PopupController {
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1022;
+	}
+	
+	// 사원 정보 조회
+	@RequestMapping("/intrPopupInqy1023.do")
+	@ResponseBody
+	public String intrPopupInqy1023(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		String defaultStr = "";
+		//
+		try {
+			// 사원 아이디 저장
+			defaultInfo = empDao.intrEmpInqy1012(paramMap);
+			
+			if(defaultInfo != null) {
+				defaultStr = String.format("[{'findId':'%s', 'findEmail':'%s'}]", (String)defaultInfo.get("empId"), (String)defaultInfo.get("email"));		
+			}
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 팝업(아이디 찾기) 사원 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
 	}
 	
 	// 프로젝트 조회

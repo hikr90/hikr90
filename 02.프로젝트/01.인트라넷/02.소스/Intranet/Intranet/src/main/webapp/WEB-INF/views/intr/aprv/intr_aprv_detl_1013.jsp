@@ -14,45 +14,56 @@
 
 	// 목록으로
 	function listCall() {
-		formSubmit('intrAprvInqy1010.do');
+		try {
+			//
+			formSubmit('intrAprvInqy1010.do');
+			
+		} catch (error){
+	        console.error("[Error] 목록으로 : ", error.message);
+		}
 	}
 	
 	// 기안 등록 
 	function aprvProc(f){
-		// 유효성 검증
-		if(!valProc()){return;};
-		// 결재선
-		if($("#aprvLine").val() == ''){
-			alert("<spring:message code="APRV.LINE.NONE"/>");
-			return;
-		}
-		// 정산내역
-		if($("#corpLine").val() == ''){
-			alert("<spring:message code="APRV.CORP.NONE"/>");
-			return;
-		}
-		//
-		if(confirm("기안하시겠습니까?")){
-			// 에디터 내용 저장
-			var getData = CKEDITOR.instances.editor.getData();
-			$("#editor").val(getData);
-			var fileList = setFormData();
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			// 결재선
+			if($("#aprvLine").val() == ''){
+				alert("<spring:message code="APRV.LINE.NONE"/>");
+				return;
+			}
+			// 정산내역
+			if($("#corpLine").val() == ''){
+				alert("<spring:message code="APRV.CORP.NONE"/>");
+				return;
+			}
+			//
+			if(confirm("기안하시겠습니까?")){
+				// 에디터 내용 저장
+				var getData = CKEDITOR.instances.editor.getData();
+				$("#editor").val(getData);
+				var fileList = setFormData();
+				
+	   			$.ajax({
+					url:"intrAprvProc1010.do?pageUrl=Aprv",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'post',
+	   				success : function(data){
+	   					//
+	   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
+	   					listCall();
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
 			
-   			$.ajax({
-				url:"intrAprvProc1010.do?pageUrl=Aprv",
-				processData : false,
-				contentType : false,
-				data: fileList,
-				type : 'post',
-   				success : function(data){
-   					//
-   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
-   					listCall();
-   				},
-   				error : function(res, status, error){
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+		} catch (error){
+	        console.error("[Error] 기안 등록 : ", error.message);
 		}
 	}
 </script>
@@ -116,7 +127,7 @@
 												<label for="post-title">&#10003; 프로젝트명</label>
 											</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="projCall();">
+												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
 												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
@@ -124,13 +135,13 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd style="width: 645px;">
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
+												<input type="button" class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											
 											<dt>&#10003; 정산내역 등록</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="corpReg();">
+												<input type="button" class="btn_blue align_top" value="선택" onclick="corpReg();">
 												<input type="hidden" id="corpLine" name="corpLine" value="">
 											</dd>
 											<dt>총 정산금액</dt>

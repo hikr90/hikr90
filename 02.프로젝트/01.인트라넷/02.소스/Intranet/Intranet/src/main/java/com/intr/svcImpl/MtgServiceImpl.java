@@ -197,7 +197,7 @@ public class MtgServiceImpl implements MtgService{
 				resStr = "YES";
 			}
 			//
-			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);
 			
 		} catch (Exception e) {
 			//

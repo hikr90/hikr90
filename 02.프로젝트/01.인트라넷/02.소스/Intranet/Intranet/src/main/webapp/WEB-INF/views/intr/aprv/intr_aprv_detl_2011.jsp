@@ -14,7 +14,13 @@
 
 	// 목록으로
 	function listCall() {
-		formSubmit('intrAprvInqy2010.do');
+		try {
+			//
+			formSubmit('intrAprvInqy2010.do');
+			
+		} catch (error){
+	        console.error("[Error] 목록으로 : ", error.message);
+		}
 	}
 </script>
 </head>
@@ -96,7 +102,7 @@
 										<dl>
 											<dt>결재선</dt>
 											<dd>
-												<input type="button"class="btn_gray align_top" value="조회" onclick="lineCall();">
+												<input type="button" class="btn_gray align_top" value="조회" onclick="lineCall();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											

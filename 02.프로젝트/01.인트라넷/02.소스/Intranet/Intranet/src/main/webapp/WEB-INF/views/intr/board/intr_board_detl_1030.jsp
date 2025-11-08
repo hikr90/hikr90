@@ -10,46 +10,59 @@
 	
 	// 취소
 	function detCall() {
-		formSubmit('intrBoardInqy1030.do');
+		try {
+			//
+			formSubmit('intrBoardInqy1030.do');
+			
+		} catch (error){
+	        console.error("[Error] 취소 : ", error.message);
+		}
 	}
 	
 	// 수정 처리
 	function modProc(f){
-		// 유효성 검증
-		if(!valProc()){return;};
-		var fileList = setFormData();
-		//
-		if(confirm("수정하시겠습니까?")){
-			// 
-   			$.ajax({
-				url:"intrBoardProc1030.do",
-				processData : false,
-				contentType : false,
-				data: fileList,
-				type : 'POST',
-   				success : function(data){
-   						//
-   						var json = eval(data);
-   						if(json[0].res=='YES'){
-   	   						//
-   							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
-	   						
-   						}else if(json[0].res=='NO'){
-   	   						//
-   							alert("<spring:message code="PROC.FAIL"/>");
-							return;	   							
-   						}else{
-   	   						//
-   							alert("<spring:message code="PROC.EXISTS"/>");
-							return;	   							
-   						}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			
+			// 파일 목록 저장
+			var fileList = setFormData();
+			//
+			if(confirm("수정하시겠습니까?")){
+				// 
+	   			$.ajax({
+					url:"intrBoardProc1030.do",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'POST',
+	   				success : function(data){
+	   						//
+	   						var json = eval(data);
+	   						if(json[0].res=='YES'){
+	   	   						//
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
+		   						
+	   						}else if(json[0].res=='NO'){
+	   	   						//
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;	   							
+	   						}else{
+	   	   						//
+	   							alert("<spring:message code="PROC.EXISTS"/>");
+								return;	   							
+	   						}
+	   				},
+	   				error : function(res, status, error){
+	   					//
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 수정 처리 : ", error.message);
 		}
 	}	
 </script>

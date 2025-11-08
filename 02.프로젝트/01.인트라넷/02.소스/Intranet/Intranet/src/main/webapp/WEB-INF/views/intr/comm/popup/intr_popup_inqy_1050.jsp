@@ -27,8 +27,8 @@
 	                     	<div id="opinCon" class="post_con disp_flex" style="height: 240px;"></div>
 	                        
 							<div class="btn_right">
-	                      		<input type="button"class="btn_blue_thin" value="확인" onclick="opinConf('opin');">
-								<input type="button"class="btn_gray_thin" value="취소" onclick="popClose('opin');">
+	                      		<input type="button" class="btn_blue_thin" value="확인" onclick="opinConf('opin');">
+								<input type="button" class="btn_gray_thin" value="취소" onclick="popClose('opin');">
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

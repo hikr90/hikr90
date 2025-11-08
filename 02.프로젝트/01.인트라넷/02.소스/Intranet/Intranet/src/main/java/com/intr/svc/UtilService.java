@@ -34,4 +34,9 @@ public interface UtilService {
 	
 	// 메일 전송 관련
 	String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception;
+	
+	// 암복호화 관련
+	String encryptProc(String encryptedText) throws Exception;
+	String decryptProc(String encryptedText) throws Exception;
+
 }

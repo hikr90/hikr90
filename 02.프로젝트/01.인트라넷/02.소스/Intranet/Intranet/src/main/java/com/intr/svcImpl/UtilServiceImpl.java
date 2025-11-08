@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,7 @@ import com.intr.dao.EmpDao;
 import com.intr.dao.QueryDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
+import com.intr.utils.AESCryptoUtil;
 import com.intr.utils.Const;
 
 @Service
@@ -120,9 +123,7 @@ public class UtilServiceImpl implements UtilService{
 		//
 		String defaultStr = ""; // 결과 전달 JSON
 		String resStr = "NO";	// 결과값
-		String joinCode = "";	// 인증 코드
-		String empId = "";		// 아이디
-		String empPwd = "";		// 비밀번호
+		String joinCode = "";		// 인증 코드
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -132,11 +133,9 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpInqy1012(paramMap);
 			//
-			if(defaultInfo!=null) {
+			if(defaultInfo != null) {
 				// 값 저장
 				resStr = "YES";
-				empId = String.valueOf(defaultInfo.get("empId"));
-				empPwd = String.valueOf(defaultInfo.get("empPwd"));
 				
 				//--------------------------------------------------------------------------------------------
 				// 메일 전송
@@ -144,7 +143,7 @@ public class UtilServiceImpl implements UtilService{
 				joinCode = sendMailProc(paramMap);
 			}
 			//
-			defaultStr = String.format("[{'res':'%s','joinCode':'%s','empId':'%s','empPwd':'%s'}]", resStr, joinCode, empId, empPwd);
+			defaultStr = String.format("[{'res':'%s'}]", resStr);
 			
 		} catch (Exception e) {
 			//
@@ -928,5 +927,29 @@ public class UtilServiceImpl implements UtilService{
 		}
 		//
 		return res;
+	}
+	
+	// 암호화
+	public String encryptProc(String plainText) throws Exception {
+		//--------------------------------------------------------------------------------------------
+		// 암호화
+		//--------------------------------------------------------------------------------------------
+		SecretKey key = AESCryptoUtil.getKey();
+		IvParameterSpec ivParameterSpec = AESCryptoUtil.getIv();
+		String specName = "AES/CBC/PKCS5Padding";
+		//
+		return AESCryptoUtil.encrypt(specName, key, ivParameterSpec, plainText);
+	}
+	
+	// 복호화
+	public String decryptProc(String plainText) throws Exception {
+		//--------------------------------------------------------------------------------------------
+		// 암호화
+		//--------------------------------------------------------------------------------------------
+		SecretKey key = AESCryptoUtil.getKey();
+		IvParameterSpec ivParameterSpec = AESCryptoUtil.getIv();
+		String specName = "AES/CBC/PKCS5Padding";
+		//
+		return AESCryptoUtil.decrypt(specName, key, ivParameterSpec, plainText);
 	}
 }

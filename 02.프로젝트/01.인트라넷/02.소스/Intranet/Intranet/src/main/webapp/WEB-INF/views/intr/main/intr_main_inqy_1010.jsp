@@ -59,40 +59,51 @@
 	
 	// 캘린더 목록 조회
 	function viewCall(dateObj){
-		//
-		var year = dateObj.getFullYear();
-		var month = String(dateObj.getMonth() + 1).padStart(2, '0');  // 월은 0부터 시작
-		var date = String(dateObj.getDate()).padStart(2, '0');	// 일은 최소 두자리
-		var calDate = year + month + date;
-		//
-		$.ajax({
-				type:	"post" , 
-				traditional: true,
-				url:	"intrMtgInqy2020.do",
-				data:	{
-					"mtgDt": calDate
-				},
-				success : function(data){
-   					$("#calInfo").html(data);
-				},
-				error : function(res, status, error){
-					//
-					alert("<spring:message code="PROC.ERROR"/>");
-				}
-		});
+		try {
+			// 변수 지정
+			var year = dateObj.getFullYear();
+			var month = String(dateObj.getMonth() + 1).padStart(2, '0');  // 월은 0부터 시작
+			var date = String(dateObj.getDate()).padStart(2, '0');	// 일은 최소 두자리
+			var calDate = year + month + date;
+			//
+			$.ajax({
+					type:	"post" , 
+					traditional: true,
+					url:	"intrMtgInqy2020.do",
+					data:	{
+						"mtgDt": calDate
+					},
+					success : function(data){
+	   					$("#calInfo").html(data);
+					},
+					error : function(res, status, error){
+						//
+						alert("<spring:message code="PROC.ERROR"/>");
+					}
+			});
+			
+		} catch (error){
+	        console.error("[Error] 캘린더 목록 조회 : ", error.message);
+		}
 	}
 	
 	// 회의 조회 팝업
 	function mtgCall(sequenceId){
-		var obj = new Object();
-		//
-		obj["mappingId"] = "intrPopupInqy1091.do";
-		obj["sequenceId"] = sequenceId;
-		obj["areaType"] = "mtg";
-		obj["width"] = "700";
-		obj["height"] = "550";
-		//		
-		ajaxPopup(obj);
+		try {
+			//
+			var obj = new Object();
+			
+			obj["mappingId"] = "intrPopupInqy1091.do";
+			obj["sequenceId"] = sequenceId;
+			obj["areaType"] = "mtg";
+			obj["width"] = "700";
+			obj["height"] = "550";
+			//		
+			ajaxPopup(obj);
+			
+		} catch (error){
+	        console.error("[Error] 회의 조회 팝업 : ", error.message);
+		}
 	}
 </script>
 
@@ -110,7 +121,7 @@
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1090.jsp"></c:import>	
 	</div>
 
-	<div class="top_wrap">
+	<div class="main_area">
 		<div class="top_area">
 			<article class="main_article">
 				<div class="content">
@@ -168,13 +179,10 @@
 				</div><!-- End content -->
 			</article>
 		</div>
-	</div>
-	
-	<div class="bottom_wrap">
+		
 		<div class="bottom_area">
 			<article class="main_article">
 				<div class="content">
-				
 					<div class="bottom_box">
 						<div class="wrap">
 							<div class="bottom_wrap">
@@ -190,7 +198,10 @@
 										<ul class="area_ul">
 											<c:forEach var="list" items="${boardList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">${list.brdTitle}</a>
+													<a class="main_a" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
+														<script>document.write(isNew('${list.regDt}'))</script>
+														${list.brdTitle}
+													</a>
 													<span class="date main_ie">
 														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
@@ -220,7 +231,10 @@
 										<ul class="area_ul">
 											<c:forEach var="list" items="${aprvList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">${list.aprvTitle}</a>
+													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
+														<script>document.write(isNew('${list.regDt}'))</script>	
+														${list.aprvTitle}
+													</a>
 													<span class="date main_ie">
 														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
 														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>

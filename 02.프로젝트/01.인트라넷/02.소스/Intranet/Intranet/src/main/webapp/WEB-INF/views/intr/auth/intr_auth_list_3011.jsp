@@ -14,108 +14,131 @@
 	
 	// 목록 이동
 	function moveBtn(f) {
-		// 체크한 건이 없는 경우
-		if($("input[id=empIdx]:checked").length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
-		}
+		try {
+			// 체크한 건이 없는 경우
+			if($("input[id=empIdx]:checked").length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}
 
-		// 체크한 값 이동
-		$("input[class=empIdx]:checked").each(function() {
-			// 중복 여부 값
-			var dupeYn = 'N';
-			// 사용자 관련 변수
-			var empIdx = $(this).val();
-			var empNm = $(this).attr("empNm");
-			var orgNm = $(this).attr("orgNm");
-			
-			// 사용자 권한 목록 값
-			$("input[id=authEmpIdx]").each(function() {
-				// 중복되는 경우 중복 여부 값 변경
-				var authEmpIdx = $(this).val();
-				//
-				if(authEmpIdx==empIdx){
+			// 체크한 값 이동
+			$("input[class=empIdx]:checked").each(function() {
+				// 중복 여부 값
+				var dupeYn = 'N';
+				// 사용자 관련 변수
+				var empIdx = $(this).val();
+				var empNm = $(this).attr("empNm");
+				var orgNm = $(this).attr("orgNm");
+				
+				// 사용자 권한 목록 값
+				$("input[id=authEmpIdx]").each(function() {
+					// 중복되는 경우 중복 여부 값 변경
+					var authEmpIdx = $(this).val();
 					//
-					dupeYn = "Y";
-					return; 
+					if(authEmpIdx==empIdx){
+						//
+						dupeYn = "Y";
+						return; 
+					}
+				});
+				
+				// 중복되지 않는 경우
+				if(dupeYn=='N'){
+					//
+					var str = "";
+					//
+					str += "<tr>"
+					str += "	<td class='first_td'>";
+					str += "		<span class='check_box'>";
+					str += "		<input type='checkbox' class='checkbox' id='authEmpIdx' value='" + empIdx + "'/>"
+					str += "		<label for='chk_local'><span></span></label></span>";
+					str += "		<input type='hidden' name='authEmpIdx' value='" + empIdx + "'/>"
+					str += "	</td>";
+					str += "	<td>" + orgNm + "</td>";
+					str += "	<td>" + empNm + "</td>";
+					str += "</tr>";
+					
+					$(".authEmpTbl").append(str);
 				}
+				
+				// 체크 해제
+				$("input[id='empIdx']").prop("checked", false);
+				$(".empChk").prop("checked", false);
+				$(".totalIdx").prop("checked", false);
 			});
 			
-			// 중복되지 않는 경우
-			if(dupeYn=='N'){
-				//
-				var str = "";
-				//
-				str += "<tr>"
-				str += "	<td class='first_td'>";
-				str += "		<span class='check_box'>";
-				str += "		<input type='checkbox' class='checkbox' id='authEmpIdx' value='" + empIdx + "'/>"
-				str += "		<label for='chk_local'><span></span></label></span>";
-				str += "		<input type='hidden' name='authEmpIdx' value='" + empIdx + "'/>"
-				str += "	</td>";
-				str += "	<td>" + orgNm + "</td>";
-				str += "	<td>" + empNm + "</td>";
-				str += "</tr>";
-				
-				$(".authEmpTbl").append(str);
-			}
-			
-			// 체크 해제
-			$("input[id='empIdx']").prop("checked", false);
-			$(".empChk").prop("checked", false);
-			$(".totalIdx").prop("checked", false);
-		});
+		} catch (error){
+	        console.error("[Error] 목록 이동 : ", error.message);
+		}
 	}
 	
 	// 권한 목록 화면 상 제거
 	function delCall(){
-		// 유효성 검증
-		if($("input[id=authEmpIdx]:checked").length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
+		try {
+			// 유효성 검증
+			if($("input[id=authEmpIdx]:checked").length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}
+			
+			// 화면 상 삭제 처리
+			$("input[id=authEmpIdx]:checked").each(function() {
+				$(this).parents("tr").remove();
+			});
+			
+			// 권한 사용자 체크 초기화
+			$(".empChk").prop("checked", false);
+			
+		} catch (error){
+	        console.error("[Error] 권한 목록 화면 상 제거 : ", error.message);
 		}
-		
-		// 화면 상 삭제 처리
-		$("input[id=authEmpIdx]:checked").each(function() {
-			$(this).parents("tr").remove();
-		});
-		
-		//
-		$(".empChk").prop("checked", false);
 	}
 	
-	// 새로고침 (사용자 권한 목록 재 조회)
+	// 새로고침
 	function setListCall() {
-		$(".list_bg").trigger("click");
+		try {
+			//
+			$(".list_bg").trigger("click");
+			
+		} catch (error){
+	        console.error("[Error] 새로고침 : ", error.message);
+		}
 	}
 	
 	// 저장 처리
 	function regProc(){
-		//
-		$("#authCd").val($("#authTree .list_bg").attr('id'));
-		$("input[name=authEmpIdx]").each(function(idx) {
-			$(this).attr("name","empIdx"+idx);
-		});
-		//
-		var param = $("#form").serialize();
-		if(confirm("저장하시겠습니까?")){
+		try {
+			// 권한 코드 지정
+			$("#authCd").val($("#authTree .list_bg").attr('id'));
+			
+			// 권한 사용자 지정
+			$("input[name=authEmpIdx]").each(function(idx) {
+				$(this).attr("name","empIdx"+idx);
+			});
 			//
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrAuthProc3010.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	            	//
-					alert("<spring:message code="PROC.SUCCESS"/>");
-	            	setListCall();
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-		}				
+			var param = $("#form").serialize();
+			if(confirm("저장하시겠습니까?")){
+				//
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrAuthProc3010.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	//
+						alert("<spring:message code="PROC.SUCCESS"/>");
+		            	setListCall();
+		            },
+		            error : function(data){
+		            	//
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 저장 처리 : ", error.message);
+		}
 	}
 </script>
 

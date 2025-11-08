@@ -9,12 +9,24 @@
 	<script type="text/javascript">
 		// 목록으로
 		function listCall() {
-			formSubmit('intrBoardInqy1010.do');
+			try {
+				//
+				formSubmit('intrBoardInqy1010.do');
+				
+			} catch (error){
+		        console.error("[Error] 목록으로 : ", error.message);
+			}
 		}
 		
 		// 수정 화면
 		function modCall() {
-			formSubmit('intrBoardInqy1040.do');
+			try {
+				//
+				formSubmit('intrBoardInqy1040.do');
+				
+			} catch (error){
+		        console.error("[Error] 수정 화면 : ", error.message);
+			}
 		}
 	</script>
 </head>

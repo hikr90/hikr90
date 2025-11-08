@@ -133,4 +133,12 @@ public class EmpDao {
 		resInt = sqlsession.update("emp.intrEmpProc1041", paramMap);
 		return resInt;
 	}
+	
+	// 사원  비밀번호 수정
+	public int intrEmpProc1051(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("emp.intrEmpProc1051", paramMap);
+		return resInt;
+	}
 }

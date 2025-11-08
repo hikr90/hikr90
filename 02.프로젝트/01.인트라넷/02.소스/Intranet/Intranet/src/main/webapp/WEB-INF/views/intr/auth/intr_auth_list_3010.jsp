@@ -16,9 +16,7 @@
 		setTree("tree_area");
 		// 선택 항목 음영 처리
 		$(document).on('click','.a_btn',function() {
-			//
 			$(".a_btn").each(function() {
-				//
 				$(this).removeClass('list_bg');
 			});
 			//
@@ -53,46 +51,57 @@
 	
 	// 권한 조회
 	function listCall(f){
-		//
-		var param = $("#form").serialize();
-		$.ajax({
-    		type : 'post',
-        	url : 'intrAuthInqy1011.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-            	//
-            	$("#authTree").html(data);
-            	$("#empArea").css("display","inline-flex");
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
+		try {
+			//
+			var param = $("#form").serialize();
+			
+			$.ajax({
+	    		type : 'post',
+	        	url : 'intrAuthInqy1011.do',
+	            data : param,
+	            dataType : 'html',
+	            success : function(data){
+	            	//
+	            	$("#authTree").html(data);
+	            	$("#empArea").css("display","inline-flex");
+	            },
+	            error : function(data){
+	            	//
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+			
+		} catch (error){
+	        console.error("[Error] 권한 조회 : ", error.message);
+		}
 	}
 
 	// 권한 상세보기
 	function detCall(authCd){
-		//
-		$(".authCd").val(authCd);
-		var param = $("#form").serialize();
-		//
-		$.ajax({
-    		type : 'post',
-        	url : 'intrAuthInqy3011.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-     				//
-            	    $("#empTree").html(data);
-            	    $("#empArea").css("display","inline-flex");
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
+		try {
+			// 권한 코드 지정
+			$(".authCd").val(authCd);
+			var param = $("#form").serialize();
+			//
+			$.ajax({
+	    		type : 'post',
+	        	url : 'intrAuthInqy3011.do',
+	            data : param,
+	            dataType : 'html',
+	            success : function(data){
+	     				//
+	            	    $("#empTree").html(data);
+	            	    $("#empArea").css("display","inline-flex");
+	            },
+	            error : function(data){
+	            	//
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+			
+		} catch (error){
+	        console.error("[Error] 권한 상세보기 : ", error.message);
+		}
 	}
 </script>
 </head>
@@ -126,8 +135,8 @@
 													<label class="srch_label">제목</label>		
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>

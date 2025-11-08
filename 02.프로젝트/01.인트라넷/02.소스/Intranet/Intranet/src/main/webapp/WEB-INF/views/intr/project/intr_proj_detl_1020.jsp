@@ -8,85 +8,99 @@
 	<script type="text/javascript">
 		// 담당자 선택
 		function popCall(){
-			var obj = new Object();
-			//
-			obj["mappingId"] = "intrPopupInqy1010.do";
-			obj["areaType"] = "emp";
-			obj["width"] = "550"
-			obj["height"] = "420";
-			//		
-			ajaxPopup(obj);
+			try {
+				//
+				var obj = new Object();
+				//
+				obj["mappingId"] = "intrPopupInqy1010.do";
+				obj["areaType"] = "emp";
+				obj["width"] = "550"
+				obj["height"] = "420";
+				//		
+				ajaxPopup(obj);
+				
+			} catch (error){
+		        console.error("[Error] 담당자 선택 : ", error.message);
+			}
 		}
 	
 		// 프로젝트 등록 처리
 		function regProc(f){
-  			// 유효성 검증
-			if(!valProc()){return;};
-			//
-			var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
-			var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
-			var status = $("#statList").text();
-			
-			// 계약기간
-			if(projSdt == ''){
-				alert("<spring:message code="PROJ.SDT.NONE"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			if(projEdt == ''){
-				alert("<spring:message code="PROJ.EDT.NONE"/>");
-				$("#projEdt").focus();
-				return;
-			}
-			if(projSdt > projEdt){
-				alert("<spring:message code="PROJ.DT.PAST"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			// 진행상태
-			if(status == ''){
-				alert("<spring:message code="PROJ.STAT.NONE"/>");
-				return;
-			}
-			//
-			if(confirm("등록하시겠습니까?")){
+			try {
+	  			// 유효성 검증
+				if(!valProc()){return;};
 				//
-				var fileList = setFormData();
-	   			$.ajax({
-					url:"intrProjProc1010.do",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'post',
-	   				success : function(data){
-	   						//
-	   						var json = eval(data);
-	   						if(json[0].res=='YES'){
-	   	   						//
-	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrProjInqy1010.do?pageUrl=Proj";
+				var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
+				var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
+				var status = $("#statList").text();
+				
+				// 계약기간
+				if(projSdt == ''){
+					alert("<spring:message code="PROJ.SDT.NONE"/>");
+					$("#projSdt").focus();
+					return;
+				}
+				if(projEdt == ''){
+					alert("<spring:message code="PROJ.EDT.NONE"/>");
+					$("#projEdt").focus();
+					return;
+				}
+				if(projSdt > projEdt){
+					alert("<spring:message code="PROJ.DT.PAST"/>");
+					$("#projSdt").focus();
+					return;
+				}
+				// 진행상태
+				if(status == ''){
+					alert("<spring:message code="PROJ.STAT.NONE"/>");
+					return;
+				}
+				//
+				if(confirm("등록하시겠습니까?")){
+					//
+					var fileList = setFormData();
+		   			$.ajax({
+						url:"intrProjProc1010.do",
+						processData : false,
+						contentType : false,
+						data: fileList,
+						type : 'post',
+		   				success : function(data){
+		   						var json = eval(data);
 		   						
-	   						}else if(json[0].res=='NO'){
-	   	   						//
-	   							alert("<spring:message code="PROC.FAIL"/>");
-								return;	   							
-	   						}else{
-	   	   						//
-	   							alert("<spring:message code="PROC.EXISTS"/>");
-								return;	   							
-	   						}
-	   				},
-	   				error : function(res, status, error){
-	   					//
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
+		   						if(json[0].res=='YES'){
+		   							alert("<spring:message code="PROC.SUCCESS"/>");
+			   						location.href = "intrProjInqy1010.do?pageUrl=Proj";
+			   						
+		   						}else if(json[0].res=='NO'){
+		   							alert("<spring:message code="PROC.FAIL"/>");
+									return;
+									
+		   						}else{
+		   							alert("<spring:message code="PROC.EXISTS"/>");
+									return;	   							
+		   						}
+		   				},
+		   				error : function(res, status, error){
+		   					alert("<spring:message code="PROC.ERROR"/>");
+		   				}
+		   			});
+				}
+				
+			} catch (error){
+		        console.error("[Error] 프로젝트 등록 처리 : ", error.message);
 			}
 		}
 		
 		// 목록으로
 		function listCall() {
-			formSubmit('intrProjInqy1010.do');
+			try {
+				//
+				formSubmit('intrProjInqy1010.do');
+				
+			} catch (error){
+		        console.error("[Error] 목록으로 : ", error.message);
+			}
 		}
 	</script>
 </head>
@@ -142,7 +156,7 @@
 										</dd>
 										<dt>&#10003; 담당자</dt>
 										<dd>
-											<input type="button"class="btn_blue align_top" value="선택" onclick="popCall();">
+											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
 											<input type="text" id="empPnm" title="담당자" style="width: 50%;" disabled="disabled">
 										</dd>
 										<dt>&#10003; 계약기간</dt>

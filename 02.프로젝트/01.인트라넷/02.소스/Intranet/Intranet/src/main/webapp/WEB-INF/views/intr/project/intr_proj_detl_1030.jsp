@@ -11,85 +11,99 @@
 	
 		// 담당자 선택
 		function popCall(){
-			var obj = new Object();
-			
-			obj["mappingId"] = "intrPopupInqy1010.do";
-   			obj["areaType"] = "emp";
-   			obj["width"] = "550"
-   			obj["height"] = "420";
-   			//		
-   			ajaxPopup(obj);
+			try {
+				//
+				var obj = new Object();
+				
+				obj["mappingId"] = "intrPopupInqy1010.do";
+	   			obj["areaType"] = "emp";
+	   			obj["width"] = "550"
+	   			obj["height"] = "420";
+	   			//		
+	   			ajaxPopup(obj);
+	   			
+			} catch (error){
+		        console.error("[Error] 담당자 선택 : ", error.message);
+			}
 		}
 		
 		// 취소
 		function detCall() {
-			formSubmit('intrProjInqy1030.do');
+			try {
+				//
+				formSubmit('intrProjInqy1030.do');
+				
+			} catch (error){
+		        console.error("[Error] 취소 : ", error.message);
+			}
 		}
 		
 		// 수정 처리
 		function modProc(f){
-			// 유효성 검증
-			if(!valProc()){return;};
-			//
-			var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
-			var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
-			var status = $("#statList").text();
-			
-			// 계약기간
-			if(projSdt == ''){
-				alert("<spring:message code="PROJ.SDT.NONE"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			if(projEdt == ''){
-				alert("<spring:message code="PROJ.EDT.NONE"/>");
-				$("#projEdt").focus();
-				return;
-			}
-			if(projSdt > projEdt){
-				alert("<spring:message code="PROJ.DT.PAST"/>");
-				$("#projSdt").focus();
-				return;
-			}
-			// 진행상태
-			if(status == ''){
-				alert("<spring:message code="PROJ.STAT.NONE"/>");
-				return;
-			}
-			//
-			var fileList = setFormData();
-			//
-			if(confirm("수정하시겠습니까?")){
-				// 
-	   			$.ajax({
-					url:"intrProjProc1030.do",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'POST',
-	   				success : function(data){
-	   						//
-	   						var json = eval(data);
-	   						if(json[0].res=='YES'){
-	   	   						//
-	   							alert("<spring:message code="PROC.SUCCESS"/>");
-		   						location.href = "intrProjInqy1010.do?pageUrl=Proj";
+			try {
+				// 유효성 검증
+				if(!valProc()){return;};
+				//
+				var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
+				var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
+				var status = $("#statList").text();
+				
+				// 계약기간
+				if(projSdt == ''){
+					alert("<spring:message code="PROJ.SDT.NONE"/>");
+					$("#projSdt").focus();
+					return;
+				}
+				if(projEdt == ''){
+					alert("<spring:message code="PROJ.EDT.NONE"/>");
+					$("#projEdt").focus();
+					return;
+				}
+				if(projSdt > projEdt){
+					alert("<spring:message code="PROJ.DT.PAST"/>");
+					$("#projSdt").focus();
+					return;
+				}
+				// 진행상태
+				if(status == ''){
+					alert("<spring:message code="PROJ.STAT.NONE"/>");
+					return;
+				}
+				//
+				var fileList = setFormData();
+				//
+				if(confirm("수정하시겠습니까?")){
+					// 
+		   			$.ajax({
+						url:"intrProjProc1030.do",
+						processData : false,
+						contentType : false,
+						data: fileList,
+						type : 'POST',
+		   				success : function(data){
+		   						var json = eval(data);
 		   						
-	   						}else if(json[0].res=='NO'){
-	   	   						//
-	   							alert("<spring:message code="PROC.FAIL"/>");
-								return;	   							
-	   						}else{
-	   	   						//
-	   							alert("<spring:message code="PROC.EXISTS"/>");
-								return;	   							
-	   						}
-	   				},
-	   				error : function(res, status, error){
-	   					//
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
+		   						if(json[0].res=='YES'){
+		   							alert("<spring:message code="PROC.SUCCESS"/>");
+			   						location.href = "intrProjInqy1010.do?pageUrl=Proj";
+			   						
+		   						}else if(json[0].res=='NO'){
+		   							alert("<spring:message code="PROC.FAIL"/>");
+									return;
+									
+		   						}else{
+		   							alert("<spring:message code="PROC.EXISTS"/>");
+									return;	   							
+		   						}
+		   				},
+		   				error : function(res, status, error){
+		   					alert("<spring:message code="PROC.ERROR"/>");
+		   				}
+		   			});
+				}
+				
+			} catch (error){
+		        console.error("[Error] 수정 처리 : ", error.message);
 			}
 		}	
 	</script>
@@ -146,7 +160,7 @@
 										</dd>
 										<dt>&#10003; 담당자</dt>
 										<dd>
-											<input type="button"class="btn_blue align_top" value="선택" onclick="popCall();">
+											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
 											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 50%;" disabled="disabled">
 										</dd>
 										<dt>&#10003; 계약기간</dt>

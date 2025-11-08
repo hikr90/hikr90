@@ -71,16 +71,21 @@ public class MainServiceImpl implements MainService{
 			// 아이디 / 비밀번호 체크
 			//--------------------------------------------------------------------------------------------
 			if(defaultInfo!=null) {
-				String paramPwd = (String)paramMap.get("empPwd");
-				String defaultPwd = (String)defaultInfo.getEmpPwd();
+				String paramPwd = (String)paramMap.get("empPwd");		// 비밀번호 (입력)
+				String encryptPwd = (String)defaultInfo.getEmpPwd();		// 비밀번호 (DB)
+				
+				//--------------------------------------------------------------------------------------------
+				// 비밀번호 복호화
+				//--------------------------------------------------------------------------------------------
+				String decryptPwd = utilService.decryptProc(encryptPwd);
 				//
-				if(!paramPwd.equalsIgnoreCase(defaultPwd)) {
+				if(!paramPwd.equalsIgnoreCase(decryptPwd)) {
 					resStr = "NO_PWD";
 				} else {
 					//
 					resStr = "YES";
 					session.setAttribute("empVO", defaultInfo);
-					session.setMaxInactiveInterval(60*60); // 저장 시간 1시간
+					session.setMaxInactiveInterval(60*60); // 1시간
 				}
 				
 			} else {

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1011.jsp" %>
+<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,72 +10,85 @@
 	<script type="text/javascript">
    		// 정보 찾기 팝업
    		function popCall(){
-   			// 정보 찾기 팝업 (높이, 너비, 맵핑, 변수)
-   			var obj = new Object();
-   			//
-   			obj["mappingId"] = "intrPopupInqy1021.do";
-   			obj["areaType"] = "find";
-   			obj["width"] = "650"
-   			obj["height"] = "360";
-   			//		
-   			ajaxPopup(obj);
+   			try {
+   	   			// 정보 찾기 팝업
+   	   			var obj = new Object();
+   	   			//
+   	   			obj["mappingId"] = "intrPopupInqy1021.do";
+   	   			obj["areaType"] = "find";
+   	   			obj["width"] = "650"
+   	   			obj["height"] = "365";
+   	   			//		
+   	   			ajaxPopup(obj);
+   				
+   			} catch (error){
+   		        console.error("[Error] 정보 찾기 팝업 : ", error.message);
+   			}
    		}
    		
    		// 로그인
-   		function loginCall(f){
-   			// 유효성 검증
-			if(!valProc()){return;};
-			//   			
-			var param = $("#form").serialize();
-   			$.ajax({
-   				type:	"post" , 
-   				url:	"intrMainProc1010.do",
-   				data:	param,
-   				dataType:	"text" ,
-   				success : function(data){
-   					//
-   					var json = eval(data);
-   					if(json[0].res=="NO_ID"){
+   		function loginProc(f){
+   			try {
+   	   			// 유효성 검증
+   				if(!valProc()){return;};
+   				//   			
+   				var param = $("#form").serialize();
+   	   			$.ajax({
+   	   				type:	"post" , 
+   	   				url:	"intrMainProc1010.do",
+   	   				data:	param,
+   	   				dataType:	"text" ,
+   	   				success : function(data){
    	   					//
-   						alert("<spring:message code="LOGIN.ID.FAIL"/>");
-   					} else if(json[0].res=="NO_PWD") {
-   	   					//
-   						alert("<spring:message code="LOGIN.PWD.FAIL"/>");
-   					} else {
-   						//
-   						location.href = "intrMainInqy1020.do";
-   					}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+   	   					var json = eval(data);
+   	   					if(json[0].res=="NO_ID"){
+   	   						alert("<spring:message code="LOGIN.ID.FAIL"/>");
+   	   						
+   	   					} else if(json[0].res=="NO_PWD") {
+   	   						alert("<spring:message code="LOGIN.PWD.FAIL"/>");
+   	   						
+   	   					} else {
+   	   						location.href = "intrMainInqy1020.do";
+   	   					}
+   	   				},
+   	   				error : function(res, status, error){
+   	   					alert("<spring:message code="PROC.ERROR"/>");
+   	   				}
+   	   			});
+   	   			
+   			} catch (error){
+   		        console.error("[Error] 로그인 : ", error.message);
+   			}
    		}
    		
    		// 로그인 정보 입력
    		function setInfo(empId, empPwd){
-   			//
-   			$("input[name=empId]").val(empId);
-   			$("input[name=empPwd]").val(empPwd);
+   			try {
+   				//
+   	   			$("input[name=empId]").val(empId);
+   	   			$("input[name=empPwd]").val(empPwd);
+   				
+   			} catch (error){
+   		        console.error("[Error] 로그인 정보 입력 : ", error.message);
+   			}
    		}
 	</script>
 </head>
 <body id="sub">
 	<!-- 정보 찾기 -->
- 	<div id="findArea" class="popup_area hidden">
+ 	<div id="findArea" class="hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1020.jsp"></c:import>	
 	</div>
 
 	<!-- 로그인 화면 -->
-	<form id="form" method="post" enctype="multipart/form-data">
+	<form id="form" method="post">
 		<div class="body">
 			<div class="login_wrap">
 				<div class="login_area">
 					<h3>LOGIN</h3>
 					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLogCall(this.form);" value="ADMIN">
-					<input type="password" id="empPwd" name="empPwd" placeholder="패스워드" title="비밀번호" onkeydown="pushLogCall(this.form);" value="1111">
-					<input type="button" class="login_btn" value="로그인" onclick="loginCall(this.form);">
+					<input type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="pushLogCall(this.form);" value="1111">
+					<input type="button" class="login_btn" value="로그인" onclick="loginProc(this.form);">
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>
 					

@@ -5,25 +5,37 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <script type="text/javascript">
-	//
+	// 양식 선택
 	function detCall(temptypeCd, sequenceId){
-		//
-		var typeProc = {
-		  Leav: "intr_aprv_detl_2010.jsp", 		// 휴가 신청서
-		  Exp:  "intr_aprv_detl_2011.jsp", 		// 가지급결의서
-		  Item: "intr_aprv_detl_2012.jsp", 		// 물품반입신청서
-		  Corp: "intr_aprv_detl_2013.jsp", 		// 법인카드정산서
-		};
-		//	
-		$("#sequenceId").val(sequenceId);
-		$("#temptypeCd").val(temptypeCd);
-		$("#returnUrl").val(typeProc[temptypeCd]);
-		//
-		formSubmit("intrAprvInqy2020.do");
+		try {
+			//
+			var typeProc = {
+				  Leav: "intr_aprv_detl_2010.jsp", 		// 휴가 신청서
+				  Exp:  "intr_aprv_detl_2011.jsp", 		// 가지급결의서
+				  Item: "intr_aprv_detl_2012.jsp", 		// 물품반입신청서
+				  Corp: "intr_aprv_detl_2013.jsp", 		// 법인카드정산서
+				};
+				//	
+				$("#sequenceId").val(sequenceId);
+				$("#temptypeCd").val(temptypeCd);
+				$("#returnUrl").val(typeProc[temptypeCd]);
+				//
+				formSubmit("intrAprvInqy2020.do");
+				
+		} catch (error){
+	        console.error("[Error] 양식 선택 : ", error.message);
+		}
 	}
+	
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrAprvInqy2010.do");
+		try {
+			//
+			formSubmit("intrAprvInqy2010.do");
+			
+		} catch (error){
+	        console.error("[Error] 목록으로 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
@@ -85,8 +97,8 @@
 													<label class="srch_label">제목</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>
@@ -117,7 +129,10 @@
 														<td class="first_td">${list.num}</td>
 														<td>${list.aprvstepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}','${list.aprvId}');">${list.aprvTitle}</a>
+															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}','${list.aprvId}');">
+																<script>document.write(isNew('${list.regDt}'))</script>
+																${list.aprvTitle}
+															</a>
 															<c:if test="${list.fileYn eq 'Y'}">
 																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 															</c:if>

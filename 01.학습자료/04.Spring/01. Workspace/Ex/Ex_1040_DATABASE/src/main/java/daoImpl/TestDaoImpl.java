@@ -20,6 +20,8 @@ public class TestDaoImpl implements TestDao{
 				- 파라미터는 한가지만 전송 가능하므로, 보통 HashMap등에 저장해서 전송한다.
 					(1) 파라미터 사용 시 	: sqlSession.메소드(맵퍼 namespace.쿼리id);
 					(2) 파라미터 미사용 시 : sqlSession.메소드(맵퍼 namespace.쿼리id, 파라미터);
+					
+				[참고] 팩토리는 객체의 생성 방법을 결정하고 그렇게 만들어진 오브젝트를 돌려주는 역할을 수행하는 클래스를 뜻한다.
 	*/
 	SqlSession sqlSession;
 	

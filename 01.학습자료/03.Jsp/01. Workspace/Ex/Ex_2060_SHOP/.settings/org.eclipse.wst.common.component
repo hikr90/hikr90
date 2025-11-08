@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
-    <wb-module deploy-name="Ex_2060_SHOP">
-                
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-                
-        <property name="java-output-path" value="/Ex_2060_SHOP/build/classes"/>
-        <property name="context-root" value="Ex_2060_SHOP"/>
             
-    </wb-module>
     
+    <wb-module deploy-name="Ex_2060_Shop">
+                        
+        
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                        
+        
+        <property name="java-output-path" value="/Ex_2060_Shop/build/classes"/>
+        <property name="context-root" value="Ex_2060_Shop"/>
+                    
+    
+    </wb-module>
+        
+
 </project-modules>

@@ -74,53 +74,75 @@ $(function() {
 	});
 });
  
-/* ================== 첨부파일 삭제 ================== */
+
+// 첨부파일 삭제
 function fileDel(status, idx){
 	var name = $("#fileId" + idx).attr("name");
-	// insert (등록), delete (삭제), none (작업 없음)
-	if(status=='insert'){
-		if(name.indexOf("insert")>-1){
-			// insert > none
-			$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
-			$("#fileId"+idx).attr("name", name.replace(status ,"none"));					// none 처리
+	//
+	try {
+		// insert (등록), delete (삭제), none (작업 없음)
+		if(status=='insert'){
+			if(name.indexOf("insert")>-1){
+				// insert > none
+				$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
+				$("#fileId"+idx).attr("name", name.replace(status ,"none"));					// none 처리
+			} else {
+				// none > insert
+				$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
+				$("#fileId"+idx).attr("name", name.replace("none", status));					// insert 처리
+			}
+			//
 		} else {
-			// none > insert
-			$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
-			$("#fileId"+idx).attr("name", name.replace("none", status));					// insert 처리
+			if(name.indexOf("none")>-1){
+				// none > delete
+				$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
+				$("#fileId"+idx).attr("name", name.replace("none" , status));					// none 처리
+			} else {
+				// delete > none
+				$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
+				$("#fileId"+idx).attr("name", name.replace(status, "none"));					// delete 처리
+			}
 		}
-		//
-	} else {
-		if(name.indexOf("none")>-1){
-			// none > delete
-			$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
-			$("#fileId"+idx).attr("name", name.replace("none" , status));					// none 처리
-		} else {
-			// delete > none
-			$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
-			$("#fileId"+idx).attr("name", name.replace(status, "none"));					// delete 처리
-		}
+		
+	} catch (error){
+        console.error("[Error] 첨부파일 삭제 : ", error.message);
 	}
 }
 
 
-
-/* ================== 폼데이터 생성 ================== */
+// 폼 데이터 생성
 function setFormData(){
-	var fileList = new FormData(document.getElementById("form"));
-	//
-	for(var i=0;i<tempList.length;i++){
-		fileList.append("fileList", tempList[i]);
+	try {
+		//
+		var fileList = new FormData(document.getElementById("form"));
+		for(var i=0;i<tempList.length;i++){
+			fileList.append("fileList", tempList[i]);
+		}
+		
+	} catch (error){
+        console.error("[Error] 폼 데이터 생성 : ", error.message);
 	}
 	//
 	return fileList;
 }
 
 
-/* ================== 다운로드 ================== */
+// 다운로드
 function fileProc(fileId, fileSno){
-	formSubmit('fileDown.do?fileId='+fileId+'&fileSno='+fileSno);
+	try {
+		formSubmit('fileDown.do?fileId='+fileId+'&fileSno='+fileSno);
+	
+	} catch (error){
+        console.error("[Error] 다운로드 : ", error.message);
+	}
+	
 }
 	
+// 압축 다운로드
 function zipProc(){
-	formSubmit('zipDown.do');
+	try {
+		formSubmit('zipDown.do');
+	} catch (error){
+        console.error("[Error] 압축 다운로드 : ", error.message);
+	}
 }

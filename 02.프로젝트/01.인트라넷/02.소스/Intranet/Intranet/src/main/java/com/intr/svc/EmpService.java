@@ -20,4 +20,5 @@ public interface EmpService {
 	String intrEmpProc1020(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 수정
 	String intrEmpProc1030(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 복직, 퇴사
 	String intrEmpProc1040(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 삭제
+	String intrEmpProc1050(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 사원 비밀번호 수정
 }

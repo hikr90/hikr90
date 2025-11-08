@@ -23,6 +23,7 @@ public class TestController {
 
 	// 생성자 인젝션
 	public TestController(TestService test_service) {
+		// 다형성을 통해서 생성자로 인터페이스를 받아, 이를 구현한 클래스의 오브젝트 (testServiceImpl)를 받는다.
 		this.test_service = test_service;
 	}
 	

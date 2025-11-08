@@ -83,6 +83,7 @@ public interface View {
 	public static final String INTR_EMP_DETL_1010 = "intr_emp_detl_1010.jsp";				// 사원 등록
 	public static final String INTR_EMP_DETL_1020 = "intr_emp_detl_1020.jsp";			// 사원 수정
 	public static final String INTR_EMP_DETL_1030 = "intr_emp_detl_1030.jsp";			// 사원 상세
+	public static final String INTR_EMP_DETL_2010 = "intr_emp_detl_2010.jsp";			// 사원 조회
 
 	//--------------------------------------------------------------------------------------------
 	// 기안문 양식

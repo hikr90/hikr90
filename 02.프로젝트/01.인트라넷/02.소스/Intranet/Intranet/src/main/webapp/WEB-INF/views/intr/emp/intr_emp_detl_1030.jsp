@@ -14,60 +14,63 @@
 
 	// 수정 처리
 	function modProc(f){
-		// 유효성 검증
-		if(!valProc()){return;};
-		// 부서
-		if($("#setOrgCd").val()==""){
-			alert("<spring:message code="EMP.ORG.NONE"/>");
-			return;
-		}
-		// 직급
-		if($("#setRankCd").val()==""){
-			alert("<spring:message code="EMP.RANK.NONE"/>");
-			return;
-		}
-		// 연락처
-		var regex = /^010-\d{4}-\d{4}$/;
-		
-		if(!regex.test($("#mobNo").val())){
-			alert("<spring:message code="EMP.MOB.FAIL"/>");
-			return;
-		}
-		// 계정
-		if($("#empPwd").val()!=$("#chqPwd").val()){
-			alert("<spring:message code="EMP.PWD.DIFF"/>");
-			return;
-		}
-		//
-		if(confirm("수정하시겠습니까?")){
-			var fileList = setFormData();
-			//
-   			$.ajax({
-				url:"intrEmpProc1020.do",
-				processData : false,
-				contentType : false,
-				data: fileList,
-				type : 'POST',
-   				success : function(data){
-   						//
-   						var json = eval(data);
-   						if(json[0].res=='YES'){
-   	   						//
-   							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
-	   						
-   						}else{
-   	   						//
-   							alert("<spring:message code="PROC.FAIL"/>");
-							return;	   							
-   						}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
 			
+			// 부서
+			if($("#setOrgCd").val()==""){
+				alert("<spring:message code="EMP.ORG.NONE"/>");
+				return;
+			}
+			// 직급
+			if($("#setRankCd").val()==""){
+				alert("<spring:message code="EMP.RANK.NONE"/>");
+				return;
+			}
+			// 연락처
+			var regex = /^010-\d{4}-\d{4}$/;
+			
+			if(!regex.test($("#mobNo").val())){
+				alert("<spring:message code="EMP.MOB.FAIL"/>");
+				return;
+			}
+			// 계정
+			if($("#empPwd").val()!=$("#chqPwd").val()){
+				alert("<spring:message code="EMP.PWD.DIFF"/>");
+				return;
+			}
+			//
+			if(confirm("수정하시겠습니까?")){
+				var fileList = setFormData();
+				//
+	   			$.ajax({
+					url:"intrEmpProc1020.do",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'POST',
+	   				success : function(data){
+	   						var json = eval(data);
+	   						
+	   						if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+		   						
+	   						}else{
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;	   							
+	   						}
+	   				},
+	   				error : function(res, status, error){
+	   					//
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 수정 처리 : ", error.message);
 		}
 	}	
 </script>
@@ -201,7 +204,7 @@
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}">
-	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
+	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>

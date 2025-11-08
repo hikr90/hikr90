@@ -12,7 +12,6 @@ import service.TestService;
 import vo.TestVO;
 
 public class TestServiceImpl implements TestService{
-	
 	// 셋터 인젝션
 	TestDao test_dao;
 	

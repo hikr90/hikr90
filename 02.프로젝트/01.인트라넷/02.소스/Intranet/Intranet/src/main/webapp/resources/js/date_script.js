@@ -42,28 +42,45 @@ $(function() {
 
 // 월 (0 포함) 표현
 function leadingZeros(n, digits) {
-	// N (날짜 단위 값의 길이) 숫자가 DIGITS (연<4>,월<2>,일<2>의 길이) 보다 작은 경우 0 포함 두자리로 변경
-    var zero = '';
-    n = n.toString();
-    //
-    if (n.length < digits) {
-        for (i = 0; i < digits - n.length; i++)
-            zero += '0';
-    }
+	try {
+		// N (날짜 단위 값의 길이) 숫자가 DIGITS (연<4>,월<2>,일<2>의 길이) 보다 작은 경우 0 포함 두자리로 변경
+	    var zero = '';
+	    n = n.toString();
+	    //
+	    if (n.length < digits) {
+	        for (i = 0; i < digits - n.length; i++)
+	            zero += '0';
+	    }
+	
+	} catch (error){
+        console.error("[Error] 월 (0 포함) 표현 : ", error.message);
+	}
     //
     return zero + n;
 }
 
 // 현재 시간 표현
 function getTimeStamp(d) {
-	// getMinutes + 1 : Minutes의 경우 0 ~ 9로 표현
-	var now =  d.getHours() + ":" + ((d.getMinutes()<10?'0':'') + d.getMinutes() + ":" + d.getSeconds());
+	try {
+		// getMinutes + 1 : Minutes의 경우 0 ~ 9로 표현
+		var now =  d.getHours() + ":" + ((d.getMinutes()<10?'0':'') + d.getMinutes() + ":" + d.getSeconds());
+	
+	} catch (error){
+        console.error("[Error] 현재 시간 표현 : ", error.message);
+	}
+	//	
     return now;
 }
 
 // 현재 일자 표현
 function getDateStamp(d) {
-	// getMonth + 1 : Month의 경우 0 ~ 11로 표현
-	var now =  leadingZeros(d.getFullYear(), 4) + '-' + leadingZeros(d.getMonth() + 1, 2) + '-' + leadingZeros(d.getDate(), 2);
+	try {
+		// getMonth + 1 : Month의 경우 0 ~ 11로 표현
+		var now =  leadingZeros(d.getFullYear(), 4) + '-' + leadingZeros(d.getMonth() + 1, 2) + '-' + leadingZeros(d.getDate(), 2);
+	
+	} catch (error){
+        console.error("[Error] 현재 일자 표현 : ", error.message);
+	}
+	//	
     return now;
 }

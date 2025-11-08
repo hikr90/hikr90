@@ -8,19 +8,36 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrMtgInqy1010.do");
+		try {
+			//
+			formSubmit("intrMtgInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 
 	// 등록 화면 조회
 	function regCall(){
-		formSubmit("intrMtgInqy1020.do");
+		try {
+			//
+			formSubmit("intrMtgInqy1020.do");
+			
+		} catch (error){
+	        console.error("[Error] 등록 화면 조회 : ", error.message);
+		}
 	}
 	
 	// 상세 화면 조회
 	function detCall(sequenceId) {
-		//
-		$("#sequenceId").val(sequenceId);
-		formSubmit("intrMtgInqy1030.do");
+		try {
+			//
+			$("#sequenceId").val(sequenceId);
+			formSubmit("intrMtgInqy1030.do");
+			
+		} catch (error){
+	        console.error("[Error] 상세 화면 조회 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
@@ -49,7 +66,7 @@
 									
 									<h2>회의 관리
 										<span class="float_right">
-											<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
+											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -85,8 +102,8 @@
 														<label class="srch_label">제목</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 													
-														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>

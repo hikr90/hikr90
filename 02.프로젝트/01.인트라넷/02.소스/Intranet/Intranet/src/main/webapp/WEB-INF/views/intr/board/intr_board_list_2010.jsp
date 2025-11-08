@@ -7,14 +7,25 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrBoardInqy2010.do");
+		try {
+			//
+			formSubmit("intrBoardInqy2010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 
 	// 공지사항 상세
 	function detCall(brdId) {
-		//
-		$("#sequenceId").val(brdId);
-		formSubmit("intrBoardInqy2020.do");
+		try {
+			//
+			$("#sequenceId").val(brdId);
+			formSubmit("intrBoardInqy2020.do");
+			
+		} catch (error){
+	        console.error("[Error] 공지사항 상세 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
@@ -76,8 +87,8 @@
 													<label class="srch_label">제목</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 										</div>
@@ -109,7 +120,10 @@
 												<tr>
 													<td class="first_td">${list.num}</td>
 													<td class="_title">
-														<a class="show_view a_title" onclick="detCall('${list.brdId}');">${list.brdTitle}</a>
+														<a class="show_view a_title" onclick="detCall('${list.brdId}');">
+															<script>document.write(isNew('${list.regDt}'))</script>
+															${list.brdTitle}
+														</a>
 														<c:if test="${list.fileYn eq 'Y'}">
 															<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
 														</c:if>

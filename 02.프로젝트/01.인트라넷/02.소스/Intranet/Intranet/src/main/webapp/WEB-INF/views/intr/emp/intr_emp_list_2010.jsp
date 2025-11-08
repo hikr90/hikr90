@@ -6,9 +6,29 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <script type="text/javascript">
-	// 사원 목록 검색
+	// 사원 목록 조회
 	function listCall(f){
-		formSubmit("intrEmpInqy2010.do");
+		try {
+			//
+			formSubmit("intrEmpInqy2010.do");
+			
+		} catch (error){
+	        console.error("[Error] 사원 목록 조회 : ", error.message);
+		}
+	}
+	
+	// 사원 상세보기
+	function detCall(empIdx){
+		try {
+			// 시퀀스, 사원 번호 지정
+			$("#sequenceId").val(empIdx);
+			$("#empIdx").val(empIdx);
+			//
+			formSubmit("intrEmpInqy2030.do");
+			
+		} catch (error){
+	        console.error("[Error] 사원 상세보기 : ", error.message);
+		}
 	}
 </script>
 
@@ -60,14 +80,30 @@
 												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
 											</div>
 											
+											<!-- 재직여부 -->
+											<div class="srch_area">
+												<label class="srch_label">재직여부</label>
+												<div class="select_wrap">
+													<div id="useList" class="sList select_box">${empty param.useCd ? '전체' : param.useCd}</div>
+													<input type="hidden" name="useCd" value="${param.useCd}">
+													<input type="hidden" name="useNm" value="${param.useNm}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${useList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+											
 											<!-- 사원명 -->
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">사원명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>
@@ -80,8 +116,7 @@
 												<col class="w12per">
 												<col class="w12per">
 												<col class="w12per">
-												<col class="w12per">
-												<col class="w12per">
+												<col class="w8per">
 											</colgroup>
 											<thead>
 												<tr>
@@ -89,8 +124,7 @@
 													<th scope="col">부서</th>
 													<th scope="col">직급</th>
 													<th scope="col">사원명</th>
-													<th scope="col">연락처</th>
-													<th scope="col">이메일</th>
+													<th scope="col">재직 여부</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -105,16 +139,22 @@
 														</td>
 														<td>${list.orgNm}</td>
 														<td>${list.rankNm}</td>
-														<td>${list.empNm}</td>
-														<td>${list.mobNo}</td>
-														<td>${list.email}</td>
+														<td>
+															<a class="show_view a_title" onclick="detCall('${list.empIdx}');">${list.empNm}</a>
+														</td>
+														<td>
+															<c:choose>
+																<c:when test="${list.leavYn eq 'N'}">N</c:when>
+																<c:otherwise>Y</c:otherwise>
+															</c:choose>
+														</td>
 			                                        </tr>
 		                                        </c:forEach>
 		                                        
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="6">
+		                                                <td align="center" colspan="5">
 		                                              	      등록된 사원이 없습니다.
 		                                                </td>
 		                                            </tr>

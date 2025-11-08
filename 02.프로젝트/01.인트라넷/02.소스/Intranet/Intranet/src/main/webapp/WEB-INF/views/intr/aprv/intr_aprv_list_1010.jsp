@@ -14,19 +14,25 @@
 	// 양식 선택
 	function detCall(tempCd, temptypeCd){
 		//
-		var obj = new Object();
-		var typeProc = {
-		  Leav: "intr_aprv_detl_1010.jsp", 		// 휴가 신청서
-		  Exp:  "intr_aprv_detl_1011.jsp", 		// 가지급결의서
-		  Item: "intr_aprv_detl_1012.jsp", 		// 물품반입신청서
-		  Corp: "intr_aprv_detl_1013.jsp", 		// 법인카드정산서
-		};
-		//	
-		$("#tempCd").val(tempCd);
-		$("#temptypeCd").val(temptypeCd);
-		$("#returnUrl").val(typeProc[temptypeCd]);
-		//
-		formSubmit('intrAprvInqy1020.do');
+		try {
+			//
+			var obj = new Object();
+			var typeProc = {
+			  Leav: "intr_aprv_detl_1010.jsp", 		// 휴가 신청서
+			  Exp:  "intr_aprv_detl_1011.jsp", 			// 가지급결의서
+			  Item: "intr_aprv_detl_1012.jsp", 		// 물품반입신청서
+			  Corp: "intr_aprv_detl_1013.jsp", 		// 법인카드정산서
+			};
+			//	
+			$("#tempCd").val(tempCd);
+			$("#temptypeCd").val(temptypeCd);
+			$("#returnUrl").val(typeProc[temptypeCd]);
+			//
+			formSubmit('intrAprvInqy1020.do');
+			
+		} catch (error){
+	        console.error("[Error] 양식 선택 : ", error.message);
+		}
 	}
 </script>
 
@@ -61,8 +67,8 @@
 											<label class="srch_label">제목</label>
 											<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 										
-											<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-											<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+											<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+											<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 										</div>
 									</div>
 									

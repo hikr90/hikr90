@@ -14,114 +14,134 @@
 	
 	// 목록 이동
 	function moveBtn(f) {
-		// 체크한 건이 없는 경우
-		if($("input[id=menuCd]:checked").length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
-		}
-		
-		// 체크한 값 이동
-		$("input[id=menuCd]:checked").each(function() {
-			// 중복 여부 값
-			var dupeYn = 'N';
-			// 메뉴 관련 변수
-			var menuCd = $(this).val();
-			var menuNm = $(this).attr("menuNm");
-			var menutypeCd = $(this).attr("menutypeCd");
-			var menuLv = $(this).attr("menuLv");
-			
-			// 메뉴 권한 목록 값
-			$("input[id=authMenuCd]").each(function() {
-				// 중복되는 경우 중복 여부 값 변경
-				var authMenuCd = $(this).val();
-				//
-				if(authMenuCd==menuCd){
-					dupeYn = "Y";
-					return; 
-				}
-			});
-			
-			// 중복되지 않는 경우
-			if(dupeYn=='N'){
-				//
-				var str = "";
-				//
-				str += "<tr>"
-				str += "	<td class='first_td'>";
-				str += "		<span class='check_box'>";
-				str += "		<input type='checkbox' class='checkbox' id='authMenuCd' value='" + menuCd + "'/>"
-				str += "		<label for='chk_local'><span></span></label></span>";
-				str += "		<input type='hidden' name='authMenuCd' value='" + menuCd + "'/>"
-				str += "	</td>";
-				//
-				if(menuLv!=1){
-					str += "	<td style='text-align: left;'>&nbsp;&nbsp;ㄴ " + menuNm + "</td>";
-				} else {
-					str += "	<td style='text-align: left;'>" + menuNm + "</td>";
-				}
-				//
-				str += "</tr>";
-				
-				$(".authMenuTbl").append(str);
+		try {
+			// 체크한 건이 없는 경우
+			if($("input[id=menuCd]:checked").length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
 			}
 			
-			// 체크 해제
-			$("input[id='menuCd']").prop("checked", false);
-			$(".menuChk").prop("checked", false);
-		});
+			// 체크한 값 이동
+			$("input[id=menuCd]:checked").each(function() {
+				// 중복 여부 값
+				var dupeYn = 'N';
+				// 메뉴 관련 변수
+				var menuCd = $(this).val();
+				var menuNm = $(this).attr("menuNm");
+				var menutypeCd = $(this).attr("menutypeCd");
+				var menuLv = $(this).attr("menuLv");
+				
+				// 메뉴 권한 목록 값
+				$("input[id=authMenuCd]").each(function() {
+					// 중복되는 경우 중복 여부 값 변경
+					var authMenuCd = $(this).val();
+					//
+					if(authMenuCd==menuCd){
+						dupeYn = "Y";
+						return; 
+					}
+				});
+				
+				// 중복되지 않는 경우
+				if(dupeYn=='N'){
+					//
+					var str = "";
+					//
+					str += "<tr>"
+					str += "	<td class='first_td'>";
+					str += "		<span class='check_box'>";
+					str += "		<input type='checkbox' class='checkbox' id='authMenuCd' value='" + menuCd + "'/>"
+					str += "		<label for='chk_local'><span></span></label></span>";
+					str += "		<input type='hidden' name='authMenuCd' value='" + menuCd + "'/>"
+					str += "	</td>";
+					//
+					if(menuLv!=1){
+						str += "	<td style='text-align: left;'>&nbsp;&nbsp;ㄴ " + menuNm + "</td>";
+					} else {
+						str += "	<td style='text-align: left;'>" + menuNm + "</td>";
+					}
+					//
+					str += "</tr>";
+					
+					$(".authMenuTbl").append(str);
+				}
+				
+				// 체크 해제
+				$("input[id='menuCd']").prop("checked", false);
+				$(".menuChk").prop("checked", false);
+			});
+			
+		} catch (error){
+	        console.error("[Error] 목록 이동 : ", error.message);
+		}
 	}
 	
 	// 권한 목록 화면 상 제거
 	function delCall(){
-		// 유효성 검증
-		if($("input[id=authMenuCd]:checked").length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
+		try {
+			// 유효성 검증
+			if($("input[id=authMenuCd]:checked").length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}
+			
+			// 화면 상 삭제 처리
+			$("input[id=authMenuCd]:checked").each(function() {
+				$(this).parents("tr").remove();
+			});
+			
+			// 권한 목록 체크 초기화
+			$(".authChk").prop("checked", false);			
+			
+		} catch (error){
+	        console.error("[Error] 권한 목록 화면 상 제거 : ", error.message);
 		}
-		
-		// 화면 상 삭제 처리
-		$("input[id=authMenuCd]:checked").each(function() {
-			$(this).parents("tr").remove();
-		});
-		
-		//
-		$(".authChk").prop("checked", false);
 	}
 	
-	// 새로고침 (메뉴 권한 목록 재 조회)
+	// 새로고침
 	function setListCall() {
-		$(".list_bg").trigger("click");
+		try {
+			//
+			$(".list_bg").trigger("click");
+			
+		} catch (error){
+	        console.error("[Error] 새로고침 : ", error.message);
+		}
 	}
 	
-	// 저장 처리
+	// 권한 저장 처리
 	function regProc(){
-		// 권한 메뉴 추가
-		$("input[name=authMenuCd]").each(function(idx) {
-			$(this).attr("name","menuCd"+idx);
-		});
-		//
-		var param = $("#form").serialize();
-		//
-		if(confirm("저장하시겠습니까?")){
+		try {
+			// 권한 메뉴 추가
+			$("input[name=authMenuCd]").each(function(idx) {
+				$(this).attr("name","menuCd"+idx);
+			});
 			//
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrAuthProc2010.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	            	//
-					alert("<spring:message code="PROC.SUCCESS"/>");
-	            	setListCall();
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-		}				
+			var param = $("#form").serialize();
+			//
+			if(confirm("저장하시겠습니까?")){
+				//
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrAuthProc2010.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	//
+						alert("<spring:message code="PROC.SUCCESS"/>");
+		            	setListCall();
+		            },
+		            error : function(data){
+		            	//
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 권한 저장 처리 : ", error.message);
+		}
 	}
-
 </script>
 <div class="post_wrap" style="padding: 0px;">
 	<div class="scroll_wrap" style="max-height: 425px;">

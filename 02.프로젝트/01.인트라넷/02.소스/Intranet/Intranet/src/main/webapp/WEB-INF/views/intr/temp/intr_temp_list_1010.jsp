@@ -25,164 +25,184 @@
 
 	// 기안문 양식 조회
 	function listCall(f){
-		//
-		var param = $("#form").serialize();
-		$.ajax({
-    		type : 'post',
-        	url : 'intrTempInqy1011.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-            	//
-            	$(".tree_info").html("");
-            	$(".tree").html(data);
-            	setTree("tree_area");
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
+		try {
+			//
+			var param = $("#form").serialize();
+			
+			$.ajax({
+	    		type : 'post',
+	        	url : 'intrTempInqy1011.do',
+	            data : param,
+	            dataType : 'html',
+	            success : function(data){
+	            	//
+	            	$(".tree_info").html("");
+	            	$(".tree").html(data);
+	            	setTree("tree_area");
+	            },
+	            error : function(data){
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 조회 : ", error.message);
+		}
 	}
 
 	// 기안문 양식 등록
 	function regCall() {
-		//
-		$.ajax({
-    		type : 'post',
-        	url : 'intrTempInqy1030.do',
-            data : null,
-            dataType : 'html',
-            success : function(data){
-     				//
-            	    $(".tree_info").html(data);
-     				$(".a_btn").each(function() {
-        				$(this).removeClass('list_bg');
-        			});
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
+		try {
+			//
+			$.ajax({
+	    		type : 'post',
+	        	url : 'intrTempInqy1030.do',
+	            data : null,
+	            dataType : 'html',
+	            success : function(data){
+	     				//
+	            	    $(".tree_info").html(data);
+	     				$(".a_btn").each(function() {
+	        				$(this).removeClass('list_bg');
+	        			});
+	            },
+	            error : function(data){
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 등록 : ", error.message);
+		}
 	}
 	
 	// 기안문 양식 등록 처리
 	function regProc(){
-		// 에디터 내용 저장
-		var editCont = CKEDITOR.instances.editor.getData();
-		if(editCont.trim()!=null && editCont.trim()!=''){
-			$("#editor").val(editCont);
-		}
+		try {
+			// 에디터 내용 저장
+			var editCont = CKEDITOR.instances.editor.getData();
+			if(editCont.trim()!=null && editCont.trim()!=''){
+				$("#editor").val(editCont);
+			}
 
-		// 유효성 검증
-		if(!valProc()){return;};
-		var param = $("#form").serialize();
-		//
-		if(confirm("등록하시겠습니까?")){
-			//		
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrTempProc1010.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	     				//
-	            	    $(".tree_info").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="PROC.SUCCESS"/>");
-	    				
-	    				// 재 조회
-	            		$(".listCall").trigger("click");	
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-		}		
+			// 유효성 검증
+			if(!valProc()){return;};
+			var param = $("#form").serialize();
+			//
+			if(confirm("등록하시겠습니까?")){
+				//		
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrTempProc1010.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	    $(".tree_info").html(""); // 등록 화면 초기화
+		    				alert("<spring:message code="PROC.SUCCESS"/>");
+		    				
+		    				// 재 조회
+		            		$(".listCall").trigger("click");	
+		            },
+		            error : function(data){
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}	
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 등록 처리 : ", error.message);
+		}
 	}
 	
 	// 기안문 양식 상세보기
 	function detCall(tempCd){
-		//
-		$("#tempCd").val(tempCd);
-		var param = $("#form").serialize();
-		//
-		$.ajax({
-    		type : 'post',
-        	url : 'intrTempInqy1020.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-     				//
-            	    $(".tree_info").html(data);
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
+		try {
+			// 양식 코드 지정
+			$("#tempCd").val(tempCd);
+			var param = $("#form").serialize();
+			//
+			$.ajax({
+	    		type : 'post',
+	        	url : 'intrTempInqy1020.do',
+	            data : param,
+	            dataType : 'html',
+	            success : function(data){
+	            	    $(".tree_info").html(data);
+	            },
+	            error : function(data){
+					alert("<spring:message code="PROC.ERROR"/>");
+	            }
+	      	});
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 상세보기 : ", error.message);
+		}
 	}
 	
 	// 기안문 양식 수정 처리
 	function modProc(f){
-		// 유효성 검증
-		if(!valProc()){return;};
-		//
-		if(confirm("수정하시겠습니까?")){
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
 			//
-			var editCont = CKEDITOR.instances.editor.getData();
-			$("#editor").val(editCont);
-			//
-			var param = $("#form").serialize();
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrTempProc1020.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	     				//
-	            	    $(".tree_info").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="PROC.SUCCESS"/>");
-	    				
-	    				// 재 조회
-	            		$(".listCall").trigger("click");	
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-		}		
-
+			if(confirm("수정하시겠습니까?")){
+				//
+				var editCont = CKEDITOR.instances.editor.getData();
+				$("#editor").val(editCont);
+				//
+				var param = $("#form").serialize();
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrTempProc1020.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	    $(".tree_info").html(""); // 등록 화면 초기화
+		    				alert("<spring:message code="PROC.SUCCESS"/>");
+		    				
+		    				// 재 조회
+		            		$(".listCall").trigger("click");	
+		            },
+		            error : function(data){
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 수정 처리 : ", error.message);
+		}
 	}
 	
 	// 기안문 양식 삭제 처리
 	function delProc(f){
-		//
-		if(!valProc()){return;};
-		var param = $("#form").serialize();
-		//
-		if(confirm("삭제하시겠습니까?")){
-			//		
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrTempProc1030.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	     				//
-	            	    $(".tree_info").html(""); // 등록 화면 초기화
-	    				alert("<spring:message code="PROC.SUCCESS"/>");
-	    				
-	    				// 재 조회
-	            		$(".listCall").trigger("click");	
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			var param = $("#form").serialize();
+			//
+			if(confirm("삭제하시겠습니까?")){
+				//		
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrTempProc1030.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	    $(".tree_info").html(""); // 등록 화면 초기화
+		    				alert("<spring:message code="PROC.SUCCESS"/>");
+		    				
+		    				// 재 조회
+		            		$(".listCall").trigger("click");	
+		            },
+		            error : function(data){
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 기안문 양식 삭제 처리 : ", error.message);
 		}
 	}
 </script>
@@ -213,7 +233,7 @@
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
-									<input type="button"class="listCall" onclick="listCall(this.form);" style="display: none;">
+									<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
 									<h2>양식 관리</h2>
 									
@@ -224,8 +244,8 @@
 												<label class="srch_label">제목</label>		
 												<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 											
-												<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-												<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+												<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+												<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 											</div>
 										</div>
 		                            </div>

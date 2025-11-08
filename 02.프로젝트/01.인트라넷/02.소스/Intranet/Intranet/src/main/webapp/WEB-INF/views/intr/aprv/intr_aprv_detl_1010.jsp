@@ -14,40 +14,51 @@
 
 	// 목록으로
 	function listCall() {
-		formSubmit('intrAprvInqy1010.do');
+		try {
+			//
+			formSubmit('intrAprvInqy1010.do');
+			
+		} catch (error){
+	        console.error("[Error] 목록으로 : ", error.message);
+		}
 	}
 	
 	// 기안 등록 
 	function aprvProc(f){
-		// 유효성 검증
-		if(!valProc()){return;};
-		// 결재선
-		if($("#aprvLine").val() == ''){
-			alert("<spring:message code="APRV.LINE.NONE"/>");
-			return;
-		}
-		//
-		if(confirm("기안하시겠습니까?")){
-			// 에디터 내용 저장
-			var getData = CKEDITOR.instances.editor.getData();
-			$("#editor").val(getData);
-			var fileList = setFormData();
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			// 결재선
+			if($("#aprvLine").val() == ''){
+				alert("<spring:message code="APRV.LINE.NONE"/>");
+				return;
+			}
+			//
+			if(confirm("기안하시겠습니까?")){
+				// 에디터 내용 저장
+				var getData = CKEDITOR.instances.editor.getData();
+				$("#editor").val(getData);
+				var fileList = setFormData();
+				
+	   			$.ajax({
+					url:"intrAprvProc1010.do?pageUrl=Aprv",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'post',
+	   				success : function(data){
+	   					//
+	   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
+	   					listCall();
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
 			
-   			$.ajax({
-				url:"intrAprvProc1010.do?pageUrl=Aprv",
-				processData : false,
-				contentType : false,
-				data: fileList,
-				type : 'post',
-   				success : function(data){
-   					//
-   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
-   					listCall();
-   				},
-   				error : function(res, status, error){
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+		} catch (error){
+	        console.error("[Error] 기안 등록 : ", error.message);
 		}
 	}
 </script>
@@ -111,7 +122,7 @@
 												<label for="post-title">&#10003; 프로젝트명</label>
 											</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="projCall();">
+												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
 												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
 												<input type="hidden" id="projPcd" name="projCd" value="">
 											</dd>
@@ -119,7 +130,7 @@
 										<dl>
 											<dt>&#10003; 결재선</dt>
 											<dd>
-												<input type="button"class="btn_gray align_top" value="선택" onclick="lineReg();">
+												<input type="button" class="btn_gray align_top" value="선택" onclick="lineReg();">
 												<input type="hidden" id="aprvLine" name="aprvLine" value="">
 											</dd>
 											
@@ -150,7 +161,7 @@
 											
 											<dt>&#10003; 대직자</dt>
 											<dd>
-												<input type="button"class="btn_blue align_top" value="선택" onclick="empCall();">
+												<input type="button" class="btn_blue align_top" value="선택" onclick="empCall();">
 												<input type="text" id="empPnm" name="leavSubst" title="담당자" value="" style="width: 30%;" readonly="readonly">
 											</dd>
 								        </dl>

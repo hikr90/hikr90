@@ -19,31 +19,36 @@
 			})
 		});
 	
-		// 쿼리 입력 유효성 검증
+		// 유효성 검증 (쿼리)
 		function validate(query){
-			//
-			var chkYn = true;
-			var dmlPatn = ["merge","insert","update","delete"];
-			var chkDml = dmlPatn.some(word => query.includes(word));
-			
-			// 쿼리 미 입력 시
-			if(query == '' || query == null){
-				alert("<spring:message code="QUERY.NONE"/>");
-				return false;
-			}
-			
-			// DML 처리 체크되어있지 않은 경우
-			if(!$('#dmlProc').is(':checked')) {
-				// 쿼리 내 where절 없을 시
-				if(query.indexOf('where') < 0){
-					alert("<spring:message code="QUERY.WHERE.DISABLE"/>");
+			try {
+				// 변수 지정
+				var chkYn = true;
+				var dmlPatn = ["merge","insert","update","delete"];
+				var chkDml = dmlPatn.some(word => query.includes(word));
+				
+				// 쿼리 미 입력 시
+				if(query == '' || query == null){
+					alert("<spring:message code="QUERY.NONE"/>");
 					return false;
 				}
-				// 쿼리 내 dml 문장이 존재하는 경우
-				if(chkDml){
-					alert("<spring:message code="QUERY.NOT.DML"/>");
-					return false;
+				
+				// DML 처리 체크되어있지 않은 경우
+				if(!$('#dmlProc').is(':checked')) {
+					// 쿼리 내 where절 없을 시
+					if(query.indexOf('where') < 0){
+						alert("<spring:message code="QUERY.WHERE.DISABLE"/>");
+						return false;
+					}
+					// 쿼리 내 dml 문장이 존재하는 경우
+					if(chkDml){
+						alert("<spring:message code="QUERY.NOT.DML"/>");
+						return false;
+					}
 				}
+				
+			} catch (error){
+		        console.error("[Error] 유효성 검증 (쿼리) : ", error.message);
 			}
 			//
 			return chkYn;
@@ -51,59 +56,68 @@
 	
 		// 쿼리 조회
 		function listCall(f){
-			// 유효성 검증
-			var query = $("#query").val().toLowerCase();
-			var param = $("#form").serialize();
-			if(!validate(query)) return;
-			//
-			var url = "intrQueryInqy1020.do";
-			if($('#dmlProc').is(':checked')) url = "intrQueryProc1010.do"
-			//
-			$.ajax({
-	    		type : 'post',
-	        	url : url,
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	            	// 반환 데이터가 있는 경우
-	            	if(data != null && data != ''){
-	            		// DML 체크
-	            		if($('#dmlProc').is(':checked')) {
-	            			//
-	            			var json = eval(data);
-	            			var resInt = json[0].resInt;
-							//	  DML 처리	
-							if(resInt > 0) {
-								alert("쿼리가 수행되었습니다.\n총 " + resInt + "건의 데이터가 처리되었습니다.");
-							} else {
-								alert("수행된 작업이 없습니다.\n작성하신 쿼리를 확인해주세요.");
-							}
-	            			
-	            		} else {
-	            			// SELECT 처리
-	            			$("#queryResult").html(data);
-	            		}
-	            		
-	            	} else {
-	            		// 쿼리 수행 오류
-	            		alert("<spring:message code="QUERY.RES.ERROR"/>");
-	            	}
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
+			try {
+				// 유효성 검증
+				var query = $("#query").val().toLowerCase();
+				var param = $("#form").serialize();
+				if(!validate(query)) return;
+				//
+				var url = "intrQueryInqy1020.do";
+				if($('#dmlProc').is(':checked')) url = "intrQueryProc1010.do"
+				//
+				$.ajax({
+		    		type : 'post',
+		        	url : url,
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		            	// 반환 데이터가 있는 경우
+		            	if(data != null && data != ''){
+		            		// DML 체크
+		            		if($('#dmlProc').is(':checked')) {
+		            			//
+		            			var json = eval(data);
+		            			var resInt = json[0].resInt;
+								//	  DML 처리	
+								if(resInt > 0) {
+									alert("쿼리가 수행되었습니다.\n총 " + resInt + "건의 데이터가 처리되었습니다.");
+								} else {
+									alert("수행된 작업이 없습니다.\n작성하신 쿼리를 확인해주세요.");
+								}
+		            			
+		            		} else {
+		            			// SELECT 처리
+		            			$("#queryResult").html(data);
+		            		}
+		            		
+		            	} else {
+		            		// 쿼리 수행 오류
+		            		alert("<spring:message code="QUERY.RES.ERROR"/>");
+		            	}
+		            },
+		            error : function(data){
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+				
+			} catch (error){
+		        console.error("[Error] 쿼리 조회 : ", error.message);
+			}
 		}
 		
 		// 엑셀 다운로드
 		function excelDown(){
-			// 유효성 검증
-			var query = $("#query").val().toLowerCase();
-			var param = $("#form").serialize();
-			if(!validate(query)) return;
-			//
-			formSubmit("intrQueryInqy1030.do");
+			try {
+				// 유효성 검증
+				var query = $("#query").val().toLowerCase();
+				var param = $("#form").serialize();
+				if(!validate(query)) return;
+				//
+				formSubmit("intrQueryInqy1030.do");
+				
+			} catch (error){
+		        console.error("[Error] 엑셀 다운로드 : ", error.message);
+			}
 		}
 	</script>
 </head>
@@ -131,8 +145,8 @@
 		                            
 		                            <h2>쿼리 조회
 										<span class="float_right">
-												<input type="button"class="btn_green_thin" value="Excel" onclick="excelDown();">
-											<input type="button"class="btn_blue_thin listCall" value="조회" onclick="listCall();">
+												<input type="button" class="btn_green_thin" value="Excel" onclick="excelDown();">
+											<input type="button" class="btn_blue_thin listCall" value="조회" onclick="listCall();">
 										</span>
 									</h2>
 									<span style="font-size: 1.6rem; float: right; margin: 10px;">

@@ -51,7 +51,13 @@
 	
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrScheInqy1010.do");
+		try {
+			//
+			formSubmit("intrScheInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
@@ -117,8 +123,8 @@
 													<label class="srch_label">사원명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultMap.srchNm}" onkeydown="inputEnt(this.form);">
 													
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>											
 		                                	</div>
 		                                </div>

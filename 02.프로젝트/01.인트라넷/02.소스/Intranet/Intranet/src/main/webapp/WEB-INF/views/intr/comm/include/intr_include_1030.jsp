@@ -2,27 +2,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
-<header style="min-height: 110px;">
+<header>
 	<div class="wrap">
 		<div class="header_wrap">
 			<div class="header_state">
 				<ul class="header_list">
-					<c:choose>
-						<c:when test="${empVO.authYn eq 'Y'}">
-							<li><a href="intrMainInqy1020.do">사용자</a></li>
-							<li><a href="intrMainInqy1030.do">관리자</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="intrMainInqy1020.do">사용자</a></li>
-						</c:otherwise>
-					</c:choose>
-					<li><a onclick="outProc();">로그아웃</a></li>
+					<li>
+						<a href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="25" height="25" title="사용자 이동" /></a>
+					</li>
+				
+						<c:if test="${empVO.authYn eq 'Y'}">
+							<li>
+								<a href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
+							</li>
+						</c:if>
+						
+					<li>
+						<a href="javascript:void(0);" onclick="outProc();"><img src='resources/images/icon/icon_logout.png' width="30" height="30" title="로그아웃" /></a>
+					</li>
 				</ul><br><br>
 				
-				<div class="header_state_text">
-					접속을 환영합니다.<br><br>
-					<a href="intrMainInqy1040.do?menuType=${menuType}&empIdx=${empVO.empIdx}"><strong>${empVO.empNm}님</strong></a>
-				</div>
+				<span style="font-size: 14px;">
+					<a href="intrMainInqy1040.do?menuType=${menuType}&empIdx=${empVO.empIdx}">
+						<strong>${empVO.empNm}님</strong>
+					</a> 
+					환영합니다.
+				</span>
 			</div>
 		</div>
 			

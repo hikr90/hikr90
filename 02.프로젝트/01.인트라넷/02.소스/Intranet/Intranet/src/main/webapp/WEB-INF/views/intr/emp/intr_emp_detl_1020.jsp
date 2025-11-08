@@ -23,94 +23,104 @@
 	
 	// 아이디 중복 조회
 	function chqEmpId(f) {
-		//
-		if($("#empId").val()==""){
-			alert("아이디를 입력해주세요.");
-			return;			
-		}
-		//
-		var param = $("#form").serialize();
-		$.ajax({
-    		type : 'post',
-        	url : 'intrEmpInqy2020.do',
-            data : param,
-            dataType : 'html',
-            success : function(data){
-     				//
-     				var json = eval(data);
-   					if(json[0].res=="NO"){
-   						//
-   	     				chqEmpYn = "Y";
-   						alert("<spring:message code="EMP.ID.SUCCESS"/>"); // ALERT
-   					} else {
-						//
-   	     				chqEmpYn = "N";
-						alert("<spring:message code="EMP.ID.FAIL"/>"); // ALERT
-   					}
-            },
-            error : function(data){
-            	//
-				alert("<spring:message code="PROC.ERROR"/>");
-            }
-      	});
-	}
-
-	// 사원 등록 처리
-	function regProc(f){
-		// 유효성 검증
-		//if(!valProc()){return;};
-		// 부서
-		if($("#setOrgCd").val()==""){
-			alert("<spring:message code="EMP.ORG.NONE"/>");
-			return;
-		}
-		// 직급
-		if($("#setRankCd").val()==""){
-			alert("<spring:message code="EMP.RANK.NONE"/>");
-			return;
-		}
-		// 연락처
-		var regex = /^010-\d{4}-\d{4}$/;
-		
-		if(!regex.test($("#mobNo").val())){
-			alert("<spring:message code="EMP.MOB.FAIL"/>");
-			return;
-		}
-		// 계정
-		if($("#empPwd").val()!=$("#chqPwd").val()){
-			alert("<spring:message code="EMP.PWD.DIFF"/>");
-			return;
-		}
-		//
-		if(confirm("등록하시겠습니까?")){
-			var fileList = setFormData();
-			//
+		try {
+			// 유효성 검증
+			if($("#empId").val()==""){
+				alert("아이디를 입력해주세요.");
+				return;			
+			}
+			
+			// 변수 저장
+			var param = $("#form").serialize();
+			
 			$.ajax({
-				url:"intrEmpProc1010.do",
-				processData : false,
-				contentType : false,
-				data: fileList,
-				type : 'post',
+	    		type : 'post',
+	        	url : 'intrEmpInqy2020.do',
+	            data : param,
+	            dataType : 'html',
 	            success : function(data){
 	     				//
 	     				var json = eval(data);
-	     				if(json[0].res=='YES'){
-   	   						//
-   							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+	   					if(json[0].res=="NO"){
+	   	     				chqEmpYn = "Y";
+	   						alert("<spring:message code="EMP.ID.SUCCESS"/>"); // ALERT
 	   						
-	     				} else {
-	     					//
-	     					alert("<spring:message code="PROC.FAIL"/>");
-							return;	
-	     				}
+	   					} else {
+	   	     				chqEmpYn = "N";
+							alert("<spring:message code="EMP.ID.FAIL"/>"); // ALERT
+	   					}
 	            },
 	            error : function(data){
 	            	//
 					alert("<spring:message code="PROC.ERROR"/>");
 	            }
 	      	});
-		}		
+			
+		} catch (error){
+	        console.error("[Error] 아이디 중복 조회 : ", error.message);
+		}
+	}
+
+	// 사원 등록 처리
+	function regProc(f){
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			
+			// 부서
+			if($("#setOrgCd").val()==""){
+				alert("<spring:message code="EMP.ORG.NONE"/>");
+				return;
+			}
+			// 직급
+			if($("#setRankCd").val()==""){
+				alert("<spring:message code="EMP.RANK.NONE"/>");
+				return;
+			}
+			// 연락처
+			var regex = /^010-\d{4}-\d{4}$/;
+			
+			if(!regex.test($("#mobNo").val())){
+				alert("<spring:message code="EMP.MOB.FAIL"/>");
+				return;
+			}
+			// 계정
+			if($("#empPwd").val()!=$("#chqPwd").val()){
+				alert("<spring:message code="EMP.PWD.DIFF"/>");
+				return;
+			}
+			//
+			if(confirm("등록하시겠습니까?")){
+				var fileList = setFormData();
+				//
+				$.ajax({
+					url:"intrEmpProc1010.do",
+					processData : false,
+					contentType : false,
+					data: fileList,
+					type : 'post',
+		            success : function(data){
+		     				var json = eval(data);
+		     				
+		     				if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+		   						
+		     				} else {
+		     					alert("<spring:message code="PROC.FAIL"/>");
+								return;	
+		     				}
+		            },
+		            error : function(data){
+		            	//
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 사원 등록 처리 : ", error.message);
+		}
 	}
 	
 	// 목록으로
@@ -235,7 +245,7 @@
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr">
-	                                            <input type="button"class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
+	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>
@@ -247,7 +257,7 @@
 	                                        <dt><label>&#10003; 아이디</label></dt>
 	                                        <dd class="sel_2part">
 	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')">
-	                                            <input type="button"class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
+	                                            <input type="button" class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 메일 주소</label></dt>

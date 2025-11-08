@@ -167,7 +167,7 @@ public class EmpController {
 		}
 	}
 	
-	// 사원 연락처 목록 화면
+	// 사원 조회 목록 화면
 	@RequestMapping("/intrEmpInqy2010.do")
 	public String intrEmpInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -209,6 +209,29 @@ public class EmpController {
 		}
 		//
 		return defaultStr;
+	}
+	
+	// 사원 상세 조회
+	@RequestMapping("/intrEmpInqy2030.do")
+	public String intrEmpInqy2030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 사원 상세 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy1030(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_2010;
 	}
 	
 	// 사원 등록 처리
@@ -290,6 +313,27 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 사원 비밀번호 수정 처리
+	@RequestMapping("/intrEmpProc1050.do")
+	@ResponseBody
+	public String intrEmpProc1050(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 비밀번호 수정 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = empService.intrEmpProc1050(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 비밀번호 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultStr;

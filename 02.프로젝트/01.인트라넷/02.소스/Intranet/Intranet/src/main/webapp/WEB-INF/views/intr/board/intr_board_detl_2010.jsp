@@ -9,7 +9,13 @@
 	<script type="text/javascript">
 		// 목록으로
 		function listCall() {
-			formSubmit('intrBoardInqy2010.do');
+			try {
+				//
+				formSubmit('intrBoardInqy2010.do');
+				
+			} catch (error){
+		        console.error("[Error] 목록으로 : ", error.message);
+			}
 		}
 	</script>
 </head>

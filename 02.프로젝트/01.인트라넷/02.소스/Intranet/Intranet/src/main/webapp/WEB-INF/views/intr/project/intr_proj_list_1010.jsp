@@ -8,65 +8,84 @@
 <script type="text/javascript">
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrProjInqy1010.do");
+		try {
+			//
+			formSubmit("intrProjInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 
 	// 등록 화면 조회
 	function regCall(){
-		formSubmit("intrProjInqy1020.do");
+		try {
+			//
+			formSubmit("intrProjInqy1020.do");
+			
+		} catch (error){
+	        console.error("[Error] 등록 화면 조회 : ", error.message);
+		}
 	}
 	
 	// 상세 화면 조회
 	function detCall(sequenceId) {
-		//
-		$("#sequenceId").val(sequenceId);
-		formSubmit("intrProjInqy1030.do");
+		try {
+			//
+			$("#sequenceId").val(sequenceId);
+			formSubmit("intrProjInqy1030.do");
+			
+		} catch (error){
+	        console.error("[Error] 상세 화면 조회 : ", error.message);
+		}
 	}
 	
 	// 공지사항 삭제
 	function delProc(f){
-		//
-		var delIdxArr = [];
-		$(".delIdx").each(function(idx, tag){
-			if($("#delIdx"+idx).is(':checked')){
-				//				
-				delIdxArr.push($("#delIdx"+idx).val());
+		try {
+			// 삭제 배열 저장
+			var delIdxArr = [];
+			$(".delIdx").each(function(idx, tag){
+				if($("#delIdx"+idx).is(':checked')){
+					//				
+					delIdxArr.push($("#delIdx"+idx).val());
+				}
+			});
+			// 유효성 체크
+			if(delIdxArr.length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}	
+			//				
+			if(confirm('삭제하시겠습니까?')){
+				//
+	   			$.ajax({
+	   				type:	"post" , 
+	   				traditional: true,
+	   				url:	"intrProjProc1020.do",
+	   				data:	{
+	   					"delIdxArr":delIdxArr
+	   				},
+	   				success : function(data){
+	   					var json = eval(data);
+	   					
+	   					if(json[0].res=="YES"){
+	   						alert("<spring:message code="PROC.SUCCESS"/>");
+	   	   					location.href="intrProjInqy1010.do?pageUrl=Proj";
+	   	   					
+	   					} else {
+	   						alert("<spring:message code="PROC.ERROR"/>");
+	   						return;
+	   					}
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
 			}
-		});
-		// 유효성 체크
-		if(delIdxArr.length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
-		}	
-		//				
-		if(confirm('삭제하시겠습니까?')){
-			//
-   			$.ajax({
-   				type:	"post" , 
-   				traditional: true,
-   				url:	"intrProjProc1020.do",
-   				data:	{
-   					"delIdxArr":delIdxArr
-   				},
-   				success : function(data){
-   					//
-   					var json = eval(data);
-   					if(json[0].res=="YES"){
-   	   					//
-   						alert("<spring:message code="PROC.SUCCESS"/>");
-   	   					location.href="intrProjInqy1010.do?pageUrl=Proj";
-   	   					
-   					} else {
-   						//
-   						alert("<spring:message code="PROC.ERROR"/>");
-   						return;
-   					}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+			
+		} catch (error){
+	        console.error("[Error] 공지사항 삭제 : ", error.message);
 		}
 	}
 </script>
@@ -96,8 +115,8 @@
 									
 									<h2>프로젝트 관리
 										<span class="float_right">
-											<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
-											<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
+											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+											<input type="button" class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
 										</span>
 									</h2>
 									
@@ -149,8 +168,8 @@
 														<label class="srch_label">프로젝트명</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 													
-														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>

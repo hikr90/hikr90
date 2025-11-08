@@ -8,28 +8,38 @@
 <script type="text/javascript">
 	// 목록 조회
 	function listCall(f){
-		formSubmit("inqAdminTaskList.do");
+		try {
+			//
+			formSubmit("inqAdminTaskList.do");
+			
+		} catch (error){
+	        console.error("[Error] 목록 조회 : ", error.message);
+		}
 	}
 	
 	// +/- 처리
 	function spreadProc(taskIdx){
-		// 
-		var sprGb = $("#"+taskIdx).attr("sprGb");
-		//		
-		if(sprGb=="Y") {
-			// close
-			$("."+taskIdx).removeClass('hide');
-			$("."+taskIdx).addClass('show');	
-			$("#"+taskIdx).find('a').text("-");	
-			$("#"+taskIdx).attr('sprGb','N');
-
-		} else {
-			// open
-			$("."+taskIdx).removeClass('show');
-			$("."+taskIdx).addClass('hide');	
-			$("#"+taskIdx).find('a').text("+");	
-			$("#"+taskIdx).attr('sprGb','Y');
-
+		try {
+			//
+			var sprGb = $("#"+taskIdx).attr("sprGb");
+			//		
+			if(sprGb=="Y") {
+				// close
+				$("."+taskIdx).removeClass('hide');
+				$("."+taskIdx).addClass('show');	
+				$("#"+taskIdx).find('a').text("-");	
+				$("#"+taskIdx).attr('sprGb','N');
+	
+			} else {
+				// open
+				$("."+taskIdx).removeClass('show');
+				$("."+taskIdx).addClass('hide');	
+				$("#"+taskIdx).find('a').text("+");	
+				$("#"+taskIdx).attr('sprGb','Y');
+			}
+			
+		} catch (error){
+	        console.error("[Error] +/- 처리 : ", error.message);
 		}
 	}
 </script>
@@ -86,8 +96,8 @@
 														<label class="srch_label">작성자</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 														
-														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 			                                </div>

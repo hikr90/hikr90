@@ -9,45 +9,59 @@
 	<script type="text/javascript">
 		// 목록으로
 		function listCall() {
-			formSubmit('intrMtgInqy1010.do');
+			try {
+				//
+				formSubmit('intrMtgInqy1010.do');
+				
+			} catch (error){
+		        console.error("[Error] 목록으로 : ", error.message);
+			}
 		}
 		
 		// 수정 화면
 		function modCall() {
-			formSubmit('intrMtgInqy1040.do');
+			try {
+				//
+				formSubmit('intrMtgInqy1040.do');
+				
+			} catch (error){
+		        console.error("[Error] 수정 화면 : ", error.message);
+			}
 		}
 		
 		// 삭제 처리
 		function delProc(sequenceId) {
-			//
-			if(confirm('삭제하시겠습니까?')){
+			try {
 				//
-	   			$.ajax({
-	   				type:	"post" , 
-	   				traditional: true,
-	   				url:	"intrMtgProc1020.do",
-	   				data:	{
-	   					"sequenceId" : sequenceId
-	   				},
-	   				success : function(data){
-	   					//
-	   					var json = eval(data);
-	   					if(json[0].res=="YES"){
-	   	   					//
-	   						alert("<spring:message code="PROC.SUCCESS"/>");
-	   	   					location.href="intrMtgInqy1010.do?pageUrl=Mtg";
-	   	   					
-	   					} else {
-	   						//
-	   						alert("<spring:message code="PROC.ERROR"/>");
-	   						return;
-	   					}
-	   				},
-	   				error : function(res, status, error){
-	   					//
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
+				if(confirm('삭제하시겠습니까?')){
+					//
+		   			$.ajax({
+		   				type:	"post" , 
+		   				traditional: true,
+		   				url:	"intrMtgProc1020.do",
+		   				data:	{
+		   					"sequenceId" : sequenceId
+		   				},
+		   				success : function(data){
+		   					var json = eval(data);
+		   					
+		   					if(json[0].res=="YES"){
+		   						alert("<spring:message code="PROC.SUCCESS"/>");
+		   	   					location.href="intrMtgInqy1010.do?pageUrl=Mtg";
+		   	   					
+		   					} else {
+		   						alert("<spring:message code="PROC.ERROR"/>");
+		   						return;
+		   					}
+		   				},
+		   				error : function(res, status, error){
+		   					alert("<spring:message code="PROC.ERROR"/>");
+		   				}
+		   			});
+				}
+				
+			} catch (error){
+		        console.error("[Error] 삭제 처리 : ", error.message);
 			}
 		}
 	</script>

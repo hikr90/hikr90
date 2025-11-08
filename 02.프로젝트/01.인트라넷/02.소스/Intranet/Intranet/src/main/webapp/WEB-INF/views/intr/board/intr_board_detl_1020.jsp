@@ -8,46 +8,58 @@
 	<script type="text/javascript">
 		// 공지사항 등록 처리
 		function regProc(f){
-  			// 유효성 검증
-			if(!valProc()){return;};
-			if(confirm("등록하시겠습니까?")){
-				//
-				var fileList = setFormData();
-	   			$.ajax({
-					url:"intrBoardProc1010.do",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'post',
-	   				success : function(data){
-   						//
-   						var json = eval(data);
-   						if(json[0].res=='YES'){
-   	   						//
-   							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
-	   						
-   						}else if(json[0].res=='NO'){
-   	   						//
-   							alert("<spring:message code="PROC.FAIL"/>");
-							return;	   							
-   						}else{
-   	   						//
-   							alert("<spring:message code="PROC.EXISTS"/>");
-							return;	   							
-   						}
-	   				},
-	   				error : function(res, status, error){
-	   					//
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
+			try {
+	  			// 유효성 검증
+				if(!valProc()){return;};
+				
+				if(confirm("등록하시겠습니까?")){
+					var fileList = setFormData();
+					//
+		   			$.ajax({
+						url:"intrBoardProc1010.do",
+						processData : false,
+						contentType : false,
+						data: fileList,
+						type : 'post',
+		   				success : function(data){
+	   						//
+	   						var json = eval(data);
+	   						if(json[0].res=='YES'){
+	   	   						//
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrBoardInqy1010.do?pageUrl=Board";
+		   						
+	   						}else if(json[0].res=='NO'){
+	   	   						//
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;	   							
+	   						}else{
+	   	   						//
+	   							alert("<spring:message code="PROC.EXISTS"/>");
+								return;	   							
+	   						}
+		   				},
+		   				error : function(res, status, error){
+		   					//
+		   					alert("<spring:message code="PROC.ERROR"/>");
+		   				}
+		   			});
+				}
+				
+			} catch (error){
+		        console.error("[Error] 공지사항 등록 처리 : ", error.message);
 			}
 		}
 		
 		// 목록으로
 		function listCall() {
-			formSubmit('intrBoardInqy1010.do');
+			try {
+				//
+				formSubmit('intrBoardInqy1010.do');
+				
+			} catch (error){
+		        console.error("[Error] 목록으로 : ", error.message);
+			}
 		}
 	</script>
 </head>

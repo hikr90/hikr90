@@ -15,7 +15,13 @@
 
 	// 팝업 닫기
 	function popConfirm(){
-		popClose('opin');
+		try {
+			//
+			popClose('opin');
+			
+		} catch (error){
+	        console.error("[Error] 팝업 닫기 : ", error.message);
+		}
 	}
 </script>
 

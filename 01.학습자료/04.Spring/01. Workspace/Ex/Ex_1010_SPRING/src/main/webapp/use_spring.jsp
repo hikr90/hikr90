@@ -6,18 +6,20 @@
     pageEncoding="UTF-8"%> 
 
 <%
-	/*	WebApplicationContext
-			- root-context.xml에서 생성된 객체는 application 영역에 저장된다.
-			- 스프링에서는 서블릿의 내장객체로 바로 접근이 안되므로 해당 객체를 통해서 접근한다.
-			
-			메소드
-				- (1) getBean
-					- 빈객체를 가져오는 메소드
-					- 컴파일러가 객체에 저장된 값이 어떤 값인지 알 수 없으므로 형변환을 해줘야한다.
+	/*	Spring
+			- 자바 어플리케이션 개발에 사용되는 어플리케이션 프레임워크
+			- 애플리케이션 컨텍스르라고 불리는 스프링 런타임 엔진을 제공
+				
+	
+			(1) 애플리케이션 컨텍스트
+				- 프로젝트 내의 설정 정보를 참고하여 애플리케이션을 구성하는 오브젝트를 생성 및 관리한다.
+				- 독립적으로 동작할 수도 있으나 보통 모듈에서 동작하는 서비스나 서블릿으로 등록해서 사용한다.
+				- root-context.xml을 통해서 생성되어 application scope영역에 저장된다.
 	*/
 	// 객체 생성
 	WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(application);
 	// 객체 저장
+	// getBean은 빈 객체를 가져오는 메소드이다.
 	PersonVO p1 = (PersonVO)wac.getBean("p1");			// 방식 1
 	PersonVO p2 = wac.getBean("p2", PersonVO.class);	// 방식 2
 	

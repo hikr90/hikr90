@@ -8,19 +8,38 @@
 <script type="text/javascript">
 	// 사원 등록
 	function regCall(){
-		formSubmit("intrEmpInqy1020.do");
+		try {
+			//
+			formSubmit("intrEmpInqy1020.do");
+			
+		} catch (error){
+	        console.error("[Error] 사원 등록 : ", error.message);
+		}
 	}
 	
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrEmpInqy1010.do");
+		try {
+			//
+			formSubmit("intrEmpInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 	
 	// 사원 상세보기
 	function detCall(empIdx){
-		$("#sequenceId").val(empIdx);
-		$("#empIdx").val(empIdx);
-		formSubmit("intrEmpInqy1030.do");
+		try {
+			// 시퀀스, 사원 번호 지정
+			$("#sequenceId").val(empIdx);
+			$("#empIdx").val(empIdx);
+			//
+			formSubmit("intrEmpInqy1030.do");
+			
+		} catch (error){
+	        console.error("[Error] 사원 상세보기 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
@@ -51,7 +70,7 @@
 
 									<h2>사원 조회
 										<span class="float_right">
-											<input type="button"class="btn_navy_thin" value="등록" onclick="regCall();">
+											<input type="button" class="btn_navy_thin" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									
@@ -63,6 +82,18 @@
 												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly" />
 												~
 												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
+											</div>
+											
+											<!-- 부서 -->
+											<div class="srch_area">
+												<label class="srch_label">부서</label>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
+											</div>
+
+											<!-- 직급 -->
+											<div class="srch_area">
+												<label class="srch_label">직급</label>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
 											</div>
 											
 											<!-- 재직여부 -->
@@ -81,26 +112,14 @@
 												</div>
 											</div>
 												
-											<!-- 부서 -->
-											<div class="srch_area">
-												<label class="srch_label">부서</label>
-												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
-											</div>
-
-											<!-- 직급 -->
-											<div class="srch_area">
-												<label class="srch_label">직급</label>
-												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
-											</div>
-												
 											<!-- 사원명 -->
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">사원명</label>
 													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 												
-													<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 												</div>
 		                                	</div>
 		                                </div>

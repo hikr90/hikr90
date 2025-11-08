@@ -1,4 +1,4 @@
-package ex2_socket;
+package ex2_tcp_socket;
 
 import java.io.DataInputStream;
 import java.io.InputStream;

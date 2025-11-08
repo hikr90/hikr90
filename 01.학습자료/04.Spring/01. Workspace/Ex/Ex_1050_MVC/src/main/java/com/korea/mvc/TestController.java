@@ -15,7 +15,18 @@ public class TestController {
 		
 	@RequestMapping("/test.do")
 	public String test(Model model, HttpServletRequest request) {
-		//
+		/*	디자인 패턴
+		 * 		- 소프트웨어 설계 시 특정 상황에서 자주 발생하는 문제를 해결하기 위해서 사용할 수 있는 재사용 가능한 솔루션을 뜻한다.
+		 * 		- 디자인 패턴은 주로 객체지향 설계에 관한 것으로 대부분 객체지향 원칙을 통해서 문제를 해결한다.
+		 * 			(대표적으로 MVC패턴이 있다.)
+		 * 
+		 *  	[참고] 템플릿 메소드 패턴
+		 *  		- 슈퍼클래스에 기본적인 로직의 흐름을 만들고, 그 기능의 일부를 추상 메소드나 오버라이딩이 가능한 protected 메소드 등으로 만든 뒤
+		 *  		- 서브클래스에서 상속을 통하여 메소드들을 필요에 맞게 구현해서 사용하는 방식
+		 *  			(비슷한 패턴으로 팩토리 메소드 패턴이 존재한다.)
+		 */
+		
+		
 		String [] msg = {"안녕하세요.","HELLO","아리가토우","니하오"};
 		String ip = request.getRemoteAddr();
 		

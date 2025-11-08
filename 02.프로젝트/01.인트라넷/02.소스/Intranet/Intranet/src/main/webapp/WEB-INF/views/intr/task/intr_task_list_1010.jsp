@@ -33,162 +33,184 @@
 	
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrTaskInqy1010.do");
+		try {
+			//
+			formSubmit("intrTaskInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 	
 	// 목록 추가
 	function addTask(defYn) {
-		var taskStr = "";
-		// 추가 버튼
-		if(defYn){
+		try {
 			//
-			taskStr += "<tr class='setListTr'>";
-			taskStr += 		"<td class='first_td'>";
-			taskStr += 			"<span class='date'>" + today + "</span>";
-			taskStr += 			"<input type='hidden' id='regDt' name='regDt' value='" + today.replaceAll('-','') + "'>"
-			taskStr += 		"</td>";
-			taskStr += 		"<td>";
-			taskStr += 			"<input type='text' id='regTm" + "" + "' name='regTm' style='width: 60px; height:33px;' readonly>"
-			taskStr += 		"</td>";
-			taskStr += 		"<td>";
-			taskStr += 			"<input type='text' id='taskCont' name='taskCont' value='' style='height: 33px; text-align: left; width: 100%;'>";
-			taskStr += 		"</td>";
-			taskStr += 		"<td>";
-			taskStr += 			"<span id='task_del' class='task_del'></span>";
-			taskStr += 		"</td>";
-			taskStr += "</tr>";
-			//
-			
-		} else {
-			// 첫 시작
-			if("${defaultList}" != null){
+			var taskStr = "";
+			// 추가 버튼
+			if(defYn){
 				//
-				var defaultList = [];
-				// 배열에 저장
-			  	<c:forEach var="item" items="${defaultList}">
-				  	defaultList.push({
-				        regDt: "${item.regDt}",
-				        regTm: "${item.regTm}",
-				        taskCont: "${item.taskCont}"
-				      });
-  				</c:forEach>
+				taskStr += "<tr class='setListTr'>";
+				taskStr += 		"<td class='first_td'>";
+				taskStr += 			"<span class='date'>" + today + "</span>";
+				taskStr += 			"<input type='hidden' id='regDt' name='regDt' value='" + today.replaceAll('-','') + "'>"
+				taskStr += 		"</td>";
+				taskStr += 		"<td>";
+				taskStr += 			"<input type='text' id='regTm" + "" + "' name='regTm' style='width: 60px; height:33px;' readonly>"
+				taskStr += 		"</td>";
+				taskStr += 		"<td>";
+				taskStr += 			"<input type='text' id='taskCont' name='taskCont' value='' style='height: 33px; text-align: left; width: 100%;'>";
+				taskStr += 		"</td>";
+				taskStr += 		"<td>";
+				taskStr += 			"<span id='task_del' class='task_del'></span>";
+				taskStr += 		"</td>";
+				taskStr += "</tr>";
 				//
-				for(var i=0;i<defaultList.length;i++) {
+				
+			} else {
+				// 첫 시작
+				if("${defaultList}" != null){
 					//
-					taskStr += "<tr class='setListTr'>";
-					taskStr += 		"<td class='first_td'>";
-					taskStr += 			"<span class='date'>" + defaultList[i].regDt + "</span>";
-					taskStr += 			"<input type='hidden' id='regDt" + "" + "' name='regDt' value='" + defaultList[i].regDt + "'>"
-					taskStr += 		"</td>";
-					taskStr += 		"<td>";
-					taskStr += 			"<input type='text' id='regTm' name='regTm' style='width: 60px; height:33px;' value='" + defaultList[i].regTm + "' readonly>"
-					taskStr += 		"</td>";
-					taskStr += 		"<td>";
-					taskStr += 			"<input type='text' id='taskCont' name='taskCont' style='height: 33px; text-align: left; width: 100%;' value='" + defaultList[i].taskCont + "'>";
-					taskStr += 		"</td>";
-					taskStr += 		"<td>";
-					taskStr += 			"<span id='task_del' class='task_del'></span>";
-					taskStr += 		"</td>";
-					taskStr += "</tr>";
+					var defaultList = [];
+					// 배열에 저장
+				  	<c:forEach var="item" items="${defaultList}">
+					  	defaultList.push({
+					        regDt: "${item.regDt}",
+					        regTm: "${item.regTm}",
+					        taskCont: "${item.taskCont}"
+					      });
+	  				</c:forEach>
 					//
+					for(var i=0;i<defaultList.length;i++) {
+						//
+						taskStr += "<tr class='setListTr'>";
+						taskStr += 		"<td class='first_td'>";
+						taskStr += 			"<span class='date'>" + defaultList[i].regDt + "</span>";
+						taskStr += 			"<input type='hidden' id='regDt" + "" + "' name='regDt' value='" + defaultList[i].regDt + "'>"
+						taskStr += 		"</td>";
+						taskStr += 		"<td>";
+						taskStr += 			"<input type='text' id='regTm' name='regTm' style='width: 60px; height:33px;' value='" + defaultList[i].regTm + "' readonly>"
+						taskStr += 		"</td>";
+						taskStr += 		"<td>";
+						taskStr += 			"<input type='text' id='taskCont' name='taskCont' style='height: 33px; text-align: left; width: 100%;' value='" + defaultList[i].taskCont + "'>";
+						taskStr += 		"</td>";
+						taskStr += 		"<td>";
+						taskStr += 			"<span id='task_del' class='task_del'></span>";
+						taskStr += 		"</td>";
+						taskStr += "</tr>";
+						//
+					}
 				}
 			}
+			//
+			$(".post_table_wrap .post_table").append(taskStr);
+			
+			// flatpickr 생성
+		  	flatpickr("#regTm", {
+		  		enableTime: true,     // 시간 선택 활성화
+		  	    noCalendar: true,     // 달력 비활성화
+		  	    dateFormat: "H:i",    // 시:분 형식
+		  	    time_24hr: true       // 24시간제 (false면 AM/PM)
+		  	});
+			//
+			addCnt++;
+			
+		} catch (error){
+	        console.error("[Error] 목록 추가 : ", error.message);
 		}
-		//
-		$(".post_table_wrap .post_table").append(taskStr);
-		
-		// flatpickr 생성
-	  	flatpickr("#regTm", {
-	  		enableTime: true,     // 시간 선택 활성화
-	  	    noCalendar: true,     // 달력 비활성화
-	  	    dateFormat: "H:i",    // 시:분 형식
-	  	    time_24hr: true       // 24시간제 (false면 AM/PM)
-	  	});
-		//
-		addCnt++;
 	}
 
 	// 목록 초기화
 	function initTask(f){
-		//
-		if(addCnt==0){
-			alert("<spring:message code="ADD.CNT.NONE"/>");
-			return;
-		}
-		//
-		if(confirm("초기화하시겠습니까?")){
-			addCnt = 0;
-			formSubmit('intrTaskInqy1010.do');
+		try {
+			// 유효성 검증
+			if(addCnt==0){
+				alert("<spring:message code="ADD.CNT.NONE"/>");
+				return;
+			}
+			//
+			if(confirm("초기화하시겠습니까?")){
+				addCnt = 0;
+				formSubmit('intrTaskInqy1010.do');
+			}
+			
+		} catch (error){
+	        console.error("[Error] 목록 초기화 : ", error.message);
 		}
 	}
 	
 	// 목록 저장
 	function regProc(f){
-		//
-		if(addCnt==0){
-			alert("<spring:message code="ADD.CNT.NONE"/>");
-			return;
-		}
-		//
-		var dataJson = [];
-		var validate = true;
-		//
-		$(".setListTr").each(function(idx) {
-			// JSON 저장
-			var data = {};
-			var regDt = $(this).find('input[name="regDt"]').val().replaceAll("-","");
-			var regTm = $(this).find('input[name="regTm"]').val().replaceAll(":","");
-			var taskCont = $(this).find('input[name="taskCont"]').val();
-			//
-			if(regTm == null || regTm == ""){
-				alert((idx + 1) + "번째의 항목의 업무시간을 입력해주세요.");
-				validate = false;
-				return false;
-			}
-			if(taskCont == null || taskCont == ""){
-				alert((idx + 1) + "번째의 항목의 업무내용을 입력해주세요.");
-				validate = false;
-				return false;
+		try {
+			// 유효성 검증
+			if(addCnt==0){
+				alert("<spring:message code="ADD.CNT.NONE"/>");
+				return;
 			}
 			//
-			data.regDt = regDt;
-			data.regTm = regTm;
-			data.taskCont = taskCont;
-			data.empIdx = $("#empIdx").val();
+			var dataJson = [];
+			var validate = true;
 			//
-			dataJson.push(data);
-		});
-		// 유효성 검증
-		if(!validate){
-			return false;
-		}
-		//
-		if(confirm("등록하시겠습니까?")){
-			$.ajax({
-			    	type : 'post',
-			    	url : "intrTaskProc1010.do",
-					data : JSON.stringify(dataJson),
-					dataType : 'text',
-		    		contentType : 'application/json;charset=UTF-8',
-				success : function(data){
-			    	//
-   					var json = eval(data);
-   					if(json[0].res=="YES"){
-   	   					//
-	  					addCnt = 0;
-   	   					//
-   						alert("<spring:message code="PROC.SUCCESS"/>");
-   						formSubmit('intrTaskInqy1010.do');
-   					} else {
-   						//
-   						alert("<spring:message code="PROC.FAIL"/>");
-   					}
-				},
-				error : function(xhr, status, error){
-			    	//
-					alert("<spring:message code="PROC.ERROR"/>");				
-			    }
+			$(".setListTr").each(function(idx) {
+				// JSON 저장
+				var data = {};
+				var regDt = $(this).find('input[name="regDt"]').val().replaceAll("-","");
+				var regTm = $(this).find('input[name="regTm"]').val().replaceAll(":","");
+				var taskCont = $(this).find('input[name="taskCont"]').val();
+				//
+				if(regTm == null || regTm == ""){
+					alert((idx + 1) + "번째의 항목의 업무시간을 입력해주세요.");
+					validate = false;
+					return false;
+				}
+				if(taskCont == null || taskCont == ""){
+					alert((idx + 1) + "번째의 항목의 업무내용을 입력해주세요.");
+					validate = false;
+					return false;
+				}
+				//
+				data.regDt = regDt;
+				data.regTm = regTm;
+				data.taskCont = taskCont;
+				data.empIdx = $("#empIdx").val();
+				//
+				dataJson.push(data);
 			});
+			// 유효성 검증
+			if(!validate){
+				return false;
+			}
+			//
+			if(confirm("등록하시겠습니까?")){
+				$.ajax({
+				    	type : 'post',
+				    	url : "intrTaskProc1010.do",
+						data : JSON.stringify(dataJson),
+						dataType : 'text',
+			    		contentType : 'application/json;charset=UTF-8',
+					success : function(data){
+				    	//
+	   					var json = eval(data);
+	   					if(json[0].res=="YES"){
+	   	   					//
+		  					addCnt = 0;
+	   	   					//
+	   						alert("<spring:message code="PROC.SUCCESS"/>");
+	   						formSubmit('intrTaskInqy1010.do');
+	   					} else {
+	   						//
+	   						alert("<spring:message code="PROC.FAIL"/>");
+	   					}
+					},
+					error : function(xhr, status, error){
+				    	//
+						alert("<spring:message code="PROC.ERROR"/>");				
+				    }
+				});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 목록 저장 : ", error.message);
 		}
 	}
 </script>
@@ -222,7 +244,7 @@
 											<label class="srch_label">작성일자</label>
 											<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
 										
-											<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
+											<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
 										</div>
 										
 										<div class="srch_area float_right" style="padding-top: 25px;">

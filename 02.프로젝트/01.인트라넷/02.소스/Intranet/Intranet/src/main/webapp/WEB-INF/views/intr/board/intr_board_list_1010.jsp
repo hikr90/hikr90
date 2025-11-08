@@ -8,65 +8,86 @@
 <script type="text/javascript">
 	// 공지사항 등록
 	function regCall(){
-		formSubmit("intrBoardInqy1020.do");
+		try {
+			//
+			formSubmit("intrBoardInqy1020.do");
+			
+		} catch (error){
+	        console.error("[Error] 공지사항 등록 : ", error.message);
+		}
 	}
 	
 	// 공지사항 상세
 	function detCall(brdId) {
-		//
-		$("#sequenceId").val(brdId);
-		formSubmit("intrBoardInqy1030.do");
+		try {
+			//
+			$("#sequenceId").val(brdId);
+			formSubmit("intrBoardInqy1030.do");
+			
+		} catch (error){
+	        console.error("[Error] 공지사항 상세 : ", error.message);
+		}
 	}
 
 	// 검색 조회
 	function listCall(f){
-		formSubmit("intrBoardInqy1010.do");
+		try {
+			//
+			formSubmit("intrBoardInqy1010.do");
+			
+		} catch (error){
+	        console.error("[Error] 검색 조회 : ", error.message);
+		}
 	}
 	
 	// 공지사항 삭제
 	function delProc(f){
-		//
-		var delIdxArr = [];
-		$(".delIdx").each(function(idx, tag){
-			if($("#delIdx"+idx).is(':checked')){
-				//				
-				delIdxArr.push($("#delIdx"+idx).val());
+		try {
+			// 삭제 목록 저장
+			var delIdxArr = [];
+			$(".delIdx").each(function(idx, tag){
+				if($("#delIdx"+idx).is(':checked')){
+					delIdxArr.push($("#delIdx"+idx).val());
+				}
+			});
+			// 유효성 체크
+			if(delIdxArr.length==0){
+				alert("<spring:message code="CHECK.NONE"/>");
+				return;
+			}	
+			// 삭제 처리				
+			if(confirm('삭제하시겠습니까?')){
+				//
+	   			$.ajax({
+	   				type:	"post" , 
+	   				traditional: true,
+	   				url:	"intrBoardProc1020.do",
+	   				data:	{
+	   					"delIdxArr":delIdxArr
+	   				},
+	   				success : function(data){
+	   					//
+	   					var json = eval(data);
+	   					if(json[0].res=="YES"){
+	   	   					//
+	   						alert("<spring:message code="PROC.SUCCESS"/>");
+	   	   					location.href="intrBoardInqy1010.do?pageUrl=Board";
+	   	   					
+	   					} else {
+	   						//
+	   						alert("<spring:message code="PROC.ERROR"/>");
+	   						return;
+	   					}
+	   				},
+	   				error : function(res, status, error){
+	   					//
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
 			}
-		});
-		// 유효성 체크
-		if(delIdxArr.length==0){
-			alert("<spring:message code="CHECK.NONE"/>");
-			return;
-		}	
-		//				
-		if(confirm('삭제하시겠습니까?')){
-			//
-   			$.ajax({
-   				type:	"post" , 
-   				traditional: true,
-   				url:	"intrBoardProc1020.do",
-   				data:	{
-   					"delIdxArr":delIdxArr
-   				},
-   				success : function(data){
-   					//
-   					var json = eval(data);
-   					if(json[0].res=="YES"){
-   	   					//
-   						alert("<spring:message code="PROC.SUCCESS"/>");
-   	   					location.href="intrBoardInqy1010.do?pageUrl=Board";
-   	   					
-   					} else {
-   						//
-   						alert("<spring:message code="PROC.ERROR"/>");
-   						return;
-   					}
-   				},
-   				error : function(res, status, error){
-   					//
-   					alert("<spring:message code="PROC.ERROR"/>");
-   				}
-   			});
+			
+		} catch (error){
+	        console.error("[Error] 공지사항 삭제 : ", error.message);
 		}
 	}	
 </script>
@@ -96,8 +117,8 @@
 			
 										<h2>공지사항 관리
 											<span class="float_right">
-												<input type="button"class="btn_blue_thin" value="등록" onclick="regCall();">
-												<input type="button"class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
+												<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+												<input type="button" class="btn_gray_thin" value="삭제" onclick="delProc(this.form);">
 											</span>
 										</h2>
 										
@@ -135,8 +156,8 @@
 														<label class="srch_label">제목</label>
 														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 													
-														<input type="button"class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button"class="btn_gray" value="초기화" onclick="initCall();">
+														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
 													</div>
 			                                	</div>
 											</div>

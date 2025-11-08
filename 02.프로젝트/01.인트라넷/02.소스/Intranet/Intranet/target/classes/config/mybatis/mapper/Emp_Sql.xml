@@ -327,6 +327,9 @@
 				,	ADDR = #{addr, jdbcType=VARCHAR}
 				,	ADDR_INFO = #{addrInfo, jdbcType=VARCHAR}
 				,	EMAIL = #{email, jdbcType=VARCHAR}
+				<if test="empPwd != null and empPwd != ''">
+					,	EMP_PWD = 	#{empPwd, jdbcType=VARCHAR}
+				</if>
 		WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 	</update>
 	
@@ -344,5 +347,12 @@
 		/* intrEmpProc1041 : 사원 삭제 처리 */
 		DELETE FROM EMP_INFO
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="intrEmpProc1051" parameterType="java.util.HashMap">
+		/* intrEmpProc1051 : 사원 비밀번호 수정 처리 */
+		UPDATE EMP_INFO
+			SET 	EMP_PWD = #{chngPwd, jdbcType=VARCHAR}
+		WHERE EMP_ID = #{chngPwdId, jdbcType=VARCHAR}
 	</update>
 </mapper>

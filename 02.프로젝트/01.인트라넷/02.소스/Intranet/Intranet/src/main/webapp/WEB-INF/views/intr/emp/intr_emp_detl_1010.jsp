@@ -7,75 +7,96 @@
 <script type="text/javascript">
 	// 목록으로
 	function listCall() {
-		formSubmit('intrEmpInqy1010.do');
+		try {
+			//
+			formSubmit('intrEmpInqy1010.do');
+			
+		} catch (error){
+	        console.error("[Error] 목록으로 : ", error.message);
+		}
 	}
 	
 	// 수정 화면
 	function modCall() {
-		formSubmit('intrEmpInqy1040.do');
+		try {
+			//
+			formSubmit('intrEmpInqy1040.do');
+			
+		} catch (error){
+	        console.error("[Error] 수정 화면 : ", error.message);
+		}
 	}
 	
-	// 복직 퇴사 처리
+	// 복직, 퇴사 처리
 	function resiProc(f){
-		//
-		if(confirm("작업 처리하시겠습니까?")){
+		try {
 			//
-			var param = $("#form").serialize();
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrEmpProc1030.do',
-	            data : param,
-	            dataType : 'html',
-	            success : function(data){
-	     				//
-	     				var json = eval(data);
-	   					if(json[0].res=="YES"){
-	   						//
-	   						alert("<spring:message code="PROC.SUCCESS"/>");
-	   						formSubmit('intrEmpInqy1030.do');
-	   					} else {
-							//
-							alert("<spring:message code="PROC.FAIL"/>");
-	   					}
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
+			if(confirm("작업 처리하시겠습니까?")){
+				var param = $("#form").serialize();
+				//
+				$.ajax({
+		    		type : 'post',
+		        	url : 'intrEmpProc1030.do',
+		            data : param,
+		            dataType : 'html',
+		            success : function(data){
+		     				//
+		     				var json = eval(data);
+		   					if(json[0].res=="YES"){
+		   						//
+		   						alert("<spring:message code="PROC.SUCCESS"/>");
+		   						formSubmit('intrEmpInqy1030.do');
+		   					} else {
+								//
+								alert("<spring:message code="PROC.FAIL"/>");
+		   					}
+		            },
+		            error : function(data){
+		            	//
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 복직, 퇴사 처리 : ", error.message);
 		}
 	}
 	
 	// 사원 삭제 처리
 	function delProc(f){
-		//
-		if(confirm("삭제하시겠습니까?")){
+		try {
 			//
-			var param = $("#form").serialize();
-			$.ajax({
-				url:"intrEmpProc1040.do",
-				data: param,
-				type : 'post',
-	            success : function(data){
-	     				//
-	     				var json = eval(data);
-	     				if(json[0].res=='YES'){
-   	   						//
-   							alert("<spring:message code="PROC.SUCCESS"/>");
-	   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
-	   						
-	     				} else {
-	     					//
-	     					alert("<spring:message code="PROC.FAIL"/>");
-							return;	
-	     				}
-	            },
-	            error : function(data){
-	            	//
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-		}		
+			if(confirm("삭제하시겠습니까?")){
+				var param = $("#form").serialize();
+				
+				$.ajax({
+					url:"intrEmpProc1040.do",
+					data: param,
+					type : 'post',
+		            success : function(data){
+		     				var json = eval(data);
+		     				
+		     				if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+		   						location.href = "intrEmpInqy1010.do?pageUrl=Emp";
+		   						
+		     				} else {
+		     					//
+		     					alert("<spring:message code="PROC.FAIL"/>");
+								return;	
+		     				}
+		            },
+		            error : function(data){
+		            	//
+						alert("<spring:message code="PROC.ERROR"/>");
+		            }
+		      	});
+			}
+			
+		} catch (error){
+	        console.error("[Error] 사원 삭제 처리 : ", error.message);
+		}
 	}
 </script>
 </head>

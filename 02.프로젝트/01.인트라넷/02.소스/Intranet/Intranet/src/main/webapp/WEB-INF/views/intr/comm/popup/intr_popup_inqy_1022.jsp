@@ -4,11 +4,18 @@
 	view : intr_popup_inqy_1022
 	title : 비밀번호 찾기 팝업
 -->
-<h3>
-	<a onclick="javascript:chgPopup('intrPopupInqy1021.do');">아이디 찾기</a>
-	<a class="list_bg" onclick="javascript:chgPopup('intrPopupInqy1022.do');">비밀번호 찾기</a>
-</h3>
-	
+<script>
+	$(document).ready(function(){
+		// 제목 제어
+		$(".find_pwd").addClass('list_bg');
+		$(".find_id").removeClass('list_bg');
+		
+		// 버튼 제어
+		$("#findBtn").removeClass('hidden');
+		$("#updateBtn").addClass('hidden');
+	});
+</script>
+
 <div id="findPwd" class="findPwd">
 	<div class="post_write">
 		<dl>
@@ -25,7 +32,7 @@
 			</dt>
 			<dd class="sel_2part">
 				<input type="text" title="이메일" id="findEmail" name="findEmail"> 
-				<input type="button"class="btn_navy ml10" value="코드 전송" onclick="sendNum(this.form);">
+				<input type="button" class="btn_navy ml10" value="코드 전송" onclick="sendNum(this.form);">
 			</dd>
 		</dl>
 		<dl>
@@ -34,7 +41,7 @@
 			</dt>
 			<dd class="sel_2part">
 				<input type="text" title="인증번호" id="inputCode">
-				<input type="button"class="btn_navy ml10" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
+				<input type="button" class="btn_navy ml10" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
 			</dd>
 		</dl>
 	</div>

@@ -111,6 +111,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
+			paramMap.put("sequenceId", (String)paramMap.get("empIdx"));
 			defaultList = utilDao.intrFileInqy1011(model, paramMap);
 			model.addAttribute("fileList",defaultList);
 			
@@ -201,6 +202,11 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpInqy1010(model, paramMap);
 			paramMap.put("sequenceId", defaultInfo.get("sequenceId"));
+			
+			//--------------------------------------------------------------------------------------------
+			// 비밀번호 암호화
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("empPwd", utilService.encryptProc((String)paramMap.get("empPwd")));
 
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록
@@ -237,8 +243,16 @@ public class EmpServiceImpl implements EmpService{
 		String defaultStr = "";
 		String resStr = "NO";
 		int resInt = 0;
+		String empPwd = utilService.nvlProc((String)paramMap.get("empPwd"));
 		//
 		try {
+			//--------------------------------------------------------------------------------------------
+			// 비밀번호 암호화
+			//--------------------------------------------------------------------------------------------
+			if(empPwd != "") {
+				paramMap.put("empPwd", utilService.encryptProc((String)paramMap.get("empPwd")));
+			}
+			
 			//--------------------------------------------------------------------------------------------
 			// 사원 수정
 			//--------------------------------------------------------------------------------------------
@@ -313,6 +327,44 @@ public class EmpServiceImpl implements EmpService{
 				resStr = "YES";
 			}
 			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		
+		return defaultStr;
+	}
+	
+	// 사원 비밀번호 수정
+	public String intrEmpProc1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		String encryptedText = "";
+		String newPwd = utilService.nvlProc((String)paramMap.get("newPwd"));
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 암호화 처리
+			//--------------------------------------------------------------------------------------------
+			encryptedText = utilService.encryptProc(newPwd);
+			paramMap.put("chngPwd", encryptedText);
+			
+			//--------------------------------------------------------------------------------------------
+			// 사원 수정
+			//--------------------------------------------------------------------------------------------
+			resInt = empDao.intrEmpProc1051(paramMap);
+			//
+			if(resInt>0) {
+				resStr = "YES";
+			}
+
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
 			//--------------------------------------------------------------------------------------------
