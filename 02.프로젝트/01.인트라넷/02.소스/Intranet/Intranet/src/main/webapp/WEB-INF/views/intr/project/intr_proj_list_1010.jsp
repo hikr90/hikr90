@@ -44,15 +44,15 @@
 	function delProc(f){
 		try {
 			// 삭제 배열 저장
-			var delIdxArr = [];
-			$(".delIdx").each(function(idx, tag){
-				if($("#delIdx"+idx).is(':checked')){
+			var deleteList = [];
+			$(".deleteIdx").each(function(idx, tag){
+				if($("#deleteIdx"+idx).is(':checked')){
 					//				
-					delIdxArr.push($("#delIdx"+idx).val());
+					deleteList.push($("#deleteIdx"+idx).val());
 				}
 			});
 			// 유효성 체크
-			if(delIdxArr.length==0){
+			if(deleteList.length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
 			}	
@@ -64,7 +64,7 @@
 	   				traditional: true,
 	   				url:	"intrProjProc1020.do",
 	   				data:	{
-	   					"delIdxArr":delIdxArr
+	   					"deleteList":deleteList
 	   				},
 	   				success : function(data){
 	   					var json = eval(data);
@@ -206,7 +206,7 @@
 													<tr>
 														<td class="first_td">
 					                                       <span class="check_box">
-																<input type="checkbox"  name="checkBox" class="check_box delIdx" id="delIdx${status.index}" value="${list.projCd}"> 
+																<input type="checkbox"  name="checkBox" class="check_box deleteIdx" id="deleteIdx${status.index}" value="${list.projCd}"> 
 																<label for="check_label"><span></span></label>
 															</span>
 														</td>

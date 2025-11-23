@@ -12,7 +12,7 @@ public interface ProjService {
 	void intrProjInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception; // 상세 화면 조회
 	//
 	String intrProjProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 등록
-	String intrProjProc1020(Model model, String[] delIdxArr) throws Exception; 	// 삭제
+	String intrProjProc1020(Model model, String[] deleteList) throws Exception; 	// 삭제
 	String intrProjProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 수정
 
 }

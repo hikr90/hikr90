@@ -159,7 +159,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 삭제
-	public String intrBoardProc1020(Model model, String [] delIdxArr) throws Exception {
+	public String intrBoardProc1020(Model model, String [] deleteList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -170,7 +170,7 @@ public class BoardServiceImpl implements BoardService{
 			// 값 세팅
 			//--------------------------------------------------------------------------------------------
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("delIdxArr", delIdxArr);
+			paramMap.put("deleteList", deleteList);
 
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 삭제

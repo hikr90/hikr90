@@ -150,8 +150,8 @@
 		UPDATE BOARD
 			SET USE_YN = 'N'
 		WHERE BRD_ID IN
-		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
-			#{delIdx}	
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
 		</foreach>
 	</update>	
 
@@ -159,8 +159,8 @@
 		/* intrBoardProc1022 : 공지사항 삭제 처리 (삭제) */
 		DELETE FROM BOARD
 		WHERE BRD_ID IN
-		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
-			#{delIdx}	
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
 		</foreach>
 	</delete>	
 

@@ -189,7 +189,7 @@ public class BoardController {
 	// 공지사항 삭제 처리
 	@RequestMapping("/intrBoardProc1020.do")
 	@ResponseBody
-	public String intrBoardProc1020(Model model, @RequestParam String [] delIdxArr, HashMap<String, Object> paramMap) throws Exception {
+	public String intrBoardProc1020(Model model, @RequestParam String [] deleteList, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -197,7 +197,7 @@ public class BoardController {
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = boardService.intrBoardProc1020(model, delIdxArr);
+			defaultStr = boardService.intrBoardProc1020(model, deleteList);
 			
 		} catch (Exception e) {
 			//

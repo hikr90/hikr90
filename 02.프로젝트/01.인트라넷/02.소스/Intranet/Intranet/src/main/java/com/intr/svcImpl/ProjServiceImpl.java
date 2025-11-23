@@ -130,7 +130,7 @@ public class ProjServiceImpl implements ProjService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 공지사항 채번
+			// 프로젝트 채번
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = projDao.intrProjInqy1010(model, paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
@@ -163,7 +163,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 삭제
-	public String intrProjProc1020(Model model, String [] delIdxArr) throws Exception {
+	public String intrProjProc1020(Model model, String [] deleteList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -174,7 +174,7 @@ public class ProjServiceImpl implements ProjService{
 			// 값 세팅
 			//--------------------------------------------------------------------------------------------
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("delIdxArr", delIdxArr);
+			paramMap.put("deleteList", deleteList);
 
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 삭제

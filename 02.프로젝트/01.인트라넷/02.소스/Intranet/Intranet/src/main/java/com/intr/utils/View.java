@@ -148,4 +148,10 @@ public interface View {
 	public static final String INTR_MTG_DETL_1020 = "intr_mtg_detl_1020.jsp"	;			// 회의 등록
 	public static final String INTR_MTG_DETL_1030 = "intr_mtg_detl_1030.jsp";			// 회의 수정
 	public static final String INTR_MTG_DETL_2010 = "intr_mtg_detl_2010.jsp"	;			// 캘린더 목록
+	
+	//--------------------------------------------------------------------------------------------
+	// 배너
+	//--------------------------------------------------------------------------------------------
+	public static final String INTR_BANR_LIST_1010 = "intr_banr_detl_1010.jsp"; 		// 배너 관리
+
 }

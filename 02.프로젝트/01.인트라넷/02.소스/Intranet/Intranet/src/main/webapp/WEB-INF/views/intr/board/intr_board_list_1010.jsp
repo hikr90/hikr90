@@ -44,14 +44,14 @@
 	function delProc(f){
 		try {
 			// 삭제 목록 저장
-			var delIdxArr = [];
-			$(".delIdx").each(function(idx, tag){
-				if($("#delIdx"+idx).is(':checked')){
-					delIdxArr.push($("#delIdx"+idx).val());
+			var deleteList = [];
+			$(".deleteIdx").each(function(idx, tag){
+				if($("#deleteIdx"+idx).is(':checked')){
+					deleteList.push($("#deleteIdx"+idx).val());
 				}
 			});
 			// 유효성 체크
-			if(delIdxArr.length==0){
+			if(deleteList.length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
 			}	
@@ -63,7 +63,7 @@
 	   				traditional: true,
 	   				url:	"intrBoardProc1020.do",
 	   				data:	{
-	   					"delIdxArr":delIdxArr
+	   					"deleteList":deleteList
 	   				},
 	   				success : function(data){
 	   					//
@@ -196,7 +196,7 @@
 													<tr>
 														<td class="first_td">
 					                                       <span class="check_box">
-																<input type="checkbox"  name="checkBox" class="check_box delIdx" id="delIdx${status.index}" value="${list.brdId}"> 
+																<input type="checkbox"  name="checkBox" class="check_box deleteIdx" id="deleteIdx${status.index}" value="${list.brdId}"> 
 																<label for="check_label"><span></span></label>
 															</span>
 														</td>

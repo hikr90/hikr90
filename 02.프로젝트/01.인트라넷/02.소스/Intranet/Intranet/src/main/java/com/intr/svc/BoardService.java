@@ -11,7 +11,7 @@ public interface BoardService {
 	void intrBoardInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception; // 상세 화면 조회
 	//
 	String intrBoardProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 등록
-	String intrBoardProc1020(Model model, String[] delIdxArr) throws Exception; 	// 삭제
+	String intrBoardProc1020(Model model, String[] deleteList) throws Exception; 	// 삭제
 	String intrBoardProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 수정
 
 }

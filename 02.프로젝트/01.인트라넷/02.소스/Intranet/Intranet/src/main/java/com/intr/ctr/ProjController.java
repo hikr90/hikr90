@@ -148,7 +148,7 @@ public class ProjController {
 	// 프로젝트 삭제 처리
 	@RequestMapping("/intrProjProc1020.do")
 	@ResponseBody
-	public String intrProjProc1020(Model model, @RequestParam String [] delIdxArr, HashMap<String, Object> paramMap) throws Exception {
+	public String intrProjProc1020(Model model, @RequestParam String [] deleteList, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -156,7 +156,7 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = projService.intrProjProc1020(model, delIdxArr);
+			defaultStr = projService.intrProjProc1020(model, deleteList);
 			
 		} catch (Exception e) {
 			//

@@ -27,6 +27,7 @@ public interface Path {
 	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 		// 쿼리
 	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 		// 프로젝트
 	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 회의
+	public static final String VIEW_PATH_BANR 			= INTR_PATH + "/banr/"; 			// 배너
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로

@@ -182,8 +182,8 @@
 		UPDATE PROJECT
 			SET USE_YN = 'N'
 		WHERE PROJ_CD IN
-		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
-			#{delIdx}	
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
 		</foreach>
 	</update>	
 	
@@ -191,8 +191,8 @@
 		/* intrProjProc1022 : 프로젝트 삭제 처리 (삭제) */
 		DELETE FROM PROJECT
 		WHERE PROJ_CD IN
-		<foreach collection="delIdxArr" item="delIdx" separator="," open="(" close=")">
-			#{delIdx}	
+		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
+			#{deleteIdx}	
 		</foreach>
 	</delete>	
 	
