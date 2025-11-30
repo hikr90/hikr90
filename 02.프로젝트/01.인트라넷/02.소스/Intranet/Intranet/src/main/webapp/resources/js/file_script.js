@@ -37,12 +37,12 @@ $(function() {
 		//
 		if(this){
 			var thisFiles = this.files; 
-			var profImg = $(this).val();
+			var isUploadImg = $(this).val();
 			var isFileYn = /(\.png|\.jpg|\.jpeg)$/i;
 			tempList = [];
 			
 			// 유효성 검증
-			if(!profImg.match(isFileYn)){
+			if(!isUploadImg.match(isFileYn)){
 				alert("사진(png, jpg, jpeg) 파일만 업로드 가능합니다.");
 				return;
 			}
@@ -60,7 +60,7 @@ $(function() {
 			
 			// 파일 목록 추가
 			tempList.push(thisFiles[0]);
-			$("#profImg").val('Y');
+			$("#isUploadImg").val('Y');
 		}
 	});
 	
@@ -69,7 +69,7 @@ $(function() {
 		// 화면 상 처리
 		$("#empImg").attr("src","resources/images/icon/icon_profile.png");
 		$("#profText").text("사진을 등록해주세요.");
-		$("#profImg").val('N');
+		$("#isUploadImg").val('N');
 		tempList = [];
 	});
 });

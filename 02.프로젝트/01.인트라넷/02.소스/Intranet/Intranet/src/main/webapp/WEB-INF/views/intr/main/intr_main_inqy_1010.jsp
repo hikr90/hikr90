@@ -105,6 +105,55 @@
 	        console.error("[Error] 회의 조회 팝업 : ", error.message);
 		}
 	}
+	
+	$(document).ready(function(){
+		// 배너 생성
+		var banrPop = $('#banrPop');
+	    if (banrPop.length > 0) {
+	        var banrCd = "${banrInfo.banrCd}";
+
+	        // 쿠키 조회
+	        function getCookie(name) {
+	            var nameEQ = name + "=";
+	            var ca = document.cookie.split(';');
+	            for(var i=0; i < ca.length; i++) {
+	                var c = ca[i];
+	                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	            }
+	            return null;
+	        }
+
+	        // 쿠키 세팅
+	        function setCookie(name, value) {
+	            var date = new Date();
+	            date.setDate(date.getDate() + 1); // 오늘, 23:59:59까지 유효
+	            date.setHours(0); 
+	            date.setMinutes(0);
+	            date.setSeconds(0);
+	            var expires = "; expires=" + date.toUTCString();
+	            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	        }
+
+	        // 오늘 하루 보지 않기 미 체크 시, 배너 표시
+	        if (getCookie(banrCd) !== 'done') {
+	            banrPop.show(); // 쿠키가 없으면 배너 표시
+	        }
+
+	        // 닫기
+	        $('#closeBanr').on('click', function() {
+	            var noMoreToday = $('#noMoreToday').is(':checked');
+	            
+	            if (noMoreToday) {
+	                // '오늘 하루 보지 않기' 체크 시 쿠키 설정
+	                setCookie(banrCd, 'done');
+	            }
+	            
+	            // 팝업 숨김
+	            banrPop.hide();
+	        });
+	    }
+	});
 </script>
 
 <style>
@@ -120,6 +169,20 @@
  	<div id="mtgArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1090.jsp"></c:import>	
 	</div>
+
+	<!-- 배너 -->
+	<c:if test="${not empty banrInfo}">
+        <div id="banrPop" class="banr_popup">
+            <a href="${banrInfo.banrUrl}" target="_blank">
+                <img id="banrImg" class="banr_img" width="${banrInfo.width}" height="${banrInfo.height}" src="intrBanrInqy1099.do?fileNm=${banrInfo.fileNm}&sequenceId=${banrInfo.banrCd}">
+            </a>
+            
+            <div class="banr_close">
+                <label for="noMoreToday"><input type="checkbox" id="noMoreToday" class="check_box"><span style="font-size: 1.4rem;">오늘 하루 보지 않기</span></label>&nbsp;
+                 <label for="closeBanr"><button id="closeBanr" class="closeBanr"></button><span style="font-size: 1.4rem;">닫기</span></label>
+            </div>
+        </div>
+    </c:if>
 
 	<div class="main_area">
 		<div class="top_area">
@@ -245,7 +308,7 @@
 											
 											<c:if test="${empty aprvList}">
 												<li class="main_li">
-													등록된 글이 없습니다.
+													등록된 결재가 없습니다.
 												</li>												
 											</c:if>
 										</ul>

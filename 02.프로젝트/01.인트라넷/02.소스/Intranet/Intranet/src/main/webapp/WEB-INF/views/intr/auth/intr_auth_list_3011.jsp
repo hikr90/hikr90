@@ -142,7 +142,7 @@
 	}
 </script>
 
-<div class="post_wrap" style="height: 330px; padding: 0px;">
+<div class="post_wrap" style="height: auto; padding: 0px;">
 	<input type="hidden" id="authCd" name="authCd" value="">
 	
 	<div class="scroll_wrap" style="max-height: 380px; height: auto;">

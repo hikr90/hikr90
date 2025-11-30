@@ -239,6 +239,9 @@
                      WHERE E.LEAV_DT IS NULL
 				) SUB_DATA
 			WHERE 1=1
+			<if test="popNm != null and popNm != ''">
+            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{popNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            </if>
    		    ORDER BY SUB_DATA.ORG_CD ASC , SUB_DATA.LV ASC
 	</select>
 	
@@ -259,24 +262,23 @@
 	<select id="intrEmpInqy2042" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrEmpInqy2042 : 인사 요약 */
 		SELECT 
-				TO_CHAR(SYSDATE,'YYYY') || '년' AS YEAR
-			,	(
+				(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
-					WHERE E.LEAV_DT IS NULL AND SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
+					WHERE E.LEAV_DT IS NULL
 				) AS NEW_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E 
-					WHERE E.LEAV_DT IS NOT NULL AND SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
+					WHERE E.LEAV_DT IS NOT NULL
 				) AS LEAV_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
-					WHERE SUBSTR(HIRE_DT,0,4) = TO_CHAR(SYSDATE,'YYYY')
+					WHERE 1=1
 				) AS EMP_CNT
 		FROM DUAL
 	</select>

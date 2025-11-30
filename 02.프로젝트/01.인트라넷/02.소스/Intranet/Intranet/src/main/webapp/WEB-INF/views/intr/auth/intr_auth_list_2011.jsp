@@ -143,7 +143,7 @@
 		}
 	}
 </script>
-<div class="post_wrap" style="padding: 0px;">
+<div class="post_wrap" style="padding: 0px; height: auto;">
 	<div class="scroll_wrap" style="max-height: 425px;">
 		<table class="post_table authMenuTbl">
 			<caption>권한 목록 테이블</caption>

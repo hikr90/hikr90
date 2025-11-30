@@ -71,10 +71,10 @@ public class EmpDao {
 	}
 	
 	// 부서 사원 트리 조회
-	public List<HashMap<String, Object>> intrEmpInqy2031(Model model) {
+	public List<HashMap<String, Object>> intrEmpInqy2031(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqy2031");
+		defaultList = sqlsession.selectList("emp.intrEmpInqy2031", paramMap);
 		return defaultList;
 	}
 	

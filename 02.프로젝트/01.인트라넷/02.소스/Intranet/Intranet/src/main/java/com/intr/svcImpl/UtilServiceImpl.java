@@ -82,7 +82,7 @@ public class UtilServiceImpl implements UtilService{
 		String filePath = Const.FILE_PATH;
 		String filetypeCd = nvlProc((String)paramMap.get("filetypeCd"));
 		//
-		if(filetypeCd.equals("EMP")) filePath = Const.EMP_PATH;
+		if(filetypeCd.equals("EMP") || filetypeCd.equals("BANR")) filePath = Const.IMG_PATH;
 		filePath = setOsPath(paramMap, filePath);
 		//
 		return filePath;
@@ -231,7 +231,7 @@ public class UtilServiceImpl implements UtilService{
 		HashMap<String, Object> tempMap = null;
 		String resStr = "NO";
 		String filePath = "";
-		String prof = "";
+		String isUploadImg = "";
 		MultipartFile file = null;
 		int num = 0;
 		//
@@ -267,10 +267,10 @@ public class UtilServiceImpl implements UtilService{
 					num = Integer.parseInt(key.replace("delete",""));
 					this.intrFileProc1020(paramMap, num);
 					
-				} else if(key.contains("profImg")) {
-					prof = this.nvlProc((String)paramMap.get(key));
-					// 사원 이미지
-					if(prof != null && prof != "") {
+				} else if(key.contains("isUploadImg")) {
+					isUploadImg = this.nvlProc((String)paramMap.get(key));
+					// 이미지 (프로필, 배너)
+					if(isUploadImg != null && isUploadImg != "") {
 						// 삭제
 						tempMap = new HashMap<String, Object>();
 						tempMap.put("fileId", 		this.nvlProc((String)paramMap.get("sequenceId")));
@@ -279,7 +279,7 @@ public class UtilServiceImpl implements UtilService{
 						utilDao.intrFileProc1021(tempMap);
 						
 						// 등록
-						if(prof.equals("Y")) {
+						if(isUploadImg.equals("Y")) {
 							file = fileList.get(0);
 							this.intrFileProc1010(paramMap, file);	// 등록
 							

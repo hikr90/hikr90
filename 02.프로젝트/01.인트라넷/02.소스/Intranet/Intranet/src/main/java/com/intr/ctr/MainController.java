@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
+import com.intr.dao.BanrDao;
 import com.intr.dao.BoardDao;
 import com.intr.dao.EmpDao;
 import com.intr.dao.MtgDao;
@@ -79,6 +80,9 @@ public class MainController {
 	MtgDao mtgDao;
 	
 	@Autowired
+	BanrDao banrDao;
+	
+	@Autowired
 	HttpSession session;
 	
 	// 
@@ -107,6 +111,7 @@ public class MainController {
 	public String intrCoreInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
+		HashMap<String, Object> defaultInfo = null;
 		//
 		try {
 			// 사번 저장
@@ -144,6 +149,12 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvDao.intrAprvInqy1011(model, paramMap);
 			model.addAttribute("aprvList", defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 배너 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = banrDao.intrBanrInqy1021(model, paramMap);
+			model.addAttribute("banrInfo", defaultInfo);
 			
 		} catch (Exception e) {
 			//

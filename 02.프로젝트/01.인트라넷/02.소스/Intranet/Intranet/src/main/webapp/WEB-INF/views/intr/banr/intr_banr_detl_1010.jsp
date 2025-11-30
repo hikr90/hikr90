@@ -7,12 +7,6 @@
 
 <head>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#fileNm").on("click", function() {
-				$("#fileUpd").trigger("click");
-			});		
-		});
-		
 		// 저장 처리
 		function saveProc(){
 			try {
@@ -40,12 +34,6 @@
 					alert("<spring:message code="BANR.DT.PAST"/>");
 					return;
 				}
-				// URL 검증
-				var banrUrl = $("input[name=banrUrl]").val().trim();
-				if (!isValidUrl(banrUrl)) {
-					alert("<spring:message code="BANR.CHECK.URL"/>");
-                    return;
-                }				
 				//
 				if(confirm("등록하시겠습니까?")){
 					//
@@ -126,6 +114,7 @@
 				//
 				var fileName = f.files[0].name;
 				$("#fileNm").val(fileName);
+				$("#isUploadImg").val('Y');
 				//
 				var allowedExt = /\.(jpe?g|png)$/i;
 				if (!allowedExt.test(fileName)) {
@@ -135,15 +124,6 @@
 					return;
 				}
 			}
-		}
-		
-		// URL 검증
-		function isValidUrl(url) {
-			// URL 패턴
-			// 	- http:// 혹은 https:// 로 시작
-			//		- i 플래그 사용 (대소문자 구분 없음)
-            var urlPattern = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/i;
-            return urlPattern.test(url);
 		}
 	</script>
 </head>
@@ -168,34 +148,41 @@
 							<div class="form_area">
 								<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.banrCd}">
 								<input type="hidden" id="banrIdx" name="banrIdx" value="${empVO.empIdx}">
+								<input type="hidden" id="filetypeCd" name="filetypeCd" value="BANR">
+								<input type="hidden" id="fileId" name="fileId" value="${defaultInfo.fileId}">
 								
 								<div class="post_wrap">
 		                            <h2>배너 관리</h2>
 									<div class="post_view">
 										<dl>
-											<dt>첨부 파일</dt>
+											<dt>&#10003; 첨부 파일</dt>
 											<dd>
 												<div class="file_box">
-													<input type="text" id="fileNm" title="첨부 파일" placeholder="이미지 파일은 JPG, JPEG, PNG 확장자만 지원됩니다." readonly="readonly" style="width: 87%;" value="${defaultInfo.fileNm}">
+													<input type="text" id="fileNm" title="첨부 파일" placeholder="이미지 파일은 jpg, jpeg, png 확장자만 지원됩니다." readonly="readonly" style="width: 87%;" value="${defaultInfo.fileNm}">
 													<label for="fileUpd" style="margin-bottom: 5px;">업로드</label>
 													<input type="file" id="fileUpd" name="fileUpd" title="첨부파일" accept=".jpg,.jpeg,.png" onchange="fileUpload(this);">
+													<input type="hidden" id="isUploadImg" name="isUploadImg" value="">
 												</div>
 											</dd>
 											<dt>등록자</dt>
 											<dd></dd>
 										</dl>
 										<dl class="post_info">
-											<dt>노출 일자</dt>
+											<dt>&#10003; 노출 일자</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="banrSdt" value="${defaultInfo.banrSdt}" readonly="readonly" style="width: 110px;" />
+												<fmt:parseDate value="${defaultInfo.banrSdt}" var="parseSdt" pattern="yyyyMMdd"/>
+												<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
+												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="banrSdt" value="${fomatSdt}" readonly="readonly" style="width: 110px;" />
 													~
-												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${defaultInfo.banrEdt}" readonly="readonly" style="width: 110px;" />
+												<fmt:parseDate value="${defaultInfo.banrEdt}" var="parseEdt" pattern="yyyyMMdd"/>
+												<fmt:formatDate value="${parseEdt}" var="fomatEdt" pattern="yyyy-MM-dd"/>
+												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${fomatEdt}" readonly="readonly" style="width: 110px;" />
 											</dd>
-											<dt>사이즈</dt>
+											<dt>&#10003; 사이즈</dt>
 											<dd>
-												<input type="text" id="width" name="width" class="width20" value="${defaultInfo.width}">
+												<input type="text" id="width" name="width" class="width10" value="${defaultInfo.width}">
 												x
-												<input type="text" id="width" name="width" class="width20" value="${defaultInfo.width}">
+												<input type="text" id="height" name="height" class="width10" value="${defaultInfo.width}">
 											</dd>
 										</dl>
 										
@@ -224,7 +211,7 @@
 											<dd class="post_text">
 												<c:choose>
 													<c:when test="${not empty defaultInfo}">
-														<img src="${defaultInfo.fileFullPath}" alt="배너 미리보기"/>
+														<img id="banrImg" class="banr_img" width="480" height="380" src="intrBanrInqy1099.do?fileNm=${defaultInfo.fileNm}&sequenceId=${defaultInfo.banrCd}">
 													</c:when>
 													<c:otherwise>
 														등록된 배너가 없습니다.													

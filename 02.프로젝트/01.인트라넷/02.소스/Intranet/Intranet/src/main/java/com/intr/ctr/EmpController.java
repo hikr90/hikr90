@@ -1,6 +1,5 @@
 package com.intr.ctr;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;

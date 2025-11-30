@@ -34,6 +34,5 @@ public interface Path {
 	//--------------------------------------------------------------------------------------------
 	public static final String FILE_PATH = "INTR\\FILE"; 		// 파일
 	public static final String TEMP_PATH = "INTR\\TEMP"; 		// 임시
-	public static final String EMP_PATH  = "INTR\\EMP"; 		// 사원 이미지
-	
+	public static final String IMG_PATH  = "INTR\\IMG"; 		// 이미지
 }

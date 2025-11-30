@@ -8,17 +8,18 @@
 			<div class="header_state">
 				<ul class="header_list">
 					<li>
-						<a href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="25" height="25" title="사용자 이동" /></a>
+						<a href="javascript:void(0);" onclick="orgCall();"><img src='resources/images/icon/icon_org.png' width="30" height="30" title="조직도 이동" /></a>
 					</li>
-				
-						<c:if test="${empVO.authYn eq 'Y'}">
-							<li>
-								<a href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
-							</li>
-						</c:if>
-						
 					<li>
-						<a href="javascript:void(0);" onclick="outProc();"><img src='resources/images/icon/icon_logout.png' width="30" height="30" title="로그아웃" /></a>
+						<a href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="35" height="35" title="사용자 이동" /></a>
+					</li>
+					<c:if test="${empVO.authYn eq 'Y'}">
+						<li>
+							<a href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
+						</li>
+					</c:if>
+					<li>
+						<a href="javascript:void(0);" onclick="outProc();"><img src='resources/images/icon/icon_logout.png' width="32" height="32" title="로그아웃" /></a>
 					</li>
 				</ul><br><br>
 				
@@ -50,3 +51,28 @@
 		</div>
 	</div>
 </header>
+
+<script>
+	// 조직도 조회 팝업
+	function orgCall(){
+		try {
+			//
+			var obj = new Object();
+			
+			obj["mappingId"] = "intrPopupInqy1101.do";
+			obj["areaType"] = "org";
+			obj["width"] = "700";
+			obj["height"] = "550";
+			//		
+			ajaxPopup(obj);
+			
+		} catch (error){
+	        console.error("[Error] 조직도 조회 팝업 : ", error.message);
+		}
+	}
+</script>
+
+<!-- 조직도 팝업 -->
+<div id="orgArea" class="popupArea hidden">
+	<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1100.jsp"></c:import>	
+</div>

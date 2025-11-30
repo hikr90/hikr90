@@ -160,7 +160,7 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 트리 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2031(model);
+			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {

@@ -68,7 +68,6 @@ public class PopupController {
 	
 	@Autowired
 	MtgDao mtgDao;
-	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -177,7 +176,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 부서 사원 트리 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2031(model);
+			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("empList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
@@ -356,5 +355,68 @@ public class PopupController {
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1091;
+	}
+	
+	// 조직도 팝업 조회
+	@RequestMapping("/intrPopupInqy1101.do")
+	public String intrPopupInqy1101(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 조직도 팝업 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy2031(model, paramMap);
+			model.addAttribute("empList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 조직도 팝업 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1101;
+	}
+	
+	// 조직도 트리 조회
+	@RequestMapping("/intrPopupInqy1102.do")
+	public String intrPopupInqy1102(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 조직도 트리 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy2031(model, paramMap);
+			model.addAttribute("empList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 조직도 트리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1102;
+	}
+	
+	// 조직도 사원 조회
+	@RequestMapping("/intrPopupInqy1103.do")
+	@ResponseBody
+	public HashMap<String, Object> intrPopupInqy1103(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 조직도 트리 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 조직도 사원 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultInfo;
 	}
 }

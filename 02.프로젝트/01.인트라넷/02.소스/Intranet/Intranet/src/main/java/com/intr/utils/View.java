@@ -52,6 +52,10 @@ public interface View {
 	public static final String INTR_POPUP_INQY_1090 = "intr_popup_inqy_1090.jsp";		// 회의 팝업 관리
 	public static final String INTR_POPUP_INQY_1091 = "intr_popup_inqy_1091.jsp";			// 회의 조회
 	
+	public static final String INTR_POPUP_INQY_1100 = "intr_popup_inqy_1100.jsp";			// 조직도 팝업 관리
+	public static final String INTR_POPUP_INQY_1101 = "intr_popup_inqy_1101.jsp";			// 조직도 조회
+	public static final String INTR_POPUP_INQY_1102 = "intr_popup_inqy_1102.jsp";			// 조직도 트리 조회
+	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------
@@ -67,14 +71,15 @@ public interface View {
 	// 일정관리
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_SCHE_INQY_1010 = "intr_sche_list_1010.jsp";			// 일정관리 목록
-	public static final String INTR_SCHE_DETL_1010 = "intr_sche_detl_1010.jsp";			// 일정관리 목록
 	
 	//--------------------------------------------------------------------------------------------
 	// 업무일지
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_TASK_LIST_1010 = "intr_task_list_1010.jsp";			// 업무일지 조회
-	public static final String INTR_TASK_LIST_2010 = "intr_task_list_2010.jsp";			// 업무일지 등록
-
+	public static final String INTR_TASK_LIST_1010 = "intr_task_list_1010.jsp";			// 업무 작성
+	public static final String INTR_TASK_LIST_1020 = "intr_task_list_1020.jsp";			// 업무 작성 (ajax)
+	public static final String INTR_TASK_LIST_2010 = "intr_task_list_2010.jsp";			// 업무 조회
+	public static final String INTR_TASK_LIST_3010 = "intr_task_list_3010.jsp";			// 업무 캘린더 조회
+	
 	//--------------------------------------------------------------------------------------------
 	// 사원
 	//--------------------------------------------------------------------------------------------

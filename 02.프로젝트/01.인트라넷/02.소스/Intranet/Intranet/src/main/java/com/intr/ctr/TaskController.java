@@ -50,16 +50,33 @@ public class TaskController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 업무 일지 작성 조회 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 업무 작성 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
-		
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_1010;
+	}
+
+	// 업무일지 (ajax) 조회
+	@RequestMapping("/intrTaskInqy1020.do")
+	public String intrTaskInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 (ajax) 조회
+			//--------------------------------------------------------------------------------------------
+			taskService.intrTaskInqy1020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무 작성 (ajax) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_1020;
 	}
 	
 	// 업무일지 목록 조회 화면
 	@RequestMapping("/intrTaskInqy2010.do")
-	public String intrTaskInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrTaskInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -74,7 +91,7 @@ public class TaskController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 업무일지 목록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 업무일지 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_2010;
@@ -83,7 +100,7 @@ public class TaskController {
 	// 업무일지 저장 처리
 	@RequestMapping("/intrTaskProc1010.do")
 	@ResponseBody
-	public String intrTaskProc1010(Model model, @RequestBody List<HashMap<String, Object>> paramList, HashMap<String, Object> paramMap) throws Exception {
+	public String intrTaskProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -91,7 +108,8 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc1010(model, paramList);
+			System.out.println("kth1 : " + paramMap);
+			// defaultStr = taskService.intrTaskProc1010(model, paramList);
 			
 		} catch (Exception e) {
 			//
@@ -99,5 +117,29 @@ public class TaskController {
 		}
 		//
 		return defaultStr;
+	}
+	
+	// 업무 캘린더 조회
+	@RequestMapping("/intrTaskInqy3010.do")
+	public String intrTaskInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 업무 캘린더 조회
+			//--------------------------------------------------------------------------------------------
+			taskService.intrTaskInqy3010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무 캘린더 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		
+		//
+		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_3010;
 	}
 }

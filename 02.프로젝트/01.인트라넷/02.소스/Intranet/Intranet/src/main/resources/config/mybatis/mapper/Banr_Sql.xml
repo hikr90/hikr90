@@ -24,6 +24,10 @@
 			,	F.FILE_PATH
 			,	F.FILE_EXT
 			,	F.FILE_SIZE
+			,	E.EMP_NM
+			,	E.EMP_IDX
+			,	O.ORG_CD
+			,	O.ORG_NM
 		FROM BANR B
 		INNER JOIN FILE_INFO F
 			ON B.BANR_CD = F.FILE_ID
@@ -35,32 +39,37 @@
 			AND F.USE_YN = 'Y'
 	</select>
 	
-	<insert id="intrBanrProc1011" parameterType="java.util.HashMap">
-		/* intrBanrProc1011 : 배너 등록 처리 */
-		MERGE INTO BANR B
-		USING (
-			SELECT
-						#{banrCd, jdbcType=VARCHAR} AS BANR_CD
-					,	#{banrSdt, jdbcType=VARCHAR} AS BANR_SDT
-					,	#{banrEdt, jdbcType=VARCHAR} AS BANR_EDT
-					,	#{banrIdx, jdbcType=VARCHAR} AS BANR_IDX
-					,	#{width, jdbcType=VARCHAR} AS WIDTH
-					,	#{height, jdbcType=VARCHAR} AS HEIGHT
-					,	#{banrUrl, jdbcType=VARCHAR} AS BANR_URL
-			FROM DUAL
-		) D
-		ON (B.BANR_CD = D.BANR_CD)
-		WHEN MATCHED THEN
-			UPDATE BANR
-				SET BANR_SDT = #{banrSdt, jdbcType=VARCHAR}
-					,	BANR_EDT = #{banrEdt, jdbcType=VARCHAR}
-					,	BANR_IDX = #{banrIdx, jdbcType=VARCHAR}
-					,	WIDTH = #{width, jdbcType=VARCHAR}
-					,	HEIGHT = #{height, jdbcType=VARCHAR}
-					,	BANR_URL = #{banrUrl, jdbcType=VARCHAR}
-		WHEN NOT MATCHED THEN
-			INSERT INTO BANR
-			(
+	<select id="intrBanrInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrBanrInqy1021 : 배너 조회 (메인) */
+SELECT
+				B.BANR_CD
+			,	B.BANR_SDT
+			,	B.BANR_EDT
+			,	B.BANR_IDX
+			,	B.WIDTH
+			,	B.HEIGHT
+			,	B.BANR_URL
+			,	B.USE_YN
+			,	F.FILE_ID
+			,	F.FILE_SNO
+			,	F.FILE_NM
+			,	F.FILETYPE_CD
+			,	F.FILE_PATH
+			,	F.FILE_EXT
+			,	F.FILE_SIZE
+		FROM BANR B
+		INNER JOIN FILE_INFO F
+			ON B.BANR_CD = F.FILE_ID
+		WHERE F.FILETYPE_CD = 'BANR'
+			AND F.USE_YN = 'Y'
+			AND B.USE_YN = 'Y'
+			AND TRUNC(SYSDATE) BETWEEN TO_DATE(BANR_SDT, 'YYYY-MM-DD') AND TO_DATE(BANR_EDT, 'YYYY-MM-DD')
+	</select>
+	
+	<insert id="intrBanrProc1011" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* intrBanrProc1011 : 배너 저장 (등록) 처리 */
+		INSERT INTO BANR
+		(
 				BANR_CD
 			,	BANR_SDT
 			,	BANR_EDT
@@ -77,8 +86,8 @@
 		VALUES
 		(
 				#{sequenceId, jdbcType=VARCHAR}
-			,	#{banrSdt, jdbcType=VARCHAR}
-			,	#{banrEdt, jdbcType=VARCHAR}
+			,	REPLACE(#{banrSdt, jdbcType=VARCHAR}, '-', '')
+			,	REPLACE(#{banrEdt, jdbcType=VARCHAR}, '-', '')
 			,	#{banrIdx, jdbcType=VARCHAR}
 			,	#{width, jdbcType=VARCHAR}
 			,	#{height, jdbcType=VARCHAR}
@@ -93,6 +102,18 @@
 				)
 			,	NULL
 			)
+	</insert>
+	
+	<insert id="intrBanrProc1012" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* intrBanrProc1012 : 배너 저장 (수정) 처리 */
+		UPDATE BANR
+			SET	BANR_SDT = REPLACE(#{banrSdt, jdbcType=VARCHAR}, '-', '')
+				,	BANR_EDT = REPLACE(#{banrEdt, jdbcType=VARCHAR}, '-', '')
+				,	BANR_IDX = #{banrIdx, jdbcType=VARCHAR}
+				,	WIDTH = #{width, jdbcType=VARCHAR}
+				,	HEIGHT = #{height, jdbcType=VARCHAR}
+				,	BANR_URL = #{banrUrl, jdbcType=VARCHAR}
+		WHERE BANR_CD =  #{sequenceId, jdbcType=VARCHAR}
 	</insert>
 	
 	<update id="intrBanrProc1021" parameterType="java.util.HashMap">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
@@ -23,7 +24,7 @@
 								<div class="top_area" style="width: 1120px;">
 									<div class="area_title">
 										<h3>
-											<img src='resources/images/icon/icon_total.png' width="20" height="20"/>
+											<img src='resources/images/icon/icon_people.png' width="20" height="20"/>
 											부서 현황
 										</h3>
 									</div>
@@ -37,7 +38,7 @@
 										//
 										var ctx = document.getElementById('myChart');
 											new Chart(ctx, {
-											  type: 'bar',
+											  type: 'line',
 											  data: {
 											    labels: labels,
 											    datasets: [{
@@ -88,37 +89,35 @@
 									</div>
 									
 									<div class="area_content">
-										<span style="font-weight: bold;">&#8251; ${empList[0].year} 기준</span>
-									
-									<table class="post_table" style="margin-top: 10px;">
-										<caption>인사 요약</caption>
-										<colgroup>
-											<col class="auto">
-											<col class="auto">
-											<col class="auto">
-										</colgroup>
-										<thead>
-											<tr style="border-bottom: none;">
-												<th scope="col">신규</th>
-												<th scope="col">퇴사</th>
-												<th scope="col">재직</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="align_center" style="color: #0000ff">${empList[0].newCnt}</td>
-												<td class="align_center" style="color: #ff0000;">${empList[0].leavCnt}</td>
-												<td class="align_center">${empList[0].empCnt}</td>
-											</tr>
-										</tbody>
-									</table>
+										<table class="post_table" style="margin-top: 10px;">
+											<caption>인사 요약</caption>
+											<colgroup>
+												<col class="auto">
+												<col class="auto">
+												<col class="auto">
+											</colgroup>
+											<thead>
+												<tr style="border-bottom: none;">
+													<th scope="col">신규</th>
+													<th scope="col">퇴사</th>
+													<th scope="col">재직</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="align_center" style="color: #0000ff">${empList[0].newCnt}</td>
+													<td class="align_center" style="color: #ff0000;">${empList[0].leavCnt}</td>
+													<td class="align_center">${empList[0].empCnt}</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 								
 								<div class="bottom_area">
 						    		<div class="area_title">
 										<h3>
-											<img src='resources/images/icon/icon_arrow.png' width="20" height="20"/>
+											<img src='resources/images/icon/icon_question.png' width="20" height="20"/>
 											프로젝트 관리
 										</h3><a href="intrProjInqy1010.do?pageUrl=Proj" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
 									</div>
@@ -134,7 +133,7 @@
 											
 											<c:if test="${empty projList}">
 												<li class="main_li">
-													등록된 글이 없습니다.
+													등록된 프로젝트가 없습니다.
 												</li>												
 											</c:if>
 										</ul>

@@ -1,7 +1,12 @@
 package com.intr.ctr;
 
+import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.intr.dao.UtilDao;
 import com.intr.svc.BanrService;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
@@ -29,6 +35,8 @@ public class BanrController {
 	@Autowired
 	BanrService banrService;
 	
+	@Autowired
+	UtilDao utilDao;
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -55,6 +63,34 @@ public class BanrController {
 		return Const.VIEW_PATH_BANR + Const.INTR_BANR_LIST_1010;
 	}
 	
+	// 배너 사진 조회
+	@RequestMapping("/intrBanrInqy1099.do")
+	public void intrBanrInqy1099(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletResponse response){
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 사원 이미지 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// URL객체 생성 (예외사항 추가)
+			//--------------------------------------------------------------------------------------------
+			URL fileUrl = new URL("file:" + (String)defaultList.get(0).get("filePath") + (String)defaultList.get(0).get("fileNm"));
+			
+			//--------------------------------------------------------------------------------------------
+			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)
+			//--------------------------------------------------------------------------------------------
+			IOUtils.copy(fileUrl.openStream(), response.getOutputStream());
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 배너 사진 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
+	
 	// 배너 저장 처리
 	@RequestMapping("/intrBanrProc1010.do")
 	@ResponseBody
@@ -63,9 +99,8 @@ public class BanrController {
 		String defaultStr = "";
 		//
 		try {
-			System.out.println("kth1 : " + paramMap);
 			//--------------------------------------------------------------------------------------------
-			// 공지사항 등록
+			// 배너 저장
 			//--------------------------------------------------------------------------------------------
 			defaultStr = banrService.intrBanrProc1010(model, paramMap, request);
 			

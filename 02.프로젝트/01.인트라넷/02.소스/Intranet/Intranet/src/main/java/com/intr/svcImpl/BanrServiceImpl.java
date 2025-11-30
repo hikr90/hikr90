@@ -35,8 +35,8 @@ public class BanrServiceImpl implements BanrService {
 			//--------------------------------------------------------------------------------------------
 			// 배너 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = banrDao.intrBanrInqy1010(model, paramMap);
-			model.addAttribute("defaultList",defaultList);
+			defaultList = banrDao.intrBanrInqy1011(model, paramMap);
+			model.addAttribute("defaultInfo",defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -49,38 +49,39 @@ public class BanrServiceImpl implements BanrService {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
-		String resStr = "NO";
-		int resInt = 0;
+		String resStr = "YES";
 		String sequenceId = utilService.nvlProc((String)paramMap.get("sequenceId"));
 		//
 		try {
-			//
-			if(sequenceId.equals("")) {
+			// 수정
+			if(!sequenceId.equals("")) {
 				//--------------------------------------------------------------------------------------------
-				// 사용 중지 처리
+				// 배너 저장 (수정) 처리
 				//--------------------------------------------------------------------------------------------
-				resInt = banrDao.intrBanrProc1021(paramMap);
-
+				banrDao.intrBanrProc1012(paramMap);				
+			
+			} else {
 				//--------------------------------------------------------------------------------------------
 				// 배너 채번
 				//--------------------------------------------------------------------------------------------
 				defaultInfo = banrDao.intrBanrInqy1010(model, paramMap);
 				paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
+				
+				//--------------------------------------------------------------------------------------------
+				// 사용 중지 처리
+				//--------------------------------------------------------------------------------------------
+				banrDao.intrBanrProc1021(paramMap);
+				
+				//--------------------------------------------------------------------------------------------
+				// 배너 저장 (등록) 처리
+				//--------------------------------------------------------------------------------------------
+				banrDao.intrBanrProc1011(paramMap);
 			} 
 			
 			//--------------------------------------------------------------------------------------------
-			// 배너 저장 처리
-			//--------------------------------------------------------------------------------------------
-			resInt = banrDao.intrBanrProc1011(paramMap);
-			//
-			if(resInt>0) {
-				resStr = "YES";
-			}
-
-			//--------------------------------------------------------------------------------------------
 			// 파일 등록
 			//--------------------------------------------------------------------------------------------
-			resStr = utilService.fileUpload(model, paramMap, request);
+			utilService.fileUpload(model, paramMap, request);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -111,7 +112,7 @@ public class BanrServiceImpl implements BanrService {
 			//--------------------------------------------------------------------------------------------
 			// 파일 삭제 처리 (삭제)
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrFileProc1022(paramMap);
+			utilDao.intrFileProc1021(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환

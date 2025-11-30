@@ -23,10 +23,18 @@ public class TaskDao {
 	}
 
 	// 업무일지 목록 조회
-	public List<HashMap<String, Object>> intrTaskInqy1021(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy2011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy1021", paramMap);
+		defaultList = sqlsession.selectList("task.intrTaskInqy2011", paramMap);
+		return defaultList;
+	}
+	
+	// 업무 캘린더 조회
+	public List<HashMap<String, Object>> intrTaskInqy3011(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("task.intrTaskInqy3011", paramMap);
 		return defaultList;
 	}
 	

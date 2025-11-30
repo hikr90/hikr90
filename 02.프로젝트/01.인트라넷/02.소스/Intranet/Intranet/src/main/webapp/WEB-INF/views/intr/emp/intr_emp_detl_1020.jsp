@@ -174,7 +174,7 @@
 			                                        	<div style="margin-top: 5px;">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
 															<input type="file" id="profBtn">
-															<input type="hidden" id="profImg" name="profImg" value="N">
+															<input type="hidden" id="isUploadImg" name="isUploadImg" value="N">
 		                                        			<input type="button" class="btn_gray" id="profDel" value="삭제"> 
 		                                        		</div>
 		                                        	</div>

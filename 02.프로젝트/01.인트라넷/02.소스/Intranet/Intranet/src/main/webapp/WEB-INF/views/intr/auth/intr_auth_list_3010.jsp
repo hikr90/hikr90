@@ -12,9 +12,6 @@
 <script type="text/javascript">
 	//
 	$(document).ready(function() {
-		// 트리 생성
-		setTree("tree_area");
-		// 선택 항목 음영 처리
 		$(document).on('click','.a_btn',function() {
 			$(".a_btn").each(function() {
 				$(this).removeClass('list_bg');
