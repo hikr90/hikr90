@@ -5,8 +5,6 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
 	// 오늘 (yyyy-mm-dd)
 	var d = new Date();
@@ -14,11 +12,12 @@
 	//
 	$(document).ready(function() {
 		// 오늘 지정
-		var srchDt = "${param.srchDt}";
+		var srchDt = "${param.srchSdt}";
 		if(srchDt=="") $("#srchSdt").val(today);
 		
 		// 데이터 조회
-		if("${empty defaultList}") {
+		var isDefaultListEmpty = ${empty defaultList};
+		if(isDefaultListEmpty) {
 			addTask(true); // 기본 항목 추가
 		}
 	});
@@ -38,15 +37,15 @@
 
 							<div class="post_view">
 								<dl>
-									<dt>&#10003; 업무제목</dt>
+									<dt>&#10003; 업무 제목</dt>
 									<dd>
-										<input type="text" class="taskTitle" title="업무제목">
+										<input type="text" class="taskTitle" title="업무 제목">
 									</dd>
 									<dt>등록 일자</dt>
 									<dd>` + today + `</dd>
 								</dl>
 								<dl class="post_info">
-									<dt>&#10003; 업무시간</dt>
+									<dt>&#10003; 업무 시간</dt>
 									<dd>
 										<input type="text" class="width20 taskHh" title="업무(시간)" placeholder="HH" oninput="numProc(this);">
 										<input type="text" class="width20 taskMm" title="업무(분)" placeholder="MM" oninput="numProc(this);">
@@ -56,9 +55,9 @@
 								</dl>
 	
 								<dl>
-									<dt>&#10003; 업무내용</dt>
+									<dt>&#10003; 업무 내용</dt>
 									<dd class="post_text" style="height: 300px;">
-										<textarea name="taskCont" class="taskCont" title="업무내용"></textarea>
+										<textarea name="taskCont" class="taskCont" title="업무 내용"></textarea>
 									</dd>
 								</dl>
 							</div>
@@ -72,6 +71,29 @@
 	        console.error("[Error] 목록 추가 : ", error.message);
 		}
 	}
+	
+	// 목록 조회
+	function listCall(f){
+		var param = $("#form").serialize();
+		//
+		$.ajax({
+	    	type : 'post',
+	    	url : "intrTaskInqy1011.do",
+			data : param,
+			dataType : 'text',
+			success : function(data){
+				$("#taskWrap").html("");	// 초기화
+				if(data.trim() != ''){
+					$("#taskWrap").html(data);
+				} else {
+					addTask(true);
+				}
+			},
+			error : function(xhr, status, error){
+				alert("<spring:message code="PROC.ERROR"/>");				
+	    	}
+		})
+	}
 
 	// 목록 초기화
 	function initTask(){
@@ -80,18 +102,23 @@
 			if(confirm("초기화하시겠습니까?")){
 				$.ajax({
 			    	type : 'post',
-			    	url : "intrTaskInqy1020.do",
+			    	url : "intrTaskInqy1011.do",
 					data : {
-						'empIdx':'${empVO.empIdx}'
+						'empIdx':'${empVO.empIdx}',
+						'srchDt':$('#srchSdt').val()
 					},
 					dataType : 'text',
-		    		contentType : 'application/json;charset=UTF-8',
 					success : function(data){
+						$("#taskWrap").html("");	// 초기화
+
+						// 데이터가 있는 경우
 						if(data.trim() != ''){
-							$("#taskWrap").html("");	// 초기화
 							$("#taskWrap").html(data);
 						} else {
-							addTask(true);
+							// 데이터가 없고, 행이 한건도 없는 경우
+							if($(".taskArea").length == 0){
+								addTask(true);								
+							}
 						}
 					},
 					error : function(xhr, status, error){
@@ -99,7 +126,7 @@
 			    	}
 				});
 			}
-			
+
 		} catch (error){
 	        console.error("[Error] 목록 초기화 : ", error.message);
 		}
@@ -140,19 +167,23 @@
 			// Data 생성
 			let data = setTaskData();
 			//
-			if(confirm("등록하시겠습니까?")){
+			if(confirm("저장하시겠습니까?")){
 				$.ajax({
 			    	type : 'post',
 			    	url : "intrTaskProc1010.do",
-					data : data,
-					dataType : 'json',
-		    		contentType : 'application/json;charset=UTF-8',
+					data : {
+						'taskList':JSON.stringify(data),
+						'empIdx':'${empVO.empIdx}',
+						'srchDt':$("#srchSdt").val()
+					},
+					dataType : 'text',
 					success : function(data){
 			    		//
    						var json = eval(data);
    						if(json[0].res=="YES"){
    							alert("<spring:message code="PROC.SUCCESS"/>");
-							initTask();		// 초기화
+							$("#srchBtn").trigger("click");
+   							
    						} else {
    							alert("<spring:message code="PROC.FAIL"/>");
 	   					}
@@ -176,16 +207,19 @@
 			var taskTitle = $(this).find(".taskTitle").val();
 			var taskHh = $(this).find(".taskHh").val();
 			var taskMm = $(this).find(".taskMm").val();
-			var taskCont = $(this).find("taskCont").val();
+			var taskCont = $(this).find(".taskCont").val();
+			var taskDt = $("#srchSdt").val();
 			//	
-			var obj = {
+			var rObj = {
 					'taskTitle':taskTitle,
 					'taskHh':taskHh,
 					'taskMm':taskMm,
-					'taskCont':taskCont
+					'taskCont':taskCont,
+					'taskDt':taskDt,
+					'empIdx':'${empVO.empIdx}'
 			}
 			//
-			jObj.push(jObj);
+			jObj.push(rObj);
 		});
 		//
 		return jObj;
@@ -227,16 +261,15 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">						
+									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 											
 									<h2>업무일지</h2>
 									<div class="srch_wrap">
 										<div class="srch_area">
 											<label class="srch_label">작성일자</label>
 											<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
-											<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+											<input type="button" id="srchBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
 										</div>
 										
 										<div class="srch_area float_right" style="padding-top: 27px;">
@@ -256,9 +289,9 @@
 												
 												<div class="post_view">
 													<dl>
-														<dt>&#10003; 업무제목</dt>
+														<dt>&#10003; 업무 제목</dt>
 														<dd>
-															<input type="text" id="taskTitle" title="업무제목">
+															<input type="text" class="taskTitle" title="업무 제목" value="${list.taskTitle}">
 														</dd>
 														<dt>등록 일자</dt>
 														<dd>
@@ -268,7 +301,7 @@
 														</dd>
 													</dl>
 													<dl class="post_info">
-														<dt>&#10003; 업무시간</dt>
+														<dt>&#10003; 업무 시간</dt>
 														<dd>
 															<input type="text" class="width20 taskHh" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);">
 															<input type="text" class="width20 taskMm" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);">
@@ -278,9 +311,9 @@
 													</dl>
 													
 													<dl>
-														<dt>&#10003; 업무내용</dt>
+														<dt>&#10003; 업무 내용</dt>
 														<dd class="post_text" style="height: 300px;">
-															<textarea class="taskCont" name="taskCont" title="업무내용">${list.taskCont}</textarea>
+															<textarea class="taskCont" title="업무 내용">${list.taskCont}</textarea>
 														</dd>
 													</dl>
 												</div><!-- End post_view -->

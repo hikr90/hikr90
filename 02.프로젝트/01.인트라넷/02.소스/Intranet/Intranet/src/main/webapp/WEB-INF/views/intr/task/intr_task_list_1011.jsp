@@ -11,9 +11,9 @@
 		
 		<div class="post_view">
 			<dl>
-				<dt>&#10003; 제목</dt>
+				<dt>&#10003; 업무 제목</dt>
 				<dd>
-					<input type="text" id="taskTitle" title="제목" value="">
+					<input type="text" class="taskTitle" title="업무 제목" value="${list.taskTitle}">
 				</dd>
 				<dt>등록 일자</dt>
 				<dd>
@@ -23,7 +23,7 @@
 				</dd>
 			</dl>
 			<dl class="post_info">
-				<dt>&#10003; 업무시간</dt>
+				<dt>&#10003; 업무 시간</dt>
 				<dd>
 					<input type="text" class="width20 taskHh" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);">
 					<input type="text" class="width20 taskMm" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);">
@@ -33,9 +33,9 @@
 			</dl>
 			
 			<dl>
-				<dt>&#10003; 업무내용</dt>
+				<dt>&#10003; 업무 내용</dt>
 				<dd class="post_text" style="height: 300px;">
-					<textarea class="taskCont" name="taskCont" title="업무내용">${list.taskCont}</textarea>
+					<textarea class="taskCont" title="업무 내용">${list.taskCont}</textarea>
 				</dd>
 			</dl>
 		</div>

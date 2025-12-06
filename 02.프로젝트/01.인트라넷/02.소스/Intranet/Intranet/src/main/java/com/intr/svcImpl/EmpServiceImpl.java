@@ -121,6 +121,24 @@ public class EmpServiceImpl implements EmpService{
 		}
 	}
 	
+	// 부서 직급 조회
+	public void intrEmpInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 부서 목록 (전체) 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy1023(model, paramMap);
+			model.addAttribute("orgList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	// 사원 아이디 중복 조회
 	public String intrEmpInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//

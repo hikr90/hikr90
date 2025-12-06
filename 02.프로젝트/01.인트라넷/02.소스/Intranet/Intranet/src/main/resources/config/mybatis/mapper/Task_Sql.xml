@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="task">
+	<select id="intrTaskInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy1010 : 업무 시퀀스 조회 */
+		SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_ID,'TASK_')),0) + 1,4,0) AS SEQUENCE_ID FROM TASK
+	</select>
+
 	<select id="intrTaskInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrTaskInqy1011 : 업무일지 조회 */
 		SELECT 
@@ -8,13 +13,12 @@
 			,   T.EMP_IDX
 			,	T.TASK_TITLE
 			,	T.TASK_CONT
-			,	T.TASK_DT
+			,   T.TASK_DT
+			,	T.TASK_HH
+			,	T.TASK_MM
 			,	E.EMP_NM
 			,	O.ORG_NM
 			,	R.RANK_NM
-			,   TO_CHAR(TO_DATE(T.REG_DT),'YYYY-MM-DD') AS REG_DT
-			,   TO_CHAR(TO_DATE(T.REG_DT),'YYYY-MM-DD') AS REG_DT
-			,	TO_CHAR(TO_DATE(T.REG_TM, 'HH24MISS'), 'HH24:MI') AS REG_TM	
 		FROM TASK T
 		LEFT OUTER JOIN EMP_INFO E
 			ON E.EMP_IDX = T.EMP_IDX
@@ -31,35 +35,72 @@
 	
 	<select id="intrTaskInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrTaskInqy2011 : 업무일지 목록 조회 */
+			SELECT
+				RESULT.*
+			FROM (
 				SELECT
-					RESULT.*
-				FROM (
-					SELECT
-									DATA.*
-								,	COUNT(DATA.TASK_IDX) OVER(PARTITION BY DATA.TASK_IDX ORDER BY 1) AS ROW_NUM
-					FROM (
-							SELET
-								T.*
-							FROM TASK T
-					) DATA
-					WHERE 1=1
-		            <if test="srchNm != null and srchNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(DATA.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-		            </if>
-		            <if test="srchSdt != null and srchSdt !=''">
-		            	AND DATA.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
-		            </if>
-		            <if test="srchEdt != null and srchEdt !=''">
-		            	AND DATA.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
-		            </if>
-		            <if test="orgNm != null and orgNm != ''">
-		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-					</if>
-					<if test="rankNm != null and rankNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-					</if>
-				) RESULT
-		ORDER BY RESULT.ROW_NUM ASC, RESULT.DISP_ORDER ASC
+						T.TASK_ID
+					,	T.TASK_SNO
+					,	T.TASK_TITLE
+					,	T.TASK_DT
+					,	T.EMP_IDX
+					,	T.REG_DT
+					,	T.REG_TM
+					,	E.EMP_NM
+					,	E.ORG_CD
+					,	O.ORG_NM
+					,	R.RANK_NM
+					,	E.RANK_CD
+					,	COUNT(T.TASK_ID) OVER(PARTITION BY T.TASK_ID) AS ROW_CNT
+					,	ROW_NUMBER() OVER(PARTITION BY T.TASK_ID ORDER BY T.TASK_ID ASC, T.TASK_SNO ASC) AS ROW_NUM
+					,   COUNT(T.TASK_ID) OVER() AS LIST_CNT
+				FROM TASK T
+				INNER JOIN EMP_INFO E
+					ON E.EMP_IDX = T.EMP_IDX
+				INNER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				INNER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				WHERE 1=1
+					<if test="orgCd != null and orgCd != ''">
+				    	AND O.ORG_CD = #{orgCd, jdbcType=VARCHAR}
+				    </if>
+					<if test="srchNm != null and srchNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    </if>
+				    <if test="srchSdt != null and srchSdt !=''">
+				    	AND T.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    </if>
+				    <if test="srchEdt != null and srchEdt !=''">
+				    	AND T.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    </if>
+			) RESULT
+			ORDER BY RESULT.ROW_NUM ASC
+	</select>
+	
+	<select id="intrTaskInqy2021" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrTaskInqy2021 : 업무일지 상세 조회 */
+		SELECT 
+			    T.TASK_ID
+			,   T.EMP_IDX
+			,	T.TASK_TITLE
+			,	T.TASK_CONT
+			,   T.TASK_DT
+			,	T.TASK_HH
+			,	T.TASK_MM
+			,	E.EMP_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+		FROM TASK T
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.EMP_IDX = T.EMP_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		WHERE 1=1 
+            	AND T.TASK_ID = #{taskId, jdbcType=VARCHAR}
+		ORDER BY T.TASK_SNO ASC
 	</select>
 	
 	<select id="intrTaskInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -75,6 +116,8 @@
 			,	TASK_SNO
 			,	TASK_TITLE
 			,	TASK_CONT
+			,	TASK_HH
+			,	TASK_MM
 			,	TASK_DT
 			,	EMP_IDX
 			,	REG_DT
@@ -85,27 +128,28 @@
 		)
 		VALUES
 		(
-				(SELECT 'TASK_' || LPAD(NVL(MAX(REPLACE(TASK_ID,'TASK_')),0) + 1,4,0) FROM TASK)
+				#{sequenceId, jdbcType=VARCHAR}
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(TASK_SNO),0) + 1,4,0)
 					FROM TASK 
-					WHERE TASK_DT = #{taskDt, jdbcType=VARCHAR}
+					WHERE TASK_DT = REPLACE(#{taskDt, jdbcType=VARCHAR},'-','')
 						AND EMP_IDX = #{empIdx, jdbcType=VARCHAR}
 				)
 			,	#{taskTitle, jdbcType=VARCHAR}
 			,	#{taskCont, jdbcType=VARCHAR}
-			,	#{taskDt, jdbcType=VARCHAR}
+			,	#{taskHh, jdbcType=VARCHAR}
+			,	#{taskMm, jdbcType=VARCHAR}
+			,	REPLACE(#{taskDt, jdbcType=VARCHAR},'-','')
 			,	#{empIdx, jdbcType=VARCHAR}
 			,	TO_CHAR(SYSDATE, 'YYYYMMDD')
-			,	TO_CHAR(SYSDATE, 'YYYYMMDD')
+			,	TO_CHAR(SYSDATE, 'HHMMSS')
 			,	'Y'
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
 					FROM TASK
-					WHERE REG_DT = #{regDt, jdbcType=VARCHAR}
-						AND EMP_IDX = #{empIdx, jdbcType=VARCHAR}
+					WHERE TASK_ID = #{sequenceId, jdbcType=VARCHAR}
 				)
 			,	NULL
 		)
@@ -115,6 +159,6 @@
 		/* intrTaskProc1021 : 업무일지 삭제 처리 */
 		DELETE FROM TASK
 			WHERE EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				AND TASK_DT = #{taskDt, jdbcType=VARCHAR}
+				AND TASK_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
 	</delete>
 </mapper>

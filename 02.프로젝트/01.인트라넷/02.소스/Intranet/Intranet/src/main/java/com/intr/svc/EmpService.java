@@ -9,7 +9,8 @@ public interface EmpService {
 	// 사원 정보
 	void intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 목록 조회
 	void intrEmpInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 부서 직급 조회
-	void intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception;	// 상세 조회
+	void intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception;		// 상세 조회
+	void intrEmpInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 부서 (전체) 조회
 	//
 	String intrEmpInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 사원 아이디 중복 조회
 	void intrEmpInqy2030(Model model, HashMap<String, Object> paramMap) throws Exception;		// 부서 사원 트리 조회

@@ -137,7 +137,6 @@
 				LEFT OUTER JOIN ORG D
 					ON D.ORG_CD = E.ORG_CD
 				WHERE 1=1
-					AND E.EMP_IDX != 'EMP_0000'
 					<if test="authCd != null and authCd != ''">
 						AND A.AUTH_CD = #{authCd, jdbcType=VARCHAR}
 					</if>

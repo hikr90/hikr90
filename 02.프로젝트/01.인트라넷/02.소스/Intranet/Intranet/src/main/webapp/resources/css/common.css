@@ -23,7 +23,7 @@ body { font-size: 1.5rem; color: #727272; letter-spacing: -0.5px; overflow-x: hi
 
 a { text-decoration: none; cursor:pointer; color: #214b97; }
 a:hover { color: #3482fe; text-decoration: underline; text-underline-position : under; }
-a:link, a:active, a:visited { color: #333; }
+a:active, a:link, a:visited { color: #333; }
 
 h1, h2, h3, h4, h5 { font-weight: normal; }
 h3 a { color: #333; }

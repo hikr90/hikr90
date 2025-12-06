@@ -89,7 +89,7 @@
 </div><!-- End post_view -->
 
 <!-- 조직도 상세 -->
-<div class="post_write">
+<div class="post_write" style="height: 305px;">
 	<dl>
 		<dt><label for="post-title">부서</label></dt>
 		<dd><span id="orgNm"></span></dd>

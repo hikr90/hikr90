@@ -54,6 +54,14 @@ public class EmpDao {
 		return defaultList;
 	}
 	
+	// 부서 목록 (전체) 조회
+	public List<HashMap<String, Object>> intrEmpInqy1023(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy1023", paramMap);
+		return defaultList;
+	}
+	
 	// 사원 상세 조회
 	public HashMap<String, Object> intrEmpInqy1031(Model model, HashMap<String, Object> paramMap) {
 		//

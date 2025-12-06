@@ -76,15 +76,17 @@ public interface View {
 	// 업무일지
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_TASK_LIST_1010 = "intr_task_list_1010.jsp";			// 업무 작성
-	public static final String INTR_TASK_LIST_1020 = "intr_task_list_1020.jsp";			// 업무 작성 (ajax)
+	public static final String INTR_TASK_LIST_1011 = "intr_task_list_1011.jsp";			// 업무 작성 (AJAX)
 	public static final String INTR_TASK_LIST_2010 = "intr_task_list_2010.jsp";			// 업무 조회
+	public static final String INTR_TASK_LIST_2011 = "intr_task_list_2011.jsp";			// 업무 조회 (AJAX)
+	public static final String INTR_TASK_DETL_2020 = "intr_task_detl_2020.jsp";			// 업무 상세
 	public static final String INTR_TASK_LIST_3010 = "intr_task_list_3010.jsp";			// 업무 캘린더 조회
 	
 	//--------------------------------------------------------------------------------------------
 	// 사원
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_EMP_LIST_1010 = "intr_emp_list_1010.jsp";				// 사원 목록
-	public static final String INTR_EMP_LIST_2010 = "intr_emp_list_2010.jsp";				// 사원 목록
+	public static final String INTR_EMP_LIST_1010 = "intr_emp_list_1010.jsp";				// 사원 목록 (사용자)
+	public static final String INTR_EMP_LIST_2010 = "intr_emp_list_2010.jsp";				// 사원 목록 (관리자)
 	public static final String INTR_EMP_DETL_1010 = "intr_emp_detl_1010.jsp";				// 사원 등록
 	public static final String INTR_EMP_DETL_1020 = "intr_emp_detl_1020.jsp";			// 사원 수정
 	public static final String INTR_EMP_DETL_1030 = "intr_emp_detl_1030.jsp";			// 사원 상세
