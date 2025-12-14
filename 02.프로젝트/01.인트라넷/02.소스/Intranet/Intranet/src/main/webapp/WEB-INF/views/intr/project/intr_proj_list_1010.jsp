@@ -12,7 +12,7 @@
 			//
 			formSubmit("intrProjInqy1010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}
@@ -23,7 +23,7 @@
 			//
 			formSubmit("intrProjInqy1020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 등록 화면 조회 : ", error.message);
 		}
 	}
@@ -35,7 +35,7 @@
 			$("#sequenceId").val(sequenceId);
 			formSubmit("intrProjInqy1030.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 상세 화면 조회 : ", error.message);
 		}
 	}
@@ -84,7 +84,7 @@
 	   			});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 공지사항 삭제 : ", error.message);
 		}
 	}

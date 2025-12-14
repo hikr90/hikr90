@@ -10,40 +10,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	//
 	$(document).ready(function() {
-		$(document).on('click','.a_btn',function() {
-			$(".a_btn").each(function() {
-				$(this).removeClass('list_bg');
-			});
-			//
-			$(this).addClass('list_bg');
-		});	
-		
-		// 전체 선택 시 체크
-		$(document).on('click','.totalIdx',function() {
-			//
-			var totalYn = $(this).is(':checked');
-			$("input[name=empIdx]").each(function(){
-				$(this).prop('checked',totalYn);
-			});
-		});	
-			
-		// 부서 체크 시 하위 자동 체크
-		$(document).on('click','.orgCd',function() {
-			//
-			var deptYn = $(this).is(':checked');
-			var orgCd = $(this).attr("orgCd");
-			//			
-			$("input[name=empIdx]").each(function(){
-				if(orgCd==$(this).attr('orgCd')){
-					$(this).prop('checked',deptYn)
-				};
-			});
-		});	
+		// 첫번째 권한 클릭
+		$("#authTree").find("ul li:first-child").find('.a_btn').trigger('click');
 		
 		// 권한 메뉴, 메뉴 목록 감춤
 		$("#empArea").css("display","none");
+	});
+	
+	$(document).on('click','.a_btn',function() {
+		$(".a_btn").each(function() {
+			$(this).removeClass('list_bg');
+		});
+		//
+		$(this).addClass('list_bg');
+	});	
+	
+	// 전체 선택 시 체크
+	$(document).on('click','.totalIdx',function() {
+		//
+		var totalYn = $(this).is(':checked');
+		$("input[name=empIdx]").each(function(){
+			$(this).prop('checked',totalYn);
+		});
+	});	
+		
+	// 부서 체크 시 하위 자동 체크
+	$(document).on('click','.orgCd',function() {
+		//
+		var deptYn = $(this).is(':checked');
+		var orgCd = $(this).attr("orgCd");
+		//			
+		$("input[name=empIdx]").each(function(){
+			if(orgCd==$(this).attr('orgCd')){
+				$(this).prop('checked',deptYn)
+			};
+		});
 	});
 	
 	// 권한 조회
@@ -68,7 +70,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 조회 : ", error.message);
 		}
 	}
@@ -96,7 +98,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 상세보기 : ", error.message);
 		}
 	}

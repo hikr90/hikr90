@@ -21,7 +21,7 @@
    	   			//		
    	   			ajaxPopup(obj);
    				
-   			} catch (error){
+   			} catch (error) {
    		        console.error("[Error] 정보 찾기 팝업 : ", error.message);
    			}
    		}
@@ -56,7 +56,7 @@
    	   				}
    	   			});
    	   			
-   			} catch (error){
+   			} catch (error) {
    		        console.error("[Error] 로그인 : ", error.message);
    			}
    		}
@@ -68,7 +68,7 @@
    	   			$("input[name=empId]").val(empId);
    	   			$("input[name=empPwd]").val(empPwd);
    				
-   			} catch (error){
+   			} catch (error) {
    		        console.error("[Error] 로그인 정보 입력 : ", error.message);
    			}
    		}
@@ -93,7 +93,7 @@
 				</div>
 					
 				<div class="auth_area">
-					<div class="post_table_wrap">
+					<div class="post_table_wrap scroll_wrap">
 						<table class="post_table">
 							<caption>로그인 권한 목록 조회</caption>
 							<colgroup>
@@ -107,6 +107,7 @@
 								</tr>
 							</thead>
 							<tbody>
+                                <c:if test="${not empty defaultList}">
                                 <c:forEach var="list1" items="${defaultList}" varStatus="status1">
 									<c:if test="${list1.authCd ne defaultList[status1.index + 1].authCd}">
 										<tr>
@@ -122,6 +123,12 @@
 										</tr>
 									</c:if>
                                </c:forEach>
+                               </c:if>
+                               <c:if test="${empty defaultList}">
+									<tr>
+										<td class="text_center" colspan="2">권한 소유자가 없습니다.</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>

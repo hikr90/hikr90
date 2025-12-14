@@ -56,6 +56,9 @@ public interface View {
 	public static final String INTR_POPUP_INQY_1101 = "intr_popup_inqy_1101.jsp";			// 조직도 조회
 	public static final String INTR_POPUP_INQY_1102 = "intr_popup_inqy_1102.jsp";			// 조직도 트리 조회
 	
+	public static final String INTR_POPUP_INQY_1110 = "intr_popup_inqy_1110.jsp";			// RESTful API 팝업 관리
+	public static final String INTR_POPUP_INQY_1111 = "intr_popup_inqy_1111.jsp";			// RESTful API 조회
+
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------

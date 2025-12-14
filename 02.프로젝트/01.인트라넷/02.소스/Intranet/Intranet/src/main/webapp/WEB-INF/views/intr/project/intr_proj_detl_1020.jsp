@@ -19,7 +19,7 @@
 				//		
 				ajaxPopup(obj);
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 담당자 선택 : ", error.message);
 			}
 		}
@@ -87,7 +87,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 프로젝트 등록 처리 : ", error.message);
 			}
 		}
@@ -98,7 +98,7 @@
 				//
 				formSubmit('intrProjInqy1010.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 목록으로 : ", error.message);
 			}
 		}

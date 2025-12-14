@@ -171,8 +171,6 @@
 			SET 	BRD_TITLE = #{brdTitle, jdbcType=VARCHAR}
 				,	BRD_CONT = #{brdCont, jdbcType=VARCHAR}
 				,	USE_YN = #{useYn, jdbcType=VARCHAR}
-				,	REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
-				,	REG_TM = TO_CHAR(SYSDATE,'HH24MISS')
 		WHERE BRD_ID = #{sequenceId, jdbcType=VARCHAR} 
 	</update>	
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
+import com.intr.dao.AuthDao;
 import com.intr.dao.BanrDao;
 import com.intr.dao.BoardDao;
 import com.intr.dao.EmpDao;
@@ -81,6 +82,9 @@ public class MainController {
 	
 	@Autowired
 	BanrDao banrDao;
+	
+	@Autowired
+	AuthDao authDao;
 	
 	@Autowired
 	HttpSession session;
@@ -156,6 +160,12 @@ public class MainController {
 			defaultInfo = banrDao.intrBanrInqy1021(model, paramMap);
 			model.addAttribute("banrInfo", defaultInfo);
 			
+			//--------------------------------------------------------------------------------------------
+			// 사원 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
+			model.addAttribute("empInfo", defaultInfo);
+
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -199,7 +209,13 @@ public class MainController {
 			model.addAttribute("orgList", jAray.toJSONString());
 			
 			//--------------------------------------------------------------------------------------------
-			// 인사 요약
+			// 권한 부여 현황
+			//--------------------------------------------------------------------------------------------
+			defaultList = authDao.intrAuthInqy5011(model);
+			model.addAttribute("authList", defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 입사 현황
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2042(model, paramMap);
 			model.addAttribute("empList", defaultList);

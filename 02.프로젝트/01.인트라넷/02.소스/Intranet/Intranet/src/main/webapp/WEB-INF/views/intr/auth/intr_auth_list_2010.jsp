@@ -10,28 +10,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	//
 	$(document).ready(function() {
-		// 권한 메뉴 목록 전체 체크
-		$('.menuChk').click(function() {
-			if($(".menuChk").is(":checked")){
-				$("input[name=menuCd]").prop("checked", true);
-		    } else {
-		    	$("input[name=menuCd]").prop("checked", false);	
-		    }
-		});
-		
-		// 선택 항목 음영 처리
-		$(document).on('click','.a_btn',function() {
-			$(".a_btn").each(function() {
-				$(this).removeClass('list_bg');
-			})
-			//
-			$(this).addClass('list_bg');
-		});
+		// 첫번째 권한 클릭
+		$(".tree_area").find("ul li:first-child").find('.a_btn').trigger('click');
 		
 		// 권한 메뉴, 메뉴 목록 감춤
 		$("#menuArea").css("display","none");
+	});
+	
+	// 권한 메뉴 목록 전체 체크
+	$('.menuChk').click(function() {
+		if($(".menuChk").is(":checked")){
+			$("input[name=menuCd]").prop("checked", true);
+	    } else {
+	    	$("input[name=menuCd]").prop("checked", false);	
+	    }
+	});
+	
+	// 선택 항목 음영 처리
+	$(document).on('click','.a_btn',function() {
+		$(".a_btn").each(function() {
+			$(this).removeClass('list_bg');
+		})
+		//
+		$(this).addClass('list_bg');
 	});
 	
 	// 권한 조회
@@ -55,7 +57,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 조회 : ", error.message);
 		}
 	}
@@ -83,7 +85,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 상세조회 : ", error.message);
 		}
 	}

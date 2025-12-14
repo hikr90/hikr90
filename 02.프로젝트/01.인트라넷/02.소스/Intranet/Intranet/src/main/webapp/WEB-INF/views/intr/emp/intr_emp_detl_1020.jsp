@@ -56,7 +56,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 아이디 중복 조회 : ", error.message);
 		}
 	}
@@ -118,7 +118,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 사원 등록 처리 : ", error.message);
 		}
 	}

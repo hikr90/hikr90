@@ -12,15 +12,17 @@
 <script type="text/javascript">
 	//
 	$(document).ready(function() {
-		// 선택 항목 음영 처리
-		$(document).on('click','.a_btn',function() {
-			//
-			$(".a_btn").each(function() {
-				$(this).removeClass('list_bg');
-			});
-			//
-			$(this).addClass('list_bg');
+		// 첫번째 권한 클릭
+		$("#authTree").find("ul li:first-child").find('.a_btn').trigger('click');
+	});
+	
+	// 선택 항목 음영 처리
+	$(document).on('click','.a_btn',function() {
+		$(".a_btn").each(function() {
+			$(this).removeClass('list_bg');
 		});
+		//
+		$(this).addClass('list_bg');
 	});
 
 	// 권한 조회
@@ -45,7 +47,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 조회 : ", error.message);
 		}
 	}
@@ -72,7 +74,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 등록 : ", error.message);
 		}
 	}
@@ -106,7 +108,7 @@
 		      	});
 			}	
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 등록 처리 : ", error.message);
 		}
 	}
@@ -133,7 +135,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 상세보기 : ", error.message);
 		}
 	}
@@ -159,7 +161,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 수정화면 : ", error.message);
 		}
 	}
@@ -193,7 +195,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 수정 처리 : ", error.message);
 		}
 	}
@@ -227,7 +229,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 삭제 처리 : ", error.message);
 		}
 	}
@@ -277,7 +279,7 @@
 									
 									<div class="tree_wrap">
 										<div class="tree_area" id="tree_area" style="width: 400px;"> 
-											<div class="tree">
+											<div id="authTree" class="tree">
 												<ul class="ul_1">
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   	<c:set var="spanIcon" 	value="icon_list"/> 

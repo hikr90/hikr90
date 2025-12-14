@@ -11,7 +11,7 @@
 			//
 			formSubmit('intrEmpInqy1010.do');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록으로 : ", error.message);
 		}
 	}
@@ -22,7 +22,7 @@
 			//
 			formSubmit('intrEmpInqy1040.do');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 수정 화면 : ", error.message);
 		}
 	}
@@ -58,7 +58,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 복직, 퇴사 처리 : ", error.message);
 		}
 	}
@@ -94,7 +94,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 사원 삭제 처리 : ", error.message);
 		}
 	}
@@ -138,8 +138,8 @@
 	                                        	<div>
 	                                        	<div class="emp_profile">
 	                                        		<c:choose>
-	                                        			<c:when test="${not empty fileList}">
-	                                        				<img class="emp_img" id="empImg" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${fileList[0].fileId}">
+														<c:when test="${defaultInfo.profileYn eq 'Y'}">
+                                 							<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
 	                                        			</c:when>
 	                                        			<c:otherwise>
 			                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">

@@ -35,4 +35,17 @@ public interface Path {
 	public static final String FILE_PATH = "INTR\\FILE"; 		// 파일
 	public static final String TEMP_PATH = "INTR\\TEMP"; 		// 임시
 	public static final String IMG_PATH  = "INTR\\IMG"; 		// 이미지
+	public static final String DOC_PATH  = "INTR\\DOC"; 		// 참고문서
+
+	//--------------------------------------------------------------------------------------------
+	// 참고문서 명칭
+	//--------------------------------------------------------------------------------------------
+	public static final String DOC_WORD  = "인트라넷 테이블.docx"; 		// WORD
+	public static final String DOC_EXCEL  = "인트라넷 데이터.xlsx"; 		// EXCEL
+	public static final String DOC_PPT  = "인트라넷 프로젝트.ppt"; 			// PPT
+	
+	//--------------------------------------------------------------------------------------------
+	// RESTful API URL
+	//--------------------------------------------------------------------------------------------
+	public static final String API_URL = "http://172.30.1.81:9090/api/v1/";
 }

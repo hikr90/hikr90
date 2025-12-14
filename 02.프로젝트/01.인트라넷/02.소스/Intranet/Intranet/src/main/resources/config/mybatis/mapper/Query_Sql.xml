@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="query">
-	<select id="intrQueryInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrQueryInqy1021 : 쿼리 입력 조회 */
+	<select id="intrQueryInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrQueryInqy1011 : 쿼리 입력 조회 */
 		${query}
 	</select>
 
-	<select id="intrQueryInqy1031" resultType="hashmap">
-		/* intrQueryInqy1021 : 쿼리 입력 조회 (엑셀) */
+	<select id="intrQueryInqy1021" resultType="hashmap">
+		/* intrQueryInqy1011 : 쿼리 입력 조회 (엑셀) */
 		${query}
 	</select>
 	

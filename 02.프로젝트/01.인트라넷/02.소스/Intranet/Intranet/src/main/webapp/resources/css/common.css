@@ -24,6 +24,7 @@ body { font-size: 1.5rem; color: #727272; letter-spacing: -0.5px; overflow-x: hi
 a { text-decoration: none; cursor:pointer; color: #214b97; }
 a:hover { color: #3482fe; text-decoration: underline; text-underline-position : under; }
 a:active, a:link, a:visited { color: #333; }
+.pop_a_btn { color: #333; }
 
 h1, h2, h3, h4, h5 { font-weight: normal; }
 h3 a { color: #333; }
@@ -88,7 +89,7 @@ header .header_wrap .header_list li:before { content: ''; display: inline-block;
 header .header_wrap .header_list li:first-child:before { display: none; }
 
 header .menu_wrap { position: relative; display: inline-block; width: 100%; margin-top: 49px; }
-header .menu_wrap .logo { position:absolute; left:-150px; top:-18px; width:60px; }
+header .menu_wrap .logo { position:absolute; left:-60px; top:-18px; width:60px; }
 header .menu_wrap .logo > a { display: block; width: 120px; height: 51px; text-indent: -5000px; background: url("../images/logo.jpg") left top no-repeat; }
 
 header .menu_wrap .nav { text-align: center; }
@@ -269,7 +270,7 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 .sub_article h3 {color: #354257; font-size: 1.8rem; font-weight: 700;}
 
 .area_title { width: 100%; height: 50px; }
-.area_content { width: 100%; height: 83%; }
+.area_content { width: 100%; height: 80%; }
 .area_ul { width: 100% !important; }
 
 .main_li { line-height: 30px; margin-right: 15px; }

@@ -23,7 +23,7 @@
 		    let orgCd = $("#orgCd").val();
 		    $("a[orgCd='" + orgCd + "']").trigger('click');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 조회 : ", error.message);
 		}
 	}
@@ -49,7 +49,7 @@
 				$("#"+taskId).attr('spreadType','Y');
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] +/- 처리 : ", error.message);
 		}
 	}
@@ -125,7 +125,7 @@
 		    	}
 			})
 			
-		} catch (error){
+		} catch (error) {
 			console.error("[Error] 탭 선택 처리 : ", error.message);
 		}
 	}
@@ -137,7 +137,7 @@
 			$("#taskId").val(taskId);
 			formSubmit("intrTaskInqy2020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 업무 상세 조회 : ", error.message);
 		}
 	}
@@ -167,29 +167,7 @@
 										<input type="hidden" id="orgCd" name="orgCd" value="${param.orgCd}">
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
-										<h2>업무일지 조회</h2>
-										<div class="srch_wrap">
-											<div class="right_srch_area">
-												<!-- 작성일자 -->
-												<div class="srch_area">
-													<label class="srch_label">작성일자</label>
-													<input type="text" id="srchSdt" class="srch_cdt_date" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly"/>
-													~
-													<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
-												</div>
-
-												<!-- 작성자 -->
-												<div class="float_right">
-													<div class="srch_area">
-														<label class="srch_label">작성자</label>
-														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
-														
-														<input type="button" class="btn_blue" value="조회" onclick="listCall();">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
-													</div>
-			                                	</div>
-			                                </div>
-										</div>
+										<h2>업무일지 조회</h2><br>
 										
 										<!-- 탭 -->
 										<div class="tab_container">
@@ -222,8 +200,30 @@
 										    	</a>
 										    </div>
 										</div>
-										<!-- 탭 -->
+										
+										<div class="srch_wrap" style="margin-top: 5px;">
+											<div class="right_srch_area">
+												<!-- 작성일자 -->
+												<div class="srch_area">
+													<label class="srch_label">작성일자</label>
+													<input type="text" id="srchSdt" class="srch_cdt_date" id="srchSdt" name="srchSdt" value="${param.srchSdt}" readonly="readonly"/>
+													~
+													<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
+												</div>
 
+												<!-- 작성자 -->
+												<div class="float_right">
+													<div class="srch_area">
+														<label class="srch_label">작성자</label>
+														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
+														
+														<input type="button" class="btn_blue" value="조회" onclick="listCall();">
+														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+													</div>
+			                                	</div>
+			                                </div>
+										</div>
+										
 										<!-- 탭 내용 -->
 										<div id="tabArea" class="tab_content_area">
 											<table class="post_table">

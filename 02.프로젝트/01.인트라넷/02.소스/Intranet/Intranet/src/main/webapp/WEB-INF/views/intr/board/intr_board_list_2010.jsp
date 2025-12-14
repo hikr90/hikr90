@@ -11,7 +11,7 @@
 			//
 			formSubmit("intrBoardInqy2010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}
@@ -23,7 +23,7 @@
 			$("#sequenceId").val(brdId);
 			formSubmit("intrBoardInqy2020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 공지사항 상세 : ", error.message);
 		}
 	}

@@ -12,7 +12,7 @@
 			//
 			formSubmit("intrEmpInqy1020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 사원 등록 : ", error.message);
 		}
 	}
@@ -23,7 +23,7 @@
 			//
 			formSubmit("intrEmpInqy1010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}
@@ -37,7 +37,7 @@
 			//
 			formSubmit("intrEmpInqy1030.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 사원 상세보기 : ", error.message);
 		}
 	}

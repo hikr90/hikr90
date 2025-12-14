@@ -67,7 +67,7 @@
 				$(".totalIdx").prop("checked", false);
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 이동 : ", error.message);
 		}
 	}
@@ -89,7 +89,7 @@
 			// 권한 사용자 체크 초기화
 			$(".empChk").prop("checked", false);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 권한 목록 화면 상 제거 : ", error.message);
 		}
 	}
@@ -100,7 +100,7 @@
 			//
 			$(".list_bg").trigger("click");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 새로고침 : ", error.message);
 		}
 	}
@@ -136,7 +136,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 저장 처리 : ", error.message);
 		}
 	}

@@ -31,6 +31,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -449,7 +451,6 @@ public class UtilServiceImpl implements UtilService{
 			//
 			throw new Exception(e.getMessage());
 		}
-
 	}
 	
 	// 파일 다운로드
@@ -467,10 +468,45 @@ public class UtilServiceImpl implements UtilService{
 			
 			fileNm = this.nvlProc((String)defaultInfo.get("fileNm"));
 			filePath = this.nvlProc((String)defaultInfo.get("filePath"));
+			
+			//--------------------------------------------------------------------------------------------
+			// 파일 다운로드
+			//--------------------------------------------------------------------------------------------
+			fileDownProc(filePath, fileNm, request, response);
+			
+		} catch (Exception e) {
 			//
-			paramMap.put("fileId", 	this.nvlProc(((String)defaultInfo.get("fileId"))));
-			paramMap.put("fileNm", 	fileNm);
-			paramMap.put("filePath", filePath);
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 참고문서 다운로드
+	public void docDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//
+		String docCd = this.nvlProc((String)paramMap.get("docCd"));
+		String fileNm = "";
+		String filePath = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 명칭 및 경로 조회
+			//--------------------------------------------------------------------------------------------
+			fileNm = (docCd.equals("ppt")) ? Const.DOC_PPT : (docCd.equals("word")) ? Const.DOC_WORD : Const.DOC_EXCEL;
+			filePath = Const.DOC_PATH + File.separator;
+
+			//--------------------------------------------------------------------------------------------
+			// 경로 생성
+			//--------------------------------------------------------------------------------------------
+			String os = System.getProperty("os.name").toLowerCase();
+			
+			// # 1 윈도우 : C드라이브 시작 
+			// # 2 리눅스 : / 시작
+			if(os.contains("win")) {
+				filePath = "C:\\" + filePath; 
+			} else if(os.contains("linux")) {
+				filePath = "/" + filePath;
+				filePath = filePath.replace("\\", "/");
+			}
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
@@ -922,7 +958,6 @@ public class UtilServiceImpl implements UtilService{
 			if(str != null && !"".equals(str) &&  !"null".equals(str)) res = str;
 			
 		} catch (Exception e) {
-			//
 			throw new Exception(e.getMessage());
 		}
 		//
@@ -931,25 +966,64 @@ public class UtilServiceImpl implements UtilService{
 	
 	// 암호화
 	public String encryptProc(String plainText) throws Exception {
-		//--------------------------------------------------------------------------------------------
-		// 암호화
-		//--------------------------------------------------------------------------------------------
-		SecretKey key = AESCryptoUtil.getKey();
-		IvParameterSpec ivParameterSpec = AESCryptoUtil.getIv();
-		String specName = "AES/CBC/PKCS5Padding";
+		//
+		SecretKey key = null;
+		IvParameterSpec ivParameterSpec = null;
+		String specName = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 암호화
+			//--------------------------------------------------------------------------------------------
+			key = AESCryptoUtil.getKey();
+			ivParameterSpec = AESCryptoUtil.getIv();
+			specName = "AES/CBC/PKCS5Padding";
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		//
 		return AESCryptoUtil.encrypt(specName, key, ivParameterSpec, plainText);
 	}
 	
 	// 복호화
 	public String decryptProc(String plainText) throws Exception {
-		//--------------------------------------------------------------------------------------------
-		// 암호화
-		//--------------------------------------------------------------------------------------------
-		SecretKey key = AESCryptoUtil.getKey();
-		IvParameterSpec ivParameterSpec = AESCryptoUtil.getIv();
-		String specName = "AES/CBC/PKCS5Padding";
+		//
+		SecretKey key = null;
+		IvParameterSpec ivParameterSpec = null;
+		String specName = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 복호화
+			//--------------------------------------------------------------------------------------------
+			key = AESCryptoUtil.getKey();
+			ivParameterSpec = AESCryptoUtil.getIv();
+			specName = "AES/CBC/PKCS5Padding";
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		//
 		return AESCryptoUtil.decrypt(specName, key, ivParameterSpec, plainText);
+	}
+	
+	// JSON 생성
+	public String getJsonData(List<HashMap<String, Object>> defaultList) throws Exception {
+		//
+		JSONArray jAray = null;
+		JSONObject jObj = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// JSON 생성
+			//--------------------------------------------------------------------------------------------
+			
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		//
+		return "";
 	}
 }

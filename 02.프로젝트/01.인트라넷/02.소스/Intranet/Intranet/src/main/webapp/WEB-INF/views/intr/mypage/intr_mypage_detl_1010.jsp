@@ -74,7 +74,7 @@
 	   			});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 수정 처리 : ", error.message);
 		}
 	}
@@ -114,8 +114,8 @@
 			                                	<div>
 			                                    	<div class="emp_profile">
 			                                        	<c:choose>
-			                                        		<c:when test="${not empty defaultList}">
-				                                 				<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?orgNm=${defaultInfo.orgNm}&empNm=${defaultInfo.empNm}&fileNm=${defaultInfo[0].fileNm}">
+															<c:when test="${defaultInfo.profileYn eq 'Y'}">
+                                 								<img id="empImg" class="emp_img" width="200" height="200" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
 			                                        		</c:when>
 			                                        		<c:otherwise>
 					                                        	<img id="empImg" class="emp_img" width="200" height="200" src="resources/images/icon/icon_profile.png">

@@ -83,7 +83,7 @@
 				$(".sUl").css("display","none");
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 결재선 처리 : ", error.message);
 		}
 	}
@@ -133,7 +133,7 @@
 			//
 			$(".aprvTbl").append(str);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 결재선 생성 : ", error.message);
 		}
 	}
@@ -144,7 +144,7 @@
 			//
 			$(t).closest("tr").remove();
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 화면 상 제거 : ", error.message);
 		}
 	}
@@ -201,7 +201,7 @@
 				popClose(type);
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 결재선 등록 : ", error.message);
 		}
 	}

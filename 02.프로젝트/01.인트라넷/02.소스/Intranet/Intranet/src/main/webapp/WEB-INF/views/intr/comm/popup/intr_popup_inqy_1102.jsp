@@ -39,7 +39,7 @@
 						ㄴ
 					</c:if>
 					<span class="${spanIcon}"></span>
-					<a href="javascript:void(0);" class="a_btn" empIdx="${list.empIdx}">${listNm}</a>
+					<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 			</c:when>
 			<c:when test="${list.lv eq prevLv}">
 				<li class="li_${list.lv}">
@@ -48,7 +48,7 @@
 						ㄴ
 					</c:if>
 					<span class="${spanIcon}"></span>
-					<a href="javascript:void(0);" class="a_btn" empIdx="${list.empIdx}">${listNm}</a>
+					<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 			</c:when>
 		</c:choose>
 

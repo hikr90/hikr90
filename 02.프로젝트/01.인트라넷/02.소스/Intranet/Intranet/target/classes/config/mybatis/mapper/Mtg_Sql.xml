@@ -214,8 +214,6 @@
 				,	MTG_ETM = REPLACE(#{mtgEtm, jdbcType=VARCHAR},':','')
 				,	MTG_LOC = #{mtgLoc, jdbcType=VARCHAR}
 				,	MTG_MBR = #{mtgMbr, jdbcType=VARCHAR}
-				,	REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
-				,	REG_TM = TO_CHAR(SYSDATE,'HH24MISS')
 		WHERE MTG_CD = #{sequenceId, jdbcType=VARCHAR} 
 	</update>	
 </mapper>

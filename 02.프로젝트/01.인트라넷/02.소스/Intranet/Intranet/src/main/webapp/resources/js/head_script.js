@@ -71,7 +71,7 @@ function initCall(){
 		$("input[name=statNm]").val("전체");
 		$("input[name=statCd]").val("");
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 검색 초기화 : ", error.message);
 	}
 }
@@ -84,7 +84,7 @@ function formSubmit(mappingId){
 		f.action = mappingId;
 		f.submit();
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 폼 태그 동작 : ", error.message);
 	}
 }
@@ -94,7 +94,7 @@ function userCall() {
 	try {
 		location.href = "intrMainInqy1020.do";
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 사용자 : ", error.message);
 	}
 }
@@ -104,7 +104,7 @@ function adminCall() {
 	try {
 		location.href = "intrMainInqy1030.do";
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 관리자 : ", error.message);
 	}
 }
@@ -115,7 +115,7 @@ function outProc() {
 		alert("로그아웃 되었습니다.");
 		location.href = "intrMainProc1020.do";
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 로그아웃 : ", error.message);
 	}
 }
@@ -126,7 +126,7 @@ function pushCall(f) {
 		if(event.keyCode==13){
 			listCall(f);
 		}
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 목록 조회 (엔터) : ", error.message);
 	}
 }
@@ -137,7 +137,7 @@ function pushLogCall(f) {
 		if(event.keyCode==13){
 			loginCall(f);
 		}
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 로그인 (엔터) : ", error.message);
 	}
 }
@@ -146,7 +146,7 @@ function pushLogCall(f) {
 function delArea(area) {
 	try {
 		$("#"+area).html("");
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 영역 제거 : ", error.message);
 	}
 }
@@ -176,7 +176,7 @@ function mobProc(num) {
 	        output = maxInput.substr(0, 3) + "-" + maxInput.substr(3, 4) + "-" + maxInput.substr(7);
 	    }
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 연락처 자동 입력 : ", error.message);
 	}
     // 포맷팅된 값을 입력 필드에 지정
@@ -324,7 +324,7 @@ function cardProc(tag){
 function numProc(num){
 	try {
 		num.value = num.value.replace(/[^0-9]/g, '');
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 숫자 입력 : ", error.message);
 	}
 }

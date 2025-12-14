@@ -12,7 +12,7 @@
 			$("#taskId").val(taskId);
 			formSubmit("intrTaskInqy2020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 업무 상세 조회 : ", error.message);
 		}
 	}

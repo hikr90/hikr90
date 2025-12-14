@@ -22,7 +22,7 @@
 				//
 				formSubmit("intrAprvInqy2020.do");
 				
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 양식 선택 : ", error.message);
 		}
 	}
@@ -33,7 +33,7 @@
 			//
 			formSubmit("intrAprvInqy2010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록으로 : ", error.message);
 		}
 	}

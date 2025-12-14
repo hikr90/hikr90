@@ -46,7 +46,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 공지사항 등록 처리 : ", error.message);
 			}
 		}
@@ -57,7 +57,7 @@
 				//
 				formSubmit('intrBoardInqy1010.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 목록으로 : ", error.message);
 			}
 		}

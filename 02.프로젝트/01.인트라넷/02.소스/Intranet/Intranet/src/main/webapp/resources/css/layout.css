@@ -19,6 +19,25 @@
 .top_area .post_table td, .auth_area .post_table td { padding: 10px 8px !important; }
 
 
+/* ========================================== Main ========================================== */
+.top_area .emp_profile { display: flex; justify-content: center; align-items: center; }
+.top_area .emp_profile .emp_img { display: block; margin: 0 auto; }
+
+.profile_area { display: contents; }
+
+.main_ul { display: inline-block; }
+.main_ul li { display: inline-block; }
+.main_ul li:before { content: ''; display: inline-block; vertical-align: middle; width: 1px; height: 11px; background-color: #ccc; margin: 0 5px 0 3px; }
+.main_ul li:first-child:before { display: none; }
+.main_ul li span { display: block; text-align: center; }
+
+.top_box .top_wrap .top_area:nth-child(3) { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 0; }
+.top_area .emp_profile { display: block; margin-bottom: 30px; }
+
+.icon_content .main_ul { width: 100% !important; margin-left: 60px; }
+.main_font { font-size: 1.7rem; }
+
+
 /* ========================================== Wrap ========================================== */
 .wrap { width: 1130px; box-sizing: border-box; margin: 0 auto; }
 
@@ -60,8 +79,8 @@
 .left_area .post_table td.file > i { text-indent: -5000px; display: block; width: 15px; height: 17px; background: url("../images/form/icon-file.png") center center no-repeat; margin: 0 auto; }
 
 
-.form_area .post_write, .form_area .post_view { position: relative; border-top: 1px solid #162f58; margin: 20px 0px; border-bottom: 1px solid #162f58; }
 /* ========================================== Post Write ========================================== */
+.form_area .post_write, .form_area .post_view { position: relative; border-top: 1px solid #162f58; margin: 20px 0px; border-bottom: 1px solid #162f58; }
 .form_area .post_write::after, .form_area .post_view::after { content: ''; width: 100%; height: 1px; position: absolute; bottom: 0; left: 0; }
 .form_area .post_write input[type="text"], .form_area .post_view input[type="text"] { width: 100%; margin-bottom: 5px; height: 43px; line-height: 23px; box-sizing: border-box; vertical-align: middle; border: 1px solid #d7d7d7; color: #727272; }
 .form_area .post_write input[type="text"]::-webkit-input-placeholder, .form_area .post_view input[type="text"]::-webkit-input-placeholder { color: #bababa; font-size: 1.5rem; }
@@ -105,8 +124,8 @@
 
 /* ========================================== Box ========================================== */
 .top_box { background-color: #214b97; padding: 50px 0; height: 400px;}
-.top_box .top_wrap { margin-top: -40px; }
-.top_box .top_wrap .top_area { overflow: hidden; width: 560px; height: 480px; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 30px; box-sizing: border-box; margin: 0 auto;}
+.top_box .top_wrap { margin-top: -40px; display: flex; justify-content: space-between; align-items: flex-start; }
+.top_box .top_wrap .top_area { overflow: hidden; width: calc(33.3% - 10px); height: 480px; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 30px; box-sizing: border-box; margin: 0 auto; border-radius: 10px; }
 .top_box .top_wrap .top_area h3 { float: left; color: #214b97; font-size: 1.8rem; }
 .top_box .top_wrap .top_area ul { width: calc(100% - 115px); display:block;}
 .top_box .top_wrap .top_area ul li { margin: 0 0 15px; }
@@ -116,8 +135,8 @@
 .top_box .top_wrap .top_area a.btn_more { position: absolute; top: 85px; left: 30px; color: #4c4c4c; font-size: 1.5rem; padding-right: 15px; }
 
 .bottom_box { background-color:#d3d3d3; padding: 50px 0; height: 192px; }
-.bottom_box .bottom_wrap { margin-top: -40px; }
-.bottom_box .bottom_wrap .bottom_area { overflow: hidden; width: 560px; height: 260px; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 30px; box-sizing: border-box; margin: 0 auto; display: inline-block; }
+.bottom_box .bottom_wrap { margin-top: -40px; display: flex; justify-content: space-between; align-items: flex-start; }
+.bottom_box .bottom_wrap .bottom_area { overflow: hidden; width: calc(33.3% - 10px); height: 260px; background-color: #fff; border: 1px solid #d2d2d2; position: relative; padding: 30px; box-sizing: border-box; margin: 0 auto; display: inline-block; border-radius: 10px; }
 .bottom_box .bottom_wrap .bottom_area h3 { float: left; color: #214b97; font-size: 1.8rem; }
 .bottom_box .bottom_wrap .bottom_area ul { width: calc(100% - 115px); display:block;}
 .bottom_box .bottom_wrap .bottom_area ul li { margin: 0 0 15px; }
@@ -145,9 +164,8 @@
 .pop_area .find_owner_wrap .srch_area { margin: 0px; }
 .pop_area .find_owner_wrap .post_wrap .post_con { height: 260px; }
 
-.pop_area .find_aprv_wrap .srch_wrap { padding: 10px !important; padding-bottom: 0px !important; }
-.pop_area .find_aprv_wrap .srch_area { margin: 0px; }
-.pop_area .find_aprv_wrap .post_wrap .post_con { height: 650px; }
+.pop_area .pop_wrap .srch_wrap { padding: 10px !important; padding-bottom: 0px !important; }
+.pop_area .pop_wrap .srch_area { margin: 0px; }
 
 .pop_sbox { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 44px; text-indent: 10px; }
 .pop_sul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
@@ -231,7 +249,7 @@
 
 
 /* ========================================== Tab ========================================== */
-.tab_container { width: 100%; margin-bottom: 20px; display: flex; align-items: flex-end; }
+.tab_container { width: 100%; margin: 10px 0 0 0; display: flex; align-items: flex-end; }
 .tab_list { list-style: none; padding: 0; margin: 0; display: inline-flex; }
 .tab_item { margin-left: -1px; }
 .tab_item a { font-size: 1.7rem; height: 30px; min-width: 80px; display: block; padding: 10px 15px; text-decoration: none; color: #444; border: 1px solid #d6d6d6; border-bottom: none; transition: background-color 0.3s, color 0.3s; }
@@ -242,3 +260,5 @@
 .tab_wrapper {  border-left: 1px solid #d6d6d6;	border-bottom: 1px solid #d6d6d6; flex-grow: 1; overflow-x: hidden; white-space: nowrap; margin: 0; }
 .scroll_btn_right, .scroll_btn_left { padding-bottom: 7px; }
 .scroll_btn_right { transform: scaleX(-1); -webkit-transform: scaleX(-1); -moz-transform: scaleX(-1); -ms-transform: scaleX(-1); }
+
+

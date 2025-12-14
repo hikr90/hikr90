@@ -189,6 +189,7 @@
 				,	CASE WHEN E.LEAV_DT IS NOT NULL
 						THEN 'N'
 						ELSE 'Y' END LEAV_YN
+				,	CASE WHEN (SELECT COUNT(F.FILE_ID) AS EMP_IDX FROM FILE_INFO F WHERE F.FILE_ID = E.EMP_IDX AND F.USE_YN = 'Y') &gt; 0 THEN 'Y' ELSE 'N' END AS PROFILE_YN
 		FROM EMP_INFO E
 		LEFT OUTER JOIN ORG O
 			ON O.ORG_CD = E.ORG_CD
@@ -266,8 +267,8 @@
                      WHERE E.LEAV_DT IS NULL
 				) SUB_DATA
 			WHERE 1=1
-			<if test="popNm != null and popNm != ''">
-            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{popNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			<if test="srchPnm != null and srchPnm != ''">
+            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchPnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
             </if>
    		    ORDER BY SUB_DATA.ORG_CD ASC , SUB_DATA.LV ASC
 	</select>
@@ -287,26 +288,30 @@
 	</select>
 	
 	<select id="intrEmpInqy2042" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrEmpInqy2042 : 인사 요약 */
+		/* intrEmpInqy2042 : 입사 현황 */
 		SELECT 
 				(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
 					WHERE E.LEAV_DT IS NULL
-				) AS NEW_CNT
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
+					) AS NEW_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E 
 					WHERE E.LEAV_DT IS NOT NULL
-				) AS LEAV_CNT
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
+					) AS LEAV_CNT
 			,	(
 					SELECT 
 							COUNT(E.EMP_IDX) || '명'
 					FROM EMP_INFO E
 					WHERE 1=1
+						AND SUBSTR(E.HIRE_DT,1,4) = TO_CHAR(SYSDATE, 'YYYY')
 				) AS EMP_CNT
+			,	TO_CHAR(SYSDATE, 'YYYY') AS CURR_YEAR
 		FROM DUAL
 	</select>
 	

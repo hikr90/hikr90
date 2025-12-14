@@ -42,7 +42,7 @@
 							</c:if>
 							<span class="${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">
-								<a href="javascript:void(0);" class="a_btn" empIdx="${list.empIdx}">${listNm}</a>
+								<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 							</c:if>
 							<c:if test="${empty list.empIdx}">
 								${listNm}
@@ -57,7 +57,7 @@
 							</c:if>
 							<span class="${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">
-								<a href="javascript:void(0);" class="a_btn" empIdx="${list.empIdx}">${listNm}</a>
+								<a href="javascript:void(0);" class="pop_a_btn" empIdx="${list.empIdx}">${listNm}</a>
 							</c:if>
 							<c:if test="${empty list.empIdx}">
 								${listNm}

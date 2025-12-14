@@ -52,7 +52,7 @@ function leadingZeros(n, digits) {
 	            zero += '0';
 	    }
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 월 (0 포함) 표현 : ", error.message);
 	}
     //
@@ -65,7 +65,7 @@ function getTimeStamp(d) {
 		// getMinutes + 1 : Minutes의 경우 0 ~ 9로 표현
 		var now =  d.getHours() + ":" + ((d.getMinutes()<10?'0':'') + d.getMinutes() + ":" + d.getSeconds());
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 현재 시간 표현 : ", error.message);
 	}
 	//	
@@ -78,7 +78,7 @@ function getDateStamp(d) {
 		// getMonth + 1 : Month의 경우 0 ~ 11로 표현
 		var now =  leadingZeros(d.getFullYear(), 4) + '-' + leadingZeros(d.getMonth() + 1, 2) + '-' + leadingZeros(d.getDate(), 2);
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 현재 일자 표현 : ", error.message);
 	}
 	//	

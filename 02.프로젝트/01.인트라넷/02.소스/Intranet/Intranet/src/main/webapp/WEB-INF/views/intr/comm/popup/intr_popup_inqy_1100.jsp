@@ -33,7 +33,7 @@
     		type : 'post',
         	url : 'intrPopupInqy1102.do',
             data : {
-            	'popNm':$("#popNm").val()
+            	'srchPnm':$("#srchPnm").val()
             },
             dataType : 'html',
             success : function(data){
@@ -47,8 +47,8 @@
 	}
 	
 	// 선택 항목 음영 처리
-	$(document).on('click','.a_btn',function() {
-		$(".a_btn").each(function() {
+	$(document).on('click','.pop_a_btn',function() {
+		$(".pop_a_btn").each(function() {
 			$(this).removeClass('list_bg');
 		})
 		//
@@ -83,7 +83,7 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="find_aprv_wrap">
+					<div class="pop_wrap">
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">
@@ -94,7 +94,7 @@
 							</div>
 							
 							<div id="popSrchArea" class="pt10">
-								<input type="text" id="popNm" name="popNm" class="srch_cdt_text width30" value="" onkeydown="popListCall(event);">
+								<input type="text" id="srchPnm" class="srch_cdt_text width30" value="" onkeydown="popListCall(event);">
 								<input type="button" class="btn_blue" value="조회" onclick="popListCall();">
 							</div>
 	                        

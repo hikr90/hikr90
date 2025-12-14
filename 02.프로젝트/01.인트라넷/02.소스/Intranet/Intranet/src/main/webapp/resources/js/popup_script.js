@@ -39,7 +39,7 @@ function ajaxPopup(obj){
 			}
 		});
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] Ajax 팝업 : ", error.message);
 	}
 }
@@ -69,7 +69,7 @@ function chgPopup(mappingId){
 			}
 		});
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 정보 찾기 팝업 : ", error.message);
 	}
 }
@@ -93,7 +93,7 @@ function popConfirm(type){
 		//
 		popClose(type);	
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 팝업 내 선택 : ", error.message);
 	}
 }
@@ -108,7 +108,7 @@ function popClose(type){
 		$('#overlay').hide();
 	  	$('body').css('overflow', '');
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 팝업 종료 : ", error.message);
 	}
 }

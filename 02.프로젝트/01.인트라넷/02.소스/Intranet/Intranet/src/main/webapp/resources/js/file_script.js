@@ -104,7 +104,7 @@ function fileDel(status, idx){
 			}
 		}
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 첨부파일 삭제 : ", error.message);
 	}
 }
@@ -119,7 +119,7 @@ function setFormData(){
 			fileList.append("fileList", tempList[i]);
 		}
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 폼 데이터 생성 : ", error.message);
 	}
 	//
@@ -132,17 +132,26 @@ function fileProc(fileId, fileSno){
 	try {
 		formSubmit('fileDown.do?fileId='+fileId+'&fileSno='+fileSno);
 	
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 다운로드 : ", error.message);
 	}
-	
 }
 	
 // 압축 다운로드
 function zipProc(){
 	try {
 		formSubmit('zipDown.do');
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 압축 다운로드 : ", error.message);
+	}
+}
+
+// 참고문서 다운로드
+function docDown(docCd){
+	try {
+		formSubmit('docDown.do?docCd='+docCd);
+	
+	} catch (error) {
+        console.error("[Error] 참고문서 다운로드 : ", error.message);
 	}
 }

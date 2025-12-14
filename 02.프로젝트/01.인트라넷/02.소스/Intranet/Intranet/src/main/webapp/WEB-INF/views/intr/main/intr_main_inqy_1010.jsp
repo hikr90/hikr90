@@ -82,7 +82,7 @@
 					}
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 캘린더 목록 조회 : ", error.message);
 		}
 	}
@@ -101,7 +101,7 @@
 			//		
 			ajaxPopup(obj);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 회의 조회 팝업 : ", error.message);
 		}
 	}
@@ -192,15 +192,16 @@
 					<input type="hidden" id="aprvId" name="aprvId" value="">
 				
 					<div class="top_box">
-						<div class="wrap">
+						<div class="wrap" style="width: 1630px">
 							<div class="top_wrap">
-								<div class="top_area float_left">
+								<div class="top_area">
 									<!-- full calendar -->
 									<div id="calendar">
 												
 									</div>
 								</div>
 								
+								<!-- 회의 관리 -->
 								<div class="top_area">
 									<div class="area_title">
 										<h3>
@@ -213,7 +214,7 @@
 										<ul class="area_ul scroll_wrap" style="height: 360px;">
 											<c:forEach var="list" items="${calInfo}">
 												<li class="main_li" style="border-bottom: solid 2px #f6f6f6; margin-right: 20px;">
-													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a" style="font-weight: bold;">
+													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a pl20" style="font-weight: bold;">
 														<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
 														<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 														
@@ -229,13 +230,49 @@
 											</c:forEach>
 											
 											<c:if test="${empty calInfo}">
-												<li class="main_li">
+												<li class="main_li pl20">
 													등록된 회의가 없습니다.
 												</li>												
 											</c:if>
 										</ul>
 									</div>
 								</div>
+								<!-- 회의 관리 -->
+								
+								<!-- 마이페이지 -->
+								<div class="top_area">
+									<div class="emp_profile">
+                                       	<c:choose>
+                                       		<c:when test="${empInfo.profileYn eq 'Y'}">
+                                 				<img id="empImg" class="emp_img" width="250" height="250" style="border: 3px solid #214b97; border-radius: 100%;" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
+                                       		</c:when>
+                                       		<c:otherwise>
+	                                        	<img id="empImg" class="emp_img" width="250" height="250" src="resources/images/icon/icon_profile.png">
+                                       		</c:otherwise>
+                                       	</c:choose>
+									</div>
+                                    
+                                    <div class="profile_area">
+	                                    <ul class="main_ul main_font">
+	                                   		<li>${empVO.empNm}</li>
+	                                    	<li>${empVO.orgNm}</li>
+	                                    	<li>${empVO.rankNm}</li>
+	                                    </ul>
+	                                    
+	                                    <ul class="main_ul main_font">
+	                                    	<li>
+												<fmt:parseDate value="${empVO.hireDt}" var="parseDt" pattern="yyyyMMdd"/>
+												<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+												<span>${formatDt} 입사</span> 
+											</li>
+	                                    </ul>
+	                                    
+	                                    	<li><span>${not empty taskInfo ? 'myTask.taskCont' : '등록된 담당업무가 없습니다.'}</span></li>
+	                                    <ul class="main_ul main_font">
+	                                    </ul>
+                                    </div>
+								</div>
+								<!-- 마이페이지 -->
 							</div>
 						</div><!-- End wrap -->
 					</div><!-- End widget_box -->
@@ -247,8 +284,9 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="bottom_box">
-						<div class="wrap">
+						<div class="wrap" style="width: 1630px;">
 							<div class="bottom_wrap">
+								<!-- 공지사항 -->	
 								<div class="bottom_area">
 							    	<div class="area_title">
 							    		<h3>
@@ -261,7 +299,7 @@
 										<ul class="area_ul">
 											<c:forEach var="list" items="${boardList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
+													<a class="main_a pl20" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
 														<script>document.write(isNew('${list.regDt}'))</script>
 														${list.brdTitle}
 													</a>
@@ -274,14 +312,16 @@
 											</c:forEach>
 											
 											<c:if test="${empty boardList}">
-												<li class="main_li">
+												<li class="main_li pl20">
 													등록된 글이 없습니다.
 												</li>												
 											</c:if>
 										</ul>
 									</div>
 								</div>
+								<!-- 공지사항 -->	
 								
+								<!-- 결재 조회 -->	
 								<div class="bottom_area">
 						    		<div class="area_title">
 							    		<h3>
@@ -294,7 +334,7 @@
 										<ul class="area_ul">
 											<c:forEach var="list" items="${aprvList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
+													<a class="main_a pl20" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
 														<script>document.write(isNew('${list.regDt}'))</script>	
 														${list.aprvTitle}
 													</a>
@@ -307,13 +347,46 @@
 											</c:forEach>
 											
 											<c:if test="${empty aprvList}">
-												<li class="main_li">
+												<li class="main_li pl20">
 													등록된 결재가 없습니다.
 												</li>												
 											</c:if>
 										</ul>
 									</div>
 								</div>
+								<!-- 결재 조회 -->
+								
+								<!-- 오늘의 일정 -->	
+								<div class="bottom_area">
+						    		<div class="area_title">
+							    		<h3>
+							    			<img src='resources/images/icon/icon_note.png' width="20" height="20"/>
+							    			오늘의 일정
+							    		</h3><a href="intrScheInqy2010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+									</div>
+
+									<div class="area_content">
+										<ul class="area_ul">
+											<c:forEach var="list" items="${scheList}" begin="0" end="2">
+												<li class="main_li">
+													${list.aprvTitle}
+													<span class="date main_ie">
+														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
+														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
+														${formatDt} 
+													</span>
+												</li>
+											</c:forEach>
+											
+											<c:if test="${empty scheList}">
+												<li class="main_li pl20">
+													등록된 일정이 없습니다.
+												</li>												
+											</c:if>
+										</ul>
+									</div>
+								</div>
+								<!-- 오늘의 일정 -->	
 							</div>
 						</div>
 					</div>

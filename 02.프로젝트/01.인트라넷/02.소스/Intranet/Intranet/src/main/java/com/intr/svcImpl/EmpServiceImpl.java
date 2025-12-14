@@ -107,13 +107,6 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
-
-			//--------------------------------------------------------------------------------------------
-			// 파일 정보
-			//--------------------------------------------------------------------------------------------
-			paramMap.put("sequenceId", (String)paramMap.get("empIdx"));
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
-			model.addAttribute("fileList",defaultList);
 			
 		} catch (Exception e) {
 			//

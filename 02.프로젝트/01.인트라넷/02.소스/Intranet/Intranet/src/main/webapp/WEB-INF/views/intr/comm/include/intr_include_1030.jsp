@@ -25,9 +25,8 @@
 				
 				<span style="font-size: 14px;">
 					<a href="intrMainInqy1040.do?menuType=${menuType}&empIdx=${empVO.empIdx}">
-						<strong>${empVO.empNm}님</strong>
+						<strong>환영합니다, ${empVO.empNm}님</strong>
 					</a> 
-					환영합니다.
 				</span>
 			</div>
 		</div>
@@ -66,7 +65,7 @@
 			//		
 			ajaxPopup(obj);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 조직도 조회 팝업 : ", error.message);
 		}
 	}

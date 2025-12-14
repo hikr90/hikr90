@@ -17,6 +17,7 @@ import com.intr.dao.AuthDao;
 import com.intr.dao.EmpDao;
 import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
+import com.intr.dao.QueryDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
@@ -68,6 +69,9 @@ public class PopupController {
 	
 	@Autowired
 	MtgDao mtgDao;
+	
+	@Autowired
+	QueryDao queryDao;
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -418,5 +422,34 @@ public class PopupController {
 		}
 		//
 		return defaultInfo;
+	}
+	
+	// RESTful API 조회
+	@RequestMapping("/intrPopupInqy1111.do")
+	public String intrPopupInqy1111(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		String reqUrl = "";			// 요청 URL
+		String jsonData = "";			// 반환 JSON
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// RESTful API 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = queryDao.intrQueryInqy1021(model, paramMap);
+
+			// JSON 생성
+			jsonData = utilDao.getJsonData(defaultList);
+			
+			// URL 생성
+			reqUrl = Const.API_URL + (String)paramMap.get("query");
+			model.addAttribute("reqUrl", reqUrl);
+					
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : RESTful API 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1111;
 	}
 }

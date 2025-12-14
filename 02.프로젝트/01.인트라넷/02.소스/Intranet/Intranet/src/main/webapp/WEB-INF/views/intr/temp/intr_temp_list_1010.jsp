@@ -45,7 +45,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 조회 : ", error.message);
 		}
 	}
@@ -71,7 +71,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 등록 : ", error.message);
 		}
 	}
@@ -109,7 +109,7 @@
 		      	});
 			}	
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 등록 처리 : ", error.message);
 		}
 	}
@@ -134,7 +134,7 @@
 	            }
 	      	});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 상세보기 : ", error.message);
 		}
 	}
@@ -169,7 +169,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 수정 처리 : ", error.message);
 		}
 	}
@@ -201,7 +201,7 @@
 		      	});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안문 양식 삭제 처리 : ", error.message);
 		}
 	}

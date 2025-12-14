@@ -29,7 +29,6 @@ public class UtilController {
 	
 	@Autowired
 	UtilService utilService;
-
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -42,6 +41,22 @@ public class UtilController {
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
 			utilService.fileDown(model, paramMap, request, response);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+	}
+	
+	// 참고문서 다운로드
+	@RequestMapping("/docDown.do")
+	public void docDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 파일 다운로드
+			//--------------------------------------------------------------------------------------------
+			utilService.docDown(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//

@@ -19,9 +19,10 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="top_box">
-						<div class="wrap">
+						<div class="wrap" style="width: 1630px;">
 							<div class="top_wrap">
-								<div class="top_area" style="width: 1120px;">
+								<!-- 부서 현황 -->	
+								<div class="top_area" style="width: 1070px;">
 									<div class="area_title">
 										<h3>
 											<img src='resources/images/icon/icon_people.png' width="20" height="20"/>
@@ -40,12 +41,15 @@
 											new Chart(ctx, {
 											  type: 'line',
 											  data: {
-											    labels: labels,
-											    datasets: [{
-											      label: '사원 수',
-											      data: values,
-											      backgroundColor: ['#b7c2c9']
-											    }]
+											  		labels: labels,
+											        datasets: [{
+											        	label: '사원 수',
+											            data: values,
+											            borderColor: '#214b97', 
+											            backgroundColor: '#f3f6f8',
+											            fill: true,
+											        	tension: 0.3
+											  		}]
 											  },
 											  options: {
 												    plugins: {
@@ -65,6 +69,60 @@
 										</script>
 									</div>
 								</div>
+								<!-- 부서 현황 -->	
+								
+								<!-- 권한 부여 현황 -->	
+								<div class="top_area">
+									<div class="area_title">
+							    		<h3>
+							    			<img src='resources/images/icon/icon_warn.png' width="20" height="20"/>
+							    			권한 부여 현황
+							    		</h3><a href="intrAuthInqy3010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+									</div>
+
+									<div class="area_content">
+										<div class="post_table_wrap scroll_wrap">
+											<table class="post_table">
+												<caption>로그인 권한 목록 조회</caption>
+												<colgroup>
+													<col class="auto">
+													<col class="w70per">
+												</colgroup>
+												<thead>
+													<tr style="border-bottom: none;">
+														<th scope="col">권한</th>
+														<th scope="col">소유자</th>
+													</tr>
+												</thead>
+												<tbody>
+					                                <c:if test="${not empty authList}">
+						                                <c:forEach var="list1" items="${authList}" varStatus="status1">
+															<c:if test="${list1.authCd ne authList[status1.index + 1].authCd}">
+																<tr>
+																	<td class="align_center">${list1.authNm}</td>
+																	<td class="title align_left">
+																		<c:forEach var="list2" items="${authList}" varStatus="status2">
+																			<c:if test="${list1.authCd eq list2.authCd}">
+																				<a href="javascript:setInfo('${list2.empId}','${list2.empPwd}');" style="color: #214b97;">${list2.empNm}</a>
+																				&nbsp;
+																			</c:if>
+																		</c:forEach>
+																	</td>
+																</tr>					                                
+					                                		</c:if>
+					                                	</c:forEach>
+													</c:if>
+													<c:if test="${empty authList}">
+														<tr>
+															<td class="text_center" colspan="2">권한 소유자가 없습니다.</td>
+														</tr>
+													</c:if>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- 권한 부여 현황 -->	
 							</div>
 						</div><!-- End wrap -->
 					</div><!-- End widget_box -->
@@ -78,19 +136,20 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="bottom_box">
-						<div class="wrap">
+						<div class="wrap" style="width: 1630px;">
 							<div class="bottom_wrap">
+								<!-- 입사 현황 -->
 								<div class="bottom_area">
 							    	<div class="area_title">
 										<h3>
 											<img src='resources/images/icon/icon_temp.png' width="20" height="20"/>
-											인사 요약
-										</h3>
+											입사 현황 (${empList[0].currYear}년)
+										</h3><a href="intrEmpInqy4010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
 									</div>
 									
 									<div class="area_content">
 										<table class="post_table" style="margin-top: 10px;">
-											<caption>인사 요약</caption>
+											<caption>입사 현황</caption>
 											<colgroup>
 												<col class="auto">
 												<col class="auto">
@@ -113,7 +172,9 @@
 										</table>
 									</div>
 								</div>
+								<!-- 입사 현황 -->
 								
+								<!-- 프로젝트 관리 -->
 								<div class="bottom_area">
 						    		<div class="area_title">
 										<h3>
@@ -126,19 +187,54 @@
 										<ul class="area_ul">
 											<c:forEach var="list" items="${projList}" begin="0" end="2">
 												<li class="main_li">
-													<a class="main_a" href="intrProjInqy1030.do?sequenceId=${list.projCd}&pageUrl=Proj">${list.projTitle}</a>
+													<a class="main_a pl20" href="intrProjInqy1030.do?sequenceId=${list.projCd}&pageUrl=Proj">${list.projTitle}</a>
 													<span class="main_ie">${list.orgNm} ${list.ownerNm}</span>
 												</li>
 											</c:forEach>
 											
 											<c:if test="${empty projList}">
-												<li class="main_li">
+												<li class="main_li pl20">
 													등록된 프로젝트가 없습니다.
 												</li>												
 											</c:if>
 										</ul>
 									</div>
 								</div>
+								<!-- 프로젝트 관리 -->
+								
+								<!-- 참고 문서 -->
+								<div class="bottom_area">
+						    		<div class="area_title">
+							    		<h3>
+							    			<img src='resources/images/icon/icon_set.png' width="20" height="20"/>
+							    			참고 문서
+							    		</h3>
+									</div>
+
+									<div class="area_content icon_content">
+										<ul class="main_ul">
+											<li>
+												<a href="javascript:void(0);" onclick="docDown('excel')">
+													<img src='resources/images/icon/icon_excel.png' width="100" height="100"/>
+													<span>기초 데이터</span>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" onclick="docDown('word')">
+													<img src='resources/images/icon/icon_word.png' width="100" height="100"/>
+													<span>테이블 설계서</span>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" onclick="docDown('ppt')">
+													<img src='resources/images/icon/icon_ppt.png' width="100" height="100"/>
+													<span>포트폴리오</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- 참고 문서 -->
 							</div>
 						</div>
 					</div>

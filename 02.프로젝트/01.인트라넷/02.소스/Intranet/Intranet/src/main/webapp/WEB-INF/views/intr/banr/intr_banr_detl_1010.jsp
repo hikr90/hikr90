@@ -62,7 +62,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 저장 처리 : ", error.message);
 			}
 		}
@@ -103,7 +103,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 삭제 처리 : ", error.message);
 			}
 		}

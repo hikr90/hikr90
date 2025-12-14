@@ -55,7 +55,7 @@
 				});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 추가 : ", error.message);
 		}
 	}
@@ -92,7 +92,7 @@
 				,	'line-height':'35px'
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 물품 등록 생성 : ", error.message);
 		}
 	}
@@ -103,7 +103,7 @@
 			//
 			$(t).closest("tr").remove();
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 화면 상 제거 : ", error.message);
 		}
 	}
@@ -143,7 +143,7 @@
 				}
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 초기화 : ", error.message);
 		}
 	}
@@ -208,7 +208,7 @@
 				popClose(type);
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 저장 : ", error.message);
 		}
 	}

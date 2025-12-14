@@ -12,7 +12,7 @@
 			//
 			formSubmit("intrBoardInqy1020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 공지사항 등록 : ", error.message);
 		}
 	}
@@ -24,7 +24,7 @@
 			$("#sequenceId").val(brdId);
 			formSubmit("intrBoardInqy1030.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 공지사항 상세 : ", error.message);
 		}
 	}
@@ -35,7 +35,7 @@
 			//
 			formSubmit("intrBoardInqy1010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}
@@ -86,7 +86,7 @@
 	   			});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 공지사항 삭제 : ", error.message);
 		}
 	}	

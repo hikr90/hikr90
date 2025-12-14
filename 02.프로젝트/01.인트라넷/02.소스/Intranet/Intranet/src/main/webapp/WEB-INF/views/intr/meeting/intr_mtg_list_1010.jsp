@@ -12,7 +12,7 @@
 			//
 			formSubmit("intrMtgInqy1010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}
@@ -23,7 +23,7 @@
 			//
 			formSubmit("intrMtgInqy1020.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 등록 화면 조회 : ", error.message);
 		}
 	}
@@ -35,7 +35,7 @@
 			$("#sequenceId").val(sequenceId);
 			formSubmit("intrMtgInqy1030.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 상세 화면 조회 : ", error.message);
 		}
 	}

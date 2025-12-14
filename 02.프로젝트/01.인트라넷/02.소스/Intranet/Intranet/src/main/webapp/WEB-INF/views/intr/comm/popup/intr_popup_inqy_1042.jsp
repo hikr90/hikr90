@@ -19,7 +19,7 @@
 			//
 			popClose('opin');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 팝업 닫기 : ", error.message);
 		}
 	}

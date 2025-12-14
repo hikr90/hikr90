@@ -67,7 +67,7 @@
 			//
 			$("#taskWrap").append(html);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 추가 : ", error.message);
 		}
 	}
@@ -127,7 +127,7 @@
 				});
 			}
 
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 초기화 : ", error.message);
 		}
 	}
@@ -194,7 +194,7 @@
 				});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 저장 : ", error.message);
 		}
 	}
@@ -236,7 +236,7 @@
 			// 업무 삭제
 			$(btn).closest('.taskArea').remove();
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 삭제 : ", error.message);
 		}
 	}

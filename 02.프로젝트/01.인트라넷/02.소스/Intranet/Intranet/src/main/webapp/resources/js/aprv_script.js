@@ -10,7 +10,7 @@ function projCall(){
 		//		
 		ajaxPopup(obj);		
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 프로젝트 팝업 : ", error.message);
 	}
 }
@@ -19,7 +19,7 @@ function projCall(){
 function empCall(){
 	try {
 	num.value = num.value.replace(/[^0-9]/g, '');
-} catch (error){
+} catch (error) {
     console.error("[Error] 숫자 입력 : ", error.message);
 }
 	
@@ -46,7 +46,7 @@ function lineReg(){
 		//		
 		ajaxPopup(obj);
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 결재선 조회 팝업 : ", error.message);
 	}
 }
@@ -65,7 +65,7 @@ function lineCall(){
 		//		
 		ajaxPopup(obj);
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 결재선 조회 팝업 : ", error.message);
 	}
 }
@@ -84,7 +84,7 @@ function itemReg(){
 		//		
 		ajaxPopup(obj);
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 물품 등록 팝업 : ", error.message);
 	}
 }
@@ -103,7 +103,7 @@ function itemCall(){
 		//		
 		ajaxPopup(obj);
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 물품 조회 팝업 : ", error.message);
 	}
 }
@@ -122,7 +122,7 @@ function corpReg(){
 		//		
 		ajaxPopup(obj);
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 정산내역 등록 팝업 : ", error.message);
 	}
 }
@@ -153,7 +153,7 @@ function opinCall(method){
 		$("#rslttypeCd").val(method);
 		ajaxPopup(obj);
 
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 결재의견 입력 팝업 : ", error.message);
 	}
 }
@@ -187,7 +187,7 @@ function opinConf(area) {
 			formSubmit("intrAprvProc1020.do");
 		}
 					
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 결재 처리 : ", error.message);
 	}
 }
@@ -201,7 +201,7 @@ function cnlProc(rslttypeCd) {
 			formSubmit("intrAprvProc1020.do");
 		}
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 결재 취소 : ", error.message);
 	}
 }

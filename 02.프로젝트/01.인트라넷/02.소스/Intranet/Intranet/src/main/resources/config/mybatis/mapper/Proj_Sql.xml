@@ -208,8 +208,6 @@
 				,	DEPOSIT = #{deposit, jdbcType=VARCHAR}
 				,	TAG = #{tag, jdbcType=VARCHAR}
 				,	EMP_IDX = #{empIdx, jdbcType=VARCHAR}
-				,	REG_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
-				,	REG_TM = TO_CHAR(SYSDATE,'HH24MISS')
 		WHERE PROJ_CD = #{sequenceId, jdbcType=VARCHAR} 
 	</update>	
 </mapper>

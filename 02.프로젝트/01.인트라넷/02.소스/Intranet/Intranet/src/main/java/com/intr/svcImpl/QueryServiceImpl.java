@@ -43,7 +43,7 @@ public class QueryServiceImpl implements QueryService{
 	public void intrQueryInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		Set<String> columList = null;
+		Set<String> colList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -52,10 +52,9 @@ public class QueryServiceImpl implements QueryService{
 			defaultList = queryDao.intrQueryInqy1021(model, paramMap);
 			
 			if(defaultList!=null && !defaultList.isEmpty()) {
+				colList = defaultList.get(0).keySet();
 				//
-				columList = defaultList.get(0).keySet();
-				//
-				model.addAttribute("colList",columList);
+				model.addAttribute("colList",colList);
 				model.addAttribute("dataList",defaultList);
 			}
 			

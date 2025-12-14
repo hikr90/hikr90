@@ -13,7 +13,7 @@
 				//
 				formSubmit('intrTaskInqy2010.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 목록으로 : ", error.message);
 			}
 		}

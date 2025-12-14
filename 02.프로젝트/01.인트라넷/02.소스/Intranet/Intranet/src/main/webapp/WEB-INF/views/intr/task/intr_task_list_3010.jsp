@@ -55,7 +55,7 @@
 			//
 			formSubmit("intrScheInqy1010.do");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
 		}
 	}

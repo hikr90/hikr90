@@ -16,7 +16,7 @@
 				//
 				formSubmit('intrMtgInqy1030.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 취소 : ", error.message);
 			}
 		}
@@ -58,7 +58,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 수정 처리 : ", error.message);
 			}
 		}	

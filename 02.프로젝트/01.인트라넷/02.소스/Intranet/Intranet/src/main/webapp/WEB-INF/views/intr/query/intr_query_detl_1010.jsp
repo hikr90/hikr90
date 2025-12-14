@@ -7,7 +7,6 @@
 
 <head>
 	<script type="text/javascript">
-		//
 		$(document).ready(function(){
 			$("#dmlProc").change(function(){
 				// 체크에따라서 버튼명 변경
@@ -47,7 +46,7 @@
 					}
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 유효성 검증 (쿼리) : ", error.message);
 			}
 			//
@@ -100,7 +99,7 @@
 		            }
 		      	});
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 쿼리 조회 : ", error.message);
 			}
 		}
@@ -115,14 +114,69 @@
 				//
 				formSubmit("intrQueryInqy1030.do");
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 엑셀 다운로드 : ", error.message);
+			}
+		}
+		
+		// RESTful API 결과 조회 팝업
+		function apiCall(){
+			try {
+				var query = $("#query").val().toLowerCase();
+				if(!validate(query)) return;
+				
+				// API에서 DML 작업 방지
+				if($('#dmlProc').is(':checked')) {
+					// DML 체크인 경우
+					alert("<spring:message code="API.NOT.DML"/>");
+					return;
+				}
+				//
+				var obj = new Object();
+				
+				obj["mappingId"] = "intrPopupInqy1111.do";
+				obj["areaType"] = "qry";
+				obj["width"] = "700";
+				obj["height"] = "670";
+				obj["query"] = query;
+				//		
+				ajaxPopup(obj);
+				
+			} catch (error) {
+		        console.error("[Error] RESTful API 결과 조회 팝업 : ", error.message);
+			}
+		}
+		
+		// URL 복사
+		function copyUrl(reqUrl){
+			try {
+				//
+				let target = $(reqUrl);
+				$(reqUrl).select();
+				let successful = document.execCommand('copy');
+				
+				if(successful){
+					alert("<spring:message code="COPY.URL.SUCCESS"/>");
+					return;
+					
+				} else {
+					alert("<spring:message code="COPY.URL.FAIL"/>");
+					return;
+				}
+				
+			} catch (error) {
+				console.error("[Error] copyUrl : ", error.message);
 			}
 		}
 	</script>
 </head>
 <body id="main">
 <form id="form" method="POST">
+	<!-- RESTful API 팝업 -->
+	<div id="qryArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1110.jsp"></c:import>	
+	</div>
+
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
@@ -138,19 +192,20 @@
 			<div class="content_area">
 				<article class="sub_article">
 					<div class="content">
-						<div id="sub_content">					
+						<div id="sub_content">
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="headTit" name="headTit" value="쿼리 조회 목록">
 		                            
 		                            <h2>쿼리 조회
 										<span class="float_right">
-												<input type="button" class="btn_green_thin" value="Excel" onclick="excelDown();">
+											<input type="button" class="btn_navy_thin" value="RESTful API" onclick="apiCall();">
+											<input type="button" class="btn_green_thin" value="Excel" onclick="excelDown();">
 											<input type="button" class="btn_blue_thin listCall" value="조회" onclick="listCall();">
 										</span>
 									</h2>
 									<span style="font-size: 1.6rem; float: right; margin: 10px;">
-										<input type="checkbox" id="dmlProc" class="dmlProc" name="dmlProc" style="width: 15px; height: 15px; vertical-align: middle;">DML 처리
+										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc" name="dmlProc" style="width: 15px; height: 15px; vertical-align: middle;">DML 처리</label>
 									</span><br>
 									
 									<!-- 쿼리 입력 -->

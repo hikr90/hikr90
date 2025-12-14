@@ -10,7 +10,7 @@ function createRequest(){
 		else
 			xhr = new XMLHttpRequest();
 			
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 요청 생성 : ", error.message);
 	}
 }
@@ -34,7 +34,7 @@ function sendRequest(url, param, callBack, method){
 		xhr.onreadystatechange = callBack;
 		xhr.send(httpMethod == 'POST'?httpParam:null);
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 요청 전송 : ", error.message);
 	}
 }

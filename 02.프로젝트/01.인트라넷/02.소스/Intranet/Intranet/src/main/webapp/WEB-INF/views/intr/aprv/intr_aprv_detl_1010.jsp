@@ -18,7 +18,7 @@
 			//
 			formSubmit('intrAprvInqy1010.do');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록으로 : ", error.message);
 		}
 	}
@@ -57,7 +57,7 @@
 	   			});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 기안 등록 : ", error.message);
 		}
 	}

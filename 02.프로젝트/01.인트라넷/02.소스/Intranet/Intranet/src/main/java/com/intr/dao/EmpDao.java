@@ -94,7 +94,7 @@ public class EmpDao {
 		return defaultList;
 	}
 	
-	// 인사 요약
+	// 입사 현황
 	public List<HashMap<String, Object>> intrEmpInqy2042(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;

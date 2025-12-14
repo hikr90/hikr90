@@ -9,7 +9,7 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="find_aprv_wrap">
+					<div class="pop_wrap">
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">

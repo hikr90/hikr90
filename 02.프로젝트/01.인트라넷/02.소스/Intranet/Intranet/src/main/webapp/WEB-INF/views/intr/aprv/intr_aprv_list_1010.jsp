@@ -30,7 +30,7 @@
 			//
 			formSubmit('intrAprvInqy1020.do');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 양식 선택 : ", error.message);
 		}
 	}

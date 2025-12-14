@@ -43,7 +43,7 @@
 		   			});
 				}
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 회의 등록 처리 : ", error.message);
 			}
 		}
@@ -54,7 +54,7 @@
 				//
 				formSubmit('intrMtgInqy1010.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 목록으로 : ", error.message);
 			}
 		}

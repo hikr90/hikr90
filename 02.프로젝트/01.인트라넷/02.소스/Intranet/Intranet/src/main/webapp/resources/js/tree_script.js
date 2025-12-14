@@ -30,7 +30,7 @@ function setTree(area) {
 			}
 		});
 		
-	} catch (error){
+	} catch (error) {
         console.error("[Error] 트리 생성 : ", error.message);
 	}
 }

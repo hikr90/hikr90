@@ -16,7 +16,7 @@
 				return false;
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 아이디, 비밀번호 구분 : ", error.message);
 		}
 		//
@@ -76,7 +76,7 @@
 			    	}
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 인증 번호 전송 : ", error.message);
 		}
 	}
@@ -102,7 +102,7 @@
 		        return false;
 		    }
 		    
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 유효성 검증 (기본) : ", error.message);
 		}
 		//
@@ -129,7 +129,7 @@
 				return false;
 			} 
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 유효성 검증 (인증) : ", error.message);
 		}
 		//
@@ -149,7 +149,7 @@
 			mailChkYn = true;
 			alert("<spring:message code="CODE.SUCCESS"/>");
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 인증하기 : ", error.message);
 		}
 	}
@@ -206,7 +206,7 @@
 			    }
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 정보 찾기 : ", error.message);
 		}
 	}
@@ -227,7 +227,7 @@
 			// 버튼 제어
 			$("#findBtn").addClass('hidden');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 아이디 출력 : ", error.message);
 		}
 	}
@@ -267,7 +267,7 @@
 			$("#findBtn").addClass('hidden');
 			$("#updateBtn").removeClass('hidden');
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 비밀번호 찾기 팝업 : ", error.message);
 		}
 	}
@@ -317,7 +317,7 @@
 				}
 			});
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 비밀번호 변경 처리 : ", error.message);
 		}
 	}
@@ -335,7 +335,7 @@
 		        $("#checkPwd").text("비밀번호가 불일치합니다.");
 		    }
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 비밀번호 체크 : ", error.message);
 		}
 	}

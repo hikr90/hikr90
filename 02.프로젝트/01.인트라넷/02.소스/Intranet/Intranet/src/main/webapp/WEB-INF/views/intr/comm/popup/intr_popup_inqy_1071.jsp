@@ -56,7 +56,7 @@
 				});
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 생성 : ", error.message);
 		}
 	}
@@ -124,7 +124,7 @@
 			    $('.daterangepicker').css('z-index', '9999'); // 모달보다 높게
 			}, 0);
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 생성 : ", error.message);
 		}
 	}
@@ -135,7 +135,7 @@
 			//
 			$(t).closest("tr").remove();
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 화면 상 제거 : ", error.message);
 		}
 	}
@@ -175,7 +175,7 @@
 				}
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 초기화 : ", error.message);
 		}
 	}
@@ -247,7 +247,7 @@
 				popClose(type);
 			}
 			
-		} catch (error){
+		} catch (error) {
 	        console.error("[Error] 목록 저장 : ", error.message);
 		}
 	}

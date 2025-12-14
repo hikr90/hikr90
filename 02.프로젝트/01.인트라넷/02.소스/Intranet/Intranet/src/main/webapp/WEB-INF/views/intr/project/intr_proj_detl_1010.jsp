@@ -13,7 +13,7 @@
 				//
 				formSubmit('intrProjInqy1010.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 목록으로 : ", error.message);
 			}
 		}
@@ -24,7 +24,7 @@
 				//
 				formSubmit('intrProjInqy1040.do');
 				
-			} catch (error){
+			} catch (error) {
 		        console.error("[Error] 수정 화면 : ", error.message);
 			}
 		}
