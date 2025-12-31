@@ -19,6 +19,11 @@ public class Interceptor implements HandlerInterceptor {
 		if (requestURI.equals("/") ||                                			 	// 첫화면
 	        requestURI.equals("/intrMainInqy1010.do") ||             	// 로그인 화면으로 이동
 	        requestURI.equals("/intrMainProc1010.do") ||             	// 로그인 처리
+	        requestURI.equals("/intrPopupInqy1021.do") ||            	// 아이디 찾기
+	        requestURI.equals("/intrPopupInqy1022.do") ||            // 비밀번호 찾기
+	        requestURI.equals("/sendMail.do") ||            				// 메일 전송
+	        requestURI.equals("/intrPopupInqy1023.do") ||            // 사원 정보 조회
+	        requestURI.equals("/intrEmpProc1050.do") ||            	// 사원 비밀번호 수정 처리
 	        requestURI.startsWith("/resources/") ||                  		// 정적 리소스
 	        requestURI.startsWith("/error/") ||                      		// 에러 페이지
 	        requestURI.startsWith("/ckeditor/")) {                   		// CKEditor

@@ -103,7 +103,7 @@
 										</dd>
 										<dt>&#10003; 회의일자</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="mtgDt" value="" readonly="readonly" style="width: 110px;" />
+											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="mtgDt" value="" readonly="readonly" />
 										</dd>
 									</dl>
 									<dl class="post_info">
@@ -117,9 +117,9 @@
 										</dd>
 										<dt>&#10003; 회의시간</dt>
 										<dd>
-											<input type="text" id="timeSt" class="srch_cdt_date srchSdt align_center" name="mtgStm" value="" readonly="readonly" style="width: 110px;" />
+											<input type="text" id="timeSt" class="srch_cdt_date srchSdt time_picker" name="mtgStm" value="" readonly="readonly" />
 											~
-											<input type="text" id="timeEd" class="srch_cdt_date srchSdt align_center" name="mtgEtm" value="" readonly="readonly" style="width: 110px;" />
+											<input type="text" id="timeEd" class="srch_cdt_date srchSdt time_picker" name="mtgEtm" value="" readonly="readonly" />
 										</dd>
 									</dl>
 									<dl class="post_info">

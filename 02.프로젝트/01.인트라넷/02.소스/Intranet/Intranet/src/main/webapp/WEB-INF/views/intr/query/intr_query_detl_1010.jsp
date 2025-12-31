@@ -119,21 +119,25 @@
 			}
 		}
 		
-		// RESTful API 결과 조회 팝업
+		// API 결과 조회 팝업
 		function apiCall(){
 			try {
+				//
 				var query = $("#query").val().toLowerCase();
+				var dmlPatn = ["merge","insert","update","delete"];
+				var chkDml = dmlPatn.some(word => query.includes(word));
+				//
 				if(!validate(query)) return;
 				
-				// API에서 DML 작업 방지
-				if($('#dmlProc').is(':checked')) {
-					// DML 체크인 경우
+				// DML이 체크되어있거나 쿼리 내 DML 용어가 있는 경우
+				if($('#dmlProc').is(':checked') || chkDml) {
 					alert("<spring:message code="API.NOT.DML"/>");
 					return;
 				}
-				//
+
+				// 팝업 요청
 				var obj = new Object();
-				
+				//
 				obj["mappingId"] = "intrPopupInqy1111.do";
 				obj["areaType"] = "qry";
 				obj["width"] = "700";
@@ -143,7 +147,7 @@
 				ajaxPopup(obj);
 				
 			} catch (error) {
-		        console.error("[Error] RESTful API 결과 조회 팝업 : ", error.message);
+		        console.error("[Error] API 결과 조회 팝업 : ", error.message);
 			}
 		}
 		
@@ -156,11 +160,11 @@
 				let successful = document.execCommand('copy');
 				
 				if(successful){
-					alert("<spring:message code="COPY.URL.SUCCESS"/>");
+					alert("<spring:message code="COPY.DATA.SUCCESS"/>");
 					return;
 					
 				} else {
-					alert("<spring:message code="COPY.URL.FAIL"/>");
+					alert("<spring:message code="COPY.DATA.FAIL"/>");
 					return;
 				}
 				
@@ -172,7 +176,7 @@
 </head>
 <body id="main">
 <form id="form" method="POST">
-	<!-- RESTful API 팝업 -->
+	<!-- API 팝업 -->
 	<div id="qryArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1110.jsp"></c:import>	
 	</div>
@@ -199,13 +203,13 @@
 		                            
 		                            <h2>쿼리 조회
 										<span class="float_right">
-											<input type="button" class="btn_navy_thin" value="RESTful API" onclick="apiCall();">
+											<input type="button" class="btn_navy_thin" value="API 조회" onclick="apiCall();">
 											<input type="button" class="btn_green_thin" value="Excel" onclick="excelDown();">
 											<input type="button" class="btn_blue_thin listCall" value="조회" onclick="listCall();">
 										</span>
 									</h2>
-									<span style="font-size: 1.6rem; float: right; margin: 10px;">
-										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc" name="dmlProc" style="width: 15px; height: 15px; vertical-align: middle;">DML 처리</label>
+									<span style="font-size: 1.5rem; float: right; margin: 10px; font-weight: bold;">
+										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc " name="dmlProc" style="width: 16px; height: 16px; vertical-align: middle;">DML 처리</label>
 									</span><br>
 									
 									<!-- 쿼리 입력 -->

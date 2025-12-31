@@ -154,9 +154,9 @@
 								        <dl>
 								        	<dt>&#10003; 휴가 기간</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="leavSdt" value="" readonly="readonly" style="width: 110px;" />
+												<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="leavSdt" value="" readonly="readonly" />
 													~
-												<input type="text" class="srch_cdt_date srchDt" id="srchEdt" name="leavEdt" value="" readonly="readonly" style="width: 110px;" />
+												<input type="text" class="srch_cdt_date srchDt" id="srchEdt" name="leavEdt" value="" readonly="readonly" />
 											</dd>
 											
 											<dt>&#10003; 대직자</dt>

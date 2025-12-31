@@ -15,11 +15,18 @@ public interface EmpService {
 	String intrEmpInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 사원 아이디 중복 조회
 	void intrEmpInqy2030(Model model, HashMap<String, Object> paramMap) throws Exception;		// 부서 사원 트리 조회
 	void intrEmpInqy2040(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 부서 사원 수 조회
+	//
+	void intrEmpInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 조회
+	void intrEmpInqy3011(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 조회 (AJAX)
+	void intrEmpInqy3012(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 등록 조회 (AJAX)
 	
 	// 사원 관리
 	String intrEmpProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 등록
 	String intrEmpProc1020(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 수정
-	String intrEmpProc1030(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 복직, 퇴사
-	String intrEmpProc1040(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 삭제
-	String intrEmpProc1050(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 사원 비밀번호 수정
+	String intrEmpProc1030(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 복직, 퇴사
+	String intrEmpProc1040(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 삭제
+	String intrEmpProc1050(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 사원 비밀번호 수정
+	//
+	String intrEmpProc2010(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 저장
+	String intrEmpProc2020(Model model, HashMap<String, Object> paramMap) throws Exception; 	// 담당업무 삭제
 }

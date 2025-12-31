@@ -2,7 +2,7 @@
 
 <!-- 
 	view : intr_popup_inqy_1110
-	title : RESTful API 관리
+	title : API 관리
 -->
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 85%;">
@@ -14,12 +14,12 @@
 							<div class="srch_wrap">
 								<div class="srch_area">
 									<div class="right_srch_area">
-										<label class="srch_label">RESTful API 조회</label>
+										<label class="srch_label">API 조회</label>
 									</div>
 								</div>
 							</div>
 	                        
-	                     	<!-- RESTful API 상세 -->
+	                     	<!-- API 상세 -->
 	                     	<div id="qryCon" class="post_con disp_flex"></div>
 	                        
 							<div class="btn_right">

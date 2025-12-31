@@ -56,7 +56,7 @@
 					str += "	</td>";
 					//
 					if(menuLv!=1){
-						str += "	<td style='text-align: left;'>&nbsp;&nbsp;ㄴ " + menuNm + "</td>";
+						str += "	<td style='text-align: left;'>&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width='13' height='13' style='margin-right: 5px;'/> " + menuNm + "</td>";
 					} else {
 						str += "	<td style='text-align: left;'>" + menuNm + "</td>";
 					}
@@ -143,8 +143,8 @@
 		}
 	}
 </script>
-<div class="post_wrap" style="padding: 0px; height: auto;">
-	<div class="scroll_wrap" style="max-height: 425px;">
+<div class="post_wrap" style="padding: 0px; height: 490px;">
+	<div class="scroll_wrap" style="height: 490px;">
 		<table class="post_table authMenuTbl">
 			<caption>권한 목록 테이블</caption>
 			<colgroup>
@@ -171,7 +171,9 @@
 							<input type="hidden" name="authMenuCd" value="${list.menuCd}">
 						</td>
 						<td class="align_left">
-							<c:if test="${list.lv ne '1'}">&nbsp;&nbsp;ㄴ</c:if>
+							<c:if test="${list.lv ne '1'}">
+								&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+							</c:if>
 							${list.menuNm}
 						</td>
 					</tr>
@@ -181,7 +183,7 @@
 	</div>
 </div> <!-- End post_wrap -->
 
-<div class="btn_center pt30">
+<div class="btn_center">
 	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
 	
 	<button type="button" class="btn_navy_thin float_right" style="margin-left: 5px;" onclick="regProc(this.form);">저장</button> 

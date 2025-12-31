@@ -154,7 +154,7 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="orgList" class="sList select_box">${defaultInfo.orgNm}</div>
-													<input type="hidden" name="setorgNm" value="${defaultInfo.orgNm}">
+													<input type="hidden" name="setOrgNm" value="${defaultInfo.orgNm}">
 													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 												
 													<ul class="sUl select_ul scroll_wrap">

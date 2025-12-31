@@ -46,7 +46,12 @@
 	
 	<select id="intrAprvInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrAprvInqy1010 : 전자결재 시퀀스 조회 */
-		SELECT 'APRV_' || LPAD(NVL(MAX(REPLACE(APRV_ID,'APRV_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRVMAST
+		SELECT 'APRV_' || LPAD(NVL(MAX(REPLACE(APRV_ID,'APRV_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRV_MAST
+	</select>
+	
+	<select id="intrAprvInqy2010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2010 : 결재선 시퀀스 조회 */
+		SELECT 'APRVLINE_' || LPAD(NVL(MAX(REPLACE(APRVLINE_ID,'APRVLINE_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRV_LINE_MAST
 	</select>
 	
 	<select id="intrAprvInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -54,7 +59,7 @@
 		WITH HIST AS (
 			SELECT 
 				APRV_ID, LISTAGG(APRV_IDX, '|') WITHIN GROUP (ORDER BY APRV_IDX) AS APRV_IDX 
-			FROM APRVHIST AH
+			FROM APRV_HIST AH
 			WHERE AH.APRVTYPE_CD = 'TYPE_0030'
 			GROUP BY APRV_ID, APRV_IDX
 		)
@@ -97,8 +102,8 @@
       						WHERE FILE_ID = A.APRV_ID
       							AND USE_YN = 'Y'
       					) AS FILE_CNT
-					FROM APRVMAST A
-					INNER JOIN APRVHIST AH
+					FROM APRV_MAST A
+					INNER JOIN APRV_HIST AH
 						ON AH.APRV_ID = A.APRV_ID
 						AND AH.APRV_SNO = A.CURR_APRV_SNO
 					LEFT OUTER JOIN HIST H
@@ -190,8 +195,8 @@
 					,	AC.CARD_NM
 					,	AC.CARD_NO
 					,	ROW_NUMBER() OVER(ORDER BY AM.APRV_ID ASC) AS ROW_NUM
-				FROM APRVMAST AM
-				INNER JOIN APRVHIST AH
+				FROM APRV_MAST AM
+				INNER JOIN APRV_HIST AH
 					ON AH.APRV_ID = AM.APRV_ID
 					AND AH.APRV_SNO = AM.CURR_APRV_SNO
 				LEFT OUTER JOIN EMP_INFO E
@@ -250,7 +255,7 @@
 					,	AH.DISP_ORDER
 					,	AH.REMARK
 					,	RANK() OVER(ORDER BY APRV_SNO ASC) AS NUM
-				FROM APRVHIST AH
+				FROM APRV_HIST AH
 				LEFT OUTER JOIN EMP_INFO E
 					ON E.EMP_IDX = AH.APRV_IDX
 				LEFT OUTER JOIN ORG O
@@ -319,8 +324,8 @@
 					,	AH.APRV_IDX
 					,	AH.RSLTTYPE_CD
 					,	RANK() OVER(ORDER BY AH.APRV_SNO ASC) AS NUM
-				FROM APRVMAST AM
-				INNER JOIN APRVHIST AH
+				FROM APRV_MAST AM
+				INNER JOIN APRV_HIST AH
 					ON AM.APRV_ID = AH.APRV_ID
 					AND AM.CURR_APRV_SNO = AH.APRV_SNO
 				WHERE AM.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
@@ -329,8 +334,8 @@
 		WHERE DATA.NUM = '1'
 	</select>
 	
-	<select id="intrAprvInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy3011 : 다음 결재 조회 */
+	<select id="intrAprvInqy2012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2012 : 다음 결재 조회 */
 		SELECT 
 				DATA.*
 		FROM (
@@ -338,7 +343,7 @@
 				AH.APRV_ID	 AS SEQUENCE_ID
 			,	AH.APRV_SNO AS CURR_APRV_SNO
 			,	RANK() OVER(ORDER BY AH.APRV_SNO DESC) AS NUM
-			FROM APRVHIST AH
+			FROM APRV_HIST AH
 			WHERE AH.APRV_ID = #{sequenceId, jdbcType=VARCHAR}
 				AND AH.APRV_SNO != #{currAprvSno, jdbcType=VARCHAR}
 				AND AH.APRVTYPE_CD = 'TYPE_0020'
@@ -347,9 +352,113 @@
 		WHERE NUM = '1'
 	</select>
 
+	<select id="intrAprvInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy3011 : 연차 공유 조회 */
+		SELECT
+				AM.APRV_ID
+			,	AM.APRV_TITLE
+			,	AM.APRVSTEP_CD
+			,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
+			,	AL.LEAV_IDX
+			,	AL.LEAVTYPE_CD
+			,	CC_LEAV.COMMCODE_NM AS LEAVTYPE_NM
+			,	AL.LEAV_SDT
+			,	AL.LEAV_EDT
+			,	AL.LEAV_DAYS
+			,	AL.LEAV_RSN
+			,	AL.LEAV_SUBST
+			,	AM.APRV_ID AS ID
+			,	'[' || CC_LEAV.COMMCODE_NM || '] ' || AM.APRV_TITLE || '_' || E.EMP_NM AS "TITLE"
+			,	TO_CHAR(TO_DATE(AL.LEAV_SDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
+			,	TO_CHAR(TO_DATE(AL.LEAV_EDT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 24:00:00' AS "END"
+			FROM APRV_MAST AM
+			INNER JOIN APRV_REL_LEAV AL
+				ON AM.APRV_ID = AL.APRV_ID
+				AND AM.APRVSTEP_CD = 'STEP_0020'
+			LEFT OUTER JOIN EMP_INFO E
+				ON E.EMP_IDX = AL.LEAV_IDX
+			LEFT OUTER JOIN ORG O
+				ON O.ORG_CD = E.ORG_CD
+			LEFT OUTER JOIN RANK R
+				ON R.RANK_CD = E.RANK_CD
+			LEFT OUTER JOIN COMMCODE CC_STEP
+				ON CC_STEP.COMMCODE_CD = AM.APRVSTEP_CD
+			LEFT OUTER JOIN COMMCODE CC_LEAV
+				ON CC_LEAV.COMMCODE_CD = AL.LEAVTYPE_CD
+			WHERE 1=1
+				<if test="leavCd != null and leavCd != ''">
+					AND AL.LEAVTYPE_CD = #{leavCd, jdbcType=VARCHAR}
+				</if>
+				<if test="orgNm != null and orgNm != ''">
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				</if>
+				<if test="rankNm != null and rankNm != ''">
+					AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				</if>
+				<if test="srchNm != null and srchNm != ''">
+	            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+	            </if>
+			ORDER BY AM.APRV_ID ASC
+	</select>
+	
+	<select id="intrAprvInqy4011" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy4011 : 결재선 관리 조회 */
+		SELECT 
+				ALM.APRVLINE_ID
+			,	ALM.APRVLINE_NM
+			,	ALM.REG_IDX
+			,	ALM.REG_DT
+			,	ALM.DISP_ORDER
+		FROM APRV_LINE_MAST ALM
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+           		AND REGEXP_REPLACE(LOWER(AL.APRVLINE_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+       	 	</if>
+	</select>
+	
+	<select id="intrAprvInqy4031" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy4031 : 결재선 상세 조회 */
+		SELECT 
+				ALM.APRVLINE_ID
+			,	ALM.APRVLINE_NM
+			,	ALD.APRVLINE_SNO
+			,	ALD.APRV_IDX
+			,	E.EMP_NM AS APRV_NM
+			,	O.ORG_NM
+			,	R.RANK_NM
+			,	ALD.APRVTYPE_CD
+			,	CC_APRV.COMMCODE_NM AS APRVTYPE_NM
+		FROM APRV_LINE_MAST ALM
+		LEFT OUTER JOIN APRV_LINE_DETL ALD
+			ON ALD.APRVLINE_ID = ALM.APRVLINE_ID
+		LEFT OUTER JOIN EMP_INFO E
+			ON E.EMP_IDX = ALD.APRV_IDX
+		LEFT OUTER JOIN ORG O
+			ON O.ORG_CD = E.ORG_CD
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+		LEFT OUTER JOIN COMMCODE CC_APRV
+			ON CC_APRV.COMMCODE_CD = ALD.APRVTYPE_CD
+			AND CC_APRV.COMMCODE_GCD = 'TYPE'
+		WHERE 1=1
+			AND ALM.APRVLINE_ID = #{aprvlineId, jdbcType=VARCHAR}
+		ORDER BY ALD.APRVLINE_SNO ASC
+	</select>
+	
+	<select id="intrAprvInqy4032" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy4032 : 결재선 타입 조회 */
+		SELECT 
+				COMMCODE_CD AS APRVTYPE_CD
+			,	COMMCODE_NM AS APRVTYPE_NM
+		FROM COMMCODE
+		WHERE 1=1
+			AND COMMCODE_GCD = 'TYPE'
+			AND COMMCODE_CD IN ('TYPE_0020', 'TYPE_0030')
+	</select>
+
 	<insert id="intrAprvProc1011" parameterType="java.util.HashMap">
-		/* intrAprvProc1011 : 결재 마스터 등록 (APRVMAST) */
-		INSERT INTO APRVMAST
+		/* intrAprvProc1011 : 결재 마스터 등록 (APRV_MAST) */
+		INSERT INTO APRV_MAST
 		(
 				APRV_ID
 			,	APRV_TITLE
@@ -381,15 +490,15 @@
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM APRVMAST
+					FROM APRV_MAST
 				)
 			,	NULL
 			)
 	</insert>
 	
 	<insert id="intrAprvProc1012" parameterType="java.util.HashMap">
-		/* intrAprvProc1012 : 결재 이력 등록 (APRVHIST) */
-		INSERT INTO APRVHIST
+		/* intrAprvProc1012 : 결재 이력 등록 (APRV_HIST) */
+		INSERT INTO APRV_HIST
 		(
 				APRV_ID
 			,	APRV_SNO
@@ -410,7 +519,7 @@
 			,	(
 					SELECT 
                         LPAD(NVL(MAX(APRV_SNO),0) + 1,4,0)
-					FROM APRVHIST
+					FROM APRV_HIST
 					WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
 				)
 			,	#{aprvtypeCd, jdbcType=VARCHAR}
@@ -424,15 +533,15 @@
 			,	(
 					SELECT 
 						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM APRVHIST
+					FROM APRV_HIST
 				)
 			,	NULL
 			)
 	</insert>
 	
 	<update id="intrAprvProc1013" parameterType="java.util.HashMap">
-		/* intrAprvProc1013 : 현재 단계, 번호 수정 (APRVHIST) */
-		MERGE INTO APRVMAST AM
+		/* intrAprvProc1013 : 현재 단계, 번호 수정 (APRV_HIST) */
+		MERGE INTO APRV_MAST AM
 		USING (
 						SELECT 
 								DATA.*
@@ -443,7 +552,7 @@
 										,	APRVTYPE_CD
 										,	APRV_IDX
 										,   ROW_NUMBER() OVER(ORDER BY DECODE(APRVTYPE_CD,'TYPE_0020',1) ASC) AS ROW_NUM
-									FROM APRVHIST
+									FROM APRV_HIST
 									WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
 						) DATA
 						WHERE DATA.ROW_NUM = '1'
@@ -623,14 +732,14 @@
 	
 	<update id="intrAprvProc2011" parameterType="java.util.HashMap">
 		/* intrAprvProc2011 : 결재 단계 수정 */
-		UPDATE APRVMAST
+		UPDATE APRV_MAST
 			SET APRVSTEP_CD = #{stepCd, jdbcType=VARCHAR}
 		WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
 	</update>
 	
 	<update id="intrAprvProc2012" parameterType="java.util.HashMap">
 		/* intrAprvProc2012 : 결재 처리 유형 수정 */
-		UPDATE APRVHIST
+		UPDATE APRV_HIST
 			SET RSLTTYPE_CD = #{rslttypeCd, jdbcType=VARCHAR}
 				,	RSLT_NOTE =	#{rsltNote, jdbcType=VARCHAR}
 				,	RSLT_DT = TO_CHAR(SYSDATE,'YYYYMMDD')
@@ -641,8 +750,94 @@
 	
 	<update id="intrAprvProc2013" parameterType="java.util.HashMap">
 		/* intrAprvProc2013 : 결재 일련번호 수정 */
-		UPDATE APRVMAST
+		UPDATE APRV_MAST
 			SET CURR_APRV_SNO = #{currAprvSno, jdbcType=VARCHAR}
 		WHERE APRV_ID = #{sequenceId, jdbcType=VARCHAR}
 	</update>
+	
+	<insert id="intrAprvProc4011" parameterType="java.util.HashMap">
+		/* intrAprvProc4011 : 결재선 마스터 등록 처리 */
+		INSERT INTO APRV_LINE_MAST
+		(
+				APRVLINE_ID
+			,	APRVLINE_NM
+			,	REG_IDX
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	#{aprvlineNm, jdbcType=VARCHAR}
+			,	#{regIdx, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_LINE_MAST
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<insert id="intrAprvProc4012" parameterType="java.util.HashMap">
+		/* intrAprvProc4012 : 결재선 상세 등록 처리 */
+		INSERT INTO APRV_LINE_DETL
+		(
+				APRVLINE_ID
+			,	APRVLINE_SNO
+			,	APRV_IDX
+			,	APRVTYPE_CD
+			,	REG_DT
+			,	REG_TM
+			,	USE_YN
+			,	DISP_ORDER
+			,	REMARK
+		)
+		VALUES
+		(
+				#{sequenceId, jdbcType=VARCHAR}
+			,	(
+					SELECT 
+                        LPAD(NVL(MAX(APRVLINE_SNO),0) + 1,4,0)
+					FROM APRV_LINE_DETL
+					WHERE APRVLINE_ID = #{sequenceId, jdbcType=VARCHAR}
+				)
+			,	#{aprvIdx, jdbcType=VARCHAR}
+			,	#{aprvtypeCd, jdbcType=VARCHAR}
+			,	TO_CHAR(SYSDATE,'YYYYMMDD')
+			,	TO_CHAR(SYSDATE,'HH24MISS')
+			,	'Y'
+			,	(
+					SELECT 
+						NVL(MAX(DISP_ORDER),0) + 1 
+					FROM APRV_LINE_DETL
+				)
+			,	NULL
+			)
+	</insert>
+	
+	<update id="intrAprvProc4013" parameterType="java.util.HashMap">
+		/* intrAprvProc4013 : 결재선 마스터 (APRV_LINE_MAST) 수정 */
+		UPDATE APRV_LINE_MAST
+			SET APRVLINE_NM = #{aprvlineNm, jdbcType=VARCHAR}
+		WHERE APRVLINE_ID = #{sequenceId, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="intrAprvProc4014" parameterType="java.util.HashMap">
+		/* intrAprvProc4014 : 결재선 마스터 (APRV_LINE_MAST) 삭제 */
+		DELETE FROM APRV_LINE_MAST
+			WHERE APRVLINE_ID = #{sequenceId, jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="intrAprvProc4015" parameterType="java.util.HashMap">
+		/* intrAprvProc4015 : 결재선 상세 (APRV_LINE_DETL) 삭제 */
+		DELETE FROM APRV_LINE_DETL
+			WHERE APRVLINE_ID = #{sequenceId, jdbcType=VARCHAR}
+	</delete>
 </mapper>

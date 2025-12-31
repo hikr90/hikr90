@@ -353,3 +353,19 @@ function isNew(regDt) {
     }
     return "";
 }
+
+// 탭 show/hide 체크
+function isTabOverlow() {
+    let tabList = $(".tab_list"); 						// 탭 목록 전체 (실제 콘텐츠 너비)
+    let wrapper = $(".tab_wrapper");  			// 탭 목록을 감싸는 뷰포트 (보이는 영역 너비)
+    let controls = $(".tab_scroll_controls"); 	// 좌우 화살표 버튼 컨테이너
+    
+    // 탭 목록의 실제 스크롤 너비와 wrapper의 보이는 너비를 비교
+    if (tabList[0].scrollWidth > wrapper.width()) {
+        // 탭이 넘칠 경우, show
+        controls.show(); 
+    } else {
+        // 탭이 넘치지 않을 경우, hide
+        controls.hide();
+    }
+}

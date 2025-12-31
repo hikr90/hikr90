@@ -7,7 +7,7 @@
 	</select>
 
 	<select id="intrQueryInqy1021" resultType="hashmap">
-		/* intrQueryInqy1021 : 쿼리 입력 조회 (엑셀) */
+		/* intrQueryInqy1011 : 쿼리 입력 조회 (엑셀) */
 		${query}
 	</select>
 	

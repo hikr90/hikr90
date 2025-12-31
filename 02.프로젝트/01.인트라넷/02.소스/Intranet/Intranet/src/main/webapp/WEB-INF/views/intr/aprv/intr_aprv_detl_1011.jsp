@@ -149,7 +149,7 @@
 								        <dl>
 								        	<dt>&#10003; 지급 일자</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="prepayDt" value="" readonly="readonly" style="width: 110px;" />
+												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="prepayDt" value="" readonly="readonly" />
 											</dd>
 											
 											<dt>&#10003; 청구 금액</dt>

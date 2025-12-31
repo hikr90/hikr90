@@ -12,3 +12,10 @@
 		</c:forEach>
 	</ul>
 </c:if>
+<c:if test="${fn:length(defaultList) == 0}">
+	<ul class="ul_1">
+		<li class="li_1" style="margin-left: 15px;">
+			등록된 권한이 없습니다.
+		</li>
+	</ul>
+</c:if>

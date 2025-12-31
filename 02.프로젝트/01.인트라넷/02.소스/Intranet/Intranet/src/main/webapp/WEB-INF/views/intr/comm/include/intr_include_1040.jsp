@@ -8,7 +8,7 @@
 		<li id="fileLi${status.index}">
 			<input type="hidden" id="fileId${status.index}" name="none${status.index}" value="${list.fileSno}">
 			<img src="resources/images/icon/icon_file.png" width="20" height="20" >
-			<a href="#" onclick="fileDel('delete',${status.index});"><span>${list.fileNm}</span></a>
+			<a href="javascript:void(0);" onclick="fileDel('delete',${status.index});"><span>${list.fileNm}</span></a>
 		</li>
 	</c:forEach>
 </ul>    

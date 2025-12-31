@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:choose>
-	<c:when test="${dataList eq null}">
-		<span>쿼리 조회 결과가 없습니다.</span>
+	<c:when test="${not empty resMsg}">
+		<span>${resMsg}</span>
 	</c:when>
 	<c:otherwise>
 		<table class="post_table">

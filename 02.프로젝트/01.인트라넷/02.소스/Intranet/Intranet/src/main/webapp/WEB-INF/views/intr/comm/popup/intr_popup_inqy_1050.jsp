@@ -23,7 +23,7 @@
 								</div>
 							</div>
 	                        
-	                     	<!-- 회의 상세 -->
+	                     	<!-- 결재 의견 입력 -->
 	                     	<div id="opinCon" class="post_con disp_flex" style="height: 240px;"></div>
 	                        
 							<div class="btn_right">

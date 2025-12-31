@@ -33,11 +33,10 @@ public interface UtilService {
 	void zipDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception; // 전체
 	void excelDown(List<Map<String, Object>> defaultList, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception; // 엑셀
 	
-	// 메일 전송 관련
+	// 메일 전송
 	String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception;
 	
-	// 암복호화 관련
+	// 암복호화
 	String encryptProc(String encryptedText) throws Exception;
 	String decryptProc(String encryptedText) throws Exception;
-
 }

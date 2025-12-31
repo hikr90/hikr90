@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-
 <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
 
@@ -154,6 +153,25 @@
 	        });
 	    }
 	});
+	
+	// 업무 캘린더 (메인) 상세
+	function tldrCall(sequenceId){
+		try {
+			//
+			var obj = new Object();
+			//
+			obj["mappingId"] = "intrPopupInqy1123.do";
+			obj["areaType"] = "tldr";
+			obj["sequenceId"] = sequenceId;
+			obj["width"] = "700"
+			obj["height"] = "460";
+			//		
+			ajaxPopup(obj);
+			
+		} catch (error) {
+			console.error("[Error] 업무 캘린더 상세 (메인) : ", error.message);
+		}
+	}
 </script>
 
 <style>
@@ -168,6 +186,11 @@
 	<!-- 회의 팝업 -->
  	<div id="mtgArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1090.jsp"></c:import>	
+	</div>
+	
+	<!-- 업무 캘린더 팝업 -->
+ 	<div id="tldrArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1120.jsp"></c:import>	
 	</div>
 
 	<!-- 배너 -->
@@ -266,9 +289,8 @@
 												<span>${formatDt} 입사</span> 
 											</li>
 	                                    </ul>
-	                                    
-	                                    	<li><span>${not empty taskInfo ? 'myTask.taskCont' : '등록된 담당업무가 없습니다.'}</span></li>
 	                                    <ul class="main_ul main_font">
+	                                    	<li><span>${not empty empInfo.dutyTitle ? empInfo.dutyTitle : '등록된 담당업무가 없습니다.'}</span></li>
 	                                    </ul>
                                     </div>
 								</div>
@@ -298,8 +320,8 @@
 									<div class="area_content">
 										<ul class="area_ul">
 											<c:forEach var="list" items="${boardList}" begin="0" end="2">
-												<li class="main_li">
-													<a class="main_a pl20" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
+												<li class="main_li pl20">
+													<a class="main_a" href="intrBoardInqy2020.do?sequenceId=${list.brdId}&pageUrl=Board">
 														<script>document.write(isNew('${list.regDt}'))</script>
 														${list.brdTitle}
 													</a>
@@ -333,8 +355,8 @@
 									<div class="area_content">
 										<ul class="area_ul">
 											<c:forEach var="list" items="${aprvList}" begin="0" end="2">
-												<li class="main_li">
-													<a class="main_a pl20" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
+												<li class="main_li pl20">
+													<a class="main_a" href="intrAprvInqy2020.do?sequenceId=${list.aprvId}&temptypeCd=${list.temptypeCd}&returnUrl=${list.returnUrl}&pageUrl=Aprv">
 														<script>document.write(isNew('${list.regDt}'))</script>	
 														${list.aprvTitle}
 													</a>
@@ -362,26 +384,26 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_note.png' width="20" height="20"/>
 							    			오늘의 일정
-							    		</h3><a href="intrScheInqy2010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrTaskInqy3010.do?empIdx=${empVO.empIdx}" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
 									</div>
 
 									<div class="area_content">
 										<ul class="area_ul">
-											<c:forEach var="list" items="${scheList}" begin="0" end="2">
-												<li class="main_li">
-													${list.aprvTitle}
+											<c:forEach var="list" items="${tldrList}" begin="0" end="2">
+												<li class="main_li pl20">
+													<a class="main_a" href="javascript:void(0);" onclick="tldrCall('${list.tldrId}');">
+														${list.tldrTitle}
+													</a>
 													<span class="date main_ie">
-														<fmt:parseDate value="${list.regDt}" var="parseDt" pattern="yyyyMMdd"/>
-														<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-														${formatDt} 
+														${list.tldrSdt} ~ ${list.tldrEdt} 
 													</span>
 												</li>
 											</c:forEach>
 											
-											<c:if test="${empty scheList}">
+											<c:if test="${empty tldrList}">
 												<li class="main_li pl20">
 													등록된 일정이 없습니다.
-												</li>												
+												</li>	
 											</c:if>
 										</ul>
 									</div>

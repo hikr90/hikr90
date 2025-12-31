@@ -8,6 +8,9 @@
 -->
 <script>
 	$(document).ready(function(){
+		// 결재선 UI 초기화
+		AprvLineUI.init();
+		
 		// 목록 추가 (add), 데이터 있음 (data),  데이터 없음 (none)
 		var aprvLine = $("#aprvLine").val();
 		var isData =  aprvLine == '' ? 'none' : 'data';
@@ -20,7 +23,6 @@
 			// 변수 지정
 			var cIdx = $("input[name=radioIdx]:checked");
 			var obj = new Object();
-			var str = "";
 			
 			// 목록 추가
 			if(flag=="add"){
@@ -36,7 +38,7 @@
 				obj["aprvNm"] = "";													// 결재 유형
 				
 				// 목록 생성
-				str += addLine(obj);
+				addLine(obj);
 				
 			} else if(flag=="data") {
 				// 목록 있음
@@ -53,35 +55,9 @@
 				    obj["rankNm"] 		= parts[4];
 				    obj["empNm"] 		= parts[5];
 					//
-				    str += addLine(obj);
+				    addLine(obj);
 				});
 			} 
-			
-			// 셀렉트 박스 클릭
-			$(".pop_sbox").on("click", function () {
-				$(this).siblings(".pop_sul").toggle(); // 리스트 열고 닫기
-			});
-
-			// hover 이벤트
-			$(".pop_sul li").hover(function(){
-				$(this).addClass("hover").siblings().removeClass("hover");
-			});
-			
-			// 항목 선택
-			$(".pop_sul li").on("click", function () {
-			    var setNm = $(this).attr("setNm");
-			    var setCd = $(this).attr("setCd");
-				var setIdx = $(this).attr("setIdx");
-			    
-				// 값 지정
-				$(this).closest('div').find('div').text(setNm);
-				$(this).closest('div').find('input[name=aprvCd]').val(setCd);
-				$(this).closest('div').find('input[name=aprvNm]').val(setNm);
-				$(this).closest('div').find('input[name=aprvIdx]').val(setIdx);
-
-				// 목록 닫기
-				$(".sUl").css("display","none");
-			});
 			
 		} catch (error) {
 	        console.error("[Error] 결재선 처리 : ", error.message);

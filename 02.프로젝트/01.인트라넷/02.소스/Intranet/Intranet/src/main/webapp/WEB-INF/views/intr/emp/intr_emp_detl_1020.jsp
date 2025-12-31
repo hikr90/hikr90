@@ -206,7 +206,7 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="orgList" class="sList select_box">부서를 선택해주세요.</div>
-													<input type="hidden" id="setorgNm" name="setorgNm" value="">
+													<input type="hidden" id="setOrgNm" name="setOrgNm" value="">
 													<input type="hidden" id="setOrgCd" name="setOrgCd" value="">
 												
 													<ul class="sUl select_ul scroll_wrap">

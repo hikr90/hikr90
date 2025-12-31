@@ -26,6 +26,7 @@ import com.intr.dao.BoardDao;
 import com.intr.dao.EmpDao;
 import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
+import com.intr.dao.TaskDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
 import com.intr.svc.CoreService;
@@ -85,6 +86,9 @@ public class MainController {
 	
 	@Autowired
 	AuthDao authDao;
+	
+	@Autowired
+	TaskDao taskDao;
 	
 	@Autowired
 	HttpSession session;
@@ -166,6 +170,12 @@ public class MainController {
 			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
 			model.addAttribute("empInfo", defaultInfo);
 
+			//--------------------------------------------------------------------------------------------
+			// 오늘의 일정 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = taskDao.intrTaskInqy3013(model, paramMap);
+			model.addAttribute("tldrList", defaultList);
+			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 메인 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
@@ -217,7 +227,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 입사 현황
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2042(model, paramMap);
+			defaultList = empDao.intrEmpInqy4011(model, paramMap);
 			model.addAttribute("empList", defaultList);
 
 			//--------------------------------------------------------------------------------------------

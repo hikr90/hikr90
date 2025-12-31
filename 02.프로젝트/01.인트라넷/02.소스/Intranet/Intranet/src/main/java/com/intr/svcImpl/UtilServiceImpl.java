@@ -31,8 +31,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1006,24 +1004,5 @@ public class UtilServiceImpl implements UtilService{
 		}
 		//
 		return AESCryptoUtil.decrypt(specName, key, ivParameterSpec, plainText);
-	}
-	
-	// JSON 持失
-	public String getJsonData(List<HashMap<String, Object>> defaultList) throws Exception {
-		//
-		JSONArray jAray = null;
-		JSONObject jObj = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// JSON 持失
-			//--------------------------------------------------------------------------------------------
-			
-			
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-		//
-		return "";
 	}
 }

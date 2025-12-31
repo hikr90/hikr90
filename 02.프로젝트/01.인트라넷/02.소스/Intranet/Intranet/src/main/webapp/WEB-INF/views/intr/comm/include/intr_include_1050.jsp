@@ -17,7 +17,8 @@
 							<c:forEach begin="0" end="1">
 								&nbsp;
 							</c:forEach>
-								ㄴ	<a class="a_title ${menuSet eq list.menuSet ? 'list_bg' : ''}" style="font-size: 16px;" href="${list.mappingId}?menuCd=${list.menuCd}&menuSet=${list.menuSet}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
+								<img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+								<a class="a_title ${menuSet eq list.menuSet ? 'list_bg' : ''}" style="font-size: 16px;" href="${list.mappingId}?menuCd=${list.menuCd}&menuSet=${list.menuSet}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
 						</c:otherwise>
 					</c:choose>
 				</td>

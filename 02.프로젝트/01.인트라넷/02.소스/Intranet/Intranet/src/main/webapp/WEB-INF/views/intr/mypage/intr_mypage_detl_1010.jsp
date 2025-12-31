@@ -14,10 +14,19 @@
 	function updProc(f){
 		try {
 			// 비밀번호 검증
-			var empPwd = $("#empPwd").val();
-			var cPwd = $("#cPwd").val();
-			//
-			if(empPwd != ''){
+			var isPwd = $("#pwdArea").is(':visible');
+			if(isPwd){
+				var empPwd = $("#empPwd").val();
+				var cPwd = $("#cPwd").val();
+				//
+				if(empPwd == ''){
+					alert("<spring:message code="MYPAGE.PWD.NONE"/>");
+					return;
+				}
+				if(cPwd == ''){
+					alert("<spring:message code="MYPAGE.CPWD.NONE"/>");
+					return;
+				}
 				if(empPwd != cPwd){
 					alert("<spring:message code="MYPAGE.PWD.DIFF"/>");
 					return;
@@ -78,6 +87,11 @@
 	        console.error("[Error] 수정 처리 : ", error.message);
 		}
 	}
+	
+	// 비밀번호 변경
+	function pwdCall(){
+		$("#pwdArea").toggle();
+	}
 </script>
 <body id="main">
 <form id="form" name="form" method="POST">
@@ -99,7 +113,11 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-		                            <h2>My Page</h2>
+		                            <h2>My Page
+		                            	<span class="float_right">
+											<input type="button" class="btn_blue_thin" value="비밀번호 변경" onclick="pwdCall();">
+										</span>
+		                            </h2>
 		                            <input type="hidden" name="empIdx" value="${defaultInfo.empIdx}">
 		                            <input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 		                            <input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
@@ -181,11 +199,10 @@
 		                                    <dt><label>관리자 여부</label></dt>
 		                                    <dd class="sel_2part">${empVO.authYn}</dd>
 		                             	</dl>
-									 	<dl>
+									 	<dl id="pwdArea" style="display: none;">
 		                             		<dt><label>비밀번호</label></dt>
 		                                    <dd class="sel_2part">
 		                                    	<input type="password" title="비밀번호 입력" id="empPwd" name="empPwd" value="">
-		                                    	<span style="color: red; float: right; margin-top: 20px; font-size: 14px;">패스워드 입력 시, 비밀번호가 변경됩니다.</span>
 		                                    </dd>
 		                                    <dt><label>비밀번호 확인</label></dt>
 		                                    <dd class="sel_2part">
@@ -193,7 +210,7 @@
 		                                    </dd>
 		                            	</dl>
 									</div><!-- End post_write -->
-		                                
+		                              
 		                            <div class="btn_wrap align_right">
 		                            	<button type="button" class="btn_navy_thin" onclick="updProc(this.form);">수정완료</button>
 		                                <button type="button" id="cancel" class="btn_gray_thin" onclick="location.href='${menuType eq '0' ? 'intrMainInqy1020.do' : 'intrMainInqy1030.do'}'">취소</button>

@@ -104,7 +104,7 @@ public class TaskController {
 	}
 	
 	// 업무일지 목록 조회
-	@RequestMapping("/intrTaskInqy2011.do")
+	@RequestMapping("/intrTaskInqy2020.do")
 	public String intrTaskInqy2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
@@ -122,7 +122,7 @@ public class TaskController {
 	}
 	
 	// 업무일지 상세 조회
-	@RequestMapping("/intrTaskInqy2020.do")
+	@RequestMapping("/intrTaskInqy2030.do")
 	public String intrTaskInqy2030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
@@ -141,28 +141,7 @@ public class TaskController {
 			logger.debug("Exception : 업무 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_TASK + Const.INTR_TASK_DETL_2020;
-	}
-	
-	// 업무일지 저장 처리
-	@RequestMapping("/intrTaskProc1010.do")
-	@ResponseBody
-	public String intrTaskProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		String defaultStr = "";
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 업무일지 저장 처리
-			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc1010(model, paramMap);
-			
-		} catch (Exception e) {
-			//
-			logger.debug("Exception : 업무일지 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
-		//
-		return defaultStr;
+		return Const.VIEW_PATH_TASK + Const.INTR_TASK_DETL_1010;
 	}
 	
 	// 업무 캘린더 조회
@@ -187,5 +166,89 @@ public class TaskController {
 		
 		//
 		return Const.VIEW_PATH_TASK + Const.INTR_TASK_LIST_3010;
+	}
+	
+	// 업무일지 저장 처리
+	@RequestMapping("/intrTaskProc1010.do")
+	@ResponseBody
+	public String intrTaskProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = taskService.intrTaskProc1010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무일지 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 저장 처리
+	@RequestMapping("/intrTaskProc2010.do")
+	@ResponseBody
+	public String intrTaskProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = taskService.intrTaskProc2010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무 캘린더 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 수정 처리
+	@RequestMapping("/intrTaskProc2020.do")
+	@ResponseBody
+	public String intrTaskProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = taskService.intrTaskProc2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무 캘린더 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 삭제 처리
+	@RequestMapping("/intrTaskProc2030.do")
+	@ResponseBody
+	public String intrTaskProc2030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = taskService.intrTaskProc2030(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무 캘린더 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
 	}
 }

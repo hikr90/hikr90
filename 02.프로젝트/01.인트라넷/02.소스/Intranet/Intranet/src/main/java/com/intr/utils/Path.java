@@ -18,7 +18,6 @@ public interface Path {
 	public static final String VIEW_PATH_LOGIN 		= INTR_PATH + "/login/"; 			// 로그인
 	public static final String VIEW_PATH_MYPAGE 		= INTR_PATH + "/mypage/"; 		// 내 정보
 	public static final String VIEW_PATH_BOARD 		= INTR_PATH + "/board/"; 			// 공지사항
-	public static final String VIEW_PATH_SCHE 			= INTR_PATH + "/sche/";		 	// 일정
 	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 			// 업무
 	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 			// 사원
 	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 		// 기안문 양식
@@ -43,9 +42,4 @@ public interface Path {
 	public static final String DOC_WORD  = "인트라넷 테이블.docx"; 		// WORD
 	public static final String DOC_EXCEL  = "인트라넷 데이터.xlsx"; 		// EXCEL
 	public static final String DOC_PPT  = "인트라넷 프로젝트.ppt"; 			// PPT
-	
-	//--------------------------------------------------------------------------------------------
-	// RESTful API URL
-	//--------------------------------------------------------------------------------------------
-	public static final String API_URL = "http://172.30.1.81:9090/api/v1/";
 }

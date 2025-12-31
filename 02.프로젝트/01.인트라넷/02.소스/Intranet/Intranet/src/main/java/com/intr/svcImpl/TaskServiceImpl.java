@@ -5,8 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONArray;
+import net.sf.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.intr.dao.TaskDao;
+import com.intr.dao.UtilDao;
 import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 import com.intr.svc.TaskService;
@@ -36,6 +36,9 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Autowired
 	EmpService empService;
+	
+	@Autowired
+	UtilDao utilDao;
 	
 	@Autowired
 	HttpSession session;
@@ -120,6 +123,7 @@ public class TaskServiceImpl implements TaskService{
 	// 업무 캘린더 조회
 	public void intrTaskInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
+		JSONArray jAray = new JSONArray();
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
@@ -127,8 +131,8 @@ public class TaskServiceImpl implements TaskService{
 			// 업무 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = taskDao.intrTaskInqy3011(model, paramMap);
-			model.addAttribute("defaultList",defaultList);
-
+			model.addAttribute("defaultList", jAray.fromObject(defaultList));
+			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
@@ -180,7 +184,6 @@ public class TaskServiceImpl implements TaskService{
 				tempMap.put("taskDt", utilService.nvlProc((String)obj.get("taskDt")));
 				tempMap.put("empIdx", utilService.nvlProc((String)obj.get("empIdx")));
 				
-				System.out.println("kth1 : " + tempMap);
 				// 등록 처리
 				resInt += taskDao.intrTaskProc1011(tempMap);
 			}
@@ -189,6 +192,96 @@ public class TaskServiceImpl implements TaskService{
 			// 결과 반환
 			//--------------------------------------------------------------------------------------------
 			if(arr.size() == resInt) {
+				resStr = "YES";
+			}
+			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 등록 처리
+	public String intrTaskProc2010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무 캘린더 등록 처리
+			//--------------------------------------------------------------------------------------------
+			resInt = taskDao.intrTaskProc2011(paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			if(resInt > 0) {
+				resStr = "YES";
+			}
+			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 수정 처리
+	public String intrTaskProc2020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무 캘린더 수정 처리
+			//--------------------------------------------------------------------------------------------
+			resInt = taskDao.intrTaskProc2021(paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			if(resInt > 0) {
+				resStr = "YES";
+			}
+			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무 캘린더 삭제 처리
+	public String intrTaskProc2030(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무 캘린더 삭제 처리
+			//--------------------------------------------------------------------------------------------
+			resInt = taskDao.intrTaskProc2031(paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			if(resInt > 0) {
 				resStr = "YES";
 			}
 			

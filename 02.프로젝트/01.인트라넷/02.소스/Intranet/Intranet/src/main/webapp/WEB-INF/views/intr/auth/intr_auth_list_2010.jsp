@@ -4,18 +4,10 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 첫번째 권한 클릭
 		$(".tree_area").find("ul li:first-child").find('.a_btn').trigger('click');
-		
-		// 권한 메뉴, 메뉴 목록 감춤
-		$("#menuArea").css("display","none");
 	});
 	
 	// 권한 메뉴 목록 전체 체크
@@ -49,7 +41,7 @@
 	            success : function(data){
 	            	//
 	            	$("#authTree").html(data);
-	            	$("#menuArea").css("display","inline-flex");
+	            	$("#menuArea").css("display","none");
 	            },
 	            error : function(data){
 	            	//
@@ -90,7 +82,6 @@
 		}
 	}
 </script>
-</head>
 <body id="main">
 <form id="form" onsubmit="return false;">
 	<!-- 메뉴 -->
@@ -128,25 +119,34 @@
 	                                </div>
 										
 									<div class="tree_wrap">
-										<div id="tree_area" class="tree_area" style="width: 400px;">
+										<div id="tree_area" class="tree_area" style="width: 400px; height: 525px;">
 											<div id="authTree" class="tree">
-												<ul class="ul_1">
-												<c:forEach var="list" items="${defaultList}" varStatus="status">
-				           						   	<c:set var="spanIcon" 	value="icon_list"/> 
-		
-													<li class="li_1" style="margin-left: 15px;">
-													<span class="${spanIcon}"></span>
-													<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
-												</c:forEach>
-												</ul>
+												<c:if test="${not empty defaultList}">
+													<ul class="ul_1">
+													<c:forEach var="list" items="${defaultList}" varStatus="status">
+					           						   	<c:set var="spanIcon" 	value="icon_list"/> 
+			
+														<li class="li_1" style="margin-left: 15px;">
+														<span class="${spanIcon}"></span>
+														<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+													</c:forEach>
+													</ul>
+												</c:if>
+												<c:if test="${empty defaultList}">
+													<ul class="ul_1">
+														<li class="li_1" style="margin-left: 15px;">
+															등록된 권한이 없습니다.
+														</li>
+													</ul>
+												</c:if>
 											</div>	
 										</div>
 											
 										<div id="menuArea" class="menu_area" style="display: none;">
 											<!-- 권한 메뉴 목록 -->
-											<div id="menuInfo" class="tree_info ml20" style="width: 500px; height: 425px;">
+											<div id="menuInfo" class="tree_info ml20" style="width: 500px; height: 525px;">
 												<div class="post_wrap">
-													<div class="scroll_wrap" style="max-height: 425px;">
+													<div class="scroll_wrap" style="height: 525px;">
 														<table class="post_table menuTbl">
 															<caption>권한 목록 테이블</caption>
 															<colgroup>
@@ -174,7 +174,9 @@
 																		</span>
 																	</td>
 																	<td class="align_left">
-																		<c:if test="${list.lv ne '1'}">&nbsp;&nbsp;ㄴ</c:if>
+																		<c:if test="${list.lv ne '1'}">
+																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																		</c:if>
 																		${list.menuNm}
 																	</td>
 																</tr>
@@ -189,7 +191,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 권한 목록 -->
-											<div id="authInfo" class="tree_info" style="width: 550px; height: 425px;"></div>
+											<div id="authInfo" class="tree_info" style="width: 550px; height: 525px;"></div>
 										</div> <!-- End menu_area -->
 									</div>
 								</div><!-- End post_wrap -->

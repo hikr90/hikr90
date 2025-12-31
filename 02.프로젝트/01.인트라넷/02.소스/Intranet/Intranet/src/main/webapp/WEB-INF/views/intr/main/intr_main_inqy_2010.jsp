@@ -186,8 +186,8 @@
 									<div class="area_content">
 										<ul class="area_ul">
 											<c:forEach var="list" items="${projList}" begin="0" end="2">
-												<li class="main_li">
-													<a class="main_a pl20" href="intrProjInqy1030.do?sequenceId=${list.projCd}&pageUrl=Proj">${list.projTitle}</a>
+												<li class="main_li pl20">
+													<a class="main_a" href="intrProjInqy1030.do?sequenceId=${list.projCd}&pageUrl=Proj">${list.projTitle}</a>
 													<span class="main_ie">${list.orgNm} ${list.ownerNm}</span>
 												</li>
 											</c:forEach>

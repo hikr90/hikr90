@@ -114,7 +114,7 @@
 	</select>
 	
 	<select id="intrMtgInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrMtgInqy2011 : 캘린더 조회 */
+		/* intrMtgInqy2011 : 회의 (캘린더) 조회 */
 		SELECT 
 				'' AS "TITLE"
 			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"

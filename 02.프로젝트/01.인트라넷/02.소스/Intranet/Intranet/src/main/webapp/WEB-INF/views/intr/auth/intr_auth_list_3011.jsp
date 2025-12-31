@@ -145,7 +145,7 @@
 <div class="post_wrap" style="height: auto; padding: 0px;">
 	<input type="hidden" id="authCd" name="authCd" value="">
 	
-	<div class="scroll_wrap" style="max-height: 380px; height: auto;">
+	<div class="scroll_wrap" style="max-height: 480px; height: auto;">
 		<table class="post_table authEmpTbl">
 			<caption>사용자 목록 테이블</caption>
 			<colgroup>
@@ -182,9 +182,9 @@
 	</div>
 </div> <!-- End post_wrap -->
 
-<div class="btn_center pt30">
+<div class="btn_center">
 	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
+
 	<button type="button" class="btn_navy_thin float_right" style="margin-left: 5px;" onclick="regProc(this.form);">저장</button> 
-	
-	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</a>
+	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</button>
 </div>

@@ -56,10 +56,13 @@ public class QueryServiceImpl implements QueryService{
 				//
 				model.addAttribute("colList",colList);
 				model.addAttribute("dataList",defaultList);
+			} else {
+				model.addAttribute("resMsg", "쿼리 조회 결과가 없습니다.");
 			}
 			
 		} catch (Exception e) {
 			//
+			model.addAttribute("resMsg", "입력한 쿼리를 실행할 수 없습니다. 쿼리 문법 또는 테이블/컬럼을 확인해주세요.");
 			throw new Exception(e.getMessage());
 		}
 	}

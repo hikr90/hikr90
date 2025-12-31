@@ -1,3 +1,45 @@
+// 결재선 UI 공통 이벤트
+const AprvLineUI = {
+    init: function() {
+		// 목록 open & close
+		$(document).on("click", ".pop_sbox", function () {
+		    $(".pop_sul").not($(this).siblings(".pop_sul")).hide(); 
+		    $(this).siblings(".pop_sul").toggle(); 
+		});
+		
+		// 목록 선택
+		$(document).on("click", ".pop_sul li", function () {
+		    var setNm = $(this).attr("setNm");
+		    var setCd = $(this).attr("setCd");
+		    var setIdx = $(this).attr("setIdx");
+		
+		    // 값 지정
+		    $(this).closest('div').parent().find('.pop_sbox').text(setNm);
+		    $(this).closest('div').parent().find('input[name=aprvCd]').val(setCd);
+		    $(this).closest('div').parent().find('input[name=aprvIdx]').val(setIdx);
+		
+		    // 목록 닫기
+		    $(this).parent(".pop_sul").hide();
+		});
+		
+		// 목록 외부 선택
+		$(document).on("click", function (e) {
+		    if (!$(e.target).closest(".pop_sbox").length) {
+		        $(".pop_sul").hide();
+		    }
+		});
+		
+		// hover 이벤트
+		$(document).on("mouseenter", ".pop_sul li", function() {
+		    $(this).addClass("hover").siblings().removeClass("hover");
+		});
+		
+		$(document).on("mouseleave", ".pop_sul li", function() {
+		    $(this).removeClass("hover");
+		});	
+	}
+}
+
 // 프로젝트 팝업
 function projCall(){
 	try {

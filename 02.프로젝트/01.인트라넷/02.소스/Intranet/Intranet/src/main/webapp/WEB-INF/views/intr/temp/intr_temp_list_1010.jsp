@@ -4,14 +4,13 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
 <script type="text/javascript">
 	$(document).ready(function() {
+		$(document).ready(function() {
+			// 첫번째 템플릿 클릭
+			$("#tempTree").find("ul li:first-child").find('.a_btn').trigger('click');
+		});
+		
 		// 선택 항목 음영 처리
 		$(document).on('click','.a_btn',function() {
 			//
@@ -206,7 +205,6 @@
 		}
 	}
 </script>
-</head>
 <body id="main">
 <form id="form" name="form" onsubmit="return false;">
 	<!-- 정보 찾기 -->
@@ -252,7 +250,7 @@
 									
 									<div class="tree_wrap">
 										<div class="tree_area mr20" id="tree_area" style="width: 715px; height: 746px;"> 
-											<div class="tree">
+											<div id="tempTree" class="tree">
 												<ul class="ul_1">
 												<c:forEach var="list" items="${defaultList}" varStatus="status">
 				           						   	<c:set var="spanIcon" 	value="icon_list"/> 

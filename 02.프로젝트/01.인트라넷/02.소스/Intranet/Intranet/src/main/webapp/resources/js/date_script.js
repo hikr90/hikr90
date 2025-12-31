@@ -1,44 +1,37 @@
 $(function() {
-	// 달력 생성
-	$('input[id="srchSdt"],input[id="srchEdt"]').daterangepicker(
-			{
-				//
-				locale:{
-					"separator": " ~ ", 											// 구분자
-					"format": 'YYYY-MM-DD',									// 포맷
-				    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-				    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-				},
-				autoUpdateInput: false,										// 값 자동 표시 여부
-				timePicker: false,                        							// 시간 표시 여부
-			    showDropdowns: true,                     						// 년월 수동 여부
-			    autoApply: true,                         							// 확인, 취소 자동 여부
-			    timePicker24Hour: false,                  					// 24시 표시 여부
-			    timePickerSeconds: false,                 					// 초 표시 여부
-			    singleDatePicker: true	                 						// 캘린더 한가지만 사용 여부
-	});
-	
-	// 입력 포맷
-	$('input[id="srchSdt"],input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
-		$(this).val(picker.startDate.format('YYYY-MM-DD'));
-		$(this).val(picker.endDate.format('YYYY-MM-DD'));
-	});
-
-	// 시간 생성
-	flatpickr("#timeSt", {
-	    enableTime: true,
-	    noCalendar: true,
-	    dateFormat: "H:i",
-	    time_24hr: true
-	});
-	
-	flatpickr("#timeEd", {
-	    enableTime: true,
-	    noCalendar: true,
-	    dateFormat: "H:i",
-	    time_24hr: true
-	});
+	// 데이트피커 초기화
+	initDatepicker();
 });
+
+// daterangepicker 초기화
+function initDatepicker() {
+    $('input[id="srchSdt"], input[id="srchEdt"]').daterangepicker({
+        locale: {
+            "separator": " ~ ",
+            "format": 'YYYY-MM-DD',
+            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+        },
+        autoUpdateInput: false,
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoApply: true,
+        parentEl: '.post_view' // 👈 모달 내부에 달력을 생성하도록 지정 (중요)
+    });
+
+    // 날짜 선택 시 input에 값 삽입
+    $('input[id="srchSdt"], input[id="srchEdt"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+    });
+
+    // flatpickr (시간) 초기화
+    flatpickr(".time_picker", { // id보다는 class 권장 (중복 방지)
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+    });
+}
 
 // 월 (0 포함) 표현
 function leadingZeros(n, digits) {

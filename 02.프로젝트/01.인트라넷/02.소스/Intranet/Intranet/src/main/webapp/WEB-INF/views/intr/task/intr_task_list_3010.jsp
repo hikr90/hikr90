@@ -13,7 +13,7 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		//
 		var calendar = document.getElementById('calendar');
-	    var scheCont = new FullCalendar.Calendar(calendar, {
+	    var tldrCont = new FullCalendar.Calendar(calendar, {
 	    	//
 	        locale: 'en',  							// 언어
 			eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
@@ -29,12 +29,12 @@
 			dateClick: function(info) {
 				//
 			},
-			// 휴가 선택 시
+			// 일정 선택 시	
 			eventClick: function(info) {
 				var obj = new Object();
 				//
-				obj["mappingId"] = "intrPopupInqy1081.do";
-				obj["areaType"] = "sche";
+				obj["mappingId"] = "intrPopupInqy1122.do";
+				obj["areaType"] = "tldr";
 				obj["sequenceId"] = info.event.id;
 				obj["width"] = "700"
 				obj["height"] = "460";
@@ -46,17 +46,179 @@
 			eventColor: '#214b97'
 		});
 	    //
-	    scheCont.render();
+	    tldrCont.render();
 	});
 	
 	// 검색 조회
 	function listCall(f){
 		try {
 			//
-			formSubmit("intrScheInqy1010.do");
+			formSubmit("intrTaskInqy3010.do");
 			
 		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
+		}
+	}
+	
+	// 업무 캘린더 등록
+	function regCall(){
+		try {
+			//
+			var obj = new Object();
+			//
+			obj["mappingId"] = "intrPopupInqy1121.do";
+			obj["areaType"] = "tldr";
+			obj["width"] = "700"
+			obj["height"] = "460";
+			//		
+			ajaxPopup(obj);
+			
+		} catch (error) {
+			console.error("[Error] 업무 캘린더 등록 : ", error.message);
+		}
+	}
+	
+	// 업무 캘린더 등록 처리
+	function regProc(){
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			if($("#srchSdt").val() == ''){
+				alert("<spring:message code="TASK.SDT.NONE"/>");
+				return;
+			}
+			if($("#srchEdt").val() == ''){
+				alert("<spring:message code="TASK.EDT.NONE"/>");
+				return;
+			}
+			if($("#srchSdt").val() > $("#srchEdt").val()){
+				alert("<spring:message code="TASK.DT.INVAILD"/>");
+				return;
+			}
+			
+			// 등록 처리
+			if(confirm("등록하시겠습니까?")){
+				//
+	   			$.ajax({
+					url:"intrTaskProc2010.do",
+					data: {
+						'tldrTitle': $("#tldrTitle").val(),
+				        'tldrSdt':   $("#srchSdt").val(),
+				        'tldrEdt':   $("#srchEdt").val(),
+				        'tldrCont':  $("#tldrCont").val(),
+				        'empIdx':   "${empVO.empIdx}"
+					},
+					type : 'post',
+	   				success : function(data){
+	   						var json = eval(data);
+	   						
+	   						if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   							popClose('tldr');	// 팝업 종료
+	   							$("#listBtn").trigger('click');	// 조회
+		   						
+	   						}else{
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;
+	   						}								
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}				
+			
+		} catch (error) {
+			console.error("[Error] 업무 캘린더 등록 처리 : ", error.message);
+		}
+	}
+	
+	// 업무 캘린더 수정 처리
+	function modProc(){
+		try {
+			// 유효성 검증
+			if(!valProc()){return;};
+			if($("#srchSdt").val() == ''){
+				alert("<spring:message code="TASK.SDT.NONE"/>");
+				return;
+			}
+			if($("#srchEdt").val() == ''){
+				alert("<spring:message code="TASK.EDT.NONE"/>");
+				return;
+			}
+			if($("#srchSdt").val() > $("#srchEdt").val()){
+				alert("<spring:message code="TASK.DT.INVAILD"/>");
+				return;
+			}
+			//
+			if(confirm("수정하시겠습니까?")){
+	   			$.ajax({
+					url:"intrTaskProc2020.do",
+					data: {
+						'tldrTitle': $("#tldrTitle").val(),
+				        'tldrSdt':   $("#srchSdt").val(),
+				        'tldrEdt':   $("#srchEdt").val(),
+				        'tldrCont':  $("#tldrCont").val(),
+				        'tldrId': 	  $("#tldrId").val(),
+				        'empIdx':   "${empVO.empIdx}"
+					},
+					type : 'post',
+	   				success : function(data){
+	   						var json = eval(data);
+	   						
+	   						if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   							popClose('tldr');	// 팝업 종료
+	   							$("#listBtn").trigger('click');	// 조회
+		   						
+	   						}else{
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;
+	   						}								
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
+			
+		} catch (error) {
+			console.error("[Error] 업무 캘린더 수정 처리 : ", error.message);
+		}
+	}
+	
+	// 업무 캘린더 삭제 처리
+	function delProc(){
+		try {
+			//
+			if(confirm("삭제하시겠습니까?")){
+				$.ajax({
+					url:"intrTaskProc2030.do",
+					data: {
+						'tldrId': $("#tldrId").val()
+					},
+					type : 'post',
+	   				success : function(data){
+	   						var json = eval(data);
+	   						
+	   						if(json[0].res=='YES'){
+	   							alert("<spring:message code="PROC.SUCCESS"/>");
+	   							popClose('tldr');	// 팝업 종료
+	   							$("#listBtn").trigger('click');	// 조회
+		   						
+	   						}else{
+	   							alert("<spring:message code="PROC.FAIL"/>");
+								return;
+	   						}								
+	   				},
+	   				error : function(res, status, error){
+	   					alert("<spring:message code="PROC.ERROR"/>");
+	   				}
+	   			});
+			}
+			
+		} catch (error) {
+			console.error("[Error] 업무 캘린더 삭제 처리 : ", error.message);
 		}
 	}
 </script>
@@ -65,9 +227,9 @@
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
-	<!-- 일정 팝업 -->
- 	<div id="scheArea" class="popupArea hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1080.jsp"></c:import>	
+	<!-- 업무 캘린더 팝업 -->
+ 	<div id="tldrArea" class="popupArea hidden">
+		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1120.jsp"></c:import>	
 	</div>
 
 	<div class="main_wrap">
@@ -82,61 +244,36 @@
 			<div class="content_area">
 				<article class="sub_article">
 					<div class="content">
+						<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
+					
 						<div class="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<h2>일정 관리</h2>
+									<h2>업무 캘린더
+										<span class="float_right">
+											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+										</span>
+									</h2>
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
-											<!-- 휴가 타입 -->
+											<!-- 업무명 -->
 											<div class="srch_area">
-												<label class="srch_label">휴가 타입</label>
-												<div class="select_wrap">
-													<div id="leavList" class="sList select_box">${empty param.leavtypeNm ? '전체' : param.leavtypeNm}</div>
-													<input type="hidden" name="leavtypeNm" value="${param.leavtypeNm}">
-													<input type="hidden" name="leavtypeCd" value="${param.leavtypeCd}">
-												
-													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${leavList}">
-															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
-														</c:forEach>
-													</ul>
-												</div>
-											</div>
-											
-											<!-- 부서 -->
-											<div class="srch_area">
-												<label class="srch_label">부서</label>
-												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
-											</div>
-
-											<!-- 직급 -->
-											<div class="srch_area">
-												<label class="srch_label">직급</label>
-												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
-											</div>
-											
-											<!-- 사원명 -->
-											<div class="float_right">
-												<div class="srch_area">
-													<label class="srch_label">사원명</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultMap.srchNm}" onkeydown="inputEnt(this.form);">
+													<label class="srch_label">업무명</label>
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
 													
-													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
-												</div>											
-		                                	</div>
+													<input type="button" id="listBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
+												</div>	
 		                                </div>
 									</div>
 								
-									<div class="sche_wrap">
-										<div class="sche_area">
+									<div class="tldr_wrap">
+										<div class="tldr_area">
 											<div id="calendar">
 												
 											</div>
 										</div><!-- End post_write -->
-									</div><!-- End sche_wrap -->
+									</div><!-- End tldr_wrap -->
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
 						</div><!-- End sub_content -->

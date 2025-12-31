@@ -4,11 +4,6 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
 	//
 	$(document).ready(function() {
@@ -234,7 +229,6 @@
 		}
 	}
 </script>
-</head>
 <body id="main">
 <form id="form" name="form" onsubmit="return false;">
 	<!-- 메뉴 -->
@@ -278,17 +272,26 @@
 		                            </div>
 									
 									<div class="tree_wrap">
-										<div class="tree_area" id="tree_area" style="width: 400px;"> 
+										<div class="tree_area" id="tree_area" style="width: 400px; height: 525px;"> 
 											<div id="authTree" class="tree">
-												<ul class="ul_1">
-													<c:forEach var="list" items="${defaultList}" varStatus="status">
-					           						   	<c:set var="spanIcon" 	value="icon_list"/> 
-			
+												<c:if test="${not empty defaultList}">
+													<ul class="ul_1">
+														<c:forEach var="list" items="${defaultList}" varStatus="status">
+						           						   	<c:set var="spanIcon" 	value="icon_list"/> 
+				
+															<li class="li_1" style="margin-left: 15px;">
+															<span class="${spanIcon}"></span>
+															<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+														</c:forEach>
+													</ul>
+												</c:if>
+												<c:if test="${empty defaultList}">
+													<ul class="ul_1">
 														<li class="li_1" style="margin-left: 15px;">
-														<span class="${spanIcon}"></span>
-														<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
-													</c:forEach>
-												</ul>
+															등록된 권한이 없습니다.
+														</li>
+													</ul>
+												</c:if>
 											</div>	
 										</div>
 										<div class="tree_info pl20" id="tree_info" style="width: 1120px;"></div>

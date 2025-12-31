@@ -99,7 +99,6 @@ public class EmpServiceImpl implements EmpService{
 	public void intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -191,6 +190,70 @@ public class EmpServiceImpl implements EmpService{
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2041(model, paramMap);
 			model.addAttribute("empCnt",defaultList);
+
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 담당업무 조회
+	public void intrEmpInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.setPaging(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy3011(model, paramMap);
+			model.addAttribute("defaultList",defaultList);
+
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 담당업무 조회 (AJAX)
+	public void intrEmpInqy3011(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 페이징 처리
+			//--------------------------------------------------------------------------------------------
+			utilService.setPaging(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy3011(model, paramMap);
+			model.addAttribute("defaultList",defaultList);
+
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 담당업무 등록 조회 (AJAX)
+	public void intrEmpInqy3012(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 등록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = empDao.intrEmpInqy3012(model, paramMap);
+			model.addAttribute("defaultInfo",defaultInfo);
 
 		} catch (Exception e) {
 			//
@@ -371,6 +434,66 @@ public class EmpServiceImpl implements EmpService{
 			// 사원 수정
 			//--------------------------------------------------------------------------------------------
 			resInt = empDao.intrEmpProc1051(paramMap);
+			//
+			if(resInt>0) {
+				resStr = "YES";
+			}
+
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		
+		return defaultStr;
+	}
+	
+	// 담당업무 저장 처리
+	public String intrEmpProc2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 저장 처리
+			//--------------------------------------------------------------------------------------------
+			resInt = empDao.intrEmpProc2011(paramMap);
+			//
+			if(resInt>0) {
+				resStr = "YES";
+			}
+
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		
+		return defaultStr;
+	}
+	
+	// 담당업무 삭제 처리
+	public String intrEmpProc2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 삭제 처리
+			//--------------------------------------------------------------------------------------------
+			resInt = empDao.intrEmpProc2021(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";

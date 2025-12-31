@@ -22,7 +22,7 @@
 							</div>
 	                        
 	                        <!-- 프로젝트 목록 -->
-	                        <div id="projCon" class="post_con" style="height: 200px;"></div>
+	                        <div id="projCon" class="post_con" style="height: 200px; border: 1px solid #e8edf2;"></div>
 							
 							<div class="btn_center">
 								<button type="button" class="btn_navy_thin" onclick="popConfirm('proj');">확인</button>

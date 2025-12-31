@@ -1,8 +1,10 @@
 package com.intr.ctr;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.intr.dao.EmpDao;
 import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
 import com.intr.dao.QueryDao;
+import com.intr.dao.TaskDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
@@ -72,10 +75,13 @@ public class PopupController {
 	
 	@Autowired
 	QueryDao queryDao;
+	
+	@Autowired
+	TaskDao taskDao;
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// ´ã´çÀÚ Á¶È¸
+	// ë‹´ë‹¹ì ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1010.do")
 	public String intrPopupInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -83,20 +89,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ´ã´çÀÚ Á¶È¸
+			// ë‹´ë‹¹ì ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = authDao.intrAuthInqy3011(model, paramMap);
 			model.addAttribute("empList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ´ã´çÀÚ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ë‹´ë‹¹ì íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1011;
 	}
 
-	// ¾ÆÀÌµğ Ã£±â ÆË¾÷ Á¶È¸
+	// ì•„ì´ë”” ì°¾ê¸° íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1021.do")
 	public String intrPopupInqy1021(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -105,13 +111,13 @@ public class PopupController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ÆË¾÷(¾ÆÀÌµğ Ã£±â) Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : íŒì—…(ì•„ì´ë”” ì°¾ê¸°) ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1021;
 	}
 
-	// ºñ¹Ğ¹øÈ£ Ã£±â ÆË¾÷ Á¶È¸ 
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° íŒì—… ì¡°íšŒ 
 	@RequestMapping("/intrPopupInqy1022.do")
 	public String intrPopupInqy1022(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -119,13 +125,13 @@ public class PopupController {
 			//
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ÆË¾÷(ºñ¹Ğ¹øÈ£ Ã£±â) Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : íŒì—…(ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°) ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1022;
 	}
 	
-	// »ç¿ø Á¤º¸ Á¶È¸
+	// ì‚¬ì› ì •ë³´ ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1023.do")
 	@ResponseBody
 	public String intrPopupInqy1023(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
@@ -134,7 +140,7 @@ public class PopupController {
 		String defaultStr = "";
 		//
 		try {
-			// »ç¿ø ¾ÆÀÌµğ ÀúÀå
+			// ì‚¬ì› ì•„ì´ë”” ì €ì¥
 			defaultInfo = empDao.intrEmpInqy1012(paramMap);
 			
 			if(defaultInfo != null) {
@@ -143,13 +149,13 @@ public class PopupController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ÆË¾÷(¾ÆÀÌµğ Ã£±â) »ç¿ø Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : íŒì—…(ì•„ì´ë”” ì°¾ê¸°) ì‚¬ì› ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultStr;
 	}
 	
-	// ÇÁ·ÎÁ§Æ® Á¶È¸
+	// í”„ë¡œì íŠ¸ ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1030.do")
 	public String intrPopupInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -157,20 +163,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ÇÁ·ÎÁ§Æ® Á¶È¸
+			// í”„ë¡œì íŠ¸ ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = projDao.intrProjInqy1011(model, paramMap);
 			model.addAttribute("projList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ÇÁ·ÎÁ§Æ® ¸ñ·Ï ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : í”„ë¡œì íŠ¸ ëª©ë¡ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1031;
 	}
 	
-	// °áÀç¼± ¼±ÅÃ ÆË¾÷ Á¶È¸
+	// ê²°ì¬ì„  ì„ íƒ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1041.do")
 	public String intrPopupInqy1041(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -178,13 +184,13 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ºÎ¼­ »ç¿ø Æ®¸® Á¶È¸
+			// ë¶€ì„œ ì‚¬ì› íŠ¸ë¦¬ ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("empList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
-			// °øÅëÄÚµå (°áÀç¼±) Á¶È¸
+			// ê³µí†µì½”ë“œ (ê²°ì¬ì„ ) ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"TYPE");
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
@@ -192,13 +198,13 @@ public class PopupController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : °áÀç¼± ¼±ÅÃ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ê²°ì¬ì„  ì„ íƒ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1041;
 	}
 	
-	// °áÀç¼± ÆË¾÷ Á¶È¸
+	// ê²°ì¬ì„  íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1042.do")
 	public String intrPopupInqy1042(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -206,54 +212,54 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// °áÀç¼± ÆË¾÷ Á¶È¸
+			// ê²°ì¬ì„  íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvDao.intrAprvInqy1013(model, paramMap);
 			model.addAttribute("lineList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : °áÀç¼± ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ê²°ì¬ì„  íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1042;
 	}
 	
-	// °áÀçÀÇ°ß ÆË¾÷ Á¶È¸
+	// ê²°ì¬ì˜ê²¬ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1050.do")
 	public String intrPopupInqy1050(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// °áÀçÀÇ°ß ÆË¾÷ Á¶È¸
+			// ê²°ì¬ì˜ê²¬ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : °áÀç ÀÇ°ß ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ê²°ì¬ ì˜ê²¬ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1051;
 	}
 	
-	// ¹°Ç° µî·Ï ÆË¾÷ Á¶È¸
+	// ë¬¼í’ˆ ë“±ë¡ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1061.do")
 	public String intrPopupInqy1061(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ¹°Ç° µî·Ï ÆË¾÷ Á¶È¸
+			// ë¬¼í’ˆ ë“±ë¡ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ¹°Ç° µî·Ï ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ë¬¼í’ˆ ë“±ë¡ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1061;
 	}
 	
-	// ¹°Ç° Á¶È¸ ÆË¾÷ Á¶È¸
+	// ë¬¼í’ˆ ì¡°íšŒ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1062.do")
 	public String intrPopupInqy1062(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -261,37 +267,37 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ¹°Ç° Á¶È¸ ÆË¾÷ Á¶È¸
+			// ë¬¼í’ˆ ì¡°íšŒ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvDao.intrAprvInqy1014(model, paramMap);
 			model.addAttribute("itemList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ¹°Ç° Á¶È¸ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ë¬¼í’ˆ ì¡°íšŒ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1062;
 	}
 	
-	// Á¤»ê³»¿ª µî·Ï ÆË¾÷ Á¶È¸
+	// ì •ì‚°ë‚´ì—­ ë“±ë¡ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1071.do")
 	public String intrPopupInqy1071(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// Á¤»ê³»¿ª ÆË¾÷ Á¶È¸
+			// ì •ì‚°ë‚´ì—­ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : Á¤»ê³»¿ª µî·Ï ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì •ì‚°ë‚´ì—­ ë“±ë¡ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1071;
 	}
 	
-	// Á¤»ê³»¿ª Á¶È¸ ÆË¾÷ Á¶È¸
+	// ì •ì‚°ë‚´ì—­ ì¡°íšŒ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1072.do")
 	public String intrPopupInqy1072(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -299,20 +305,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// Á¤»ê³»¿ª Á¶È¸ ÆË¾÷ Á¶È¸
+			// ì •ì‚°ë‚´ì—­ ì¡°íšŒ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvDao.intrAprvInqy1015(model, paramMap);
 			model.addAttribute("corpList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : Á¤»ê³»¿ª Á¶È¸ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì •ì‚°ë‚´ì—­ ì¡°íšŒ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1072;
 	}
 	
-	// ÀÏÁ¤ »ó¼¼ ÆË¾÷ Á¶È¸
+	// ì¼ì • ìƒì„¸ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1081.do")
 	public String intrPopupInqy1081(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -320,20 +326,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ÀÏÁ¤ °ü¸® ÆË¾÷ Á¶È¸
+			// ì¼ì • ê´€ë¦¬ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvDao.intrAprvInqy1012(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : ÀÏÁ¤ »ó¼¼ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì¼ì • ìƒì„¸ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1081;
 	}
 	
-	// È¸ÀÇ »ó¼¼ ÆË¾÷ Á¶È¸
+	// íšŒì˜ ìƒì„¸ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1091.do")
 	public String intrPopupInqy1091(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -342,26 +348,26 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// ÀÏÁ¤ °ü¸® ÆË¾÷ Á¶È¸
+			// íšŒì˜ ìƒì„¸ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = mtgDao.intrMtgInqy1031(model, paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
-			// ÆÄÀÏ Á¤º¸
+			// íŒŒì¼ ì •ë³´
 			//--------------------------------------------------------------------------------------------
 			defaultList = utilDao.intrFileInqy1011(model, paramMap);
 			model.addAttribute("fileList",defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : È¸ÀÇ »ó¼¼ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : íšŒì˜ ìƒì„¸ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1091;
 	}
 	
-	// Á¶Á÷µµ ÆË¾÷ Á¶È¸
+	// ì¡°ì§ë„ íŒì—… ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1101.do")
 	public String intrPopupInqy1101(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -369,20 +375,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// Á¶Á÷µµ ÆË¾÷ Á¶È¸
+			// ì¡°ì§ë„ íŒì—… ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("empList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : Á¶Á÷µµ ÆË¾÷ Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì¡°ì§ë„ íŒì—… ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1101;
 	}
 	
-	// Á¶Á÷µµ Æ®¸® Á¶È¸
+	// ì¡°ì§ë„ íŠ¸ë¦¬ ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1102.do")
 	public String intrPopupInqy1102(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -390,20 +396,20 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// Á¶Á÷µµ Æ®¸® Á¶È¸
+			// ì¡°ì§ë„ íŠ¸ë¦¬ ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("empList", defaultList);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : Á¶Á÷µµ Æ®¸® Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì¡°ì§ë„ íŠ¸ë¦¬ ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1102;
 	}
 	
-	// Á¶Á÷µµ »ç¿ø Á¶È¸
+	// ì¡°ì§ë„ ì‚¬ì› ì¡°íšŒ
 	@RequestMapping("/intrPopupInqy1103.do")
 	@ResponseBody
 	public HashMap<String, Object> intrPopupInqy1103(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
@@ -412,44 +418,118 @@ public class PopupController {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// Á¶Á÷µµ Æ®¸® Á¶È¸
+			// ì¡°ì§ë„ íŠ¸ë¦¬ ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : Á¶Á÷µµ »ç¿ø Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : ì¡°ì§ë„ ì‚¬ì› ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultInfo;
 	}
 	
-	// RESTful API Á¶È¸
+	// API ì¡°íšŒ
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/intrPopupInqy1111.do")
-	public String intrPopupInqy1111(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrPopupInqy1111(Model model, @RequestParam HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		String reqUrl = "";			// ¿äÃ» URL
-		String jsonData = "";			// ¹İÈ¯ JSON
+		List<HashMap<String, Object>> emptyList = new ArrayList();
+		JSONObject jObj = new JSONObject();
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// RESTful API Á¶È¸
+			// API ì¡°íšŒ
 			//--------------------------------------------------------------------------------------------
 			defaultList = queryDao.intrQueryInqy1021(model, paramMap);
-
-			// JSON »ı¼º
-			jsonData = utilDao.getJsonData(defaultList);
 			
-			// URL »ı¼º
-			reqUrl = Const.API_URL + (String)paramMap.get("query");
-			model.addAttribute("reqUrl", reqUrl);
-					
+			if(defaultList.size() > 0) {
+				// ë°ì´í„° ì¡°íšŒ ì„±ê³µ
+				jObj.put("totalCnt", String.valueOf(defaultList.size()));
+				jObj.put("isSuccess", Const.API_IS_SUCC);	
+				jObj.put("message", Const.API_MSG_SUCC);
+				jObj.put("data", defaultList);
+				
+			} else {
+				// ê²€ìƒ‰ ê²°ê³¼ ì—†ìŒ
+				jObj.put("totalCnt", "0");
+				jObj.put("isSuccess", Const.API_IS_FAIL);
+	            jObj.put("message", Const.API_MSG_FAIL);
+				jObj.put("data", defaultList);
+			}
+			
 		} catch (Exception e) {
-			//
-			logger.debug("Exception : RESTful API Á¶È¸ Áß ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù. (" + e.getMessage() + ")");
+			logger.debug("Exception : API ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
+			
+			// ì¿¼ë¦¬ ì—ëŸ¬
+			jObj.put("totalCnt", "0");
+			jObj.put("isSuccess", Const.API_IS_ERROR);
+            jObj.put("message", Const.API_MSG_ERROR);
+			jObj.put("data", emptyList);
+			
+		} finally {
+			model.addAttribute("jObj", jObj.toJSONString());
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1111;
+	}
+	
+	// ì—…ë¬´ ìº˜ë¦°ë” ë“±ë¡
+	@RequestMapping("/intrPopupInqy1121.do")
+	public String intrPopupInqy1121(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : ì—…ë¬´ ìº˜ë¦°ë” ë“±ë¡ ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1121;
+	}
+	
+	// ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸
+	@RequestMapping("/intrPopupInqy1122.do")
+	public String intrPopupInqy1122(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = taskDao.intrTaskInqy3012(model, paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸ ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1122;
+	}
+	
+	// ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸ (ë©”ì¸)
+	@RequestMapping("/intrPopupInqy1123.do")
+	public String intrPopupInqy1123(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = taskDao.intrTaskInqy3012(model, paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : ì—…ë¬´ ìº˜ë¦°ë” ìƒì„¸ (ë©”ì¸) ì¡°íšŒ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1123;
 	}
 }

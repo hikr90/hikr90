@@ -14,6 +14,14 @@ public class EmpDao {
 	@Autowired
 	SqlSession sqlsession;
 	
+	// 사원 인덱스 채번
+	public HashMap<String, Object> intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1010", paramMap);
+		return defaultInfo;
+	}
+	
 	// 사원 목록
 	public List<HashMap<String, Object>> intrEmpInqy1011(Model model, HashMap<String, Object> paramMap) {
 		//
@@ -94,20 +102,28 @@ public class EmpDao {
 		return defaultList;
 	}
 	
-	// 입사 현황
-	public List<HashMap<String, Object>> intrEmpInqy2042(Model model, HashMap<String, Object> paramMap) {
+	// 담당업무 조회
+	public List<HashMap<String, Object>> intrEmpInqy3011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqy2042");
+		defaultList = sqlsession.selectList("emp.intrEmpInqy3011", paramMap);
 		return defaultList;
 	}
 	
-	// 사원 인덱스 채번
-	public HashMap<String, Object> intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) {
+	// 담당업무 등록 조회
+	public HashMap<String, Object> intrEmpInqy3012(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1010", paramMap);
+		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy3012",paramMap);
 		return defaultInfo;
+	}
+	
+	// 입사 현황
+	public List<HashMap<String, Object>> intrEmpInqy4011(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy4011");
+		return defaultList;
 	}
 	
 	// 사원 등록
@@ -147,6 +163,22 @@ public class EmpDao {
 		//
 		int resInt = 0;
 		resInt = sqlsession.update("emp.intrEmpProc1051", paramMap);
+		return resInt;
+	}
+
+	// 담당업무 저장 처리
+	public int intrEmpProc2011(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.update("emp.intrEmpProc2011", paramMap);
+		return resInt;
+	}
+	
+	// 담당업무 삭제 처리
+	public int intrEmpProc2021(HashMap<String, Object> paramMap) {
+		//
+		int resInt = 0;
+		resInt = sqlsession.delete("emp.intrEmpProc2021", paramMap);
 		return resInt;
 	}
 }

@@ -69,7 +69,7 @@
 			
 			str += "<tr class='setCorpTr'>";
 			str += 		"<td class='first_td'>";
-			str += 		"	<input type='text' class='srch_cdt_date srchSdt add_height' id='srchSdt' name='useDt' value='' readonly='readonly' style='width: 110px;' />";
+			str += 		"	<input type='text' class='srch_cdt_date srchSdt add_height' id='srchSdt' name='useDt' value='' readonly='readonly' />";
 			str += 		"</td>";
 			str += 		"<td>";
 			str += 			"<input type='text' id='useLoc' class='add_height' name='useLoc' style='width:240px;' value='" + obj["useLoc"] + "'>"

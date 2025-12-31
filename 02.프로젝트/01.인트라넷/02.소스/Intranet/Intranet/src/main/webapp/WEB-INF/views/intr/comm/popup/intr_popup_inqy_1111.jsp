@@ -6,26 +6,29 @@
 
 <!-- 
 	view : intr_popup_inqy_1111
-	title : RESTful API 상세
+	title : API 상세
 -->
 <script>
 	$(document).ready(function(){
-		// 
+		let jStr = '${jObj}';
+ 		let jParse = JSON.parse(jStr);
+		let jPretty = JSON.stringify(jParse, null, 2);
+		
+		$("#jObj").text(jPretty);
 	});
 </script>
 
 <div class="post_view" style="margin: 0; margin-top:20px;">
 	<dl>
-		<dt>요청 URL</dt>
+		<dt>반환 데이터 복사</dt>
 		<dd>
-			<input type="text" id="reqUrl" name="reqUrl" value="${defaultInfo.reqUrl}" readonly="readonly" style="width: 410px;">
-			<input type="button" class="btn_blue" value="복사" onclick="copyUrl('#reqUrl');" style="margin-bottom: 5px;">
+			<input type="button" class="btn_blue" value="복사" onclick="copyUrl('#jObj');" style="margin-bottom: 5px;">
 		</dd>
 	</dl>
 	<dl>
-		<dt>반환 JSON</dt>
+		<dt>반환 데이터</dt>
 		<dd class="post_text" style="height: 440px;">
-			<textarea readonly="readonly">${defaultInfo.jsonData}</textarea>
+			<textarea id="jObj" readonly="readonly" style="color: #727272;"></textarea>
 		</dd>
 	</dl>
 </div><!-- End post_view -->

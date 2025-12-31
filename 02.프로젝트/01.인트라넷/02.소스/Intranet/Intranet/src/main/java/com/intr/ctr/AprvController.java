@@ -132,6 +132,112 @@ public class AprvController {
 		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
 	}
 	
+	// 연차 공유 조회
+	@RequestMapping("/intrAprvInqy3010.do")
+	public String intrAprvInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 연차 공유 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy3010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 연차 공유 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_3010;
+	}
+
+	// 결재선 관리 조회
+	@RequestMapping("/intrAprvInqy4010.do")
+	public String intrAprvInqy4010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재선 관리 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy4010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4010;
+	}
+	
+	// 결재선 관리 조회 (AJAX)
+	@RequestMapping("/intrAprvInqy4011.do")
+	public String intrAprvInqy4011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 관리 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy4010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 관리 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4011;
+	}
+	
+	// 결재선 등록 조회
+	@RequestMapping("/intrAprvInqy4012.do")
+	public String intrAprvInqy4012(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy4020(model, paramMap);			
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4012;
+	}
+	
+	// 결재선 상세 조회
+	@RequestMapping("/intrAprvInqy4013.do")
+	public String intrAprvInqy4013(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 조회
+			//--------------------------------------------------------------------------------------------
+			aprvService.intrAprvInqy4030(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_4013;
+	}
+
+	
 	// 기안 등록 처리
 	@RequestMapping("/intrAprvProc1010.do")
 	@ResponseBody
@@ -166,7 +272,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재 처리
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvProc4010(model, paramMap);
+			aprvService.intrAprvProc3010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 상세 조회
@@ -179,5 +285,47 @@ public class AprvController {
 		}
 		//
 		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
+	}
+	
+	// 결재선 저장 처리
+	@RequestMapping("/intrAprvProc2010.do")
+	@ResponseBody
+	public String intrAprvProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = aprvService.intrAprvProc4010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 결재선 저장 처리
+	@RequestMapping("/intrAprvProc2020.do")
+	@ResponseBody
+	public String intrAprvProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 삭제 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = aprvService.intrAprvProc4020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
 	}
 }

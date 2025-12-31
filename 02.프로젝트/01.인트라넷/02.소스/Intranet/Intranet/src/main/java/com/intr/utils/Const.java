@@ -1,6 +1,6 @@
 package com.intr.utils;
 
-public class Const implements Page, Path, View {
+public class Const implements Page, Path, View, Api {
 	//--------------------------------------------------------------------------------------------
 	// °øÅë
 	//--------------------------------------------------------------------------------------------

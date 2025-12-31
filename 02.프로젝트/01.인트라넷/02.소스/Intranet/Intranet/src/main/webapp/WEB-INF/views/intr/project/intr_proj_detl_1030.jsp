@@ -163,12 +163,22 @@
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
 											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 50%;" disabled="disabled">
 										</dd>
-										<dt>&#10003; 계약기간</dt>
-										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="projSdt" value="${defaultInfo.projSdt}" readonly="readonly" style="width: 110px;" />
-												~
-											<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="projEdt" value="${defaultInfo.projEdt}" readonly="readonly" style="width: 110px;" />
-										</dd>
+										<dt>&#10003; 진행상태</dt>
+                                        <dd class="sel_2part">
+                                        	<div class="select_wrap">
+												<div id="statList" class="sList select_box">${empty defaultInfo.statusNm ? '' : defaultInfo.statusNm}</div>
+												<input type="hidden" id="statusNm" name="statusNm" value="${defaultInfo.statusNm}">
+												<input type="hidden" id="status" name="status" value="${defaultInfo.status}">
+											
+												<ul class="sUl select_ul scroll_wrap">
+													<c:forEach var="list" items="${statList}">
+														<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:if>
+													</c:forEach>
+												</ul>
+											</div>
+                                        </dd>
 									</dl>
 									<dl class="post_info">
 										<dt>계약문서</dt>
@@ -179,22 +189,12 @@
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
 											</div>
 										</dd>
-										<dt>&#10003; 진행상태</dt>
-	                                        <dd class="sel_2part">
-	                                        	<div class="select_wrap">
-													<div id="statList" class="sList select_box">${empty defaultInfo.statusNm ? '' : defaultInfo.statusNm}</div>
-													<input type="hidden" id="statusNm" name="statusNm" value="${defaultInfo.statusNm}">
-													<input type="hidden" id="status" name="status" value="${defaultInfo.status}">
-												
-													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${statList}">
-															<c:if test="${list.commcodeCd != null and  list.commcodeCd != ''}">
-																<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
-															</c:if>
-														</c:forEach>
-													</ul>
-												</div>
-	                                        </dd>
+										<dt>&#10003; 계약기간</dt>
+										<dd>
+											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="projSdt" value="${defaultInfo.projSdt}" readonly="readonly" />
+												~
+											<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="projEdt" value="${defaultInfo.projEdt}" readonly="readonly" />
+										</dd>
 									</dl>
 									<dl class="post_info">
 										<dt></dt>

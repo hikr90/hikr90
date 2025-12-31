@@ -13,7 +13,7 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		//
 		var calendar = document.getElementById('calendar');
-	    var scheCont = new FullCalendar.Calendar(calendar, {
+	    var leavCont = new FullCalendar.Calendar(calendar, {
 	    	//
 	        locale: 'en',  							// 언어
 			eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
@@ -34,7 +34,7 @@
 				var obj = new Object();
 				//
 				obj["mappingId"] = "intrPopupInqy1081.do";
-				obj["areaType"] = "sche";
+				obj["areaType"] = "leav";
 				obj["sequenceId"] = info.event.id;
 				obj["width"] = "700"
 				obj["height"] = "460";
@@ -46,14 +46,14 @@
 			eventColor: '#214b97'
 		});
 	    //
-	    scheCont.render();
+	    leavCont.render();
 	});
 	
 	// 검색 조회
 	function listCall(f){
 		try {
 			//
-			formSubmit("intrScheInqy1010.do");
+			formSubmit("intrAprvInqy3010.do");
 			
 		} catch (error) {
 	        console.error("[Error] 검색 조회 : ", error.message);
@@ -66,7 +66,7 @@
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 
 	<!-- 일정 팝업 -->
- 	<div id="scheArea" class="popupArea hidden">
+ 	<div id="leavArea" class="popupArea hidden">
 		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1080.jsp"></c:import>	
 	</div>
 
@@ -85,7 +85,7 @@
 						<div class="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<h2>일정 관리</h2>
+									<h2>연차 공유</h2>
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
@@ -121,7 +121,7 @@
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">사원명</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultMap.srchNm}" onkeydown="inputEnt(this.form);">
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${resultMap.srchNm}" onkeydown="pushCall(this.form);">
 													
 													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
 													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
@@ -130,13 +130,13 @@
 		                                </div>
 									</div>
 								
-									<div class="sche_wrap">
-										<div class="sche_area">
+									<div class="leav_wrap">
+										<div class="leav_area">
 											<div id="calendar">
 												
 											</div>
 										</div><!-- End post_write -->
-									</div><!-- End sche_wrap -->
+									</div><!-- End leav_wrap -->
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
 						</div><!-- End sub_content -->

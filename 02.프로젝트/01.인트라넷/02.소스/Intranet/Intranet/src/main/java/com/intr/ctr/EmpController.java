@@ -233,6 +233,75 @@ public class EmpController {
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_DETL_2010;
 	}
 	
+	// 담당업무 조회 목록 화면
+	@RequestMapping("/intrEmpInqy3010.do")
+	public String intrEmpInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy3010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 담당업무 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3010;
+	}
+	
+	// 담당업무 조회 목록 화면 (AJAX)
+	@RequestMapping("/intrEmpInqy3011.do")
+	public String intrEmpInqy3011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 조회 (AJAX)
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy3011(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 담당업무 목록 (AJAX) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3011;
+	}
+	
+	// 담당업무 등록 화면
+	@RequestMapping("/intrEmpInqy3012.do")
+	public String intrEmpInqy3012(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 조회 (AJAX)
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy3012(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 사원 담당업무 등록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3012;
+	}
+	
 	// 사원 등록 처리
 	@RequestMapping("/intrEmpProc1010.do")
 	@ResponseBody
@@ -333,6 +402,48 @@ public class EmpController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사원 비밀번호 수정 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 담당업무 저장 처리
+	@RequestMapping("/intrEmpProc2010.do")
+	@ResponseBody
+	public String intrEmpProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 저장 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = empService.intrEmpProc2010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 담당업무 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 담당업무 삭제 처리
+	@RequestMapping("/intrEmpProc2020.do")
+	@ResponseBody
+	public String intrEmpProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 담당업무 삭제 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = empService.intrEmpProc2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 담당업무 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultStr;

@@ -78,23 +78,7 @@
 	    }, 300); // 300ms 동안 움직임
 	}
 	
-	// 탭 show/hide 체크
-	function isTabOverlow() {
-	    let tabList = $(".tab_list"); 						// 탭 목록 전체 (실제 콘텐츠 너비)
-	    let wrapper = $(".tab_wrapper");  			// 탭 목록을 감싸는 뷰포트 (보이는 영역 너비)
-	    let controls = $(".tab_scroll_controls"); 	// 좌우 화살표 버튼 컨테이너
-        
-        // 탭 목록의 실제 스크롤 너비와 wrapper의 보이는 너비를 비교
-	    if (tabList[0].scrollWidth > wrapper.width()) {
-	        // 탭이 넘칠 경우, show
-	        controls.show(); 
-	    } else {
-	        // 탭이 넘치지 않을 경우, hide
-	        controls.hide();
-	    }
-	}
-	
-	// 탭 클릭
+	// 탭 선택 처리
 	function tabCall(element){
 		//
 		try {
@@ -110,7 +94,7 @@
 			let param = $("#form").serialize();
 			$.ajax({
 		    	type : 'post',
-		    	url : "intrTaskInqy2011.do",
+		    	url : "intrTaskInqy2020.do",
 				data : param,
 				dataType : 'text',
 				success : function(data){
@@ -135,7 +119,7 @@
 		try {
 			//
 			$("#taskId").val(taskId);
-			formSubmit("intrTaskInqy2020.do");
+			formSubmit("intrTaskInqy2030.do");
 			
 		} catch (error) {
 	        console.error("[Error] 업무 상세 조회 : ", error.message);
@@ -168,7 +152,6 @@
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
 										<h2>업무일지 조회</h2><br>
-										
 										<!-- 탭 -->
 										<div class="tab_container">
 											<!-- 왼쪽 화살표 -->
@@ -182,18 +165,14 @@
 										    <div class="tab_wrapper">
 											    <ul class="tab_list">
 											    	<c:forEach var="list" items="${orgList}" varStatus="status">
-											    		<c:if test="${empty param.orgCd}">
-											    			<li class="tab_item ${status.index eq 0 ? 'active' : ''}">
-											    		</c:if>
-											    		<c:if test="${not empty param.orgCd}">
-											    			<li class="tab_item ${list.orgCd eq param.orgCd ? 'active' : ''}">
-											    		</c:if>
-															<a href="javascript:void(0);" class="${list.orgCd}" onclick="tabCall(this);" orgCd="${list.orgCd}">${list.orgNm}</a>
-														</li>
-											        </c:forEach>
+													    <li class="tab_item ${(empty param.orgCd and status.index eq 0) or (list.orgCd eq param.orgCd) ? 'active' : ''}">
+													        <a href="javascript:void(0);" class="${list.orgCd}" onclick="tabCall(this);" orgcd="${list.orgCd}">${list.orgNm}</a>
+													    </li>
+													</c:forEach>
 											    </ul>
 										    </div>
 										    
+										    <!-- 오른쪽 화살표 -->
 										    <div class="tab_scroll_controls">
 										    	<a href="javascript:void(0);" onclick="scrollTabs('right');">
 										    		<img class="scroll_btn_right" src='resources/images/icon/icon_scroll_arrow.png' width="35" height="35" />

@@ -4,18 +4,10 @@
 
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 첫번째 권한 클릭
 		$("#authTree").find("ul li:first-child").find('.a_btn').trigger('click');
-		
-		// 권한 메뉴, 메뉴 목록 감춤
-		$("#empArea").css("display","none");
 	});
 	
 	$(document).on('click','.a_btn',function() {
@@ -35,19 +27,6 @@
 		});
 	});	
 		
-	// 부서 체크 시 하위 자동 체크
-	$(document).on('click','.orgCd',function() {
-		//
-		var deptYn = $(this).is(':checked');
-		var orgCd = $(this).attr("orgCd");
-		//			
-		$("input[name=empIdx]").each(function(){
-			if(orgCd==$(this).attr('orgCd')){
-				$(this).prop('checked',deptYn)
-			};
-		});
-	});
-	
 	// 권한 조회
 	function listCall(f){
 		try {
@@ -62,7 +41,7 @@
 	            success : function(data){
 	            	//
 	            	$("#authTree").html(data);
-	            	$("#empArea").css("display","inline-flex");
+	            	$("#empArea").css("display","none");
 	            },
 	            error : function(data){
 	            	//
@@ -103,7 +82,6 @@
 		}
 	}
 </script>
-</head>
 <body id="main">
 <form id="form" onsubmit="return false;">
 	<!-- 메뉴 -->
@@ -142,7 +120,7 @@
 		                                <!-- end Form srch_wrap  -->
 										
 										<div class="tree_wrap">
-											<div id="treeArea" class="tree_area" style="width: 400px;">
+											<div id="treeArea" class="tree_area" style="width: 400px; height: 525px;">
 												<div id="authTree" class="tree">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -159,10 +137,10 @@
 											
 											<div id="empArea" class="emp_area" style="display: none;">
 												<!-- 사용자 목록 -->
-												<div id="empInfo" class="tree_area ml20" style="width: 400px;">
+												<div id="empInfo" class="tree_area ml20" style="width: 400px; height: 525px;">
 													<div class="tree">
 														<li class="li_1" style="margin-left: 15px;">
-															<input type="checkbox" id="totalIdx" class="totalIdx" name="totalIdx">
+															<input type="checkbox" id="totalIdx" class="checkbox totalIdx" name="totalIdx">
 															<span class="icon_total"></span>
 															전체 선택
 														</li>
@@ -191,20 +169,20 @@
 																<c:when test="${list.lv gt prevLv}">
 																	<li class="li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
-																			&nbsp;
-																			ㄴ <input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
 																		<span class="${spanIcon}"></span>
-																		${listNm}
+																		<label for="empIdx${status.index}">${listNm}</label>
 																</c:when>
 																<c:when test="${list.lv eq prevLv}">
 																	<li class="li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
-																			&nbsp;
-																			ㄴ <input type="checkbox" id="empIdx" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
+																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
 																		<span class="${spanIcon}"></span>
-																		${listNm}
+																		<label for="empIdx${status.index}">${listNm}</label>
 																</c:when>
 															</c:choose>
 				

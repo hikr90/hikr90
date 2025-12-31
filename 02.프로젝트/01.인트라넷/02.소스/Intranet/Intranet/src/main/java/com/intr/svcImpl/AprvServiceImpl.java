@@ -3,6 +3,7 @@ package com.intr.svcImpl;
 import java.util.HashMap;
 import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +12,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.AprvDao;
 import com.intr.dao.CoreDao;
+import com.intr.dao.EmpDao;
 import com.intr.dao.TempDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.UtilService;
 import com.intr.utils.Const;
+
+import net.sf.json.JSONArray;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -29,6 +33,9 @@ public class AprvServiceImpl implements AprvService{
 	
 	@Autowired
 	TempDao tempDao;
+
+	@Autowired
+	EmpDao empDao;
 	
 	@Autowired
 	UtilDao utilDao;
@@ -166,6 +173,106 @@ public class AprvServiceImpl implements AprvService{
 			throw new Exception(e.getMessage());
 		}
 	}
+
+	// 연차 공유 조회
+	public void intrAprvInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		JSONArray jAray = new JSONArray();
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 연차 공유 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy3011(model, paramMap);
+			model.addAttribute("defaultList", jAray.fromObject(defaultList));
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (휴가 타입) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"LEAV");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("leavList",defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 결재선 관리 조회
+	public void intrAprvInqy4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 관리 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy4011(model, paramMap);
+			model.addAttribute("defaultList", defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 부서 사원 트리 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = empDao.intrEmpInqy2031(model, paramMap);
+			model.addAttribute("empList",defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 결재선 등록 조회
+	public void intrAprvInqy4020(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (결재선) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"TYPE");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("typeList",defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	// 결재선 상세 조회
+	public void intrAprvInqy4030(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy4031(model, paramMap);
+			model.addAttribute("aprvlineList", defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (결재선) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"TYPE");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("typeList",defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재 타입 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy4032(model, paramMap);
+			model.addAttribute("aprvtypeList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
 	
 	// 기안 등록
 	public String intrAprvProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
@@ -189,7 +296,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 양식 유형 처리
 			//--------------------------------------------------------------------------------------------
-			this.intrAprvProc3010(model, paramMap);
+			this.intrAprvProc2020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 등록
@@ -199,7 +306,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
 			//--------------------------------------------------------------------------------------------
-			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);
 			
 		} catch (Exception e) {
 			//
@@ -219,12 +326,12 @@ public class AprvServiceImpl implements AprvService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 결재 마스터 등록 (APRVMAST)
+			// 결재 마스터 등록 (APRV_MAST)
 			//--------------------------------------------------------------------------------------------
-			aprvDao.intrAprvProc1011(paramMap);
+			aprvDao.intrAprvProc1011(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 결재 이력 등록 (APRVHIST)
+			// 결재 이력 등록 (APRV_HIST)
 			//--------------------------------------------------------------------------------------------
 			if(aprvLine == "") {
 				throw new Exception("결재선이 존재하지 않습니다.");
@@ -239,13 +346,13 @@ public class AprvServiceImpl implements AprvService{
 				tempMap.put("aprvtypeCd", 	arrLine2[0]);
 				tempMap.put("aprvIdx", 		arrLine2[1]);
 				//
-				aprvDao.intrAprvProc1012(tempMap);
+				aprvDao.intrAprvProc1012(model, tempMap);
 			}
 			
 			//--------------------------------------------------------------------------------------------
-			// 현재 단계, 번호 수정 (APRVHIST)
+			// 현재 단계, 번호 수정 (APRV_HIST)
 			//--------------------------------------------------------------------------------------------
-			aprvDao.intrAprvProc1013(paramMap);
+			aprvDao.intrAprvProc1013(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -254,7 +361,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 양식 유형 처리
-	public void intrAprvProc3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvProc2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		String temptypeCd = utilService.nvlProc((String)paramMap.get("temptypeCd"));
@@ -268,12 +375,12 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			if(temptypeCd.equals("Leav")) {
 				// 휴가 신청서 등록 (APRV_REL_LEAV)
-				aprvDao.intrAprvProc1014(paramMap);
+				aprvDao.intrAprvProc1014(model, paramMap);
 			}
 			
 			else if(temptypeCd.equals("Exp")) {
 				// 가지급결의서 등록 (APRV_REL_EXP)
-				aprvDao.intrAprvProc1015(paramMap);
+				aprvDao.intrAprvProc1015(model, paramMap);
 			}
 
 			else if(temptypeCd.equals("Item")) {
@@ -295,7 +402,7 @@ public class AprvServiceImpl implements AprvService{
 					tempMap.put("itemCnt", 			arrLine2[2]);
 					tempMap.put("reqRsn", 				arrLine2[3]);
 					
-					aprvDao.intrAprvProc1016(tempMap);
+					aprvDao.intrAprvProc1016(model, tempMap);
 				}
 			}
 			
@@ -318,7 +425,7 @@ public class AprvServiceImpl implements AprvService{
 					tempMap.put("useRsn", 			arrLine2[2]);
 					tempMap.put("useDt",	 		arrLine2[3]);
 					
-					aprvDao.intrAprvProc1017(tempMap);
+					aprvDao.intrAprvProc1017(model, tempMap);
 				}
 			}
 			
@@ -329,7 +436,7 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 결재 처리
-	public void intrAprvProc4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void intrAprvProc3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		String sequenceId = utilService.nvlProc((String)paramMap.get("sequenceId"));
@@ -343,7 +450,7 @@ public class AprvServiceImpl implements AprvService{
 				//--------------------------------------------------------------------------------------------
 				// 다음 결재 조회
 				//--------------------------------------------------------------------------------------------
-				tempMap = aprvDao.intrAprvInqy3011(model, paramMap);
+				tempMap = aprvDao.intrAprvInqy2012(model, paramMap);
 				
 				if(tempMap == null) {
 					tempMap = new HashMap<String, Object>();
@@ -353,11 +460,11 @@ public class AprvServiceImpl implements AprvService{
 					
 					// APRVSTEP_CD 수정
 					paramMap.put("stepCd", Const.STEP_0020);		// 결재 완료
-					aprvDao.intrAprvProc2011(paramMap);
+					aprvDao.intrAprvProc2011(model, paramMap);
 					
 				}  else {
 					// CURR_APRV_SNO 수정
-					aprvDao.intrAprvProc2013(tempMap);
+					aprvDao.intrAprvProc2013(model, tempMap);
 				}
 				
 				// RSLT 수정
@@ -367,7 +474,7 @@ public class AprvServiceImpl implements AprvService{
 				tempMap.put("rslttypeCd", rslttypeCd);
 				tempMap.put("rsltNote", rsltNote);
 
-				aprvDao.intrAprvProc2012(tempMap);
+				aprvDao.intrAprvProc2012(model, tempMap);
 				
 			} 
 			
@@ -375,24 +482,24 @@ public class AprvServiceImpl implements AprvService{
 			else if(rslttypeCd.equals(Const.RSLT_0020)) {
 				// APRVSTEP_CD 수정
 				paramMap.put("stepCd", Const.STEP_0030);			// 결재반송
-				aprvDao.intrAprvProc2011(paramMap);
+				aprvDao.intrAprvProc2011(model, paramMap);
 				
 				// RSLT 수정
-				aprvDao.intrAprvProc2012(paramMap);
+				aprvDao.intrAprvProc2012(model, paramMap);
 			}
 			
 			// 결재 취소
 			else if(rslttypeCd.equals(Const.RSLT_0030)) {
 				// APRVSTEP_CD 수정
 				paramMap.put("stepCd", Const.STEP_0040);			// 결재취소
-				aprvDao.intrAprvProc2011(paramMap);
+				aprvDao.intrAprvProc2011(model, paramMap);
 				
 				// CURR_APRV_SNO 수정
 				paramMap.put("currAprvSno", "0001");						// 기안 단계 번호
-				aprvDao.intrAprvProc2013(paramMap);
+				aprvDao.intrAprvProc2013(model, paramMap);
 				
 				// RSLT 수정
-				aprvDao.intrAprvProc2012(paramMap);
+				aprvDao.intrAprvProc2012(model, paramMap);
 			}
 			
 			// 오류
@@ -404,5 +511,107 @@ public class AprvServiceImpl implements AprvService{
 			//
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	// 결재선 저장 처리
+	@SuppressWarnings("unchecked")
+	public String intrAprvProc4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		HashMap<String, Object> defaultInfo = null;
+		HashMap<String, Object> tempMap = null;
+		String sequenceId = utilService.nvlProc((String)paramMap.get("sequenceId"));
+		String defaultStr = "";
+		String resStr = "NO";
+		int resInt = 0;
+		//
+		try {
+			//
+			if(sequenceId == "") {
+				//--------------------------------------------------------------------------------------------
+				// 결재 채번
+				//--------------------------------------------------------------------------------------------
+				defaultInfo = aprvDao.intrAprvInqy2010(model, paramMap);
+				sequenceId = (String)defaultInfo.get("sequenceId");
+				paramMap.put("sequenceId", sequenceId);
+
+				//--------------------------------------------------------------------------------------------
+				// 결재선 마스터 (APRV_LINE_MAST) 등록
+				//--------------------------------------------------------------------------------------------
+				aprvDao.intrAprvProc4011(model, paramMap);
+				
+			} else {
+				//--------------------------------------------------------------------------------------------
+				// 결재선 마스터 (APRV_LINE_MAST) 수정
+				//--------------------------------------------------------------------------------------------
+				aprvDao.intrAprvProc4013(model, paramMap);
+				
+				//--------------------------------------------------------------------------------------------
+				// 결재선 상세 (APRV_LINE_DETL) 삭제
+				//--------------------------------------------------------------------------------------------
+				aprvDao.intrAprvProc4015(model, paramMap);
+			}
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 (APRV_LINE_DETL) 등록
+			//--------------------------------------------------------------------------------------------
+			ObjectMapper objMapper = new ObjectMapper();
+			defaultList = objMapper.readValue((String)paramMap.get("aprvlineList"), List.class);
+			//
+			for(HashMap<String, Object> list : defaultList) {
+				tempMap = new HashMap<String, Object>();
+				//
+				tempMap.put("sequenceId", utilService.nvlProc((String)paramMap.get("sequenceId")));
+				tempMap.put("aprvIdx", utilService.nvlProc((String)list.get("aprvIdx")));
+				tempMap.put("aprvtypeCd", utilService.nvlProc((String)list.get("aprvtypeCd")));
+				//
+				resInt += aprvDao.intrAprvProc4012(model, tempMap);
+			}
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			if(resInt == defaultList.size()) {
+				resStr = "YES";
+			}
+			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 결재선 삭제 처리
+	public String intrAprvProc4020(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		String resStr = "YES";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 마스터 (APRV_LINE_MAST) 삭제
+			//--------------------------------------------------------------------------------------------
+			aprvDao.intrAprvProc4014(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 (APRV_LINE_DETL) 삭제
+			//--------------------------------------------------------------------------------------------
+			aprvDao.intrAprvProc4015(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 결과 반환
+			//--------------------------------------------------------------------------------------------
+			defaultStr = String.format("[{'res':'%s'}]", resStr);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
 	}
 }

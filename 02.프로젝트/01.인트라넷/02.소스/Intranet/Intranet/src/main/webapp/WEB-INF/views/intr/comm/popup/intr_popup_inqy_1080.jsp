@@ -2,7 +2,7 @@
 
 <!-- 
 	view : intr_popup_inqy_1080
-	title : 일정 관리 팝업
+	title : 연차 공유 팝업
 -->
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 80%;">
@@ -20,10 +20,10 @@
 							</div>
 	                        
 	                     	<!-- 일정 상세 -->
-	                     	<div id="scheCon" class="post_con disp_flex" style="height: 300px;"></div>
+	                     	<div id="leavCon" class="post_con disp_flex" style="height: 300px;"></div>
 	                        
 							<div class="btn_right">
-	                      		<button type="button" class="btn_gray_thin" onclick="popClose('sche');">닫기</button>
+	                      		<button type="button" class="btn_gray_thin" onclick="popClose('leav');">닫기</button>
 	                 		</div>
 	                 	</div><!-- End post_wrap -->
 	               	</div> 

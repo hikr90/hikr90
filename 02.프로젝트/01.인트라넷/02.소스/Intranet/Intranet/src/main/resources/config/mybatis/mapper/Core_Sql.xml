@@ -195,7 +195,7 @@
 			<when test="pageUrl.contains('Aprv')">
 				SELECT 
 					COUNT(A.APRV_ID) AS LIST_CNT 
-				FROM APRVMAST A
+				FROM APRV_MAST A
 				LEFT OUTER JOIN EMP_INFO E
 					ON E.EMP_IDX = A.REG_IDX
 				LEFT OUTER JOIN ORG O

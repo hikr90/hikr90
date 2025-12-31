@@ -107,7 +107,7 @@
 										</dd>
 										<dt>&#10003; 회의일자</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="mtgDt" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" style="width: 110px;" />
+											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="mtgDt" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" />
 										</dd>
 									</dl>
 									<dl class="post_info">
@@ -121,9 +121,9 @@
 										</dd>
 										<dt>&#10003; 회의시간</dt>
 										<dd>
-											<input type="text" id="timeSt" class="srch_cdt_date srchSdt align_center" name="mtgStm" value="${defaultInfo.mtgStm}" readonly="readonly" style="width: 110px;" />
+											<input type="text" id="timeSt" class="srch_cdt_date srchSdt time_picker" name="mtgStm" value="${defaultInfo.mtgStm}" readonly="readonly" />
 											~
-											<input type="text" id="timeEd" class="srch_cdt_date srchSdt align_center" name="mtgEtm" value="${defaultInfo.mtgEtm}" readonly="readonly" style="width: 110px;" />
+											<input type="text" id="timeEd" class="srch_cdt_date srchSdt time_picker" name="mtgEtm" value="${defaultInfo.mtgEtm}" readonly="readonly" />
 									</dl>
 										</dd>
 									<dl class="post_info">

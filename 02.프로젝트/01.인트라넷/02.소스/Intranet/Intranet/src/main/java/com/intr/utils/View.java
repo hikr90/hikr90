@@ -4,8 +4,8 @@ public interface View {
 	//--------------------------------------------------------------------------------------------
 	// 로그인
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_LOGIN_INQY_1010 	= "intr_login_inqy_1010.jsp"; // 로그인
-	public static final String INTR_LOGIN_INQY_1020 	= "intr_login_inqy_1020.jsp"; // 정보 찾기
+	public static final String INTR_LOGIN_INQY_1010 	= "intr_login_inqy_1010.jsp"; 	// 로그인
+	public static final String INTR_LOGIN_INQY_1020 	= "intr_login_inqy_1020.jsp"; 	// 정보 찾기
 	
 	//--------------------------------------------------------------------------------------------
 	// 메인
@@ -56,9 +56,14 @@ public interface View {
 	public static final String INTR_POPUP_INQY_1101 = "intr_popup_inqy_1101.jsp";			// 조직도 조회
 	public static final String INTR_POPUP_INQY_1102 = "intr_popup_inqy_1102.jsp";			// 조직도 트리 조회
 	
-	public static final String INTR_POPUP_INQY_1110 = "intr_popup_inqy_1110.jsp";			// RESTful API 팝업 관리
-	public static final String INTR_POPUP_INQY_1111 = "intr_popup_inqy_1111.jsp";			// RESTful API 조회
+	public static final String INTR_POPUP_INQY_1110 = "intr_popup_inqy_1110.jsp";			// API 팝업 관리
+	public static final String INTR_POPUP_INQY_1111 = "intr_popup_inqy_1111.jsp";			// API 조회
 
+	public static final String INTR_POPUP_INQY_1120 = "intr_popup_inqy_1120.jsp";			// 업무 캘린더 팝업 관리
+	public static final String INTR_POPUP_INQY_1121 = "intr_popup_inqy_1121.jsp";			// 업무 캘린더 등록
+	public static final String INTR_POPUP_INQY_1122 = "intr_popup_inqy_1122.jsp";			// 업무 캘린더 상세
+	public static final String INTR_POPUP_INQY_1123 = "intr_popup_inqy_1123.jsp";			// 업무 캘린더 상세 (메인)
+	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------
@@ -71,25 +76,23 @@ public interface View {
 	public static final String INTR_BOARD_DETL_2010 = "intr_board_detl_2010.jsp";		// 공지사항 상세
 	
 	//--------------------------------------------------------------------------------------------
-	// 일정관리
-	//--------------------------------------------------------------------------------------------
-	public static final String INTR_SCHE_INQY_1010 = "intr_sche_list_1010.jsp";			// 일정관리 목록
-	
-	//--------------------------------------------------------------------------------------------
 	// 업무일지
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_TASK_LIST_1010 = "intr_task_list_1010.jsp";			// 업무 작성
 	public static final String INTR_TASK_LIST_1011 = "intr_task_list_1011.jsp";			// 업무 작성 (AJAX)
 	public static final String INTR_TASK_LIST_2010 = "intr_task_list_2010.jsp";			// 업무 조회
 	public static final String INTR_TASK_LIST_2011 = "intr_task_list_2011.jsp";			// 업무 조회 (AJAX)
-	public static final String INTR_TASK_DETL_2020 = "intr_task_detl_2020.jsp";			// 업무 상세
 	public static final String INTR_TASK_LIST_3010 = "intr_task_list_3010.jsp";			// 업무 캘린더 조회
+	public static final String INTR_TASK_DETL_1010 = "intr_task_detl_1010.jsp";			// 업무 상세
 	
 	//--------------------------------------------------------------------------------------------
 	// 사원
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_EMP_LIST_1010 = "intr_emp_list_1010.jsp";				// 사원 목록 (사용자)
 	public static final String INTR_EMP_LIST_2010 = "intr_emp_list_2010.jsp";				// 사원 목록 (관리자)
+	public static final String INTR_EMP_LIST_3010 = "intr_emp_list_3010.jsp";				// 담당업무 조회
+	public static final String INTR_EMP_LIST_3011 = "intr_emp_list_3011.jsp";				// 담당업무 조회 (AJAX)
+	public static final String INTR_EMP_LIST_3012 = "intr_emp_list_3012.jsp";				// 담당업무 등록 (AJAX)
 	public static final String INTR_EMP_DETL_1010 = "intr_emp_detl_1010.jsp";				// 사원 등록
 	public static final String INTR_EMP_DETL_1020 = "intr_emp_detl_1020.jsp";			// 사원 수정
 	public static final String INTR_EMP_DETL_1030 = "intr_emp_detl_1030.jsp";			// 사원 상세
@@ -135,6 +138,13 @@ public interface View {
 	public static final String INTR_APRV_DETL_2011 = "intr_aprv_detl_2011.jsp"	;			// 결재 상세 (가지급결의서)
 	public static final String INTR_APRV_DETL_2012 = "intr_aprv_detl_2012.jsp"	;			// 결재 상세 (물품반출입 신청서)
 	public static final String INTR_APRV_DETL_2013 = "intr_aprv_detl_2013.jsp"	;			// 결재 상세 (법인카드 정산서)
+
+	public static final String INTR_APRV_LIST_3010 = "intr_aprv_list_3010.jsp";				// 연차 공유
+
+	public static final String INTR_APRV_LIST_4010 = "intr_aprv_list_4010.jsp";				// 결재선 관리
+	public static final String INTR_APRV_LIST_4011 = "intr_aprv_list_4011.jsp";				// 결재선 관리 (AJAX)
+	public static final String INTR_APRV_LIST_4012 = "intr_aprv_list_4012.jsp";				// 결재선 등록
+	public static final String INTR_APRV_LIST_4013 = "intr_aprv_list_4013.jsp";				// 결재선 상세
 
 	//--------------------------------------------------------------------------------------------
 	// 쿼리

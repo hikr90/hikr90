@@ -30,6 +30,9 @@ h1, h2, h3, h4, h5 { font-weight: normal; }
 h3 a { color: #333; }
 h2 { display: contents; }
 
+input::placeholder, 
+textarea::placeholder { color: currentColor !important; opacity: 0.5 !important; }
+
 button, input[type="button"] { cursor: pointer; padding: 0; }
 button { border: 0; background-color: transparent; }
 
@@ -70,6 +73,8 @@ table caption { display: block; overflow: hidden; position: absolute; top: 0; le
 table th._title, table td._title { text-align: left !important; }
 
 textarea { height: auto; line-height: 1.5; text-indent: 0; padding: 15px; }
+textarea { box-sizing: border-box; border: 1px solid #d7d7d7; color: #727272; }
+
 pre { font-family: 'NanumSquare'; font-size: 1.5rem; }
 label[for="chk-yes"] { margin-right: 5px; }
 
@@ -267,7 +272,7 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 
 .sub_article { height: 100%; background-color: #fff; position: relative; padding: 35px 25px 35px; }
 .sub_article h2 {float: left; color: #214b97; font-size: 2.4rem; font-weight: 700;}
-.sub_article h3 {color: #354257; font-size: 1.8rem; font-weight: 700;}
+.sub_article h3 {color: #354257; font-size: 1.8rem; }
 
 .area_title { width: 100%; height: 50px; }
 .area_content { width: 100%; height: 80%; }
@@ -281,3 +286,4 @@ input[type="text"], input[type="password"] { height: 43px; line-height: 43px; bo
 
 .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 350px; display: inline-block; }
 .cursor { cursor: pointer; }
+.srchDt, .srchSdt, .srchEdt { width: 110px !important; }

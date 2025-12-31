@@ -17,7 +17,7 @@ $(function() {
 			fileStr += "<li id='fileLi" + i + "'>";
 			fileStr += "	<input type='hidden' id='fileId" + i + "' name='insert" + i + "' />";
 			fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
-			fileStr += "	<a href='#' onclick=\"fileDel('insert', '" + i + "');\"><span>"+thisFiles[i].name+"</span></a>";
+			fileStr += "	<a href='javascript:void(0);' onclick=\"fileDel('insert', '" + i + "');\"><span>"+thisFiles[i].name+"</span></a>";
 			fileStr += "</li>";
 		}		
 		
