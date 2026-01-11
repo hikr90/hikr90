@@ -12,7 +12,8 @@ public interface TaskService {
 	void intrTaskInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 업무 상세
 	void intrTaskInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 업무 캘린더 조회
 	//
-	String intrTaskProc1010(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무일지 등록
+	String intrTaskProc1010(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무일지 저장
+	String intrTaskProc1020(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무일지 삭제
 	String intrTaskProc2010(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무 캘린더 등록
 	String intrTaskProc2020(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무 캘린더 수정
 	String intrTaskProc2030(Model model, HashMap<String,Object> paramMapt) throws Exception; 	// 업무 캘린더 삭제

@@ -177,18 +177,8 @@
 			)
 	</insert>
 	
-	<update id="intrProcProc1021" parameterType="java.util.HashMap">
-		/* intrProjProc1021 : 프로젝트 삭제 처리 (수정)  */
-		UPDATE PROJECT
-			SET USE_YN = 'N'
-		WHERE PROJ_CD IN
-		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">
-			#{deleteIdx}	
-		</foreach>
-	</update>	
-	
-	<delete id="intrProjProc1022" parameterType="java.util.HashMap">
-		/* intrProjProc1022 : 프로젝트 삭제 처리 (삭제) */
+	<delete id="intrProjProc1021" parameterType="java.util.HashMap">
+		/* intrProjProc1021 : 프로젝트 삭제 처리 (삭제) */
 		DELETE FROM PROJECT
 		WHERE PROJ_CD IN
 		<foreach collection="deleteList" item="deleteIdx" separator="," open="(" close=")">

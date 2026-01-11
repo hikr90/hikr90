@@ -188,7 +188,13 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			defaultList = empDao.intrEmpInqy2031(model, paramMap);
 			model.addAttribute("empList",defaultList);
-			
+
+			//--------------------------------------------------------------------------------------------
+			// 결재선 목록 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy4011(model, paramMap);
+			model.addAttribute("defaultList",defaultList);
+
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
@@ -223,6 +229,27 @@ public class PopupController {
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1042;
+	}
+	
+	// 결재선 상세 조회
+	@RequestMapping("/intrPopupInqy1043.do")
+	public String intrPopupInqy1043(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 결재선 상세 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy4031(model, paramMap);
+			model.addAttribute("aprvlineList", defaultList);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 결재선 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1043;
 	}
 	
 	// 결재의견 팝업 조회

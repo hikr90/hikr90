@@ -172,7 +172,7 @@
 											<dd>
 												<fmt:parseDate value="${defaultInfo.banrSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="banrSdt" value="${fomatSdt}" readonly="readonly" />
+												<input type="text" class="srch_cdt_date srchSdt" id="banrSdt" name="banrSdt" value="${fomatSdt}" readonly="readonly" />
 													~
 												<fmt:parseDate value="${defaultInfo.banrEdt}" var="parseEdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseEdt}" var="fomatEdt" pattern="yyyy-MM-dd"/>

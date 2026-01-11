@@ -4,6 +4,11 @@
 	view : intr_popup_inqy_1060
 	title : 물품 등록 관리 팝업
 -->
+<script>
+	// 물품 등록
+	let itemlineList = [];
+</script>
+
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 85%;">
 		<div class="content">

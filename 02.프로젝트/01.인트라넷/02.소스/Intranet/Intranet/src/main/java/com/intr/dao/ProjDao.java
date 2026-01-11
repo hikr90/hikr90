@@ -55,10 +55,10 @@ public class ProjDao {
 	}
 
 	// 프로젝트 삭제 처리 (삭제)
-	public int intrProjProc1022(HashMap<String,Object> paramMap) {
+	public int intrProjProc1021(HashMap<String,Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("proj.intrProjProc1022", paramMap);
+		resInt = sqlsession.delete("proj.intrProjProc1021", paramMap);
 		return resInt;
 	}
 

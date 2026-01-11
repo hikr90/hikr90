@@ -26,7 +26,7 @@
 			//
 			str += "  		<div class='select_wrap'>";
 			str += "    			<div class='pop_sbox' style='width:126px; border:unset; text-indent:0px;'>" + obj["aprvNm"] + "</div>";
-			str += "    			<input type='hidden' id='aprvCd' name='aprvCd' name='aprvCd' value='" + obj["aprvCd"] + "'>";
+			str += "    			<input type='hidden' id='aprvtypeCd' name='aprvtypeCd' name='aprvtypeCd' value='" + obj["aprvtypeCd"] + "'>";
 			str += "    			<input type='hidden' id='aprvIdx' name='aprvIdx' name='aprvIdx' value='" + obj["aprvIdx"] + "'>";
 			str += "				";
 			str += "    			<ul class='sUl pop_sul scroll_wrap' style='width:125px; margin-left: -1px;'>";
@@ -74,7 +74,7 @@
 				<thead>
 					<tr>
 						<th scope="col">부서</th>
-						<th scope="col">성함</th>
+						<th scope="col">이름</th>
 						<th scope="col">결재유형</th>
 						<th scope="col">삭제</th>
 					</tr>
@@ -85,7 +85,7 @@
 						<td>${empVO.orgNm}</td>
 						<td>${empVO.empNm} ${empVO.rankNm}</td>
 						<td>기안
-							<input type="hidden" id="aprvCd" name="aprvCd" value="TYPE_0010">
+							<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="TYPE_0010">
 							<input type="hidden" id="aprvIdx" name="aprvIdx" value="${empVO.empIdx}">
 						</td>
 						<td></td>

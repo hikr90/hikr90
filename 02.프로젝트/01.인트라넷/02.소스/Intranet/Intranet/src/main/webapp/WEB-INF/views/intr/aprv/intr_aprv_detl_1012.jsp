@@ -22,50 +22,6 @@
 	        console.error("[Error] 목록으로 : ", error.message);
 		}
 	}
-	
-	// 기안 등록 
-	function aprvProc(f){
-		try {
-			// 유효성 검증
-			if(!valProc()){return;};
-			// 결재선
-			if($("#aprvLine").val() == ''){
-				alert("<spring:message code="APRV.LINE.NONE"/>");
-				return;
-			}
-			// 물품등록
-			if($("#itemLine").val() == ''){
-				alert("<spring:message code="APRV.ITEM.NONE"/>");
-				return;
-			}
-			//
-			if(confirm("기안하시겠습니까?")){
-				// 에디터 내용 저장
-				var getData = CKEDITOR.instances.editor.getData();
-				$("#editor").val(getData);	
-				var fileList = setFormData();
-				
-	   			$.ajax({
-					url:"intrAprvProc1010.do?pageUrl=Aprv",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'post',
-	   				success : function(data){
-	   					//
-	   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
-	   					listCall();
-	   				},
-	   				error : function(res, status, error){
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
-			}
-			
-		} catch (error) {
-	        console.error("[Error] 기안 등록 : ", error.message);
-		}
-	}
 </script>
 </head>
 <body id="main">
@@ -133,24 +89,10 @@
 											</dd>
 										</dl>
 										<dl>
-											<dt>&#10003; 결재선</dt>
-											<dd>
-												<input type="button" class="btn_gray align_top" value="선택" onclick="lineReg();">
-												<input type="hidden" id="aprvLine" name="aprvLine" value="">
-											</dd>
-											
-											<dt>&#10003; 물품 등록</dt>
-											<dd>
-												<input type="button" class="btn_blue align_top" value="선택" onclick="itemReg();">
-												<input type="hidden" id="itemLine" name="itemLine" value="">
-											</dd>
-										</dl>
-										<dl>
 											<dt>&#10003; 반출입 일자</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="reqDt" value="" readonly="readonly" />
+												<input type="text" class="srch_cdt_date srchSdt" id="reqDt" name="reqDt" value="" readonly="readonly" />
 											</dd>
-											
 											<dt>&#10003; 요청 구분</dt>
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
@@ -167,6 +109,10 @@
 													</ul>
 												</div>
 									    	</dd>
+									    	<dt>&#10003; 물품 등록</dt>
+											<dd>
+												<input type="button" class="btn_gray align_top mb5" value="선택" onclick="itemReg();">
+											</dd>
 										</dl>
 								        <dl>
 											<dt><label for="post_text">&#10003; 기안내용</label></dt>
@@ -199,7 +145,7 @@
 									
 									<div class="btn_wrap">
 										<div class="float_right">
-											<button type="button" class="btn_gray_thin" onclick="aprvProc(this);">기안하기</button>
+											<button type="button" class="btn_gray_thin" onclick="lineReg();">기안하기</button>
 										</div>
 									</div>
 									

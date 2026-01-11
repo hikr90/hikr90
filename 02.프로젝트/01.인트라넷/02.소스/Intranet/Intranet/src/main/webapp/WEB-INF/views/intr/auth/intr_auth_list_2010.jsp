@@ -10,15 +10,6 @@
 		$(".tree_area").find("ul li:first-child").find('.a_btn').trigger('click');
 	});
 	
-	// 권한 메뉴 목록 전체 체크
-	$('.menuChk').click(function() {
-		if($(".menuChk").is(":checked")){
-			$("input[name=menuCd]").prop("checked", true);
-	    } else {
-	    	$("input[name=menuCd]").prop("checked", false);	
-	    }
-	});
-	
 	// 선택 항목 음영 처리
 	$(document).on('click','.a_btn',function() {
 		$(".a_btn").each(function() {

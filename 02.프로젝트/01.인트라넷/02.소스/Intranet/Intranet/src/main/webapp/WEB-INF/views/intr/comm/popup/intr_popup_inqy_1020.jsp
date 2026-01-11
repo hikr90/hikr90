@@ -28,7 +28,7 @@
 		try {
 			// 변수 지정
 			var isId = isFindId();
-			var text = (!isId) ? '성함' : '아이디';
+			var text = (!isId) ? '이름' : '아이디';
 			var element = (!isId) ? 'findNm' : 'findId';
 			var value = $("#" + element).val();
 

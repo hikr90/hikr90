@@ -6,8 +6,8 @@
 	view : intr_popup_inqy_1030
 	title : 프로젝트 관리 팝업
 -->
-<div id="popArea" class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 70%;">
+<div id="popArea" class="pop_area">
+	<article class="sub_article">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">

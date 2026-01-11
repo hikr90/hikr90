@@ -102,8 +102,7 @@
 										<dl>
 											<dt>결재선</dt>
 											<dd>
-												<input type="button" class="btn_gray align_top" value="조회" onclick="lineCall();">
-												<input type="hidden" id="aprvLine" name="aprvLine" value="">
+												<input type="button" class="btn_gray align_top mb5" value="조회" onclick="lineCall('${defaultInfo.aprvId}');">
 											</dd>
 											
 											<dt>지급 방법</dt>

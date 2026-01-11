@@ -22,45 +22,6 @@
 	        console.error("[Error] 목록으로 : ", error.message);
 		}
 	}
-	
-	// 기안 등록 
-	function aprvProc(f){
-		try {
-			// 유효성 검증
-			if(!valProc()){return;};
-			// 결재선
-			if($("#aprvLine").val() == ''){
-				alert("<spring:message code="APRV.LINE.NONE"/>");
-				return;
-			}
-			//
-			if(confirm("기안하시겠습니까?")){
-				// 에디터 내용 저장
-				var getData = CKEDITOR.instances.editor.getData();
-				$("#editor").val(getData);
-				var fileList = setFormData();
-				
-	   			$.ajax({
-					url:"intrAprvProc1010.do?pageUrl=Aprv",
-					processData : false,
-					contentType : false,
-					data: fileList,
-					type : 'post',
-	   				success : function(data){
-	   					//
-	   					alert("<spring:message code="APRV.PROC.SUCCESS"/>");
-	   					listCall();
-	   				},
-	   				error : function(res, status, error){
-	   					alert("<spring:message code="PROC.ERROR"/>");
-	   				}
-	   			});
-			}
-			
-		} catch (error) {
-	        console.error("[Error] 기안 등록 : ", error.message);
-		}
-	}
 </script>
 </head>
 <body id="main">
@@ -103,6 +64,7 @@
 								<input type="hidden" id="temptypeCd" name="temptypeCd" value="${param.temptypeCd}">
 								<input type="hidden" id="returnUrl" name="returnUrl" value="${param.returnUrl}">
 								<input type="hidden" id="filetypeCd" name="filetypeCd" value="APRV">
+								<input type="hidden" id="formtypeCd" name="formtypeCd" value="LEAV">
 										
 								<div class="post_wrap">
 		                        	<h2>휴가 신청서
@@ -124,16 +86,16 @@
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
 												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
-												<input type="hidden" id="projPcd" name="projCd" value="">
+												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
 										<dl>
-											<dt>&#10003; 결재선</dt>
+								        	<dt>&#10003; 휴가 기간</dt>
 											<dd>
-												<input type="button" class="btn_gray align_top" value="선택" onclick="lineReg();">
-												<input type="hidden" id="aprvLine" name="aprvLine" value="">
+												<input type="text" class="srch_cdt_date srchDt" id="leavSdt" name="leavSdt" title="휴가 기간(시작)" value="" readonly="readonly" />
+													~
+												<input type="text" class="srch_cdt_date srchDt" id="leavEdt" name="leavEdt" title="휴가 기간(종료)" value="" readonly="readonly" />
 											</dd>
-											
 											<dt>&#10003; 휴가 타입</dt>
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
@@ -150,21 +112,12 @@
 													</ul>
 												</div>
 									    	</dd>
-										</dl>
-								        <dl>
-								        	<dt>&#10003; 휴가 기간</dt>
-											<dd>
-												<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="leavSdt" value="" readonly="readonly" />
-													~
-												<input type="text" class="srch_cdt_date srchDt" id="srchEdt" name="leavEdt" value="" readonly="readonly" />
-											</dd>
-											
-											<dt>&#10003; 대직자</dt>
+									    	<dt>&#10003; 대직자</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="empCall();">
 												<input type="text" id="empPnm" name="leavSubst" title="담당자" value="" style="width: 30%;" readonly="readonly">
 											</dd>
-								        </dl>
+										</dl>
 								        <dl>
 								        	<dt>&#10003; 사유</dt>
 											<dd>
@@ -202,7 +155,7 @@
 									
 									<div class="btn_wrap">
 										<div class="float_right">
-											<button type="button" class="btn_gray_thin" onclick="aprvProc(this);">기안하기</button>
+											<button type="button" class="btn_gray_thin" onclick="lineReg();">기안하기</button>
 										</div>
 									</div>
 									

@@ -10,48 +10,39 @@
 -->
 <script>
 	$(document).ready(function() {
-		// 목록 추가 (add), 데이터 있음 (data),  데이터 없음 (none)
-		var itemLine = $("#itemLine").val();
-		var isData = itemLine == '' ? 'none' : 'data';
-		setItem(isData);
+		// 물품 목록 초기화
+		setItem();
 		
 		$(document).on("click", "#item_del", function() {
-			// 물품 삭제
-			$(this).parent().parent().remove();
+			$(this).parent().parent().remove();		// 물품 삭제
 		});
 	});
 	
 	// 목록 추가
 	function setItem(flag) {
 		try {
-			// 객체 생성
-			var str = "";
-			var obj = new Object();
-			
-			// 추가
+			// 목록 추가
 			if(flag == "add"){
 				//
-				obj["mgtNo"] 		= "";
-			    obj["itemNm"] 		= "";
-			 	obj["itemCnt"] 		= "";
-			    obj["reqRsn"] 		= "";
-				
+				var obj = new Object();
+				obj['mgtNo'] = '';
+			    obj['itemNm'] = '';
+			 	obj['itemCnt'] = '';
+			    obj['reqRsn'] = '';
+				//				
 				addItem(obj);
 				
-			} else if(flag == "data") {
-				// 목록 조회
-				var data = $("#itemLine").val();
-				var items = data.split("@").filter(item => item != "");
-				//
-				items.forEach(function(item) {
-					var parts = item.split('|');
-					// 관리번호|제품명|수량|사유@...
-					obj["mgtNo"] 		= parts[0];
-				    obj["itemNm"] 		= parts[1];
-				 	obj["itemCnt"] 		= parts[2];
-				    obj["reqRsn"] 		= parts[3];
+			} else {
+				// 물품 목록 조회
+				itemlineList.forEach(function(item){
 					//
-					str += addItem(obj);
+					var obj = new Object();
+					obj['mgtNo'] = item.mgtNo;
+					obj['itemNm'] = item.itemNm;
+					obj['itemCnt'] = item.itemCnt;
+					obj['reqRsn'] = item.reqRsn;
+					//
+					addItem(obj);
 				});
 			}
 			
@@ -118,29 +109,18 @@
 			}
 			//
 			if(confirm("초기화하시겠습니까?")){
-				var data = $("#itemLine").val();
-				//
-				if(data != ""){
-					// 초기화
-					$(".setItemTr").remove();
-					// 재 생성
-					var items = data.split("@").filter(item => item != "");
+				// 물품 목록 조회
+				$(".setItemTr").remove();
+				itemlineList.forEach(function(item){
+					//
 					var obj = new Object();
-					var str = "";
-					
-					items.forEach(function(item) {
-					    var parts = item.split('|');
-						// 관리번호|제품명|수량|사유@...
-						obj["mgtNo"] 		= parts[0];
-					    obj["itemNm"] 		= parts[1];
-					 	obj["itemCnt"] 		= parts[2];
-					    obj["reqRsn"] 		= parts[3];
-						//
-						str += addItem(obj);
-					});
-				} else {
-					$(".setItemTr").remove();
-				}
+					obj['mgtNo'] = item.mgtNo;
+					obj['itemNm'] = item.itemNm;
+					obj['itemCnt'] = item.itemCnt;
+					obj['reqRsn'] = item.reqRsn;
+					//
+					addItem(obj);
+				});
 			}
 			
 		} catch (error) {
@@ -155,10 +135,11 @@
 			var itemLine = "";			// 목록 항목
 			var itemYn = true; 		// 유효성 플래그
 			var reqCnt = 0;
+			//
+			itemLine = [];					// 목록 초기화
 			//	
 			$(".setItemTr").each(function(idx){
-				// 항목 등록
-				// (관리번호|제품명|수량|사유@...)
+				// 유효성 검증
 				var mgtNo = $(this).find("input[name='mgtNo']").val();
 				var itemNm = $(this).find("input[name='itemNm']").val();
 				var itemCnt = $(this).find("input[name='itemCnt']").val();
@@ -187,9 +168,6 @@
 				}
 				// 등록 건수
 				reqCnt++;
-				// 
-				itemLine += mgtNo + "|" + itemNm + "|" + itemCnt + "|" + reqRsn;
-	    		itemLine += "@";
 			});
 			
 			// 특정 항목이 입력되지 않은 경우
@@ -203,7 +181,16 @@
 			
 			// 등록		
 			if(confirm("<spring:message code="APRV.ITEM.CONFIRM"/>")){
-				$("#itemLine").val(itemLine);
+				$(".setItemTr").each(function(idx){
+					// 추가
+					itemlineList.push({
+						'mgtNo' : $(this).find("input[name='mgtNo']").val(), 
+						'itemNm' : $(this).find("input[name='itemNm']").val(),
+						'itemCnt' : $(this).find("input[name='itemCnt']").val(),
+						'reqRsn' : $(this).find("input[name='reqRsn']").val()
+					});
+				});
+				//
 				alert("<spring:message code="APRV.ITEM.SUCCESS"/>");
 				popClose(type);
 			}
@@ -214,7 +201,7 @@
 	}
 </script>
 
-<div class="post_table_wrap scroll_wa">
+<div class="post_table_wrap scroll_wrap">
 	<table class="post_table itemTbl">
 		<caption>물품 등록 목록</caption>
 		<colgroup>

@@ -12,8 +12,8 @@
 	//
 	$(document).ready(function() {
 		// 오늘 지정
-		var srchDt = "${param.srchSdt}";
-		if(srchDt=="") $("#srchSdt").val(today);
+		var srchDt = "${param.srchDt}";
+		if(srchDt=="") $("#srchDt").val(today);
 		
 		// 데이터 조회
 		var isDefaultListEmpty = ${empty defaultList};
@@ -31,8 +31,8 @@
 			if(isDef){
 				html = `
 						<div class="taskArea">
-							<div style="text-align: end;">
-								<input type="button" class="btn_gray_thin" value="삭제" onclick="removeCall(this);">
+							<div>
+								<input type="button" class="btn_gray_thin" value="행 삭제" onclick="removeCall(this);">
 							</div>
 
 							<div class="post_view">
@@ -105,7 +105,7 @@
 			    	url : "intrTaskInqy1011.do",
 					data : {
 						'empIdx':'${empVO.empIdx}',
-						'srchDt':$('#srchSdt').val()
+						'srchDt':$('#srchDt').val()
 					},
 					dataType : 'text',
 					success : function(data){
@@ -174,7 +174,7 @@
 					data : {
 						'taskList':JSON.stringify(data),
 						'empIdx':'${empVO.empIdx}',
-						'srchDt':$("#srchSdt").val()
+						'srchDt':$("#srchDt").val()
 					},
 					dataType : 'text',
 					success : function(data){
@@ -208,7 +208,7 @@
 			var taskHh = $(this).find(".taskHh").val();
 			var taskMm = $(this).find(".taskMm").val();
 			var taskCont = $(this).find(".taskCont").val();
-			var taskDt = $("#srchSdt").val();
+			var taskDt = $("#srchDt").val();
 			//	
 			var rObj = {
 					'taskTitle':taskTitle,
@@ -225,7 +225,7 @@
 		return jObj;
 	}
 	
-	// 삭제
+	// 화면 상 삭제
 	function removeCall(btn){
 		try {
 			// 유효성 검증
@@ -237,7 +237,42 @@
 			$(btn).closest('.taskArea').remove();
 			
 		} catch (error) {
-	        console.error("[Error] 목록 삭제 : ", error.message);
+	        console.error("[Error] 화면 상 삭제 : ", error.message);
+		}
+	}
+	
+	// 업무일지 삭제
+	function delProc(btn){
+		try {
+			//
+			if(confirm("삭제하시겠습니까?")){
+				$.ajax({
+			    	type : 'post',
+			    	url : "intrTaskProc1020.do",
+					data : {
+						'empIdx':'${empVO.empIdx}',
+						'srchDt':$("#srchDt").val()
+					},
+					dataType : 'text',
+					success : function(data){
+			    		//
+   						var json = eval(data);
+   						if(json[0].res=="YES"){
+   							alert("<spring:message code="PROC.SUCCESS"/>");
+							$("#srchBtn").trigger("click");
+   							
+   						} else {
+   							alert("<spring:message code="PROC.FAIL"/>");
+	   					}
+					},
+					error : function(xhr, status, error){
+						alert("<spring:message code="PROC.ERROR"/>");				
+				    }
+				});
+			}
+			
+		} catch (error) {
+	        console.error("[Error] 업무일지 삭제 : ", error.message);
 		}
 	}
 </script>
@@ -264,18 +299,22 @@
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 											
-									<h2>업무일지</h2>
+									<h2>업무일지
+										<span class="float_right">
+											<button type="button" class="btn_blue_thin" onclick="regProc(this.form);">저장</button>
+											<button type="button" class="btn_gray_thin" onclick="delProc(this.form);">삭제</button>
+										</span>
+									</h2>
 									<div class="srch_wrap">
 										<div class="srch_area">
 											<label class="srch_label">작성일자</label>
-											<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchDt" id="srchDt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
 											<input type="button" id="srchBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
 										</div>
 										
 										<div class="srch_area float_right" style="padding-top: 27px;">
 											<button type="button" class="btn_navy" onclick="addTask(true);">추가</button>
 											<button type="button" class="btn_gray" onclick="initTask();">초기화</button>
-											<button type="button" class="btn_blue" onclick="regProc(this.form);">저장</button>
 										</div>
 									</div>
 									
@@ -283,8 +322,8 @@
 										<!-- 업무 작성 -->
 										<c:forEach var="list" items="${defaultList}" varStatus="status"> 
 											<div class="taskArea">
-												<div style="text-align: end;">
-													<input type="button" class="btn_gray_thin" value="삭제" onclick="removeCall(this);">
+												<div>
+													<input type="button" class="btn_gray_thin" value="행 삭제" onclick="removeCall(this);">
 												</div>
 												
 												<div class="post_view">

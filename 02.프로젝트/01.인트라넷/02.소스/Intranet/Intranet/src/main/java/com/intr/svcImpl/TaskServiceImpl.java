@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,7 +123,6 @@ public class TaskServiceImpl implements TaskService{
 	// 업무 캘린더 조회
 	public void intrTaskInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
-		JSONArray jAray = new JSONArray();
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
@@ -131,7 +130,7 @@ public class TaskServiceImpl implements TaskService{
 			// 업무 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = taskDao.intrTaskInqy3011(model, paramMap);
-			model.addAttribute("defaultList", jAray.fromObject(defaultList));
+			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
 			//
@@ -139,7 +138,7 @@ public class TaskServiceImpl implements TaskService{
 		}
 	}
 	
-	// 업무일지 등록
+	// 업무일지 저장
 	public String intrTaskProc1010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
@@ -195,6 +194,33 @@ public class TaskServiceImpl implements TaskService{
 				resStr = "YES";
 			}
 			
+			defaultStr = String.format("[{'res':'%s'}]", resStr);			
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무일지 삭제
+	public String intrTaskProc1020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> tempMap = null;
+		String defaultStr = "";
+		String resStr = "YES";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 삭제
+			//--------------------------------------------------------------------------------------------
+			tempMap = new HashMap<String, Object>();
+			tempMap.put("empIdx", (String)paramMap.get("empIdx"));
+			tempMap.put("srchDt", (String)paramMap.get("srchDt"));
+			//
+			taskDao.intrTaskProc1021(tempMap);
+			//
 			defaultStr = String.format("[{'res':'%s'}]", resStr);			
 			
 		} catch (Exception e) {

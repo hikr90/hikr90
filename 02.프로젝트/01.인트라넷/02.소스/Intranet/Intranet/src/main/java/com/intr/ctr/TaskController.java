@@ -183,7 +183,28 @@ public class TaskController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 업무일지 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 업무일지 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultStr;
+	}
+	
+	// 업무일지 삭제 처리
+	@RequestMapping("/intrTaskProc1020.do")
+	@ResponseBody
+	public String intrTaskProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 업무일지 삭제 처리
+			//--------------------------------------------------------------------------------------------
+			defaultStr = taskService.intrTaskProc1020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 업무일지 삭제 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultStr;
@@ -204,7 +225,7 @@ public class TaskController {
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 업무 캘린더 등록 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 업무 캘린더 저장 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return defaultStr;

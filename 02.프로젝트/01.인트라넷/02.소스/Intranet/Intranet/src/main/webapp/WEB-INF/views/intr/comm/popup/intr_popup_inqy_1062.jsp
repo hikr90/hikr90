@@ -8,7 +8,7 @@
 	view : intr_popup_inqy_1062
 	title : 물품 조회 팝업
 -->
-<div class="post_table_wrap scroll_wa">
+<div class="post_table_wrap scroll_wrap">
 	<table class="post_table">
 		<caption>물품 등록 목록</caption>
 		<colgroup>

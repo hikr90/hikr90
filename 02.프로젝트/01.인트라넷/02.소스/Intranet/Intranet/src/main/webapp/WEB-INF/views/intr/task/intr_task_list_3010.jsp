@@ -83,18 +83,6 @@
 		try {
 			// 유효성 검증
 			if(!valProc()){return;};
-			if($("#srchSdt").val() == ''){
-				alert("<spring:message code="TASK.SDT.NONE"/>");
-				return;
-			}
-			if($("#srchEdt").val() == ''){
-				alert("<spring:message code="TASK.EDT.NONE"/>");
-				return;
-			}
-			if($("#srchSdt").val() > $("#srchEdt").val()){
-				alert("<spring:message code="TASK.DT.INVAILD"/>");
-				return;
-			}
 			
 			// 등록 처리
 			if(confirm("등록하시겠습니까?")){
@@ -103,8 +91,8 @@
 					url:"intrTaskProc2010.do",
 					data: {
 						'tldrTitle': $("#tldrTitle").val(),
-				        'tldrSdt':   $("#srchSdt").val(),
-				        'tldrEdt':   $("#srchEdt").val(),
+				        'tldrSdt':   $("#tldrSdt").val(),
+				        'tldrEdt':   $("#tldrEdt").val(),
 				        'tldrCont':  $("#tldrCont").val(),
 				        'empIdx':   "${empVO.empIdx}"
 					},
@@ -138,26 +126,14 @@
 		try {
 			// 유효성 검증
 			if(!valProc()){return;};
-			if($("#srchSdt").val() == ''){
-				alert("<spring:message code="TASK.SDT.NONE"/>");
-				return;
-			}
-			if($("#srchEdt").val() == ''){
-				alert("<spring:message code="TASK.EDT.NONE"/>");
-				return;
-			}
-			if($("#srchSdt").val() > $("#srchEdt").val()){
-				alert("<spring:message code="TASK.DT.INVAILD"/>");
-				return;
-			}
 			//
 			if(confirm("수정하시겠습니까?")){
 	   			$.ajax({
 					url:"intrTaskProc2020.do",
 					data: {
 						'tldrTitle': $("#tldrTitle").val(),
-				        'tldrSdt':   $("#srchSdt").val(),
-				        'tldrEdt':   $("#srchEdt").val(),
+				        'tldrSdt':   $("#tldrSdt").val(),
+				        'tldrEdt':   $("#tldrEdt").val(),
 				        'tldrCont':  $("#tldrCont").val(),
 				        'tldrId': 	  $("#tldrId").val(),
 				        'empIdx':   "${empVO.empIdx}"

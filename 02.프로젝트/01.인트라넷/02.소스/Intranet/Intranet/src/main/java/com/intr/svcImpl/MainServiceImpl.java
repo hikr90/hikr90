@@ -46,6 +46,14 @@ public class MainServiceImpl implements MainService{
 			// 로그인 권한 사용자 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = authDao.intrAuthInqy5011(model);
+			//
+			if(defaultList != null) {
+				for(int i=0;i<defaultList.size();i++) {
+					String decPwd = utilService.decryptProc((String)defaultList.get(i).get("empPwd"));
+					defaultList.get(i).put("decpwd", decPwd);
+				}
+			}
+			//
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -66,7 +74,7 @@ public class MainServiceImpl implements MainService{
 			// 로그인 사용자 조회
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = mainDao.intrMainInqy1011(model, paramMap);
-
+			
 			//--------------------------------------------------------------------------------------------
 			// 아이디 / 비밀번호 체크
 			//--------------------------------------------------------------------------------------------

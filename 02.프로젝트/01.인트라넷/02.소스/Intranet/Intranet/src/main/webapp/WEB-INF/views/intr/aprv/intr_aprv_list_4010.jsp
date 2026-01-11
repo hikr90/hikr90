@@ -148,14 +148,14 @@
 		//
 		$(".setListTr").each(function(idx){
 			// 결재자 확인
-			var aprvCd = $(this).find("input[name='aprvCd']").val();
+			var aprvtypeCd = $(this).find("input[name='aprvtypeCd']").val();
 			
-			if(aprvCd == 'TYPE_0020'){		// 결재
+			if(aprvtypeCd == 'TYPE_0020'){		// 결재
 				aprvCnt++;
 			}
 			
 			// 결재 유형이 선택되지 않음
-			if(idx != 0 && (aprvCd == '' || aprvCd == null || aprvCd == 'undefined')){
+			if(idx != 0 && (aprvtypeCd == '' || aprvtypeCd == null || aprvtypeCd == 'undefined')){
 				alert((idx + 1) + "번째 항목의 결재 유형이 선택되지 않았습니다.");
 				isLine = false;
 				return false;
@@ -185,7 +185,7 @@
 				let  aprvlineList = [];
 				
 				$(".setListTr").each(function(idx){
-		   			let aprvtypeCd = $(this).find("input[name='aprvCd']").val();
+		   			let aprvtypeCd = $(this).find("input[name='aprvtypeCd']").val();
 		   			let aprvIdx = $(this).find("input[name='aprvIdx']").val();
 					//		   			
 		   			aprvlineList.push({
@@ -372,7 +372,7 @@
 											<!-- 화살표 -->
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
-											<!-- 사용자 트리 -->
+											<!-- 사용자 목록 -->
 											<div id="aprvlineTb" class="tree_info" style="width: 646px;"></div>
 										</div><!-- End emp_area -->
 									</div><!-- End tree_wrap -->

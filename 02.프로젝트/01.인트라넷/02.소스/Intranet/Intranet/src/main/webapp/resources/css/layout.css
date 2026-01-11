@@ -168,8 +168,9 @@
 .pop_area .pop_wrap .srch_area { margin: 0px; }
 
 .pop_sbox { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 44px; text-indent: 10px; }
-.pop_sul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
+.pop_sul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; padding-top: 1px; }
 .pop_sul .hover { color: #ffffff; background-color: #727272; }
+.pop_sul li { border-top: 1px solid #d6d6d6; }
 
 .pop_close { background: url("../images/icon/icon_close.png") no-repeat center center; width: 15px; height: 15px; cursor: pointer; margin-top: 3px; }
 
@@ -194,7 +195,8 @@
 /* ========================================== Select ========================================== */
 .select_box { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 43px; text-indent: 10px; }
 .select_ul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
-.select_ul li { padding-left: 5px; }
+.select_ul li { padding-left: 5px; border-top: 1px solid #d6d6d6; }
+.select_ul li:nth-child(1) { border-top: none; }
 .select_ul .hover { color: #ffffff; background-color: #727272; }
 
 

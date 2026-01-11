@@ -4,6 +4,11 @@
 	view : intr_popup_inqy_1070
 	title : 정산내역 등록 관리 팝업
 -->
+<script>
+	// 정산 내역
+	let corplineList = [];
+</script>
+
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 85%;">
 		<div class="content">

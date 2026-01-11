@@ -3,7 +3,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <script type="text/javascript">
-	// 권한 메뉴 목록 전체 체크
+	// 전체 메뉴 목록 전체 체크
+	$('.menuChk').click(function() {
+		if($(".menuChk").is(":checked")){
+			$("input[name=menuCd]").prop("checked", true);
+	    } else {
+	    	$("input[name=menuCd]").prop("checked", false);	
+	    }
+	});
+	
+	// 메뉴 부여 목록 전체 체크
 	$('.authChk').click(function() {
 		if($(".authChk").is(":checked")){
 			$("input[id=authMenuCd]").prop("checked", true);

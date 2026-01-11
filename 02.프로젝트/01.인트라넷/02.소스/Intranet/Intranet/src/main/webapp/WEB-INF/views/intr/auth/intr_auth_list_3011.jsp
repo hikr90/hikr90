@@ -16,7 +16,7 @@
 	function moveBtn(f) {
 		try {
 			// 체크한 건이 없는 경우
-			if($("input[id=empIdx]:checked").length==0){
+			if($("input[name=empIdx]:checked").length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
 			}

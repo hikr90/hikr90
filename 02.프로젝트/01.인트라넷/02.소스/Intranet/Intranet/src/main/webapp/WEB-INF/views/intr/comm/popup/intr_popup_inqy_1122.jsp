@@ -30,9 +30,9 @@
 	<dl class="post_info">
 		<dt>&#10003; 업무 기간</dt>
 		<dd>
-			<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="tldrSdt" title="업무 기간 (시작)" value="${defaultInfo.tldrSdt}" readonly="readonly" />
+			<input type="text" class="srch_cdt_date srchSdt" id="tldrSdt" name="tldrSdt" title="업무 기간 (시작)" value="${defaultInfo.tldrSdt}" readonly="readonly" />
 				~
-			<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="tldrEdt" title="업무 기간 (종료)" value="${defaultInfo.tldrEdt}" readonly="readonly" />
+			<input type="text" class="srch_cdt_date srchEdt" id="tldrEdt" name="tldrEdt" title="업무 기간 (종료)" value="${defaultInfo.tldrEdt}" readonly="readonly" />
 		</dd>
 	</dl>
 	<dl>

@@ -34,6 +34,7 @@ public interface View {
 	public static final String INTR_POPUP_INQY_1040 = "intr_popup_inqy_1040.jsp";		// 결재선 팝업 관리
 	public static final String INTR_POPUP_INQY_1041 = "intr_popup_inqy_1041.jsp";			// 결재선 선택 팝업 트리
 	public static final String INTR_POPUP_INQY_1042 = "intr_popup_inqy_1042.jsp";		// 결재선 목록
+	public static final String INTR_POPUP_INQY_1043 = "intr_popup_inqy_1043.jsp";		// 결재선 상세 (팝업)
 
 	public static final String INTR_POPUP_INQY_1050 = "intr_popup_inqy_1050.jsp";		// 결재의견 관리
 	public static final String INTR_POPUP_INQY_1051 = "intr_popup_inqy_1051.jsp";			// 결재의견 입력

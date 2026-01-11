@@ -13,7 +13,7 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap" style="height: 650px;">
+					<div class="pop_wrap" style="height: 330px;">
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">

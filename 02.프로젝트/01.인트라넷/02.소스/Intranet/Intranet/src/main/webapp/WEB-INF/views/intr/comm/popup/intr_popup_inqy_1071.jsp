@@ -9,55 +9,45 @@
 	title : 정산내역 등록 팝업
 -->
 <script>
-	var addCnt = 0;
 	$(document).ready(function() {
-		// 목록 추가 (add), 데이터 있음 (data),  데이터 없음 (none)
-		var corpLine = $("#corpLine").val();
-		var isData = corpLine == '' ? 'none' : 'data';
-		setCorp(isData);
+		// 정산 내역 초기화
+		setCorp();
 		
-		// 정산내역 삭제
 		$(document).on("click", "#corp_del", function() {
-			$(this).parent().parent().remove();
+			$(this).parent().parent().remove();		// 정산내역 삭제
 		});
 	});
 	
-	// 목록 생성
+	// 목록 추가
 	function setCorp(flag) {
 		try {
-			// 객체 생성
-			var str = "";
-			var obj = new Object();
-			
-			// 추가
+			// 목록 추가
 			if(flag == "add"){
 				//
-				obj["useDt"] 		= "";
-				obj["useLoc"] 		= "";
-			    obj["useAmt"] 		= "";
-			    obj["useRsn"] 		= "";
-				
+				var obj = new Object();
+				obj["useDt"] = "";
+				obj["useLoc"] = "";
+			    obj["useAmt"] = "";
+			    obj["useRsn"] = "";
+				//
 				addCorp(obj);
 				
-			} else if(flag == "data") {
-				// 목록 조회
-				var data = $("#corpLine").val();
-				var items = data.split("@").filter(item => item != "");
-				//
-				items.forEach(function(item) {
-					var parts = item.split('|');
-					// 사용 일자|사용처|사용금액|사유@...
-					obj["useLoc"] 		= parts[0];
-				    obj["useAmt"] 		= parts[1];
-				 	obj["useRsn"] 		= parts[2];
-				 	obj["useDt"] 		= parts[3];
+			} else {
+				// 정산 내역 조회
+				corplineList.forEach(function(item){
 					//
-					str += addCorp(obj);
+					var obj = new Object();
+					obj["useDt"] = item.useDt;
+					obj["useLoc"] = item.useLoc;
+				    obj["useAmt"] = item.useAmt;
+				    obj["useRsn"] = item.useRsn;
+					//
+					addCorp(obj);
 				});
 			}
 			
 		} catch (error) {
-	        console.error("[Error] 목록 생성 : ", error.message);
+	        console.error("[Error] 목록 추가 : ", error.message);
 		}
 	}
 	
@@ -69,7 +59,7 @@
 			
 			str += "<tr class='setCorpTr'>";
 			str += 		"<td class='first_td'>";
-			str += 		"	<input type='text' class='srch_cdt_date srchSdt add_height' id='srchSdt' name='useDt' value='' readonly='readonly' />";
+			str += 		"	<input type='text' class='srch_cdt_date srchSdt add_height' name='useDt' value='" + obj["useDt"] + "' readonly='readonly' />";
 			str += 		"</td>";
 			str += 		"<td>";
 			str += 			"<input type='text' id='useLoc' class='add_height' name='useLoc' style='width:240px;' value='" + obj["useLoc"] + "'>"
@@ -86,7 +76,6 @@
 			str += "</tr>";
 			//
 			$(".corpTbl").append(str);
-			addCnt++;
 			
 			// 목록 높이 지정
 			$(".add_height").css({
@@ -142,37 +131,26 @@
 	
 	// 목록 초기화
 	function initCorp(f){
-		try {
 			// 유효성 검증
-			if(addCnt==0){
+		try {
+			if($(".setCorpTr").length==0){
 				alert("<spring:message code="ADD.CNT.NONE"/>");
 				return;
 			}
 			//			
 			if(confirm("초기화하시겠습니까?")){
-				var data = $("#corpLine").val();
-				//
-				if(data != ""){
-					// 초기화
-					$(".setCorpTr").remove();
-					// 재 생성
-					var items = data.split("@").filter(item => item != "");
+				// 정산 내역 조회
+				$(".setCorpTr").remove();
+				corplineList.forEach(function(item){
+					//
 					var obj = new Object();
-					var str = "";
-					
-					items.forEach(function(item) {
-					    var parts = item.split('|');
-						// 사용 일자|사용처|사용금액|사유@...
-						obj["useLoc"] 		= parts[0];
-					    obj["useAmt"] 		= parts[1];
-					 	obj["useRsn"] 		= parts[2];
-					 	obj["useDt"] 		= parts[3];
-						//
-						str += addCorp(obj);
-					});
-				} else {
-					$(".setCorpTr").remove();
-				}
+					obj['useDt'] = item.useDt;
+					obj['useLoc'] = item.useLoc;
+					obj['useAmt'] = item.useAmt;
+					obj['useRsn'] = item.useRsn;
+					//
+					addCorp(obj);
+				});
 			}
 			
 		} catch (error) {
@@ -187,12 +165,9 @@
 			var corpLine = "";			// 목록 항목
 			var corpYn = true; 		// 유효성 플래그
 			var reqCnt = 0;				// 등록 건수
-			var total = 0;					// 총 금액
-			var amt = 0;					// 계산 금액
 			//	
 			$(".setCorpTr").each(function(idx){
-				// 항목 등록
-				// (사용처|사용금액|사유@...)
+				// 유효성 검증
 				var useLoc = $(this).find("input[name='useLoc']").val();
 				var useAmt = $(this).find("input[name='useAmt']").val();
 				var useRsn = $(this).find("input[name='useRsn']").val();
@@ -221,13 +196,6 @@
 				}
 				// 등록 건수
 				reqCnt++;
-				// 
-				corpLine += useLoc + "|" + useAmt + "|" + useRsn + "|" + useDt + "|";
-	    		corpLine += "@";
-	    		
-	    		// 합계 계산
-	    		amt = parseInt(useAmt.replace(/[₩,\s]/g, ""), 10);
-	    		total += amt;
 			});
 			
 			// 특정 항목이 입력되지 않은 경우
@@ -241,7 +209,23 @@
 			
 			// 등록		
 			if(confirm("<spring:message code="APRV.CORP.CONFIRM"/>")){
-				$("#corpLine").val(corpLine);
+				var total = 0;					// 총 금액
+				var amt = 0;					// 계산 금액
+				//	
+				$(".setCorpTr").each(function(idx){
+					// 추가
+					corplineList.push({
+						'useLoc' : $(this).find("input[name='useLoc']").val(), 
+						'useAmt' : $(this).find("input[name='useAmt']").val(),
+						'useRsn' : $(this).find("input[name='useRsn']").val(),
+						'useDt' : $(this).find("input[name='useDt']").val()
+					});
+					
+		    		// 합계 계산
+		    		amt = parseInt($(this).find("input[name='useAmt']").val().replace(/[₩,\s]/g, ""), 10);
+		    		total += amt;
+				});				
+				//	
 	    		$("#total").val("₩" + total.toLocaleString());
 				alert("<spring:message code="APRV.CORP.SUCCESS"/>");
 				popClose(type);

@@ -103,7 +103,7 @@
 																	<td class="title align_left">
 																		<c:forEach var="list2" items="${authList}" varStatus="status2">
 																			<c:if test="${list1.authCd eq list2.authCd}">
-																				<a href="javascript:setInfo('${list2.empId}','${list2.empPwd}');" style="color: #214b97;">${list2.empNm}</a>
+																				<span style="color: #214b97;">${list2.empNm}</span>
 																				&nbsp;
 																			</c:if>
 																		</c:forEach>

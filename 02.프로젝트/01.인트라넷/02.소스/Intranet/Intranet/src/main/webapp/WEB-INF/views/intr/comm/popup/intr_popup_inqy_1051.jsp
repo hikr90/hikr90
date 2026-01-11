@@ -6,7 +6,7 @@
 -->
 <div class="post_view" style="margin: 0; margin-top:20px;">
 	<dl>
-		<dt>비밀번호</dt>
+		<dt>&#10003; 비밀번호</dt>
 		<dd>
 			<input type="password" id="aprvPwd" name="aprvPwd" style="width: 100%;">
 		</dd>

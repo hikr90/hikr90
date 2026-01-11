@@ -5,8 +5,8 @@
 
 <c:forEach var="list" items="${defaultList}" varStatus="status"> 
 	<div class="taskArea">
-		<div style="text-align: end;">
-			<input type="button" class="btn_gray_thin" value="삭제" onclick="removeCall(this);">
+		<div>
+			<input type="button" class="btn_gray_thin" value="행 삭제" onclick="removeCall(this);">
 		</div>
 		
 		<div class="post_view">

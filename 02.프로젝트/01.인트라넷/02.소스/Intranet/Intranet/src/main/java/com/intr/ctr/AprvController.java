@@ -261,7 +261,10 @@ public class AprvController {
 	
 	// 결재 처리
 	@RequestMapping("/intrAprvProc1020.do")
+	@ResponseBody
 	public String intrAprvProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		String defaultStr = "";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -272,19 +275,14 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재 처리
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvProc3010(model, paramMap);
-			
-			//--------------------------------------------------------------------------------------------
-			// 결재 상세 조회
-			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy2020(model, paramMap);
+			defaultStr = aprvService.intrAprvProc3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 결재 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
+		return defaultStr;
 	}
 	
 	// 결재선 저장 처리

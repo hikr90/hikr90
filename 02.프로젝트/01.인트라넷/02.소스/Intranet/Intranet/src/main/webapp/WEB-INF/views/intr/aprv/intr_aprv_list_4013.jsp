@@ -23,7 +23,7 @@
 			str += "		<td>" + obj["orgNm"] + "</td>";
 			str += "		<td>" + obj["empNm"] + " " + obj["rankNm"] + "</td>";
 			str += "		<td style='padding: 0;'>";
-			str += "    		<input type='hidden' id='aprvCd' name='aprvCd' name='aprvCd' value='" + obj["aprvCd"] + "'>";
+			str += "    		<input type='hidden' id='aprvtypeCd' name='aprvtypeCd' name='aprvtypeCd' value='" + obj["aprvtypeCd"] + "'>";
 			str += "    		<input type='hidden' id='aprvIdx' name='aprvIdx' name='aprvIdx' value='" + obj["aprvIdx"] + "'>";
 			//
 			str += "  		<div class='select_wrap'>";
@@ -100,7 +100,7 @@
 				<thead>
 					<tr>
 						<th scope="col">부서</th>
-						<th scope="col">성함</th>
+						<th scope="col">이름</th>
 						<th scope="col">결재유형</th>
 						<th scope="col">삭제</th>
 					</tr>
@@ -112,7 +112,7 @@
 							<td>${list.orgNm}</td>
 							<td>${list.aprvNm} ${list.rankNm}</td>
 							<td style="padding: 0;">
-								<input type="hidden" id="aprvCd" name="aprvCd" value="${list.aprvtypeCd}">
+								<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="${list.aprvtypeCd}">
 								<input type="hidden" id="aprvIdx" name="aprvIdx" value="${list.aprvIdx}">
 								
 								<c:if test="${status.index eq 0}">${list.aprvtypeNm}</c:if>

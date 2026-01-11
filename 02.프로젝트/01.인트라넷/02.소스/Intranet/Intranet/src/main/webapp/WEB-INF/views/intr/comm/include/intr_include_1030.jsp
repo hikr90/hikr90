@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
 <header>
-	<div class="wrap">
+	<div class="wrap" style="min-height: 100px;">
 		<div class="header_wrap">
 			<div class="header_state">
 				<ul class="header_list">

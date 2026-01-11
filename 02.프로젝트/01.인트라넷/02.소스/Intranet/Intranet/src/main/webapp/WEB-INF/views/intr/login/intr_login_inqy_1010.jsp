@@ -33,6 +33,7 @@
    				if(!valProc()){return;};
    				//   			
    				var param = $("#form").serialize();
+   				
    	   			$.ajax({
    	   				type:	"post" , 
    	   				url:	"intrMainProc1010.do",
@@ -115,7 +116,7 @@
 											<td class="title align_left">
 												<c:forEach var="list2" items="${defaultList}" varStatus="status2">
 													<c:if test="${list1.authCd eq list2.authCd}">
-														<a href="javascript:setInfo('${list2.empId}','${list2.empPwd}');" style="color: #214b97;">${list2.empNm}</a>
+														<a href="javascript:setInfo('${list2.empId}','${list2.decpwd}');" style="color: #214b97;">${list2.empNm}</a>
 														&nbsp;
 													</c:if>
 												</c:forEach>

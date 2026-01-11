@@ -187,9 +187,9 @@
 										</dd>
                                         <dt>&#10003; 계약기간</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="srchSdt" name="projSdt" value="" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" value="" readonly="readonly" />
 												~
-											<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="projEdt" value="" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="" readonly="readonly" />
 										</dd>
 									</dl>
 									<dl class="post_info">
