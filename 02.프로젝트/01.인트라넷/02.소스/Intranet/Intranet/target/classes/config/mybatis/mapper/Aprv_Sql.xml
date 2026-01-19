@@ -84,6 +84,7 @@
 							A.APRV_ID
 						,	A.APRV_TITLE
 						,	A.TEMP_CD
+						,	T.TEMP_NM
 						,	A.APRVSTEP_CD
 						,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
 						,	A.CURR_APRV_SNO
@@ -142,6 +143,9 @@
 					</if>
 					<if test="srchStepCd != null and srchStepCd != ''">
 			        	AND A.APRVSTEP_CD = #{srchStepCd, jdbcType=VARCHAR}
+					</if>
+					<if test="srchTempCd != null and srchTempCd != ''">
+			        	AND T.TEMP_CD = #{srchTempCd, jdbcType=VARCHAR}
 					</if>
 			) SUB_DATA
 			WHERE 1=1 
@@ -311,7 +315,7 @@
 	</select>
 
 	<select id="intrAprvInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy2011 : 결재 상태 조회 */
+		/* intrAprvInqy2011 : 결재 조회 */
 		SELECT
 			DATA.*
 		FROM (
@@ -350,6 +354,16 @@
 				AND AH.RSLTTYPE_CD IS NULL
 		) DATA
 		WHERE NUM = '1'
+	</select>
+	
+	<select id="intrAprvInqy2013" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrAprvInqy2013 : 기안문 양식 조회 */
+		SELECT 
+			TEMP_CD AS COMMCODE_CD
+		,	TEMP_NM AS COMMCODE_NM
+	FROM TEMPLATE
+	WHERE 1=1
+	ORDER BY TEMP_CD ASC
 	</select>
 
 	<select id="intrAprvInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">

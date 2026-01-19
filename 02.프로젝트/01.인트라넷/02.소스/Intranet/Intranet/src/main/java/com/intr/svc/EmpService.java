@@ -19,6 +19,8 @@ public interface EmpService {
 	void intrEmpInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 조회
 	void intrEmpInqy3011(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 조회 (AJAX)
 	void intrEmpInqy3012(Model model, HashMap<String, Object> paramMap) throws Exception; 		// 담당업무 등록 조회 (AJAX)
+	//
+	void intrEmpInqy4010(Model model, HashMap<String, Object> paramMap) throws Exception;			// 인사통계 목록 조회
 	
 	// 사원 관리
 	String intrEmpProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; 	// 등록

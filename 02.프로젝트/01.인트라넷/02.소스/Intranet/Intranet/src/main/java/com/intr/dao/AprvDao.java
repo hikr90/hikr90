@@ -70,7 +70,7 @@ public class AprvDao {
 		return defaultList;
 	}
 	
-	// 결재 상태 조회
+	// 결재 조회
 	public HashMap<String, Object> intrAprvInqy2011(Model model, HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
@@ -84,6 +84,14 @@ public class AprvDao {
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("aprv.intrAprvInqy2012", paramMap);
 		return defaultInfo;
+	}
+
+	// 기안문 양식 조회
+	public List<HashMap<String, Object>> intrAprvInqy2013(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("aprv.intrAprvInqy2013", paramMap);
+		return defaultList;
 	}
 	
 	// 연차 공유 조회

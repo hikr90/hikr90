@@ -133,8 +133,8 @@
 													<label class="srch_label">진행상태</label>
 													<div class="select_wrap">
 														<div id="statList" class="sList select_box">${empty param.srchStatNm ? '전체' : param.srchStatNm}</div>
-														<input type="hidden" name="srchStatNm" value="${param.statNm}">
 														<input type="hidden" name="srchStatCd" value="${param.statCd}">
+														<input type="hidden" name="srchStatNm" value="${param.statNm}">
 													
 														<ul class="sUl select_ul scroll_wrap">
 															<c:forEach var="list" items="${statList}">

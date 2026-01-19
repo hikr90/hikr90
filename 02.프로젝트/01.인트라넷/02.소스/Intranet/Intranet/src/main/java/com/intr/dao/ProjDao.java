@@ -46,14 +46,6 @@ public class ProjDao {
 		return resInt;
 	}
 	
-	// 프로젝트 삭제 처리 (수정)
-	public int intrProjProc1021(HashMap<String,Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("proj.intrProjProc1021", paramMap);
-		return resInt;
-	}
-
 	// 프로젝트 삭제 처리 (삭제)
 	public int intrProjProc1021(HashMap<String,Object> paramMap) {
 		//

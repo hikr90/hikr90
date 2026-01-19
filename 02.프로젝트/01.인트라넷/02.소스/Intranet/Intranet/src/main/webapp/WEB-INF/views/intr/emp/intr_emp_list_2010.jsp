@@ -84,12 +84,12 @@
 											<div class="srch_area">
 												<label class="srch_label">재직여부</label>
 												<div class="select_wrap">
-													<div id="useList" class="sList select_box">${empty param.useCd ? '전체' : param.useCd}</div>
-													<input type="hidden" name="useCd" value="${param.useCd}">
-													<input type="hidden" name="useNm" value="${param.useNm}">
+													<div id="hireList" class="sList select_box">${empty param.hireNm ? '전체' : param.hireNm}</div>
+													<input type="hidden" name="hireCd" value="${param.hireCd}">
+													<input type="hidden" name="hireNm" value="${param.hireNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
-														<c:forEach var="list" items="${useList}">
+														<c:forEach var="list" items="${hireList}">
 															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
@@ -117,6 +117,7 @@
 												<col class="w12per">
 												<col class="w12per">
 												<col class="w8per">
+												<col class="w8per">
 											</colgroup>
 											<thead>
 												<tr>
@@ -124,7 +125,8 @@
 													<th scope="col">부서</th>
 													<th scope="col">직급</th>
 													<th scope="col">사원명</th>
-													<th scope="col">재직 여부</th>
+													<th scope="col">연락처</th>
+													<th scope="col">재직여부</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -142,19 +144,15 @@
 														<td>
 															<a class="show_view a_title" onclick="detCall('${list.empIdx}');">${list.empNm}</a>
 														</td>
-														<td>
-															<c:choose>
-																<c:when test="${list.leavYn eq 'N'}">N</c:when>
-																<c:otherwise>Y</c:otherwise>
-															</c:choose>
-														</td>
+														<td>${list.mobNo}</td>
+														<td>${list.leavYn}</td>
 			                                        </tr>
 		                                        </c:forEach>
 		                                        
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="5">
+		                                                <td align="center" colspan="6">
 		                                              	      등록된 사원이 없습니다.
 		                                                </td>
 		                                            </tr>

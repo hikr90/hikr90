@@ -91,6 +91,22 @@
 												</div>
 											</div>
 											
+											<!-- 기안문 양식 -->
+											<div class="srch_area">
+												<label class="srch_label">기안문 양식</label>
+												<div class="select_wrap">
+													<div id="tempList" class="sList select_box">${empty param.srchTempNm ? '전체' : param.srchTempNm}</div>
+													<input type="hidden" name="srchTempCd" value="${param.srchTempCd}">
+													<input type="hidden" name="srchTempNm" value="${param.srchTempNm}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${tempList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+											
 											<!-- 제목 -->
 											<div class="float_right">
 												<div class="srch_area">
@@ -110,6 +126,7 @@
 											<colgroup>
 												<col class="w7per">
 												<col class="w15per">
+												<col class="w15per">
 												<col class="auto">
 												<col class="w15per">
 												<col class="w15per">
@@ -117,6 +134,7 @@
 											<thead>
 												<tr>
 													<th scope="col">순번</th>
+													<th scope="col">기안문 양식</th>
 													<th scope="col">결재단계</th>
 													<th scope="col">제목</th>
 													<th scope="col">기안자</th>
@@ -127,6 +145,7 @@
 		                                    	<c:forEach var="list" items="${defaultList}"> 
 													<tr>
 														<td class="first_td">${list.num}</td>
+														<td>${list.tempNm}</td>
 														<td>${list.aprvstepNm}</td>
 														<td class="_title">
 															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}','${list.aprvId}');">
@@ -154,7 +173,7 @@
 		                                        <!-- 글이 없는 경우 -->
 		                                        <c:if test="${empty defaultList}">
 		                                            <tr>
-		                                                <td align="center" colspan="5">
+		                                                <td align="center" colspan="6">
 		                                              	      등록된 글이 없습니다.
 		                                                </td>
 		                                            </tr>

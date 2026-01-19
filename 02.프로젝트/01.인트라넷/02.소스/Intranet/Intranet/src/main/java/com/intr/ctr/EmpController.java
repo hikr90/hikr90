@@ -302,6 +302,29 @@ public class EmpController {
 		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_3012;
 	}
 	
+	// 담당업무 조회 목록 화면
+	@RequestMapping("/intrEmpInqy4010.do")
+	public String intrEmpInqy4010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.intrCoreInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 인사 통계 조회
+			//--------------------------------------------------------------------------------------------
+			empService.intrEmpInqy4010(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 인사통계 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_EMP + Const.INTR_EMP_LIST_4010;
+	}
+	
 	// 사원 등록 처리
 	@RequestMapping("/intrEmpProc1010.do")
 	@ResponseBody

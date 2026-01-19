@@ -22,8 +22,8 @@ $(function(){
 		
 		// 텍스트 박스에 표시
     	sw.find(".sList").text(setNm);           	// 표시용 div
-    	sw.find('input').val(setNm); 				// 이름 값
-    	sw.find('input').next().val(setCd); 		// 코드 값
+    	sw.find('input').val(setCd); 				// 코드 값
+    	sw.find('input').next().val(setNm); 	// 이름 값
 
 		// 목록 닫기
 		$(".sUl").css("display","none");

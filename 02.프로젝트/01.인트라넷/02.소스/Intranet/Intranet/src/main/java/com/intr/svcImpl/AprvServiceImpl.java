@@ -144,6 +144,12 @@ public class AprvServiceImpl implements AprvService{
 			defaultList = utilDao.intrCodeInqy1011(paramMap);
 			model.addAttribute("stepList",defaultList);
 
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (기안문 양식) 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = aprvDao.intrAprvInqy2013(model, paramMap);
+			model.addAttribute("tempList",defaultList);
+			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());

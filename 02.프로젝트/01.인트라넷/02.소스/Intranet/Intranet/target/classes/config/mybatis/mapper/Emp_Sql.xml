@@ -55,10 +55,10 @@
 					<if test="rankNm != null and rankNm != ''">
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="useCd == 'Y'.toString()">
+					<if test="hireCd == 'HIRE_0010'.toString()">
 						AND E.LEAV_DT IS NULL
 					</if>
-					<if test="useCd == 'N'.toString()">
+					<if test="hireCd == 'HIRE_0020'.toString()">
 						AND E.LEAV_DT IS NOT NULL
 					</if>
         	) SUB_DATA
@@ -126,6 +126,10 @@
 				,	DISP_ORDER
 				,	REMARK
 		FROM ORG
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			</if>
 		ORDER BY DISP_ORDER ASC
 	</select>
 	
@@ -402,6 +406,75 @@
 				) AS EMP_CNT
 			,	TO_CHAR(SYSDATE, 'YYYY') AS CURR_YEAR
 		FROM DUAL
+	</select>
+
+	<select id="intrEmpInqy4012" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4012 : 인사통계 목록 조회 */
+		SELECT 
+		    CASE WHEN G_ORG = 1 THEN '전체 합계' ELSE ORG_NM END AS ORG_NM,
+		    CASE WHEN G_YM = 1 THEN '연간 소계' ELSE YEAR_MM END AS YEAR_MM,
+		    HIRE_TOTAL,
+		    LEAV_TOTAL,
+		    G_ORG, G_YM
+		FROM (
+		    SELECT
+		        ORG_CD,
+		        MAX(ORG_NM) AS ORG_NM,
+		        YEAR_MM,
+		        SUM(HIRE_SUM) AS HIRE_TOTAL,
+		        SUM(LEAV_SUM) AS LEAV_TOTAL,
+		        GROUPING(ORG_CD) AS G_ORG,
+		        GROUPING(YEAR_MM) AS G_YM
+		    FROM (
+		    	-- 입사자, 퇴사자 데이터
+		        SELECT
+		            E.ORG_CD, O.ORG_NM, SUBSTR(E.HIRE_DT, 1, 6) AS YEAR_MM,
+		            COUNT(E.EMP_IDX) AS HIRE_SUM, 0 AS LEAV_SUM
+		        FROM EMP_INFO E LEFT OUTER JOIN ORG O ON E.ORG_CD = O.ORG_CD
+		        WHERE HIRE_DT BETWEEN NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '0101' AND NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '1231'
+		        GROUP BY E.ORG_CD, O.ORG_NM, SUBSTR(E.HIRE_DT, 1, 6)
+		        UNION ALL
+		        SELECT
+		            E.ORG_CD, O.ORG_NM, SUBSTR(E.LEAV_DT, 1, 6) AS YEAR_MM,
+		            0 AS HIRE_SUM, COUNT(E.EMP_IDX) AS LEAV_SUM
+		        FROM EMP_INFO E LEFT OUTER JOIN ORG O ON E.ORG_CD = O.ORG_CD
+		        WHERE LEAV_DT BETWEEN NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '0101' AND NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '1231'
+		        GROUP BY E.ORG_CD, O.ORG_NM, SUBSTR(E.LEAV_DT, 1, 6)
+		    )
+		    GROUP BY GROUPING SETS (
+		        (ORG_CD, YEAR_MM), 		-- 1. 일반 부서별 월 데이터
+		        (ORG_CD),          				-- 2. 부서별 가로 합계 (YEAR_MM : NULL)
+		        (YEAR_MM),         			-- 3. 월별 세로 합계 (ORG_CD : NULL)
+		        ()                 						-- 4. 전체 총합 (NULL)
+		    )
+		)
+		WHERE 1=1
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			</if>
+		ORDER BY 
+		    G_ORG, -- 부서 데이터 먼저, 전체 합계는 맨 아래
+		    ORG_CD, 
+		    G_YM,  -- 월 데이터 먼저, 연간 소계는 부서 끝에
+		    YEAR_MM
+	</select>
+
+	<select id="intrEmpInqy4013" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4013 : 통계 연도 조회 */
+		SELECT
+				(TO_CHAR(SYSDATE, 'YYYY') - LEVEL + 1) AS COMMCODE_CD
+			,	(TO_CHAR(SYSDATE, 'YYYY') - LEVEL + 1) || '년' AS COMMCODE_NM
+		FROM DUAL
+		CONNECT BY LEVEL &lt;= 5
+	</select>
+	
+	<select id="intrEmpInqy4014" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrEmpInqy4014 : 통계 연월 조회 */
+		SELECT
+				NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || LPAD(LEVEL, 2, '0') AS YEAR_MM 
+			,	NVL(#{srchYearCd, jdbcType=VARCHAR}, TO_CHAR(SYSDATE, 'YYYY')) || '.' || LPAD(LEVEL, 2, '0') AS YEAR_NM 
+		FROM DUAL
+		CONNECT BY LEVEL &lt;= 12
 	</select>
 	
 	<insert id="intrEmpProc1011" parameterType="java.util.HashMap">

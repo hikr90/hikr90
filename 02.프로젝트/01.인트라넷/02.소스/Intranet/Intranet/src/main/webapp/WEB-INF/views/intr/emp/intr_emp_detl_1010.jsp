@@ -129,6 +129,8 @@
 									<input type="hidden" id="srchEdt" name="srchEdt" value="${param.srchEdt}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${param.empIdx}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
+									<input type="hidden" id="hireCd" name="hireCd" value="${param.hireCd}">
+									<input type="hidden" id="hireNm" name="hireNm" value="${param.hireNm}">
 		
 		                            <h2>사원 상세</h2>
 	                                <div class="post_write">

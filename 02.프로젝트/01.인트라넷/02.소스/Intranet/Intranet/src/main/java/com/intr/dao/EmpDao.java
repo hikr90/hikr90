@@ -122,7 +122,31 @@ public class EmpDao {
 	public List<HashMap<String, Object>> intrEmpInqy4011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqy4011");
+		defaultList = sqlsession.selectList("emp.intrEmpInqy4011", paramMap);
+		return defaultList;
+	}
+	
+	// 인사통계 목록 조회
+	public List<HashMap<String, Object>> intrEmpInqy4012(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy4012", paramMap);
+		return defaultList;
+	}
+	
+	// 통계 연도 조회
+	public List<HashMap<String, Object>> intrEmpInqy4013(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy4013", paramMap);
+		return defaultList;
+	}
+	
+	// 통계 연월 조회
+	public List<HashMap<String, Object>> intrEmpInqy4014(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("emp.intrEmpInqy4014", paramMap);
 		return defaultList;
 	}
 	

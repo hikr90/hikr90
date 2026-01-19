@@ -101,6 +101,8 @@
 									<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 									<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="${param.empIdx}">
+									<input type="hidden" id="hireCd" name="hireCd" value="${param.hireCd}">
+									<input type="hidden" id="hireNm" name="hireNm" value="${param.hireNm}">
 									<input type="hidden" id="filetypeCd" name="filetypeCd" value="EMP">
 								
 		                            <h2>사원 상세</h2>

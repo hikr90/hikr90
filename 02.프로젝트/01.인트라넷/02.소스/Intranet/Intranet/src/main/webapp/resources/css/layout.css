@@ -58,6 +58,7 @@
 /* ========================================== Post Table ========================================== */
 .post_table thead th { color: #214b97; font-weight: 700; background-color: #f3f6f8; text-align: center; border: 1px solid #d6d6d6;  padding: 5px 8px; }
 .post_table tbody td { border-bottom: 1px solid #d6d6d6; border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6; vertical-align: middle; padding: 14px 8px; color: #4c4c4c; }
+.post_table tfoot td { border-bottom: 1px solid #d6d6d6; border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6; vertical-align: middle; padding: 14px 8px; color: #4c4c4c; }
 
 .form_area .post_table thead th, .form_area .post_wrap table.post_table tbody th, .form_area .post_wrap table.post_table tbody td, .form_area .post_wrap table.post_table tfoot th, .form_area .post_wrap table.post_table tfoot td { border-right:1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6; border-left: 1px solid #d6d6d6; vertical-align: middle; padding: 14px 8px; }
 .form_area .post_table thead th { color: #214b97; font-weight: 700; background-color: #f3f6f8; }

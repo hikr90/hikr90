@@ -94,6 +94,7 @@ public interface View {
 	public static final String INTR_EMP_LIST_3010 = "intr_emp_list_3010.jsp";				// 담당업무 조회
 	public static final String INTR_EMP_LIST_3011 = "intr_emp_list_3011.jsp";				// 담당업무 조회 (AJAX)
 	public static final String INTR_EMP_LIST_3012 = "intr_emp_list_3012.jsp";				// 담당업무 등록 (AJAX)
+	public static final String INTR_EMP_LIST_4010 = "intr_emp_list_4010.jsp";				// 인사통계 조회
 	public static final String INTR_EMP_DETL_1010 = "intr_emp_detl_1010.jsp";				// 사원 등록
 	public static final String INTR_EMP_DETL_1020 = "intr_emp_detl_1020.jsp";			// 사원 수정
 	public static final String INTR_EMP_DETL_1030 = "intr_emp_detl_1030.jsp";			// 사원 상세
