@@ -55,10 +55,10 @@
 					<if test="rankNm != null and rankNm != ''">
 						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 					</if>
-					<if test="hireCd == 'HIRE_0010'.toString()">
+					<if test="srchHireCd == 'HIRE_0010'.toString()">
 						AND E.LEAV_DT IS NULL
 					</if>
-					<if test="hireCd == 'HIRE_0020'.toString()">
+					<if test="srchHireCd == 'HIRE_0020'.toString()">
 						AND E.LEAV_DT IS NOT NULL
 					</if>
         	) SUB_DATA
@@ -452,11 +452,7 @@
 			<if test="srchNm != null and srchNm != ''">
 		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 			</if>
-		ORDER BY 
-		    G_ORG, -- 부서 데이터 먼저, 전체 합계는 맨 아래
-		    ORG_CD, 
-		    G_YM,  -- 월 데이터 먼저, 연간 소계는 부서 끝에
-		    YEAR_MM
+		ORDER BY G_ORG, ORG_CD, G_YM, YEAR_MM
 	</select>
 
 	<select id="intrEmpInqy4013" resultType="CamelHashMap" parameterType="java.util.HashMap">

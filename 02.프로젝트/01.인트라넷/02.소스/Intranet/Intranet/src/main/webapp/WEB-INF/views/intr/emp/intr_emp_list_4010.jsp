@@ -41,9 +41,9 @@
 									<h2>인사 통계</h2>
 									<div class="srch_wrap">
 										<div class="right_srch_area">
-											<!-- 조회 기준 -->
+											<!-- 연도 -->
 											<div class="srch_area">
-												<label class="srch_label">연도 선택</label>
+												<label class="srch_label">연도</label>
 												<div class="select_wrap">
 													<div id="yearList" class="sList select_box">${empty param.srchEmpyNm ? yearList[0].commcodeNm : param.srchEmpyNm}</div>
 													<input type="hidden" name="srchYearCd" value="${param.srchYearCd}">
@@ -51,6 +51,22 @@
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${yearList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+											
+											<!-- 재직여부 -->
+											<div class="srch_area">
+												<label class="srch_label">재직여부</label>
+												<div class="select_wrap">
+													<div id="hireList" class="sList select_box">${empty param.srchHireNm ? '전체' : param.srchHireNm}</div>
+													<input type="hidden" name="srchHireCd" value="${param.srchHireCd}">
+													<input type="hidden" name="srchHireNm" value="${param.srchHireNm}">
+												
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${hireList}">
 															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
 														</c:forEach>
 													</ul>
@@ -97,34 +113,58 @@
 										                    <c:set var="key" value="${org.orgNm}_${ym.yearMm}" />
 										                    <c:set var="data" value="${statList[key]}" />
 										                    
-										                    <td>${not empty data ? data.hireTotal : 0} / ${not empty data ? data.leavTotal : 0}</td>
+										                    <td>
+										                    	<c:choose>
+										                    		<c:when test="${param.srchHireNm eq 'Y'}">${not empty data ? data.hireTotal : 0}</c:when>
+										                    		<c:when test="${param.srchHireNm eq 'N'}">${not empty data ? data.leavTotal : 0}</c:when>
+										                    		<c:otherwise>${not empty data ? data.hireTotal : 0} / ${not empty data ? data.leavTotal : 0}</c:otherwise>
+										                    	</c:choose>
+										                    </td>
 										                </c:forEach>
 										                
 										                <%-- 합계(부서) --%>
 										                <c:set var="rowKey" value="${org.orgNm}_연간 소계" />
 										                <c:set var="rowData" value="${statList[rowKey]}" />
 
-										                <td>${not empty rowData ? rowData.hireTotal : 0} / ${not empty rowData ? rowData.leavTotal : 0}</td>
+										                <td style="font-weight: bold;">
+										              		<c:choose>
+										                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty rowData ? rowData.hireTotal : 0}</c:when>
+										                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty rowData ? rowData.leavTotal : 0}</c:when>
+										                    	<c:otherwise>${not empty rowData ? rowData.hireTotal : 0} / ${not empty rowData ? rowData.leavTotal : 0}</c:otherwise>
+										                    </c:choose>
+										                </td>
 										            </tr>
 										        </c:forEach>
 										    </tbody>
 										    
 										    <tfoot>
 										        <tr>
-										            <td style="background-color:#f9f9f9; font-weight:bold;">합계 (월)</td>
+										            <td class="bg_total" style="color: #214b97; font-weight: 700; background-color: #f3f6f8;">합계 (월)</td>
 										            <c:forEach var="ym" items="${ymList}">
 										                <%-- 합계(월) --%>
 										                <c:set var="colKey" value="전체 합계_${ym.yearMm}" />
 										                <c:set var="colData" value="${statList[colKey]}" />
 										                
-										                <td>${not empty colData ? colData.hireTotal : 0} / ${not empty colData ? colData.leavTotal : 0}</td>
+										                <td style="font-weight: bold;">
+										                	<c:choose>
+										                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty colData ? colData.hireTotal : 0}</c:when>
+										                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty colData ? colData.leavTotal : 0}</c:when>
+										                    	<c:otherwise>${not empty colData ? colData.hireTotal : 0} / ${not empty colData ? colData.leavTotal : 0}</c:otherwise>
+										                    </c:choose>
+										                </td>
 										            </c:forEach>
 										            
 										            <%-- 전체 총합 : 합계(월) + 합계(부서) --%>
 										            <c:set var="grandKey" value="전체 합계_연간 소계" />
 										            <c:set var="grandData" value="${statList[grandKey]}" />
 										            
-										            <td style="color:#0056b3;">${not empty grandData ? grandData.hireTotal : 0} / ${not empty grandData ? grandData.leavTotal : 0}</td>
+										            <td style="font-weight: bold;">
+										            	<c:choose>
+									                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty grandData ? grandData.hireTotal : 0}</c:when>
+									                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty grandData ? grandData.leavTotal : 0}</c:when>
+									                    	<c:otherwise>${not empty grandData ? grandData.hireTotal : 0} / ${not empty grandData ? grandData.leavTotal : 0}</c:otherwise>
+									                    </c:choose>
+										            </td>
 										        </tr>
 										    </tfoot>
 										</table>

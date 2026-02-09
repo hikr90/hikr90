@@ -84,9 +84,9 @@
 											<div class="srch_area">
 												<label class="srch_label">재직여부</label>
 												<div class="select_wrap">
-													<div id="hireList" class="sList select_box">${empty param.hireNm ? '전체' : param.hireNm}</div>
-													<input type="hidden" name="hireCd" value="${param.hireCd}">
-													<input type="hidden" name="hireNm" value="${param.hireNm}">
+													<div id="hireList" class="sList select_box">${empty param.srchHireNm ? '전체' : param.srchHireNm}</div>
+													<input type="hidden" name="srchHireCd" value="${param.srchHireCd}">
+													<input type="hidden" name="srchHireNm" value="${param.srchHireNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${hireList}">
