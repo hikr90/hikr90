@@ -41,7 +41,13 @@
 					<c:forEach var="list" items="${menuList}" varStatus="status">
 						<c:if test="${list.lv eq 1}">
 							<li class="li_1">
-								<a class="a_1" href="${list.mappingId}?menuCd=${list.menuCd}&menuSet=${list.menuSet}&pageUrl=${list.mappingId}&empIdx=${empVO.empIdx}">${list.menuNm}</a>
+								<a class="a_1" onclick="goMenu(this);"
+								   data-mapping-id="${list.mappingId}"
+								   data-menu-pos="top"
+								   data-menu-cd="${list.menuCd}"
+								   data-lead-menu-cd="${list.leadMenuCd}"
+								   data-emp-idx="${empVO.empIdx}">${list.menuNm}
+								</a>
 							</li>
 						</c:if>
 					</c:forEach>

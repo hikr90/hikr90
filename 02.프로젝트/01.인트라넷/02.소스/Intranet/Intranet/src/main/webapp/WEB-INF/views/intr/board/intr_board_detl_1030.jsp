@@ -76,7 +76,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 		
@@ -103,24 +103,9 @@
 									<div class="post_write">
 										<dl>
 											<dt><label for="post-title">&#10003; 제목</label></dt>
-											<dd style="width: 35%;">
+											<dd>
 												<input type="text" id="brdTitle" name="brdTitle" title="제목" value="${defaultInfo.brdTitle}">
 											</dd>
-											<dt>부서</dt>
-											<dd>${defaultInfo.orgNm}</dd>									
-											<dt>작성자</dt>
-											<dd>${defaultInfo.empNm}</dd>
-										</dl>
-										<dl class="post_info">
-											<dt>첨부 파일</dt>
-											<dd style="width: 35%;">
-												<div class="file_box">
-													<label for="fileUpd">업로드</label>
-													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
-													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
-												</div>
-											</dd>
-											
 											<dt>사용여부</dt>
 	                                        <dd class="sel_2part">
 	                                        	<div class="radio_box enter-check_box">
@@ -134,9 +119,29 @@
 	                                            	</span>
 	                                            </div>
 	                                        </dd>
-									</dl>
 										</dl>
-										
+										<dl>
+											<dt>부서</dt>
+											<dd>${defaultInfo.orgNm}</dd>									
+											<dt>작성자</dt>
+											<dd>${defaultInfo.empNm}</dd>
+										</dl>
+										<dl>
+											<dt><label for="post_text">&#10003; 내용</label></dt>
+											<dd class="post_text">
+												<textarea id="post_text" id="brdCont" name="brdCont" title="내용">${defaultInfo.brdCont}</textarea>
+											</dd>
+										</dl>
+										<dl class="post_info">
+											<dt>첨부 파일</dt>
+											<dd>
+												<div class="file_box">
+													<label for="fileUpd">업로드</label>
+													<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
+													<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
+												</div>
+											</dd>
+										</dl>
 										<dl class="post_info">
 											<dt></dt>
 											<dd class="post_file">
@@ -148,17 +153,10 @@
 												</div>
 											</dd>
 										</dl>
-										
-										<dl>
-											<dt><label for="post_text">&#10003; 내용</label></dt>
-											<dd class="post_text">
-												<textarea id="post_text" id="brdCont" name="brdCont" title="내용">${defaultInfo.brdCont}</textarea>
-											</dd>
-										</dl>
 									</div><!-- End post_write -->
 									<div class="btn_wrap align_right">
-											<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정완료</button>
-											<button type="button" class="btn_gray_thin" onclick="detCall();">취소</button>
+										<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정완료</button>
+										<button type="button" class="btn_gray_thin" onclick="detCall();">취소</button>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End content_area form_area -->

@@ -132,7 +132,7 @@ public class AprvController {
 		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
 	}
 	
-	// 연차 공유 조회
+	// 일정 관리 조회
 	@RequestMapping("/intrAprvInqy3010.do")
 	public String intrAprvInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -143,13 +143,13 @@ public class AprvController {
 			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 연차 공유 조회
+			// 일정 관리 조회
 			//--------------------------------------------------------------------------------------------
 			aprvService.intrAprvInqy3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 연차 공유 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 일정 관리 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_3010;

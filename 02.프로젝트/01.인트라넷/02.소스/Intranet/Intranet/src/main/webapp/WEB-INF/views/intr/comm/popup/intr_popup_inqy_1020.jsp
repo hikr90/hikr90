@@ -51,6 +51,7 @@
 			//
 			var param = $("#popForm").serialize();
 			mailChkYn = false; // 인증 여부
+			$("#loadingBar").show();
 			//
 			$.ajax({
 			    	type : 'post',
@@ -60,16 +61,17 @@
 					success : function(data){
 						//
 						var json = eval(data);
-		   				if(json[0].res=="NO"){
-		   	   				// 발송 실패
-		   					alert("<spring:message code="FIND.INFO.NONE"/>");
-		   				} else {
-		   					// 발송 성공
+		   				if(json[0].joinCode!=""){
+		   					// 전송 성공
+		   					$("#joinCode").val(json[0].joinCode);
 		   					alert("<spring:message code="JOIN.CODE.SUCCESS"/>");
 		   					
-		   					// 인증 코드 입력
-		   					$("#joinCode").val(json[0].joinCode);
+		   				} else {
+		   					// 전송 실패
+		   					alert("<spring:message code="FIND.INFO.NONE"/>");
 		   				}
+		   				//
+		   				$("#loadingBar").hide();
 					},
 					error : function(xhr, status, error){
 						alert("<spring:message code="PROC.ERROR"/>");
@@ -140,7 +142,7 @@
 	function chkNum(f){
 		try {
 			// 유효성 검증
-			var isValidate = isValidated();
+			var isValidate = validateCode();
 			if(!isValidate){
 				return;
 			}
@@ -169,7 +171,7 @@
 		    }
 
 		    // 인증 체크 여부
-		    if (mailChkYn) {
+		    if (!mailChkYn) {
 		        alert("<spring:message code="FIND.CHECK.NONE"/>");
 		        return;
 		    }
@@ -250,12 +252,12 @@
 						</dl>
 						<dl>
 							<dt>
-								<label>신규 비밀번호 확인</label>
+								<label>비밀번호 확인</label>
 							</dt>
 							<dd class="sel_2part">
-								<input type="password" title="신규비밀번호 확인" id="newPwdConf" name="newPwdConf" oninput="checkPwd(this);">
-								<span id="checkPwd" style="color:red; font-size:14px; text-align:right; margin-top:20px; float:right;"></span>
+								<input type="password" title="비밀번호 확인" id="newPwdConf" name="newPwdConf" oninput="checkPwd(this);">
 							</dd>
+							<span id="checkPwd" style="color:red; font-size:14px; text-align:right; margin-top:20px; float:right;"></span>
 						</dl>
 					</div>
 				</div>
@@ -340,6 +342,11 @@
 		}
 	}
 </script>
+
+<div id="loadingBar" class="loading_bar">
+    <div class="loader"></div>
+</div>
+
 <form id="popForm">
 <div class="pop_area">
 	<article class="sub_article">

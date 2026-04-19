@@ -11,15 +11,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.MtgDao;
 import com.intr.dao.UtilDao;
+import com.intr.svc.CoreService;
 import com.intr.svc.MtgService;
 import com.intr.svc.UtilService;
 
-import net.sf.json.JSONArray;
+import org.json.simple.JSONArray;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MtgServiceImpl implements MtgService{
 	//
+	@Autowired
+	CoreService coreService;
+
 	@Autowired
 	UtilService utilService;
 	
@@ -36,15 +40,15 @@ public class MtgServiceImpl implements MtgService{
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 페이징 처리
+			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			utilService.setPaging(model, paramMap);
-			
+			coreService.intrCoreInqy1010(model, paramMap);
+
 			//--------------------------------------------------------------------------------------------
 			// 회의 목록 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = mtgDao.intrMtgInqy1011(model, paramMap);
-			model.addAttribute("defaultList", defaultList);
+			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
 			//
@@ -92,18 +96,35 @@ public class MtgServiceImpl implements MtgService{
 		}
 	}
 	
+	// 회의 중복 조회
+	public void intrMtgInqy1091(Model model, HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 회의 중복 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = mtgDao.intrMtgInqy1091(model, paramMap);
+			model.addAttribute("bookedList",defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	// 캘린더 조회
 	public void intrMtgInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		JSONArray jAray = new JSONArray();
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = mtgDao.intrMtgInqy2011(model, paramMap);
-			model.addAttribute("calList", jAray.fromObject(defaultList));
+			model.addAttribute("calList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
 			//

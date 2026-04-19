@@ -27,19 +27,14 @@ public interface Path {
 	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 		// 프로젝트
 	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 회의
 	public static final String VIEW_PATH_BANR 			= INTR_PATH + "/banr/"; 			// 배너
+	public static final String VIEW_PATH_REGS 			= INTR_PATH + "/regs/"; 			// 내부규정
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String FILE_PATH = "INTR\\FILE"; 		// 파일
-	public static final String TEMP_PATH = "INTR\\TEMP"; 		// 임시
-	public static final String IMG_PATH  = "INTR\\IMG"; 		// 이미지
-	public static final String DOC_PATH  = "INTR\\DOC"; 		// 참고문서
-
-	//--------------------------------------------------------------------------------------------
-	// 참고문서 명칭
-	//--------------------------------------------------------------------------------------------
-	public static final String DOC_WORD  = "인트라넷 테이블.docx"; 		// WORD
-	public static final String DOC_EXCEL  = "인트라넷 데이터.xlsx"; 		// EXCEL
-	public static final String DOC_PPT  = "인트라넷 프로젝트.ppt"; 			// PPT
+	public static final String FILE_PATH = "INTR\\FILE"; 				// 파일
+	public static final String TEMP_PATH = "INTR\\TEMP"; 				// 임시
+	public static final String MANU_PATH  = "INTR\\MANUAL"; 		// 매뉴얼
+	public static final String REGS_PATH  = "INTR\\REGS"; 			// 내부규정
+	
 }

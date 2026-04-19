@@ -43,7 +43,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 		
@@ -92,8 +92,8 @@
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
 													<div id="statList" class="sList select_box">${prepayList[1].commcodeNm}</div>
-													<input type="hidden" id="methodNm" name="methodNm" value="${prepayList[1].commcodeNm}">
 													<input type="hidden" id="methodCd" name="methodCd" value="${prepayList[1].commcodeCd}">
+													<input type="hidden" id="methodNm" name="methodNm" value="${prepayList[1].commcodeNm}">
 											
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${prepayList}">

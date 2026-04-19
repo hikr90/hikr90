@@ -21,8 +21,9 @@ public interface UtilService {
 	String setPageUrl(HashMap<String, Object> paramMap) throws Exception; // 페이지 URL 생성
 	
 	// 파일 경로 생성
-	String setFilePath(HashMap<String, Object> paramMap) throws Exception; // 일반
-	String setTempPath(HashMap<String, Object> paramMap) throws Exception; // 임시
+	String setFilePath(HashMap<String, Object> paramMap) throws Exception; 	// 일반 경로
+	String setTempPath(HashMap<String, Object> paramMap) throws Exception; // 임시 경로
+	String setOsPath(HashMap<String, Object> paramMap, String filePath) throws Exception; 	// 운영체제 경로
 	
 	// 파일 업로드
 	String fileUpload(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; // 업로드

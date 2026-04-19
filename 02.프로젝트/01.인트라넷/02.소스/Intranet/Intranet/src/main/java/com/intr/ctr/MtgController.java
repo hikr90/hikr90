@@ -1,6 +1,7 @@
 package com.intr.ctr;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.intr.dao.MtgDao;
+import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.MtgService;
 import com.intr.svc.UtilService;
@@ -29,12 +32,20 @@ public class MtgController {
 	@Autowired
 	MtgService mtgService;
 	
+	@Autowired
+	UtilDao utilDao;
+	
+	@Autowired
+	MtgDao mtgDao;
+	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 회의 목록 조회
 	@RequestMapping("/intrMtgInqy1010.do")
 	public String intrMtgInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -46,6 +57,13 @@ public class MtgController {
 			// 회의 목록 조회
 			//--------------------------------------------------------------------------------------------
 			mtgService.intrMtgInqy1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (회의실 종류) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"LOC");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("locList",defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -59,6 +77,8 @@ public class MtgController {
 	@RequestMapping("/intrMtgInqy1020.do")
 	public String intrMtgInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
@@ -66,9 +86,16 @@ public class MtgController {
 			coreService.intrCoreInqy1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 회의 등록 조회
+			// 중복 회의 시간 조회
 			//--------------------------------------------------------------------------------------------
-			mtgService.intrMtgInqy1020(model, paramMap);
+			mtgService.intrMtgInqy1091(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (회의실 종류) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"LOC");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("locList",defaultList);
 			
 		} catch (Exception e) {
 			//
@@ -101,9 +128,32 @@ public class MtgController {
 		return Const.VIEW_PATH_MTG + Const.INTR_MTG_DETL_1010;
 	}
 	
+	// 회의 중복 조회
+	@RequestMapping("/intrMtgInqy1090.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> intrMtgInqy1090(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 회의 중복 조회
+			//--------------------------------------------------------------------------------------------
+			defaultList = mtgDao.intrMtgInqy1091(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 회의 상세화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return defaultList;
+	}
+	
 	// 회의 수정화면
 	@RequestMapping("/intrMtgInqy1040.do")
 	public String intrMtgInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -115,6 +165,18 @@ public class MtgController {
 			// 회의 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
 			mtgService.intrMtgInqy1030(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 중복 회의 시간 조회
+			//--------------------------------------------------------------------------------------------
+			mtgService.intrMtgInqy1091(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (회의실 종류) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"LOC");
+			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			model.addAttribute("locList",defaultList);
 			
 		} catch (Exception e) {
 			//

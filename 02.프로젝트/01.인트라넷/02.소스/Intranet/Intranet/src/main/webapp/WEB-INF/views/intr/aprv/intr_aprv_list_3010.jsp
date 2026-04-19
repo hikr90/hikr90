@@ -9,7 +9,6 @@
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.10.2/lib/main.js'></script>
 <script>
 	var defaultList = JSON.parse('${defaultList}');
-	//
 	document.addEventListener('DOMContentLoaded', function() {
 		//
 		var calendar = document.getElementById('calendar');
@@ -74,7 +73,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 	
@@ -85,7 +84,7 @@
 						<div class="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<h2>연차 공유</h2>
+									<h2>일정 관리</h2>
 									
 									<div class="srch_wrap">
 										<div class="right_srch_area">
@@ -93,9 +92,9 @@
 											<div class="srch_area">
 												<label class="srch_label">휴가 타입</label>
 												<div class="select_wrap">
-													<div id="leavList" class="sList select_box">${empty param.leavtypeNm ? '전체' : param.leavtypeNm}</div>
-													<input type="hidden" name="leavtypeNm" value="${param.leavtypeNm}">
-													<input type="hidden" name="leavtypeCd" value="${param.leavtypeCd}">
+													<div id="leavList" class="sList select_box">${empty param.srchLeavNm ? '전체' : param.srchLeavNm}</div>
+													<input type="hidden" name="srchLeavCd" value="${param.srchLeavCd}">
+													<input type="hidden" name="srchLeavNm" value="${param.srchLeavNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${leavList}">

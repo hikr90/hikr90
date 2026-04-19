@@ -7,32 +7,12 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	$(document).ready(function(){
-		$(".a_title ").removeClass('list_bg');
+		$('.left_area').html('');
 	});
 
 	// 수정 처리
 	function updProc(f){
 		try {
-			// 비밀번호 검증
-			var isPwd = $("#pwdArea").is(':visible');
-			if(isPwd){
-				var empPwd = $("#empPwd").val();
-				var cPwd = $("#cPwd").val();
-				//
-				if(empPwd == ''){
-					alert("<spring:message code="MYPAGE.PWD.NONE"/>");
-					return;
-				}
-				if(cPwd == ''){
-					alert("<spring:message code="MYPAGE.CPWD.NONE"/>");
-					return;
-				}
-				if(empPwd != cPwd){
-					alert("<spring:message code="MYPAGE.PWD.DIFF"/>");
-					return;
-				}
-			}
-			
 			// 유효성 검증
 			if($("#addr").val() == ''){
 				alert("<spring:message code="MYPAGE.ADDR.NONE"/>");
@@ -88,12 +68,48 @@
 		}
 	}
 	
-	// 비밀번호 변경
-	function pwdCall(){
-		$("#pwdArea").toggle();
+	// 비밀번호 변경 팝업
+	function popCall(){
+		try {
+   			// 비밀번호 변경 팝업
+   			var obj = new Object();
+   			//
+   			obj["mappingId"] = "intrPopupInqy2011.do";
+   			obj["areaType"] = "pwd";
+   			obj["width"] = "650"
+   			obj["height"] = "365";
+   			//		
+   			ajaxPopup(obj);
+			
+		} catch (error) {
+	        console.error("[Error] 비밀번호 변경 팝업 : ", error.message);
+		}
+	}
+	
+	// 비밀번호 변경 검증
+	function checkPwd(newPwdConfElement){
+		try {
+			//
+			var newPwd = $("#newPwd").val();	// 변경 비밀번호
+			var newPwdConf = newPwdConfElement.value;	// 변경 비밀번호 확인
+			//
+			if (newPwd == newPwdConf) {
+		        $("#checkPwd").text("");
+		    } else if(newPwd != newPwdConf) {
+		        $("#checkPwd").text("비밀번호가 불일치합니다.");
+		    }
+			
+		} catch (error) {
+	        console.error("[Error] 비밀번호 변경 검증 : ", error.message);
+		}
 	}
 </script>
 <body id="main">
+<!-- 비밀번호 변경 -->
+<div id="pwdArea" class="hidden">
+	<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_2010.jsp"></c:import>	
+</div>
+
 <form id="form" name="form" method="POST">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
@@ -102,7 +118,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 		
@@ -115,10 +131,11 @@
 								<div class="post_wrap">
 		                            <h2>My Page
 		                            	<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="비밀번호 변경" onclick="pwdCall();">
+											<input type="button" class="btn_blue_thin" value="비밀번호 변경" onclick="popCall();">
 										</span>
 		                            </h2>
 		                            <input type="hidden" name="empIdx" value="${defaultInfo.empIdx}">
+		                            <input type="hidden" name="empId" value="${defaultInfo.empId}">
 		                            <input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
 		                            <input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
 		                            <input type="hidden" name="isMale" value="${defaultInfo.isMale}">
@@ -199,16 +216,6 @@
 		                                    <dt><label>관리자 여부</label></dt>
 		                                    <dd class="sel_2part">${empVO.authYn}</dd>
 		                             	</dl>
-									 	<dl id="pwdArea" style="display: none;">
-		                             		<dt><label>비밀번호</label></dt>
-		                                    <dd class="sel_2part">
-		                                    	<input type="password" title="비밀번호 입력" id="empPwd" name="empPwd" value="">
-		                                    </dd>
-		                                    <dt><label>비밀번호 확인</label></dt>
-		                                    <dd class="sel_2part">
-		                                    	<input type="password" title="비밀번호 확인" name="cPwd" id="cPwd" value="">
-		                                    </dd>
-		                            	</dl>
 									</div><!-- End post_write -->
 		                              
 		                            <div class="btn_wrap align_right">

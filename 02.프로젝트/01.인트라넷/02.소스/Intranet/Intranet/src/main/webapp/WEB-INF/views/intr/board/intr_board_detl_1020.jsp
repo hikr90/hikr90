@@ -73,7 +73,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -101,36 +101,44 @@
 										<dt>
 											<label for="post-title">&#10003; 제목</label>
 										</dt>
-										<dd style="width: 35%;">
+										<dd>
 											<input type="text" id="brdTitle" title="제목" name="brdTitle">
 										</dd>
+										<dt>사용여부</dt>
+                                        <dd class="sel_2part">
+                                        	<div class="radio_box enter-check_box">
+                                            	<span class="radio-area">
+                                                	<input type="radio" id="chk-yes" name="useYn" value="Y" checked="checked">
+                                                	<label for="chk-yes">Y<span></span></label>
+                                            	</span>
+                                            	<span class="radio-area">
+                                                	<input type="radio" id="chk-no" name="useYn" value="N" >
+                                                	<label for="chk-no">N<span></span></label>
+                                            	</span>
+                                            </div>
+                                        </dd>
+									</dl>
+									<dl>
 										<dt>부서</dt>
 										<dd>${empVO.orgNm}</dd>
 										<dt>작성자</dt>
 										<dd>${empVO.empNm} ${empVO.rankNm}</dd>
 									</dl>
+									<dl>
+										<dt><label for="post_text">&#10003; 내용</label></dt>
+										<dd class="post_text">
+											<textarea id="brdCont" name="brdCont" title="공지사항 내용"></textarea>
+										</dd>
+									</dl>
 									<dl class="post_info">
 										<dt>첨부 파일</dt>
-										<dd style="width: 35%;">
+										<dd>
 											<div class="file_box">
 												<label for="fileUpd">업로드</label>
 												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
 											</div>
 										</dd>
-										<dt>사용여부</dt>
-	                                        <dd class="sel_2part">
-	                                        	<div class="radio_box enter-check_box">
-	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-yes" name="useYn" value="Y" checked="checked">
-	                                                	<label for="chk-yes">Y<span></span></label>
-	                                            	</span>
-	                                            	<span class="radio-area">
-	                                                	<input type="radio" id="chk-no" name="useYn" value="N" >
-	                                                	<label for="chk-no">N<span></span></label>
-	                                            	</span>
-	                                            </div>
-	                                        </dd>
 									</dl>
 									<dl class="post_info">
 										<dt></dt>
@@ -143,16 +151,10 @@
 											</div>
 										</dd>
 									</dl>
-									<dl>
-										<dt><label for="post_text">&#10003; 내용</label></dt>
-										<dd class="post_text">
-											<textarea id="brdCont" name="brdCont" title="공지사항 내용"></textarea>
-										</dd>
-									</dl>
 								</div><!-- End post_write -->
 								<div class="btn_wrap align_right">
-										<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
-										<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+									<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
+									<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
 								</div>
 							</div><!-- End post_wrap -->
 						</div><!-- End form_area -->

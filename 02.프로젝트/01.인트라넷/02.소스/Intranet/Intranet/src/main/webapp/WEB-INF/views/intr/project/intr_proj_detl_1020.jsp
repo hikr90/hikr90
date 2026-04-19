@@ -12,7 +12,7 @@
 				//
 				var obj = new Object();
 				//
-				obj["mappingId"] = "intrPopupInqy1010.do";
+				obj["mappingId"] = "intrPopupInqy1011.do";
 				obj["areaType"] = "emp";
 				obj["width"] = "550"
 				obj["height"] = "420";
@@ -119,7 +119,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -151,7 +151,7 @@
 										<dt>
 											<label for="post-title">&#10003; 프로젝트명</label>
 										</dt>
-										<dd style="width: 35%;">
+										<dd>
 											<input type="text" id="projTitle" title="프로젝트명" name="projTitle">
 										</dd>
 										<dt>&#10003; 담당자</dt>
@@ -159,12 +159,20 @@
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
 											<input type="text" id="empPnm" title="담당자" style="width: 50%;" disabled="disabled">
 										</dd>
+									</dl>
+									<dl>
+										<dt>&#10003; 계약기간</dt>
+										<dd>
+											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" value="" readonly="readonly" />
+												~
+											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="" readonly="readonly" />
+										</dd>
 										<dt>&#10003; 진행상태</dt>
                                         <dd class="sel_2part">
                                         	<div class="select_wrap">
 												<div id="statList" class="sList select_box">${statList[1].commcodeNm}</div>
-												<input type="hidden" id="statusNm" name="statusNm" value="${statList[1].commcodeNm}">
 												<input type="hidden" id="status" name="status" value="${statList[1].commcodeCd}">
+												<input type="hidden" id="statusNm" name="statusNm" value="${statList[1].commcodeNm}">
 											
 												<ul class="sUl select_ul scroll_wrap">
 													<c:forEach var="list" items="${statList}">
@@ -176,20 +184,31 @@
 											</div>
                                         </dd>
 									</dl>
+									<dl>
+										<dt>&#10003; 계약금</dt>
+										<dd>
+											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;">
+											&nbsp; <span id="amtNm">(원)</span>
+										</dd>
+										<dt>태그</dt>
+										<dd>
+											<input type="text" id="tag_none" title="태그" name="tag" placeholder="#SI, #SM, #운영 등.." value="">
+										</dd>
+									</dl>
+									<dl>
+										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
+										<dd class="post_text" style="height: 310px;">
+											<textarea id="projCont" title="개요/설명" name="projCont"></textarea>
+										</dd>
+									</dl>
 									<dl class="post_info">
 										<dt>계약문서</dt>
-										<dd style="width: 35%;">
+										<dd>
 											<div class="file_box">
 												<label for="fileUpd">업로드</label>
 												<h4 class="file_text">업로드할 파일을 선택해주세요.</h4>
 												<input type="file" id="fileUpd" name="fileUpd" class="btn_blue" multiple="multiple">
 											</div>
-										</dd>
-                                        <dt>&#10003; 계약기간</dt>
-										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" value="" readonly="readonly" />
-												~
-											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="" readonly="readonly" />
 										</dd>
 									</dl>
 									<dl class="post_info">
@@ -203,27 +222,10 @@
 											</div>
 										</dd>
 									</dl>
-									<dl>
-										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
-										<dd class="post_text" style="height: 330px;">
-											<textarea id="projCont" title="개요/설명" name="projCont"></textarea>
-										</dd>
-									</dl>
-									<dl>
-										<dt>&#10003; 계약금</dt>
-										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;">
-											&nbsp; <span id="amtNm">(원)</span>
-										</dd>
-										<dt>태그</dt>
-										<dd>
-											<input type="text" id="tag_none" title="태그" name="tag" placeholder="#SI, #SM, #운영 등.." value="">
-										</dd>
-									</dl>
 								</div><!-- End post_write -->
 								<div class="btn_wrap align_right">
-										<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
-										<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
+									<button type="button" class="btn_navy_thin" onclick="regProc(this.form);">등록</button>
+									<button type="button" class="btn_gray_thin" onclick="listCall();">취소</button>
 								</div>
 							</div><!-- End post_wrap -->
 						</div><!-- End form_area -->

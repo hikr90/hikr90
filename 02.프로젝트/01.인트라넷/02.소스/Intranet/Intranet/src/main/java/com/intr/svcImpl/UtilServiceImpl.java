@@ -80,9 +80,6 @@ public class UtilServiceImpl implements UtilService{
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
 		String filePath = Const.FILE_PATH;
-		String filetypeCd = nvlProc((String)paramMap.get("filetypeCd"));
-		//
-		if(filetypeCd.equals("EMP") || filetypeCd.equals("BANR")) filePath = Const.IMG_PATH;
 		filePath = setOsPath(paramMap, filePath);
 		//
 		return filePath;
@@ -93,7 +90,7 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String filePath = Const.TEMP_PATH + File.separator;
+		String filePath = Const.TEMP_PATH;
 		filePath = setOsPath(paramMap, filePath);
 		//
 		return filePath;
@@ -105,13 +102,23 @@ public class UtilServiceImpl implements UtilService{
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
 		String os = System.getProperty("os.name").toLowerCase();
+		String sequenceId = (String)paramMap.get("sequenceId");
+		String filetypeCd = (String)paramMap.get("filetypeCd");
 		
 		// # 1 윈도우 : C드라이브 시작 
 		// # 2 리눅스 : / 시작
 		if(os.contains("win")) {
-			filePath = "C:\\" + filePath + File.separator + (String)paramMap.get("filetypeCd") + File.separator + (String)paramMap.get("sequenceId") + File.separator; 
+			filePath = "C:\\" + filePath + File.separator;
+			//
+			if(!this.isNull(filetypeCd)) filePath +=  filetypeCd + File.separator;
+			if(!this.isNull(sequenceId)) filePath += sequenceId + File.separator;
+			
 		} else if(os.contains("linux")) {
-			filePath = "/" + filePath + File.separator + (String)paramMap.get("filetypeCd") + File.separator +  (String)paramMap.get("sequenceId") + File.separator;
+			filePath = "/" + filePath + File.separator;
+			//
+			if(!this.isNull(filetypeCd)) filePath += filetypeCd + File.separator;
+			if(!this.isNull(sequenceId)) filePath += sequenceId + File.separator;
+			//
 			filePath = filePath.replace("\\", "/");
 		}
 		//
@@ -122,7 +129,6 @@ public class UtilServiceImpl implements UtilService{
 	public String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = ""; // 결과 전달 JSON
-		String resStr = "NO";	// 결과값
 		String joinCode = "";		// 인증 코드
 		//
 		HashMap<String, Object> defaultInfo = null;
@@ -134,16 +140,13 @@ public class UtilServiceImpl implements UtilService{
 			defaultInfo = empDao.intrEmpInqy1012(paramMap);
 			//
 			if(defaultInfo != null) {
-				// 값 저장
-				resStr = "YES";
-				
 				//--------------------------------------------------------------------------------------------
 				// 메일 전송
 				//--------------------------------------------------------------------------------------------
 				joinCode = sendMailProc(paramMap);
 			}
 			//
-			defaultStr = String.format("[{'res':'%s'}]", resStr);
+			defaultStr = String.format("[{'joinCode':'%s'}]", joinCode);
 			
 		} catch (Exception e) {
 			//
@@ -182,8 +185,8 @@ public class UtilServiceImpl implements UtilService{
 			subject = "[인트라넷] 정보 찾기 인증코드 발급 안내";
 			//
 			StringBuilder sb = new StringBuilder();
-			sb.append("[인트라넷] 정보 찾기 인증코드 발급 안내" + "\n");
-			sb.append("귀하의 발급 인증 코드는 " + joinCode + "입니다." + "\n");
+			sb.append("[INTR] 정보 찾기 인증코드 발급 안내" + "\n");
+			sb.append("인증 코드는 " + joinCode + "입니다." + "\n");
 			sb.append("\n");
 			sb.append("인증 코드를 입력해주세요.");
 			//
@@ -209,9 +212,11 @@ public class UtilServiceImpl implements UtilService{
             helper.setTo(receiver);	// 수신사
  
 			// 첨부 파일 처리 시
-			// if (filePath != null) { // File file = new File(filePath); 
-            // if (file.exists()) { helper.addAttachment(file.getName(), new File(filePath)); }
-			// };
+            /*
+				if (filePath != null) { // File file = new File(filePath); 
+            		if (file.exists()) { helper.addAttachment(file.getName(), new File(filePath)); }
+				};
+			 */
 
             // 전송 완료
             javaMailSender.send(message);
@@ -478,7 +483,7 @@ public class UtilServiceImpl implements UtilService{
 		}
 	}
 	
-	// 참고문서 다운로드
+	// 매뉴얼 다운로드
 	public void docDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String docCd = this.nvlProc((String)paramMap.get("docCd"));
@@ -489,23 +494,14 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 명칭 및 경로 조회
 			//--------------------------------------------------------------------------------------------
-			fileNm = (docCd.equals("ppt")) ? Const.DOC_PPT : (docCd.equals("word")) ? Const.DOC_WORD : Const.DOC_EXCEL;
-			filePath = Const.DOC_PATH + File.separator;
+			fileNm = (docCd.equals("ppt")) ? Const.MANU_PPT : (docCd.equals("word")) ? Const.MANU_WORD : Const.MANU_EXCEL;
+			filePath = Const.MANU_PATH;
 
 			//--------------------------------------------------------------------------------------------
 			// 경로 생성
 			//--------------------------------------------------------------------------------------------
-			String os = System.getProperty("os.name").toLowerCase();
-			
-			// # 1 윈도우 : C드라이브 시작 
-			// # 2 리눅스 : / 시작
-			if(os.contains("win")) {
-				filePath = "C:\\" + filePath; 
-			} else if(os.contains("linux")) {
-				filePath = "/" + filePath;
-				filePath = filePath.replace("\\", "/");
-			}
-			
+			filePath = setOsPath(paramMap, filePath);
+
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------

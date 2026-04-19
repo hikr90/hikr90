@@ -48,19 +48,19 @@ public class UtilController {
 		}
 	}
 	
-	// 참고문서 다운로드
+	// 문서 다운로드
 	@RequestMapping("/docDown.do")
 	public void docDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 파일 다운로드
+			// 문서 다운로드
 			//--------------------------------------------------------------------------------------------
 			utilService.docDown(model, paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 파일 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 문서 다운로드 처리 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 	}
 	

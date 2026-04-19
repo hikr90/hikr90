@@ -40,8 +40,8 @@
 				<label>인증코드</label>
 			</dt>
 			<dd class="sel_2part">
-				<input type="text" title="인증번호" id="inputCode">
-				<input type="button" class="btn_navy ml10" value="인증하기" id="chkNum" onclick="chkNum(this.form);">
+				<input type="text" title="인증번호 입력" id="inputCode">
+				<input type="button" class="btn_navy ml10" value="인증하기" onclick="chkNum(this.form);">
 			</dd>
 		</dl>
 	</div>

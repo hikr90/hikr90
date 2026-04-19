@@ -6,6 +6,40 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <script type="text/javascript">
+	var defaultList = JSON.parse('${defaultList}');
+	document.addEventListener('DOMContentLoaded', function() {
+		//
+		var calendar = document.getElementById('calendar');
+	    var mtgCont = new FullCalendar.Calendar(calendar, {
+	    	//
+	        locale: 'en',  							// 언어
+			eventLimit: true,						// 이벤트 내용 초과 시, MORE로 표현
+			displayEventTime: false, 			// 이벤트 시간 여부
+			navLinks: false, 						// 날짜 선택할 경우 상세 데이터 조회 
+			selectable: false,						// 네모 선택 여부
+			headerToolbar: {
+				start: 'prev,next today',
+				center: 'title',
+			    end: 'dayGridMonth,listMonth'
+			},
+			// 네모 선택 시
+			dateClick: function(info) {
+				//
+			},
+			// 회의 선택 시
+			eventClick: function(info) {
+				//
+				$("#sequenceId").val(info.event.id);
+				formSubmit("intrMtgInqy1030.do");
+			},
+			// 데이터
+			events : defaultList,
+			eventColor: '#214b97'
+		});
+	    //
+	    mtgCont.render();
+	});
+
 	// 검색 조회
 	function listCall(f){
 		try {
@@ -27,18 +61,6 @@
 	        console.error("[Error] 등록 화면 조회 : ", error.message);
 		}
 	}
-	
-	// 상세 화면 조회
-	function detCall(sequenceId) {
-		try {
-			//
-			$("#sequenceId").val(sequenceId);
-			formSubmit("intrMtgInqy1030.do");
-			
-		} catch (error) {
-	        console.error("[Error] 상세 화면 조회 : ", error.message);
-		}
-	}
 </script>
 <body id="main">
 <form id="form" name="form" method="POST">
@@ -49,7 +71,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 		
@@ -61,9 +83,6 @@
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
-									<input type="hidden" id="page" name="page" value="${param.page}">
-									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-									
 									<h2>회의 관리
 										<span class="float_right">
 											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
@@ -71,111 +90,61 @@
 									</h2>
 									
 									<div class="srch_wrap">
-											<div class="right_srch_area">
-												<!-- 회의일자 -->
-												<div class="srch_area">
-													<label class="srch_label">회의일자</label>
-													<input type="text" class="srch_cdt_date srchDt" id="srchSdt" name="srchDt" value="${param.srchDt}" readonly="readonly" />
-												</div>
+										<div class="right_srch_area">
+											<!-- 회의실 종류 -->
+											<div class="srch_area">
+												<label class="srch_label">회의실 종류</label>
+												<div class="select_wrap">
+													<div id="locList" class="sList select_box">${empty param.srchLocNm ? '전체' : param.srchLocNm}</div>
+													<input type="hidden" name="srchLocCd" value="${param.srchLocCd}">
+													<input type="hidden" name="srchLocNm" value="${param.srchLocNm}">
 												
-												<!-- 등록자 -->
-												<div class="srch_area">
-													<label class="srch_label">등록자</label>
-													<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushCall(this.form);">
+													<ul class="sUl select_ul scroll_wrap">
+														<c:forEach var="list" items="${locList}">
+															<li setNm="${list.commcodeNm}" setCd="${list.commcodeCd}">${list.commcodeNm}</li>
+														</c:forEach>
+													</ul>
 												</div>
-												
-												<!-- 부서 -->
-												<div class="srch_area">
-													<label class="srch_label">부서</label>
-													<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
-												</div>
-
-												<!-- 직급 -->
-												<div class="srch_area">
-													<label class="srch_label">직급</label>
-													<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
-												</div>
-												
-												<!-- 제목 -->
-												<div class="float_right">
-													<div class="srch_area">
-														<label class="srch_label">제목</label>
-														<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
-													
-														<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
-														<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
-													</div>
-			                                	</div>
 											</div>
-										</div>
-									
-									<div class="post_table_wrap">
-										<table class="post_table">
-											<caption>회의 목록 조회</caption>
-											<colgroup>
-												<col class="w15per">
-												<col class="w15per">
-												<col class="auto">
-												<col class="w20per">
-											</colgroup>
-											<thead>
-												<tr>
-													<th scope="col">회의일자</th>
-													<th scope="col">회의시간</th>
-													<th scope="col">회의 제목</th>
-													<th scope="col">등록자</th>
-												</tr>
-											</thead>
-											<tbody>
-		                                    	<c:forEach var="list" items="${defaultList}" varStatus="status"> 
-													<tr>
-														<td class="first_td">
-															<span class="date">
-																<fmt:parseDate value="${list.mtgDt}" var="parseDt" pattern="yyyyMMdd"/>
-																<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-																${formatDt} 
-															</span>
-														</td>
-														<td>
-															<span class="date">
-																<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
-																<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
+										
+											<!-- 등록자 -->
+											<div class="srch_area">
+												<label class="srch_label">등록자</label>
+												<input type="text" id="srchIdx" name="srchIdx" class="srch_cdt_text" value="${param.srchIdx}" onkeydown="pushCall(this.form);">
+											</div>
+											
+											<!-- 부서 -->
+											<div class="srch_area">
+												<label class="srch_label">부서</label>
+												<input type="text" id="orgNm" name="orgNm" class="srch_cdt_text" value="${param.orgNm}" onkeydown="pushCall(this.form);">
+											</div>
 
-																<fmt:parseDate value="${list.mtgEtm}" var="parseEtm" pattern="HHmm"/>
-																<fmt:formatDate value="${parseEtm}" var="formatEtm" pattern="HH:mm"/>
-																${formatStm} ~ ${formatEtm}
-															</span> 
-														</td>
-														<td class="_title">
-															<c:if test="${list.fileYn eq 'Y'}">
-																<img id="fileImg" src='resources/images/icon/icon_file.png' width="15" height="15" />
-															</c:if>
-															<a class="show_view a_title" onclick="detCall('${list.mtgCd}');">${list.mtgTitle}</a>
-														</td>
-														<td>${list.orgNm} ${list.empNm} ${list.rankNm}</td>
-			                                        </tr>
-		                                        </c:forEach>
-		                                        
-		                                        <!-- 글이 없는 경우 -->
-		                                        <c:if test="${empty defaultList}">
-		                                            <tr>
-		                                                <td align="center" colspan="4">
-		                                              	      등록된 글이 없습니다.
-		                                                </td>
-		                                            </tr>
-		                                        </c:if>
-											</tbody>
-										</table>
+											<!-- 직급 -->
+											<div class="srch_area">
+												<label class="srch_label">직급</label>
+												<input type="text" id="rankNm" name="rankNm" class="srch_cdt_text" value="${param.rankNm}" onkeydown="pushCall(this.form);">
+											</div>
+											
+											<!-- 제목 -->
+											<div class="float_right">
+												<div class="srch_area">
+													<label class="srch_label">제목</label>
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
+												
+													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
+													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">
+												</div>
+		                                	</div>
+										</div>
 									</div>
 									
-									<c:if test="${not empty defaultList}">
-										<div class="paging_area">
-											<div class="list_cnt">총 건수 : ${defaultList[0].listCnt}건</div>
-											<ul class="paging">
-												<li class="">${pageMenu}</li>
-											</ul>
-										</div><!-- End paging_wrap -->
-									</c:if>
+									<div class="mtg_wrap">
+										<div class="mtg_area">
+											<div id="calendar">
+												
+											</div>
+										</div><!-- End post_write -->
+									</div><!-- End leav_wrap -->
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->
 						</div><!-- End sub_content -->

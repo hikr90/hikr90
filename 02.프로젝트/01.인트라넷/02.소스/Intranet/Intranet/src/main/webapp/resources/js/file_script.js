@@ -8,6 +8,13 @@ $(function() {
 		var thisFiles = this.files; 
 		var fileStr = "";
 		
+		// 파일 개수 유효성 검사
+		if (tempList.length + thisFiles.length > 3) {
+            alert("파일은 최대 3개까지만 업로드 가능합니다.");
+            $(this).val('');
+            return false;
+        }
+		
 		// 다중 파일 처리 
 		for(var i=0;i<thisFiles.length;i++){
 			// 임시 목록 추가

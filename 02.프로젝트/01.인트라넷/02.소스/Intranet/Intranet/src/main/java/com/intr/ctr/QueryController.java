@@ -2,6 +2,7 @@ package com.intr.ctr;
 
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,6 +79,11 @@ public class QueryController {
 			//--------------------------------------------------------------------------------------------
 			// ¿¢¼¿ ´Ù¿î·Îµå
 			//--------------------------------------------------------------------------------------------
+	        Cookie excelCookie = new Cookie("excelCookie", "true");
+	        excelCookie.setPath("/");
+	        excelCookie.setMaxAge(60);
+	        response.addCookie(excelCookie);
+			
 			queryService.intrQueryInqy1030(paramMap, request, response);
 			
 		} catch (Exception e) {

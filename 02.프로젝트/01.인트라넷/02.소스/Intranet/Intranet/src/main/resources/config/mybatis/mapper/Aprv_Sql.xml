@@ -367,7 +367,7 @@
 	</select>
 
 	<select id="intrAprvInqy3011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrAprvInqy3011 : 연차 공유 조회 */
+		/* intrAprvInqy3011 : 일정 관리 조회 */
 		SELECT
 				AM.APRV_ID
 			,	AM.APRV_TITLE
@@ -400,8 +400,8 @@
 			LEFT OUTER JOIN COMMCODE CC_LEAV
 				ON CC_LEAV.COMMCODE_CD = AL.LEAVTYPE_CD
 			WHERE 1=1
-				<if test="leavCd != null and leavCd != ''">
-					AND AL.LEAVTYPE_CD = #{leavCd, jdbcType=VARCHAR}
+				<if test="srchLeavCd != null and srchLeavCd != ''">
+					AND AL.LEAVTYPE_CD = #{srchLeavCd, jdbcType=VARCHAR}
 				</if>
 				<if test="orgNm != null and orgNm != ''">
 		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'

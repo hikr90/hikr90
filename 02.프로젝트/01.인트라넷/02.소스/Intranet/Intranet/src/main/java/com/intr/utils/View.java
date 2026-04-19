@@ -65,6 +65,9 @@ public interface View {
 	public static final String INTR_POPUP_INQY_1122 = "intr_popup_inqy_1122.jsp";			// 업무 캘린더 상세
 	public static final String INTR_POPUP_INQY_1123 = "intr_popup_inqy_1123.jsp";			// 업무 캘린더 상세 (메인)
 	
+	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";		// 비밀번호 변경 관리 (마이페이지)
+	public static final String INTR_POPUP_INQY_2011 = "intr_popup_inqy_2011.jsp";			// 비밀번호 변경 (마이페이지)
+	
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------
@@ -141,7 +144,7 @@ public interface View {
 	public static final String INTR_APRV_DETL_2012 = "intr_aprv_detl_2012.jsp"	;			// 결재 상세 (물품반출입 신청서)
 	public static final String INTR_APRV_DETL_2013 = "intr_aprv_detl_2013.jsp"	;			// 결재 상세 (법인카드 정산서)
 
-	public static final String INTR_APRV_LIST_3010 = "intr_aprv_list_3010.jsp";				// 연차 공유
+	public static final String INTR_APRV_LIST_3010 = "intr_aprv_list_3010.jsp";				// 일정 관리
 
 	public static final String INTR_APRV_LIST_4010 = "intr_aprv_list_4010.jsp";				// 결재선 관리
 	public static final String INTR_APRV_LIST_4011 = "intr_aprv_list_4011.jsp";				// 결재선 관리 (AJAX)
@@ -175,5 +178,11 @@ public interface View {
 	// 배너
 	//--------------------------------------------------------------------------------------------
 	public static final String INTR_BANR_LIST_1010 = "intr_banr_detl_1010.jsp"; 		// 배너 관리
+
+	//--------------------------------------------------------------------------------------------
+	// 내부규정
+	//--------------------------------------------------------------------------------------------
+	public static final String INTR_REGS_DETL_1010 = "intr_regs_detl_1010.jsp"; 			// 내부규정 조회
+	public static final String INTR_REGS_DETL_1020 = "intr_regs_detl_1020.jsp"; 			// PDF 뷰어
 
 }

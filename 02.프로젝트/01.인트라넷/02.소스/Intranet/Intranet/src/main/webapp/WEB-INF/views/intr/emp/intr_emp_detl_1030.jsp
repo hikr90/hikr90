@@ -84,7 +84,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -156,8 +156,8 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="orgList" class="sList select_box">${defaultInfo.orgNm}</div>
-													<input type="hidden" name="setOrgNm" value="${defaultInfo.orgNm}">
 													<input type="hidden" name="setOrgCd" value="${defaultInfo.orgCd}">
+													<input type="hidden" name="setOrgNm" value="${defaultInfo.orgNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${orgList}">
@@ -171,8 +171,8 @@
 	                                        <dd class="sel_2part">
 												<div class="select_wrap">
 													<div id="rankList" class="sList select_box">${defaultInfo.rankNm}</div>
-													<input type="hidden" name="setRankNm" value="${defaultInfo.rankNm}">
 													<input type="hidden" name="setRankCd" value="${defaultInfo.rankCd}">
+													<input type="hidden" name="setRankNm" value="${defaultInfo.rankNm}">
 												
 													<ul class="sUl select_ul scroll_wrap">
 														<c:forEach var="list" items="${rankList}">

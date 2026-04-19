@@ -49,6 +49,43 @@ $(function(){
 	});
 });
 
+
+// 메뉴 이동
+function goMenu(element) {
+	//
+    var mappingId = element.dataset.mappingId;
+    var menuCd = element.dataset.menuCd;
+	var leadMenuCd = element.dataset.leadMenuCd;
+	var menuPos = element.dataset.menuPos;
+    var empIdx = element.dataset.empIdx;
+
+    // 동적 폼 생성 및 전송
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", mappingId);
+
+    var params = {
+        "menuCd": menuCd,
+		"menuPos": menuPos,
+		"leadMenuCd":leadMenuCd,
+        "pageUrl": mappingId,
+        "empIdx": empIdx
+    };
+
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+            form.appendChild(hiddenField);
+        }
+    }
+	//
+    document.body.appendChild(form);
+    form.submit();
+}
+
 // 검색 초기화
 function initCall(){
 	try {

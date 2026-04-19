@@ -38,6 +38,14 @@ public class MtgDao {
 		return defaultInfo;
 	}
 	
+	// 회의 중복 조회
+	public List<HashMap<String, Object>> intrMtgInqy1091(Model model, HashMap<String, Object> paramMap) {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		defaultList = sqlsession.selectList("mtg.intrMtgInqy1091", paramMap);
+		return defaultList;
+	}
+	
 	// 캘린더 조회
 	public List<HashMap<String, Object>> intrMtgInqy2011(Model model, HashMap<String, Object> paramMap) {
 		//

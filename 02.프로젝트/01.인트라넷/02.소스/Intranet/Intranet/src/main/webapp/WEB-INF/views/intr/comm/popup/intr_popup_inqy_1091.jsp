@@ -39,31 +39,12 @@
 	</dl>
 	<dl>
 		<dt>회의 장소</dt>
-		<dd>${defaultInfo.mtgLoc}</dd>
-		<dt>참여 인원</dt>
-		<dd>${defaultInfo.mtgMbr}</dd>
+		<dd>${defaultInfo.mtgLocNm}</dd>
 	</dl>
 	<dl>
 		<dt>회의 내용</dt>
 		<dd class="post_text" style="height: 140px;">
 			<pre>${defaultInfo.mtgCont}</pre>
-		</dd>
-	</dl>
-	
-	<dl class="post_file">
-		<dt>회의자료</dt>
-		<dd class="post_file">
-			<div class="file_wrap">
-				<ul id="fileUl"> 
-				<c:forEach var="list" items="${fileList}" varStatus="status">
-					<li class="${status.index != 0 ? 'nbsp' : ''}">
-						<img src='resources/images/icon/icon_file.png' width="15" height="15"/>
-						<a href="#" onclick="fileProc('${list.fileId}', '${list.fileSno}');">${list.fileNm}</a>
-						<input type="hidden" id="fileId" name="fileId" value="${list.fileId}">
-					</li>
-				</c:forEach>
-				</ul>
-			</div>
 		</dd>
 	</dl>
 </div><!-- End post_view -->

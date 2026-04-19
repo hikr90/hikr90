@@ -62,7 +62,7 @@ function empCall(){
 	try {
 		//
 		var obj = new Object();
-		obj["mappingId"] = "intrPopupInqy1010.do";
+		obj["mappingId"] = "intrPopupInqy1011.do";
 		obj["areaType"] = "emp";
 		obj["width"] = "550"
 		obj["height"] = "420";

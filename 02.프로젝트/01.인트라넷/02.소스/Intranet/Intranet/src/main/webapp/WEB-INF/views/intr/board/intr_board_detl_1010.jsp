@@ -39,7 +39,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -82,7 +82,12 @@
 											<dt>작성자</dt>
 											<dd>${defaultInfo.empNm}</dd>
 										</dl>
-			
+										<dl>
+											<dt>내용</dt>
+											<dd class="post_text">
+												<pre>${defaultInfo.brdCont}</pre>
+											</dd>
+										</dl>
 										<dl class="post_file">
 											<dt>첨부파일</dt>
 											<dd class="post_file">
@@ -97,13 +102,6 @@
 													</c:forEach>
 													</ul>
 												</div>
-											</dd>
-										</dl>
-		
-										<dl>
-											<dt>내용</dt>
-											<dd class="post_text">
-												<pre>${defaultInfo.brdCont}</pre>
 											</dd>
 										</dl>
 									</div><!-- End post_view -->

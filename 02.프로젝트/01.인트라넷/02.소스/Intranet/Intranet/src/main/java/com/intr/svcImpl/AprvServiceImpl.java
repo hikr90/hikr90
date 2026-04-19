@@ -187,14 +187,14 @@ public class AprvServiceImpl implements AprvService{
 		}
 	}
 
-	// 연차 공유 조회
+	// 일정 관리 조회
 	public void intrAprvInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
-			// 연차 공유 조회
+			// 일정 관리 조회
 			//--------------------------------------------------------------------------------------------
 			defaultList = aprvDao.intrAprvInqy3011(model, paramMap);
 			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));

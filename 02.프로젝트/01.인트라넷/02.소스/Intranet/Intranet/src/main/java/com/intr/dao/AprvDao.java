@@ -94,7 +94,7 @@ public class AprvDao {
 		return defaultList;
 	}
 	
-	// 연차 공유 조회
+	// 일정 관리 조회
 	public List<HashMap<String, Object>> intrAprvInqy3011(Model model, HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;

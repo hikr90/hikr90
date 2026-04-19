@@ -87,8 +87,8 @@
 			<div class="login_wrap">
 				<div class="login_area">
 					<h3>LOGIN</h3>
-					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLogCall(this.form);" value="ADMIN">
-					<input type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="pushLogCall(this.form);" value="1111">
+					<input type="text" placeholder="아이디" title="아이디" id="empId" name="empId" onkeydown="pushLogCall(this.form);" value="${defaultList[0].empId}">
+					<input type="password" id="empPwd" name="empPwd" placeholder="비밀번호" title="비밀번호" onkeydown="pushLogCall(this.form);" value="${defaultList[0].decpwd}">
 					<input type="button" class="login_btn" value="로그인" onclick="loginProc(this.form);">
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>

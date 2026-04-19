@@ -2,7 +2,7 @@
 
 <!-- 
 	view : intr_popup_inqy_1080
-	title : 연차 공유 팝업
+	title : 일정 관리 팝업
 -->
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 80%;">

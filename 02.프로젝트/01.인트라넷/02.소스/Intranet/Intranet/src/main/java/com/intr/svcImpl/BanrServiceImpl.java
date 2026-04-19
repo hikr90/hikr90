@@ -21,10 +21,10 @@ public class BanrServiceImpl implements BanrService {
 	UtilService utilService;
 	
 	@Autowired
-	BanrDao banrDao;
+	UtilDao utilDao;
 	
 	@Autowired
-	UtilDao utilDao;
+	BanrDao banrDao;
 	
 	// 배너 관리 조회
 	public void intrBanrInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {

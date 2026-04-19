@@ -13,7 +13,7 @@ public interface AprvService {
 	void intrAprvInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 목록
 	void intrAprvInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재 상세
 	//
-	void intrAprvInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 연차 공유
+	void intrAprvInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 일정 관리
 	//
 	void intrAprvInqy4010(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재선 관리
 	void intrAprvInqy4020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 결재선 등록

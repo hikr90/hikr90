@@ -82,8 +82,8 @@ public class PopupController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 담당자 조회
-	@RequestMapping("/intrPopupInqy1010.do")
-	public String intrPopupInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrPopupInqy1011.do")
+	public String intrPopupInqy1011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -558,5 +558,20 @@ public class PopupController {
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_1123;
+	}
+	
+	// 비밀번호 변경 팝업 조회 (마이페이지)
+	@RequestMapping("/intrPopupInqy2011.do")
+	public String intrPopupInqy2011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 팝업(마이페이지 비밀번호 변경) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_2011;
 	}
 }

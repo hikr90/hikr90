@@ -35,8 +35,6 @@
 .top_area .emp_profile { display: block; margin-bottom: 30px; }
 
 .icon_content .main_ul { width: 100% !important; margin-left: 60px; }
-.main_font { font-size: 1.7rem; }
-
 
 /* ========================================== Wrap ========================================== */
 .wrap { width: 1130px; box-sizing: border-box; margin: 0 auto; }
@@ -48,7 +46,7 @@
 .srch_wrap .srch_area { display: inline-block; vertical-align: middle; margin: 0 6px 15px 0; }
 .srch_wrap .srch_area .srch_label { display: block; color: #64738d; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
 
-.main_wrap { display: inline-flex; height: auto; min-height: 100%; }
+.main_wrap { display: flex; height: auto; min-height: 100%; }
 .content_wrap { width: 1600px; display: inline-block; }
 
 .left_wrap { display: inline-block; width: 300px; min-height: 756px; padding-top: 35px; overflow: auto; border-right: 1px solid #d6d6d6; }
@@ -94,7 +92,7 @@
 .form_area .post_write textarea:-ms-input-placeholder, .form_area .post_view textarea:-ms-input-placeholder { color: #bababa; font-size: 1.5rem; }
 .form_area .post_write textarea::-ms-input-placeholder, .form_area .post_view textarea::-ms-input-placeholder { color: #bababa; font-size: 1.5rem; }
 .form_area .post_write textarea::placeholder, .form_area .post_view textarea::placeholder { color: #bababa; font-size: 1.5rem; }
-.form_area .post_write dd.post_text, .form_area .post_view dd.post_text { vertical-align: top; height: 400px; }
+.form_area .post_write dd.post_text, .form_area .post_view dd.post_text { vertical-align: top; height: 380px; }
 .form_area .post_write dd.post_text textarea, .form_area .post_view dd.post_text textarea { height: 98%; }
 .form_area .post_write dd.post_file, .form_area .post_view dd.post_file { min-height: 100px; }
 .form_area .post_write dd.post_file textarea, .form_area .post_view dd.post_file textarea { height: 95%; }
@@ -194,7 +192,7 @@
 
 
 /* ========================================== Select ========================================== */
-.select_box { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 43px; text-indent: 10px; }
+.select_box { background: #ffffff; border: 1px solid #d7d7d7; overflow: hidden; font-size: 1.5rem; color: #727272; width: 180px; height: 43px; line-height: 43px; text-indent: 10px; margin-bottom: 5px; }
 .select_ul { list-style-type: none; overflow-x: hidden; overflow-y: auto; font-size: 1.5rem; color: #727272; border: 1px solid #d7d7d7; display: none; position: absolute; background: #ffffff; border-top: none; width: 180px; line-height: 43px; z-index: 2; max-height: 300px; }
 .select_ul li { padding-left: 5px; border-top: 1px solid #d6d6d6; }
 .select_ul li:nth-child(1) { border-top: none; }
@@ -241,6 +239,20 @@
 .set_date { border: 2px solid #214b97; background-color: rgba(33, 75, 151, 0.2) !important; transition: all 0.2s ease; }
 
 
+/* ========================================== Meeting ========================================== */
+.mtg_btn { border: 1px solid #d7d7d7;  background-color: #fff; color: #727272 !important; font-size: 14px; padding: 10px; border-radius: 5px; }
+.mtg_btn.active { background-color: #214b97; color: #fff !important; border-color: #fff; }
+.mtg_btn:hover { text-decoration: none; }
+.mtg_btn.active { text-decoration: none; }
+
+.mtg_btn.booked {
+    background-color: #f0f0f0 !important;
+    color: #ccc !important;
+    cursor: not-allowed !important;
+    pointer-events: none; 
+    text-decoration: none !important;
+}
+
 /* ========================================== Query ========================================== */
 .query_input { padding: 20px 0 20px 0; width: 100%; height: 400px; }
 .query { width: 100%; height: 100%;	box-sizing: border-box; vertical-align: top;	border: 1px solid #d7d7d7; color: #727272;	font-size: 2rem;	text-indent: 10px; resize: none; }
@@ -263,5 +275,11 @@
 .tab_wrapper {  border-left: 1px solid #d6d6d6;	border-bottom: 1px solid #d6d6d6; flex-grow: 1; overflow-x: hidden; white-space: nowrap; margin: 0; }
 .scroll_btn_right, .scroll_btn_left { padding-bottom: 7px; }
 .scroll_btn_right { transform: scaleX(-1); -webkit-transform: scaleX(-1); -moz-transform: scaleX(-1); -ms-transform: scaleX(-1); }
+
+
+/* ========================================== Loading Bar ========================================== */
+.loading_bar { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; }
+.loader { position: absolute; top: 50%; left: 50%; margin: -30px 0 0 -30px; border: 6px solid #f3f3f3; border-top: 6px solid #214b97; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 

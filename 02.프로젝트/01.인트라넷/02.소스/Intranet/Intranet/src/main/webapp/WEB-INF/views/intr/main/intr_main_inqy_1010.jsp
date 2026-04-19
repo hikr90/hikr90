@@ -96,7 +96,7 @@
 			obj["sequenceId"] = sequenceId;
 			obj["areaType"] = "mtg";
 			obj["width"] = "700";
-			obj["height"] = "550";
+			obj["height"] = "500";
 			//		
 			ajaxPopup(obj);
 			
@@ -237,7 +237,7 @@
 										<ul class="area_ul scroll_wrap" style="height: 360px;">
 											<c:forEach var="list" items="${calInfo}">
 												<li class="main_li" style="border-bottom: solid 2px #f6f6f6; margin-right: 20px;">
-													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a pl20" style="font-weight: bold;">
+													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a" style="font-weight: bold;">
 														<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
 														<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 														
@@ -276,20 +276,13 @@
 									</div>
                                     
                                     <div class="profile_area">
-	                                    <ul class="main_ul main_font">
+	                                    <ul class="main_ul">
 	                                   		<li>${empVO.empNm}</li>
 	                                    	<li>${empVO.orgNm}</li>
 	                                    	<li>${empVO.rankNm}</li>
 	                                    </ul>
 	                                    
-	                                    <ul class="main_ul main_font">
-	                                    	<li>
-												<fmt:parseDate value="${empVO.hireDt}" var="parseDt" pattern="yyyyMMdd"/>
-												<fmt:formatDate value="${parseDt}" var="formatDt" pattern="yyyy-MM-dd"/>
-												<span>${formatDt} 입사</span> 
-											</li>
-	                                    </ul>
-	                                    <ul class="main_ul main_font">
+	                                    <ul class="main_ul">
 	                                    	<li><span>${not empty empInfo.dutyTitle ? empInfo.dutyTitle : '등록된 담당업무가 없습니다.'}</span></li>
 	                                    </ul>
                                     </div>

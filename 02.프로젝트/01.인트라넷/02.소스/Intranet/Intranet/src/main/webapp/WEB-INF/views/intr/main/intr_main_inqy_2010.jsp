@@ -215,19 +215,19 @@
 										<ul class="main_ul">
 											<li>
 												<a href="javascript:void(0);" onclick="docDown('excel')">
-													<img src='resources/images/icon/icon_excel.png' width="100" height="100"/>
+													<img src='resources/images/manual/manual_excel.png' width="100" height="100"/>
 													<span>기초 데이터</span>
 												</a>
 											</li>
 											<li>
 												<a href="javascript:void(0);" onclick="docDown('word')">
-													<img src='resources/images/icon/icon_word.png' width="100" height="100"/>
+													<img src='resources/images/manual/manual_word.png' width="100" height="100"/>
 													<span>테이블 설계서</span>
 												</a>
 											</li>
 											<li>
 												<a href="javascript:void(0);" onclick="docDown('ppt')">
-													<img src='resources/images/icon/icon_ppt.png' width="100" height="100"/>
+													<img src='resources/images/manual/manual_ppt.png' width="100" height="100"/>
 													<span>포트폴리오</span>
 												</a>
 											</li>

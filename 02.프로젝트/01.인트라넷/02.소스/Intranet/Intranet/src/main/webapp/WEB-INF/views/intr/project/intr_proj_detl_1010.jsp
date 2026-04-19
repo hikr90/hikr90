@@ -39,7 +39,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -70,18 +70,32 @@
 											<dd>${defaultInfo.projTitle}</dd>
 											<dt>담당자</dt>
 											<dd>${defaultInfo.orgNm} ${defaultInfo.ownerNm} ${defaultInfo.rankNm}</dd>
+										</dl>
+										<dl class="post_info">
 											<dt>계약기간</dt>
 											<dd>
 												<span class="date">
 													${defaultInfo.projSdt} ~ ${defaultInfo.projEdt}
 												</span>	
 											</dd>
-										</dl>
-										<dl class="post_info">
 											<dt>진행상태</dt>
 											<dd>${defaultInfo.statusNm}</dd>
 										</dl>
-			
+										<dl>
+											<dt>계약금</dt>
+											<dd>
+												${defaultInfo.deposit}
+												&nbsp; <span id="amtNm">(${defaultInfo.depositNm})</span>
+											</dd>
+											<dt>태그</dt>
+											<dd>${defaultInfo.tag}</dd>
+										</dl>
+										<dl>
+											<dt>설명/개요</dt>
+											<dd class="post_text" style="height: 310px;">
+												<pre>${defaultInfo.projCont}</pre>
+											</dd>
+										</dl>
 										<dl class="post_file">
 											<dt>첨부파일</dt>
 											<dd class="post_file">
@@ -97,23 +111,6 @@
 													</ul>
 												</div>
 											</dd>
-										</dl>
-		
-										<dl>
-											<dt>설명/개요</dt>
-											<dd class="post_text" style="height: 330px;">
-												<pre>${defaultInfo.projCont}</pre>
-											</dd>
-										</dl>
-									
-										<dl>
-											<dt>계약금</dt>
-											<dd>
-												${defaultInfo.deposit}
-												&nbsp; <span id="amtNm">(${defaultInfo.depositNm})</span>
-											</dd>
-											<dt>태그</dt>
-											<dd>${defaultInfo.tag}</dd>
 										</dl>
 									</div><!-- End post_view -->
 		

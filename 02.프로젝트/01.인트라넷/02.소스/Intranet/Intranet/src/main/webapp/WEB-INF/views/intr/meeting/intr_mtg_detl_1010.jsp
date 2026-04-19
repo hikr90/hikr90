@@ -75,7 +75,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 
@@ -89,7 +89,7 @@
 								<input type="hidden" id="sequenceId" name="sequenceId" value="${defaultInfo.mtgCd}">
 								<input type="hidden" id="page" name="page" value="${param.page}">
 								<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
-								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}">
+								<input type="hidden" id="srchNm" name="srchNm" value="${param.srchNm}"> 
 								<input type="hidden" id="srchDt" name="srchDt" value="${param.srchDt}">
 								<input type="hidden" id="orgNm" name="orgNm" value="${param.orgNm}">
 								<input type="hidden" id="rankNm" name="rankNm" value="${param.rankNm}">
@@ -114,7 +114,26 @@
 												</span>	
 											</dd>
 										</dl>
-			
+										<dl>
+											<dt>회의장소</dt>
+											<dd>${defaultInfo.mtgLocNm}</dd>
+											
+											<dt>회의시간</dt>
+											<dd>
+												<fmt:parseDate value="${defaultInfo.mtgStm}" var="parseStm" pattern="HHmm"/>
+												<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
+
+												<fmt:parseDate value="${defaultInfo.mtgEtm}" var="parseEtm" pattern="HHmm"/>
+												<fmt:formatDate value="${parseEtm}" var="formatEtm" pattern="HH:mm"/>
+												${formatStm} ~ ${formatEtm}
+											</dd>
+										</dl>
+										<dl>
+											<dt>설명/개요</dt>
+											<dd class="post_text" style="height: 310px;">
+												<pre>${defaultInfo.mtgCont}</pre>
+											</dd>
+										</dl>
 										<dl class="post_file">
 											<dt>회의자료</dt>
 											<dd class="post_file">
@@ -129,28 +148,6 @@
 													</c:forEach>
 													</ul>
 												</div>
-											</dd>
-										</dl>
-			
-										<dl>
-											<dt>설명/개요</dt>
-											<dd class="post_text" style="height: 330px;">
-												<pre>${defaultInfo.mtgCont}</pre>
-											</dd>
-										</dl>
-										
-										<dl class="post_info">
-											<dt>회의장소</dt>
-											<dd>${defaultInfo.mtgLoc}</dd>
-											
-											<dt>회의시간</dt>
-											<dd>
-												<fmt:parseDate value="${defaultInfo.mtgStm}" var="parseStm" pattern="HHmm"/>
-												<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
-
-												<fmt:parseDate value="${defaultInfo.mtgEtm}" var="parseEtm" pattern="HHmm"/>
-												<fmt:formatDate value="${parseEtm}" var="formatEtm" pattern="HH:mm"/>
-												${formatStm} ~ ${formatEtm}
 											</dd>
 										</dl>
 									</div><!-- End post_view -->

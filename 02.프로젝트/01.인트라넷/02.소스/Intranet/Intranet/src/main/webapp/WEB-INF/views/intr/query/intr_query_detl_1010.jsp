@@ -104,6 +104,17 @@
 			}
 		}
 		
+		// 쿠키 읽기 함수
+		function getCookie(name) {
+		    var parts = document.cookie.split(name + "=");
+		    if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+
+		// 쿠키 삭제 함수
+		function expireCookie(name) {
+		    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		}
+		
 		// 엑셀 다운로드
 		function excelDown(){
 			try {
@@ -111,8 +122,19 @@
 				var query = $("#query").val().toLowerCase();
 				var param = $("#form").serialize();
 				if(!validate(query)) return;
+				$("#loadingBar").show();
 				//
 				formSubmit("intrQueryInqy1030.do");
+				
+				// 쿠키 체크 타이머
+		        var downloadTimer = setInterval(function() {
+		            var token = getCookie("excelCookie");
+		            if (token == "true") {
+		                $("#loadingBar").hide();
+		                expireCookie("excelCookie");
+		                clearInterval(downloadTimer);
+		            }
+		        }, 500);
 				
 			} catch (error) {
 		        console.error("[Error] 엑셀 다운로드 : ", error.message);
@@ -175,6 +197,10 @@
 	</script>
 </head>
 <body id="main">
+<div id="loadingBar" class="loading_bar">
+    <div class="loader"></div>
+</div>
+
 <form id="form" method="POST">
 	<!-- API 팝업 -->
 	<div id="qryArea" class="popupArea hidden">
@@ -188,7 +214,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 

@@ -45,21 +45,26 @@ public class CoreServiceImpl implements CoreService{
 			// 메뉴 정보 세션 조회
 			//--------------------------------------------------------------------------------------------
 			HttpSession session = request.getSession();
-			String menuType = "";
-			String menuSet = "";
+			String menuType = (String)session.getAttribute("menuType");
+			String menuCd = (String)paramMap.get("menuCd");
+			String leadMenuCd = (String)paramMap.get("leadMenuCd");
+			String menuPos = "";
 
-			// (1) MenuType
-			menuType = (String)session.getAttribute("menuType");
+			// 사용자, 관리자 구분
 			if(menuType!=null) {
 				paramMap.put("menuType", menuType);
 			}
 			
-			// (2) menuSet
-			menuSet =  utilService.nvlProc((String)paramMap.get("menuSet"));
-			if(menuSet!="") {
-				session.setAttribute("menuSet", menuSet);
+			// 상단, 좌측 구분
+			menuPos =  utilService.nvlProc((String)paramMap.get("menuPos"));
+			if(menuPos.equals("top")) {
+				session.setAttribute("setUpprMenu", menuCd);
+				session.setAttribute("setMenu", leadMenuCd);
 			} else {
-				menuSet = (String)session.getAttribute("menuSet");
+				//
+				if(!utilService.isNull(menuCd)) {
+					session.setAttribute("setMenu", menuCd);
+				}
 			}
 
 			//--------------------------------------------------------------------------------------------
@@ -84,7 +89,6 @@ public class CoreServiceImpl implements CoreService{
 			// 좌측 메뉴 조회
 			//--------------------------------------------------------------------------------------------
 			tempMap = new HashMap<String, Object>();
-			tempMap.put("menuSet", menuSet);
 			tempMap.put("menuCd", utilService.nvlProc((String)paramMap.get("menuCd")));
 			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
 			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));

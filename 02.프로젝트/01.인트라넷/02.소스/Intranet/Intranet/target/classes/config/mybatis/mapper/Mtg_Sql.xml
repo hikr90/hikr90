@@ -9,75 +9,46 @@
 	<select id="intrMtgInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* intrMtgInqy1011 : 회의 목록 조회 */
 		SELECT 
-		            SUB_DATA.NUM
-		        ,	SUB_DATA.MTG_CD
-				,	SUB_DATA.MTG_TITLE
-				,	SUB_DATA.MTG_DT
-				,	SUB_DATA.MTG_STM
-				,	SUB_DATA.MTG_ETM
-				,	SUB_DATA.ORG_NM
-				,	SUB_DATA.RANK_NM
-				,	SUB_DATA.MTG_IDX
-				,	SUB_DATA.EMP_NM
-				,	SUB_DATA.REG_DT
-				,	SUB_DATA.REG_TM
-				,   CASE WHEN SUB_DATA.FILE_CNT <![CDATA[>]]> 0
-                        THEN 'Y'
-                        ELSE 'N'
-                    END AS FILE_YN
-				,	SUB_DATA.LIST_CNT
-		FROM (
-				SELECT 
-		    			M.MTG_CD
-		    		,	M.MTG_TITLE
-		    		,	M.MTG_DT
-		    		,	M.MTG_STM
-		    		,	M.MTG_ETM
-		    		,	M.MTG_IDX
-		    		,	E.EMP_NM
-		    		,   O.ORG_NM
-		    		,	R.RANK_NM
-                    ,   M.REG_DT
-                    ,   M.REG_TM
-                    ,	RANK() OVER(ORDER BY M.MTG_CD DESC) AS NUM
-                    ,	(SELECT 
-      							COUNT(FILE_ID) 
-      						FROM FILE_INFO 
-      						WHERE FILE_ID = M.MTG_CD
-      							AND USE_YN = 'Y'
-      					) AS FILE_CNT
-                    ,   COUNT(M.MTG_CD) OVER() AS LIST_CNT
-		        FROM MEETING M
-	        	LEFT OUTER JOIN EMP_INFO E
-	            	ON M.MTG_IDX = E.EMP_IDX
-	            LEFT OUTER JOIN ORG O
-	            	ON O.ORG_CD = E.ORG_CD
-                       AND O.USE_YN = 'Y'
-                LEFT OUTER JOIN RANK R
-	            	ON R.RANK_CD = E.RANK_CD
-                    AND R.USE_YN = 'Y'
-		        WHERE M.USE_YN = 'Y'
-		            <if test="srchNm != null and srchNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(M.MTG_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-		            </if>
-		            <if test="srchDt != null and srchDt !=''">
-		            	AND M.MTG_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
-		            </if>
-		  			<if test="orgNm != null and orgNm != ''">
-		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-					</if>
-					<if test="rankNm != null and rankNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-					</if>
-					<if test="srchIdx != null and srchIdx != ''">
-		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-					</if>
-        	) SUB_DATA
- 		WHERE 1=1 
- 			<if test="(sIdx != null and sIdx !='') and (eIdx != null and eIdx !='')">
- 				AND SUB_DATA.NUM BETWEEN #{sIdx, jdbcType=VARCHAR} AND #{eIdx, jdbcType=VARCHAR}
-        	</if>
-        ORDER BY SUB_DATA.NUM DESC
+	   			M.MTG_CD
+	   		,	M.MTG_CD AS ID	
+	   		,	M.MTG_TITLE AS TITLE
+			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "START"
+			,	TO_CHAR(TO_DATE(M.MTG_DT,'YYYY-MM-DD'), 'YYYY-MM-DD') || ' 00:00:00' AS "END"
+	   		,	M.MTG_DT
+	   		,	M.MTG_STM
+	   		,	M.MTG_ETM
+	   		,	M.MTG_IDX
+	   		,	E.EMP_NM
+	   		,   O.ORG_NM
+	   		,	R.RANK_NM
+	        ,   M.REG_DT
+	        ,   M.REG_TM
+	        ,	M.MTG_LOC
+	        ,	CC_LOC.COMMCODE_NM AS MTG_LOC_NM
+		FROM MEETING M
+	    LEFT OUTER JOIN EMP_INFO E
+			ON M.MTG_IDX = E.EMP_IDX
+		LEFT OUTER JOIN ORG O
+        	ON O.ORG_CD = E.ORG_CD
+            AND O.USE_YN = 'Y'
+		LEFT OUTER JOIN RANK R
+			ON R.RANK_CD = E.RANK_CD
+            AND R.USE_YN = 'Y'
+        LEFT OUTER JOIN COMMCODE CC_LOC
+			ON CC_LOC.COMMCODE_CD = M.MTG_LOC
+		WHERE M.USE_YN = 'Y'
+        	<if test="srchNm != null and srchNm != ''">
+         		AND REGEXP_REPLACE(LOWER(M.MTG_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+         	</if>
+			<if test="orgNm != null and orgNm != ''">
+				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			</if>
+			<if test="rankNm != null and rankNm != ''">
+         		AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+			</if>
+			<if test="srchLocCd != null and srchLocCd != ''">
+         		AND M.MTG_LOC = #{srchLocCd, jdbcType=VARCHAR}
+         	</if>
 	</select>
 
 	<select id="intrMtgInqy1031" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -94,7 +65,7 @@
 							,	M.MTG_STM
 							,	M.MTG_ETM
 							,	M.MTG_LOC
-							,	M.MTG_MBR
+							,	CC_LOC.COMMCODE_NM AS MTG_LOC_NM
 							,	E.ORG_CD
 							,	O.ORG_NM
 							,	E.EMP_NM
@@ -109,8 +80,43 @@
 					LEFT OUTER JOIN RANK R
 						ON R.RANK_CD = E.RANK_CD
 						AND R.USE_YN = 'Y'
+					LEFT OUTER JOIN COMMCODE CC_LOC
+						ON CC_LOC.COMMCODE_CD = M.MTG_LOC
 					WHERE M.MTG_CD = #{sequenceId, jdbcType=VARCHAR}
 		) DATA
+	</select>
+	
+	<select id="intrMtgInqy1091" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* intrMtgInqy1091 : 회의 중복 조회 */
+		SELECT 
+				MTG_CD
+			,	MTG_STM
+			, MTG_ETM
+		FROM MEETING
+		WHERE 1=1
+			<if test="sequenceId != null and sequenceId != ''">
+				AND MTG_CD != #{sequenceId, jdbcType=VARCHAR}
+			</if>
+			
+			<!-- MTG_DT -->
+			<choose>
+				<when test="mtgDt != null and mtgDt != ''">
+					AND MTG_DT = REPLACE(#{mtgDt, jdbcType=VARCHAR},'-', '')
+				</when>
+				<otherwise>
+					AND MTG_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+				</otherwise>
+			</choose>
+			
+			<!-- MTG_LOC -->
+			<choose>
+				<when test="mtgLoc != null and mtgLoc != ''">
+					AND MTG_LOC = #{mtgLoc, jdbcType=VARCHAR}
+				</when>
+				<otherwise>
+					AND MTG_LOC = 'LOC_0010'
+				</otherwise>
+			</choose>
 	</select>
 	
 	<select id="intrMtgInqy2011" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -166,7 +172,6 @@
 			,	MTG_STM
 			,	MTG_ETM
 			,	MTG_LOC
-			,	MTG_MBR
 			,	REG_DT
 			,	REG_TM
 			,	USE_YN
@@ -183,7 +188,6 @@
 			,	REPLACE(#{mtgStm, jdbcType=VARCHAR},':','')
 			,	REPLACE(#{mtgEtm, jdbcType=VARCHAR},':','')
 			,	#{mtgLoc, jdbcType=VARCHAR}
-			,	#{mtgMbr, jdbcType=VARCHAR}
 			,	TO_CHAR(SYSDATE,'YYYYMMDD')
 			,	TO_CHAR(SYSDATE,'HH24MISS')
 			,	'Y'
@@ -198,8 +202,7 @@
 	
 	<update id="intrMtgProc1021" parameterType="java.util.HashMap">
 		/* intrMtgProc1021 : 회의 삭제 처리 (수정)  */
-		UPDATE MEETING
-			SET USE_YN = 'N'
+		DELETE MEETING
 		WHERE MTG_CD = #{sequenceId, jdbcType=VARCHAR}
 	</update>
 	
@@ -213,7 +216,6 @@
 				,	MTG_STM = REPLACE(#{mtgStm, jdbcType=VARCHAR},':','')
 				,	MTG_ETM = REPLACE(#{mtgEtm, jdbcType=VARCHAR},':','')
 				,	MTG_LOC = #{mtgLoc, jdbcType=VARCHAR}
-				,	MTG_MBR = #{mtgMbr, jdbcType=VARCHAR}
 		WHERE MTG_CD = #{sequenceId, jdbcType=VARCHAR} 
 	</update>	
 </mapper>

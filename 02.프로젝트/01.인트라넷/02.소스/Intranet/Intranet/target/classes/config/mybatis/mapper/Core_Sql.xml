@@ -36,9 +36,9 @@
 						    ,   CASE WHEN M.UPPR_MENU_CD IS NULL
 						    		THEN LEAD(M.MAPPING_ID) OVER(ORDER BY M.MENU_CD ASC) 
 						    		ELSE M.MAPPING_ID END AS MAPPING_ID
-						    ,	CASE WHEN M.UPPR_MENU_CD IS NULL
+					  		,	CASE WHEN M.UPPR_MENU_CD IS NULL
 						    		THEN LEAD(M.MENU_CD) OVER(ORDER BY M.MENU_CD ASC)
-						    		ELSE M.MENU_CD END AS MENU_SET
+						    		ELSE M.MENU_CD END AS LEAD_MENU_CD
 						    ,   M.USE_YN
 						    ,   M.DISP_ORDER
 						    ,   M.REMARK
@@ -55,12 +55,6 @@
 						<if test="menuType == 1">
 							AND M.MENUTYPE_CD = '1'
 						</if>
-						
-						<!-- 
-						<if test="menuSet != null and menuSet != ''">
-							AND (M.MENU_CD = #{menuCd, jdbcType=VARCHAR} OR M.UPPR_MENU_CD = #{menuCd, jdbcType=VARCHAR})
-						</if>
-						 -->
 				) DATA
 				START WITH DATA.UPPR_MENU_CD IS NULL
 				CONNECT BY PRIOR DATA.MENU_CD = DATA.UPPR_MENU_CD

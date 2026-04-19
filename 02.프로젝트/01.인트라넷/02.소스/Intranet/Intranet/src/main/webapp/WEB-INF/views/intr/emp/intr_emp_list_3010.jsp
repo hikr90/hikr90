@@ -70,7 +70,7 @@
 		<!-- 좌측 메뉴 -->
 		<div class="left_wrap">
 			<div class="left_area">
-				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1050.jsp" %>
+				<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1031.jsp" %>
 			</div>
 		</div>
 	
@@ -86,8 +86,8 @@
 									<input type="hidden" id="tabCd" name="tabCd" value="${param.tabCd}">
 									<input type="hidden" id="empIdx" name="empIdx" value="${empVO.empIdx}">
 									<input type="hidden" id="sequenceId" name="sequenceId" value="">
-								
 									<h2 id="title">담당업무 조회</h2>
+
 									<!-- 탭 목록 -->
 								    <div class="tab_container">
 									    <div class="tab_wrapper">
