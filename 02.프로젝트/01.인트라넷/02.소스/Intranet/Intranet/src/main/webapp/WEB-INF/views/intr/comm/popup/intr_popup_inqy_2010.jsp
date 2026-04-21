@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_2010
-	title : 비밀번호 변경 팝업 관리 (마이페이지)
--->
-<!DOCTYPE html>
-<html>
+<!-- 비밀번호 변경 관리 (마이페이지) -->
 <script type="text/javascript">
 	// 비밀번호 변경
 	function popUpdate(){
@@ -104,4 +100,3 @@
 	</article>
 </div>
 </form>
-</html>

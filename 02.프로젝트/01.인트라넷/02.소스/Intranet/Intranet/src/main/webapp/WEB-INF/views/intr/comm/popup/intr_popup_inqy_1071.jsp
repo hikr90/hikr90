@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1071
-	title : 정산내역 등록 팝업
--->
+<!-- 정산내역 등록 -->
 <script>
 	$(document).ready(function() {
 		// 정산 내역 초기화

@@ -4,10 +4,7 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1031
-	title : 프로젝트 트리 팝업
--->
+<!-- 프로젝트 트리 -->
 <div class="scroll_wrap">
 	<div class="pop_tree">
 		<div class="tree">

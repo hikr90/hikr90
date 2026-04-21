@@ -49,32 +49,6 @@
 		}
 	}
 
-	// 기안문 양식 등록
-	function regCall() {
-		try {
-			//
-			$.ajax({
-	    		type : 'post',
-	        	url : 'intrTempInqy1030.do',
-	            data : null,
-	            dataType : 'html',
-	            success : function(data){
-	     				//
-	            	    $(".tree_info").html(data);
-	     				$(".a_btn").each(function() {
-	        				$(this).removeClass('list_bg');
-	        			});
-	            },
-	            error : function(data){
-					alert("<spring:message code="PROC.ERROR"/>");
-	            }
-	      	});
-			
-		} catch (error) {
-	        console.error("[Error] 기안문 양식 등록 : ", error.message);
-		}
-	}
-	
 	// 기안문 양식 등록 처리
 	function regProc(){
 		try {
@@ -152,7 +126,7 @@
 				var param = $("#form").serialize();
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrTempProc1020.do',
+		        	url : 'intrTempProc1010.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -172,46 +146,9 @@
 	        console.error("[Error] 기안문 양식 수정 처리 : ", error.message);
 		}
 	}
-	
-	// 기안문 양식 삭제 처리
-	function delProc(f){
-		try {
-			// 유효성 검증
-			if(!valProc()){return;};
-			var param = $("#form").serialize();
-			//
-			if(confirm("삭제하시겠습니까?")){
-				//		
-				$.ajax({
-		    		type : 'post',
-		        	url : 'intrTempProc1030.do',
-		            data : param,
-		            dataType : 'html',
-		            success : function(data){
-		            	    $(".tree_info").html(""); // 등록 화면 초기화
-		    				alert("<spring:message code="PROC.SUCCESS"/>");
-		    				
-		    				// 재 조회
-		            		$(".listCall").trigger("click");	
-		            },
-		            error : function(data){
-						alert("<spring:message code="PROC.ERROR"/>");
-		            }
-		      	});
-			}
-			
-		} catch (error) {
-	        console.error("[Error] 기안문 양식 삭제 처리 : ", error.message);
-		}
-	}
 </script>
 <body id="main">
 <form id="form" name="form" onsubmit="return false;">
-	<!-- 정보 찾기 -->
- 	<div id="popupArea" class="popup_area hidden">
-		<c:import url="/WEB-INF/views/intr/comm/popup/intr_popup_inqy_1010.jsp"></c:import>	
-	</div>
-	
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	
@@ -233,7 +170,11 @@
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
 									<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>양식 관리</h2>
+									<h2>기안문 관리
+										<span class="float_right">
+											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
+										</span>
+									</h2>
 									
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">

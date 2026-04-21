@@ -6,6 +6,7 @@
 		<result property="tempNm" 				column="TEMP_NM"/>
 		<result property="temptypeCd" 		column="TEMPTYPE_CD"/>
 		<result property="tempCont" 			column="TEMP_CONT" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="useYn" 					column="USE_YN"/>
 	</resultMap>
 
 	<select id="intrTempInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
@@ -22,9 +23,13 @@
 	        ,	RANK() OVER(ORDER BY T.TEMP_CD ASC) AS NUM
 		FROM TEMPLATE T
 		WHERE 1=1
-		<if test="srchNm != null and srchNm != ''">
-	    	AND REGEXP_REPLACE(LOWER(T.TEMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
-	    </if>
+			<if test="isView != null and isView != ''">
+				AND T.USE_YN = 'Y'
+			</if>
+			<if test="srchNm != null and srchNm != ''">
+		    	AND REGEXP_REPLACE(LOWER(T.TEMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		    </if>
+		ORDER BY T.TEMP_CD ASC
 	</select>
 	
 	<select id="intrTempInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getTEMP_INFO">
@@ -34,50 +39,18 @@
 	        ,   T.TEMP_NM
 	        ,	T.TEMP_CONT
 	        ,	T.TEMPTYPE_CD
+	        ,	T.USE_YN
 		FROM TEMPLATE T
 		WHERE 1=1
 			AND T.TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="intrTempProc1011" parameterType="java.util.HashMap">
-		/* intrTempProc1011 : 기안문 양식 등록 처리 */
-		INSERT INTO TEMPLATE
-		(
-				TEMP_CD
-			,	TEMP_NM
-			,	TEMP_CONT
-			,	TEMPTYPE_CD
-			,	DISP_ORDER
-			,	REMARK
-		)
-		VALUES
-		(
-				(SELECT 
-					'TEMP_' || LPAD(NVL(MAX(SUBSTR(TEMP_CD,LENGTH(TEMP_CD)-3,LENGTH(TEMP_CD))),0) + 1,4,0) AS TEMP_CD 
-				FROM TEMPLATE)
-			,	#{tempNm, jdbcType=VARCHAR}
-			,	#{tempCont, jdbcType=VARCHAR}
-			,	(
-					SELECT 
-						NVL(MAX(DISP_ORDER),0) + 1 
-					FROM TEMPLATE
-				)
-			,	NULL
-			,	NULL
-		)
-	</insert>
-
-	<update id="intrTempProc1021" parameterType="java.util.HashMap">
-		/* intrTempProc1021 : 기안문 양식 수정 처리 */
+	<update id="intrTempProc1011" parameterType="java.util.HashMap">
+		/* intrTempProc1011 : 기안문 양식 수정 처리 */
 		UPDATE TEMPLATE
 			SET		TEMP_NM = #{tempNm, jdbcType=VARCHAR}
 					,	TEMP_CONT = #{tempCont, jdbcType=VARCHAR}
+					,	USE_YN = #{useYn, jdbcType=VARCHAR}
 		WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
 	</update>
-	
-	<delete id="intrTempProc1031" parameterType="java.util.HashMap">
-		/* intrTempProc1031 : 기안문 양식 삭제 처리 */
-		DELETE FROM TEMPLATE
-			WHERE TEMP_CD = #{tempCd, jdbcType=VARCHAR}
-	</delete>
 </mapper>

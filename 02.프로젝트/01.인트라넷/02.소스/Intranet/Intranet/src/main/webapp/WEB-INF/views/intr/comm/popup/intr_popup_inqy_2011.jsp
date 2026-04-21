@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_2011
-	title : 비밀번호 변경 (마이페이지)
--->
+<!-- 비밀번호 변경 (마이페이지) -->
 <div id="chagePwd" class="chagePwd">
 	<div class="post_write">
 		<dl>

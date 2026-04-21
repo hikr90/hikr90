@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
-
-<!-- 
-	view : intr_popup_inqy_1101
-	title : 조직도 상세 팝업
--->
 
 <!-- 조직도 트리 -->
 <div class="post_view mt20 mr10" style="margin: 0; border: 1px solid #d7d7d7;">

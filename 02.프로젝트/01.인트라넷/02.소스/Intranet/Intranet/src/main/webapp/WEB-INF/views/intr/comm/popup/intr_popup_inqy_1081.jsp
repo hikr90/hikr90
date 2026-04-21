@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1081
-	title : 일정 상세 팝업
--->
+<!-- 휴가 조회 -->
 <div class="post_view" style="margin: 0; margin-top:20px;">
 	<dl>
 		<dt>휴가자</dt>

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1080
-	title : 일정 관리 팝업
--->
+<!-- 휴가 관리 -->
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 80%;">
 		<div class="content">

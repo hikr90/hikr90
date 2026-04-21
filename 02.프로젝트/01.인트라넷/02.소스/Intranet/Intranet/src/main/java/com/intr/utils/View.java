@@ -21,53 +21,53 @@ public interface View {
 	//--------------------------------------------------------------------------------------------
 	// 팝업
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_POPUP_INQY_1010 = "intr_popup_inqy_1010.jsp";			// 사원 관리 팝업
-	public static final String INTR_POPUP_INQY_1011 = "intr_popup_inqy_1011.jsp";			// 사원 트리
+	public static final String INTR_POPUP_INQY_1010 = "intr_popup_inqy_1010.jsp";			// 담당자 관리
+	public static final String INTR_POPUP_INQY_1011 = "intr_popup_inqy_1011.jsp";			// 담당자 트리
 	
-	public static final String INTR_POPUP_INQY_1020 = "intr_popup_inqy_1020.jsp";		// 회원정보 찾기 팝업
+	public static final String INTR_POPUP_INQY_1020 = "intr_popup_inqy_1020.jsp";		// 회원정보 찾기 관리
 	public static final String INTR_POPUP_INQY_1021 = "intr_popup_inqy_1021.jsp";			// 팝업 (아이디 찾기)
 	public static final String INTR_POPUP_INQY_1022 = "intr_popup_inqy_1022.jsp";		// 팝업 (비밀번호 찾기)
 
 	public static final String INTR_POPUP_INQY_1030 = "intr_popup_inqy_1030.jsp";		// 프로젝트 관리
 	public static final String INTR_POPUP_INQY_1031 = "intr_popup_inqy_1031.jsp";			// 프로젝트 트리
 	
-	public static final String INTR_POPUP_INQY_1040 = "intr_popup_inqy_1040.jsp";		// 결재선 팝업 관리
-	public static final String INTR_POPUP_INQY_1041 = "intr_popup_inqy_1041.jsp";			// 결재선 선택 팝업 트리
+	public static final String INTR_POPUP_INQY_1040 = "intr_popup_inqy_1040.jsp";		// 결재선 관리
+	public static final String INTR_POPUP_INQY_1041 = "intr_popup_inqy_1041.jsp";			// 결재선 트리
 	public static final String INTR_POPUP_INQY_1042 = "intr_popup_inqy_1042.jsp";		// 결재선 목록
-	public static final String INTR_POPUP_INQY_1043 = "intr_popup_inqy_1043.jsp";		// 결재선 상세 (팝업)
+	public static final String INTR_POPUP_INQY_1043 = "intr_popup_inqy_1043.jsp";		// 결재선 상세
 
 	public static final String INTR_POPUP_INQY_1050 = "intr_popup_inqy_1050.jsp";		// 결재의견 관리
 	public static final String INTR_POPUP_INQY_1051 = "intr_popup_inqy_1051.jsp";			// 결재의견 입력
 
-	public static final String INTR_POPUP_INQY_1060 = "intr_popup_inqy_1060.jsp";		// 물품 등록 관리
+	public static final String INTR_POPUP_INQY_1060 = "intr_popup_inqy_1060.jsp";		// 물품 관리
 	public static final String INTR_POPUP_INQY_1061 = "intr_popup_inqy_1061.jsp";			// 물품 등록
 	public static final String INTR_POPUP_INQY_1062 = "intr_popup_inqy_1062.jsp";		// 물품 조회
 	
-	public static final String INTR_POPUP_INQY_1070 = "intr_popup_inqy_1070.jsp";		// 정산내역 등록 관리
+	public static final String INTR_POPUP_INQY_1070 = "intr_popup_inqy_1070.jsp";		// 정산내역 관리
 	public static final String INTR_POPUP_INQY_1071 = "intr_popup_inqy_1071.jsp";			// 정산내역 등록
 	public static final String INTR_POPUP_INQY_1072 = "intr_popup_inqy_1072.jsp";		// 정산내역 조회
 	
-	public static final String INTR_POPUP_INQY_1080 = "intr_popup_inqy_1080.jsp";		// 휴가 팝업 관리
+	public static final String INTR_POPUP_INQY_1080 = "intr_popup_inqy_1080.jsp";		// 휴가 관리
 	public static final String INTR_POPUP_INQY_1081 = "intr_popup_inqy_1081.jsp";			// 휴가 조회
 
-	public static final String INTR_POPUP_INQY_1090 = "intr_popup_inqy_1090.jsp";		// 회의 팝업 관리
+	public static final String INTR_POPUP_INQY_1090 = "intr_popup_inqy_1090.jsp";		// 회의 관리
 	public static final String INTR_POPUP_INQY_1091 = "intr_popup_inqy_1091.jsp";			// 회의 조회
 	
-	public static final String INTR_POPUP_INQY_1100 = "intr_popup_inqy_1100.jsp";			// 조직도 팝업 관리
-	public static final String INTR_POPUP_INQY_1101 = "intr_popup_inqy_1101.jsp";			// 조직도 조회
+	public static final String INTR_POPUP_INQY_1100 = "intr_popup_inqy_1100.jsp";			// 조직도 관리
+	public static final String INTR_POPUP_INQY_1101 = "intr_popup_inqy_1101.jsp";			// 조직도 트리
 	public static final String INTR_POPUP_INQY_1102 = "intr_popup_inqy_1102.jsp";			// 조직도 트리 조회
 	
-	public static final String INTR_POPUP_INQY_1110 = "intr_popup_inqy_1110.jsp";			// API 팝업 관리
+	public static final String INTR_POPUP_INQY_1110 = "intr_popup_inqy_1110.jsp";			// API 관리
 	public static final String INTR_POPUP_INQY_1111 = "intr_popup_inqy_1111.jsp";			// API 조회
 
-	public static final String INTR_POPUP_INQY_1120 = "intr_popup_inqy_1120.jsp";			// 업무 캘린더 팝업 관리
+	public static final String INTR_POPUP_INQY_1120 = "intr_popup_inqy_1120.jsp";			// 업무 캘린더 관리
 	public static final String INTR_POPUP_INQY_1121 = "intr_popup_inqy_1121.jsp";			// 업무 캘린더 등록
 	public static final String INTR_POPUP_INQY_1122 = "intr_popup_inqy_1122.jsp";			// 업무 캘린더 상세
 	public static final String INTR_POPUP_INQY_1123 = "intr_popup_inqy_1123.jsp";			// 업무 캘린더 상세 (메인)
 	
 	public static final String INTR_POPUP_INQY_2010 = "intr_popup_inqy_2010.jsp";		// 비밀번호 변경 관리 (마이페이지)
 	public static final String INTR_POPUP_INQY_2011 = "intr_popup_inqy_2011.jsp";			// 비밀번호 변경 (마이페이지)
-	
+
 	//--------------------------------------------------------------------------------------------
 	// 공지사항
 	//--------------------------------------------------------------------------------------------
@@ -110,8 +110,6 @@ public interface View {
 	public static final String INTR_TEMP_LIST_1011 = "intr_temp_list_1011.jsp"; 			// 기안문 양식 목록 (트리)
 
 	public static final String INTR_TEMP_DETL_1010 = "intr_temp_detl_1010.jsp";			// 기안문 양식 상세
-	public static final String INTR_TEMP_DETL_1020 = "intr_temp_detl_1020.jsp";			// 기안문 양식 등록
-	public static final String INTR_TEMP_DETL_1030 = "intr_temp_detl_1030.jsp";			// 기안문 양식 수정
 
 	//--------------------------------------------------------------------------------------------
 	// 권한

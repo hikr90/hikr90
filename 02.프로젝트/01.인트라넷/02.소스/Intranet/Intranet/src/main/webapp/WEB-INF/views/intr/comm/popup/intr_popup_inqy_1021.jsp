@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1021
-	title : 아이디 찾기 팝업
--->
+<!-- 팝업 (아이디 찾기) -->
 <script>
 	$(document).ready(function(){
 		// 제목 제어

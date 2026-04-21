@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1020
-	title : 정보 찾기 관리 팝업
--->
-<!DOCTYPE html>
-<html>
+<!-- 회원정보 찾기 관리 -->
 <script type="text/javascript">
 	// 아아디, 비밀번호 구분
 	function isFindId(){
@@ -377,4 +372,3 @@
 	</article>
 </div>
 </form>
-</html>

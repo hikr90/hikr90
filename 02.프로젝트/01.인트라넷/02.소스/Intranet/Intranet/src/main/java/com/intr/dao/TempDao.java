@@ -31,27 +31,11 @@ public class TempDao {
 		return defaultInfo;
 	}
 	
-	// 기안문 양식 등록
+	// 기안문 양식 수정
 	public int intrTempProc1011(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("temp.intrTempProc1011", paramMap);
-		return resInt;
-	}
-	
-	// 기안문 양식 수정
-	public int intrTempProc1021(HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.update("temp.intrTempProc1021", paramMap);
-		return resInt;
-	}
-	
-	// 기안문 양식 삭제 
-	public int intrTempProc1031(HashMap<String, Object> paramMap) {
-		//
-		int resInt = 0;
-		resInt = sqlsession.delete("temp.intrTempProc1031", paramMap);
+		resInt = sqlsession.update("temp.intrTempProc1011", paramMap);
 		return resInt;
 	}
 }

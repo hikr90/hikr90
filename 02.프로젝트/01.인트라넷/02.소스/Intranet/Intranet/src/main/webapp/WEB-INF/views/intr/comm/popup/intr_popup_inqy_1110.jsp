@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1110
-	title : API 관리
--->
+<!-- API 관리 -->
 <div class="pop_area" style="height: 100%;">
 	<article class="sub_article" style="height: 85%;">
 		<div class="content">

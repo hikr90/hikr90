@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1060
-	title : 물품 등록 관리 팝업
--->
+<!-- 물품 관리 -->
 <script>
 	// 물품 등록
 	let itemlineList = [];

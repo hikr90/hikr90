@@ -22,6 +22,7 @@ import com.intr.dao.TempDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.UtilService;
+import com.intr.utils.AprvView;
 import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
 
@@ -65,11 +66,11 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 기안 등록 양식 조회
-	public void intrAprvInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrAprvInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
-		List<HashMap<String, Object>> defaultList = null;
 		HashMap<String, Object> defaultInfo = null;
 		String temptypeCd = utilService.nvlProc((String)paramMap.get("temptypeCd"));
+		String returnUrl = "";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -79,45 +80,29 @@ public class AprvServiceImpl implements AprvService{
 			model.addAttribute("tempInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
-			// 휴가 신청서
+			// ENUM 조회
 			//--------------------------------------------------------------------------------------------
-			if(temptypeCd.equals("Leav")) {
-				//--------------------------------------------------------------------------------------------
-				// 공통코드 (휴가 타입) 조회
-				//--------------------------------------------------------------------------------------------
-				paramMap.put("commcodeGcd", 	"LEAV");
-				defaultList = utilDao.intrCodeInqy1011(paramMap);
-				model.addAttribute("leavList",defaultList);
-			}
-			
-			//--------------------------------------------------------------------------------------------
-			// 가지급결의서
-			//--------------------------------------------------------------------------------------------
-			else if(temptypeCd.equals("Exp")) {
-				//--------------------------------------------------------------------------------------------
-				// 공통코드 (지급 방법) 조회
-				//--------------------------------------------------------------------------------------------
-				paramMap.put("commcodeGcd", 	"PAY");
-				defaultList = utilDao.intrCodeInqy1011(paramMap);
-				model.addAttribute("prepayList",defaultList);
-			}
-
-			//--------------------------------------------------------------------------------------------
-			// 물품반출입 신청서
-			//--------------------------------------------------------------------------------------------
-			else if(temptypeCd.equals("Item")) {
-				//--------------------------------------------------------------------------------------------
-				// 공통코드 (요청 구분) 조회
-				//--------------------------------------------------------------------------------------------
-				paramMap.put("commcodeGcd", 	"REQ");
-				defaultList = utilDao.intrCodeInqy1011(paramMap);
-				model.addAttribute("reqList",defaultList);
-			}
+	        AprvView av = AprvView.findCode(temptypeCd);
+			//
+	        if (av != null) {
+	            // 해당 양식에 필요한 공통코드가 있는 경우 조회
+	            if (av.getTemptypeCd() != null && av.getModelNm() != null) {
+	            	//
+	                paramMap.put("commcodeGcd", av.getTemptypeCd());
+	                List<HashMap<String, Object>> codeList = utilDao.intrCodeInqy1011(paramMap);
+	                returnUrl = av.getViewNm(); 
+	                //
+	                model.addAttribute("returnUrl", returnUrl);
+	                model.addAttribute(av.getModelNm(), codeList);
+	            }
+	        }
 			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
 		}
+		//
+		return returnUrl;
 	}
 	
 	// 결재 목록 조회

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1070
-	title : 정산내역 등록 관리 팝업
--->
+<!-- 정산내역 관리 -->
 <script>
 	// 정산 내역
 	let corplineList = [];

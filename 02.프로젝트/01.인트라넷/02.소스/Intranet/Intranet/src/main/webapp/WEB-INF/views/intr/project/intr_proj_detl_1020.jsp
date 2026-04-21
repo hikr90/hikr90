@@ -157,7 +157,7 @@
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" style="width: 50%;" disabled="disabled">
+											<input type="text" id="empPnm" title="담당자" style="width: 150px;" disabled="disabled">
 										</dd>
 									</dl>
 									<dl>

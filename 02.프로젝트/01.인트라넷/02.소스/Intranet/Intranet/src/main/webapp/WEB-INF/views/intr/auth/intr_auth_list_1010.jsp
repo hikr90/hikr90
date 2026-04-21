@@ -254,7 +254,7 @@
 								
 									<h2>권한 관리
 										<span class="float_right">
-											<input type="button" class="btn_navy_thin" value="등록" onclick="regCall();">
+											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
 										</span>
 									</h2>
 									

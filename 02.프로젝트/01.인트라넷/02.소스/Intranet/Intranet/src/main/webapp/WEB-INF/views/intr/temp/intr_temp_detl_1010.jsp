@@ -20,6 +20,19 @@
 			<input type="text" id="tempNm" title="양식명" name="tempNm" value="${defaultInfo.tempNm}">
 			<input type="hidden" class="tempCd" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
 		</dd>
+		<dt>사용여부</dt>
+        <dd class="sel_2part">
+        	<div class="radio_box enter-check_box">
+            	<span class="radio-area">
+                	<input type="radio" id="chk-yes" name="useYn" value="Y" <c:if test="${defaultInfo.useYn eq 'Y'}">checked="checked"</c:if>>
+                	<label for="chk-yes">Y<span></span></label>
+            	</span>
+            	<span class="radio-area">
+                	<input type="radio" id="chk-no" name="useYn" value="N" <c:if test="${defaultInfo.useYn eq 'N'}">checked="checked"</c:if>>
+                	<label for="chk-no">N<span></span></label>
+            	</span>
+            </div>
+        </dd>
 	</dl>
 	<dl>
 		<dt>

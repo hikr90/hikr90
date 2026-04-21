@@ -62,56 +62,8 @@ public class TempServiceImpl implements TempService{
 		}
 	}
 
-	// 기안문 양식 목록 조회
-	public void intrTempInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		List<HashMap<String, Object>> defaultList = null;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// (메인)기안문 양식 목록 조회
-			//--------------------------------------------------------------------------------------------
-			defaultList = tempDao.intrTempInqy1011(model, paramMap);
-			model.addAttribute("tempList", defaultList);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	// 기안문 양식 등록
-	public String intrTempProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		String defaultStr = "";
-		String resStr = "NO";
-		int resInt = 0;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 기안문 양식 등록
-			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1011(paramMap);
-			//
-			if(resInt>0) {
-				resStr = "YES";
-			}
-			
-			//--------------------------------------------------------------------------------------------
-			// 결과 반환
-			//--------------------------------------------------------------------------------------------
-			defaultStr = String.format("[{'res':'%s'}]", resStr);			
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-		//
-		return defaultStr;
-	}
-	
 	// 기안문 양식 수정
-	public String intrTempProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String intrTempProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -121,37 +73,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1021(paramMap);
-			//
-			if(resInt>0) {
-				resStr = "YES";
-			}
-			
-			//--------------------------------------------------------------------------------------------
-			// 결과 반환
-			//--------------------------------------------------------------------------------------------
-			defaultStr = String.format("[{'res':'%s'}]", resStr);			
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-		//
-		return defaultStr;
-	}
-	
-	// 기안문 양식 삭제
-	public String intrTempProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
-		//
-		String defaultStr = "";
-		String resStr = "NO";
-		int resInt = 0;
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 기안문 양식 삭제
-			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1031(paramMap);
+			resInt = tempDao.intrTempProc1011(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";

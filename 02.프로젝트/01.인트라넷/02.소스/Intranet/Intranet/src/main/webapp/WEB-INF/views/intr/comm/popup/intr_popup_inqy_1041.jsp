@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1041
-	title : 결재선 등록 팝업
--->
+<!-- 결재선 트리 -->
 <script>
 	$(document).ready(function(){
 		// 페이지 로드 후 탭 오버플로우 체크

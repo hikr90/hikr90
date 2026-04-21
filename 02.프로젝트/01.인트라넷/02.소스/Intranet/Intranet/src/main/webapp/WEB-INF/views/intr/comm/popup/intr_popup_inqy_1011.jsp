@@ -4,10 +4,7 @@
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1011
-	title : 사원 트리 팝업
--->
+<!-- 담당자 트리 -->
 <div class="scroll_wrap" style="height: 260px;">
 	<div class="pop_tree">
 		<div class="tree">

@@ -16,17 +16,8 @@
 		//
 		try {
 			//
-			var obj = new Object();
-			var typeProc = {
-			  Leav: "intr_aprv_detl_1010.jsp", 		// 휴가 신청서
-			  Exp:  "intr_aprv_detl_1011.jsp", 			// 가지급결의서
-			  Item: "intr_aprv_detl_1012.jsp", 		// 물품반입신청서
-			  Corp: "intr_aprv_detl_1013.jsp", 		// 법인카드정산서
-			};
-			//	
 			$("#tempCd").val(tempCd);
-			$("#temptypeCd").val(temptypeCd);
-			$("#returnUrl").val(typeProc[temptypeCd]);
+        	$("#temptypeCd").val(temptypeCd);
 			//
 			formSubmit('intrAprvInqy1020.do');
 			
@@ -58,7 +49,6 @@
 								<div class="post_wrap">
 									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
 									<input type="hidden" id="tempCd" name="tempCd" value="">
-									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
 									<h2>기안 작성</h2>
 									<div class="srch_wrap">

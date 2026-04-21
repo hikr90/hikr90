@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1010
-	title : 사원 관리 팝업
--->
+<!-- 담당자 관리 -->
 <div id="popArea" class="pop_area">
 	<article class="sub_article">
 		<div class="content">

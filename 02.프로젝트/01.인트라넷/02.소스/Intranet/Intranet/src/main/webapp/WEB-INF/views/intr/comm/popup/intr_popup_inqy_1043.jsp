@@ -3,11 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1043
-	title : 결재선 상세 (팝업)
--->
-<!-- 결재선 목록 -->
+<!-- 결재선 상세 -->
 <div class="post_wrap">
 	<div class="scroll_wrap" style="height: 390px;">
 		<table class="post_table aprvTbl">

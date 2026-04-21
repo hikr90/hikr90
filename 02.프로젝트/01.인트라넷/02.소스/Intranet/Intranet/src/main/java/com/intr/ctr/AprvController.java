@@ -43,6 +43,8 @@ public class AprvController {
 	// 기안 작성 조회
 	@RequestMapping("/intrAprvInqy1010.do")
 	public String intrAprvInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		// 기안문 양식 뷰 처리
+		paramMap.put("isView", "Y");
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -66,6 +68,8 @@ public class AprvController {
 	// 기안 작성 상세 조회
 	@RequestMapping("/intrAprvInqy1020.do")
 	public String intrAprvInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		// 선택 양식 URL
+		String returnUrl = "";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -76,14 +80,14 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 기안 작성 상세 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy1020(model, paramMap);
+			returnUrl = aprvService.intrAprvInqy1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 작성 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
+		return Const.VIEW_PATH_APRV + returnUrl;
 	}
 	
 	// 결재 목록 조회

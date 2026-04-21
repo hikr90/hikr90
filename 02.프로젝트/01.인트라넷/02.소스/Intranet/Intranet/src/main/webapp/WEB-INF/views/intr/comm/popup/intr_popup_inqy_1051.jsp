@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	view : intr_popup_inqy_1051
-	title : 결재의견 입력 팝업
--->
+<!-- 결재의견 입력 -->
 <div class="post_view" style="margin: 0; margin-top:20px;">
 	<dl>
 		<dt>&#10003; 비밀번호</dt>

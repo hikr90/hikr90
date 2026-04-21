@@ -155,6 +155,7 @@
 
 
 /* ========================================== Pop ========================================== */
+.pop_con { border: 1px solid #e8edf2; }
 .pop_area { background: #fff; border: 3px solid #214b97; }
 .pop_area .sub_article { border: 1px solid #f6f6f6; }
 

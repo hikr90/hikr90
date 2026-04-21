@@ -2,10 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1030
-	title : 프로젝트 관리 팝업
--->
+<!-- 프로젝트 관리 -->
 <div id="popArea" class="pop_area">
 	<article class="sub_article">
 		<div class="content">
@@ -22,7 +19,7 @@
 							</div>
 	                        
 	                        <!-- 프로젝트 목록 -->
-	                        <div id="projCon" class="post_con" style="height: 200px; border: 1px solid #e8edf2;"></div>
+	                        <div id="projCon" class="post_con pop_con"></div>
 							
 							<div class="btn_center">
 								<button type="button" class="btn_navy_thin" onclick="popConfirm('proj');">확인</button>

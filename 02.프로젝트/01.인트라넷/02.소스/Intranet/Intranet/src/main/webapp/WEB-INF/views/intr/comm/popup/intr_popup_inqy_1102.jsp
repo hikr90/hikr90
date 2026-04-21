@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
-<!-- 
-	view : intr_popup_inqy_1102
-	title : 조직도 트리 조회
--->
-
-<!-- 조직도 트리 -->
+<!-- 조직도 트리 조회 -->
 <div class="tree">
 	<c:forEach var="list" items="${empList}" varStatus="status">
 		<c:set var="spanIcon"	value="icon_folder"/>
