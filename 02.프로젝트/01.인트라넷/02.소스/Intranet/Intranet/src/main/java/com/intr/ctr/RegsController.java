@@ -1,13 +1,9 @@
 package com.intr.ctr;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
@@ -49,12 +43,12 @@ public class RegsController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 내부규정 조회
 			//--------------------------------------------------------------------------------------------
-			regsService.intrRegsInqy1010(model, paramMap);
+			regsService.regsInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -73,7 +67,7 @@ public class RegsController {
 			//--------------------------------------------------------------------------------------------
 			// PDF뷰어 조회
 			//--------------------------------------------------------------------------------------------
-			regsService.intrRegsInqy1011(model, paramMap, response);
+			regsService.regsInqyService1011(model, paramMap, response);
 			
 		} catch (Exception e) {
 			//

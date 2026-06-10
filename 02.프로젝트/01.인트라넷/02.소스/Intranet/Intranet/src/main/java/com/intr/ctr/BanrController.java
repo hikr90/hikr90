@@ -48,12 +48,12 @@ public class BanrController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 배너 관리 조회
 			//--------------------------------------------------------------------------------------------
-			banrService.intrBanrInqy1010(model, paramMap);
+			banrService.banrInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -73,7 +73,7 @@ public class BanrController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 이미지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// URL객체 생성 (예외사항 추가)
@@ -102,7 +102,7 @@ public class BanrController {
 			//--------------------------------------------------------------------------------------------
 			// 배너 저장
 			//--------------------------------------------------------------------------------------------
-			defaultStr = banrService.intrBanrProc1010(model, paramMap, request);
+			defaultStr = banrService.banrProcService1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -123,7 +123,7 @@ public class BanrController {
 			//--------------------------------------------------------------------------------------------
 			// 배너 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = banrService.intrBanrProc1020(model, paramMap);
+			defaultStr = banrService.banrProcService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//

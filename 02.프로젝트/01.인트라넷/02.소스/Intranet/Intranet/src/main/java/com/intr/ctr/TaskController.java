@@ -42,12 +42,12 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy1010(model, paramMap);
+			taskService.taskInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -65,7 +65,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 (AJAX) 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy1020(model, paramMap);
+			taskService.taskInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -83,17 +83,17 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 부서 목록 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1040(model, paramMap);
+			empService.empInqyService1040(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy2010(model, paramMap);
+			taskService.taskInqyService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -111,7 +111,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 (AJAX) 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy2010(model, paramMap);
+			taskService.taskInqyService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -129,12 +129,12 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 상세 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy2020(model, paramMap);
+			taskService.taskInqyService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -152,12 +152,12 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 조회
 			//--------------------------------------------------------------------------------------------
-			taskService.intrTaskInqy3010(model, paramMap);
+			taskService.taskInqyService3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -179,7 +179,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc1010(model, paramMap);
+			defaultStr = taskService.taskProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -200,7 +200,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc1020(model, paramMap);
+			defaultStr = taskService.taskProcService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -221,7 +221,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc2010(model, paramMap);
+			defaultStr = taskService.taskProcService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -242,7 +242,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc2020(model, paramMap);
+			defaultStr = taskService.taskProcService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -263,7 +263,7 @@ public class TaskController {
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = taskService.intrTaskProc2030(model, paramMap);
+			defaultStr = taskService.taskProcService2030(model, paramMap);
 			
 		} catch (Exception e) {
 			//

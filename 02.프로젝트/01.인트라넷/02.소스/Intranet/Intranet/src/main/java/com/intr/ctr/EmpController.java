@@ -49,12 +49,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1010(model, paramMap);
+			empService.empInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -72,12 +72,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
+			empService.empInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -95,12 +95,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1030(model, paramMap);
+			empService.empInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -118,17 +118,17 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 직급 정보 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1020(model, paramMap);
+			empService.empInqyService1020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1030(model, paramMap);
+			empService.empInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -148,7 +148,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 이미지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// URL객체 생성 (예외사항 추가)
@@ -174,12 +174,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 목록 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1010(model, paramMap);
+			empService.empInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -200,7 +200,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 아이디 중복 조회
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpInqy2020(model, paramMap);
+			defaultStr = empService.empInqyService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -218,12 +218,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1030(model, paramMap);
+			empService.empInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -241,12 +241,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 담당업무 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy3010(model, paramMap);
+			empService.empInqyService3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -264,12 +264,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 담당업무 조회 (AJAX)
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy3011(model, paramMap);
+			empService.empInqyService3011(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -287,12 +287,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 담당업무 조회 (AJAX)
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy3012(model, paramMap);
+			empService.empInqyService3012(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -310,12 +310,12 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 인사 통계 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy4010(model, paramMap);
+			empService.empInqyService4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -336,7 +336,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc1010(model, paramMap, request);
+			defaultStr = empService.empProcService1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -357,7 +357,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc1020(model, paramMap, request);
+			defaultStr = empService.empProcService1020(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -378,7 +378,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 복직, 퇴사 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc1030(model, paramMap);
+			defaultStr = empService.empProcService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -399,7 +399,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc1040(model, paramMap);
+			defaultStr = empService.empProcService1040(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -420,7 +420,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 사원 비밀번호 수정 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc1050(model, paramMap);
+			defaultStr = empService.empProcService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -441,7 +441,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 담당업무 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc2010(model, paramMap);
+			defaultStr = empService.empProcService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -462,7 +462,7 @@ public class EmpController {
 			//--------------------------------------------------------------------------------------------
 			// 담당업무 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = empService.intrEmpProc2020(model, paramMap);
+			defaultStr = empService.empProcService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//

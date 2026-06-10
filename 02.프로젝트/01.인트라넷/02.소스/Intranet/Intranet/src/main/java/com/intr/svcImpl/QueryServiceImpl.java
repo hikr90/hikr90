@@ -28,7 +28,7 @@ public class QueryServiceImpl implements QueryService{
 	QueryDao queryDao;
 	
 	// 쿼리 화면 조회
-	public void intrQueryInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void queryInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//
@@ -40,7 +40,7 @@ public class QueryServiceImpl implements QueryService{
 	}
 	
 	// 쿼리 결과 조회
-	public void intrQueryInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void queryInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		Set<String> colList = null;
@@ -49,7 +49,7 @@ public class QueryServiceImpl implements QueryService{
 			//--------------------------------------------------------------------------------------------
 			// 쿼리 화면 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = queryDao.intrQueryInqy1021(model, paramMap);
+			defaultList = queryDao.intrQueryInqy1021(paramMap);
 			
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				colList = defaultList.get(0).keySet();
@@ -68,7 +68,7 @@ public class QueryServiceImpl implements QueryService{
 	}
 
 	// 엑셀 다운로드
-	public void intrQueryInqy1030(HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void queryInqyService1030(HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		List<Map<String, Object>> defaultList = null;
 		//
@@ -76,7 +76,7 @@ public class QueryServiceImpl implements QueryService{
 			//--------------------------------------------------------------------------------------------
 			// 엑셀 다운로드
 			//--------------------------------------------------------------------------------------------
-			defaultList = queryDao.intrQueryInqy1031(null, paramMap);
+			defaultList = queryDao.intrQueryInqy1031(paramMap);
 			utilService.excelDown(defaultList, paramMap, request, response);
 			
 		} catch (Exception e) {
@@ -86,7 +86,7 @@ public class QueryServiceImpl implements QueryService{
 	}
 
 	// 쿼리 입력 처리
-	public String intrQueryProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String queryProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String query = (String)paramMap.get("query");
@@ -97,7 +97,7 @@ public class QueryServiceImpl implements QueryService{
 			// 쿼리 입력 처리
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("query", query.replaceAll(";", ""));
-			resInt = queryDao.intrQueryProc1011(model, paramMap);
+			resInt = queryDao.intrQueryProc1011(paramMap);
 					
 			// 처리된 건이 없는 경우 빈 값으로 결과 전송
 			if(resInt>0) {

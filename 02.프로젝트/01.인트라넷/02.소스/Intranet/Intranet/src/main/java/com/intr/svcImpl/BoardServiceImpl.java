@@ -46,7 +46,7 @@ public class BoardServiceImpl implements BoardService{
 	UtilDao utilDao;
 	
 	// 공지사항 목록 조회
-	public void intrBoardInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void boardInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = boardDao.intrBoardInqy1011(model, paramMap);
+			defaultList = boardDao.intrBoardInqy1011(paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	// 공지사항 상세화면 조회
-	public void intrBoardInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void boardInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -90,13 +90,13 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqy1021(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqy1021(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ public class BoardServiceImpl implements BoardService{
 			String readHit = (String)session.getAttribute("readHit");
 			//
 			if(readHit==null) {
-				boardDao.intrBoardProc1032(model, paramMap);
+				boardDao.intrBoardProc1032(paramMap);
 				session.setAttribute("readHit", "hit");
 			}
 
@@ -117,7 +117,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 등록
-	public String intrBoardProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String boardProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -128,7 +128,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqy1010(model, paramMap);
+			defaultInfo = boardDao.intrBoardInqy1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 삭제
-	public String intrBoardProc1020(Model model, String [] deleteList) throws Exception {
+	public String boardProcService1020(Model model, String [] deleteList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -200,7 +200,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 공지사항 수정
-	public String intrBoardProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String boardProcService1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

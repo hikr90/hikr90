@@ -104,7 +104,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 조회
 			//--------------------------------------------------------------------------------------------
-			mainService.intrMainInqy1010(model);
+			mainService.mainInqyService1010(model);
 			
 		} catch (Exception e) {
 			//
@@ -116,7 +116,7 @@ public class MainController {
 
 	// 사용자 메인 조회
 	@RequestMapping("/intrMainInqy1020.do")
-	public String intrCoreInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String intrMainInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		HashMap<String, Object> defaultInfo = null;
@@ -129,51 +129,51 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1030(Const.USER);
+			coreService.coreInqyService1030(Const.USER);
 			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 조회
 			//--------------------------------------------------------------------------------------------
-			mtgService.intrMtgInqy2010(model, paramMap);
+			mtgService.mtgInqyService2010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-			mtgService.intrMtgInqy2020(model, paramMap);
+			mtgService.mtgInqyService2020(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = boardDao.intrBoardInqy1011(model, paramMap);
+			defaultList = boardDao.intrBoardInqy1011(paramMap);
 			model.addAttribute("boardList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1011(model, paramMap);
+			defaultList = aprvDao.intrAprvInqy1011(paramMap);
 			model.addAttribute("aprvList", defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 배너 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = banrDao.intrBanrInqy1021(model, paramMap);
+			defaultInfo = banrDao.intrBanrInqy1021(paramMap);
 			model.addAttribute("banrInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy1031(paramMap);
 			model.addAttribute("empInfo", defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 오늘의 일정 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy3013(model, paramMap);
+			defaultList = taskDao.intrTaskInqy3013(paramMap);
 			model.addAttribute("tldrList", defaultList);
 			
 		} catch (Exception e) {
@@ -196,17 +196,17 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1030(Const.ADMIN);
+			coreService.coreInqyService1030(Const.ADMIN);
 
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 부서 현황
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2041(model, paramMap);
+			defaultList = empDao.intrEmpInqy2041(paramMap);
 			//
 			for (int i=0;i<defaultList.size();i++) {
 				//
@@ -227,13 +227,13 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 입사 현황
 			//--------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy4011(model, paramMap);
+			defaultList = empDao.intrEmpInqy4011(paramMap);
 			model.addAttribute("empList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = projDao.intrProjInqy1011(model, paramMap);
+			defaultList = projDao.intrProjInqy1011(paramMap);
 			model.addAttribute("projList", defaultList);
 			
 		} catch (Exception e) {
@@ -252,17 +252,17 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 세션 저장
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1030((String)paramMap.get("menuType"));
+			coreService.coreInqyService1030((String)paramMap.get("menuType"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사원 상세 조회
 			//--------------------------------------------------------------------------------------------
-			empService.intrEmpInqy1030(model, paramMap);
+			empService.empInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -283,7 +283,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 로그인 처리
 			//-------------------------------------------------------------------------------------------
-			defaultStr = mainService.intrMainProc1010(model, paramMap);	
+			defaultStr = mainService.mainProcService1010(model, paramMap);	
 			
 		} catch (Exception e) {
 			//

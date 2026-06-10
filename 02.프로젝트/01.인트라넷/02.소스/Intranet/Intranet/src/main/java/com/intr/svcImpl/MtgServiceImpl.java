@@ -34,7 +34,7 @@ public class MtgServiceImpl implements MtgService{
 	UtilDao utilDao;
 	
 	// 회의 목록 조회
-	public void intrMtgInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -42,12 +42,12 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 회의 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy1011(model, paramMap);
+			defaultList = mtgDao.intrMtgInqy1011(paramMap);
 			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -57,13 +57,12 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 회의 등록 조회
-	public void intrMtgInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 회의 등록 조회
 			//--------------------------------------------------------------------------------------------
-			
 			
 		} catch (Exception e) {
 			//
@@ -72,7 +71,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 
 	// 회의 상세화면 조회
-	public void intrMtgInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -81,13 +80,13 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mtgDao.intrMtgInqy1031(model, paramMap);
+			defaultInfo = mtgDao.intrMtgInqy1031(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 		} catch (Exception e) {
@@ -97,7 +96,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 회의 중복 조회
-	public void intrMtgInqy1091(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService1091(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -105,7 +104,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 중복 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy1091(model, paramMap);
+			defaultList = mtgDao.intrMtgInqy1091(paramMap);
 			model.addAttribute("bookedList",defaultList);
 			
 		} catch (Exception e) {
@@ -115,7 +114,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 캘린더 조회
-	public void intrMtgInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -123,7 +122,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy2011(model, paramMap);
+			defaultList = mtgDao.intrMtgInqy2011(paramMap);
 			model.addAttribute("calList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -133,7 +132,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 캘린더 목록 조회
-	public void intrMtgInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void mtgInqyService2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -141,7 +140,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy2021(model, paramMap);
+			defaultList = mtgDao.intrMtgInqy2021(paramMap);
 			model.addAttribute("calInfo", defaultList);
 			
 		} catch (Exception e) {
@@ -152,7 +151,7 @@ public class MtgServiceImpl implements MtgService{
 
 	
 	// 회의 등록 처리
-	public String intrMtgProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String mtgProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -163,7 +162,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mtgDao.intrMtgInqy1010(model, paramMap);
+			defaultInfo = mtgDao.intrMtgInqy1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
@@ -194,7 +193,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 회의 삭제
-	public String intrMtgProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String mtgProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -229,7 +228,7 @@ public class MtgServiceImpl implements MtgService{
 	}
 	
 	// 회의 수정
-	public String intrMtgProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String mtgProcService1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

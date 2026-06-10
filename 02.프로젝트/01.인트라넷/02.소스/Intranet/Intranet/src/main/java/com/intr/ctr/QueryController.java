@@ -43,7 +43,7 @@ public class QueryController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -61,7 +61,7 @@ public class QueryController {
 			//--------------------------------------------------------------------------------------------
 			// 쿼리 조회
 			//--------------------------------------------------------------------------------------------
-			queryService.intrQueryInqy1020(model, paramMap);
+			queryService.queryInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -84,7 +84,7 @@ public class QueryController {
 	        excelCookie.setMaxAge(60);
 	        response.addCookie(excelCookie);
 			
-			queryService.intrQueryInqy1030(paramMap, request, response);
+			queryService.queryInqyService1030(paramMap, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -103,7 +103,7 @@ public class QueryController {
 			//--------------------------------------------------------------------------------------------
 			// 쿼리 입력 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = queryService.intrQueryProc1010(model, paramMap);
+			defaultStr = queryService.queryProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

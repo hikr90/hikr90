@@ -15,7 +15,7 @@ public class AuthDao {
 	SqlSession sqlsession;
 	
 	// 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy1011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("auth.intrAuthInqy1011", paramMap);
@@ -23,7 +23,7 @@ public class AuthDao {
 	}
 
 	// 권한 상세 조회
-	public HashMap<String, Object> intrAuthInqy1021(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrAuthInqy1021(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("auth.intrAuthInqy1021", paramMap);
@@ -32,7 +32,7 @@ public class AuthDao {
 	}
 	
 	// 메뉴 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy2011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy2011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("auth.intrAuthInqy2011", paramMap);
@@ -40,7 +40,7 @@ public class AuthDao {
 	}
 	
 	// 사용자 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy3011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy3011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("auth.intrAuthInqy3011", paramMap);
@@ -48,7 +48,7 @@ public class AuthDao {
 	}
 	
 	// 사용자 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy4011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrAuthInqy4011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("auth.intrAuthInqy4011", paramMap);

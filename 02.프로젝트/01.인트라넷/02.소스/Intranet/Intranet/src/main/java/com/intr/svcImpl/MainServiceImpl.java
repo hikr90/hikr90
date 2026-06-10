@@ -37,7 +37,7 @@ public class MainServiceImpl implements MainService{
 	UtilService utilService;
 	
 	// 로그인 권한 사용자 조회
-	public void intrMainInqy1010(Model model) throws Exception {
+	public void mainInqyService1010(Model model) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -63,7 +63,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 로그인 처리
-	public String intrMainProc1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String mainProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "";
@@ -73,7 +73,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mainDao.intrMainInqy1011(model, paramMap);
+			defaultInfo = mainDao.intrMainInqy1011(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 아이디 / 비밀번호 체크

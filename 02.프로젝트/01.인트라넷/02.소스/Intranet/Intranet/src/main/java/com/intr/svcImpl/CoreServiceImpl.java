@@ -34,7 +34,7 @@ public class CoreServiceImpl implements CoreService{
 	UtilDao utilDao;
 	
 	// 메뉴 조회
-	public void intrCoreInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void coreInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -82,7 +82,7 @@ public class CoreServiceImpl implements CoreService{
 			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
 			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
-			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
+			defaultList = coreDao.intrCoreInqy1011(tempMap);
 			model.addAttribute("menuList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public class CoreServiceImpl implements CoreService{
 			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
 			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
-			defaultList = coreDao.intrCoreInqy1011(model, tempMap);
+			defaultList = coreDao.intrCoreInqy1011(tempMap);
 			model.addAttribute("leftList", defaultList);
 			
 		} catch (Exception e) {
@@ -103,7 +103,7 @@ public class CoreServiceImpl implements CoreService{
 	}
 
 	// 전체 메뉴 조회
-	public void intrCoreInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void coreInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -111,7 +111,7 @@ public class CoreServiceImpl implements CoreService{
 			//--------------------------------------------------------------------------------------------
 			// 전체 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreDao.intrCoreInqy1021(model, paramMap);
+			defaultList = coreDao.intrCoreInqy1021(paramMap);
 			model.addAttribute("tMenuList", defaultList);
 			
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class CoreServiceImpl implements CoreService{
 	}
 	
 	// 메뉴 세션 저장
-	public void intrCoreInqy1030(String menuType) throws Exception {
+	public void coreInqyService1030(String menuType) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------

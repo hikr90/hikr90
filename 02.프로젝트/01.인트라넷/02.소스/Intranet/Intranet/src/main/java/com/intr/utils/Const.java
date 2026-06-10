@@ -28,32 +28,40 @@ public class Const {
 	public final static int BLOCKPAGE = 5; 		// 페이지 페이지 수 
 	
 	//--------------------------------------------------------------------------------------------
-	// 프로젝트 경로
+	// 결재
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_PATH  = "/WEB-INF/views/intr";
-
-	//--------------------------------------------------------------------------------------------
-	// 공통 영역
-	//--------------------------------------------------------------------------------------------
-	public static final String VIEW_PATH_POPUP = INTR_PATH + "/comm/popup/"; 	// 팝업
-
+	public static final String STEP_0010 		= "STEP_0010"; 			// 결재진행중
+	public static final String STEP_0020 		= "STEP_0020"; 			// 결재완료
+	public static final String STEP_0030 		= "STEP_0030"; 			// 결재반송
+	public static final String STEP_0040 		= "STEP_0040"; 			// 결재취소
+	
+	public static final String TYPE_0010 		= "TYPE_0010"; 			// 기안
+	public static final String TYPE_0020 		= "TYPE_0020"; 			// 결재
+	public static final String TYPE_0030 		= "TYPE_0030"; 			// 참조
+	
+	public static final String RSLT_0010 		= "RSLT_0010"; 			// 승인
+	public static final String RSLT_0020 		= "RSLT_0020"; 			// 반송
+	public static final String RSLT_0030 		= "RSLT_0030"; 			// 취소
+	
 	//--------------------------------------------------------------------------------------------
 	// 폴더 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String VIEW_PATH_MAIN 		= INTR_PATH + "/main/"; 			// 메인
-	public static final String VIEW_PATH_LOGIN 		= INTR_PATH + "/login/"; 			// 로그인
-	public static final String VIEW_PATH_MYPAGE 		= INTR_PATH + "/mypage/"; 		// 내 정보
-	public static final String VIEW_PATH_BOARD 		= INTR_PATH + "/board/"; 			// 공지사항
-	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 			// 업무
-	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 			// 사원
-	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 		// 기안문 양식
-	public static final String VIEW_PATH_AUTH 		= INTR_PATH + "/auth/";	 		// 권한
-	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 		// 결재
-	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 		// 쿼리
-	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 		// 프로젝트
-	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 		// 회의
-	public static final String VIEW_PATH_BANR 			= INTR_PATH + "/banr/"; 			// 배너
-	public static final String VIEW_PATH_REGS 			= INTR_PATH + "/regs/"; 			// 내부규정
+	public static final String INTR_PATH  					= "/WEB-INF/views/intr";				// 프로젝트
+	public static final String VIEW_PATH_POPUP 		= INTR_PATH + "/comm/popup/"; 	// 팝업
+	public static final String VIEW_PATH_MAIN 		= INTR_PATH + "/main/"; 				// 메인
+	public static final String VIEW_PATH_LOGIN 		= INTR_PATH + "/login/"; 				// 로그인
+	public static final String VIEW_PATH_MYPAGE 		= INTR_PATH + "/mypage/"; 			// 내 정보
+	public static final String VIEW_PATH_BOARD 		= INTR_PATH + "/board/"; 				// 공지사항
+	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 				// 업무
+	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 				// 사원
+	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 			// 기안문 양식
+	public static final String VIEW_PATH_AUTH 		= INTR_PATH + "/auth/";	 			// 권한
+	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 			// 결재
+	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 			// 쿼리
+	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 			// 프로젝트
+	public static final String VIEW_PATH_MTG 			= INTR_PATH + "/meeting/"; 			// 회의
+	public static final String VIEW_PATH_BANR 			= INTR_PATH + "/banr/"; 				// 배너
+	public static final String VIEW_PATH_REGS 			= INTR_PATH + "/regs/"; 				// 내부규정
 	
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로

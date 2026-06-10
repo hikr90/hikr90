@@ -40,12 +40,12 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			projService.intrProjInqy1010(model, paramMap);
+			projService.projInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -63,12 +63,12 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 등록 조회
 			//--------------------------------------------------------------------------------------------
-			projService.intrProjInqy1020(model, paramMap);
+			projService.projInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -86,12 +86,12 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
-			projService.intrProjInqy1030(model, paramMap);
+			projService.projInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -109,12 +109,12 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 상세화면 조회 
 			//--------------------------------------------------------------------------------------------
-			projService.intrProjInqy1030(model, paramMap);
+			projService.projInqyService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -135,7 +135,7 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = projService.intrProjProc1010(model, paramMap, request);
+			defaultStr = projService.projProcService1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -156,7 +156,7 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = projService.intrProjProc1020(model, deleteList);
+			defaultStr = projService.projProcService1020(model, deleteList);
 			
 		} catch (Exception e) {
 			//
@@ -177,7 +177,7 @@ public class ProjController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 수정
 			//--------------------------------------------------------------------------------------------
-			defaultStr = projService.intrProjProc1030(model, paramMap, request);
+			defaultStr = projService.projProcService1030(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//

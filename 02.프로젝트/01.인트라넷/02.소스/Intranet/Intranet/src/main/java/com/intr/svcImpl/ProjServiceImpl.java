@@ -40,7 +40,7 @@ public class ProjServiceImpl implements ProjService{
 	UtilDao utilDao;
 
 	// 프로젝트 목록 조회
-	public void intrProjInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void projInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -53,7 +53,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = projDao.intrProjInqy1011(model, paramMap);
+			defaultList = projDao.intrProjInqy1011(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 등록 조회
-	public void intrProjInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void projInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -89,7 +89,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 상세화면 조회
-	public void intrProjInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void projInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		List<HashMap<String, Object>> defaultList = null;
@@ -98,7 +98,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = projDao.intrProjInqy1031(model, paramMap);
+			defaultInfo = projDao.intrProjInqy1031(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(model, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 등록 처리
-	public String intrProjProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String projProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -132,7 +132,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = projDao.intrProjInqy1010(model, paramMap);
+			defaultInfo = projDao.intrProjInqy1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 삭제
-	public String intrProjProc1020(Model model, String [] deleteList) throws Exception {
+	public String projProcService1020(Model model, String [] deleteList) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -204,7 +204,7 @@ public class ProjServiceImpl implements ProjService{
 	}
 	
 	// 프로젝트 수정
-	public String intrProjProc1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String projProcService1030(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

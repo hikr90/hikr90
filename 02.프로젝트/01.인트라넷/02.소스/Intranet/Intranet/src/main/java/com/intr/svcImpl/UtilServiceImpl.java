@@ -467,7 +467,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.intrFileInqy1021(model, paramMap);
+			defaultInfo = utilDao.intrFileInqy1021(paramMap);
 			
 			fileNm = this.nvlProc((String)defaultInfo.get("fileNm"));
 			filePath = this.nvlProc((String)defaultInfo.get("filePath"));
@@ -564,7 +564,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(null, paramMap);
+			defaultList = utilDao.intrFileInqy1011(paramMap);
 					
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				//

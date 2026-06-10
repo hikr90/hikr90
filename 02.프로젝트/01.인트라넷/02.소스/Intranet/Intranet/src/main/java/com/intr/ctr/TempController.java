@@ -39,12 +39,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
+			tempService.tempInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -62,12 +62,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
+			tempService.tempInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -85,12 +85,12 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 상세 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1020(model, paramMap);
+			tempService.tempInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -111,7 +111,7 @@ public class TempController {
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 수정 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = tempService.intrTempProc1010(model, paramMap);
+			defaultStr = tempService.tempProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//

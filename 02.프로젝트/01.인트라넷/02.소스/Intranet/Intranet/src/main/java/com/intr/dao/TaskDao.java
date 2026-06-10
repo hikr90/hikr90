@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 @Repository
 public class TaskDao {
@@ -15,7 +14,7 @@ public class TaskDao {
 	SqlSession sqlsession;
 
 	// 업무일지 시퀀스 조회
-	public HashMap<String, Object> intrTaskInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrTaskInqy1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("task.intrTaskInqy1010", paramMap);
@@ -23,7 +22,7 @@ public class TaskDao {
 	}
 	
 	// 업무일지 작성 조회
-	public List<HashMap<String, Object>> intrTaskInqy1011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy1011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqy1011", paramMap);
@@ -31,7 +30,7 @@ public class TaskDao {
 	}
 
 	// 업무일지 목록 조회
-	public List<HashMap<String, Object>> intrTaskInqy2011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy2011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqy2011", paramMap);
@@ -39,7 +38,7 @@ public class TaskDao {
 	}
 	
 	// 업무일지 상세 조회
-	public List<HashMap<String, Object>> intrTaskInqy2021(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy2021(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqy2021", paramMap);
@@ -47,7 +46,7 @@ public class TaskDao {
 	}
 	
 	// 업무 캘린더 조회
-	public List<HashMap<String, Object>> intrTaskInqy3011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy3011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqy3011", paramMap);
@@ -55,7 +54,7 @@ public class TaskDao {
 	}
 	
 	// 업무 캘린더 상세
-	public HashMap<String, Object> intrTaskInqy3012(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrTaskInqy3012(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("task.intrTaskInqy3012", paramMap);
@@ -63,7 +62,7 @@ public class TaskDao {
 	}
 	
 	// 업무 캘린더 (메인) 조회
-	public List<HashMap<String, Object>> intrTaskInqy3013(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTaskInqy3013(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("task.intrTaskInqy3013", paramMap);

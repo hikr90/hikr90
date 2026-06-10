@@ -50,12 +50,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안 작성 (양식 목록) 조회
 			//--------------------------------------------------------------------------------------------
-			tempService.intrTempInqy1010(model, paramMap);
+			tempService.tempInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -75,12 +75,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 기안 작성 상세 조회
 			//--------------------------------------------------------------------------------------------
-			returnUrl = aprvService.intrAprvInqy1020(model, paramMap);
+			returnUrl = aprvService.aprvInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -98,12 +98,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy2010(model, paramMap);
+			aprvService.aprvInqyService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -121,12 +121,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 상세 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy2020(model, paramMap);
+			aprvService.aprvInqyService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -144,12 +144,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 일정 관리 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy3010(model, paramMap);
+			aprvService.aprvInqyService3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -167,12 +167,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재선 관리 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy4010(model, paramMap);
+			aprvService.aprvInqyService4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -190,7 +190,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 관리 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy4010(model, paramMap);
+			aprvService.aprvInqyService4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -208,7 +208,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 상세 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy4020(model, paramMap);			
+			aprvService.aprvInqyService4020(model, paramMap);			
 			
 		} catch (Exception e) {
 			//
@@ -226,12 +226,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재선 상세 조회
 			//--------------------------------------------------------------------------------------------
-			aprvService.intrAprvInqy4030(model, paramMap);
+			aprvService.aprvInqyService4030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -253,7 +253,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 기안 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProc1010(model, paramMap, request);
+			defaultStr = aprvService.aprvProcService1010(model, paramMap, request);
 			
 		} catch (Exception e) {
 			//
@@ -274,12 +274,12 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			coreService.intrCoreInqy1010(model, paramMap);
+			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProc3010(model, paramMap);
+			defaultStr = aprvService.aprvProcService3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -300,7 +300,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 저장 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProc4010(model, paramMap);
+			defaultStr = aprvService.aprvProcService4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -310,7 +310,7 @@ public class AprvController {
 		return defaultStr;
 	}
 	
-	// 결재선 저장 처리
+	// 결재선 삭제 처리
 	@RequestMapping("/intrAprvProc2020.do")
 	@ResponseBody
 	public String intrAprvProc2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
@@ -321,7 +321,7 @@ public class AprvController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = aprvService.intrAprvProc4020(model, paramMap);
+			defaultStr = aprvService.aprvProcService4020(model, paramMap);
 			
 		} catch (Exception e) {
 			//

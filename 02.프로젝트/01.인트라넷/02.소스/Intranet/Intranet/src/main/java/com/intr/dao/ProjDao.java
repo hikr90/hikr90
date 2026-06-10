@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 @Repository
 public class ProjDao {
@@ -15,7 +14,7 @@ public class ProjDao {
 	SqlSession sqlsession;
 	
 	// 프로젝트 시퀀스 조회
-	public HashMap<String, Object> intrProjInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrProjInqy1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("proj.intrProjInqy1010", paramMap);
@@ -23,7 +22,7 @@ public class ProjDao {
 	}
 
 	// 프로젝트 목록 조회
-	public List<HashMap<String, Object>> intrProjInqy1011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrProjInqy1011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("proj.intrProjInqy1011", paramMap);
@@ -31,7 +30,7 @@ public class ProjDao {
 	}
 	
 	// 프로젝트 상세 조회
-	public HashMap<String, Object> intrProjInqy1031(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrProjInqy1031(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("proj.intrProjInqy1031", paramMap);

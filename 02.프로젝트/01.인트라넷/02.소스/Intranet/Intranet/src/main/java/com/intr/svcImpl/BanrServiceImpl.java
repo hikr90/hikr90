@@ -27,7 +27,7 @@ public class BanrServiceImpl implements BanrService {
 	BanrDao banrDao;
 	
 	// 배너 관리 조회
-	public void intrBanrInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void banrInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultList = null;
 		//
@@ -35,7 +35,7 @@ public class BanrServiceImpl implements BanrService {
 			//--------------------------------------------------------------------------------------------
 			// 배너 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = banrDao.intrBanrInqy1011(model, paramMap);
+			defaultList = banrDao.intrBanrInqy1011(paramMap);
 			model.addAttribute("defaultInfo",defaultList);
 			
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class BanrServiceImpl implements BanrService {
 	}
 	
 	// 배너 저장
-	public String intrBanrProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
+	public String banrProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		String defaultStr = "";
@@ -64,7 +64,7 @@ public class BanrServiceImpl implements BanrService {
 				//--------------------------------------------------------------------------------------------
 				// 배너 채번
 				//--------------------------------------------------------------------------------------------
-				defaultInfo = banrDao.intrBanrInqy1010(model, paramMap);
+				defaultInfo = banrDao.intrBanrInqy1010(paramMap);
 				paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 				
 				//--------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ public class BanrServiceImpl implements BanrService {
 	}
 	
 	// 배너 삭제
-	public String intrBanrProc1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String banrProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

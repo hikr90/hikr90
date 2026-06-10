@@ -44,7 +44,7 @@ public class TaskServiceImpl implements TaskService{
 	HttpSession session;
 
 	// 업무일지 작성
-	public void intrTaskInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void taskInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy1011(model, paramMap);
+			defaultList = taskDao.intrTaskInqy1011(paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 작성 (ajax)
-	public void intrTaskInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void taskInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -70,7 +70,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy1011(model, paramMap);
+			defaultList = taskDao.intrTaskInqy1011(paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 목록 조회
-	public void intrTaskInqy2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void taskInqyService2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -93,7 +93,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy2011(model, paramMap);
+			defaultList = taskDao.intrTaskInqy2011(paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -103,7 +103,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 상세 조회
-	public void intrTaskInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void taskInqyService2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -111,7 +111,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy2021(model, paramMap);
+			defaultList = taskDao.intrTaskInqy2021(paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무 캘린더 조회
-	public void intrTaskInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void taskInqyService3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -129,7 +129,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy3011(model, paramMap);
+			defaultList = taskDao.intrTaskInqy3011(paramMap);
 			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -139,7 +139,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 저장
-	public String intrTaskProc1010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+	public String taskProcService1010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		HashMap<String, Object> defaultInfo = null;
@@ -160,7 +160,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqy1010(model, paramMap);
+			defaultInfo = taskDao.intrTaskInqy1010(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무 일지 등록
@@ -205,7 +205,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무일지 삭제
-	public String intrTaskProc1020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+	public String taskProcService1020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> tempMap = null;
 		String defaultStr = "";
@@ -232,7 +232,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무 캘린더 등록 처리
-	public String intrTaskProc2010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+	public String taskProcService2010(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -262,7 +262,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무 캘린더 수정 처리
-	public String intrTaskProc2020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+	public String taskProcService2020(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -292,7 +292,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 	
 	// 업무 캘린더 삭제 처리
-	public String intrTaskProc2030(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
+	public String taskProcService2030(Model model, @RequestBody HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

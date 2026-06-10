@@ -5,7 +5,6 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 @Repository
 public class BanrDao {
@@ -14,7 +13,7 @@ public class BanrDao {
 	SqlSession sqlsession;
 	
 	// 배너 채번
-	public HashMap<String, Object> intrBanrInqy1010(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrBanrInqy1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1010", paramMap);
@@ -22,7 +21,7 @@ public class BanrDao {
 	}
 	
 	// 배너 조회
-	public HashMap<String, Object> intrBanrInqy1011(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrBanrInqy1011(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1011", paramMap);
@@ -30,7 +29,7 @@ public class BanrDao {
 	}
 	
 	// 배너 조회 (메인)
-	public HashMap<String, Object> intrBanrInqy1021(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrBanrInqy1021(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1021", paramMap);

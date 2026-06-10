@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 @Repository
 public class TempDao {
@@ -15,7 +14,7 @@ public class TempDao {
 	SqlSession sqlsession;
 
 	// 기안문 양식 목록 조회
-	public List<HashMap<String, Object>> intrTempInqy1011(Model model, HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> intrTempInqy1011(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		defaultList = sqlsession.selectList("temp.intrTempInqy1011", paramMap);
@@ -23,7 +22,7 @@ public class TempDao {
 	}
 	
 	// 기안문 양식 상세 조회
-	public HashMap<String, Object> intrTempInqy1021(Model model, HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> intrTempInqy1021(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		defaultInfo = sqlsession.selectOne("temp.intrTempInqy1021", paramMap);

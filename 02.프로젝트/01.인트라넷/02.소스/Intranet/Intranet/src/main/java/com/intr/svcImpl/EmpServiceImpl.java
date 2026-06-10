@@ -42,7 +42,7 @@ public class EmpServiceImpl implements EmpService {
 	HttpServletRequest request;
 
 	// 사원 목록 조회
-	public void intrEmpInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -55,7 +55,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 목록
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1011(model, paramMap);
+			defaultList = empDao.intrEmpInqy1011(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 부서 직급 조회
-	public void intrEmpInqy1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -80,13 +80,13 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 부서 목록 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1021(model, paramMap);
+			defaultList = empDao.intrEmpInqy1021(paramMap);
 			model.addAttribute("orgList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
 			// 직급 목록 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1022(model, paramMap);
+			defaultList = empDao.intrEmpInqy1022(paramMap);
 			model.addAttribute("rankList", defaultList);
 
 		} catch (Exception e) {
@@ -96,7 +96,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 상세 조회
-	public void intrEmpInqy1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -104,7 +104,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 상세 정보
 			// --------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy1031(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy1031(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 
 		} catch (Exception e) {
@@ -114,7 +114,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 부서 직급 조회
-	public void intrEmpInqy1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -122,7 +122,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 부서 목록 (전체) 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1023(model, paramMap);
+			defaultList = empDao.intrEmpInqy1023(paramMap);
 			model.addAttribute("orgList", defaultList);
 
 		} catch (Exception e) {
@@ -132,7 +132,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 아이디 중복 조회
-	public String intrEmpInqy2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empInqyService2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		String defaultStr = "";
@@ -142,7 +142,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 아이디 중복 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2021(model, paramMap);
+			defaultList = empDao.intrEmpInqy2021(paramMap);
 			//
 			if (defaultList.size() > 0) {
 				resStr = "YES";
@@ -162,7 +162,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 부서 사원 트리 조회
-	public void intrEmpInqy2030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService2030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -170,7 +170,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 부서 사원 트리 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2031(model, paramMap);
+			defaultList = empDao.intrEmpInqy2031(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -180,7 +180,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 부서 현황
-	public void intrEmpInqy2040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService2040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -188,7 +188,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 부서 현황
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy2041(model, paramMap);
+			defaultList = empDao.intrEmpInqy2041(paramMap);
 			model.addAttribute("empCnt", defaultList);
 
 		} catch (Exception e) {
@@ -198,7 +198,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 담당업무 조회
-	public void intrEmpInqy3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -211,7 +211,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 담당업무 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy3011(model, paramMap);
+			defaultList = empDao.intrEmpInqy3011(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -221,7 +221,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 담당업무 조회 (AJAX)
-	public void intrEmpInqy3011(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService3011(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -234,7 +234,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 담당업무 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy3011(model, paramMap);
+			defaultList = empDao.intrEmpInqy3011(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -244,7 +244,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 담당업무 등록 조회 (AJAX)
-	public void intrEmpInqy3012(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService3012(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -252,7 +252,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 담당업무 등록 조회
 			// --------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy3012(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy3012(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 
 		} catch (Exception e) {
@@ -262,7 +262,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 인사통계 목록 조회
-	public void intrEmpInqy4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void empInqyService4010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		HashMap<String, Object> statList = new HashMap<String, Object>();
@@ -272,7 +272,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 인사통계 목록 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy4012(model, paramMap);
+			defaultList = empDao.intrEmpInqy4012(paramMap);
 			//
 			for (HashMap<String, Object> row : defaultList) {
 				// [예시]: "관리팀_202501", "관리팀_연간 소계", "전체 합계_202501"
@@ -285,7 +285,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 통계 연도 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy4013(model, paramMap);
+			defaultList = empDao.intrEmpInqy4013(paramMap);
 			model.addAttribute("yearList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
@@ -298,13 +298,13 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 통계 연월 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy4014(model, paramMap);
+			defaultList = empDao.intrEmpInqy4014(paramMap);
 			model.addAttribute("ymList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
 			// 부서 조회
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1021(model, paramMap);
+			defaultList = empDao.intrEmpInqy1021(paramMap);
 			model.addAttribute("orgList", defaultList);
 
 		} catch (Exception e) {
@@ -314,8 +314,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 등록
-	public String intrEmpProc1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request)
-			throws Exception {
+	public String empProcService1010(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		List<MultipartFile> fileList = request.getFiles("fileList");
 		HashMap<String, Object> defaultInfo = null;
@@ -327,7 +326,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 인덱스 채번
 			// --------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy1010(model, paramMap);
+			defaultInfo = empDao.intrEmpInqy1010(paramMap);
 			paramMap.put("sequenceId", defaultInfo.get("sequenceId"));
 
 			// --------------------------------------------------------------------------------------------
@@ -365,8 +364,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 수정
-	public String intrEmpProc1020(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request)
-			throws Exception {
+	public String empProcService1020(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -409,7 +407,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 복직, 퇴사 처리
-	public String intrEmpProc1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -439,7 +437,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 삭제
-	public String intrEmpProc1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empProcService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -469,7 +467,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 사원 비밀번호 수정
-	public String intrEmpProc1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empProcService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -507,7 +505,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 담당업무 저장 처리
-	public String intrEmpProc2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empProcService2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -537,7 +535,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	// 담당업무 삭제 처리
-	public String intrEmpProc2020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String empProcService2020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";

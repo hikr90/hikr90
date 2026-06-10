@@ -33,7 +33,7 @@ public class RegsServiceImpl implements RegsService {
 	RegsDao regsDao;
 	
 	// 내부규정 조회
-	public void intrRegsInqy1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void regsInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String tabCd = utilService.nvlProc((String)paramMap.get("tabCd"));
 		//
@@ -50,7 +50,7 @@ public class RegsServiceImpl implements RegsService {
 	
 	// PDF 뷰어 생성
 	@Override
-    public void intrRegsInqy1011(Model model, HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
+    public void regsInqyService1011(Model model, HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
         // 물리 경로 설정
 		String filePath = Const.REGS_PATH;
 		filePath = utilService.setOsPath(paramMap, filePath);
