@@ -55,14 +55,14 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 목록
 			// --------------------------------------------------------------------------------------------
-			defaultList = empDao.intrEmpInqy1011(paramMap);
+			defaultList = empDao.empInqyDao1020(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
 			// 공통코드 (재직여부) 조회
 			// --------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", "HIRE");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("hireList", defaultList);
 
 		} catch (Exception e) {
@@ -292,7 +292,7 @@ public class EmpServiceImpl implements EmpService {
 			// 공통코드 (재직여부) 조회
 			// --------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", "HIRE");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("hireList", defaultList);
 
 			// --------------------------------------------------------------------------------------------
@@ -326,7 +326,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 사원 인덱스 채번
 			// --------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy1010(paramMap);
+			defaultInfo = empDao.empInqyDao1010(paramMap);
 			paramMap.put("sequenceId", defaultInfo.get("sequenceId"));
 
 			// --------------------------------------------------------------------------------------------

@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy1011(paramMap);
+			defaultList = authDao.authInqyDao1010(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = authDao.intrAuthInqy1021(paramMap);
+			defaultInfo = authDao.authInqyDao1020(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy2011(paramMap);
+			defaultList = authDao.authInqyDao2010(paramMap);
 			model.addAttribute("authMenuList", defaultList);
 
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy3011(paramMap);
+			defaultList = authDao.authInqyDao3010(paramMap);
 			model.addAttribute("empList", defaultList);
 
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy4011(paramMap);
+			defaultList = authDao.authInqyDao4010(paramMap);
 			model.addAttribute("authEmpList", defaultList);
 
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 등록 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.intrAuthProc1011(paramMap);
+			resInt = authDao.authProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -156,7 +156,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 수정 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.intrAuthProc1021(paramMap);
+			resInt = authDao.authProcDao1020(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -186,7 +186,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.intrAuthProc1031(paramMap);
+			resInt = authDao.authProcDao1030(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -217,7 +217,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			authDao.intrAuthProc1041(paramMap);
+			authDao.authProcDao1040(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 저장 처리
@@ -230,7 +230,7 @@ public class AuthServiceImpl implements AuthService{
 					tempMap.put("menuCd", (String)paramMap.get("menuCd"+i));
 					tempMap.put("authCd", (String)paramMap.get("authCd"));
 					//
-					resInt += authDao.intrAuthProc1042(tempMap);
+					resInt += authDao.authProcDao1050(tempMap);
 				}
 			}
 			
@@ -264,7 +264,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			authDao.intrAuthProc1051(paramMap);
+			authDao.authProcDao1060(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 저장 처리
@@ -277,7 +277,7 @@ public class AuthServiceImpl implements AuthService{
 					tempMap.put("empIdx", (String)paramMap.get("empIdx"+i));
 					tempMap.put("authCd", (String)paramMap.get("authCd"));
 					//
-					resInt += authDao.intrAuthProc1052(tempMap);
+					resInt += authDao.authProcDao1070(tempMap);
 				}
 			}
 			

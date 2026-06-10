@@ -15,26 +15,26 @@ public class QueryDao {
 	SqlSession sqlsession;
 
 	// Äõ¸® ÀÔ·Â Á¶È¸
-	public List<HashMap<String, Object>> intrQueryInqy1021(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> queryInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("query.intrQueryInqy1021", paramMap);
+		defaultList = sqlsession.selectList("query.queryInqyDao1010", paramMap);
 		return defaultList;
 	}
 
 	// Äõ¸® ÀÔ·Â Á¶È¸ (¿¢¼¿)
-	public List<Map<String, Object>> intrQueryInqy1031(HashMap<String, Object> paramMap) {
+	public List<Map<String, Object>> queryInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		List<Map<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("query.intrQueryInqy1031", paramMap);
+		defaultList = sqlsession.selectList("query.queryInqyDao1020", paramMap);
 		return defaultList;
 	}
 	
 	// Äõ¸® ÀÔ·Â Ã³¸®
-	public int intrQueryProc1011(HashMap<String, Object> paramMap) {
+	public int queryProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("query.intrQueryProc1011", paramMap);
+		resInt = sqlsession.update("query.queryProcDao1010", paramMap);
 		return resInt;
 	}
 

@@ -35,7 +35,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = tempDao.intrTempInqy1011(paramMap);
+			defaultList = tempDao.tempInqyDao1010(paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = tempDao.intrTempInqy1021(paramMap);
+			defaultInfo = tempDao.tempInqyDao1020(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class TempServiceImpl implements TempService{
 			//--------------------------------------------------------------------------------------------
 			// 기안문 양식 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = tempDao.intrTempProc1011(paramMap);
+			resInt = tempDao.tempProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="core">
-	<select id="intrCoreInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1011 : 메뉴 조회 */
+	<select id="coreInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* coreInqyDao1010 : 메뉴 조회 */
 		WITH M_DATA AS 
 			(
 				SELECT 
@@ -61,8 +61,8 @@
 				ORDER SIBLINGS BY DATA.MENU_CD
 	</select>
 	
-	<select id="intrCoreInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1021 : 전체 메뉴 조회 */
+	<select id="coreInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* coreInqyDao1020 : 전체 메뉴 조회 */
 		SELECT 
 				DATA.*
 			,	LEVEL AS LV
@@ -87,8 +87,8 @@
 			ORDER SIBLINGS BY DATA.MENU_CD
 	</select>
 
-	<select id="intrCoreInqy1051" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCoreInqy1051 : 목록 건수 조회 */
+	<select id="coreInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* coreInqyDao1030 : 목록 건수 조회 */
 		<choose>
 			<when test="pageUrl.contains('Board')">
 				SELECT 

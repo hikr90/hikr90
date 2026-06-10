@@ -13,50 +13,50 @@ public class BanrDao {
 	SqlSession sqlsession;
 	
 	// 배너 채번
-	public HashMap<String, Object> intrBanrInqy1010(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> banrInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1010", paramMap);
+		defaultInfo = sqlsession.selectOne("banr.banrInqyDao1010", paramMap);
 		return defaultInfo;
 	}
 	
 	// 배너 조회
-	public HashMap<String, Object> intrBanrInqy1011(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> banrInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1011", paramMap);
+		defaultInfo = sqlsession.selectOne("banr.banrInqyDao1020", paramMap);
 		return defaultInfo;
 	}
 	
 	// 배너 조회 (메인)
-	public HashMap<String, Object> intrBanrInqy1021(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> banrInqyDao1030(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("banr.intrBanrInqy1021", paramMap);
+		defaultInfo = sqlsession.selectOne("banr.banrInqyDao1030", paramMap);
 		return defaultInfo;
 	}
 	
 	// 배너 저장 (등록)
-	public int intrBanrProc1011(HashMap<String, Object> paramMap) {
+	public int banrProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("banr.intrBanrProc1011", paramMap);
+		resInt = sqlsession.insert("banr.banrProcDao1010", paramMap);
 		return resInt;
 	}
 	
 	// 배너 저장 (수정)
-	public int intrBanrProc1012(HashMap<String, Object> paramMap) {
+	public int banrProcDao1020(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("banr.intrBanrProc1012", paramMap);
+		resInt = sqlsession.insert("banr.banrProcDao1020", paramMap);
 		return resInt;
 	}
 
 	// 배너 삭제 (수정)
-	public int intrBanrProc1021(HashMap<String,Object> paramMap) {
+	public int banrProcDao1030(HashMap<String,Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("banr.intrBanrProc1021", paramMap);
+		resInt = sqlsession.update("banr.banrProcDao1030", paramMap);
 		return resInt;
 	}
 }

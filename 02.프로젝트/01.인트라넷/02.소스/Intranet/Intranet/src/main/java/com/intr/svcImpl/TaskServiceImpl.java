@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy1011(paramMap);
+			defaultList = taskDao.taskInqyDao1020(paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy1011(paramMap);
+			defaultList = taskDao.taskInqyDao1020(paramMap);
 			model.addAttribute("defaultList", defaultList);
 			
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy2011(paramMap);
+			defaultList = taskDao.taskInqyDao2010(paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy2021(paramMap);
+			defaultList = taskDao.taskInqyDao2020(paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 		} catch (Exception e) {
@@ -129,7 +129,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy3011(paramMap);
+			defaultList = taskDao.taskInqyDao3010(paramMap);
 			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -155,12 +155,12 @@ public class TaskServiceImpl implements TaskService{
 			tempMap.put("empIdx", (String)paramMap.get("empIdx"));
 			tempMap.put("srchDt", (String)paramMap.get("srchDt"));
 			//
-			taskDao.intrTaskProc1021(tempMap);
+			taskDao.taskProcDao1020(tempMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 업무일지 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqy1010(paramMap);
+			defaultInfo = taskDao.taskInqyDao1010(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 업무 일지 등록
@@ -184,7 +184,7 @@ public class TaskServiceImpl implements TaskService{
 				tempMap.put("empIdx", utilService.nvlProc((String)obj.get("empIdx")));
 				
 				// 등록 처리
-				resInt += taskDao.intrTaskProc1011(tempMap);
+				resInt += taskDao.taskProcDao1010(tempMap);
 			}
 			
 			//--------------------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ public class TaskServiceImpl implements TaskService{
 			tempMap.put("empIdx", (String)paramMap.get("empIdx"));
 			tempMap.put("srchDt", (String)paramMap.get("srchDt"));
 			//
-			taskDao.intrTaskProc1021(tempMap);
+			taskDao.taskProcDao1020(tempMap);
 			//
 			defaultStr = String.format("[{'res':'%s'}]", resStr);			
 			
@@ -242,7 +242,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 등록 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = taskDao.intrTaskProc2011(paramMap);
+			resInt = taskDao.taskProcDao2010(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -272,7 +272,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 수정 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = taskDao.intrTaskProc2021(paramMap);
+			resInt = taskDao.taskProcDao2020(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -302,7 +302,7 @@ public class TaskServiceImpl implements TaskService{
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = taskDao.intrTaskProc2031(paramMap);
+			resInt = taskDao.taskProcDao2030(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환

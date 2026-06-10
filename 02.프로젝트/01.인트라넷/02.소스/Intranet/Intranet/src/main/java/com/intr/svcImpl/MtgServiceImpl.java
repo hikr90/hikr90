@@ -47,7 +47,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy1011(paramMap);
+			defaultList = mtgDao.mtgInqyDao1020(paramMap);
 			model.addAttribute("defaultList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -80,13 +80,13 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mtgDao.intrMtgInqy1031(paramMap);
+			defaultInfo = mtgDao.mtgInqyDao1030(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(paramMap);
+			defaultList = utilDao.fileInqyDao1010(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 		} catch (Exception e) {
@@ -104,7 +104,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 중복 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy1091(paramMap);
+			defaultList = mtgDao.mtgInqyDao1040(paramMap);
 			model.addAttribute("bookedList",defaultList);
 			
 		} catch (Exception e) {
@@ -122,7 +122,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy2011(paramMap);
+			defaultList = mtgDao.mtgInqyDao2010(paramMap);
 			model.addAttribute("calList", JSONArray.toJSONString(defaultList));
 			
 		} catch (Exception e) {
@@ -140,7 +140,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 캘린더 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = mtgDao.intrMtgInqy2021(paramMap);
+			defaultList = mtgDao.mtgInqyDao2020(paramMap);
 			model.addAttribute("calInfo", defaultList);
 			
 		} catch (Exception e) {
@@ -162,13 +162,13 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mtgDao.intrMtgInqy1010(paramMap);
+			defaultInfo = mtgDao.mtgInqyDao1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 회의 등록 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = mtgDao.intrMtgProc1011(paramMap);
+			resInt = mtgDao.mtgProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -203,12 +203,12 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 삭제
 			//--------------------------------------------------------------------------------------------
-			resInt = mtgDao.intrMtgProc1021(paramMap);
+			resInt = mtgDao.mtgProcDao1020(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrFileProc1021(paramMap);
+			utilDao.fileProcDao1020(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -238,7 +238,7 @@ public class MtgServiceImpl implements MtgService{
 			//--------------------------------------------------------------------------------------------
 			// 회의 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = mtgDao.intrMtgProc1031(paramMap);
+			resInt = mtgDao.mtgProcDao1030(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정

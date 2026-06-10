@@ -137,7 +137,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = empDao.intrEmpInqy1012(paramMap);
+			defaultInfo = empDao.empInqyDao1030(paramMap);
 			//
 			if(defaultInfo != null) {
 				//--------------------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ public class UtilServiceImpl implements UtilService{
             //--------------------------------------------------------------------------------------------
 			// 관리자 메일 조회
 			//--------------------------------------------------------------------------------------------
-            defaultInfo = empDao.intrEmpInqy1013();
+            defaultInfo = empDao.empInqyDao1040();
             //
             sender 		= String.valueOf(defaultInfo.get("email"));
             receiver 	= String.valueOf(paramMap.get("findEmail"));
@@ -281,7 +281,7 @@ public class UtilServiceImpl implements UtilService{
 						tempMap.put("fileId", 		this.nvlProc((String)paramMap.get("sequenceId")));
 						tempMap.put("fileSno", 	"");
 						//
-						utilDao.intrFileProc1021(tempMap);
+						utilDao.fileProcDao1020(tempMap);
 						
 						// 등록
 						if(isUploadImg.equals("Y")) {
@@ -322,7 +322,7 @@ public class UtilServiceImpl implements UtilService{
 			tempMap.put("fileExt", 			fileNm.substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase());
 			tempMap.put("fileSize", 			file.getSize());
 			//
-			utilDao.intrFileProc1011(tempMap);
+			utilDao.fileProcDao1010(tempMap);
 			
 		} catch (Exception e) {
 			throw e;
@@ -339,7 +339,7 @@ public class UtilServiceImpl implements UtilService{
 			tempMap.put("fileId", 		this.nvlProc((String)paramMap.get("sequenceId")));
 			tempMap.put("fileSno", 	paramMap.get("delete" + num));
 			//
-			utilDao.intrFileProc1021(tempMap);
+			utilDao.fileProcDao1020(tempMap);
 			
 		} catch (Exception e) {
 			throw e;
@@ -467,7 +467,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.intrFileInqy1021(paramMap);
+			defaultInfo = utilDao.fileInqyDao1020(paramMap);
 			
 			fileNm = this.nvlProc((String)defaultInfo.get("fileNm"));
 			filePath = this.nvlProc((String)defaultInfo.get("filePath"));
@@ -564,7 +564,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 압축 파일 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(paramMap);
+			defaultList = utilDao.fileInqyDao1010(paramMap);
 					
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				//
@@ -775,7 +775,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 목록 건수 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreDao.intrCoreInqy1051(paramMap);
+			defaultList = coreDao.coreInqyDao1030(paramMap);
 			//
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				listCnt = String.valueOf(defaultList.get(0).get("listCnt"));

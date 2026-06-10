@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="banr">
-	<select id="intrBanrInqy1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBanrInqy1010 : 배너 시퀀스 조회 */
+	<select id="banrInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1010 : 배너 시퀀스 조회 */
 		SELECT 'BANR_' || LPAD(NVL(MAX(REPLACE(BANR_CD,'BANR_')),0) + 1,4,0) AS SEQUENCE_ID FROM BANR
 	</select>
 	
-	<select id="intrBanrInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBanrInqy1011 : 배너 조회 */
+	<select id="banrInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1020 : 배너 조회 */
 		SELECT
 				B.BANR_CD
 			,	B.BANR_SDT
@@ -39,8 +39,8 @@
 			AND F.USE_YN = 'Y'
 	</select>
 	
-	<select id="intrBanrInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrBanrInqy1021 : 배너 조회 (메인) */
+	<select id="banrInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* banrInqyDao1030 : 배너 조회 (메인) */
 SELECT
 				B.BANR_CD
 			,	B.BANR_SDT
@@ -66,8 +66,8 @@ SELECT
 			AND TRUNC(SYSDATE) BETWEEN TO_DATE(BANR_SDT, 'YYYY-MM-DD') AND TO_DATE(BANR_EDT, 'YYYY-MM-DD')
 	</select>
 	
-	<insert id="intrBanrProc1011" parameterType="java.util.HashMap" useGeneratedKeys="false">
-		/* intrBanrProc1011 : 배너 저장 (등록) 처리 */
+	<insert id="banrProcDao1010" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* banrProcDao1010 : 배너 저장 (등록) 처리 */
 		INSERT INTO BANR
 		(
 				BANR_CD
@@ -104,8 +104,8 @@ SELECT
 			)
 	</insert>
 	
-	<insert id="intrBanrProc1012" parameterType="java.util.HashMap" useGeneratedKeys="false">
-		/* intrBanrProc1012 : 배너 저장 (수정) 처리 */
+	<insert id="banrProcDao1020" parameterType="java.util.HashMap" useGeneratedKeys="false">
+		/* banrProcDao1020 : 배너 저장 (수정) 처리 */
 		UPDATE BANR
 			SET	BANR_SDT = REPLACE(#{banrSdt, jdbcType=VARCHAR}, '-', '')
 				,	BANR_EDT = REPLACE(#{banrEdt, jdbcType=VARCHAR}, '-', '')
@@ -116,8 +116,8 @@ SELECT
 		WHERE BANR_CD =  #{sequenceId, jdbcType=VARCHAR}
 	</insert>
 	
-	<update id="intrBanrProc1021" parameterType="java.util.HashMap">
-		/* intrBanrProc1021 : 배너 삭제 처리 (수정)  */
+	<update id="banrProcDao1030" parameterType="java.util.HashMap">
+		/* banrProcDao1030 : 배너 삭제 처리 (수정)  */
 		UPDATE BANR
 			SET USE_YN = 'N'
 		WHERE 1=1

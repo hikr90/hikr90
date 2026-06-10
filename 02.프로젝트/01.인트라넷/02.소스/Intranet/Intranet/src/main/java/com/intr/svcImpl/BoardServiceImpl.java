@@ -59,14 +59,14 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록
 			//--------------------------------------------------------------------------------------------
-			defaultList = boardDao.intrBoardInqy1011(paramMap);
+			defaultList = boardDao.boardInqyDao1020(paramMap);
 			model.addAttribute("defaultList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (사용여부) 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"USE");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("useList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
@@ -90,13 +90,13 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqy1021(paramMap);
+			defaultInfo = boardDao.boardInqyDao1030(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(paramMap);
+			defaultList = utilDao.fileInqyDao1010(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ public class BoardServiceImpl implements BoardService{
 			String readHit = (String)session.getAttribute("readHit");
 			//
 			if(readHit==null) {
-				boardDao.intrBoardProc1032(paramMap);
+				boardDao.boardProcDao1050(paramMap);
 				session.setAttribute("readHit", "hit");
 			}
 
@@ -128,13 +128,13 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = boardDao.intrBoardInqy1010(paramMap);
+			defaultInfo = boardDao.boardInqyDao1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 등록
 			//--------------------------------------------------------------------------------------------
-			resInt = boardDao.intrBoardProc1011(paramMap);
+			resInt = boardDao.boardProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -175,12 +175,12 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 삭제
 			//--------------------------------------------------------------------------------------------
-			resInt = boardDao.intrBoardProc1021(paramMap);
+			resInt = boardDao.boardProcDao1020(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 삭제 처리 (삭제)
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrFileProc1022(paramMap);
+			utilDao.fileProcDao1030(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -210,7 +210,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = boardDao.intrBoardProc1031(paramMap);
+			resInt = boardDao.boardProcDao1040(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정

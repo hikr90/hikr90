@@ -63,7 +63,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 담당자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy3011(paramMap);
+			defaultList = authDao.authInqyDao3010(paramMap);
 			model.addAttribute("empList", defaultList);
 			
 		} catch (Exception e) {
@@ -113,7 +113,7 @@ public class PopupController {
 		//
 		try {
 			// 사원 아이디 저장
-			defaultInfo = empDao.intrEmpInqy1012(paramMap);
+			defaultInfo = empDao.empInqyDao1030(paramMap);
 			
 			if(defaultInfo != null) {
 				defaultStr = String.format("[{'findId':'%s', 'findEmail':'%s'}]", (String)defaultInfo.get("empId"), (String)defaultInfo.get("email"));		
@@ -137,7 +137,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = projDao.intrProjInqy1011(paramMap);
+			defaultList = projDao.projInqyDao1020(paramMap);
 			model.addAttribute("projList", defaultList);
 			
 		} catch (Exception e) {
@@ -164,14 +164,14 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy4011(paramMap);
+			defaultList = aprvDao.aprvInqyDao4010(paramMap);
 			model.addAttribute("defaultList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"TYPE");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("typeList",defaultList);
 			
 		} catch (Exception e) {
@@ -192,7 +192,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 팝업 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1013(paramMap);
+			defaultList = aprvDao.aprvInqyDao1050(paramMap);
 			model.addAttribute("lineList", defaultList);
 			
 		} catch (Exception e) {
@@ -213,7 +213,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 결재선 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy4031(paramMap);
+			defaultList = aprvDao.aprvInqyDao4020(paramMap);
 			model.addAttribute("aprvlineList", defaultList);
 			
 		} catch (Exception e) {
@@ -268,7 +268,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 물품 조회 팝업 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1014(paramMap);
+			defaultList = aprvDao.aprvInqyDao1060(paramMap);
 			model.addAttribute("itemList", defaultList);
 			
 		} catch (Exception e) {
@@ -306,7 +306,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 정산내역 조회 팝업 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1015(paramMap);
+			defaultList = aprvDao.aprvInqyDao1070(paramMap);
 			model.addAttribute("corpList", defaultList);
 			
 		} catch (Exception e) {
@@ -327,7 +327,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 일정 관리 팝업 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = aprvDao.intrAprvInqy1012(paramMap);
+			defaultInfo = aprvDao.aprvInqyDao1040(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -349,13 +349,13 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 회의 상세 팝업 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = mtgDao.intrMtgInqy1031(paramMap);
+			defaultInfo = mtgDao.mtgInqyDao1030(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(paramMap);
+			defaultList = utilDao.fileInqyDao1010(paramMap);
 			model.addAttribute("fileList",defaultList);
 			
 		} catch (Exception e) {
@@ -442,7 +442,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// API 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = queryDao.intrQueryInqy1021(paramMap);
+			defaultList = queryDao.queryInqyDao1010(paramMap);
 			
 			if(defaultList.size() > 0) {
 				// 데이터 조회 성공
@@ -500,7 +500,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 상세
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqy3012(paramMap);
+			defaultInfo = taskDao.taskInqyDao3020(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -521,7 +521,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 업무 캘린더 상세
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = taskDao.intrTaskInqy3012(paramMap);
+			defaultInfo = taskDao.taskInqyDao3020(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {

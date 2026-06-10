@@ -15,107 +15,107 @@ public class AuthDao {
 	SqlSession sqlsession;
 	
 	// 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy1011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> authInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy1011", paramMap);
+		defaultList = sqlsession.selectList("auth.authInqyDao1010", paramMap);
 		return defaultList;
 	}
 
 	// 권한 상세 조회
-	public HashMap<String, Object> intrAuthInqy1021(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> authInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("auth.intrAuthInqy1021", paramMap);
+		defaultInfo = sqlsession.selectOne("auth.authInqyDao1020", paramMap);
 		//
 		return defaultInfo;
 	}
 	
 	// 메뉴 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy2011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> authInqyDao2010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy2011", paramMap);
+		defaultList = sqlsession.selectList("auth.authInqyDao2010", paramMap);
 		return defaultList;
 	}
 	
 	// 사용자 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy3011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> authInqyDao3010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy3011", paramMap);
+		defaultList = sqlsession.selectList("auth.authInqyDao3010", paramMap);
 		return defaultList;
 	}
 	
 	// 사용자 권한 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy4011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> authInqyDao4010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy4011", paramMap);
+		defaultList = sqlsession.selectList("auth.authInqyDao4010", paramMap);
 		return defaultList;
 	}
 	
 	// 로그인 권한 사용자 목록 조회
-	public List<HashMap<String, Object>> intrAuthInqy5011(Model model) {
+	public List<HashMap<String, Object>> authInqyDao5010(Model model) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("auth.intrAuthInqy5011");
+		defaultList = sqlsession.selectList("auth.authInqyDao5010");
 		return defaultList;
 	}
 	
 	// 권한 등록
-	public int intrAuthProc1011(HashMap<String, Object> paramMap) {
+	public int authProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("auth.intrAuthProc1011", paramMap);
+		resInt = sqlsession.insert("auth.authProcDao1010", paramMap);
 		return resInt;
 	}
 	
 	// 권한 수정
-	public int intrAuthProc1021(HashMap<String, Object> paramMap) {
+	public int authProcDao1020(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("auth.intrAuthProc1021", paramMap);
+		resInt = sqlsession.update("auth.authProcDao1020", paramMap);
 		return resInt;
 	}
 	
 	// 권한 삭제 
-	public int intrAuthProc1031(HashMap<String, Object> paramMap) {
+	public int authProcDao1030(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("auth.intrAuthProc1031", paramMap);
+		resInt = sqlsession.delete("auth.authProcDao1030", paramMap);
 		return resInt;
 	}
 
 	// 메뉴 권한 삭제 처리
-	public int intrAuthProc1041(HashMap<String, Object> paramMap) {
+	public int authProcDao1040(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("auth.intrAuthProc1041", paramMap);
+		resInt = sqlsession.delete("auth.authProcDao1040", paramMap);
 		return resInt;
 	}
 
 	// 메뉴 권한 저장 처리
-	public int intrAuthProc1042(HashMap<String, Object> paramMap) {
+	public int authProcDao1050(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("auth.intrAuthProc1042", paramMap);
+		resInt = sqlsession.insert("auth.authProcDao1050", paramMap);
 		return resInt;
 	}
 	
 	// 사용자 권한 삭제 처리
-	public int intrAuthProc1051(HashMap<String, Object> paramMap) {
+	public int authProcDao1060(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("auth.intrAuthProc1051", paramMap);
+		resInt = sqlsession.insert("auth.authProcDao1060", paramMap);
 		return resInt;
 	}
 	
 	// 사용자 권한 저장 처리
-	public int intrAuthProc1052(HashMap<String, Object> paramMap) {
+	public int authProcDao1070(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("auth.intrAuthProc1052", paramMap);
+		resInt = sqlsession.insert("auth.authProcDao1070", paramMap);
 		return resInt;
 	}
 }

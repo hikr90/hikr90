@@ -14,74 +14,74 @@ public class MtgDao {
 	SqlSession sqlsession;
 	
 	// 회의 시퀀스 조회
-	public HashMap<String, Object> intrMtgInqy1010(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> mtgInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("mtg.intrMtgInqy1010", paramMap);
+		defaultInfo = sqlsession.selectOne("mtg.mtgInqyDao1010", paramMap);
 		return defaultInfo;
 	}
 	
 	// 회의 목록 조회
-	public List<HashMap<String, Object>> intrMtgInqy1011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> mtgInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("mtg.intrMtgInqy1011", paramMap);
+		defaultList = sqlsession.selectList("mtg.mtgInqyDao1020", paramMap);
 		return defaultList;
 	}
 	
 	// 회의 상세 조회
-	public HashMap<String, Object> intrMtgInqy1031(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> mtgInqyDao1030(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("mtg.intrMtgInqy1031", paramMap);
+		defaultInfo = sqlsession.selectOne("mtg.mtgInqyDao1030", paramMap);
 		return defaultInfo;
 	}
 	
 	// 회의 중복 조회
-	public List<HashMap<String, Object>> intrMtgInqy1091(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> mtgInqyDao1040(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("mtg.intrMtgInqy1091", paramMap);
+		defaultList = sqlsession.selectList("mtg.mtgInqyDao1040", paramMap);
 		return defaultList;
 	}
 	
 	// 캘린더 조회
-	public List<HashMap<String, Object>> intrMtgInqy2011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> mtgInqyDao2010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("mtg.intrMtgInqy2011", paramMap);
+		defaultList = sqlsession.selectList("mtg.mtgInqyDao2010", paramMap);
 		return defaultList;
 	}
 
 	// 캘린더 목록 조회
-	public List<HashMap<String, Object>> intrMtgInqy2021(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> mtgInqyDao2020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("mtg.intrMtgInqy2021", paramMap);
+		defaultList = sqlsession.selectList("mtg.mtgInqyDao2020", paramMap);
 		return defaultList;
 	}
 	
 	// 회의 등록 처리
-	public int intrMtgProc1011(HashMap<String, Object> paramMap) {
+	public int mtgProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("mtg.intrMtgProc1011", paramMap);
+		resInt = sqlsession.insert("mtg.mtgProcDao1010", paramMap);
 		return resInt;
 	}
 	
 	// 회의 삭제 처리
-	public int intrMtgProc1021(HashMap<String,Object> paramMap) {
+	public int mtgProcDao1020(HashMap<String,Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("mtg.intrMtgProc1021", paramMap);
+		resInt = sqlsession.update("mtg.mtgProcDao1020", paramMap);
 		return resInt;
 	}
 	
 	// 회의 수정 처리
-	public int intrMtgProc1031(HashMap<String, Object> paramMap) {
+	public int mtgProcDao1030(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("mtg.intrMtgProc1031", paramMap);
+		resInt = sqlsession.update("mtg.mtgProcDao1030", paramMap);
 		return resInt;
 	}	
 }

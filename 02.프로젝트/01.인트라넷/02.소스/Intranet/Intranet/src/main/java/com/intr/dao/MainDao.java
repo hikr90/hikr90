@@ -15,10 +15,10 @@ public class MainDao {
 	SqlSession sqlsession;
 	
 	// 로그인 사용자 조회
-	public EmpVO intrMainInqy1011(HashMap<String, Object> paramMap) {
+	public EmpVO mainInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		EmpVO defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("main.intrMainInqy1011", paramMap);
+		defatulInfo = sqlsession.selectOne("main.mainInqyDao1010", paramMap);
 		//
 		return defatulInfo;
 	}

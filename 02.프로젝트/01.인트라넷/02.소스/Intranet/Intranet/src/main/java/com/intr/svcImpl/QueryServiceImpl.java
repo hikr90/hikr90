@@ -49,7 +49,7 @@ public class QueryServiceImpl implements QueryService{
 			//--------------------------------------------------------------------------------------------
 			// 쿼리 화면 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = queryDao.intrQueryInqy1021(paramMap);
+			defaultList = queryDao.queryInqyDao1010(paramMap);
 			
 			if(defaultList!=null && !defaultList.isEmpty()) {
 				colList = defaultList.get(0).keySet();
@@ -76,7 +76,7 @@ public class QueryServiceImpl implements QueryService{
 			//--------------------------------------------------------------------------------------------
 			// 엑셀 다운로드
 			//--------------------------------------------------------------------------------------------
-			defaultList = queryDao.intrQueryInqy1031(paramMap);
+			defaultList = queryDao.queryInqyDao1020(paramMap);
 			utilService.excelDown(defaultList, paramMap, request, response);
 			
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ public class QueryServiceImpl implements QueryService{
 			// 쿼리 입력 처리
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("query", query.replaceAll(";", ""));
-			resInt = queryDao.intrQueryProc1011(paramMap);
+			resInt = queryDao.queryProcDao1010(paramMap);
 					
 			// 처리된 건이 없는 경우 빈 값으로 결과 전송
 			if(resInt>0) {

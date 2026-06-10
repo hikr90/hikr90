@@ -82,7 +82,7 @@ public class CoreServiceImpl implements CoreService{
 			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
 			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
-			defaultList = coreDao.intrCoreInqy1011(tempMap);
+			defaultList = coreDao.coreInqyDao1010(tempMap);
 			model.addAttribute("menuList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public class CoreServiceImpl implements CoreService{
 			tempMap.put("idxSet", utilService.nvlProc((String)paramMap.get("idxSet")));
 			tempMap.put("menuType", utilService.nvlProc((String)paramMap.get("menuType")));
 			//
-			defaultList = coreDao.intrCoreInqy1011(tempMap);
+			defaultList = coreDao.coreInqyDao1010(tempMap);
 			model.addAttribute("leftList", defaultList);
 			
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class CoreServiceImpl implements CoreService{
 			//--------------------------------------------------------------------------------------------
 			// 전체 메뉴 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = coreDao.intrCoreInqy1021(paramMap);
+			defaultList = coreDao.coreInqyDao1020(paramMap);
 			model.addAttribute("tMenuList", defaultList);
 			
 		} catch (Exception e) {

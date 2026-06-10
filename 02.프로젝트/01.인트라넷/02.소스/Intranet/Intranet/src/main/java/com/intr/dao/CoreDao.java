@@ -14,26 +14,26 @@ public class CoreDao {
 	SqlSession sqlsession;
 	
 	// 메뉴 조회
-	public List<HashMap<String, Object>> intrCoreInqy1011(HashMap<String,Object> paramMap) {
+	public List<HashMap<String, Object>> coreInqyDao1010(HashMap<String,Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("core.intrCoreInqy1011", paramMap);
+		defaultList = sqlsession.selectList("core.coreInqyDao1010", paramMap);
 		return defaultList;
 	}
 
 	// 전체 메뉴 조회
-	public List<HashMap<String, Object>> intrCoreInqy1021(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> coreInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("core.intrCoreInqy1021", paramMap);
+		defaultList = sqlsession.selectList("core.coreInqyDao1020", paramMap);
 		return defaultList;
 	}
 	
 	// 목록 수 조회
-	public List<HashMap<String, Object>> intrCoreInqy1051(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> coreInqyDao1030(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("core.intrCoreInqy1051", paramMap);
+		defaultList = sqlsession.selectList("core.coreInqyDao1030", paramMap);
 		return defaultList;
 	}
 }

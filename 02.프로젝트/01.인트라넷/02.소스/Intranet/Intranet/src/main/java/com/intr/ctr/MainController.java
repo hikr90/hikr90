@@ -149,19 +149,19 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 공지사항 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = boardDao.intrBoardInqy1011(paramMap);
+			defaultList = boardDao.boardInqyDao1020(paramMap);
 			model.addAttribute("boardList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결재 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = aprvDao.intrAprvInqy1011(paramMap);
+			defaultList = aprvDao.aprvInqyDao1030(paramMap);
 			model.addAttribute("aprvList", defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 배너 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = banrDao.intrBanrInqy1021(paramMap);
+			defaultInfo = banrDao.banrInqyDao1030(paramMap);
 			model.addAttribute("banrInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 오늘의 일정 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = taskDao.intrTaskInqy3013(paramMap);
+			defaultList = taskDao.taskInqyDao3030(paramMap);
 			model.addAttribute("tldrList", defaultList);
 			
 		} catch (Exception e) {
@@ -221,7 +221,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 부여 현황
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.intrAuthInqy5011(model);
+			defaultList = authDao.authInqyDao5010(model);
 			model.addAttribute("authList", defaultList);
 			
 			//--------------------------------------------------------------------------------------------
@@ -233,7 +233,7 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = projDao.intrProjInqy1011(paramMap);
+			defaultList = projDao.projInqyDao1020(paramMap);
 			model.addAttribute("projList", defaultList);
 			
 		} catch (Exception e) {

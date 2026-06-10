@@ -53,14 +53,14 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = projDao.intrProjInqy1011(paramMap);
+			defaultList = projDao.projInqyDao1020(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"STAT");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			
 		} catch (Exception e) {
@@ -79,7 +79,7 @@ public class ProjServiceImpl implements ProjService{
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"STAT");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			
 		} catch (Exception e) {
@@ -98,20 +98,20 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 상세 정보
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = projDao.intrProjInqy1031(paramMap);
+			defaultInfo = projDao.projInqyDao1030(paramMap);
 			model.addAttribute("defaultInfo",defaultInfo);
 
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("commcodeGcd", 	"STAT");
-			defaultList = utilDao.intrCodeInqy1011(paramMap);
+			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
 			//--------------------------------------------------------------------------------------------
-			defaultList = utilDao.intrFileInqy1011(paramMap);
+			defaultList = utilDao.fileInqyDao1010(paramMap);
 			model.addAttribute("fileList",defaultList);
 
 		} catch (Exception e) {
@@ -132,13 +132,13 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 채번
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = projDao.intrProjInqy1010(paramMap);
+			defaultInfo = projDao.projInqyDao1010(paramMap);
 			paramMap.put("sequenceId", (String)defaultInfo.get("sequenceId"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 등록 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = projDao.intrProjProc1011(paramMap);
+			resInt = projDao.projProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -179,12 +179,12 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 삭제
 			//--------------------------------------------------------------------------------------------
-			resInt = projDao.intrProjProc1021(paramMap);
+			resInt = projDao.projProcDao1020(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 삭제 처리 (삭제)
 			//--------------------------------------------------------------------------------------------
-			utilDao.intrFileProc1021(paramMap);
+			utilDao.fileProcDao1020(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 결과 반환
@@ -214,7 +214,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 프로젝트 수정
 			//--------------------------------------------------------------------------------------------
-			resInt = projDao.intrProjProc1031(paramMap);
+			resInt = projDao.projProcDao1030(paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 수정

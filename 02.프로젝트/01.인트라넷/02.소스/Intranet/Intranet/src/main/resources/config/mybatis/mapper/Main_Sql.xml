@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main">
-	<select id="intrMainInqy1011" resultType="emp" parameterType="java.util.HashMap"> 
-		/* intrMainInqy1011 : 로그인 사용자 조회 */
+	<select id="mainInqyDao1010" resultType="emp" parameterType="java.util.HashMap"> 
+		/* mainInqyDao1010 : 로그인 사용자 조회 */
 		SELECT 
 				E.EMP_IDX
 			,	E.ORG_CD

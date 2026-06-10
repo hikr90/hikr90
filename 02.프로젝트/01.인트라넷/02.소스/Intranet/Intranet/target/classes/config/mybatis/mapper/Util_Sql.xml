@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="util">
-	<select id="intrFileInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1011 : 컨텐츠 파일 데이터 조회 */
+	<select id="fileInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* fileInqyDao1010 : 컨텐츠 파일 데이터 조회 */
 		SELECT 
 		    FILE_ID,
 		    FILE_ID,
@@ -20,8 +20,8 @@
 			AND USE_YN = 'Y'
 	</select>
 
-	<select id="intrFileInqy1021" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrFileInqy1021 : 단건 파일 데이터 조회 */
+	<select id="fileInqyDao1020" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* fileInqyDao1020 : 단건 파일 데이터 조회 */
 		SELECT 
 		    FILE_ID,
 		    FILE_SNO, 
@@ -39,8 +39,8 @@
 			AND USE_YN = 'Y'
 	</select>
 	
-	<insert id="intrFileProc1011" parameterType="java.util.HashMap">
-		/* intrFileProc1011 : 파일 등록 처리 */
+	<insert id="fileProcDao1010" parameterType="java.util.HashMap">
+		/* fileProcDao1010 : 파일 등록 처리 */
 		INSERT INTO FILE_INFO
 		(
 				FILE_ID
@@ -79,8 +79,8 @@
 		)
 	</insert>
 	
-	<update id="intrFileProc1021" parameterType="java.util.HashMap">
-		/* intrFileProc1021 : 파일 삭제 처리 (수정) */
+	<update id="fileProcDao1020" parameterType="java.util.HashMap">
+		/* fileProcDao1020 : 파일 삭제 처리 (수정) */
 		UPDATE FILE_INFO
 			SET USE_YN = 'N'
 		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
@@ -89,8 +89,8 @@
 			</if>
 	</update>
 	
-	<delete id="intrFileProc1022" parameterType="java.util.HashMap">
-		/* intrFileProc1022 : 파일 삭제 처리 (삭제) */
+	<delete id="fileProcDao1030" parameterType="java.util.HashMap">
+		/* fileProcDao1030 : 파일 삭제 처리 (삭제) */
 		DELETE FILE_INFO
 		WHERE FILE_ID = #{fileId, jdbcType=VARCHAR}
 			<if test="fileSno != null and fileSno != ''">
@@ -98,8 +98,8 @@
 			</if>
 	</delete>
 	
-	<select id="intrCodeInqy1011" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* intrCodeInqy1011 : 공통코드 조회 */
+	<select id="codeInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
+		/* codeInqyDao1010 : 공통코드 조회 */
 		SELECT 
 			DATA.*
 		FROM (

@@ -14,33 +14,33 @@ public class EmpDao {
 	SqlSession sqlsession;
 	
 	// 사원 인덱스 채번
-	public HashMap<String, Object> intrEmpInqy1010(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> empInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("emp.intrEmpInqy1010", paramMap);
+		defaultInfo = sqlsession.selectOne("emp.empInqyDao1010", paramMap);
 		return defaultInfo;
 	}
 	
 	// 사원 목록
-	public List<HashMap<String, Object>> intrEmpInqy1011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> empInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("emp.intrEmpInqy1011", paramMap);
+		defaultList = sqlsession.selectList("emp.empInqyDao1020", paramMap);
 		return defaultList;
 	}
 	
 	// 사용자 정보 조회 (정보 찾기)
-	public HashMap<String, Object> intrEmpInqy1012(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> empInqyDao1030(HashMap<String, Object> paramMap) {
 		HashMap<String, Object> defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("emp.intrEmpInqy1012", paramMap);
+		defatulInfo = sqlsession.selectOne("emp.empInqyDao1030", paramMap);
 		//
 		return defatulInfo;
 	}
 	
 	// 관리자 계정 조회
-	public HashMap<String, Object> intrEmpInqy1013() {
+	public HashMap<String, Object> empInqyDao1040() {
 		HashMap<String, Object> defatulInfo = null;
-		defatulInfo = sqlsession.selectOne("emp.intrEmpInqy1013");
+		defatulInfo = sqlsession.selectOne("emp.empInqyDao1040");
 		//
 		return defatulInfo;
 	}

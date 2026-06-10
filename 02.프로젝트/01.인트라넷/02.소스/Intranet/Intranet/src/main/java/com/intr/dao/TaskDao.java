@@ -14,98 +14,98 @@ public class TaskDao {
 	SqlSession sqlsession;
 
 	// 업무일지 시퀀스 조회
-	public HashMap<String, Object> intrTaskInqy1010(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> taskInqyDao1010(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("task.intrTaskInqy1010", paramMap);
+		defaultInfo = sqlsession.selectOne("task.taskInqyDao1010", paramMap);
 		return defaultInfo;
 	}
 	
 	// 업무일지 작성 조회
-	public List<HashMap<String, Object>> intrTaskInqy1011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> taskInqyDao1020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy1011", paramMap);
+		defaultList = sqlsession.selectList("task.taskInqyDao1020", paramMap);
 		return defaultList;
 	}
 
 	// 업무일지 목록 조회
-	public List<HashMap<String, Object>> intrTaskInqy2011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> taskInqyDao2010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy2011", paramMap);
+		defaultList = sqlsession.selectList("task.taskInqyDao2010", paramMap);
 		return defaultList;
 	}
 	
 	// 업무일지 상세 조회
-	public List<HashMap<String, Object>> intrTaskInqy2021(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> taskInqyDao2020(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy2021", paramMap);
+		defaultList = sqlsession.selectList("task.taskInqyDao2020", paramMap);
 		return defaultList;
 	}
 	
 	// 업무 캘린더 조회
-	public List<HashMap<String, Object>> intrTaskInqy3011(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> taskInqyDao3010(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy3011", paramMap);
+		defaultList = sqlsession.selectList("task.taskInqyDao3010", paramMap);
 		return defaultList;
 	}
 	
 	// 업무 캘린더 상세
-	public HashMap<String, Object> intrTaskInqy3012(HashMap<String, Object> paramMap) {
+	public HashMap<String, Object> taskInqyDao3020(HashMap<String, Object> paramMap) {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		defaultInfo = sqlsession.selectOne("task.intrTaskInqy3012", paramMap);
+		defaultInfo = sqlsession.selectOne("task.taskInqyDao3020", paramMap);
 		return defaultInfo;
 	}
 	
 	// 업무 캘린더 (메인) 조회
-	public List<HashMap<String, Object>> intrTaskInqy3013(HashMap<String, Object> paramMap) {
+	public List<HashMap<String, Object>> taskInqyDao3030(HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		defaultList = sqlsession.selectList("task.intrTaskInqy3013", paramMap);
+		defaultList = sqlsession.selectList("task.taskInqyDao3030", paramMap);
 		return defaultList;
 	}
 	
 	// 업무일지 등록
-	public int intrTaskProc1011(HashMap<String, Object> paramMap) {
+	public int taskProcDao1010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("task.intrTaskProc1011", paramMap);
+		resInt = sqlsession.insert("task.taskProcDao1010", paramMap);
 		return resInt;
 	}
 	
 	// 업무일지 삭제
-	public int intrTaskProc1021(HashMap<String, Object> paramMap) {
+	public int taskProcDao1020(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("task.intrTaskProc1021", paramMap);
+		resInt = sqlsession.delete("task.taskProcDao1020", paramMap);
 		return resInt;
 	}
 	
 	// 업무 캘린더 등록
-	public int intrTaskProc2011(HashMap<String, Object> paramMap) {
+	public int taskProcDao2010(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.insert("task.intrTaskProc2011", paramMap);
+		resInt = sqlsession.insert("task.taskProcDao2010", paramMap);
 		return resInt;
 	}
 	
 	// 업무 캘린더 수정
-	public int intrTaskProc2021(HashMap<String, Object> paramMap) {
+	public int taskProcDao2020(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.update("task.intrTaskProc2021", paramMap);
+		resInt = sqlsession.update("task.taskProcDao2020", paramMap);
 		return resInt;
 	}
 	
 	// 업무 캘린더 삭제
-	public int intrTaskProc2031(HashMap<String, Object> paramMap) {
+	public int taskProcDao2030(HashMap<String, Object> paramMap) {
 		//
 		int resInt = 0;
-		resInt = sqlsession.delete("task.intrTaskProc2031", paramMap);
+		resInt = sqlsession.delete("task.taskProcDao2030", paramMap);
 		return resInt;
 	}
 }
