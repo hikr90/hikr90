@@ -24,10 +24,10 @@ import com.intr.dao.TaskDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.AuthService;
+import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 import com.intr.svc.ProjService;
 import com.intr.svc.TempService;
-import com.intr.svc.EmpService;
 import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
@@ -475,15 +475,15 @@ public class PopupController {
 			if(defaultList.size() > 0) {
 				// 데이터 조회 성공
 				jObj.put("totalCnt", String.valueOf(defaultList.size()));
-				jObj.put("isSuccess", Const.API_IS_SUCC);	
-				jObj.put("message", Const.API_MSG_SUCC);
+				jObj.put("isSuccess", "SUCCESS");	
+				jObj.put("message", "쿼리 조회에 성공하였습니다.");
 				jObj.put("data", defaultList);
 				
 			} else {
 				// 검색 결과 없음
 				jObj.put("totalCnt", "0");
-				jObj.put("isSuccess", Const.API_IS_FAIL);
-	            jObj.put("message", Const.API_MSG_FAIL);
+				jObj.put("isSuccess", "FAIL");
+	            jObj.put("message", "검색 결과가 없습니다.");
 				jObj.put("data", defaultList);
 			}
 			
@@ -492,8 +492,8 @@ public class PopupController {
 			
 			// 쿼리 에러
 			jObj.put("totalCnt", "0");
-			jObj.put("isSuccess", Const.API_IS_ERROR);
-            jObj.put("message", Const.API_MSG_ERROR);
+			jObj.put("isSuccess", "ERROR");
+            jObj.put("message", "입력한 쿼리를 실행시킬 수 없습니다.");
 			jObj.put("data", emptyList);
 			
 		} finally {

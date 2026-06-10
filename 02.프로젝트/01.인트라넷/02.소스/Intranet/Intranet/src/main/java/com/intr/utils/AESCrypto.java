@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class AESCryptoUtil {
+public class AESCrypto {
 	
 	private static final String KEY_STRING = "ThisIsASecretKey"; // 16자리 고정 키
 	private static final String IV_STRING = "FixedIVForAES128";   // 16자리 고정 IV

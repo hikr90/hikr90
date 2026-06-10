@@ -47,7 +47,7 @@ import com.intr.dao.EmpDao;
 import com.intr.dao.QueryDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.UtilService;
-import com.intr.utils.AESCryptoUtil;
+import com.intr.utils.AESCrypto;
 import com.intr.utils.Const;
 
 @Service
@@ -969,15 +969,15 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 암호화
 			//--------------------------------------------------------------------------------------------
-			key = AESCryptoUtil.getKey();
-			ivParameterSpec = AESCryptoUtil.getIv();
+			key = AESCrypto.getKey();
+			ivParameterSpec = AESCrypto.getIv();
 			specName = "AES/CBC/PKCS5Padding";
 			
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 		//
-		return AESCryptoUtil.encrypt(specName, key, ivParameterSpec, plainText);
+		return AESCrypto.encrypt(specName, key, ivParameterSpec, plainText);
 	}
 	
 	// 복호화
@@ -991,14 +991,14 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 복호화
 			//--------------------------------------------------------------------------------------------
-			key = AESCryptoUtil.getKey();
-			ivParameterSpec = AESCryptoUtil.getIv();
+			key = AESCrypto.getKey();
+			ivParameterSpec = AESCrypto.getIv();
 			specName = "AES/CBC/PKCS5Padding";
 			
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 		//
-		return AESCryptoUtil.decrypt(specName, key, ivParameterSpec, plainText);
+		return AESCrypto.decrypt(specName, key, ivParameterSpec, plainText);
 	}
 }

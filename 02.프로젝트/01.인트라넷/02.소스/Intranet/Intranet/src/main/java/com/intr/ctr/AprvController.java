@@ -60,7 +60,7 @@ public class AprvController {
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
-		}
+		}	
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_1010;
 	}
