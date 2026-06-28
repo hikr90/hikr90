@@ -187,7 +187,7 @@ public class MtgController {
 	}
 	
 	// 캘린더 목록 조회
-	@RequestMapping("/intrMtgInqy2020.do")
+	@RequestMapping("/intrMtgInqy2010.do")
 	public String intrMtgInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {

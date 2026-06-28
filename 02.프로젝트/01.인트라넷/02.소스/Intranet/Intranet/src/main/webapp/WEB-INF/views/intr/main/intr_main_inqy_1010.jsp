@@ -68,7 +68,7 @@
 			$.ajax({
 					type:	"post" , 
 					traditional: true,
-					url:	"intrMtgInqy2020.do",
+					url:	"intrMtgInqy2010.do",
 					data:	{
 						"mtgDt": calDate
 					},
