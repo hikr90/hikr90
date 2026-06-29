@@ -33,8 +33,8 @@ public class UtilController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 파일 다운로드
-	@RequestMapping("/fileDown.do")
-	public void fileDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/intrFileProc1010.do")
+	public void intrFileProc1010(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ public class UtilController {
 	}
 	
 	// 문서 다운로드
-	@RequestMapping("/docDown.do")
+	@RequestMapping("/intrFileProc1020.do")
 	public void docDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
@@ -65,8 +65,8 @@ public class UtilController {
 	}
 	
 	// 전체 다운로드
-	@RequestMapping("/zipDown.do")
-	public void zipDown(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/intrFileProc1030.do")
+	public void intrFileProc1030(Model model, @RequestParam HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -81,9 +81,9 @@ public class UtilController {
 	}
 
 	// 메일 전송
-	@RequestMapping(value="/sendMail.do")
+	@RequestMapping(value="/intrMailProc1010.do")
 	@ResponseBody
-	public String sendMail(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrMailProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//

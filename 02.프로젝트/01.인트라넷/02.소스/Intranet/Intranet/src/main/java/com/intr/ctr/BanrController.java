@@ -78,7 +78,7 @@ public class BanrController {
 			//--------------------------------------------------------------------------------------------
 			// URL객체 생성 (예외사항 추가)
 			//--------------------------------------------------------------------------------------------
-			URL fileUrl = new URL("file:" + (String)defaultList.get(0).get("filePath") + (String)defaultList.get(0).get("fileNm"));
+			URL fileUrl = new URL("file:" + (String)defaultList.get(0).get("filePath") + (String)defaultList.get(0).get("saveFileNm"));
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 입출력 (응답객체로 뿌려진 파일 데이터 JSP로 전송)

@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -101,28 +103,42 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------------
+		// 경로 생성
+		//--------------------------------------------------------------------------------------------
 		String os = System.getProperty("os.name").toLowerCase();
-		String sequenceId = (String)paramMap.get("sequenceId");
-		String filetypeCd = (String)paramMap.get("filetypeCd");
-		
-		// # 1 윈도우 : C드라이브 시작 
+		String filetypeCd = (String) paramMap.get("filetypeCd");
+
+		// # 1 윈도우 : C드라이브 시작
 		// # 2 리눅스 : / 시작
 		if(os.contains("win")) {
 			filePath = "C:\\" + filePath + File.separator;
-			//
-			if(!this.isNull(filetypeCd)) filePath +=  filetypeCd + File.separator;
-			if(!this.isNull(sequenceId)) filePath += sequenceId + File.separator;
-			
 		} else if(os.contains("linux")) {
 			filePath = "/" + filePath + File.separator;
-			//
-			if(!this.isNull(filetypeCd)) filePath += filetypeCd + File.separator;
-			if(!this.isNull(sequenceId)) filePath += sequenceId + File.separator;
-			//
+		}
+		//
+		if (!this.isNull(filetypeCd))
+		    filePath += filetypeCd + File.separator;
+		
+		// 날짜 경로
+		filePath += getDatePath();
+
+		// Linux 경로 변환
+		if(os.contains("linux")) {
 			filePath = filePath.replace("\\", "/");
 		}
 		//
 		return filePath;
+	}
+	
+	// 날짜별 경로 생성
+	private String getDatePath() {
+	    LocalDate now = LocalDate.now();
+
+	    return now.getYear()
+	            + File.separator
+	            + String.format("%02d", now.getMonthValue())
+	            + File.separator;
 	}
 	
 	// 메일 전송
@@ -256,16 +272,18 @@ public class UtilServiceImpl implements UtilService{
 			// DB, 파일 등록 및 수정
 			//--------------------------------------------------------------------------------------------
 			for (String key : paramMap.keySet()) {
+				String saveFileNm = "";
+				//
 				if(key.contains("insert")) {
 					// 등록
 					if(!fileList.isEmpty()) {
 						num = Integer.parseInt(key.replace("insert",""));
 						file = fileList.get(num);
-						this.intrFileProc1010(paramMap, file);
+						saveFileNm = this.intrFileProc1010(paramMap, file);
 					}
 					
 					// file 저장
-					this.saveFile(filePath, file);
+					this.saveFile(filePath, saveFileNm, file);
 					
 				} else if(key.contains("delete")) {
 					// 삭제
@@ -286,11 +304,8 @@ public class UtilServiceImpl implements UtilService{
 						// 등록
 						if(isUploadImg.equals("Y")) {
 							file = fileList.get(0);
-							this.intrFileProc1010(paramMap, file);	// 등록
-							
-							// file 저장
-							file = fileList.get(num);
-							this.saveFile(filePath, file);
+							saveFileNm = this.intrFileProc1010(paramMap, file);	// 등록
+							this.saveFile(filePath, saveFileNm, file);
 						} 
 					}
 				}
@@ -308,18 +323,21 @@ public class UtilServiceImpl implements UtilService{
 	}
 
 	// 파일 DB 저장
-	public void intrFileProc1010(HashMap<String, Object> paramMap, MultipartFile file)  throws Exception {
+	public String intrFileProc1010(HashMap<String, Object> paramMap, MultipartFile file)  throws Exception {
 		//
 		HashMap<String, Object> tempMap = new HashMap<String, Object>();
 		String fileNm = file.getOriginalFilename();
+		String fileExt = fileNm.substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+		String saveFileNm = makeSaveFileNm(fileExt);
 		//
 		try {
 			//
 			tempMap.put("fileId", 				this.nvlProc((String)paramMap.get("sequenceId")));
-			tempMap.put("fileNm", 			file.getOriginalFilename());
+			tempMap.put("fileNm", 				file.getOriginalFilename());
+			tempMap.put("saveFileNm",  		saveFileNm);
 			tempMap.put("filePath", 			this.nvlProc((String)paramMap.get("filePath")));
 			tempMap.put("filetypeCd", 		this.nvlProc((String)paramMap.get("filetypeCd")));
-			tempMap.put("fileExt", 			fileNm.substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase());
+			tempMap.put("fileExt", 				fileExt);
 			tempMap.put("fileSize", 			file.getSize());
 			//
 			utilDao.fileProcDao1010(tempMap);
@@ -327,6 +345,22 @@ public class UtilServiceImpl implements UtilService{
 		} catch (Exception e) {
 			throw e;
 		}
+		//
+		return saveFileNm ;
+	}
+	
+	// 저장 파일명 생성
+	private String makeSaveFileNm(String fileExt) {
+		//
+		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder();
+		//
+		for (int i = 0; i < 16; i++) {
+			sb.append(chars.charAt(random.nextInt(chars.length())));
+		}
+		//
+		return sb.toString() + "." + fileExt;
 	}
 	
 	// 파일 DB 삭제
@@ -347,14 +381,17 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 파일 저장
-	public void saveFile(String filePath, MultipartFile file) throws Exception {
-		File f = null;
+	public void saveFile(String filePath, String saveFileNm, MultipartFile file) throws Exception {
+		File dir = new File(filePath);
 		//
 		try {
 			//
-			f = new File(filePath, file.getOriginalFilename());
-			if(!f.exists()) f.mkdirs();
-			file.transferTo(f);
+			if (!dir.exists()) {
+	            dir.mkdirs();
+	        }
+			//
+			File saveFile = new File(dir, saveFileNm);
+		    file.transferTo(saveFile);
 			
 		} catch (Exception e) {
 			throw e;
@@ -362,10 +399,39 @@ public class UtilServiceImpl implements UtilService{
 	}
 	
 	// 파일 다운로드
-	public void fileDownProc(String filePath, String fileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		public void fileDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			//
+			HashMap<String, Object> defaultInfo = null;
+			String fileNm = "";
+			String saveFileNm = "";
+			String filePath = "";
+			//
+			try {
+				//--------------------------------------------------------------------------------------------
+				// 파일 정보 조회
+				//--------------------------------------------------------------------------------------------
+				defaultInfo = utilDao.fileInqyDao1020(paramMap);
+				
+				fileNm = this.nvlProc((String)defaultInfo.get("fileNm"));
+				filePath = this.nvlProc((String)defaultInfo.get("filePath"));
+				saveFileNm = this.nvlProc((String)defaultInfo.get("saveFileNm"));
+				
+				//--------------------------------------------------------------------------------------------
+				// 파일 다운로드
+				//--------------------------------------------------------------------------------------------
+				fileDownProc(filePath, fileNm, saveFileNm, request, response);
+				
+			} catch (Exception e) {
+				//
+				throw new Exception(e.getMessage());
+			}
+		}
+	
+	// 파일 다운로드
+	public void fileDownProc(String filePath, String fileNm, String saveFileNm, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String value = "";
-		String fullPath = filePath + fileNm;
+		String fullPath = filePath + saveFileNm;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -456,38 +522,12 @@ public class UtilServiceImpl implements UtilService{
 		}
 	}
 	
-	// 파일 다운로드
-	public void fileDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//
-		HashMap<String, Object> defaultInfo = null;
-		String fileNm = "";
-		String filePath = "";
-		//
-		try {
-			//--------------------------------------------------------------------------------------------
-			// 파일 정보 조회
-			//--------------------------------------------------------------------------------------------
-			defaultInfo = utilDao.fileInqyDao1020(paramMap);
-			
-			fileNm = this.nvlProc((String)defaultInfo.get("fileNm"));
-			filePath = this.nvlProc((String)defaultInfo.get("filePath"));
-			
-			//--------------------------------------------------------------------------------------------
-			// 파일 다운로드
-			//--------------------------------------------------------------------------------------------
-			fileDownProc(filePath, fileNm, request, response);
-			
-		} catch (Exception e) {
-			//
-			throw new Exception(e.getMessage());
-		}
-	}
-	
 	// 매뉴얼 다운로드
 	public void docDown(Model model, HashMap<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//
 		String docCd = this.nvlProc((String)paramMap.get("docCd"));
 		String fileNm = "";
+		String saveFileNm = "";
 		String filePath = "";
 		//
 		try {
@@ -495,6 +535,7 @@ public class UtilServiceImpl implements UtilService{
 			// 명칭 및 경로 조회
 			//--------------------------------------------------------------------------------------------
 			fileNm = (docCd.equals("ppt")) ? Const.MANU_PPT : (docCd.equals("word")) ? Const.MANU_WORD : Const.MANU_EXCEL;
+			saveFileNm = fileNm;
 			filePath = Const.MANU_PATH;
 
 			//--------------------------------------------------------------------------------------------
@@ -505,7 +546,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			fileDownProc(filePath, fileNm, request, response);
+			fileDownProc(filePath, fileNm, saveFileNm, request, response);
 			
 		} catch (Exception e) {
 			//
@@ -518,6 +559,7 @@ public class UtilServiceImpl implements UtilService{
 		//
 		String tempPath = "";
 		String fileNm = (String)paramMap.get("sequenceId") + ".zip";
+		String saveFileNm = fileNm;
 		fileNm = fileNm.replaceAll(" ", "");
 		//
 		try {
@@ -529,7 +571,7 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드
 			//--------------------------------------------------------------------------------------------
-			fileDownProc(tempPath, fileNm, request, response);
+			fileDownProc(tempPath, fileNm, saveFileNm, request, response);
 
 			//--------------------------------------------------------------------------------------------
 			// 임시 경로 삭제
@@ -585,7 +627,7 @@ public class UtilServiceImpl implements UtilService{
 				// 압축할 파일을 임시 경로에 생성
 				for(int i=0;i<defaultList.size();i++) {
 					//
-					File f = new File(filePath + (String)defaultList.get(i).get("fileNm"));
+					File f = new File(filePath + (String)defaultList.get(i).get("saveFileNm"));
 					fis = new FileInputStream(f); // 압축 대상 스트림 오픈
 					zos.putNextEntry(new ZipEntry(f.getName())); // 압축 리스트 추가
 					// 
@@ -629,30 +671,21 @@ public class UtilServiceImpl implements UtilService{
 		try {
 			//
 			File file = new File(path);
-			
-			// 하위 폴더가 존재하는 경우
-			if(file.isDirectory()) {
-				// 
-				File [] fs = file.listFiles();
-				// 폴더 내 파일이 존재하는 경우
-				if(fs.length>0) {
-					// 
-					for(File f:fs) {
-						//
-						if(f.isFile()) {
-							f.delete(); // 파일 삭제
-							delTempPath(f.getParent()); // 폴더 삭제
-							
-						} else {
-							// 폴더 인 경우 재귀 반복
-							delTempPath(f.getPath());
-						}
-					}
-				} else {
-					// 빈 폴더인 경우
-					file.delete();
-				}
-			}
+			//
+		    if (!file.exists())
+		        return;
+
+		    if (file.isDirectory()) {
+		        File[] children = file.listFiles();
+		        //
+		        if (children != null) {
+		            for (File child : children) {
+		                delTempPath(child.getAbsolutePath());
+		            }
+		        }
+		    }
+		    //
+		    file.delete();
 			
 		} catch (Exception e) {
 			//

@@ -137,7 +137,7 @@ function setFormData(){
 // 다운로드
 function fileProc(fileId, fileSno){
 	try {
-		formSubmit('fileDown.do?fileId='+fileId+'&fileSno='+fileSno);
+		formSubmit('intrFileProc1010.do?fileId='+fileId+'&fileSno='+fileSno);
 	
 	} catch (error) {
         console.error("[Error] 다운로드 : ", error.message);
@@ -147,7 +147,7 @@ function fileProc(fileId, fileSno){
 // 압축 다운로드
 function zipProc(){
 	try {
-		formSubmit('zipDown.do');
+		formSubmit('intrFileProc1030.do');
 	} catch (error) {
         console.error("[Error] 압축 다운로드 : ", error.message);
 	}
@@ -156,7 +156,7 @@ function zipProc(){
 // 참고문서 다운로드
 function docDown(docCd){
 	try {
-		formSubmit('docDown.do?docCd='+docCd);
+		formSubmit('intrFileProc1020.do?docCd='+docCd);
 	
 	} catch (error) {
         console.error("[Error] 참고문서 다운로드 : ", error.message);

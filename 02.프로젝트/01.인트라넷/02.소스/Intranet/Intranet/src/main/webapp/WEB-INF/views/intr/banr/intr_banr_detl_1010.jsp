@@ -211,7 +211,7 @@
 											<dd class="post_text">
 												<c:choose>
 													<c:when test="${not empty defaultInfo}">
-														<img id="banrImg" class="banr_img" width="480" height="380" src="intrBanrInqy1099.do?fileNm=${defaultInfo.fileNm}&sequenceId=${defaultInfo.banrCd}">
+														<img id="banrImg" class="banr_img" width="480" height="380" src="intrBanrInqy1099.do?fileNm=${defaultInfo.saveFileNm}&sequenceId=${defaultInfo.banrCd}">
 													</c:when>
 													<c:otherwise>
 														등록된 배너가 없습니다.													
