@@ -15,7 +15,7 @@
 	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/Aprv_Sql.xml" />
-		<mapper resource="config/mybatis/mapper/Auth_Sql.xml" />
+		<mapper resource="config/mybatis/mapper/Role_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Board_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Core_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Emp_Sql.xml" />

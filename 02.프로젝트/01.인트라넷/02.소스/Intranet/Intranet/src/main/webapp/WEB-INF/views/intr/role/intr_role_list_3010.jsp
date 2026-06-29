@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 첫번째 권한 클릭
-		$("#authTree").find("ul li:first-child").find('.a_btn').trigger('click');
+		$("#roleTree").find("ul li:first-child").find('.a_btn').trigger('click');
 	});
 	
 	$(document).on('click','.a_btn',function() {
@@ -35,12 +35,12 @@
 			
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1011.do',
+	        	url : 'intrRoleInqy1011.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
 	            	//
-	            	$("#authTree").html(data);
+	            	$("#roleTree").html(data);
 	            	$("#empArea").css("display","none");
 	            },
 	            error : function(data){
@@ -55,15 +55,15 @@
 	}
 
 	// 권한 상세보기
-	function detCall(authCd){
+	function detCall(roleCd){
 		try {
 			// 권한 코드 지정
-			$(".authCd").val(authCd);
+			$(".roleCd").val(roleCd);
 			var param = $("#form").serialize();
 			//
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy3011.do',
+	        	url : 'intrRoleInqy3011.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
@@ -101,7 +101,7 @@
 					<div class="content">
 						<div id="sub_content">					
 							<div class="form_area">
-								<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
+								<input type="hidden" id="roleCd" class="roleCd" name="roleCd" value="">
 							
 								<div class="post_wrap">
 									<h2>사용자 권한 부여</h2>
@@ -121,14 +121,14 @@
 										
 										<div class="tree_wrap">
 											<div id="treeArea" class="tree_area" style="width: 400px; height: 525px;">
-												<div id="authTree" class="tree">
+												<div id="roleTree" class="tree">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   		<c:set var="spanIcon" 	value="icon_list"/> 
 			
 															<li class="li_1" style="margin-left: 15px;">
 																<span class="${spanIcon}"></span>
-																<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+																<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 															</li>
 														</c:forEach>
 													</ul>

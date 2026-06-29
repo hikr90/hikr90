@@ -10,7 +10,7 @@
 			<label for="post-title">권한명</label>
 		</dt>
 		<dd>
-			<input type="text" id="authNm" class="authNm" title="권한명" name="authNm">
+			<input type="text" id="roleNm" class="roleNm" title="권한명" name="roleNm">
 		</dd>
 	</dl>
 	<dl>

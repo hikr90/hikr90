@@ -13,11 +13,11 @@
 	});
 	
 	// 메뉴 부여 목록 전체 체크
-	$('.authChk').click(function() {
-		if($(".authChk").is(":checked")){
-			$("input[id=authMenuCd]").prop("checked", true);
+	$('.roleChk').click(function() {
+		if($(".roleChk").is(":checked")){
+			$("input[id=roleMenuCd]").prop("checked", true);
 	    } else {
-	    	$("input[id=authMenuCd]").prop("checked", false);	
+	    	$("input[id=roleMenuCd]").prop("checked", false);	
 	    }
 	});
 	
@@ -41,11 +41,11 @@
 				var menuLv = $(this).attr("menuLv");
 				
 				// 메뉴 권한 목록 값
-				$("input[id=authMenuCd]").each(function() {
+				$("input[id=roleMenuCd]").each(function() {
 					// 중복되는 경우 중복 여부 값 변경
-					var authMenuCd = $(this).val();
+					var roleMenuCd = $(this).val();
 					//
-					if(authMenuCd==menuCd){
+					if(roleMenuCd==menuCd){
 						dupeYn = "Y";
 						return; 
 					}
@@ -59,9 +59,9 @@
 					str += "<tr>"
 					str += "	<td class='first_td'>";
 					str += "		<span class='check_box'>";
-					str += "		<input type='checkbox' class='checkbox' id='authMenuCd' value='" + menuCd + "'/>"
+					str += "		<input type='checkbox' class='checkbox' id='roleMenuCd' value='" + menuCd + "'/>"
 					str += "		<label for='chk_local'><span></span></label></span>";
-					str += "		<input type='hidden' name='authMenuCd' value='" + menuCd + "'/>"
+					str += "		<input type='hidden' name='roleMenuCd' value='" + menuCd + "'/>"
 					str += "	</td>";
 					//
 					if(menuLv!=1){
@@ -72,7 +72,7 @@
 					//
 					str += "</tr>";
 					
-					$(".authMenuTbl").append(str);
+					$(".roleMenuTbl").append(str);
 				}
 				
 				// 체크 해제
@@ -89,18 +89,18 @@
 	function delCall(){
 		try {
 			// 유효성 검증
-			if($("input[id=authMenuCd]:checked").length==0){
+			if($("input[id=roleMenuCd]:checked").length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
 			}
 			
 			// 화면 상 삭제 처리
-			$("input[id=authMenuCd]:checked").each(function() {
+			$("input[id=roleMenuCd]:checked").each(function() {
 				$(this).parents("tr").remove();
 			});
 			
 			// 권한 목록 체크 초기화
-			$(".authChk").prop("checked", false);			
+			$(".roleChk").prop("checked", false);			
 			
 		} catch (error) {
 	        console.error("[Error] 권한 목록 화면 상 제거 : ", error.message);
@@ -111,7 +111,7 @@
 	function setListCall() {
 		try {
 			//
-			$(".list_bg").trigger("click");
+			$('#roleTree .list_bg').trigger("click");
 			
 		} catch (error) {
 	        console.error("[Error] 새로고침 : ", error.message);
@@ -122,7 +122,7 @@
 	function regProc(){
 		try {
 			// 권한 메뉴 추가
-			$("input[name=authMenuCd]").each(function(idx) {
+			$("input[name=roleMenuCd]").each(function(idx) {
 				$(this).attr("name","menuCd"+idx);
 			});
 			//
@@ -132,7 +132,7 @@
 				//
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrAuthProc2010.do',
+		        	url : 'intrRoleProc2010.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -154,7 +154,7 @@
 </script>
 <div class="post_wrap" style="padding: 0px; height: 490px;">
 	<div class="scroll_wrap" style="height: 490px;">
-		<table class="post_table authMenuTbl">
+		<table class="post_table roleMenuTbl">
 			<caption>권한 목록 테이블</caption>
 			<colgroup>
 				<col class="w7per">
@@ -164,20 +164,20 @@
 				<tr>
 					<th scope="col">
 						<span class="check_box"> 
-						<input type="checkbox" class="check_box authChk"> 
+						<input type="checkbox" class="check_box roleChk"> 
 						<label for="chk-yes"><span></span></label></span>
 					</th>
 					<th scope="col">메뉴 부여</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="list" items="${authMenuList}" varStatus="status">
+				<c:forEach var="list" items="${roleMenuList}" varStatus="status">
 					<tr>
 						<td class="first_td">
 							<span class="check_box"> 
-							<input type="checkbox" class="check_box" id="authMenuCd" value="${list.menuCd}"> 
+							<input type="checkbox" class="check_box" id="roleMenuCd" value="${list.menuCd}"> 
 							<label for="chk-yes"><span></span></label></span>
-							<input type="hidden" name="authMenuCd" value="${list.menuCd}">
+							<input type="hidden" name="roleMenuCd" value="${list.menuCd}">
 						</td>
 						<td class="align_left">
 							<c:if test="${list.lv ne '1'}">

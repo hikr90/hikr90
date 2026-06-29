@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import com.intr.dao.AuthDao;
-import com.intr.svc.AuthService;
+import com.intr.dao.RoleDao;
+import com.intr.svc.RoleService;
 import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class AuthServiceImpl implements AuthService{
+public class RoleServiceImpl implements RoleService{
 	//
 	@Autowired
-	AuthDao authDao;
+	RoleDao roleDao;
 	
 	@Autowired
 	MainService mainService;
@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService{
 	@Autowired
 	UtilService utilService;
 	
-	public void authInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void roleInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao1010(paramMap);
+			defaultList = roleDao.roleInqyDao1010(paramMap);
 			model.addAttribute("defaultList", defaultList);
 
 		} catch (Exception e) {
@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 권한 상세 조회
-	public void authInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void roleInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
 		//
@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			defaultInfo = authDao.authInqyDao1020(paramMap);
+			defaultInfo = roleDao.roleInqyDao1020(paramMap);
 			model.addAttribute("defaultInfo", defaultInfo);
 			
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 메뉴 권한 목록 조회
-	public void authInqyService2010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void roleInqyService2010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -70,8 +70,8 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao2010(paramMap);
-			model.addAttribute("authMenuList", defaultList);
+			defaultList = roleDao.roleInqyDao2010(paramMap);
+			model.addAttribute("roleMenuList", defaultList);
 
 		} catch (Exception e) {
 			//
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 사용자 목록 조회
-	public void authInqyService3010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void roleInqyService3010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -88,7 +88,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao3010(paramMap);
+			defaultList = roleDao.roleInqyDao3010(paramMap);
 			model.addAttribute("empList", defaultList);
 
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 사용자 권한 목록 조회
-	public void authInqyService4010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public void roleInqyService4010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
 		//
@@ -106,8 +106,8 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao4010(paramMap);
-			model.addAttribute("authEmpList", defaultList);
+			defaultList = roleDao.roleInqyDao4010(paramMap);
+			model.addAttribute("roleEmpList", defaultList);
 
 		} catch (Exception e) {
 			//
@@ -116,7 +116,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 권한 등록 처리
-	public String authProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String roleProcService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -126,7 +126,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 등록 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.authProcDao1010(paramMap);
+			resInt = roleDao.roleProcDao1010(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -146,7 +146,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 권한 수정 처리
-	public String authProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String roleProcService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -156,7 +156,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 수정 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.authProcDao1020(paramMap);
+			resInt = roleDao.roleProcDao1020(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -176,7 +176,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 권한 삭제 처리
-	public String authProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String roleProcService1030(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -186,7 +186,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			resInt = authDao.authProcDao1030(paramMap);
+			resInt = roleDao.roleProcDao1030(paramMap);
 			//
 			if(resInt>0) {
 				resStr = "YES";
@@ -206,7 +206,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 메뉴 권한 저장 처리
-	public String authProcService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String roleProcService1040(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -217,7 +217,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			authDao.authProcDao1040(paramMap);
+			roleDao.roleProcDao1040(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 저장 처리
@@ -228,9 +228,9 @@ public class AuthServiceImpl implements AuthService{
 					//
 					tempMap = new HashMap<String, Object>();
 					tempMap.put("menuCd", (String)paramMap.get("menuCd"+i));
-					tempMap.put("authCd", (String)paramMap.get("authCd"));
+					tempMap.put("roleCd", (String)paramMap.get("roleCd"));
 					//
-					resInt += authDao.authProcDao1050(tempMap);
+					resInt += roleDao.roleProcDao1050(tempMap);
 				}
 			}
 			
@@ -253,7 +253,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	// 사용자 권한 저장 처리
-	public String authProcService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public String roleProcService1050(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		String resStr = "NO";
@@ -264,7 +264,7 @@ public class AuthServiceImpl implements AuthService{
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 삭제 처리
 			//--------------------------------------------------------------------------------------------
-			authDao.authProcDao1060(paramMap);
+			roleDao.roleProcDao1060(paramMap);
 
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 저장 처리
@@ -275,9 +275,9 @@ public class AuthServiceImpl implements AuthService{
 					//
 					tempMap = new HashMap<String, Object>();
 					tempMap.put("empIdx", (String)paramMap.get("empIdx"+i));
-					tempMap.put("authCd", (String)paramMap.get("authCd"));
+					tempMap.put("roleCd", (String)paramMap.get("roleCd"));
 					//
-					resInt += authDao.authProcDao1070(tempMap);
+					resInt += roleDao.roleProcDao1070(tempMap);
 				}
 			}
 			

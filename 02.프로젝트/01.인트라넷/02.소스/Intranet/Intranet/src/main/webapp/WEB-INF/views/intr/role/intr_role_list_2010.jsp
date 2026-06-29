@@ -26,12 +26,12 @@
 			var param = $("#form").serialize();
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1011.do',
+	        	url : 'intrRoleInqy1011.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
 	            	//
-	            	$("#authTree").html(data);
+	            	$("#roleTree").html(data);
 	            	$("#menuArea").css("display","none");
 	            },
 	            error : function(data){
@@ -46,20 +46,20 @@
 	}
 
 	// 권한 상세보기
-	function detCall(authCd){
+	function detCall(roleCd){
 		try {
 			// 권한 코드 지정
-			$(".authCd").val(authCd);
+			$(".roleCd").val(roleCd);
 			var param = $("#form").serialize();
 			
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy2011.do',
+	        	url : 'intrRoleInqy2011.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
 	     				//
-	            	    $("#authInfo").html(data);
+	            	    $("#roleInfo").html(data);
 	            	    $("#menuArea").css("display","inline-flex");
 	            },
 	            error : function(data){
@@ -93,7 +93,7 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-									<input type="hidden" id="authCd" class="authCd" name="authCd" value="">
+									<input type="hidden" id="roleCd" class="roleCd" name="roleCd" value="">
 								
 									<h2>메뉴 권한 부여</h2>
 	                                <div class="srch_wrap">
@@ -111,7 +111,7 @@
 										
 									<div class="tree_wrap">
 										<div id="tree_area" class="tree_area" style="width: 400px; height: 525px;">
-											<div id="authTree" class="tree">
+											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -119,7 +119,7 @@
 			
 														<li class="li_1" style="margin-left: 15px;">
 														<span class="${spanIcon}"></span>
-														<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+														<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 													</c:forEach>
 													</ul>
 												</c:if>
@@ -182,7 +182,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 권한 목록 -->
-											<div id="authInfo" class="tree_info" style="width: 550px; height: 525px;"></div>
+											<div id="roleInfo" class="tree_info" style="width: 550px; height: 525px;"></div>
 										</div> <!-- End menu_area -->
 									</div>
 								</div><!-- End post_wrap -->

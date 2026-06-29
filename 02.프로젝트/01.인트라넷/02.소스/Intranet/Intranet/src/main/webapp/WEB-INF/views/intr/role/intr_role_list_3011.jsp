@@ -6,9 +6,9 @@
 	// 사용자 권한 목록 전체 체크
 	$('.empChk').click(function() {
 		if($(".empChk").is(":checked")){
-			$("input[id=authEmpIdx]").prop("checked", true);
+			$("input[id=roleEmpIdx]").prop("checked", true);
 	    } else {
-	    	$("input[id=authEmpIdx]").prop("checked", false);	
+	    	$("input[id=roleEmpIdx]").prop("checked", false);	
 	    }
 	});
 	
@@ -31,11 +31,11 @@
 				var orgNm = $(this).attr("orgNm");
 				
 				// 사용자 권한 목록 값
-				$("input[id=authEmpIdx]").each(function() {
+				$("input[id=roleEmpIdx]").each(function() {
 					// 중복되는 경우 중복 여부 값 변경
-					var authEmpIdx = $(this).val();
+					var roleEmpIdx = $(this).val();
 					//
-					if(authEmpIdx==empIdx){
+					if(roleEmpIdx==empIdx){
 						//
 						dupeYn = "Y";
 						return; 
@@ -50,15 +50,15 @@
 					str += "<tr>"
 					str += "	<td class='first_td'>";
 					str += "		<span class='check_box'>";
-					str += "		<input type='checkbox' class='checkbox' id='authEmpIdx' value='" + empIdx + "'/>"
+					str += "		<input type='checkbox' class='checkbox' id='roleEmpIdx' value='" + empIdx + "'/>"
 					str += "		<label for='chk_local'><span></span></label></span>";
-					str += "		<input type='hidden' name='authEmpIdx' value='" + empIdx + "'/>"
+					str += "		<input type='hidden' name='roleEmpIdx' value='" + empIdx + "'/>"
 					str += "	</td>";
 					str += "	<td>" + orgNm + "</td>";
 					str += "	<td>" + empNm + "</td>";
 					str += "</tr>";
 					
-					$(".authEmpTbl").append(str);
+					$(".roleEmpTbl").append(str);
 				}
 				
 				// 체크 해제
@@ -76,13 +76,13 @@
 	function delCall(){
 		try {
 			// 유효성 검증
-			if($("input[id=authEmpIdx]:checked").length==0){
+			if($("input[id=roleEmpIdx]:checked").length==0){
 				alert("<spring:message code="CHECK.NONE"/>");
 				return;
 			}
 			
 			// 화면 상 삭제 처리
-			$("input[id=authEmpIdx]:checked").each(function() {
+			$("input[id=roleEmpIdx]:checked").each(function() {
 				$(this).parents("tr").remove();
 			});
 			
@@ -98,7 +98,7 @@
 	function setListCall() {
 		try {
 			//
-			$(".list_bg").trigger("click");
+			$('#roleTree .list_bg').trigger("click");
 			
 		} catch (error) {
 	        console.error("[Error] 새로고침 : ", error.message);
@@ -109,10 +109,10 @@
 	function regProc(){
 		try {
 			// 권한 코드 지정
-			$("#authCd").val($("#authTree .list_bg").attr('id'));
+			$("#roleCd").val($("#roleTree .list_bg").attr('id'));
 			
 			// 권한 사용자 지정
-			$("input[name=authEmpIdx]").each(function(idx) {
+			$("input[name=roleEmpIdx]").each(function(idx) {
 				$(this).attr("name","empIdx"+idx);
 			});
 			//
@@ -121,7 +121,7 @@
 				//
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrAuthProc3010.do',
+		        	url : 'intrRoleProc3010.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -143,10 +143,10 @@
 </script>
 
 <div class="post_wrap" style="height: auto; padding: 0px;">
-	<input type="hidden" id="authCd" name="authCd" value="">
+	<input type="hidden" id="roleCd" name="roleCd" value="">
 	
 	<div class="scroll_wrap" style="max-height: 480px; height: auto;">
-		<table class="post_table authEmpTbl">
+		<table class="post_table roleEmpTbl">
 			<caption>사용자 목록 테이블</caption>
 			<colgroup>
 				<col class="w7per">
@@ -165,13 +165,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="list" items="${authEmpList}" varStatus="status">
+				<c:forEach var="list" items="${roleEmpList}" varStatus="status">
 					<tr>
 						<td class="first_td">
 							<span class="check_box"> 
-							<input type="checkbox" class="check_box" id="authEmpIdx" value="${list.empIdx}"> 
+							<input type="checkbox" class="check_box" id="roleEmpIdx" value="${list.empIdx}"> 
 							<label for="chk-yes"><span></span></label></span>
-							<input type="hidden" name="authEmpIdx" value="${list.empIdx}">
+							<input type="hidden" name="roleEmpIdx" value="${list.empIdx}">
 						</td>
 						<td>${list.orgNm}</td>
 						<td>${list.empNm}</td>

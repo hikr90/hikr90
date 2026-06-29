@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
-import com.intr.dao.AuthDao;
+import com.intr.dao.RoleDao;
 import com.intr.dao.EmpDao;
 import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
@@ -28,7 +28,7 @@ import com.intr.utils.Const;
 public class PopupController {
 	//
 	@Autowired
-	AuthDao authDao;
+	RoleDao roleDao;
 	
 	@Autowired
 	UtilDao utilDao;
@@ -63,7 +63,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 담당자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao3010(paramMap);
+			defaultList = roleDao.roleInqyDao3010(paramMap);
 			model.addAttribute("empList", defaultList);
 			
 		} catch (Exception e) {

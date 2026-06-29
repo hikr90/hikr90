@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.dao.AprvDao;
-import com.intr.dao.AuthDao;
+import com.intr.dao.RoleDao;
 import com.intr.dao.BanrDao;
 import com.intr.dao.BoardDao;
 import com.intr.dao.EmpDao;
@@ -28,7 +28,7 @@ import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
 import com.intr.dao.TaskDao;
 import com.intr.svc.AprvService;
-import com.intr.svc.AuthService;
+import com.intr.svc.RoleService;
 import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
@@ -58,7 +58,7 @@ public class MainController {
 	TempService tempService;
 
 	@Autowired
-	AuthService authService;
+	RoleService roleService;
 	
 	@Autowired
 	UtilService utilService;
@@ -85,7 +85,7 @@ public class MainController {
 	BanrDao banrDao;
 	
 	@Autowired
-	AuthDao authDao;
+	RoleDao roleDao;
 	
 	@Autowired
 	TaskDao taskDao;
@@ -221,8 +221,8 @@ public class MainController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 부여 현황
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao5010(model);
-			model.addAttribute("authList", defaultList);
+			defaultList = roleDao.roleInqyDao5010(model);
+			model.addAttribute("roleList", defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 입사 현황

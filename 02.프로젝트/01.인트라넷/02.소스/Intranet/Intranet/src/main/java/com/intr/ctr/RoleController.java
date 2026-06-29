@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.intr.svc.AuthService;
+import com.intr.svc.RoleService;
 import com.intr.svc.CoreService;
 import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
-public class AuthController {
+public class RoleController {
 	//
 	@Autowired
 	CoreService coreService;
@@ -26,14 +26,14 @@ public class AuthController {
 	UtilService utilService;
 
 	@Autowired
-	AuthService authService;
+	RoleService roleService;
 
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	// 권한 목록 조회
-	@RequestMapping("/intrAuthInqy1010.do")
-	public String intrAuthInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy1010.do")
+	public String intrRoleInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -44,19 +44,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1010(model, paramMap);
+			roleService.roleInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_1010;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_1010;
 	}
 
 	// 권한 트리 목록 화면
-	@RequestMapping("/intrAuthInqy1011.do")
-	public String intrAuthInqy1011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy1011.do")
+	public String intrRoleInqy1011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -67,19 +67,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1010(model, paramMap);
+			roleService.roleInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_1011;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_1011;
 	}
 	
 	// 권한 등록 화면
-	@RequestMapping("/intrAuthInqy1020.do")
-	public String intrAuthInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy1020.do")
+	public String intrRoleInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -92,12 +92,12 @@ public class AuthController {
 			logger.debug("Exception : 권한 등록 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1020;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_DETL_1020;
 	}
 	
 	// 권한 상세 화면
-	@RequestMapping("/intrAuthInqy1030.do")
-	public String intrAuthInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy1030.do")
+	public String intrRoleInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -108,19 +108,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1020(model, paramMap);
+			roleService.roleInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 권한 상세 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1010;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_DETL_1010;
 	}
 	
 	// 권한 수정 화면
-	@RequestMapping("/intrAuthInqy1040.do")
-	public String intrAuthInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy1040.do")
+	public String intrRoleInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -131,19 +131,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 상세 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1020(model, paramMap);
+			roleService.roleInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 권한 수정 화면 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_DETL_1030;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_DETL_1030;
 	}
 	
 	// 권한 목록 조회
-	@RequestMapping("/intrAuthInqy2010.do")
-	public String intrAuthInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy2010.do")
+	public String intrRoleInqy2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1010(model, paramMap);
+			roleService.roleInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 목록 조회
@@ -166,12 +166,12 @@ public class AuthController {
 			logger.debug("Exception : 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_2010;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_2010;
 	}
 	
 	// 메뉴 권한 목록 조회
-	@RequestMapping("/intrAuthInqy2011.do")
-	public String intrAuthInqy2011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy2011.do")
+	public String intrRoleInqy2011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -182,19 +182,19 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService2010(model, paramMap);
+			roleService.roleInqyService2010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 메뉴 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_2011;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_2011;
 	}
 	
 	// 사용자 권한 목록 조회
-	@RequestMapping("/intrAuthInqy3010.do")
-	public String intrAuthInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy3010.do")
+	public String intrRoleInqy3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -205,24 +205,24 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1010(model, paramMap);
+			roleService.roleInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사용자 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService3010(model, paramMap);
+			roleService.roleInqyService3010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 권한 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_3010;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_3010;
 	}
 	
 	// 사용자 권한 트리 목록 화면
-	@RequestMapping("/intrAuthInqy3011.do")
-	public String intrAuthInqy3011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	@RequestMapping("/intrRoleInqy3011.do")
+	public String intrRoleInqy3011(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -233,25 +233,25 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService1010(model, paramMap);
+			roleService.roleInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 목록 조회
 			//--------------------------------------------------------------------------------------------
-			authService.authInqyService4010(model, paramMap);
+			roleService.roleInqyService4010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
 			logger.debug("Exception : 사용자 권한 트리 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_AUTH + Const.INTR_AUTH_LIST_3011;
+		return Const.VIEW_PATH_ROLE + Const.INTR_ROLE_LIST_3011;
 	}
 	
 	// 권한 등록 처리
-	@RequestMapping("/intrAuthProc1010.do")
+	@RequestMapping("/intrRoleProc1010.do")
 	@ResponseBody
-	public String intrAuthProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrRoleProc1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -259,7 +259,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 등록
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.authProcService1010(model, paramMap);
+			defaultStr = roleService.roleProcService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -271,9 +271,9 @@ public class AuthController {
 	
 	
 	// 권한 수정 처리
-	@RequestMapping("/intrAuthProc1020.do")
+	@RequestMapping("/intrRoleProc1020.do")
 	@ResponseBody
-	public String intrAuthProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrRoleProc1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -281,7 +281,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 수정 처리
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.authProcService1020(model, paramMap);
+			defaultStr = roleService.roleProcService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -292,9 +292,9 @@ public class AuthController {
 	}
 
 	// 권한 삭제 처리
-	@RequestMapping("/intrAuthProc1030.do")
+	@RequestMapping("/intrRoleProc1030.do")
 	@ResponseBody
-	public String intrAuthProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrRoleProc1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -302,7 +302,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 권한 삭제
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.authProcService1030(model, paramMap);
+			defaultStr = roleService.roleProcService1030(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -313,9 +313,9 @@ public class AuthController {
 	}
 	
 	// 메뉴 권한 저장 처리
-	@RequestMapping("/intrAuthProc2010.do")
+	@RequestMapping("/intrRoleProc2010.do")
 	@ResponseBody
-	public String intrAuthProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrRoleProc2010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -323,7 +323,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 권한 저장
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.authProcService1040(model, paramMap);
+			defaultStr = roleService.roleProcService1040(model, paramMap);
 			
 		} catch (Exception e) {
 			//
@@ -334,9 +334,9 @@ public class AuthController {
 	}
 	
 	// 사용자 권한 저장 처리
-	@RequestMapping("/intrAuthProc3010.do")
+	@RequestMapping("/intrRoleProc3010.do")
 	@ResponseBody
-	public String intrAuthProc3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrRoleProc3010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		String defaultStr = "";
 		//
@@ -344,7 +344,7 @@ public class AuthController {
 			//--------------------------------------------------------------------------------------------
 			// 사용자 권한 저장
 			//--------------------------------------------------------------------------------------------
-			defaultStr = authService.authProcService1050(model, paramMap);
+			defaultStr = roleService.roleProcService1050(model, paramMap);
 			
 		} catch (Exception e) {
 			//

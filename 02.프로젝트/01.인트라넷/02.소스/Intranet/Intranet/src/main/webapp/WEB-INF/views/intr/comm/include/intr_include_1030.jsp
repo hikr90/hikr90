@@ -13,7 +13,7 @@
 					<li>
 						<a href="javascript:void(0);" onclick="userCall();"><img src='resources/images/icon/icon_user.png' width="35" height="35" title="사용자 이동" /></a>
 					</li>
-					<c:if test="${empVO.authYn eq 'Y'}">
+					<c:if test="${empVO.roleYn eq 'Y'}">
 						<li>
 							<a href="javascript:void(0);" onclick="adminCall();"><img src='resources/images/icon/icon_admin.png' width="35" height="35" title="관리자 이동" /></a>
 						</li>

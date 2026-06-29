@@ -19,9 +19,9 @@
 			,	E.EMP_PWD
 			,	E.HIRE_DT
 			,	E.LEAV_DT
-         	,   CASE WHEN EA.AUTH_CD IS NOT NULL
+         	,   CASE WHEN EA.ROLE_CD IS NOT NULL
                     THEN 'Y' 
-                    ELSE 'N' END AS AUTH_YN
+                    ELSE 'N' END AS ROLE_YN
 		FROM EMP_INFO E
 		LEFT OUTER JOIN ORG O
 			ON O.ORG_CD = E.ORG_CD
@@ -29,9 +29,9 @@
 		LEFT OUTER JOIN RANK R
 			ON R.RANK_CD = E.RANK_CD
 			AND R.USE_YN = 'Y'
-        LEFT OUTER JOIN EMP_AUTH EA
+        LEFT OUTER JOIN EMP_ROLE EA
             ON EA.EMP_IDX = E.EMP_IDX
-            AND EA.AUTH_CD = 'AUTH_0001'
+            AND EA.ROLE_CD = 'ROLE_0001'
 		WHERE UPPER(EMP_ID) = UPPER(#{empId, jdbcType=VARCHAR})
 	</select>
 </mapper>

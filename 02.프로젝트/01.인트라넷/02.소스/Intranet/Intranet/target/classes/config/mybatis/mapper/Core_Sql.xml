@@ -11,14 +11,14 @@
 							(
 								SELECT 
 										DISTINCT MA.MENU_CD
-								FROM AUTH A
+								FROM ROLE A
 								INNER JOIN EMP_INFO E
 									ON E.EMP_IDX = #{idxSet, jdbcType=VARCHAR}
 									AND A.USE_YN = 'Y'
-                                INNER JOIN EMP_AUTH EA
+                                INNER JOIN EMP_ROLE EA
                                     ON EA.EMP_IDX = E.EMP_IDX
-                                INNER JOIN MENU_AUTH MA
-                                    ON MA.AUTH_CD = EA.AUTH_CD
+                                INNER JOIN MENU_ROLE MA
+                                    ON MA.ROLE_CD = EA.ROLE_CD
                                 GROUP BY MA.MENU_CD
 							) DATA
 				WHERE 1=1

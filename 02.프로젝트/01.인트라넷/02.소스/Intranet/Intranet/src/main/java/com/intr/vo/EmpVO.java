@@ -7,7 +7,7 @@ public class EmpVO {
 	private String empIdx, empNm, empId, empPwd,
 					orgCd, orgNm, rankCd, rankNm,
 					isMale, mobNo, email, addr, addrInfo,
-					isHead, isAuth, hireDt, leavDt, authYn;
+					isHead, isRole, hireDt, leavDt, roleYn;
 
 	public String getEmpIdx() {
 		return empIdx;
@@ -65,8 +65,8 @@ public class EmpVO {
 		return isHead;
 	}
 
-	public String getIsAuth() {
-		return isAuth;
+	public String getIsRole() {
+		return isRole;
 	}
 
 	public String getHireDt() {
@@ -77,7 +77,7 @@ public class EmpVO {
 		return leavDt;
 	}
 
-	public String getAuthYn() {
-		return authYn;
+	public String getRoleYn() {
+		return roleYn;
 	}
 }

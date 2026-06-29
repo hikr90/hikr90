@@ -93,7 +93,7 @@
                     <input type="button" class="btn_find" value="아이디/비밀번호 찾기" onclick="popCall();">
 				</div>
 					
-				<div class="auth_area">
+				<div class="role_area">
 					<div class="post_table_wrap scroll_wrap">
 						<table class="post_table">
 							<caption>로그인 권한 목록 조회</caption>
@@ -110,12 +110,12 @@
 							<tbody>
                                 <c:if test="${not empty defaultList}">
                                 <c:forEach var="list1" items="${defaultList}" varStatus="status1">
-									<c:if test="${list1.authCd ne defaultList[status1.index + 1].authCd}">
+									<c:if test="${list1.roleCd ne defaultList[status1.index + 1].roleCd}">
 										<tr>
-											<td class="align_center">${list1.authNm}</td>
+											<td class="align_center">${list1.roleNm}</td>
 											<td class="title align_left">
 												<c:forEach var="list2" items="${defaultList}" varStatus="status2">
-													<c:if test="${list1.authCd eq list2.authCd}">
+													<c:if test="${list1.roleCd eq list2.roleCd}">
 														<a href="javascript:setInfo('${list2.empId}','${list2.decpwd}');" style="color: #214b97;">${list2.empNm}</a>
 														&nbsp;
 													</c:if>

@@ -8,7 +8,7 @@
 	//
 	$(document).ready(function() {
 		// 첫번째 권한 클릭
-		$("#authTree").find("ul li:first-child").find('.a_btn').trigger('click');
+		$("#roleTree").find("ul li:first-child").find('.a_btn').trigger('click');
 	});
 	
 	// 선택 항목 음영 처리
@@ -28,7 +28,7 @@
 			
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1011.do',
+	        	url : 'intrRoleInqy1011.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
@@ -53,7 +53,7 @@
 			//
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1020.do',
+	        	url : 'intrRoleInqy1020.do',
 	            data : null,
 	            dataType : 'html',
 	            success : function(data){
@@ -85,7 +85,7 @@
 				//		
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrAuthProc1010.do',
+		        	url : 'intrRoleProc1010.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -109,15 +109,15 @@
 	}
 	
 	// 권한 상세보기
-	function detCall(authCd){
+	function detCall(roleCd){
 		try {
 			// 권한 코드 지정
-			$("#authCd").val(authCd);
+			$("#roleCd").val(roleCd);
 			// 권한 재 상세 조회
 			var param = $("#form").serialize();
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1030.do',
+	        	url : 'intrRoleInqy1030.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
@@ -143,7 +143,7 @@
 			
 			$.ajax({
 	    		type : 'post',
-	        	url : 'intrAuthInqy1040.do',
+	        	url : 'intrRoleInqy1040.do',
 	            data : param,
 	            dataType : 'html',
 	            success : function(data){
@@ -172,7 +172,7 @@
 				//		
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrAuthProc1020.do',
+		        	url : 'intrRoleProc1020.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -206,7 +206,7 @@
 				//		
 				$.ajax({
 		    		type : 'post',
-		        	url : 'intrAuthProc1030.do',
+		        	url : 'intrRoleProc1030.do',
 		            data : param,
 		            dataType : 'html',
 		            success : function(data){
@@ -249,7 +249,7 @@
 						<div id="sub_content">					
 							<div class="form_area">
 								<div class="post_wrap">
-								<input type="hidden" id="authCd" name="authCd" value="0">
+								<input type="hidden" id="roleCd" name="roleCd" value="0">
 								<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
 									<h2>권한 관리
@@ -273,7 +273,7 @@
 									
 									<div class="tree_wrap">
 										<div class="tree_area" id="tree_area" style="width: 400px; height: 525px;"> 
-											<div id="authTree" class="tree">
+											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -281,7 +281,7 @@
 				
 															<li class="li_1" style="margin-left: 15px;">
 															<span class="${spanIcon}"></span>
-															<a class="a_btn" id="${list.authCd}" href="#" onclick="detCall('${list.authCd}');">${list.authNm}</a>
+															<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 														</c:forEach>
 													</ul>
 												</c:if>

@@ -8,8 +8,8 @@
 			<label for="post-title">권한명</label>
 		</dt>
 		<dd>
-			<input type="text" id="authNm" title="권한명" name="authNm" value="${defaultInfo.authNm}">
-			<input type="hidden" class="authCd" id="authCd" name="authCd" value="${defaultInfo.authCd}">
+			<input type="text" id="roleNm" title="권한명" name="roleNm" value="${defaultInfo.roleNm}">
+			<input type="hidden" class="roleCd" id="roleCd" name="roleCd" value="${defaultInfo.roleCd}">
 		</dd>
 	</dl>
 	<dl>
@@ -40,5 +40,5 @@
 
 <div class="btn_center align_right">
 	<button type="button" class="btn_navy_thin" onclick="modProc(this.form);">수정완료</button>	
-	<button type="button" class="btn_gray_thin" onclick="detCall('${defaultInfo.authCd}');">취소</button>
+	<button type="button" class="btn_gray_thin" onclick="detCall('${defaultInfo.roleCd}');">취소</button>
 </div>

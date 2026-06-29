@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import com.intr.dao.AuthDao;
+import com.intr.dao.RoleDao;
 import com.intr.dao.MainDao;
 import com.intr.svc.MainService;
 import com.intr.svc.UtilService;
@@ -31,7 +31,7 @@ public class MainServiceImpl implements MainService{
 	MainDao mainDao;
 	
 	@Autowired
-	AuthDao authDao;
+	RoleDao roleDao;
 	
 	@Autowired
 	UtilService utilService;
@@ -45,7 +45,7 @@ public class MainServiceImpl implements MainService{
 			//--------------------------------------------------------------------------------------------
 			// 로그인 권한 사용자 조회
 			//--------------------------------------------------------------------------------------------
-			defaultList = authDao.authInqyDao5010(model);
+			defaultList = roleDao.roleInqyDao5010(model);
 			//
 			if(defaultList != null) {
 				for(int i=0;i<defaultList.size();i++) {

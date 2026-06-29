@@ -214,7 +214,7 @@
 		                                        <input type="hidden" title="아이디" name="empId" value="${defaultInfo.empId}">
 		                                    </dd>
 		                                    <dt><label>관리자 여부</label></dt>
-		                                    <dd class="sel_2part">${empVO.authYn}</dd>
+		                                    <dd class="sel_2part">${empVO.roleYn}</dd>
 		                             	</dl>
 									</div><!-- End post_write -->
 		                              

@@ -10,7 +10,7 @@
 			<label for="post-title">권한명</label>
 		</dt>
 		<dd>
-			${defaultInfo.authNm} 
+			${defaultInfo.roleNm} 
 		</dd>
 	</dl>
 	<dl>

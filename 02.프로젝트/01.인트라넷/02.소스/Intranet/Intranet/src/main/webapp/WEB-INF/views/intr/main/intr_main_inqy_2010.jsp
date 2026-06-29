@@ -77,7 +77,7 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_warn.png' width="20" height="20"/>
 							    			권한 부여 현황
-							    		</h3><a href="intrAuthInqy3010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrRoleInqy3010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
 									</div>
 
 									<div class="area_content">
@@ -95,14 +95,14 @@
 													</tr>
 												</thead>
 												<tbody>
-					                                <c:if test="${not empty authList}">
-						                                <c:forEach var="list1" items="${authList}" varStatus="status1">
-															<c:if test="${list1.authCd ne authList[status1.index + 1].authCd}">
+					                                <c:if test="${not empty roleList}">
+						                                <c:forEach var="list1" items="${roleList}" varStatus="status1">
+															<c:if test="${list1.roleCd ne roleList[status1.index + 1].roleCd}">
 																<tr>
-																	<td class="align_center">${list1.authNm}</td>
+																	<td class="align_center">${list1.roleNm}</td>
 																	<td class="title align_left">
-																		<c:forEach var="list2" items="${authList}" varStatus="status2">
-																			<c:if test="${list1.authCd eq list2.authCd}">
+																		<c:forEach var="list2" items="${roleList}" varStatus="status2">
+																			<c:if test="${list1.roleCd eq list2.roleCd}">
 																				<span style="color: #214b97;">${list2.empNm}</span>
 																				&nbsp;
 																			</c:if>
@@ -112,7 +112,7 @@
 					                                		</c:if>
 					                                	</c:forEach>
 													</c:if>
-													<c:if test="${empty authList}">
+													<c:if test="${empty roleList}">
 														<tr>
 															<td class="text_center" colspan="2">권한 소유자가 없습니다.</td>
 														</tr>

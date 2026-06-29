@@ -55,7 +55,7 @@ public class Const {
 	public static final String VIEW_PATH_TASK 			= INTR_PATH + "/task/"; 				// 업무
 	public static final String VIEW_PATH_EMP 			= INTR_PATH + "/emp/";	 				// 사원
 	public static final String VIEW_PATH_TEMP 			= INTR_PATH + "/temp/";	 			// 기안문 양식
-	public static final String VIEW_PATH_AUTH 		= INTR_PATH + "/auth/";	 			// 권한
+	public static final String VIEW_PATH_ROLE 			= INTR_PATH + "/role/";	 				// 권한
 	public static final String VIEW_PATH_APRV 			= INTR_PATH + "/aprv/";	 			// 결재
 	public static final String VIEW_PATH_QUERY 		= INTR_PATH + "/query/";	 			// 쿼리
 	public static final String VIEW_PATH_PROJ 			= INTR_PATH + "/project/"; 			// 프로젝트
@@ -184,18 +184,18 @@ public class Const {
 	//--------------------------------------------------------------------------------------------
 	// 권한
 	//--------------------------------------------------------------------------------------------
-	public static final String INTR_AUTH_LIST_1010 = "intr_auth_list_1010.jsp"; 			// 권한 목록 (권한)
-	public static final String INTR_AUTH_LIST_1011 = "intr_auth_list_1011.jsp"; 			// 권한 목록 
+	public static final String INTR_ROLE_LIST_1010 = "intr_role_list_1010.jsp"; 			// 권한 목록 (권한)
+	public static final String INTR_ROLE_LIST_1011 = "intr_role_list_1011.jsp"; 			// 권한 목록 
 
-	public static final String INTR_AUTH_DETL_1010 = "intr_auth_detl_1010.jsp";			// 권한 상세
-	public static final String INTR_AUTH_DETL_1020 = "intr_auth_detl_1020.jsp";		// 권한 등록
-	public static final String INTR_AUTH_DETL_1030 = "intr_auth_detl_1030.jsp";		// 권한 수정
+	public static final String INTR_ROLE_DETL_1010 = "intr_role_detl_1010.jsp";			// 권한 상세
+	public static final String INTR_ROLE_DETL_1020 = "intr_role_detl_1020.jsp";			// 권한 등록
+	public static final String INTR_ROLE_DETL_1030 = "intr_role_detl_1030.jsp";			// 권한 수정
 
-	public static final String INTR_AUTH_LIST_2010 = "intr_auth_list_2010.jsp"; 			// 권한 목록 (메뉴 권한)
-	public static final String INTR_AUTH_LIST_2011 = "intr_auth_list_2011.jsp"; 			// 권한 목록
+	public static final String INTR_ROLE_LIST_2010 = "intr_role_list_2010.jsp"; 			// 권한 목록 (메뉴 권한)
+	public static final String INTR_ROLE_LIST_2011 = "intr_role_list_2011.jsp"; 			// 권한 목록
 	
-	public static final String INTR_AUTH_LIST_3010 = "intr_auth_list_3010.jsp"; 			// 권한 목록 (사용자 권한)
-	public static final String INTR_AUTH_LIST_3011 = "intr_auth_list_3011.jsp"; 			// 권한 목록
+	public static final String INTR_ROLE_LIST_3010 = "intr_role_list_3010.jsp"; 			// 권한 목록 (사용자 권한)
+	public static final String INTR_ROLE_LIST_3011 = "intr_role_list_3011.jsp"; 			// 권한 목록
 
 	//--------------------------------------------------------------------------------------------
 	// 결재
