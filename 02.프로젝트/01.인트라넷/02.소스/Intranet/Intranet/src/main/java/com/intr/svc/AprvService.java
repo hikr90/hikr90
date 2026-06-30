@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public interface AprvService {
 	// 결재
 	void aprvInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception;		// 기안 목록
-	String aprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 기안 등록 양식
+	HashMap<String, Object> aprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception;	// 기안 등록 양식
 	//
 	void aprvInqyService2010(Model model, HashMap<String, Object> paramMap) throws Exception;		// 결재 목록
 	void aprvInqyService2020(Model model, HashMap<String, Object> paramMap) throws Exception;		// 결재 상세

@@ -82,7 +82,7 @@ function lineReg(){
 		if(!valProc()){return;};
 
 		// 물품 등록 검증
-		if($('#temptypeCd').val() == 'Item'){
+		if($('#temptypeCd').val() == 'ITEM'){
 			if(Array.isArray(itemlineList) && itemlineList.length === 0){
 				alert("물품이 등록되지 않았습니다.");
 				return;
@@ -90,7 +90,7 @@ function lineReg(){
 		}
 			
 		// 정산 내역 검증
-		if($('#temptypeCd').val() == 'Corp'){
+		if($('#temptypeCd').val() == 'CORP'){
 			if(Array.isArray(corplineList) && corplineList.length === 0){
 				alert("정산내역이 등록되지 않았습니다.");
 				return;

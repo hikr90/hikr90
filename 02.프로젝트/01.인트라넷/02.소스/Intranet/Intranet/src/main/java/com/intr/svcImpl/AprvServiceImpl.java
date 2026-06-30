@@ -22,7 +22,6 @@ import com.intr.dao.TempDao;
 import com.intr.dao.UtilDao;
 import com.intr.svc.AprvService;
 import com.intr.svc.UtilService;
-import com.intr.utils.AprvView;
 import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
 
@@ -66,11 +65,10 @@ public class AprvServiceImpl implements AprvService{
 	}
 	
 	// 기안 등록 양식 조회
-	public String aprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
+	public HashMap<String, Object> aprvInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		HashMap<String, Object> defaultInfo = null;
-		String temptypeCd = utilService.nvlProc((String)paramMap.get("temptypeCd"));
-		String returnUrl = "";
+		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -80,29 +78,32 @@ public class AprvServiceImpl implements AprvService{
 			model.addAttribute("tempInfo", defaultInfo);
 			
 			//--------------------------------------------------------------------------------------------
-			// ENUM 조회
+			// 공통코드 (휴가 타입) 조회
 			//--------------------------------------------------------------------------------------------
-	        AprvView av = AprvView.findCode(temptypeCd);
-			//
-	        if (av != null) {
-	            // 해당 양식에 필요한 공통코드가 있는 경우 조회
-	            if (av.getTemptypeCd() != null && av.getModelNm() != null) {
-	            	//
-	                paramMap.put("commcodeGcd", av.getTemptypeCd());
-	                List<HashMap<String, Object>> codeList = utilDao.codeInqyDao1010(paramMap);
-	                returnUrl = av.getViewNm(); 
-	                //
-	                model.addAttribute("returnUrl", returnUrl);
-	                model.addAttribute(av.getModelNm(), codeList);
-	            }
-	        }
+			paramMap.put("commcodeGcd", 	"LEAV");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("leavList",defaultList);
+
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (반출 구분) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"REQ");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("reqList",defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (지급 방법) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"PAY");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("prepayList",defaultList);
 			
 		} catch (Exception e) {
 			//
 			throw new Exception(e.getMessage());
 		}
 		//
-		return returnUrl;
+		return defaultInfo;
 	}
 	
 	// 결재 목록 조회
@@ -159,6 +160,27 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			defaultInfo = aprvDao.aprvInqyDao2010(paramMap);
 			model.addAttribute("aprvInfo", defaultInfo);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (휴가 타입) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"LEAV");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("leavList",defaultList);
+
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (반출 구분) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"REQ");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("reqList",defaultList);
+			
+			//--------------------------------------------------------------------------------------------
+			// 공통코드 (지급 방법) 조회
+			//--------------------------------------------------------------------------------------------
+			paramMap.put("commcodeGcd", 	"PAY");
+			defaultList = utilDao.codeInqyDao1010(paramMap);
+			model.addAttribute("prepayList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보
@@ -368,17 +390,17 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 양식 유형 처리
 			//--------------------------------------------------------------------------------------------
-			if(temptypeCd.equals("Leav")) {
+			if(temptypeCd.equals("LEAV")) {
 				// 휴가 신청서 등록 (APRV_REL_LEAV)
 				aprvDao.aprvProcDao1040(paramMap);
 			}
 			
-			else if(temptypeCd.equals("Exp")) {
+			else if(temptypeCd.equals("EXP")) {
 				// 가지급결의서 등록 (APRV_REL_EXP)
 				aprvDao.aprvProcDao1050(paramMap);
 			}
 
-			else if(temptypeCd.equals("Item")) {
+			else if(temptypeCd.equals("ITEM")) {
 				// 물품반출입 신청서 등록 (APRV_REL_ITEM)
 				jStr = (String)paramMap.get("itemlineList");
 				jParser = new JSONParser();
@@ -390,9 +412,9 @@ public class AprvServiceImpl implements AprvService{
 					//
 					tempMap = new HashMap<String, Object>();
 					tempMap.put("sequenceId", 	(String)paramMap.get("sequenceId"));
-					tempMap.put("reqtypeCd", 	utilService.nvlProc((String)jObj.get("reqtypeCd")));
+					tempMap.put("reqtypeCd", 	utilService.nvlProc((String)paramMap.get("reqtypeCd")));
+					tempMap.put("reqDt", 			utilService.nvlProc((String)paramMap.get("reqDt")));
 					tempMap.put("empIdx", 		utilService.nvlProc((String)jObj.get("empIdx")));
-					tempMap.put("reqDt", 			utilService.nvlProc((String)jObj.get("reqDt")));
 					tempMap.put("reqRsn", 			utilService.nvlProc((String)jObj.get("reqRsn")));
 					tempMap.put("mgtNo", 			utilService.nvlProc((String)jObj.get("mgtNo")));
 					tempMap.put("itemNm", 		utilService.nvlProc((String)jObj.get("itemNm")));
@@ -402,7 +424,7 @@ public class AprvServiceImpl implements AprvService{
 				}
 			}
 			
-			else if(temptypeCd.equals("Corp")) {
+			else if(temptypeCd.equals("CORP")) {
 				// 법인카드 정산서 등록 (APRV_REL_CORP)
 				jStr = (String)paramMap.get("corplineList");
 				jParser = new JSONParser();

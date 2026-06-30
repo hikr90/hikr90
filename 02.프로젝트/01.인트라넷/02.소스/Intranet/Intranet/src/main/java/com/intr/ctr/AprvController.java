@@ -40,11 +40,9 @@ public class AprvController {
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	// 기안 작성 조회
+	// 기안 양식 목록 조회
 	@RequestMapping("/intrAprvInqy1010.do")
 	public String intrAprvInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		// 기안문 양식 뷰 처리
-		paramMap.put("isView", "Y");
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -53,23 +51,21 @@ public class AprvController {
 			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 기안 작성 (양식 목록) 조회
+			// 기안 양식 목록 조회
 			//--------------------------------------------------------------------------------------------
 			tempService.tempInqyService1010(model, paramMap);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 기안 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 기안 양식 목록 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}	
 		//
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_1010;
 	}
 	
-	// 기안 작성 상세 조회
+	// 기안 작성 조회 (LEAV)
 	@RequestMapping("/intrAprvInqy1020.do")
 	public String intrAprvInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		// 선택 양식 URL
-		String returnUrl = "";
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -78,16 +74,85 @@ public class AprvController {
 			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 기안 작성 상세 조회
+			// 기안 작성 조회 (LEAV)
 			//--------------------------------------------------------------------------------------------
-			returnUrl = aprvService.aprvInqyService1020(model, paramMap);
+			aprvService.aprvInqyService1020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 기안 작성 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 기안 작성 조회 (LEAV) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_APRV + returnUrl;
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1010;
+	}
+	
+	// 기안 작성 조회 (EXP)
+	@RequestMapping("/intrAprvInqy1021.do")
+	public String intrAprvInqy1021(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 작성 조회 (EXP)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService1020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 작성 조회 (EXP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1011;
+	}
+	
+	// 기안 작성 조회 (ITEM)
+	@RequestMapping("/intrAprvInqy1022.do")
+	public String intrAprvInqy1022(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 작성 상세 조회 (ITEM)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService1020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 작성 조회 (ITEM) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1012;
+	}
+	
+	// 기안 작성 조회 (CORP)
+	@RequestMapping("/intrAprvInqy1023.do")
+	public String intrAprvInqy1023(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 작성 상세 조회 (CORP)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService1020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 작성 조회 (CORP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_1013;
 	}
 	
 	// 결재 목록 조회
@@ -113,7 +178,7 @@ public class AprvController {
 		return Const.VIEW_PATH_APRV + Const.INTR_APRV_LIST_2010;
 	}
 	
-	// 결재 상세 조회
+	// 기안 상세 조회 (LEAV)
 	@RequestMapping("/intrAprvInqy2020.do")
 	public String intrAprvInqy2020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
@@ -124,16 +189,85 @@ public class AprvController {
 			coreService.coreInqyService1010(model, paramMap);
 			
 			//--------------------------------------------------------------------------------------------
-			// 결재 상세 조회
+			// 기안 상세 조회 (LEAV)
 			//--------------------------------------------------------------------------------------------
 			aprvService.aprvInqyService2020(model, paramMap);
 			
 		} catch (Exception e) {
 			//
-			logger.debug("Exception : 결재 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+			logger.debug("Exception : 기안 상세 (LEAV) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
 		}
 		//
-		return Const.VIEW_PATH_APRV + utilService.nvlProc((String)paramMap.get("returnUrl"));
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2010;
+	}
+	
+	// 기안 상세 조회 (EXP)
+	@RequestMapping("/intrAprvInqy2021.do")
+	public String intrAprvInqy2021(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 상세 조회 (EXP)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 상세 (EXP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2011;
+	}
+	
+	// 기안 상세 조회 (ITEM)
+	@RequestMapping("/intrAprvInqy2022.do")
+	public String intrAprvInqy2022(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 상세 조회 (ITEM)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 상세 (ITEM) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2012;
+	}
+	
+	// 기안 상세 조회 (CORP)
+	@RequestMapping("/intrAprvInqy2024.do")
+	public String intrAprvInqy2024(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 메뉴 조회
+			//--------------------------------------------------------------------------------------------
+			coreService.coreInqyService1010(model, paramMap);
+			
+			//--------------------------------------------------------------------------------------------
+			// 기안 상세 조회 (CORP)
+			//--------------------------------------------------------------------------------------------
+			aprvService.aprvInqyService2020(model, paramMap);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 기안 상세 (CORP) 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_APRV + Const.INTR_APRV_DETL_2013;
 	}
 	
 	// 일정 관리 조회

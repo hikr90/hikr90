@@ -93,10 +93,10 @@
 											<dd>
 												<input type="text" class="srch_cdt_date srchSdt" id="reqDt" name="reqDt" value="" readonly="readonly" />
 											</dd>
-											<dt>&#10003; 요청 구분</dt>
+											<dt>&#10003; 반출 구분</dt>
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
-													<div id="statList" class="sList select_box">${reqList[1].commcodeNm}</div>
+													<div id="reqList" class="sList select_box">${reqList[1].commcodeNm}</div>
 													<input type="hidden" id="reqtypeCd" name="reqtypeCd" value="${reqList[1].commcodeCd}">
 													<input type="hidden" id="reqtypeNm" name="reqtypeNm" value="${reqList[1].commcodeNm}">
 											

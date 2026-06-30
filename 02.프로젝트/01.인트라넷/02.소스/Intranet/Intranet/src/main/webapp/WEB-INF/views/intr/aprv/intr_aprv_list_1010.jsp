@@ -12,14 +12,14 @@
 	}
 
 	// 양식 선택
-	function detCall(tempCd, temptypeCd){
+	function detCall(tempCd, temptypeCd, mappingId){
 		//
 		try {
 			//
 			$("#tempCd").val(tempCd);
         	$("#temptypeCd").val(temptypeCd);
 			//
-			formSubmit('intrAprvInqy1020.do');
+			formSubmit(mappingId);
 			
 		} catch (error) {
 	        console.error("[Error] 양식 선택 : ", error.message);
@@ -80,7 +80,7 @@
 													<tr>
 														<td class="first_td">${list.num}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.tempCd}','${list.temptypeCd}');">${list.tempNm}</a>
+															<a class="show_view a_title" onclick="detCall('${list.tempCd}','${list.temptypeCd}', '${list.writeMappingId}');">${list.tempNm}</a>
 														</td>
 			                                        </tr>
 		                                        </c:forEach>

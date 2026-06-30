@@ -91,7 +91,7 @@
 											<dt>&#10003; 지급 방법</dt>
 											<dd class="sel_2part">
 									        	<div class="select_wrap">
-													<div id="statList" class="sList select_box">${prepayList[1].commcodeNm}</div>
+													<div id="prepayList" class="sList select_box">${prepayList[1].commcodeNm}</div>
 													<input type="hidden" id="methodCd" name="methodCd" value="${prepayList[1].commcodeCd}">
 													<input type="hidden" id="methodNm" name="methodNm" value="${prepayList[1].commcodeNm}">
 											

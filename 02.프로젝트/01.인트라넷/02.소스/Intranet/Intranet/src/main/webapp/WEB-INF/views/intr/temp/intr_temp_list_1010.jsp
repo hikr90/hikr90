@@ -49,44 +49,6 @@
 		}
 	}
 
-	// 기안문 양식 등록 처리
-	function regProc(){
-		try {
-			// 에디터 내용 저장
-			var editCont = CKEDITOR.instances.editor.getData();
-			if(editCont.trim()!=null && editCont.trim()!=''){
-				$("#editor").val(editCont);
-			}
-
-			// 유효성 검증
-			if(!valProc()){return;};
-			var param = $("#form").serialize();
-			//
-			if(confirm("등록하시겠습니까?")){
-				//		
-				$.ajax({
-		    		type : 'post',
-		        	url : 'intrTempProc1010.do',
-		            data : param,
-		            dataType : 'html',
-		            success : function(data){
-		            	    $(".tree_info").html(""); // 등록 화면 초기화
-		    				alert("<spring:message code="PROC.SUCCESS"/>");
-		    				
-		    				// 재 조회
-		            		$(".listCall").trigger("click");	
-		            },
-		            error : function(data){
-						alert("<spring:message code="PROC.ERROR"/>");
-		            }
-		      	});
-			}	
-			
-		} catch (error) {
-	        console.error("[Error] 기안문 양식 등록 처리 : ", error.message);
-		}
-	}
-	
 	// 기안문 양식 상세보기
 	function detCall(tempCd){
 		try {
@@ -170,12 +132,7 @@
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
 									<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
 								
-									<h2>기안문 관리
-										<span class="float_right">
-											<input type="button" class="btn_blue_thin" value="등록" onclick="regCall();">
-										</span>
-									</h2>
-									
+									<h2>기안문 관리</h2>
 		                            <div class="srch_wrap">
 		                            	<div class="right_srch_area">
 											<!-- 제목 -->

@@ -126,7 +126,7 @@
 												<fmt:formatDate value="${parseDt}" var="fomatDt" pattern="yyyy-MM-dd"/>
 												${fomatDt}
 											</dd>
-											<dt>요청 구분</dt>
+											<dt>반출 구분</dt>
 											<dd class="sel_2part">
 									        	${defaultInfo.reqtypeNm}
 									    	</dd>

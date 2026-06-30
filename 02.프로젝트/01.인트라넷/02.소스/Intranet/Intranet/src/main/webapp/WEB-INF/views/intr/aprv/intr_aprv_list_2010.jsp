@@ -6,21 +6,13 @@
 
 <script type="text/javascript">
 	// 양식 선택
-	function detCall(temptypeCd, sequenceId){
+	function detCall(temptypeCd, mappingId, sequenceId){
 		try {
-			//
-			var typeProc = {
-				  Leav: "intr_aprv_detl_2010.jsp", 		// 휴가 신청서
-				  Exp:  "intr_aprv_detl_2011.jsp", 		// 가지급결의서
-				  Item: "intr_aprv_detl_2012.jsp", 		// 물품반입신청서
-				  Corp: "intr_aprv_detl_2013.jsp", 		// 법인카드정산서
-				};
 				//	
 				$("#sequenceId").val(sequenceId);
 				$("#temptypeCd").val(temptypeCd);
-				$("#returnUrl").val(typeProc[temptypeCd]);
 				//
-				formSubmit("intrAprvInqy2020.do");
+				formSubmit(mappingId);
 				
 		} catch (error) {
 	        console.error("[Error] 양식 선택 : ", error.message);
@@ -62,7 +54,6 @@
 									<input type="hidden" id="page" name="page" value="${param.page}">
 									<input type="hidden" id="pageUrl" name="pageUrl" value="${param.pageUrl}">
 									<input type="hidden" id="temptypeCd" name="temptypeCd" value="">
-									<input type="hidden" id="returnUrl" name="returnUrl" value="">
 									
 									<h2>결재 조회</h2>
 									<div class="srch_wrap">
@@ -148,7 +139,7 @@
 														<td>${list.tempNm}</td>
 														<td>${list.aprvstepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}','${list.aprvId}');">
+															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}', '${list.detailMappingId}', '${list.aprvId}');">
 																<script>document.write(isNew('${list.regDt}'))</script>
 																${list.aprvTitle}
 															</a>
