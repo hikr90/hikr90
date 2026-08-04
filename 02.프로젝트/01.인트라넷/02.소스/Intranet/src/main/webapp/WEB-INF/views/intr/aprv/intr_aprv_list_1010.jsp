@@ -80,7 +80,7 @@
 													<tr>
 														<td class="first_td">${list.num}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.tempCd}','${list.temptypeCd}', '${list.writeMappingId}');">${list.tempNm}</a>
+															<a class="show_view a_title" onclick="detCall('${list.tempCd}','${list.temptypeCd}', '${list.regMappingId}');">${list.tempNm}</a>
 														</td>
 			                                        </tr>
 		                                        </c:forEach>

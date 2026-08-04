@@ -12,8 +12,8 @@
 		<result property="tempCd" 				column="TEMP_CD"/>
 		<result property="tempNm" 				column="TEMP_NM"/>
 		<result property="temptypeCd" 		column="TEMPTYPE_CD"/>
-		<result property="writeMappingId" 	column="WRITE_MAPPING_ID"/>
-		<result property="detailMappingId" 	column="DETAIL_MAPPING_ID"/>
+		<result property="regMappingId" 		column="REG_MAPPING_ID"/>
+		<result property="detMappingId" 		column="DET_MAPPING_ID"/>
 		<result property="currAprvSno" 		column="CURR_APRV_SNO"/>
 		<result property="aprvIdx" 				column="APRV_IDX"/>
 		<result property="regIdx" 				column="REG_IDX"/>
@@ -77,8 +77,8 @@
 						,	A.APRV_TITLE
 						,	A.TEMP_CD
 						,	T.TEMP_NM
-						,	T.WRITE_MAPPING_ID
-						,	T.DETAIL_MAPPING_ID
+						,	T.REG_MAPPING_ID
+						,	T.DET_MAPPING_ID
 						,	A.APRVSTEP_CD
 						,	CC_STEP.COMMCODE_NM AS APRVSTEP_NM
 						,	A.CURR_APRV_SNO

@@ -5,8 +5,8 @@
 		<result property="tempCd" 				column="TEMP_CD"/>
 		<result property="tempNm" 				column="TEMP_NM"/>
 		<result property="temptypeCd" 		column="TEMPTYPE_CD"/>
-		<result property="writeMappingId" 	column="WRITE_MAPPING_ID"/>
-		<result property="detailMappingId" 	column="DETAIL_MAPPING_ID"/>
+		<result property="regMappingId" 		column="REG_MAPPING_ID"/>
+		<result property="detMappingId" 		column="DET_MAPPING_ID"/>
 		<result property="tempCont" 			column="TEMP_CONT" jdbcType="CLOB" javaType="java.lang.String" />
 		<result property="useYn" 					column="USE_YN"/>
 	</resultMap>
@@ -17,8 +17,8 @@
 				T.TEMP_CD
 	        ,   T.TEMP_NM
 	        ,	T.TEMPTYPE_CD
-	        ,	T.WRITE_MAPPING_ID
-	        ,	T.DETAIL_MAPPING_ID
+	        ,	T.REG_MAPPING_ID
+	        ,	T.DET_MAPPING_ID
 	        ,   T.DISP_ORDER
 	        ,   T.REMARK
 	        ,	'1' AS LV

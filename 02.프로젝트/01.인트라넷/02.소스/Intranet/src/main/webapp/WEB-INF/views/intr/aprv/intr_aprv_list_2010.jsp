@@ -139,7 +139,7 @@
 														<td>${list.tempNm}</td>
 														<td>${list.aprvstepNm}</td>
 														<td class="_title">
-															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}', '${list.detailMappingId}', '${list.aprvId}');">
+															<a class="show_view a_title" onclick="detCall('${list.temptypeCd}', '${list.detMappingId}', '${list.aprvId}');">
 																<script>document.write(isNew('${list.regDt}'))</script>
 																${list.aprvTitle}
 															</a>
