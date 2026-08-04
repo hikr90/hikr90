@@ -9,20 +9,11 @@
 	<!-- Local -->
  	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xepdb1"/>
 		<property name="username" value="INTR"/>
 		<property name="password" value="1111"/>
 		<property name="maxActive" value="20"/>
 	</bean>  
-
-	<!-- Dev  
- 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/> 
-		<property name="url" value="jdbc:oracle:thin:@10.33.176.80:1521:xe"/>
-		<property name="username" value="INTR"/>
-		<property name="password" value="1111"/>
-		<property name="maxActive" value="20"/>
-	</bean>  -->
 
     <bean id="ds" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 	    <constructor-arg ref="dataSourceSpied" />
