@@ -61,7 +61,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 공통코드 (재직여부) 조회
 			// --------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "HIRE");
+			paramMap.put("commcodeGcd", "Hire");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("hireList", defaultList);
 
@@ -291,7 +291,7 @@ public class EmpServiceImpl implements EmpService {
 			// --------------------------------------------------------------------------------------------
 			// 공통코드 (재직여부) 조회
 			// --------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "HIRE");
+			paramMap.put("commcodeGcd", "Hire");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("hireList", defaultList);
 

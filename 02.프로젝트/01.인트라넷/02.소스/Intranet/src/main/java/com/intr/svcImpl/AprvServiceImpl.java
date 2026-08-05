@@ -80,21 +80,21 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (휴가 타입) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LEAV");
+			paramMap.put("commcodeGcd", "Leav");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("leavList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (반출 구분) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"REQ");
+			paramMap.put("commcodeGcd", "Req");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("reqList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (지급 방법) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"PAY");
+			paramMap.put("commcodeGcd",	"Pay");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("prepayList",defaultList);
 			
@@ -126,7 +126,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재단계) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STEP");
+			paramMap.put("commcodeGcd", "Step");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("stepList",defaultList);
 
@@ -164,21 +164,21 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (휴가 타입) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LEAV");
+			paramMap.put("commcodeGcd",	"Leav");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("leavList",defaultList);
 
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (반출 구분) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"REQ");
+			paramMap.put("commcodeGcd", "Req");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("reqList",defaultList);
 			
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (지급 방법) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"PAY");
+			paramMap.put("commcodeGcd", "Pay");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("prepayList",defaultList);
 			
@@ -209,7 +209,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (휴가 타입) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LEAV");
+			paramMap.put("commcodeGcd", "Leav");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("leavList",defaultList);
 			
@@ -252,7 +252,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"TYPE");
+			paramMap.put("commcodeGcd", "Type");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("typeList",defaultList);
 			
@@ -277,7 +277,7 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"TYPE");
+			paramMap.put("commcodeGcd", "Type");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("typeList",defaultList);
 			

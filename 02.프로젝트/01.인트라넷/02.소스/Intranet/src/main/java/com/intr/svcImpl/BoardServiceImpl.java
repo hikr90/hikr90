@@ -65,7 +65,7 @@ public class BoardServiceImpl implements BoardService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (사용여부) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"USE");
+			paramMap.put("commcodeGcd", "Use");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("useList",defaultList);
 			

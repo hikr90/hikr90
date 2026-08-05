@@ -170,7 +170,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"TYPE");
+			paramMap.put("commcodeGcd", "Type");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("typeList",defaultList);
 			

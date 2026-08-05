@@ -59,7 +59,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", "Stat");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			
@@ -78,7 +78,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", "Stat");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			
@@ -104,7 +104,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"STAT");
+			paramMap.put("commcodeGcd", "Stat");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("statList",defaultList);
 			

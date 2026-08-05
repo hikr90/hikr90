@@ -61,7 +61,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LOC");
+			paramMap.put("commcodeGcd",	"Loc");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("locList",defaultList);
 			
@@ -93,7 +93,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LOC");
+			paramMap.put("commcodeGcd", "Loc");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("locList",defaultList);
 			
@@ -174,7 +174,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", 	"LOC");
+			paramMap.put("commcodeGcd",	"Loc");
 			defaultList = utilDao.codeInqyDao1010(paramMap);
 			model.addAttribute("locList",defaultList);
 			
