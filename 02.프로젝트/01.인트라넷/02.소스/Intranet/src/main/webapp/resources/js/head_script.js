@@ -87,30 +87,23 @@ function goMenu(element) {
 }
 
 // 검색 초기화
-function initCall(){
-	try {
-		// 검색어
-		$("input[name=srchNm]").val("");
-		
-		// 검색일자
-		$("input[name=srchSdt]").val("");
-		$("input[name=srchEdt]").val("");
-	
-		// 부서, 직급
-		$("input[name=orgNm]").val("");
-		$("input[name=rankNm]").val("");
-	
-		// 사용여부
-		$("input[name=useNm]").val("전체");
-		$("input[name=useCd]").val("");
-		
-		// 진행단계
-		$("input[name=statNm]").val("전체");
-		$("input[name=statCd]").val("");
-	
-	} catch (error) {
-        console.error("[Error] 검색 초기화 : ", error.message);
-	}
+function initCall() {
+    try {
+        const search = $(".srch_wrap");
+
+        // 검색 조건 입력값 초기화
+        search.find("input[type='text']").val("");
+
+        // 커스텀 셀렉트 초기화
+        search.find(".select_wrap").each(function () {
+            $(this).find(".select_box").text("전체");
+            $(this).find("input[type='hidden']").val("");
+            $(this).find(".select_ul li").removeClass("on");
+        });
+
+    } catch (error) {
+        console.error("[Error] 검색 초기화 :", error.message);
+    }
 }
 
 // 폼 태그 동작
