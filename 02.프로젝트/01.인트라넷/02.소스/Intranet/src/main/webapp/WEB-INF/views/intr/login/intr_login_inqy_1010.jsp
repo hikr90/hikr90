@@ -30,7 +30,7 @@
    		function loginProc(f){
    			try {
    	   			// 유효성 검증
-   				if(!valProc()){return;};
+   				if(!requiredProc()){return;};
    				//   			
    				var param = $("#form").serialize();
    				

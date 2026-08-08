@@ -75,7 +75,7 @@
 												<label for="post-title">&#10003; 기안명</label>
 											</dt>
 											<dd>
-												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle">
+												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle" isReq="Y">
 											</dd>
 										</dl>
 										<dl>
@@ -84,14 +84,14 @@
 											</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
+												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isReq="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
 										<dl>
 											<dt>&#10003; 반출입 일자</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchSdt" id="reqDt" name="reqDt" value="" readonly="readonly" />
+												<input type="text" class="srch_cdt_date srchSdt" id="reqDt" name="reqDt" title="반출입 일자" value="" readonly="readonly" isReq="Y" />
 											</dd>
 											<dt>&#10003; 반출 구분</dt>
 											<dd class="sel_2part">
@@ -117,7 +117,7 @@
 								        <dl>
 											<dt><label for="post_text">&#10003; 기안내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="기안내용">${tempInfo.tempCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안내용" isReq="Y">${tempInfo.tempCont}</textarea>
 											</dd>
 										</dl>
 								        <dl class="post_info">

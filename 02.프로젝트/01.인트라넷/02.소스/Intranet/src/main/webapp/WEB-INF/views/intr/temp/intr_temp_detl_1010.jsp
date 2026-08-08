@@ -17,7 +17,7 @@
 			<label for="post-title">&#10003; 양식명</label>
 		</dt>
 		<dd>
-			<input type="text" id="tempNm" title="양식명" name="tempNm" value="${defaultInfo.tempNm}">
+			<input type="text" id="tempNm" title="양식명" name="tempNm" value="${defaultInfo.tempNm}" isReq="Y">
 			<input type="hidden" class="tempCd" id="tempCd" name="tempCd" value="${defaultInfo.tempCd}">
 		</dd>
 	</dl>
@@ -26,7 +26,7 @@
 			<label for="post-title">&#10003; 양식 내용</label>
 		</dt>
 		<dd>
-			<textarea id="editor" name="tempCont" title="양식 내용">${defaultInfo.tempCont}</textarea>
+			<textarea id="editor" name="tempCont" title="양식 내용" isReq="Y">${defaultInfo.tempCont}</textarea>
 		</dd>
 	</dl>
 </div>

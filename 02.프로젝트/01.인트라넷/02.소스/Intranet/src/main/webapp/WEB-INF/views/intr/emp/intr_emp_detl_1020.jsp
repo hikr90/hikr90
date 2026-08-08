@@ -65,7 +65,7 @@
 	function regProc(f){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			
 			// 부서
 			if($("#setOrgCd").val()==""){
@@ -186,7 +186,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 사원명</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="사원명" id="empNm" name="empNm">
+	                                            <input type="text" title="사원명" id="empNm" name="empNm" isReq="Y">
 	                                        </dd>
 	                                        
 	                                        <dt><label>성별</label></dt>
@@ -237,7 +237,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="mobProc(this);" >
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" onkeydown="mobProc(this);" isReq="Y" >
 	                                        </dd>
 											
 											<dt></dt>
@@ -246,35 +246,35 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr">
+	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" isReq="Y">
 	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo">
+	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" isReq="Y">
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
 	                                        <dt><label>&#10003; 아이디</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')">
+	                                            <input type="text" title="아이디" name="empId" id="empId" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')" isReq="Y">
 	                                            <input type="button" class="btn_blue align_top" value="중복 확인" onclick="chqEmpId(this.form)">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 메일 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="email" name="email">
+	                                            <input type="text" title="메일 주소" id="email" name="email" isReq="Y">
 	                                        </dd>
 	                                    </dl>
 										<dl>
 											<dt><label>&#10003; 비밀번호</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd">
+	                                            <input type="password" title="비밀번호" id="empPwd" name="empPwd" isReq="Y">
 	                                        </dd>
 	                                        <dt><label>&#10003; 비밀번호 확인</label></dt>
 	                                        <dd class="sel_2part">
-	                                        	<input type="password" title="비밀번호 확인" id="chqPwd" name="chqPwd">
+	                                        	<input type="password" title="비밀번호 (확인)" id="chqPwd" name="chqPwd" isReq="Y">
 	                                       	</dd>
 	                                    </dl>
 									</div><!-- End post_write -->

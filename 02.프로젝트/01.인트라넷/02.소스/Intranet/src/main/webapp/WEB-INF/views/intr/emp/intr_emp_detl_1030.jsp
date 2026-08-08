@@ -16,7 +16,7 @@
 	function modProc(f){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			
 			// 부서
 			if($("#setOrgCd").val()==""){
@@ -145,7 +145,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 사원명</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}">
+	                                            <input type="text" title="사원명" id="empNm" name="empNm" value="${defaultInfo.empNm}" isReq="Y">
 	                                        </dd>
 	                                        
 	                                        <dt></dt>
@@ -185,7 +185,7 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 연락처</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);">
+	                                            <input type="text" title="연락처" id="mobNo" name="mobNo" maxlength="13" value="${defaultInfo.mobNo}" onkeyup="mobProc(this);" isReq="Y">
 	                                        </dd>
 	
 	                                        <dt><label>성별</label></dt>
@@ -205,19 +205,19 @@
 	                                    <dl>
 	                                        <dt><label>&#10003; 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}">
+	                                            <input type="text" title="주소" readonly="readonly" id="addr" name="addr" value="${defaultInfo.addr}" isReq="Y">
 	                                            <input type="button" class="btn_blue align_top" value="주소 검색" onclick="addrProc();">
 	                                        </dd>
 	                                        
 	                                        <dt><label>&#10003; 상세 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" value="${defaultInfo.addrInfo}">
+	                                            <input type="text" title="상세주소" id="addrInfo" name="addrInfo" value="${defaultInfo.addrInfo}" isReq="Y">
 	                                        </dd>
 	                                    </dl>
 	                                    <dl>
 											<dt><label>&#10003; 메일 주소</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}">
+	                                            <input type="text" title="메일 주소" id="email" name="email" value="${defaultInfo.email}" isReq="Y">
 	                                        </dd>
 	                                        
 	                                        <dt></dt>
@@ -226,7 +226,7 @@
 										<dl>
 	                                        <dt><label>&#10003; 아이디</label></dt>
 	                                        <dd class="sel_2part">
-	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly" st>
+	                                            <input type="text" title="아이디" id="empId" name="empId" value="${defaultInfo.empId}" readonly="readonly" isReq="Y">
 	                                        </dd>
 	                                        
 	                                        <dt></dt>

@@ -75,7 +75,7 @@
 												<label for="post-title">&#10003; 기안명</label>
 											</dt>
 											<dd>
-												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle">
+												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle" isReq="Y">
 											</dd>
 										</dl>
 										<dl>
@@ -84,7 +84,7 @@
 											</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly">
+												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isReq="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
@@ -101,17 +101,17 @@
 								        <dl>
 								        	<dt>&#10003; 카드 회사명</dt>
 											<dd>
-												<input type="text" id="cardNm" title="카드명" name="cardNm" placeholder="카드 제외하고 입력 (ex.신한)">
+												<input type="text" id="cardNm" title="카드명" name="cardNm" placeholder="카드 제외하고 입력 (ex.신한)" isReq="Y">
 											</dd>
 											<dt>&#10003; 카드 번호</dt>
 											<dd>
-												<input type="text" id="cardNo" name="cardNo" maxlength="19" placeholder="- 제외하고 입력" oninput="cardProc(this)">
+												<input type="text" id="cardNo" name="cardNo" title="카드 번호" maxlength="19" placeholder="- 제외하고 입력" oninput="cardProc(this)" isReq="Y">
 											</dd>
 								        </dl>
 								        <dl>
 											<dt><label for="post_text">&#10003; 기안내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="기안내용">${tempInfo.tempCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안내용" isReq="Y">${tempInfo.tempCont}</textarea>
 											</dd>
 										</dl>
 								        <dl class="post_info">

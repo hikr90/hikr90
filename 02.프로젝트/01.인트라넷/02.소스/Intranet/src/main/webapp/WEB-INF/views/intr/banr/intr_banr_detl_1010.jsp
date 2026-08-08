@@ -11,7 +11,7 @@
 		function saveProc(){
 			try {
 				// 유효성 검증
-				if(!valProc()){return;};
+				if(!requiredProc()){return;};
 
 				// 확장자 검증
 				var fileInput = $("#fileUpd");
@@ -168,28 +168,28 @@
 											<dd></dd>
 										</dl>
 										<dl class="post_info">
-											<dt>&#10003; 노출 일자</dt>
+											<dt>&#10003; 게시일자</dt>
 											<dd>
 												<fmt:parseDate value="${defaultInfo.banrSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
-												<input type="text" class="srch_cdt_date srchSdt" id="banrSdt" name="banrSdt" value="${fomatSdt}" readonly="readonly" />
+												<input type="text" class="srch_cdt_date srchSdt" id="banrSdt" name="banrSdt" value="${fomatSdt}" title="게시일자 (시작)" readonly="readonly" isReq="Y" />
 													~
 												<fmt:parseDate value="${defaultInfo.banrEdt}" var="parseEdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseEdt}" var="fomatEdt" pattern="yyyy-MM-dd"/>
-												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${fomatEdt}" readonly="readonly" />
+												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${fomatEdt}" title="게시일자 (종료)" readonly="readonly" isReq="Y" />
 											</dd>
 											<dt>&#10003; 사이즈</dt>
 											<dd>
-												<input type="text" id="width" name="width" class="width10" value="${defaultInfo.width}">
+												<input type="text" id="width" name="width" class="width10" title="가로" value="${defaultInfo.width}" isReq="Y">
 												x
-												<input type="text" id="height" name="height" class="width10" value="${defaultInfo.width}">
+												<input type="text" id="height" name="height" class="width10" title="세로" value="${defaultInfo.width}" isReq="Y">
 											</dd>
 										</dl>
 										
 										<dl class="post_info">
 											<dt>링크 URL</dt>
 											<dd>
-												<input type="text" id="banrUrl_none" name="banrUrl" class="width100" value="${defaultInfo.banrUrl}" placeholder="예시, https://www.example.com">
+												<input type="text" id="banrUrl" name="banrUrl" class="width100" value="${defaultInfo.banrUrl}" placeholder="예시, https://www.example.com">
 											</dd>
 											<dt>사용여부</dt>
 	                                        <dd class="sel_2part">

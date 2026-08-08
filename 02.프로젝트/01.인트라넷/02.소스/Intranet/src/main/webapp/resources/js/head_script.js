@@ -213,46 +213,35 @@ function mobProc(num) {
     num.value = output;
 }
 
-// 입력 값 유효성 검증
-function valProc(){
-	// 유효성 검사 플래그
+// 필수 입력값 유효성 검증
+function requiredProc(){
+    // 유효성 검사 플래그
     var chkYn = true;
-	//    
-	try {
-		// input & textArea
-	    var requiredFields = $("#form input[type='text'], #form input[type='password'], #form textarea");
-	
-	    requiredFields.each(function(index, element){
-	        // 현재 요소를 jQuery 객체로 변환
-	        var tag = $(element);
-	        var id = tag.attr('id') || '';
-	        var title = tag.attr('title') || '필수 항목';
-	        var value = tag.val().trim(); 
-	        
-	        // 제외 조건 통합 확인
-	        // - input: id에 'srch' 또는 'none' 포함 시 제외
-	        // - textarea: id가 'remark'인 경우 제외
-	        var isTextArea = tag.is('textarea');
-	
-	        if (id.includes('srch') || id.includes('none') || (isTextArea && id === 'remark')) {
-	            // 해당 요소는 건너뛰고 다음 반복으로 이동
-	            return true; 
-	        }
-	        
-	        // 값 유효성 검증
-	        if (value === ""){
-	            alert(title + "(을)를 입력해주세요.");
-	            tag.focus(); 
-	            chkYn = false; // 플래그 변경
-	            return false;  // jQuery each 반복 중단
-	        }
-	    });
-		    
-	} catch(error) {
-		console.error("[Error] 입력 값 유효성 검증 : ", error.message);
-	}
-	// 반복문 내에서 chkYn이 false로 변경되지 않았다면 true 반환
-	return chkYn;		
+    //
+    try {
+        // 필수 입력값 대상
+        var requiredFields = $("#form input[isReq='Y'], #form textarea[isReq='Y']");
+
+        requiredFields.each(function(index, element){
+            // 현재 요소를 jQuery 객체로 변환
+            var tag = $(element);
+            var title = tag.attr("title") || "필수 항목";
+            var value = tag.val().trim();
+
+            // 값 유효성 검증
+            if (value === ""){
+                alert(title + "(을)를 입력해주세요.");
+                tag.focus();
+                chkYn = false;
+                return false;
+            }
+        });
+
+    } catch(error) {
+        console.error("[Error] 필수 입력값 유효성 검증 : ", error.message);
+    }
+
+    return chkYn;
 }
 
 // 주소 조회

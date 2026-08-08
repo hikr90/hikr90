@@ -78,7 +78,7 @@
 	function modProc(f){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			//
 			if(confirm("수정하시겠습니까?")){
 				//

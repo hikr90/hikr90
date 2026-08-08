@@ -39,7 +39,7 @@
 								<dl>
 									<dt>&#10003; 업무 제목</dt>
 									<dd>
-										<input type="text" class="taskTitle" title="업무 제목">
+										<input type="text" class="taskTitle" title="업무 제목" isReq="Y">
 									</dd>
 									<dt>등록 일자</dt>
 									<dd>` + today + `</dd>
@@ -47,8 +47,8 @@
 								<dl class="post_info">
 									<dt>&#10003; 업무 시간</dt>
 									<dd>
-										<input type="text" class="width20 taskHh" title="업무(시간)" placeholder="HH" oninput="numProc(this);">
-										<input type="text" class="width20 taskMm" title="업무(분)" placeholder="MM" oninput="numProc(this);">
+										<input type="text" class="width20 taskHh" title="업무(시간)" placeholder="HH" oninput="numProc(this);" isReq="Y">
+										<input type="text" class="width20 taskMm" title="업무(분)" placeholder="MM" oninput="numProc(this);" isReq="Y">
 									</dd>
 									<dt>등록자</dt>
 									<dd>` + "${empVO.orgNm}" + " " + "${empVO.empNm}" + `</dd>
@@ -57,7 +57,7 @@
 								<dl>
 									<dt>&#10003; 업무 내용</dt>
 									<dd class="post_text" style="height: 300px;">
-										<textarea name="taskCont" class="taskCont" title="업무 내용"></textarea>
+										<textarea name="taskCont" class="taskCont" title="업무 내용" isReq="Y"></textarea>
 									</dd>
 								</dl>
 							</div>
@@ -330,7 +330,7 @@
 													<dl>
 														<dt>&#10003; 업무 제목</dt>
 														<dd>
-															<input type="text" class="taskTitle" title="업무 제목" value="${list.taskTitle}">
+															<input type="text" class="taskTitle" title="업무 제목" value="${list.taskTitle}" isReq="Y">
 														</dd>
 														<dt>등록 일자</dt>
 														<dd>
@@ -342,8 +342,8 @@
 													<dl class="post_info">
 														<dt>&#10003; 업무 시간</dt>
 														<dd>
-															<input type="text" class="width20 taskHh" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);">
-															<input type="text" class="width20 taskMm" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);">
+															<input type="text" class="width20 taskHh" title="업무(시간)" value="${list.taskHh}" placeholder="HH" oninput="numProc(this);" isReq="Y">
+															<input type="text" class="width20 taskMm" title="업무(분)" value="${list.taskMm}" placeholder="MM" oninput="numProc(this);" isReq="Y">
 														</dd>
 														<dt>등록자</dt>
 														<dd>${empVO.orgNm} ${empVO.empNm}</dd>
@@ -352,7 +352,7 @@
 													<dl>
 														<dt>&#10003; 업무 내용</dt>
 														<dd class="post_text" style="height: 300px;">
-															<textarea class="taskCont" title="업무 내용">${list.taskCont}</textarea>
+															<textarea class="taskCont" title="업무 내용" isReq="Y">${list.taskCont}</textarea>
 														</dd>
 													</dl>
 												</div><!-- End post_view -->

@@ -105,7 +105,7 @@
 										<dl>
 											<dt>회의명</dt>
 											<dd>${defaultInfo.mtgTitle}</dd>
-											<dt>회의일자</dt>
+											<dt>회의 일자</dt>
 											<dd>
 												<span class="date">
 													<fmt:parseDate value="${defaultInfo.mtgDt}" var="parseDt" pattern="yyyyMMdd"/>

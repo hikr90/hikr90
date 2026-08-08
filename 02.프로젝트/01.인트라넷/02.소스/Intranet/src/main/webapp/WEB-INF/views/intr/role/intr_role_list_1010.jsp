@@ -78,7 +78,7 @@
 	function regProc(){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			//
 			var param = $("#form").serialize();
 			if(confirm("등록하시겠습니까?")){
@@ -165,7 +165,7 @@
 	function modProc(f){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			//
 			var param = $("#form").serialize();
 			if(confirm("수정하시겠습니까?")){
@@ -199,7 +199,7 @@
 	function delProc(f){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			var param = $("#form").serialize();
 			//
 			if(confirm("삭제하시겠습니까?")){

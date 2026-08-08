@@ -82,7 +82,7 @@
 	function regProc(){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			
 			// 등록 처리
 			if(confirm("등록하시겠습니까?")){
@@ -125,7 +125,7 @@
 	function modProc(){
 		try {
 			// 유효성 검증
-			if(!valProc()){return;};
+			if(!requiredProc()){return;};
 			//
 			if(confirm("수정하시겠습니까?")){
 	   			$.ajax({

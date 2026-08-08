@@ -28,7 +28,7 @@
 		function regProc(f){
 			try {
 	  			// 유효성 검증
-				if(!valProc()){return;};
+				if(!requiredProc()){return;};
 				//
 				var projSdt = $("input[name=projSdt]").val().replaceAll("-","")
 				var projEdt = $("input[name=projEdt]").val().replaceAll("-","");
@@ -152,20 +152,20 @@
 											<label for="post-title">&#10003; 프로젝트명</label>
 										</dt>
 										<dd>
-											<input type="text" id="projTitle" title="프로젝트명" name="projTitle">
+											<input type="text" id="projTitle" title="프로젝트명" name="projTitle" isReq="Y">
 										</dd>
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" style="width: 150px;" disabled="disabled">
+											<input type="text" id="empPnm" title="담당자" style="width: 150px;" disabled="disabled" isReq="Y">
 										</dd>
 									</dl>
 									<dl>
 										<dt>&#10003; 계약기간</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" value="" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" title="계약기간 (시작)" readonly="readonly" isReq="Y" />
 												~
-											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="계약기간 (종료)" readonly="readonly" isReq="Y" />
 										</dd>
 										<dt>&#10003; 진행상태</dt>
                                         <dd class="sel_2part">
@@ -187,18 +187,18 @@
 									<dl>
 										<dt>&#10003; 계약금</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;">
+											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;" isReq="Y">
 											&nbsp; <span id="amtNm">(원)</span>
 										</dd>
 										<dt>태그</dt>
 										<dd>
-											<input type="text" id="tag_none" title="태그" name="tag" placeholder="#SI, #SM, #운영 등.." value="">
+											<input type="text" id="tag" title="태그" name="tag" placeholder="#SI, #SM, #운영 등.." value="">
 										</dd>
 									</dl>
 									<dl>
 										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
 										<dd class="post_text" style="height: 310px;">
-											<textarea id="projCont" title="개요/설명" name="projCont"></textarea>
+											<textarea id="projCont" title="개요/설명" name="projCont" isReq="Y"></textarea>
 										</dd>
 									</dl>
 									<dl class="post_info">

@@ -130,7 +130,7 @@
 		function regProc(f){
 			try {
 	  			// 유효성 검증
-				if(!valProc()){return;};
+				if(!requiredProc()){return;};
 				//
 				if(!mtgStm || !mtgEtm) {
 					alert("<spring:message code="MTG.TM.NONE"/>");
@@ -248,9 +248,9 @@
 										<dd style="width: 600px;">
 											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle">
 										</dd>
-										<dt>&#10003; 회의일자</dt>
+										<dt>&#10003; 회의 일자</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="mtgDt" name="mtgDt" value="" readonly="readonly" />
+											<input type="text" class="srch_cdt_date srchSdt" id="mtgDt" name="mtgDt" title="회의 일자" readonly="readonly" isReq="Y" />
 										</dd>
 										<dt>
 											<label for="post-title">&#10003; 회의장소</label>
@@ -302,7 +302,7 @@
 									<dl>
 										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
 										<dd class="post_text" style="height: 310px;">
-											<textarea id="projCont" title="회의 개요" name="mtgCont"></textarea>
+											<textarea id="projCont" title="회의 개요" name="mtgCont" isReq="Y"></textarea>
 										</dd>
 									</dl>
 									<dl class="post_info">

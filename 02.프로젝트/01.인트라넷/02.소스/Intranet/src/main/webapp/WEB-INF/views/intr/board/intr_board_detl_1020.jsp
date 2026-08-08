@@ -10,7 +10,7 @@
 		function regProc(f){
 			try {
 	  			// 유효성 검증
-				if(!valProc()){return;};
+				if(!requiredProc()){return;};
 				
 				if(confirm("등록하시겠습니까?")){
 					var fileList = setFormData();
@@ -102,7 +102,7 @@
 											<label for="post-title">&#10003; 제목</label>
 										</dt>
 										<dd>
-											<input type="text" id="brdTitle" title="제목" name="brdTitle">
+											<input type="text" id="brdTitle" title="제목" name="brdTitle" isReq="Y">
 										</dd>
 										<dt>사용여부</dt>
                                         <dd class="sel_2part">
@@ -127,7 +127,7 @@
 									<dl>
 										<dt><label for="post_text">&#10003; 내용</label></dt>
 										<dd class="post_text">
-											<textarea id="brdCont" name="brdCont" title="공지사항 내용"></textarea>
+											<textarea id="brdCont" name="brdCont" title="내용" isReq="Y"></textarea>
 										</dd>
 									</dl>
 									<dl class="post_info">
