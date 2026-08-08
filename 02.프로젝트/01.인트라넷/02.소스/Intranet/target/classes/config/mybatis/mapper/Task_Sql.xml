@@ -124,7 +124,7 @@
 	</select>
 	
 	<select id="taskInqyDao3020" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* taskInqyDao3020 : 업무 캘린더 상세 */
+		/* taskInqyDao3020 : 업무 캘린더 상세 조회 */
 		SELECT 
 				TC.TLDR_ID
 			,	TC.TLDR_TITLE

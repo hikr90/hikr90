@@ -52,7 +52,7 @@
 	</select>
 
 	<select id="mtgInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* mtgInqyDao1030 : 회의 상세 */
+		/* mtgInqyDao1030 : 회의 상세 조회 */
 		SELECT
 				DATA.*
 		FROM (

@@ -34,7 +34,7 @@
                     ,   B.REG_DT
                     ,   B.REG_TM
                     ,	B.READ_HIT
-                    ,	RANK() OVER(ORDER BY B.REG_DT DESC, B.REG_TM DESC) AS NUM
+                    ,	ROW_NUMBER() OVER(ORDER BY B.REG_DT DESC, B.REG_TM DESC) AS NUM
                     ,   COUNT(B.BRD_ID) OVER() AS LIST_CNT
       				,	(SELECT 
       							COUNT(FILE_ID) 
@@ -80,7 +80,7 @@
 	</select>	
 
 	<select id="boardInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
-		/* boardInqyDao1030 : 공지사항 상세 */
+		/* boardInqyDao1030 : 공지사항 상세 조회 */
 		SELECT 
 					B.BRD_ID
 				,	B.BRD_TITLE

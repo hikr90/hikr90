@@ -24,7 +24,7 @@
 	        ,	'1' AS LV
 	        ,	'Y' AS ISLEAF
 	        ,   COUNT(T.TEMP_CD) OVER() AS LIST_CNT
-	        ,	RANK() OVER(ORDER BY T.TEMP_CD ASC) AS NUM
+	        ,	ROW_NUMBER() OVER(ORDER BY T.TEMP_CD ASC) AS NUM
 		FROM TEMPLATE T
 		WHERE 1=1
 			<if test="srchNm != null and srchNm != ''">
