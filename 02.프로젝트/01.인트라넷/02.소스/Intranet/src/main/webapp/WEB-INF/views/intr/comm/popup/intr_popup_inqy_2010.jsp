@@ -82,17 +82,23 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-                       <div class="find_info_wrap">
-                           <div class="post_wrap">
-                           		<input type="hidden" id="chngPwdId" name="chngPwdId" value="">
-								<h3>비밀번호 변경</h3>
-                               	<div id="pwdCon" class="post_con"></div>
+                       <div class="pop_wrap find_info_wrap">
+                           <div class="srch_wrap">
+								<div class="srch_area">
+									<div class="right_srch_area">
+										<label class="srch_label">비밀번호 변경</label>
+									</div>
+								</div>
+							</div>
+                           <input type="hidden" id="chngPwdId" name="chngPwdId" value="">
+
+							<!-- 패스워드 변경 -->                           
+                           	<div id="pwdCon" class="post_con"></div>
                                
-                               <div class="btn_center">
-                               		<input type="button" id="updateBtn" class="btn_blue_thin" value="변경" onclick="popUpdate();">
-                                   	<input type="button" class="btn_gray_thin" value="닫기" onclick="popClose('pwd');">
-                               </div>
-                           </div><!-- End post_wrap -->
+                            <div class="btn_center">
+                            	<input type="button" id="updateBtn" class="btn_blue_thin" value="변경" onclick="popUpdate();">
+                                <input type="button" class="btn_gray_thin" value="닫기" onclick="popClose('pwd');">
+                            </div>
                          </div> 
 				</div><!-- End content_area form_area -->
 			</div><!-- End sub_content -->

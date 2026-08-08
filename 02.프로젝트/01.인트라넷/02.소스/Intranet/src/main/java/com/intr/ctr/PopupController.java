@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.dao.AprvDao;
 import com.intr.dao.RoleDao;
 import com.intr.dao.EmpDao;
+import com.intr.dao.LogDao;
 import com.intr.dao.MtgDao;
 import com.intr.dao.ProjDao;
 import com.intr.dao.QueryDao;
@@ -50,6 +51,9 @@ public class PopupController {
 	
 	@Autowired
 	TaskDao taskDao;
+	
+	@Autowired
+	LogDao logDao;
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -545,5 +549,26 @@ public class PopupController {
 		}
 		//
 		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_2011;
+	}
+	
+	// 로그 메세지 상세
+	@RequestMapping("/intrPopupInqy2021.do")
+	public String intrPopupInqy2021(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+		//
+		HashMap<String, Object> defaultInfo = null;
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 로그 메세지 상세
+			//--------------------------------------------------------------------------------------------
+			defaultInfo = logDao.logInqyDao1030(paramMap);
+			model.addAttribute("defaultInfo", defaultInfo);
+			
+		} catch (Exception e) {
+			//
+			logger.debug("Exception : 로그 메세지 상세 조회 중 에러가 발생했습니다. (" + e.getMessage() + ")");
+		}
+		//
+		return Const.VIEW_PATH_POPUP + Const.INTR_POPUP_INQY_2021;
 	}
 }

@@ -6,16 +6,6 @@
 <%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1010.jsp" %>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		// 페이지 로드 후 탭 오버플로우 체크
-	    isTabOverlow();
-	    
-	    // 윈도우 크기가 변경될 때도 체크 (반응형 대응)
-	    $(window).resize(function() {
-	    	isTabOverlow();
-	    });
-	});
-	
 	// 목록 조회
 	function listCall(){
 		try {
@@ -51,66 +41,6 @@
 			
 		} catch (error) {
 	        console.error("[Error] +/- 처리 : ", error.message);
-		}
-	}
-	
-	// 스크롤 이동 거리 설정
-	let SCROLL_AMOUNT = 250; 
-	
-	// 화살표 이동
-	function scrollTabs(direction) {
-	    // 탭 목록을 감싸서 overflow: hidden이 적용된 요소
-	    let wrapper = $(".tab_wrapper");
-	    let currentScroll = wrapper.scrollLeft();
-	    let newScroll;
-
-	    if (direction === 'left') {
-	        // 왼쪽으로 이동 (스크롤 위치 감소)
-	        newScroll = currentScroll - SCROLL_AMOUNT;
-	    } else {
-	        // 오른쪽으로 이동 (스크롤 위치 증가)
-	        newScroll = currentScroll + SCROLL_AMOUNT;
-	    }
-
-	    // jQuery animate를 사용하여 부드럽게 스크롤 이동
-	    wrapper.animate({
-	        scrollLeft: newScroll
-	    }, 300); // 300ms 동안 움직임
-	}
-	
-	// 탭 선택 처리
-	function tabCall(element){
-		//
-		try {
-			// Active 추가
-			let elt = $(element);
-			$('.tab_item').removeClass('active');
-			elt.parent('li').addClass('active');
-
-			// 부서 코드 조회
-			let orgCd = elt.attr('orgCd');
-			$("#orgCd").val(orgCd);
-			//
-			let param = $("#form").serialize();
-			$.ajax({
-		    	type : 'post',
-		    	url : "intrTaskInqy2020.do",
-				data : param,
-				dataType : 'text',
-				success : function(data){
-					$("#tabArea").html("");
-					//
-					if(data != ''){
-						$("#tabArea").html(data);
-					}
-				},
-				error : function(xhr, status, error){
-					alert("<spring:message code="PROC.ERROR"/>");	
-		    	}
-			})
-			
-		} catch (error) {
-			console.error("[Error] 탭 선택 처리 : ", error.message);
 		}
 	}
 	
@@ -152,34 +82,6 @@
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
 										<h2>업무일지 조회</h2><br>
-										<!-- 탭 -->
-										<div class="tab_container">
-											<!-- 왼쪽 화살표 -->
-										    <div class="tab_scroll_controls">
-										    	<a href="javascript:void(0);" onclick="scrollTabs('left');">
-										    		<img class="scroll_btn_left" src='resources/images/icon/icon_scroll_arrow.png' width="35" height="35" />
-										    	</a>
-										    </div>
-										    
-										    <!-- 탭 목록 -->
-										    <div class="tab_wrapper">
-											    <ul class="tab_list">
-											    	<c:forEach var="list" items="${orgList}" varStatus="status">
-													    <li class="tab_item ${(empty param.orgCd and status.index eq 0) or (list.orgCd eq param.orgCd) ? 'active' : ''}">
-													        <a href="javascript:void(0);" class="${list.orgCd}" onclick="tabCall(this);" orgcd="${list.orgCd}">${list.orgNm}</a>
-													    </li>
-													</c:forEach>
-											    </ul>
-										    </div>
-										    
-										    <!-- 오른쪽 화살표 -->
-										    <div class="tab_scroll_controls">
-										    	<a href="javascript:void(0);" onclick="scrollTabs('right');">
-										    		<img class="scroll_btn_right" src='resources/images/icon/icon_scroll_arrow.png' width="35" height="35" />
-										    	</a>
-										    </div>
-										</div>
-										
 										<div class="srch_wrap" style="margin-top: 5px;">
 											<div class="right_srch_area">
 												<!-- 작성일자 -->
@@ -189,7 +91,23 @@
 													~
 													<input type="text" id="srchEdt" class="srch_cdt_date" id="srchEdt" name="srchEdt" value="${param.srchEdt}" readonly="readonly"/>
 												</div>
-
+												
+												<!-- 부서 -->
+												<div class="srch_area">
+													<label class="srch_label">부서</label>
+													<div class="select_wrap">
+														<div id="orgList" class="sList select_box">${empty param.orgNm ? '전체' : param.orgNm}</div>
+														<input type="hidden" name="orgCd" value="${param.orgCd}">
+														<input type="hidden" name="orgNm" value="${param.orgNm}">
+													
+														<ul class="sUl select_ul scroll_wrap">
+															<c:forEach var="list" items="${orgList}">
+																<li setNm="${list.orgNm}" setCd="${list.orgCd}">${list.orgNm}</li>
+															</c:forEach>
+														</ul>
+													</div>
+												</div>
+											
 												<!-- 작성자 -->
 												<div class="float_right">
 													<div class="srch_area">

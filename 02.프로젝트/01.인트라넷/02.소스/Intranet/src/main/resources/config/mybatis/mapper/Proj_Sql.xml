@@ -43,7 +43,7 @@
 		    		,	R.RANK_NM
                     ,   P.REG_DT
                     ,   P.REG_TM
-                    ,	RANK() OVER(ORDER BY P.PROJ_CD DESC) AS NUM
+                    ,	ROW_NUMBER() OVER(ORDER BY P.PROJ_CD DESC) AS NUM
                     ,	(SELECT 
       							COUNT(FILE_ID) 
       						FROM FILE_INFO 

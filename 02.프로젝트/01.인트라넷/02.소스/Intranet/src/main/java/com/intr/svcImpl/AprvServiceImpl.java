@@ -390,17 +390,17 @@ public class AprvServiceImpl implements AprvService{
 			//--------------------------------------------------------------------------------------------
 			// 양식 유형 처리
 			//--------------------------------------------------------------------------------------------
-			if(temptypeCd.equals("LEAV")) {
+			if(temptypeCd.equals(Const.TEMP_LEAV)) {
 				// 휴가 신청서 등록 (APRV_REL_LEAV)
 				aprvDao.aprvProcDao1040(paramMap);
 			}
 			
-			else if(temptypeCd.equals("EXP")) {
+			else if(temptypeCd.equals(Const.TEMP_EXP)) {
 				// 가지급결의서 등록 (APRV_REL_EXP)
 				aprvDao.aprvProcDao1050(paramMap);
 			}
 
-			else if(temptypeCd.equals("ITEM")) {
+			else if(temptypeCd.equals(Const.TEMP_ITEM)) {
 				// 물품반출입 신청서 등록 (APRV_REL_ITEM)
 				jStr = (String)paramMap.get("itemlineList");
 				jParser = new JSONParser();
@@ -424,7 +424,7 @@ public class AprvServiceImpl implements AprvService{
 				}
 			}
 			
-			else if(temptypeCd.equals("CORP")) {
+			else if(temptypeCd.equals(Const.TEMP_CORP)) {
 				// 법인카드 정산서 등록 (APRV_REL_CORP)
 				jStr = (String)paramMap.get("corplineList");
 				jParser = new JSONParser();
@@ -488,7 +488,7 @@ public class AprvServiceImpl implements AprvService{
 						tempMap.put("rslttypeCd", rslttypeCd);
 						
 						// APRVSTEP_CD 수정
-						paramMap.put("stepCd", Const.STEP_0020);		// 결재 완료
+						paramMap.put("stepCd", Const.STEP_COMP);		// 결재 완료
 						aprvDao.aprvProcDao2010(paramMap);
 						
 					}  else {
@@ -510,7 +510,7 @@ public class AprvServiceImpl implements AprvService{
 				// 결재 반송
 				else if(rslttypeCd.equals(Const.RSLT_0020)) {
 					// APRVSTEP_CD 수정
-					paramMap.put("stepCd", Const.STEP_0030);			// 결재반송
+					paramMap.put("stepCd", Const.STEP_REJT);			// 결재반송
 					aprvDao.aprvProcDao2010(paramMap);
 					
 					// RSLT 수정
@@ -520,7 +520,7 @@ public class AprvServiceImpl implements AprvService{
 				// 결재 취소
 				else if(rslttypeCd.equals(Const.RSLT_0030)) {
 					// APRVSTEP_CD 수정
-					paramMap.put("stepCd", Const.STEP_0040);			// 결재취소
+					paramMap.put("stepCd", Const.STEP_CANC);			// 결재취소
 					aprvDao.aprvProcDao2010(paramMap);
 					
 					// CURR_APRV_SNO 수정

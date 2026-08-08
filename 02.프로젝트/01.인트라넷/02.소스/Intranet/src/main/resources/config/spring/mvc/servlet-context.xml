@@ -18,9 +18,8 @@
         <interceptor>
             <mapping path="/**"/> 
             <exclude-mapping path="/"/>
-            <exclude-mapping path=""/> 
             <exclude-mapping path="/intrMainInqy1010.do"/> 
-            <exclude-mapping path="intrMainProc1010.do"/> 
+            <exclude-mapping path="/intrMainProc1010.do"/> 
             <exclude-mapping path="/resources/**"/>
             <exclude-mapping path="/error/**"/>
             <exclude-mapping path="/ckeditor/**"/> 

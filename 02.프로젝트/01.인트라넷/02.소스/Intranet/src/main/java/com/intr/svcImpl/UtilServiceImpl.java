@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -717,7 +718,7 @@ public class UtilServiceImpl implements UtilService{
 	        headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 	        
 	        XSSFFont headerFont = wb.createFont();
-	        headerFont.setBoldweight(headerFont.BOLDWEIGHT_BOLD); // 구버전에서 사용
+	        headerFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
 	        headerStyle.setFont(headerFont);
 	        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
 	        headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
@@ -798,11 +799,15 @@ public class UtilServiceImpl implements UtilService{
 	public void setPaging(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		String listPage = String.valueOf(paramMap.get("page"));
+		String listPage = (String) paramMap.get("page");
 		String listCnt = "0";
 		//
 		int nowPage = 1; // 페이지 기본 값 (첫 동작)
-		Integer page = this.isNull(listPage) ? 0 : Integer.parseInt(listPage); // 현재 페이지
+		Integer page = null; // 현재 페이지
+		
+		if(!this.isNull(listPage)) {
+			page = Integer.parseInt(listPage);
+		}
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -821,20 +826,22 @@ public class UtilServiceImpl implements UtilService{
 			// 페이징 처리
 			//--------------------------------------------------------------------------------------------
 			if(page!=null) {
-				// 특정 페이지 값이 있는 경우 대체
 				nowPage = page;
+			}
+			if(nowPage < 1) {
+				nowPage = 1;
 			}
 					
 			// 페이지 첫, 마지막 인덱스
 			int sIdx = (nowPage-1)*Const.BLOCKLIST+1;
-			int endIdx = sIdx+Const.BLOCKLIST-1;
+			int eIdx = sIdx+Const.BLOCKLIST-1;
 			//
 			//--------------------------------------------------------------------------------------------
 			// 페이지 변수 저장
 			//--------------------------------------------------------------------------------------------
 			paramMap.put("nowPage", nowPage);
 			paramMap.put("sIdx",sIdx);
-			paramMap.put("eIdx",endIdx);
+			paramMap.put("eIdx",eIdx);
 			paramMap.put("blockList",Const.BLOCKLIST);
 			paramMap.put("blockPage",Const.BLOCKPAGE);
 
@@ -850,7 +857,6 @@ public class UtilServiceImpl implements UtilService{
 	
 	// 페이징 메뉴 생성
 	public String setPageMenu(HashMap<String, Object> paramMap) throws Exception {
-		// 
 		//--------------------------------------------------------------------------------------------
 		// 변수 
 		//--------------------------------------------------------------------------------------------
@@ -938,20 +944,23 @@ public class UtilServiceImpl implements UtilService{
 	// 페이지 Url 생성
 	public String setPageUrl(HashMap<String, Object> paramMap) throws Exception {
 		//
-		String pageUrl = "";
-		StringBuilder sb = new StringBuilder();
-		sb.append((String)paramMap.get("pageUrl"));
-		sb.append("?");
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(paramMap.get("pageUrl")).append("?");
+	    //
+	    for(String key : paramMap.keySet()) {
+	        // 페이징 계산값 제외
+	        if("page".equals(key) || "nowPage".equals(key) || "sIdx".equals(key) ||
+	        		"eIdx".equals(key) || "listCnt".equals(key) || "blockList".equals(key) || "blockPage".equals(key)) {
+	            continue;
+	        }
+	        //
+	        Object value = paramMap.get(key);
+	        sb.append(key).append("=").append(value == null ? "" : value).append("&");
+	    }
 
-		//--------------------------------------------------------------------------------------------
-		// 변수 추가
-		//--------------------------------------------------------------------------------------------
-		for (String key : paramMap.keySet()) {
-			sb.append(key + "=" + String.valueOf(paramMap.get(key)) + "&");
-		}
-		//
-		pageUrl = sb.substring(0, sb.length() -1).toString();
-		return pageUrl;
+	    // 마지막 & 제거
+	    if(sb.charAt(sb.length()-1) == '&') sb.deleteCharAt(sb.length()-1);
+	    return sb.toString();
 	}
 	
 	// Null 체크

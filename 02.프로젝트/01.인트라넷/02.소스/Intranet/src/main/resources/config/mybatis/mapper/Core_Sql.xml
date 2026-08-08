@@ -237,7 +237,7 @@
 					ON R.RANK_CD = E.RANK_CD
 				WHERE 1 = 1
 					<if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(P.PROJ_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
 				    </if>
 				    <if test="srchDt != null and srchDt !=''">
 				    	AND T.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
@@ -278,6 +278,30 @@
 				    <if test="srchDt != null and srchDt !=''">
 				    	AND T.REG_DT = REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
 				    </if>
+			</when>
+			<when test="pageUrl.contains('Log')">
+				SELECT 
+					COUNT(L.LOG_ID) AS LIST_CNT 
+				FROM LOG L
+				LEFT OUTER JOIN EMP_INFO E
+					ON L.EMP_IDX = E.EMP_IDX
+				LEFT OUTER JOIN ORG O
+					ON O.ORG_CD = E.ORG_CD
+				LEFT OUTER JOIN RANK R
+					ON R.RANK_CD = E.RANK_CD
+				WHERE 1 = 1
+					 <if test="srchNm != null and srchNm != ''">
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    </if>
+				    <if test="srchSdt != null and srchSdt !=''">
+				    	AND L.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
+				    </if>
+				    <if test="srchEdt != null and srchEdt !=''">
+				    	AND L.REG_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
+				    </if>
+					<if test="srchLogCd != null and srchLogCd != ''">
+						AND L.LOGTYPE_CD = #{srchLogCd, jdbcType=VARCHAR}
+					</if>
 			</when>
 		</choose>
 	</select>

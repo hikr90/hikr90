@@ -17,7 +17,6 @@
 							</div>
 	                        
 	                     	<!-- 업무 캘린더 상세 -->
-	                        
 	                     	<div id="tldrCon" class="post_con disp_flex" style="height: 310px;"></div>
 							<div class="btn_right">
    		                  		<button type="button" class="btn_blue_thin regBtn" onclick="regProc();">등록</button>
