@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import com.intr.dao.RoleDao;
 import com.intr.svc.RoleService;
 import com.intr.svc.MainService;
-import com.intr.svc.UtilService;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -23,9 +22,7 @@ public class RoleServiceImpl implements RoleService{
 	@Autowired
 	MainService mainService;
 	
-	@Autowired
-	UtilService utilService;
-	
+	// 권한 목록 조회
 	public void roleInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		List<HashMap<String, Object>> defaultList = null;

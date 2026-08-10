@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.RoleService;
 import com.intr.svc.CoreService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -23,11 +22,7 @@ public class RoleController {
 	CoreService coreService;
 
 	@Autowired
-	UtilService utilService;
-
-	@Autowired
 	RoleService roleService;
-
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

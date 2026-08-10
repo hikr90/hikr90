@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import com.intr.dao.TempDao;
 import com.intr.svc.MainService;
 import com.intr.svc.TempService;
-import com.intr.svc.UtilService;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -22,9 +21,6 @@ public class TempServiceImpl implements TempService{
 	
 	@Autowired
 	MainService mainService;
-	
-	@Autowired
-	UtilService utilService;
 	
 	// 기안문 양식 목록 조회
 	public void tempInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {

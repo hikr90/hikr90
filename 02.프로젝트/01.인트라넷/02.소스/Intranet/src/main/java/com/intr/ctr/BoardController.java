@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.BoardService;
 import com.intr.svc.CoreService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -25,10 +24,6 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
-	
-	@Autowired
-	UtilService utilService;
-	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

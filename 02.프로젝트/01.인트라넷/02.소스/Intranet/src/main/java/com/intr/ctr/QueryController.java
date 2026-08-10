@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.CoreService;
 import com.intr.svc.QueryService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -28,10 +27,6 @@ public class QueryController {
 
 	@Autowired
 	CoreService coreService;
-	
-	@Autowired
-	UtilService utilService;
-	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

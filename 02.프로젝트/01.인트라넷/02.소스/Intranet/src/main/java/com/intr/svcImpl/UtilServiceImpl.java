@@ -82,10 +82,12 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String filePath = Const.FILE_PATH;
-		filePath = setOsPath(paramMap, filePath);
+		String fullPath = "";
+		String filetypeCd = this.nvlProc((String)paramMap.get("filetypeCd"));
+		String filePath = setBasePath(Const.FILE_PATH, filetypeCd);
+		fullPath = filePath + getDatePath();
 		//
-		return filePath;
+		return fullPath;
 	}
 	
 	// (임시) 파일 경로 조회
@@ -93,40 +95,32 @@ public class UtilServiceImpl implements UtilService{
 		//--------------------------------------------------------------------------------------------
 		// 경로 검색
 		//--------------------------------------------------------------------------------------------
-		String filePath = Const.TEMP_PATH;
-		filePath = setOsPath(paramMap, filePath);
+		String fullPath = "";
+		String filetypeCd = this.nvlProc((String)paramMap.get("filetypeCd"));
+		String filePath = setBasePath(Const.TEMP_PATH, filetypeCd);
+		fullPath = filePath + getDatePath();
 		//
-		return filePath;
+		return fullPath;
 	}
 	
 	// 운영 체제 조회
-	public String setOsPath(HashMap<String, Object> paramMap, String filePath) throws Exception {
-		//--------------------------------------------------------------------------------------------
-		// 경로 생성
-		//--------------------------------------------------------------------------------------------
+	public String setBasePath(String basePath, String filetypeCd) throws Exception {
 		//--------------------------------------------------------------------------------------------
 		// 경로 생성
 		//--------------------------------------------------------------------------------------------
 		String os = System.getProperty("os.name").toLowerCase();
-		String filetypeCd = (String) paramMap.get("filetypeCd");
+		String filePath = "";
 
-		// # 1 윈도우 : C드라이브 시작
-		// # 2 리눅스 : / 시작
+		// 운영 체제 구분
 		if(os.contains("win")) {
-			filePath = "C:\\" + filePath + File.separator;
-		} else if(os.contains("linux")) {
-			filePath = "/" + filePath + File.separator;
+			filePath = "C:\\" + basePath + File.separator;
+		} else {
+			filePath = "/" + basePath.replace("\\", "/") + File.separator;
 		}
-		//
-		if (!this.isNull(filetypeCd))
-		    filePath += filetypeCd + File.separator;
 		
-		// 날짜 경로
-		filePath += getDatePath();
-
-		// Linux 경로 변환
-		if(os.contains("linux")) {
-			filePath = filePath.replace("\\", "/");
+		// 파일 종류
+		if(!isNull(filetypeCd)) {
+			filePath += filetypeCd + File.separator;
 		}
 		//
 		return filePath;
@@ -557,12 +551,11 @@ public class UtilServiceImpl implements UtilService{
 			//--------------------------------------------------------------------------------------------
 			fileNm = (docCd.equals("ppt")) ? Const.MANU_PPT : (docCd.equals("word")) ? Const.MANU_WORD : Const.MANU_EXCEL;
 			saveFileNm = fileNm;
-			filePath = Const.MANU_PATH;
 
 			//--------------------------------------------------------------------------------------------
 			// 경로 생성
 			//--------------------------------------------------------------------------------------------
-			filePath = setOsPath(paramMap, filePath);
+			filePath = setBasePath(Const.MANU_PATH, null);
 
 			//--------------------------------------------------------------------------------------------
 			// 파일 다운로드

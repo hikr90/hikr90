@@ -23,8 +23,8 @@ public class Const {
 	public static final String LOG_INQY 		= "PROC_0010"; 			// 조회
 	public static final String LOG_PROC 		= "PROC_0020"; 			// 처리
 
-	public static final String LOG_SUCC 		= "Y"; 			// 성공
-	public static final String LOG_FAIL 		= "N"; 			// 실패
+	public static final String LOG_SUCC 		= "Y"; 				// 성공
+	public static final String LOG_FAIL 		= "N"; 				// 실패
 	
 	public static final String TEMP_LEAV 		= "Leav"; 			// 휴가 신청서
 	public static final String TEMP_EXP 		= "Exp"; 			// 가지급결의서
@@ -34,16 +34,20 @@ public class Const {
 	//--------------------------------------------------------------------------------------------
 	// 매뉴얼
 	//--------------------------------------------------------------------------------------------
-	public static final String MANU_WORD  = "인트라넷 테이블.docx"; 		// WORD
-	public static final String MANU_EXCEL  = "인트라넷 데이터.xlsx"; 		// EXCEL
-	public static final String MANU_PPT  = "인트라넷 프로젝트.pptx"; 		// PPT
+	public static final String MANU_WORD  = "intr_table.docx"; 		// WORD
+	public static final String MANU_EXCEL  = "intr_data.xlsx"; 		// EXCEL
+	public static final String MANU_PPT  = "intr_project.pptx"; 		// PPT
 	
 	//--------------------------------------------------------------------------------------------
 	// 내부규정
 	//--------------------------------------------------------------------------------------------
-	public static final String RULE_CORP  = "사규관리규정.pdf"; 			// 사규
-	public static final String RULE_HRM  = "인사관리규정.pdf"; 			// 인사관리
-	public static final String RULE_WEL  = "복리후생관리규정.pdf"; 		// 복리후생
+	public static final String TAB_CORP  = "corp"; 		// 사규 (탭)
+	public static final String TAB_HRM  = "hrm"; 			// 인사관리 (탭)
+	public static final String TAB_WEL  = "wel"; 			// 복리후생 (탭)
+	
+	public static final String RULE_CORP  = "intr_corporateregulations.pdf"; 	// 사규
+	public static final String RULE_HRM  = "intr_hrregulations.pdf"; 				// 인사관리
+	public static final String RULE_WEL  = "intr_welfareregulations.pdf"; 		// 복리후생
 	
 	//--------------------------------------------------------------------------------------------
 	// 페이징
@@ -75,10 +79,10 @@ public class Const {
 	//--------------------------------------------------------------------------------------------
 	// 파일 다운로드 경로
 	//--------------------------------------------------------------------------------------------
-	public static final String FILE_PATH = "INTR\\FILE"; 				// 파일
-	public static final String TEMP_PATH = "INTR\\TEMP"; 				// 임시
-	public static final String MANU_PATH  = "INTR\\MANUAL"; 		// 매뉴얼
-	public static final String REGS_PATH  = "INTR\\REGS"; 			// 내부규정
+	public static final String FILE_PATH = "Intr\\File"; 				// 파일
+	public static final String TEMP_PATH = "Intr\\Temp"; 			// 임시
+	public static final String MANU_PATH  = "Intr\\Manual"; 		// 매뉴얼
+	public static final String REGS_PATH  = "Intr\\Regs"; 			// 내부규정
 	
 	//--------------------------------------------------------------------------------------------
 	// 로그인

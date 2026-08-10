@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.LogService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -22,9 +21,6 @@ public class LogController {
 	@Autowired
 	CoreService coreService;
 
-	@Autowired
-	UtilService utilService;
-	
 	@Autowired
 	LogService logService;
 	

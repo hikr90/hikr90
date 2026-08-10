@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.dao.UtilDao;
 import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -33,11 +32,7 @@ public class EmpController {
 	EmpService empService;
 	
 	@Autowired
-	UtilService utilService;
-	
-	@Autowired
 	UtilDao utilDao;
-	
 	// 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	

@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.intr.dao.UtilDao;
 import com.intr.svc.BanrService;
 import com.intr.svc.CoreService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -29,9 +28,6 @@ public class BanrController {
 	@Autowired
 	CoreService coreService;
 
-	@Autowired
-	UtilService utilService;
-	
 	@Autowired
 	BanrService banrService;
 	

@@ -37,7 +37,6 @@ public class MtgController {
 	
 	@Autowired
 	MtgDao mtgDao;
-	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

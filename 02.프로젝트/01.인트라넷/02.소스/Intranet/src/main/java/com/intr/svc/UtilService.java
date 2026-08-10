@@ -23,7 +23,7 @@ public interface UtilService {
 	// 파일 경로 생성
 	String setFilePath(HashMap<String, Object> paramMap) throws Exception; 	// 일반 경로
 	String setTempPath(HashMap<String, Object> paramMap) throws Exception; // 임시 경로
-	String setOsPath(HashMap<String, Object> paramMap, String filePath) throws Exception; 	// 운영체제 경로
+	String setBasePath(String basePath, String filetypeCd) throws Exception; 	// 기본 경로
 	
 	// 파일 업로드
 	String fileUpload(Model model, HashMap<String, Object> paramMap, MultipartHttpServletRequest request) throws Exception; // 업로드

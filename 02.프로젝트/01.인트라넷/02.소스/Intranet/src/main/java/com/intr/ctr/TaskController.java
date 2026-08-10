@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.intr.svc.CoreService;
 import com.intr.svc.EmpService;
 import com.intr.svc.TaskService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -26,9 +25,6 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 
-	@Autowired
-	UtilService utilService;
-	
 	@Autowired
 	EmpService empService;
 	// 

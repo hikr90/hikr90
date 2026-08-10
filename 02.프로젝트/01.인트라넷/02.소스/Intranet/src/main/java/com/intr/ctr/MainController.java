@@ -34,10 +34,8 @@ import com.intr.svc.EmpService;
 import com.intr.svc.MainService;
 import com.intr.svc.MtgService;
 import com.intr.svc.TempService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 import com.intr.vo.EmpVO;
-
 
 @Controller
 public class MainController {
@@ -59,9 +57,6 @@ public class MainController {
 
 	@Autowired
 	RoleService roleService;
-	
-	@Autowired
-	UtilService utilService;
 	
 	@Autowired
 	MtgService mtgService;
@@ -185,6 +180,7 @@ public class MainController {
 	}
 
 	// 관리자 메인 조회
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/intrMainInqy1030.do")
 	public String intrMainInqy1030(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//

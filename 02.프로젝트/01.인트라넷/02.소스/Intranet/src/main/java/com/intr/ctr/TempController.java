@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.intr.svc.CoreService;
 import com.intr.svc.TempService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -24,10 +23,6 @@ public class TempController {
 	
 	@Autowired
 	TempService tempService;
-	
-	@Autowired
-	UtilService utilService;
-
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

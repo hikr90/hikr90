@@ -52,12 +52,11 @@ public class RegsServiceImpl implements RegsService {
 	@Override
     public void regsInqyService1011(Model model, HashMap<String, Object> paramMap, HttpServletResponse response) throws Exception {
         // 물리 경로 설정
-		String filePath = Const.REGS_PATH;
-		filePath = utilService.setOsPath(paramMap, filePath);
+		 String filePath = utilService.setBasePath(Const.REGS_PATH, null);
 		
 		// 파일명 설정
 		String tabCd = (String)paramMap.get("tabCd");
-		String fileNm = "wel".equals(tabCd) ? Const.RULE_WEL : "hrm".equals(tabCd) ? Const.RULE_HRM : Const.RULE_CORP;
+		String fileNm = Const.TAB_WEL.equals(tabCd) ? Const.RULE_WEL : Const.TAB_HRM.equals(tabCd) ? Const.RULE_HRM : Const.RULE_CORP;
 		//
         File pdfFile = new File(filePath + File.separator + fileNm);
         if (!pdfFile.exists()) throw new FileNotFoundException("[ERROR] file not found : " + pdfFile.getName());

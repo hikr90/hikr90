@@ -441,7 +441,7 @@ public class PopupController {
 	public String intrPopupInqy1111(Model model, @RequestParam HashMap<String, Object> paramMap) {
 		//
 		List<HashMap<String, Object>> defaultList = null;
-		List<HashMap<String, Object>> emptyList = new ArrayList();
+		List<HashMap<String, Object>> emptyList = new ArrayList<HashMap<String, Object>>();
 		JSONObject jObj = new JSONObject();
 		//
 		try {

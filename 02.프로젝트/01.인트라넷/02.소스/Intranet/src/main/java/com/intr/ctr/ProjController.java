@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.CoreService;
 import com.intr.svc.ProjService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -24,11 +23,7 @@ public class ProjController {
 	CoreService coreService;
 
 	@Autowired
-	UtilService utilService;
-	
-	@Autowired
 	ProjService projService;
-	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

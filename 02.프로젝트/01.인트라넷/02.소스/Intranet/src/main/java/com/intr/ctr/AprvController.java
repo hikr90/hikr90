@@ -14,9 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.intr.svc.AprvService;
 import com.intr.svc.CoreService;
-import com.intr.svc.EmpService;
 import com.intr.svc.TempService;
-import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
@@ -30,13 +28,6 @@ public class AprvController {
 
 	@Autowired
 	TempService tempService;
-	
-	@Autowired
-	EmpService empService;
-	
-	@Autowired
-	UtilService utilService;
-	
 	//
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -405,11 +396,6 @@ public class AprvController {
 		String defaultStr = "";
 		//
 		try {
-			//--------------------------------------------------------------------------------------------
-			// 메뉴 조회
-			//--------------------------------------------------------------------------------------------
-			coreService.coreInqyService1010(model, paramMap);
-			
 			//--------------------------------------------------------------------------------------------
 			// 결재 처리
 			//--------------------------------------------------------------------------------------------

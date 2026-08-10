@@ -31,7 +31,9 @@ public class QueryServiceImpl implements QueryService{
 	public void queryInqyService1010(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
-			//
+			//--------------------------------------------------------------------------------------------
+			// 쿼리 화면 조회
+			//--------------------------------------------------------------------------------------------
 			
 		} catch (Exception e) {
 			//
