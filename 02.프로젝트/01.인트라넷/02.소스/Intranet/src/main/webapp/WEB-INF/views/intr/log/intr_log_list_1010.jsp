@@ -37,7 +37,7 @@
 	}
 </script>
 <body id="main">
-<form id="form" method="POST">
+<form id="form" name="form" method="POST">
 	<!-- 메뉴 -->
 	<%@ include file="/WEB-INF/views/intr/comm/include/intr_include_1030.jsp" %>
 	

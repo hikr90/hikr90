@@ -45,7 +45,7 @@
 											<div class="srch_area">
 												<label class="srch_label">연도</label>
 												<div class="select_wrap">
-													<div id="yearList" class="sList select_box">${empty param.srchEmpyNm ? yearList[0].commcodeNm : param.srchEmpyNm}</div>
+													<div id="yearList" class="sList select_box">${empty param.srchYearNm ? yearList[0].commcodeNm : param.srchYearNm}</div>
 													<input type="hidden" name="srchYearCd" value="${param.srchYearCd}">
 													<input type="hidden" name="srchYearNm" value="${param.srchYearNm}">
 												

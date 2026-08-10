@@ -35,7 +35,7 @@ public class LogController {
 
 	// 로그 목록 조회
 	@RequestMapping("/intrLogInqy1010.do")
-	public String intrBanrInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
+	public String intrLogInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
