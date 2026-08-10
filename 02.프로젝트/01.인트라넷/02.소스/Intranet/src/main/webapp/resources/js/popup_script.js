@@ -2,21 +2,19 @@
 function ajaxPopup(obj){
 	try {
 		//
-		var area = obj["areaType"] + "Area"; // projArea
-		var con =  obj["areaType"] + "Con";	// projCon
+		var area = obj["areaType"] + "Area"; 		// projArea
+		var con =  obj["areaType"] + "Con";			// projCon
 		//	
 		var postArea = $("#" + area);
 		postArea.css({
 			 //
-			 position:	'fixed'	,																// 포지션
-	         zIndex: 9991 + 1,																	// z-index (백그라운드 레이어보다 위)
+			 position:	'fixed'	,								// 포지션
+	         zIndex: 9992,										// z-index (백그라운드 레이어보다 위)
 	         top:	'47%',
 	         left: 	'50%',
 	         width:	  obj["width"] + "px",
 	         height:  obj["height"] + "px",
-	         transform:	'translate(-50%, -50%)'	,
-	         msTransform:	'translate(-50%, -50%)',
-	         webkitTransform:	'translate(-50%, -50%)'
+	         transform:	'translate(-50%, -50%)'
 		});
 		
 		// 동작 제어
@@ -80,7 +78,7 @@ function popConfirm(type){
 		//
 		var pcd = type + "Pcd";
 		var pnm = type + "Pnm";
-		var input = $("input[name=" + pcd + "]:checked"); 
+		var input = $("input[name='" + pcd + "']:checked");
 	
 		// 선택 여부 검증
 		if(input.length==0){

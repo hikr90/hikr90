@@ -8,24 +8,20 @@ $(function() {
 		var thisFiles = this.files; 
 		var fileStr = "";
 		
-		// 파일 개수 유효성 검사
-		if (tempList.length + thisFiles.length > 3) {
-            alert("파일은 최대 3개까지만 업로드 가능합니다.");
-            $(this).val('');
-            return false;
-        }
-		
 		// 다중 파일 처리 
 		for(var i=0;i<thisFiles.length;i++){
 			// 임시 목록 추가
 			tempList.push(thisFiles[i]);
 			
+			// 전체 파일 목록 기준 인덱스
+			var fileIdx = tempList.length - 1;
+			
 			// 화면 내 파일 추가
-			fileStr += "<li id='fileLi" + i + "'>";
-			fileStr += "	<input type='hidden' id='fileId" + i + "' name='insert" + i + "' />";
-			fileStr += "	<img src='resources/images/icon/icon_file.png' width='20' height='20' />";
-			fileStr += "	<a href='javascript:void(0);' onclick=\"fileDel('insert', '" + i + "');\"><span>"+thisFiles[i].name+"</span></a>";
-			fileStr += "</li>";
+			fileStr += "<li id='fileLi" + fileIdx + "'>";
+		    fileStr += "    <input type='hidden' id='fileId" + fileIdx + "' name='insert" + fileIdx + "' />";
+		    fileStr += "    <img src='resources/images/icon/icon_file.png' width='20' height='20' />";
+		    fileStr += "    <a href='javascript:void(0);' onclick=\"fileDel('insert', '" + fileIdx + "');\"><span>" + thisFiles[i].name + "</span></a>";
+		    fileStr += "</li>";
 		}		
 		
 		// 추가 후 초기화 
@@ -83,45 +79,43 @@ $(function() {
  
 
 // 첨부파일 삭제
-function fileDel(status, idx){
-	var name = $("#fileId" + idx).attr("name");
-	//
-	try {
-		// insert (등록), delete (삭제), none (작업 없음)
-		if(status=='insert'){
-			if(name.indexOf("insert")>-1){
-				// insert > none
-				$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
-				$("#fileId"+idx).attr("name", name.replace(status ,"none"));					// none 처리
-			} else {
-				// none > insert
-				$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
-				$("#fileId"+idx).attr("name", name.replace("none", status));					// insert 처리
-			}
-			//
-		} else {
-			if(name.indexOf("none")>-1){
-				// none > delete
-				$("#fileLi"+idx).find("span").css('text-decoration','line-through');			// 라인 추가
-				$("#fileId"+idx).attr("name", name.replace("none" , status));					// none 처리
-			} else {
-				// delete > none
-				$("#fileLi"+idx).find("span").css('text-decoration','');							// 라인 제거
-				$("#fileId"+idx).attr("name", name.replace(status, "none"));					// delete 처리
-			}
-		}
-		
-	} catch (error) {
+function fileDel(status, idx) {
+    try {
+        // 대상
+        var fileId = $("#fileId" + idx);
+        var fileLi = $("#fileLi" + idx);
+
+        // 현재 상태
+        var name = fileId.attr("name");
+        var currentStatus = name.indexOf("none") > -1 ? "none" : status;
+
+        // 상태 변경
+        var nextStatus = currentStatus === "none" ? status : "none";
+
+        // name 변경
+        fileId.attr("name", name.replace(currentStatus, nextStatus));
+
+        // 화면 처리
+        fileLi.find("span").css(
+            "text-decoration",
+            nextStatus === "none" ? "line-through" : ""
+        );
+
+    } catch (error) {
         console.error("[Error] 첨부파일 삭제 : ", error.message);
-	}
+    }
 }
 
 
 // 폼 데이터 생성
 function setFormData(){
+	//
+	var fileList = null;
+	//
 	try {
 		//
-		var fileList = new FormData(document.getElementById("form"));
+		fileList = new FormData(document.getElementById("form"));
+		//
 		for(var i=0;i<tempList.length;i++){
 			fileList.append("fileList", tempList[i]);
 		}

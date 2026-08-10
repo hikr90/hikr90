@@ -140,7 +140,7 @@ function adminCall() {
 }
 
 // 로그아웃
-function outProc() {
+function logoutProc() {
 	try {
 		alert("로그아웃 되었습니다.");
 		location.href = "intrMainProc1020.do";
@@ -151,7 +151,7 @@ function outProc() {
 }
 
 // 목록 조회 (엔터)
-function pushCall(f) {
+function enterListCall(f) {
 	try {
 		if(event.keyCode==13){
 			listCall(f);
@@ -162,7 +162,7 @@ function pushCall(f) {
 }
 
 // 로그인 (엔터)
-function pushLogCall(f) {
+function enterLoginCall(f) {
 	try {
 		if(event.keyCode==13){
 			loginCall(f);
@@ -222,9 +222,9 @@ function requiredProc(){
         // 필수 입력값 대상
         var requiredFields = $("#form input[isReq='Y'], #form textarea[isReq='Y']");
 
-        requiredFields.each(function(index, element){
+        requiredFields.each(function(){
             // 현재 요소를 jQuery 객체로 변환
-            var tag = $(element);
+            var tag = $(this);
             var title = tag.attr("title") || "필수 항목";
             var value = tag.val().trim();
 

@@ -19,7 +19,7 @@
 						</li>
 					</c:if>
 					<li>
-						<a href="javascript:void(0);" onclick="outProc();"><img src='resources/images/icon/icon_logout.png' width="32" height="32" title="로그아웃" /></a>
+						<a href="javascript:void(0);" onclick="logoutProc();"><img src='resources/images/icon/icon_logout.png' width="32" height="32" title="로그아웃" /></a>
 					</li>
 				</ul><br><br>
 				

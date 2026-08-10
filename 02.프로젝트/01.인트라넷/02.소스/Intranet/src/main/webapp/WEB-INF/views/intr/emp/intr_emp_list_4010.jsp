@@ -76,7 +76,7 @@
 											<div class="float_right">
 												<div class="srch_area">
 													<label class="srch_label">부서명</label>
-													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="pushCall(this.form);">
+													<input type="text" id="srchNm" name="srchNm" class="srch_cdt_text" value="${param.srchNm}" onkeydown="enterListCall(this.form);">
 												
 													<input type="button" class="btn_blue" value="조회" onclick="listCall(this.form);">
 													<input type="button" class="btn_gray" value="초기화" onclick="initCall();">

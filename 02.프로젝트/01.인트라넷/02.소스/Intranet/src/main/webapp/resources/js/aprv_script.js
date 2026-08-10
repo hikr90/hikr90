@@ -187,14 +187,21 @@ function corpReg(){
 
 // 정산내역 조회 팝업
 function corpCall(aprvId){
-	var obj = new Object();
-	obj["mappingId"] = "intrPopupInqy1072.do";
-	obj["areaType"] = "corp";
-	obj["sequenceId"] = aprvId;
-	obj["width"] = "1100"
-	obj["height"] = "620";
-	//		
-	ajaxPopup(obj);
+	try {
+		//
+		var obj = new Object();
+		
+		obj["mappingId"] = "intrPopupInqy1072.do";
+		obj["areaType"] = "corp";
+		obj["sequenceId"] = aprvId;
+		obj["width"] = "1100"
+		obj["height"] = "620";
+		//		
+		ajaxPopup(obj);
+	
+	} catch (error) {
+        console.error("[Error] 정산내역 입력 팝업 : ", error.message);
+	}
 }
 
 // 결재의견 입력 팝업
@@ -218,12 +225,10 @@ function opinCall(method){
 
 // 결재의견 처리
 function opinConf(area) {
-	var rslttypeCd = $("#rslttypeCd").val();
-	var aprvPwd = $("#aprvPwd").val();
-	var empPwd = "${empVO.empPwd}";
 	//	
 	try {
 		// 유효성 검증
+		var aprvPwd = $("#aprvPwd").val();
 		if(aprvPwd == '') {
 			alert("비밀번호를 입력해주세요.");
 			return;
@@ -239,12 +244,12 @@ function opinConf(area) {
 	            dataType : 'html',
 	            success : function(data){
 						var json = eval(data);
-   						if(json[0].res=="YES"){
+   						if(json[0].res == "YES"){
    							//
 							alert("작업이 완료되었습니다.");
 							formSubmit('intrAprvInqy2010.do');
 				
-   						} else if(json[0].res=="PWD") {
+   						} else if(json[0].res == "PWD") {
 							alert("비밀번호를 확인해주세요.");
 							return;
 	

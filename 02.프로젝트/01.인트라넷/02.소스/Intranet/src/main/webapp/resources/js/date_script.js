@@ -41,7 +41,7 @@ function leadingZeros(n, digits) {
 	    n = n.toString();
 	    //
 	    if (n.length < digits) {
-	        for (i = 0; i < digits - n.length; i++)
+	        for (var i = 0; i < digits - n.length; i++)
 	            zero += '0';
 	    }
 	
@@ -56,7 +56,7 @@ function leadingZeros(n, digits) {
 function getTimeStamp(d) {
 	try {
 		// getMinutes + 1 : Minutes의 경우 0 ~ 9로 표현
-		var now =  d.getHours() + ":" + ((d.getMinutes()<10?'0':'') + d.getMinutes() + ":" + d.getSeconds());
+		var now = d.getHours() + ":" + leadingZeros(d.getMinutes(), 2) + ":" + leadingZeros(d.getSeconds(), 2);
 	
 	} catch (error) {
         console.error("[Error] 현재 시간 표현 : ", error.message);
