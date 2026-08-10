@@ -59,9 +59,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Stat");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("statList",defaultList);
+			utilService.getCodeList(model, "Stat", "statList");
 			
 		} catch (Exception e) {
 			//
@@ -72,15 +70,11 @@ public class ProjServiceImpl implements ProjService{
 	// 프로젝트 등록 조회
 	public void projInqyService1020(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//
-		List<HashMap<String, Object>> defaultList = null;
-		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Stat");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("statList",defaultList);
+			utilService.getCodeList(model, "Stat", "statList");
 			
 		} catch (Exception e) {
 			//
@@ -104,9 +98,7 @@ public class ProjServiceImpl implements ProjService{
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (진행상태) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Stat");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("statList",defaultList);
+			utilService.getCodeList(model, "Stat", "statList");
 			
 			//--------------------------------------------------------------------------------------------
 			// 파일 정보

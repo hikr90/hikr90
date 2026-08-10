@@ -142,6 +142,26 @@ public class UtilServiceImpl implements UtilService{
 	            + File.separator;
 	}
 	
+	// 공통 코드 조회
+	public void getCodeList(Model model, String groupCd, String modelNm) throws Exception {
+		//
+		List<HashMap<String, Object>> defaultList = null;
+		HashMap<String, Object> tempMap = new HashMap<String, Object>();
+		//
+		try {
+			//--------------------------------------------------------------------------------------------
+			// 공통 코드 조회
+			//--------------------------------------------------------------------------------------------
+			tempMap.put("commcodeGcd", groupCd);
+			defaultList = utilDao.codeInqyDao1010(tempMap);
+			model.addAttribute(modelNm, defaultList);
+			
+		} catch (Exception e) {
+			//
+			throw e;
+		}
+	}
+	
 	// 메일 전송
 	public String sendMail(Model model, HashMap<String, Object> paramMap) throws Exception {
 		//

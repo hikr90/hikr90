@@ -46,9 +46,7 @@ public class LogServiceImpl implements LogService {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (유형) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Proc");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("procList",defaultList);
+			utilService.getCodeList(model, "Proc", "procList");
 			
 		} catch (Exception e) {
 			//

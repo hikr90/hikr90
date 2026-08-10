@@ -23,11 +23,15 @@ import com.intr.dao.ProjDao;
 import com.intr.dao.QueryDao;
 import com.intr.dao.TaskDao;
 import com.intr.dao.UtilDao;
+import com.intr.svc.UtilService;
 import com.intr.utils.Const;
 
 @Controller
 public class PopupController {
 	//
+	@Autowired
+	UtilService utilService;
+	
 	@Autowired
 	RoleDao roleDao;
 	
@@ -174,9 +178,7 @@ public class PopupController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (결재선) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Type");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("typeList",defaultList);
+			utilService.getCodeList(model, "Type", "typeList");
 			
 		} catch (Exception e) {
 			//

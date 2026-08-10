@@ -45,8 +45,6 @@ public class MtgController {
 	@RequestMapping("/intrMtgInqy1010.do")
 	public String intrMtgInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
-		List<HashMap<String, Object>> defaultList = null;
-		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
@@ -61,9 +59,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd",	"Loc");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("locList",defaultList);
+			utilService.getCodeList(model, "Loc", "locList");
 			
 		} catch (Exception e) {
 			//
@@ -76,8 +72,6 @@ public class MtgController {
 	// 회의 등록 조회
 	@RequestMapping("/intrMtgInqy1020.do")
 	public String intrMtgInqy1020(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
-		//
-		List<HashMap<String, Object>> defaultList = null;
 		//
 		try {
 			//--------------------------------------------------------------------------------------------
@@ -93,9 +87,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd", "Loc");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("locList",defaultList);
+			utilService.getCodeList(model, "Loc", "locList");
 			
 		} catch (Exception e) {
 			//
@@ -153,8 +145,6 @@ public class MtgController {
 	@RequestMapping("/intrMtgInqy1040.do")
 	public String intrMtgInqy1040(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
-		List<HashMap<String, Object>> defaultList = null;
-		//
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회
@@ -174,9 +164,7 @@ public class MtgController {
 			//--------------------------------------------------------------------------------------------
 			// 공통코드 (회의실 종류) 조회
 			//--------------------------------------------------------------------------------------------
-			paramMap.put("commcodeGcd",	"Loc");
-			defaultList = utilDao.codeInqyDao1010(paramMap);
-			model.addAttribute("locList",defaultList);
+			utilService.getCodeList(model, "Loc", "locList");
 			
 		} catch (Exception e) {
 			//
