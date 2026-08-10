@@ -40,7 +40,7 @@ public class BanrServiceImpl implements BanrService {
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class BanrServiceImpl implements BanrService {
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -125,7 +125,7 @@ public class BanrServiceImpl implements BanrService {
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;

@@ -98,7 +98,7 @@ public class CoreServiceImpl implements CoreService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -116,7 +116,7 @@ public class CoreServiceImpl implements CoreService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class CoreServiceImpl implements CoreService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 }

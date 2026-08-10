@@ -57,7 +57,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class TaskServiceImpl implements TaskService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -116,7 +116,7 @@ public class TaskServiceImpl implements TaskService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -198,7 +198,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -225,7 +225,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -255,7 +255,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -285,7 +285,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -315,7 +315,7 @@ public class TaskServiceImpl implements TaskService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;

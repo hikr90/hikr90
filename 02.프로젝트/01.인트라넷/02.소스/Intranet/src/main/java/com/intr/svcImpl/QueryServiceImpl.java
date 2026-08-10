@@ -35,7 +35,7 @@ public class QueryServiceImpl implements QueryService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class QueryServiceImpl implements QueryService{
 		} catch (Exception e) {
 			//
 			model.addAttribute("resMsg", "입력한 쿼리를 실행할 수 없습니다. 쿼리 문법 또는 테이블/컬럼을 확인해주세요.");
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class QueryServiceImpl implements QueryService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -110,7 +110,7 @@ public class QueryServiceImpl implements QueryService{
 					
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;

@@ -76,7 +76,7 @@ public class BoardServiceImpl implements BoardService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -112,7 +112,7 @@ public class BoardServiceImpl implements BoardService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -152,7 +152,7 @@ public class BoardServiceImpl implements BoardService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -193,7 +193,7 @@ public class BoardServiceImpl implements BoardService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -228,7 +228,7 @@ public class BoardServiceImpl implements BoardService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;

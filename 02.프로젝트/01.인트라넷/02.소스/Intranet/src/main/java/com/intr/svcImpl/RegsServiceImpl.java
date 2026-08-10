@@ -44,7 +44,7 @@ public class RegsServiceImpl implements RegsService {
 			model.addAttribute("tabCd", tabCd);
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	

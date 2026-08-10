@@ -40,7 +40,7 @@ public class TempServiceImpl implements TempService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class TempServiceImpl implements TempService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -86,7 +86,7 @@ public class TempServiceImpl implements TempService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;

@@ -65,7 +65,7 @@ public class ProjServiceImpl implements ProjService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class ProjServiceImpl implements ProjService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -116,7 +116,7 @@ public class ProjServiceImpl implements ProjService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -156,7 +156,7 @@ public class ProjServiceImpl implements ProjService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -197,7 +197,7 @@ public class ProjServiceImpl implements ProjService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -232,7 +232,7 @@ public class ProjServiceImpl implements ProjService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;

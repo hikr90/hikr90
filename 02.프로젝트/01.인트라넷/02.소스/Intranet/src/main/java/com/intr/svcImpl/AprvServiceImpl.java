@@ -60,7 +60,7 @@ public class AprvServiceImpl implements AprvService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultInfo;
@@ -138,7 +138,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -190,7 +190,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -215,7 +215,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -239,7 +239,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -258,7 +258,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -289,7 +289,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -329,7 +329,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -372,7 +372,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -450,7 +450,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -547,7 +547,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -619,7 +619,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -649,7 +649,7 @@ public class AprvServiceImpl implements AprvService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;

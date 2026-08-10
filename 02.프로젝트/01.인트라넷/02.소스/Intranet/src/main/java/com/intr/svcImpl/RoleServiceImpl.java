@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class RoleServiceImpl implements RoleService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class RoleServiceImpl implements RoleService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -111,7 +111,7 @@ public class RoleServiceImpl implements RoleService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -169,7 +169,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -199,7 +199,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -246,7 +246,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -293,7 +293,7 @@ public class RoleServiceImpl implements RoleService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;

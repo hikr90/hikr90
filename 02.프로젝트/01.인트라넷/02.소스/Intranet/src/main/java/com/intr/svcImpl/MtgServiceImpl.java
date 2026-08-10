@@ -52,7 +52,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -91,7 +91,7 @@ public class MtgServiceImpl implements MtgService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -145,7 +145,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -186,7 +186,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -221,7 +221,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;
@@ -256,7 +256,7 @@ public class MtgServiceImpl implements MtgService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		
 		return defaultStr;

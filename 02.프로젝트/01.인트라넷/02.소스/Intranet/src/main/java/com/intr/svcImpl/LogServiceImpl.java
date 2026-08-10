@@ -52,7 +52,7 @@ public class LogServiceImpl implements LogService {
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -75,7 +75,7 @@ public class LogServiceImpl implements LogService {
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 }

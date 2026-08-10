@@ -58,7 +58,7 @@ public class MainServiceImpl implements MainService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class MainServiceImpl implements MainService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		return defaultStr;
 	}

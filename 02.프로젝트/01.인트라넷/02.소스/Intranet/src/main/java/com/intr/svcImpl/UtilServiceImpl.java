@@ -167,7 +167,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return defaultStr;
@@ -241,7 +241,7 @@ public class UtilServiceImpl implements UtilService{
             
         } catch (Exception e) {
             //
-        	throw new Exception(e.getMessage());
+        	throw e;
         }
         
 		return joinCode;
@@ -318,7 +318,7 @@ public class UtilServiceImpl implements UtilService{
 		} catch (Exception e) {
 			//
 			resStr = "NO";
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		return resStr;
 	}
@@ -424,7 +424,7 @@ public class UtilServiceImpl implements UtilService{
 				
 			} catch (Exception e) {
 				//
-				throw new Exception(e.getMessage());
+				throw e;
 			}
 		}
 	
@@ -519,7 +519,7 @@ public class UtilServiceImpl implements UtilService{
 
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -551,7 +551,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -581,7 +581,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -653,7 +653,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 			
 		} finally {
 			//
@@ -690,7 +690,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -791,7 +791,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -851,7 +851,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -976,7 +976,7 @@ public class UtilServiceImpl implements UtilService{
 			
 		} catch (Exception e) {
 			//
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return res;
@@ -994,7 +994,7 @@ public class UtilServiceImpl implements UtilService{
 			if(str != null && !"".equals(str) &&  !"null".equals(str)) res = str;
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return res;
@@ -1016,7 +1016,7 @@ public class UtilServiceImpl implements UtilService{
 			specName = "AES/CBC/PKCS5Padding";
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return AESCrypto.encrypt(specName, key, ivParameterSpec, plainText);
@@ -1038,7 +1038,7 @@ public class UtilServiceImpl implements UtilService{
 			specName = "AES/CBC/PKCS5Padding";
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw e;
 		}
 		//
 		return AESCrypto.decrypt(specName, key, ivParameterSpec, plainText);
