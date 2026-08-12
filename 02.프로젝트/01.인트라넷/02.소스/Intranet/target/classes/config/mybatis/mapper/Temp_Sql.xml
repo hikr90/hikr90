@@ -28,7 +28,7 @@
 		FROM TEMPLATE T
 		WHERE 1=1
 			<if test="srchNm != null and srchNm != ''">
-		    	AND REGEXP_REPLACE(LOWER(T.TEMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		    	AND REGEXP_REPLACE(LOWER(T.TEMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 		    </if>
 		ORDER BY T.TEMP_CD ASC
 	</select>

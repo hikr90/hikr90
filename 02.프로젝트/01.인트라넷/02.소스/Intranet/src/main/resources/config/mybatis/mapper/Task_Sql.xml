@@ -66,7 +66,7 @@
 				    	AND O.ORG_CD = #{orgCd, jdbcType=VARCHAR}
 				    </if>
 					<if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 				    </if>
 				    <if test="srchSdt != null and srchSdt !=''">
 				    	AND T.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
@@ -115,7 +115,7 @@
 		WHERE 1=1 
 			AND TC.EMP_IDX = #{empIdx, jdbcType=VARCHAR}        	
 			<if test="srchNm != null and srchNm != ''">
-            	AND REGEXP_REPLACE(LOWER(TC.TLDR_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            	AND REGEXP_REPLACE(LOWER(TC.TLDR_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
             </if>
             <if test="srchDt != null and srchDt != ''">
             	AND TC.TLDR_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')

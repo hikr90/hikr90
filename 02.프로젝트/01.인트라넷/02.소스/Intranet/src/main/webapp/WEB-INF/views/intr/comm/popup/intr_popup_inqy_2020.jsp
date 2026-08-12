@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!-- 로그 상세 -->
-<form id="popForm">
 <div class="pop_area">
 	<article class="sub_article">
 		<div class="content">
@@ -30,4 +29,3 @@
 		</div><!-- End content -->
 	</article>
 </div>
-</form>

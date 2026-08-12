@@ -57,7 +57,7 @@
 					ON CC_LOG.COMMCODE_CD = L.LOGTYPE_CD
 		        WHERE 1=1
 		            <if test="srchNm != null and srchNm != ''">
-				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+				    	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 				    </if>
 				    <if test="srchSdt != null and srchSdt !=''">
 				    	AND L.REG_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')

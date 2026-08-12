@@ -33,6 +33,7 @@ public class LogController {
 	@RequestMapping("/intrLogInqy1010.do")
 	public String intrLogInqy1010(Model model, @RequestParam HashMap<String, Object> paramMap) throws Exception {
 		//
+		System.out.println("kth11 : " + paramMap);
 		try {
 			//--------------------------------------------------------------------------------------------
 			// 메뉴 조회

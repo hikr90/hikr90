@@ -63,19 +63,19 @@
 		        WHERE 
 		            P.USE_YN = 'Y'
 		            <if test="srchNm != null and srchNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(P.PROJ_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            	AND REGEXP_REPLACE(LOWER(P.PROJ_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 		            </if>
 		            <if test="srchDt != null and srchDt !=''">
 		            	(AND P.PROJ_SDT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','') OR P.PROJ_EDT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-',''))
 		            </if>
 		  			<if test="orgNm != null and orgNm != ''">
-		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="rankNm != null and rankNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            	AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="srchIdx != null and srchIdx != ''">
-		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchIdx, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="srchStatCd != null and srchStatCd != ''">
 						AND P.STATUS = #{srchStatCd, jdbcType=VARCHAR}

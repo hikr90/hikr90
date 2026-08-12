@@ -41,7 +41,7 @@
                     AND R.USE_YN = 'Y'
 		        WHERE 1=1
 		            <if test="srchNm != null and srchNm != ''">
-		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            	AND REGEXP_REPLACE(LOWER(E.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 		            </if>
 		            <if test="srchSdt != null and srchSdt !=''">
 		            	AND E.HIRE_DT &gt;= REPLACE(#{srchSdt, jdbcType=VARCHAR},'-','')
@@ -50,10 +50,10 @@
 		            	AND E.HIRE_DT &lt;= REPLACE(#{srchEdt, jdbcType=VARCHAR},'-','')
 		            </if>
 		            <if test="orgNm != null and orgNm != ''">
-		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="rankNm != null and rankNm != ''">
-						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="srchHireCd == 'HIRE_0010'.toString()">
 						AND E.LEAV_DT IS NULL
@@ -128,7 +128,7 @@
 		FROM ORG
 		WHERE 1=1
 			<if test="srchNm != null and srchNm != ''">
-		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 			</if>
 		ORDER BY DISP_ORDER ASC
 	</select>
@@ -275,7 +275,7 @@
 				) SUB_DATA
 			WHERE 1=1
 			<if test="srchPnm != null and srchPnm != ''">
-            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchPnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+            	AND REGEXP_REPLACE(LOWER(SUB_DATA.EMP_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchPnm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
             </if>
    		    ORDER BY SUB_DATA.ORG_CD ASC , SUB_DATA.LV ASC
 	</select>
@@ -330,16 +330,16 @@
 		        WHERE E.LEAV_DT IS NULL
 		            <if test="srchNm != null and srchNm != ''">
 		            	AND ( 
-		            		REGEXP_REPLACE(LOWER(ED.DUTY_TITLE),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            		REGEXP_REPLACE(LOWER(ED.DUTY_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 		            			OR
-		            		REGEXP_REPLACE(LOWER(ED.DUTY_CONT),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		            		REGEXP_REPLACE(LOWER(ED.DUTY_CONT),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 		            		)
 		            </if>
 		            <if test="orgNm != null and orgNm != ''">
-		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		  				AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
 					<if test="rankNm != null and rankNm != ''">
-						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+						AND REGEXP_REPLACE(LOWER(R.RANK_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{rankNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 					</if>
         	) SUB_DATA
  		WHERE 1=1 
@@ -450,7 +450,7 @@
 		)
 		WHERE 1=1
 			<if test="srchNm != null and srchNm != ''">
-		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]*','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]*','')||'%'
+		    	AND REGEXP_REPLACE(LOWER(ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 			</if>
 		ORDER BY G_ORG, ORG_CD, G_YM, YEAR_MM
 	</select>
