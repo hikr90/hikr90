@@ -240,7 +240,7 @@
 				    	AND REGEXP_REPLACE(LOWER(P.PROJ_TITLE),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{srchNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'
 				    </if>
 				    <if test="srchDt != null and srchDt !=''">
-				    	AND T.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
+				    	AND P.REG_DT &gt;= REPLACE(#{srchDt, jdbcType=VARCHAR},'-','')
 				    </if>
 				    <if test="orgNm != null and orgNm != ''">
 				    	AND REGEXP_REPLACE(LOWER(O.ORG_NM),'[^0-9가-힣A-Za-z]','') LIKE '%'||REGEXP_REPLACE(LOWER(#{orgNm, jdbcType=VARCHAR}),'[^0-9가-힣A-Za-z]','')||'%'

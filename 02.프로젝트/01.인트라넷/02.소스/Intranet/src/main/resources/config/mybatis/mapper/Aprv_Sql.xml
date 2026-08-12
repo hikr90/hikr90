@@ -1,51 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="aprv">
-	<resultMap type="HashMap" id="getAprvInfo">
-		<result property="aprvId" 				column="APRV_ID"/>
-		<result property="aprvTitle" 				column="APRV_TITLE"/>
-		<result property="aprvCont" 				column="APRV_CONT" jdbcType="CLOB" javaType="java.lang.String" />
-		<result property="projCd" 				column="PROJ_CD"/>
-		<result property="projTitle" 				column="PROJ_TITLE"/>
-		<result property="aprvstepCd" 			column="APRVSTEP_CD"/>
-		<result property="aprvstepNm"	 		column="APRVSTEP_NM"/>
-		<result property="tempCd" 				column="TEMP_CD"/>
-		<result property="tempNm" 				column="TEMP_NM"/>
-		<result property="temptypeCd" 		column="TEMPTYPE_CD"/>
-		<result property="regMappingId" 		column="REG_MAPPING_ID"/>
-		<result property="detMappingId" 		column="DET_MAPPING_ID"/>
-		<result property="currAprvSno" 		column="CURR_APRV_SNO"/>
-		<result property="aprvIdx" 				column="APRV_IDX"/>
-		<result property="regIdx" 				column="REG_IDX"/>
-		<result property="regDt" 					column="REG_DT"/>
-		<result property="regTm" 					column="REG_TM"/>
-		<result property="useYn" 					column="USE_YN"/>
-		<result property="dispOrder" 			column="DISP_ORDER"/>
-		<result property="remark" 				column="REMARK"/>
-		<result property="aprvtypeCd" 			column="APRVTYPE_CD"/>
-		<result property="rslttypeCd" 			column="RSLTTYPE_CD"/>
-		<result property="empNm" 				column="EMP_NM"/>
-		<result property="orgNm" 					column="ORG_NM"/>
-		<result property="rankNm" 				column="RANK_NM"/>
-		<result property="leavtypeCd" 			column="LEAVTYPE_CD"/>
-		<result property="leavtypeNm"	 		column="LEAVTYPE_NM"/>
-		<result property="leavSdt" 				column="LEAV_SDT"/>
-		<result property="leavEdt" 				column="LEAV_EDT"/>
-		<result property="leavDays" 				column="LEAV_DAYS"/>
-		<result property="leavRsn" 				column="LEAV_RSN"/>
-		<result property="leavSubst" 			column="LEAV_SUBST"/>
-		<result property="methodCd" 			column="METHOD_CD"/>
-		<result property="methodNm" 			column="METHOD_NM"/>
-		<result property="prepayAmt" 			column="PREPAY_AMT"/>
-		<result property="prepayDt" 				column="PREPAY_DT"/>
-		<result property="prepayRsn" 			column="PREPAY_RSN"/>
-		<result property="reqtypeCd" 			column="REQTYPE_CD"/>
-		<result property="reqtypeNm" 			column="REQTYPE_NM"/>
-		<result property="reqDt" 					column="REQ_DT"/>
-		<result property="cardNm" 				column="CARD_NM"/>
-		<result property="cardNo" 				column="CARD_NO"/>
-	</resultMap>
-	
 	<select id="aprvInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* aprvInqyDao1010 : 전자결재 시퀀스 조회 */
 		SELECT 'APRV_' || LPAD(NVL(MAX(REPLACE(APRV_ID,'APRV_')),0) + 1,4,0) AS SEQUENCE_ID FROM APRV_MAST
@@ -149,7 +104,7 @@
         ORDER BY SUB_DATA.NUM DESC
 	</select>
 	
-	<select id="aprvInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getAprvInfo">
+	<select id="aprvInqyDao1040" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* aprvInqyDao1040 : 결재 상세 조회 */
 		SELECT 
 				DATA.* 

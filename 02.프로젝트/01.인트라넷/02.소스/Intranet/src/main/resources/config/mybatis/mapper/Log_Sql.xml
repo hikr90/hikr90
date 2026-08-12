@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="log">
-	<resultMap type="HashMap" id="getLogInfo">
-		<result property="logId" 				column="LOG_ID"/>
-		<result property="logtypeCd" 		column="LOGTYPE_CD"/>
-		<result property="empIdx" 			column="EMP_IDX"/>
-		<result property="empNm" 			column="EMP_NM"/>
-		<result property="orgNm" 				column="ORG_NM"/>
-		<result property="rankNm" 			column="RANK_NM"/>
-		<result property="mappingId" 		column="MAPPING_ID"/>
-		<result property="ipAddr" 			column="IP_ADDR"/>
-		<result property="isSucc" 				column="IS_SUCC"/>
-		<result property="logMsg"	 			column="LOG_MSG" jdbcType="CLOB" javaType="java.lang.String" />
-		<result property="regDt" 				column="REG_DT"/>
-		<result property="regTm" 				column="REG_TM"/>
-	</resultMap>
-	
 	<select id="logInqyDao1010" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* logInqyDao1010 : 로그 시퀀스 조회 */
 		SELECT 'LOG_' || LPAD(NVL(MAX(REPLACE(LOG_ID,'LOG_')),0) + 1,4,0) AS SEQUENCE_ID FROM LOG
@@ -76,7 +61,7 @@
         ORDER BY SUB_DATA.NUM DESC
 	</select>
 	
-	<select id="logInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap" resultMap="getLogInfo">
+	<select id="logInqyDao1030" resultType="CamelHashMap" parameterType="java.util.HashMap">
 		/* logInqyDao1030 : 로그 상세 조회 */
 		SELECT 
 					L.LOG_ID

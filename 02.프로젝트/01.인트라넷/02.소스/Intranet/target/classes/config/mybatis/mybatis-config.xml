@@ -13,6 +13,10 @@
 		<typeAlias type="com.intr.utils.CamelHashMap" alias="CamelHashMap"/>
 	</typeAliases>
 	
+	<typeHandlers>
+        <typeHandler handler="com.intr.utils.TypeHandler" jdbcType="CLOB" javaType="java.lang.String"/>
+    </typeHandlers>
+	
 	<mappers>
 		<mapper resource="config/mybatis/mapper/Aprv_Sql.xml" />
 		<mapper resource="config/mybatis/mapper/Role_Sql.xml" />
