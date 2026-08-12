@@ -14,6 +14,7 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	
+	<!-- interceptor -->
 	<interceptors>
         <interceptor>
             <mapping path="/**"/> 
@@ -31,7 +32,6 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	
 	<!-- autowired -->
 	<context:component-scan base-package="com.intr.*" />
 	<context:annotation-config/> 
@@ -65,4 +65,7 @@
 	<beans:bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
 		<beans:constructor-arg ref="messageSource" />
 	</beans:bean>
+	
+	<!-- aes -->
+	<context:property-placeholder location="classpath:config/aes/aes.properties" />
 </beans:beans>
