@@ -5,7 +5,7 @@
 	<dl>
 		<dt>&#10003; 비밀번호</dt>
 		<dd>
-			<input type="password" id="aprvPwd" name="aprvPwd" title="비밀번호" style="width: 100%;" isReq="Y">
+			<input type="password" id="aprvPwd" name="aprvPwd" title="비밀번호" style="width: 100%;" isRequired="Y">
 		</dd>
 	</dl>
 	<dl>

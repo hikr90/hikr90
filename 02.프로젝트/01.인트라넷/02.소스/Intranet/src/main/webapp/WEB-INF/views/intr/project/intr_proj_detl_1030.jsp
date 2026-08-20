@@ -156,20 +156,20 @@
 											<label for="post-title">&#10003; 프로젝트명</label>
 										</dt>
 										<dd>
-											<input type="text" id="projTitle" title="프로젝트명" name="projTitle" value="${defaultInfo.projTitle}" isReq="Y">
+											<input type="text" id="projTitle" title="프로젝트명" name="projTitle" value="${defaultInfo.projTitle}" isRequired="Y">
 										</dd>
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 150px;" disabled="disabled" isReq="Y">
+											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 150px;" disabled="disabled" isRequired="Y">
 										</dd>
 									</dl>
 									<dl>
 										<dt>&#10003; 계약기간</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" title="계약기간 (시작)" value="${defaultInfo.projSdt}" readonly="readonly" isReq="Y" />
+											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" title="계약기간 (시작)" value="${defaultInfo.projSdt}" readonly="readonly" isRequired="Y" />
 												~
-											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" title="계약기간 (종료)" value="${defaultInfo.projEdt}" readonly="readonly" isReq="Y" />
+											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" title="계약기간 (종료)" value="${defaultInfo.projEdt}" readonly="readonly" isRequired="Y" />
 										</dd>
 										<dt>&#10003; 진행상태</dt>
                                         <dd class="sel_2part">
@@ -191,7 +191,7 @@
 									<dl>
 										<dt>&#10003; 계약금</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" value="${defaultInfo.deposit}" style="width: 50%;" isReq="Y">
+											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" value="${defaultInfo.deposit}" style="width: 50%;" isRequired="Y">
 											&nbsp; <span id="amtNm">${defaultInfo.depositNm}</span>
 										</dd>
 										<dt>태그</dt>
@@ -202,7 +202,7 @@
 									<dl>
 										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
 										<dd class="post_text" style="height: 310px;">
-											<textarea id="projCont" title="개요/설명" name="projCont" isReq="Y">${defaultInfo.projCont}</textarea>
+											<textarea id="projCont" title="개요/설명" name="projCont" isRequired="Y">${defaultInfo.projCont}</textarea>
 										</dd>
 									</dl>
 									<dl class="post_info">

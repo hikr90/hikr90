@@ -250,11 +250,11 @@
 											<label for="post-title">&#10003; 회의명</label>
 										</dt>
 										<dd>
-											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle" value="${defaultInfo.mtgTitle}" isReq="Y">
+											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle" value="${defaultInfo.mtgTitle}" isRequired="Y">
 										</dd>
 										<dt>&#10003; 회의 일자</dt>
 										<dd>
-											<input type="text" class="srch_cdt_date srchSdt" id="mtgDt" name="mtgDt" title="회의 일자" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" isReq="Y" />
+											<input type="text" class="srch_cdt_date srchSdt" id="mtgDt" name="mtgDt" title="회의 일자" value="${fn:substring(defaultInfo.mtgDt, 0, 4)}-${fn:substring(defaultInfo.mtgDt, 4, 6)}-${fn:substring(defaultInfo.mtgDt, 6, 8)}" readonly="readonly" isRequired="Y" />
 										</dd>
 										<dt>&#10003; 회의장소</dt>
 										<dd class="sel_2part">
@@ -304,7 +304,7 @@
 									<dl>
 										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
 										<dd class="post_text" style="height: 310px;">
-											<textarea id="projCont" title="회의 개요" name="mtgCont" isReq="Y">${defaultInfo.mtgCont}</textarea>
+											<textarea id="projCont" title="회의 개요" name="mtgCont" isRequired="Y">${defaultInfo.mtgCont}</textarea>
 										</dd>
 									</dl>
 									<dl class="post_info">

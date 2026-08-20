@@ -104,7 +104,7 @@
 										<dl>
 											<dt><label for="post-title">&#10003; 제목</label></dt>
 											<dd>
-												<input type="text" id="brdTitle" name="brdTitle" title="제목" value="${defaultInfo.brdTitle}" isReq="Y">
+												<input type="text" id="brdTitle" name="brdTitle" title="제목" value="${defaultInfo.brdTitle}" isRequired="Y">
 											</dd>
 											<dt>사용여부</dt>
 	                                        <dd class="sel_2part">
@@ -129,7 +129,7 @@
 										<dl>
 											<dt><label for="post_text">&#10003; 내용</label></dt>
 											<dd class="post_text">
-												<textarea id="post_text" id="brdCont" name="brdCont" title="내용" isReq="Y">${defaultInfo.brdCont}</textarea>
+												<textarea id="post_text" id="brdCont" name="brdCont" title="내용" isRequired="Y">${defaultInfo.brdCont}</textarea>
 											</dd>
 										</dl>
 										<dl class="post_info">

@@ -220,7 +220,7 @@ function requiredProc(){
     //
     try {
         // 필수 입력값 대상
-        var requiredFields = $("#form input[isReq='Y'], #form textarea[isReq='Y']");
+        var requiredFields = $("#form input[isRequired='Y'], #form textarea[isRequired='Y']");
 
         requiredFields.each(function(){
             // 현재 요소를 jQuery 객체로 변환

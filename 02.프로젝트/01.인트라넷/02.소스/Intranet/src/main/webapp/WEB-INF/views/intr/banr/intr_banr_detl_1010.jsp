@@ -172,17 +172,17 @@
 											<dd>
 												<fmt:parseDate value="${defaultInfo.banrSdt}" var="parseSdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseSdt}" var="fomatSdt" pattern="yyyy-MM-dd"/>
-												<input type="text" class="srch_cdt_date srchSdt" id="banrSdt" name="banrSdt" value="${fomatSdt}" title="게시일자 (시작)" readonly="readonly" isReq="Y" />
+												<input type="text" class="srch_cdt_date srchSdt" id="banrSdt" name="banrSdt" value="${fomatSdt}" title="게시일자 (시작)" readonly="readonly" isRequired="Y" />
 													~
 												<fmt:parseDate value="${defaultInfo.banrEdt}" var="parseEdt" pattern="yyyyMMdd"/>
 												<fmt:formatDate value="${parseEdt}" var="fomatEdt" pattern="yyyy-MM-dd"/>
-												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${fomatEdt}" title="게시일자 (종료)" readonly="readonly" isReq="Y" />
+												<input type="text" class="srch_cdt_date srchEdt" id="srchEdt" name="banrEdt" value="${fomatEdt}" title="게시일자 (종료)" readonly="readonly" isRequired="Y" />
 											</dd>
 											<dt>&#10003; 사이즈</dt>
 											<dd>
-												<input type="text" id="width" name="width" class="width10" title="가로" value="${defaultInfo.width}" isReq="Y">
+												<input type="text" id="width" name="width" class="width10" title="가로" value="${defaultInfo.width}" isRequired="Y">
 												x
-												<input type="text" id="height" name="height" class="width10" title="세로" value="${defaultInfo.width}" isReq="Y">
+												<input type="text" id="height" name="height" class="width10" title="세로" value="${defaultInfo.width}" isRequired="Y">
 											</dd>
 										</dl>
 										

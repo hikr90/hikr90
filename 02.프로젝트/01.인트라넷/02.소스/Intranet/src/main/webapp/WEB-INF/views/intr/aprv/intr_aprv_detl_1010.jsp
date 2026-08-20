@@ -76,7 +76,7 @@
 												<label for="post-title">&#10003; 기안명</label>
 											</dt>
 											<dd>
-												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle" isReq="Y">
+												<input type="text" id="aprvTitle" title="기안명" name="aprvTitle" isRequired="Y">
 											</dd>
 										</dl>
 										<dl>
@@ -85,16 +85,16 @@
 											</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isReq="Y">
+												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isRequired="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
 										<dl>
 								        	<dt>&#10003; 휴가기간</dt>
 											<dd>
-												<input type="text" class="srch_cdt_date srchDt" id="leavSdt" name="leavSdt" title="휴가기간 (시작)" value="" readonly="readonly" isReq="Y" />
+												<input type="text" class="srch_cdt_date srchDt" id="leavSdt" name="leavSdt" title="휴가기간 (시작)" value="" readonly="readonly" isRequired="Y" />
 													~
-												<input type="text" class="srch_cdt_date srchDt" id="leavEdt" name="leavEdt" title="휴가기간 (종료)" value="" readonly="readonly" isReq="Y" />
+												<input type="text" class="srch_cdt_date srchDt" id="leavEdt" name="leavEdt" title="휴가기간 (종료)" value="" readonly="readonly" isRequired="Y" />
 											</dd>
 											<dt>&#10003; 휴가 타입</dt>
 											<dd class="sel_2part">
@@ -115,19 +115,19 @@
 									    	<dt>&#10003; 대직자</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="empCall();">
-												<input type="text" id="empPnm" name="leavSubst" title="대직자" value="" style="width: 30%;" readonly="readonly" isReq="Y">
+												<input type="text" id="empPnm" name="leavSubst" title="대직자" value="" style="width: 30%;" readonly="readonly" isRequired="Y">
 											</dd>
 										</dl>
 								        <dl>
 								        	<dt>&#10003; 사유</dt>
 											<dd>
-												<input type="text" id="leavRsn" title="사유" name="leavRsn" isReq="Y">
+												<input type="text" id="leavRsn" title="사유" name="leavRsn" isRequired="Y">
 											</dd>
 								        </dl>
 								        <dl>
 											<dt><label for="post_text">&#10003; 기안내용</label></dt>
 											<dd class="post_text">
-												<textarea id="editor" name="aprvCont" title="기안내용" isReq="Y">${tempInfo.tempCont}</textarea>
+												<textarea id="editor" name="aprvCont" title="기안내용" isRequired="Y">${tempInfo.tempCont}</textarea>
 											</dd>
 										</dl>
 								        <dl class="post_info">
