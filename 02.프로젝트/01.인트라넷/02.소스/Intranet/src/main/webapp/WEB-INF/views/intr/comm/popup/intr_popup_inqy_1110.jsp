@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- API 관리 -->
-<div class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 85%;">
+<div class="pop_area height100">
+	<article class="sub_article height85">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -17,7 +17,7 @@
 							</div>
 	                        
 	                     	<!-- API 상세 -->
-	                     	<div id="qryCon" class="post_con disp_flex"></div>
+	                     	<div id="qryCon" class="post_con inline_flex"></div>
 	                        
 							<div class="btn_right">
 	                      		<button type="button" class="btn_gray_thin" onclick="popClose('qry');">닫기</button>

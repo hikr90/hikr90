@@ -16,7 +16,7 @@
 			<col class="wAutoper">
 		</colgroup>
 		<thead>
-			<tr style="line-height: 10px;">
+			<tr class="lh10">
 				<th scope="col">관리번호</th>
 				<th scope="col">제품명</th>
 				<th scope="col">수량</th>
@@ -29,7 +29,7 @@
 					<td class='first_td'>${list.mgtNo}</td>
 		 			<td>${list.itemNm}</td>
 		 			<td>${list.itemCnt}</td>
-		 			<td style="text-align: left;">${list.reqRsn}</td>
+		 			<td class="text_left">${list.reqRsn}</td>
 			    </tr>
 			</c:forEach>
 		</tbody>

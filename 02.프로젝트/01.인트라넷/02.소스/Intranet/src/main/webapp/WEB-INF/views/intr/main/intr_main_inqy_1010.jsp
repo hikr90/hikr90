@@ -201,8 +201,8 @@
             </a>
             
             <div class="banr_close">
-                <label for="noMoreToday"><input type="checkbox" id="noMoreToday" class="check_box"><span style="font-size: 1.4rem;">오늘 하루 보지 않기</span></label>&nbsp;
-                 <label for="closeBanr"><button id="closeBanr" class="closeBanr"></button><span style="font-size: 1.4rem;">닫기</span></label>
+                <label for="noMoreToday"><input type="checkbox" id="noMoreToday" class="check_box"><span class="fs_14">오늘 하루 보지 않기</span></label>&nbsp;
+                 <label for="closeBanr"><button id="closeBanr" class="closeBanr"></button><span class="fs_14">닫기</span></label>
             </div>
         </div>
     </c:if>
@@ -236,8 +236,8 @@
 									<div id="calInfo" class="area_content">
 										<ul class="area_ul scroll_wrap" style="height: 360px;">
 											<c:forEach var="list" items="${calInfo}">
-												<li class="main_li" style="border-bottom: solid 2px #f6f6f6; margin-right: 20px;">
-													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a" style="font-weight: bold;">
+												<li class="main_li mr20 bb_f6f6f6">
+													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a bold">
 														<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
 														<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 														
@@ -267,7 +267,7 @@
 									<div class="emp_profile">
                                        	<c:choose>
                                        		<c:when test="${empInfo.profileYn eq 'Y'}">
-                                 				<img id="empImg" class="emp_img" width="250" height="250" style="border: 3px solid #214b97; border-radius: 100%;" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
+                                 				<img id="empImg" class="emp_img br_100 b_214b97" width="250" height="250" src="intrEmpInqy1099.do?sequenceId=${empVO.empIdx}">
                                        		</c:when>
                                        		<c:otherwise>
 	                                        	<img id="empImg" class="emp_img" width="250" height="250" src="resources/images/icon/icon_profile.png">
@@ -307,7 +307,7 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_fcheck.png' width="20" height="20"/>
 							    			공지사항
-							    		</h3><a href="intrBoardInqy2010.do?pageUrl=Board" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrBoardInqy2010.do?pageUrl=Board" class="main_ie fs_15">전체보기</a>
 									</div>
 									
 									<div class="area_content">
@@ -342,7 +342,7 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_auth.png' width="20" height="20"/>
 							    			결재 조회
-							    		</h3><a href="intrAprvInqy2010.do?pageUrl=Aprv" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrAprvInqy2010.do?pageUrl=Aprv" class="main_ie fs_15">전체보기</a>
 									</div>
 
 									<div class="area_content">
@@ -377,7 +377,7 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_note.png' width="20" height="20"/>
 							    			오늘의 일정
-							    		</h3><a href="intrTaskInqy3010.do?empIdx=${empVO.empIdx}" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrTaskInqy3010.do?empIdx=${empVO.empIdx}" class="main_ie fs_15">전체보기</a>
 									</div>
 
 									<div class="area_content">

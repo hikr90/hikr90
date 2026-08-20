@@ -11,7 +11,7 @@
 	});
 </script>
 
-<div class="post_write" style="margin-top: 0px;">
+<div class="post_write mt0">
 	<dl>
 		<dt>
 			<label for="post-title">&#10003; 양식명</label>

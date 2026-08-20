@@ -26,7 +26,7 @@
 					<tr class="setListTr">
 						<td>${list.orgNm}</td>
 						<td>${list.aprvNm} ${list.rankNm}</td>
-						<td style="padding: 0;">
+						<td class="pd0">
 							<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="${list.aprvtypeCd}">
 							<input type="hidden" id="aprvIdx" name="aprvIdx" value="${list.aprvIdx}">
 							${list.aprvtypeNm}

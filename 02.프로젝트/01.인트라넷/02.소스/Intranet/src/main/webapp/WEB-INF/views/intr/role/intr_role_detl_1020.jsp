@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring"  uri="http://www.springframework.org/tags" %>
 
-<div class="post_write" style="margin: 0px;">
+<div class="post_write mg0">
 	<dl>
 		<dt>
 			<label for="post-title">권한명</label>

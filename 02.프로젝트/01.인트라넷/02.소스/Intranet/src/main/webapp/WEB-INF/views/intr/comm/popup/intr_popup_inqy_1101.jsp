@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 조직도 트리 -->
-<div class="post_view mt20 mr10" style="margin: 0; border: 1px solid #d7d7d7;">
+<div class="post_view mt20 mr10 mg0 b_d7d7d7">
 	<div id="empTree" class="tree_area ml20 scroll_wrap" style="width: 300px; height: 300px;">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">
@@ -33,7 +33,7 @@
 					<c:when test="${list.lv gt prevLv}">
 						<li class="li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
-								&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
 							<span class="${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">
@@ -47,7 +47,7 @@
 					<c:when test="${list.lv eq prevLv}">
 						<li class="li_${list.lv}">
 							<c:if test="${list.isleaf eq 'Y'}">
-								&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
 							<span class="${spanIcon}"></span>
 							<c:if test="${not empty list.empIdx}">

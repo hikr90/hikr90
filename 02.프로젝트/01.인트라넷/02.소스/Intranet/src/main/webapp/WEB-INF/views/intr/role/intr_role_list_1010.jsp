@@ -250,7 +250,7 @@
 							<div class="form_area">
 								<div class="post_wrap">
 								<input type="hidden" id="roleCd" name="roleCd" value="0">
-								<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
+								<input type="button" class="listCall display_none" onclick="listCall(this.form);">
 								
 									<h2>권한 관리
 										<span class="float_right">
@@ -279,7 +279,7 @@
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 						           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 				
-															<li class="li_1" style="margin-left: 15px;">
+															<li class="li_1 ml15">
 															<span class="${spanIcon}"></span>
 															<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 														</c:forEach>
@@ -287,7 +287,7 @@
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1" style="margin-left: 15px;">
+														<li class="li_1 ml15">
 															등록된 권한이 없습니다.
 														</li>
 													</ul>

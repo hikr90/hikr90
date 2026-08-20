@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- 휴가 관리 -->
-<div class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 80%;">
+<div class="pop_area height100">
+	<article class="sub_article height80">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -17,7 +17,7 @@
 							</div>
 	                        
 	                     	<!-- 일정 상세 -->
-	                     	<div id="leavCon" class="post_con disp_flex" style="height: 300px;"></div>
+	                     	<div id="leavCon" class="post_con inline_flex" style="height: 300px;"></div>
 	                        
 							<div class="btn_right">
 	                      		<button type="button" class="btn_gray_thin" onclick="popClose('leav');">닫기</button>

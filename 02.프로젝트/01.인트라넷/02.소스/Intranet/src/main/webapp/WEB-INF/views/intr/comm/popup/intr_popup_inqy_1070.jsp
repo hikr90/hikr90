@@ -6,8 +6,8 @@
 	let corplineList = [];
 </script>
 
-<div class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 85%;">
+<div class="pop_area height100">
+	<article class="sub_article height85">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -22,10 +22,10 @@
 							</div>
 	                        
 	                     	<!-- 정산내역 등록 목록 -->
-	                     	<div id="corpCon" class="post_con disp_flex pt20" style="height: 425px;"></div>
+	                     	<div id="corpCon" class="post_con inline_flex pt20" style="height: 425px;"></div>
 	                        
-							<div class="btn_right" style="margin-top: 40px;">
-								<span style="float: left;">
+							<div class="btn_right mt40">
+								<span class="float_left">
 									<button type="button" class="btn_navy_thin procBtn" onclick="setCorp('add');">추가</button>
 									<button type="button" class="btn_gray_thin procBtn" onclick="initCorp(this.form);">초기화</button>
 								</span>

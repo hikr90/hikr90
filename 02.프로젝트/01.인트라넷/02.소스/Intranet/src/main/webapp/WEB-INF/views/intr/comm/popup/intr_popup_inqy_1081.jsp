@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 휴가 조회 -->
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>휴가자</dt>
 		<dd>${defaultInfo.orgNm} ${defaultInfo.empNm} ${defaultInfo.rankNm}</dd>

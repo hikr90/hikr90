@@ -46,7 +46,7 @@
 		        </c:if>
 
 		        <td class="_title">
-    		        <a href="javascript:void(0);" class="show_view a_title" style="color: #214b97 !important;" onclick="detCall('${list.taskId}');">${list.taskTitle}</a>
+    		        <a href="javascript:void(0);" class="show_view a_title c_214b97" onclick="detCall('${list.taskId}');">${list.taskTitle}</a>
     		    </td>
 
 		        <c:if test="${list.rowNum eq 1}">

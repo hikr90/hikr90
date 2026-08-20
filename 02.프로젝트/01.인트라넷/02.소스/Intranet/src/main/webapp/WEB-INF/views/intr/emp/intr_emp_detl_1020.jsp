@@ -166,14 +166,14 @@
 	                                        	<label>사진 등록</label>
 	                                        </dt>
 	                                        <dd>
-	                                        	<div class="profile_wrap disp_flex">
+	                                        	<div class="profile_wrap inline_flex">
 		                                        	<div class="profile_area">
 		                                        		<img class="emp_img" id="empImg" width="200" height="200" src="resources/images/icon/icon_profile.png">
 	                                        		</div>
 	    
 		                                        	<div class="profile_box ml20">
 		                                        		<br><span id="profText">사진을 등록해주세요.</span>
-			                                        	<div style="margin-top: 5px;">
+			                                        	<div class="mt5">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
 															<input type="file" id="profBtn">
 															<input type="hidden" id="isUploadImg" name="isUploadImg" value="N">

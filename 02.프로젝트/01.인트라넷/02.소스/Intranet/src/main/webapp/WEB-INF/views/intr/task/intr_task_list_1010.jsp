@@ -312,7 +312,7 @@
 											<input type="button" id="srchBtn" class="btn_blue" value="조회" onclick="listCall(this.form);">
 										</div>
 										
-										<div class="srch_area float_right" style="padding-top: 27px;">
+										<div class="srch_area float_right mt27">
 											<button type="button" class="btn_navy" onclick="addTask(true);">추가</button>
 											<button type="button" class="btn_gray" onclick="initTask();">초기화</button>
 										</div>

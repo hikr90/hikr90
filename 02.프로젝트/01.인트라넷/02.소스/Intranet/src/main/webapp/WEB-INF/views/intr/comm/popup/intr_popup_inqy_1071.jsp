@@ -246,7 +246,7 @@
 			<col class="w8per">
 		</colgroup>
 		<thead>
-			<tr style="line-height: 10px;">
+			<tr class="lh10">
 				<th scope="col">사용 일자</th>
 				<th scope="col">사용처</th>
 				<th scope="col">사용 금액</th>

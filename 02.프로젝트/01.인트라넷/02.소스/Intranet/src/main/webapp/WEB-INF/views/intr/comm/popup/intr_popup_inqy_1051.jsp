@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- 결재의견 입력 -->
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>&#10003; 비밀번호</dt>
 		<dd>
-			<input type="password" id="aprvPwd" name="aprvPwd" title="비밀번호" style="width: 100%;" isRequired="Y">
+			<input type="password" id="aprvPwd" class="width100" name="aprvPwd" title="비밀번호" isRequired="Y">
 		</dd>
 	</dl>
 	<dl>

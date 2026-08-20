@@ -187,7 +187,7 @@
 									<dl>
 										<dt>&#10003; 계약금</dt>
 										<dd>
-											<input type="text" id="deposit" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" style="width: 50%;" isRequired="Y">
+											<input type="text" id="deposit" class="width50" name="deposit" title="계약금" placeholder="₩0" oninput="amtProc(this);" isRequired="Y">
 											&nbsp; <span id="amtNm">(원)</span>
 										</dd>
 										<dt>태그</dt>

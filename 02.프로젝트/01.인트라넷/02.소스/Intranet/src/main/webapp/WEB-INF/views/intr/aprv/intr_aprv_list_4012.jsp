@@ -50,17 +50,17 @@
 	}
 </script>
 
-<div class="mb10"  style="padding: 8px; border: solid 2px #f6f6f6;">
+<div class="mb10 pd8 b_f6f6f6">
     <input type="text" id="aprvlineNm" style="height: 36px; width: 410px;" placeholder="결재선 명칭을 입력하세요">
 
     <div class="float_right">
         <button type="button" class="btn_navy_thin" onclick="saveProc('');">저장</button>
-        <button type="button" class="btn_blue_thin" style="margin-left: 5px;" onclick="initCall('');">새로고침</button>
+        <button type="button" class="btn_blue_thin ml5" onclick="initCall('');">새로고침</button>
     </div>
 </div>
 
 <!-- 결재선 목록 -->
-<div id="tree_info" class="tree_info" style="width: 623px; height: 390px; border: solid 2px #f6f6f6; padding: 10px;">
+<div id="tree_info" class="tree_info pd10 b_f6f6f6" style="width: 623px; height: 390px;">
 	<div class="post_wrap">
 		<div class="scroll_wrap" style="height: 390px;">
 			<table class="post_table aprvTbl">

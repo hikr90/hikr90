@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 회의 조회 -->
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>회의 제목</dt>
 		<dd>${defaultInfo.mtgTitle}</dd>

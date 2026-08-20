@@ -30,7 +30,7 @@
 										</h3>
 									</div>
 									
-									<div class="area_content" style="margin-left: 30px;">
+									<div class="area_content ml30">
 										<canvas id="myChart" width="900" height="300"></canvas>
 										<script>
 										var json = ${orgList};
@@ -77,7 +77,7 @@
 							    		<h3>
 							    			<img src='resources/images/icon/icon_warn.png' width="20" height="20"/>
 							    			권한 부여 현황
-							    		</h3><a href="intrRoleInqy3010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+							    		</h3><a href="intrRoleInqy3010.do" class="main_ie fs_15">전체보기</a>
 									</div>
 
 									<div class="area_content">
@@ -89,7 +89,7 @@
 													<col class="w70per">
 												</colgroup>
 												<thead>
-													<tr style="border-bottom: none;">
+													<tr class="bb_none">
 														<th scope="col">권한</th>
 														<th scope="col">소유자</th>
 													</tr>
@@ -103,7 +103,7 @@
 																	<td class="title align_left">
 																		<c:forEach var="list2" items="${roleList}" varStatus="status2">
 																			<c:if test="${list1.roleCd eq list2.roleCd}">
-																				<span style="color: #214b97;">${list2.empNm}</span>
+																				<span class="c_214b97">${list2.empNm}</span>
 																				&nbsp;
 																			</c:if>
 																		</c:forEach>
@@ -144,11 +144,11 @@
 										<h3>
 											<img src='resources/images/icon/icon_temp.png' width="20" height="20"/>
 											입사 현황 (${empList[0].currYear}년)
-										</h3><a href="intrEmpInqy4010.do" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+										</h3><a href="intrEmpInqy4010.do" class="main_ie fs_15">전체보기</a>
 									</div>
 									
 									<div class="area_content">
-										<table class="post_table" style="margin-top: 10px;">
+										<table class="post_table mt10">
 											<caption>입사 현황</caption>
 											<colgroup>
 												<col class="auto">
@@ -156,7 +156,7 @@
 												<col class="auto">
 											</colgroup>
 											<thead>
-												<tr style="border-bottom: none;">
+												<tr class="bb_none">
 													<th scope="col">신규</th>
 													<th scope="col">퇴사</th>
 													<th scope="col">재직</th>
@@ -164,8 +164,8 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td class="align_center" style="color: #0000ff">${empList[0].newCnt}</td>
-													<td class="align_center" style="color: #ff0000;">${empList[0].leavCnt}</td>
+													<td class="align_center c_ff0000">${empList[0].newCnt}</td>
+													<td class="align_center c_0000ff">${empList[0].leavCnt}</td>
 													<td class="align_center">${empList[0].empCnt}</td>
 												</tr>
 											</tbody>
@@ -180,7 +180,7 @@
 										<h3>
 											<img src='resources/images/icon/icon_question.png' width="20" height="20"/>
 											프로젝트 관리
-										</h3><a href="intrProjInqy1010.do?pageUrl=Proj" class="main_ie" style="font-size: 1.5rem;">전체보기</a>
+										</h3><a href="intrProjInqy1010.do?pageUrl=Proj" class="main_ie fs_15">전체보기</a>
 									</div>
 									
 									<div class="area_content">

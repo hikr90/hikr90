@@ -25,7 +25,7 @@
 
 <div class="post_wrap">
 	<!-- 결재의견 -->
-	<div class="post_view" style="margin-top: -10px;">
+	<div class="post_view mt_10">
 		<dl>
 			<dt>
 				<label for="post-title">결재 의견</label>
@@ -67,7 +67,7 @@
 								<td>
 										<c:choose>
 											<c:when test="${not empty list.rsltNote}">
-												<a href="javascript:#" onclick="viewNote('${list.rsltNote}');" style="color: #214b97;">
+												<a class="c_214b97" href="javascript:#" onclick="viewNote('${list.rsltNote}');">
 													${list.orgNm} ${list.empNm} ${list.rankNm}
 												</a>
 											</c:when>

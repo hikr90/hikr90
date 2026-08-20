@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
 <header>
-	<div class="wrap" style="min-height: 100px;">
+	<div class="wrap mh_100p">
 		<div class="header_wrap">
 			<div class="header_state">
 				<ul class="header_list">
@@ -23,7 +23,7 @@
 					</li>
 				</ul><br><br>
 				
-				<span style="font-size: 14px;">
+				<span class="fs_14">
 					<a href="intrMainInqy1040.do?menuType=${menuType}&empIdx=${empVO.empIdx}">
 						<strong>환영합니다, ${empVO.empNm}님</strong>
 					</a> 
@@ -33,7 +33,7 @@
 			
 		<div class="menu_wrap">
 			<div class="logo">
-				<img class="logo" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png" style="cursor: pointer;" onclick="location.href='${menuType eq '0' ? 'intrMainInqy1020.do' : 'intrMainInqy1030.do'}'">
+				<img class="logo cursor" src="${pageContext.request.contextPath }/resources/images/icon/icon_logo.png" onclick="location.href='${menuType eq '0' ? 'intrMainInqy1020.do' : 'intrMainInqy1030.do'}'">
 			</div>
 			
 			<nav class="nav">

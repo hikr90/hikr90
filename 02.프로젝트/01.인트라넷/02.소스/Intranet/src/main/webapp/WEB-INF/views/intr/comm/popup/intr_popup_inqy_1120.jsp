@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- 업무 캘린더 관리 -->
-<div class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 80%; border: none;">
+<div class="pop_area height100">
+	<article class="sub_article height80 border_none">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -17,7 +17,7 @@
 							</div>
 	                        
 	                     	<!-- 업무 캘린더 상세 -->
-	                     	<div id="tldrCon" class="post_con disp_flex" style="height: 310px;"></div>
+	                     	<div id="tldrCon" class="post_con inline_flex" style="height: 310px;"></div>
 							<div class="btn_right">
    		                  		<button type="button" class="btn_blue_thin regBtn" onclick="regProc();">등록</button>
    		                  		<button type="button" class="btn_blue_thin mdBtn" onclick="modProc();">수정</button>

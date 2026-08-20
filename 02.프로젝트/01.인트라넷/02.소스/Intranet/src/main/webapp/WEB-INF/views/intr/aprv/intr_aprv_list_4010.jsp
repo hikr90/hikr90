@@ -282,7 +282,7 @@
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   		<c:set var="spanIcon" 	value="icon_list"/> 
 			
-															<li class="li_1" style="margin-left: 15px;">
+															<li class="li_1 ml15">
 																<span class="${spanIcon}"></span>
 																<a class="a_btn" id="${list.aprvlineId}" href="#" onclick="detCall('${list.aprvlineId}');">${list.aprvlineNm}</a>
 															</li>
@@ -291,7 +291,7 @@
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1" style="margin-left: 15px;">
+														<li class="li_1 ml15">
 															등록된 결재선이 없습니다.
 														</li>
 													</ul>
@@ -330,7 +330,7 @@
 																			<span class="${spanIcon}"></span>
 																		</c:if>
 																		<c:if test="${list.isleaf eq 'Y'}">
-																			<img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			<img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																			<span class="${spanIcon}"></span>
 																			<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 																		</c:if>
@@ -338,7 +338,7 @@
 															</c:when>
 															<c:when test="${list.lv eq prevLv}">
 																<c:if test="${list.isleaf eq 'Y'}">
-																	<img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																	<img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																	<span class="${spanIcon}"></span>
 																	<input type="radio" id="radio${status.index}" name="radioIdx" value="${list.empIdx}" orgNm="${list.orgNm}" empNm="${list.empNm}" rankNm="${list.rankNm}">
 																</c:if>

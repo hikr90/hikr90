@@ -115,7 +115,7 @@
 									    	<dt>&#10003; 대직자</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="empCall();">
-												<input type="text" id="empPnm" name="leavSubst" title="대직자" value="" style="width: 30%;" readonly="readonly" isRequired="Y">
+												<input type="text" id="empPnm" class="width30" name="leavSubst" title="대직자" value="" readonly="readonly" isRequired="Y">
 											</dd>
 										</dl>
 								        <dl>

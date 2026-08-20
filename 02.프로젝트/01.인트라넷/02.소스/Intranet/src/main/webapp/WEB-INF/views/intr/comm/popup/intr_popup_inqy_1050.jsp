@@ -6,8 +6,8 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 결재의견 관리 -->
-<div class="pop_area" style="height: 100%:">
-	<article class="sub_article" style="padding-bottom: 20px;">
+<div class="pop_area height100">
+	<article class="sub_article pb20">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -22,7 +22,7 @@
 							</div>
 	                        
 	                     	<!-- 결재 의견 입력 -->
-	                     	<div id="opinCon" class="post_con disp_flex" style="height: 240px;"></div>
+	                     	<div id="opinCon" class="post_con inline_flex" style="height: 240px;"></div>
 	                        
 							<div class="btn_right">
 	                      		<input type="button" class="btn_blue_thin" value="확인" onclick="opinConf('opin');">

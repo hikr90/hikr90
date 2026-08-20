@@ -143,7 +143,7 @@
 			</dd>
 			<dt>대직자</dt>
 			<dd>
-				<input type="text" id="empPnm" title="담당자" value="${defaultInfo.tpicNm}" style="width: 50%;" disabled="disabled">
+				<input type="text" id="empPnm" class="width50" title="담당자" value="${defaultInfo.tpicNm}" disabled="disabled">
 				<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
 				<input type="button" class="btn_gray align_top" value="초기화" onclick="initTpicCall();">
 			</dd>

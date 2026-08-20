@@ -5,8 +5,8 @@
 
 <ul class="area_ul scroll_wrap" style="height: 360px;">
 	<c:forEach var="list" items="${calInfo}">
-		<li class="main_li" style="border-bottom: solid 2px #f6f6f6; margin-right: 20px;">
-			<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a" style="font-weight: bold;">
+		<li class="main_li mr20 b_f6f6f6">
+			<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a bold">
 				<fmt:parseDate value="${list.mtgStm}" var="parseStm" pattern="HHmm"/>
 				<fmt:formatDate value="${parseStm}" var="formatStm" pattern="HH:mm"/>
 				

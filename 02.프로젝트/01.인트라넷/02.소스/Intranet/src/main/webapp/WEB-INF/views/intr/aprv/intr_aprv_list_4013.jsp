@@ -76,17 +76,17 @@
 	}
 </script>
 
-<div class="mb10"  style="padding: 8px; border: solid 2px #f6f6f6;">
+<div class="mb10 pd8 b_f6f6f6" >
     <input type="text" id="aprvlineNm" style="height: 36px; width: 410px;" placeholder="결재선 명칭을 입력하세요" value="${aprvlineList[0].aprvlineNm}">
 
     <div class="float_right">
         <button type="button" class="btn_navy_thin" onclick="saveProc('${aprvlineList[0].aprvlineId}');">저장</button>
-        <button type="button" class="btn_blue_thin" style="margin-left: 5px;" onclick="initCall('${aprvlineList[0].aprvlineId}');">새로고침</button>
+        <button type="button" class="btn_blue_thin ml5" onclick="initCall('${aprvlineList[0].aprvlineId}');">새로고침</button>
     </div>
 </div>
 
 <!-- 결재선 목록 -->
-<div id="tree_info" class="tree_info" style="width: 623px; height: 390px; border: solid 2px #f6f6f6; padding: 10px;">
+<div id="tree_info pd10" class="tree_info b_f6f6f6" style="width: 623px; height: 390px;">
 	<div class="post_wrap">
 		<div class="scroll_wrap" style="height: 390px;">
 			<table class="post_table aprvTbl">
@@ -111,15 +111,15 @@
 						<tr class="setListTr">
 							<td>${list.orgNm}</td>
 							<td>${list.aprvNm} ${list.rankNm}</td>
-							<td style="padding: 0;">
+							<td class="pd0">
 								<input type="hidden" id="aprvtypeCd" name="aprvtypeCd" value="${list.aprvtypeCd}">
 								<input type="hidden" id="aprvIdx" name="aprvIdx" value="${list.aprvIdx}">
 								
 								<c:if test="${status.index eq 0}">${list.aprvtypeNm}</c:if>
 								<c:if test="${status.index ne 0}">
 									<div class='select_wrap'>
-										<div class='pop_sbox' style='width:126px; border:unset; text-indent:0px;'>${list.aprvtypeNm}</div>
-										<ul class='sUl pop_sul scroll_wrap' style='width:125px; margin-left: -1px;'>
+										<div class='pop_sbox bb_unset text_indent0' style='width:126px;'>${list.aprvtypeNm}</div>
+										<ul class='sUl pop_sul scroll_wrap ml_1' style='width:125px;'>
 											<c:forEach var="type" items="${aprvtypeList}" varStatus="status">
 												<li setNm='${type.aprvtypeNm}' setCd='${type.aprvtypeCd}'>${type.aprvtypeNm}</li>
 											</c:forEach>
@@ -141,5 +141,5 @@
 </div>
 
 <div class="btn_right">
-    <button type="button" class="btn_gray_thin" style="margin-left: 5px;" onclick="delProc('${aprvlineList[0].aprvlineId}');">삭제</button>
+    <button type="button" class="btn_gray_thin ml5" onclick="delProc('${aprvlineList[0].aprvlineId}');">삭제</button>
 </div>

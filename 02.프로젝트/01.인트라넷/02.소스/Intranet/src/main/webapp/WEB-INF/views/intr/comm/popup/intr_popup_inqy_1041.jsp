@@ -135,7 +135,7 @@
 	}
 </script>
 
-<div id="custom" style="display: inline-flex;">
+<div id="custom" class="inline_flex">
 	<!-- 부서 사용자 트리 -->
 	<div class="tree_wrap">
 		<div class="tree_area" id="tree_area" style="width: 300px; height: 445px;"> 
@@ -205,7 +205,7 @@
 	<div id="treeArrow" class="tree_arrow" onclick="initAprvLine();"></div>
 	
 	<!-- 결재선 목록 -->
-	<div id="tree_info" class="tree_info" style="width: 640px; height: 425px; border: solid 2px #f6f6f6; padding: 10px;">
+	<div id="tree_info" class="tree_info b_f6f6f6 pd10" style="width: 640px; height: 425px;">
 		<div class="post_wrap">
 			<div class="scroll_wrap" style="height: 410px;">
 				<table class="post_table aprvTbl">
@@ -254,7 +254,7 @@
 					<c:forEach var="list" items="${defaultList}" varStatus="status">
        					<c:set var="spanIcon" 	value="icon_list"/> 
 
-						<li class="li_1" style="margin-left: 15px;">
+						<li class="li_1 ml15">
 							<span class="${spanIcon}"></span>
 							<a class="a_btn" id="${list.aprvlineId}" href="javascript:void(0);" onclick="detCall('${list.aprvlineId}');">${list.aprvlineNm}</a>
 						</li>
@@ -263,7 +263,7 @@
 			</c:if>
 			<c:if test="${empty defaultList}">
 				<ul class="ul_1">
-					<li class="li_1" style="margin-left: 15px;">
+					<li class="li_1 ml15">
 						등록된 결재선이 없습니다.
 					</li>
 				</ul>
@@ -272,5 +272,5 @@
 	</div>
 	
 	<!-- 사용자 목록 -->
-	<div id="aprvlineTb" class="tree_info" style="width: 640px; height: 425px; border: solid 2px #f6f6f6; padding: 10px; margin-left: 25px;"></div>
+	<div id="aprvlineTb" class="tree_info ml25 pd10 b_f6f6f6" style="width: 640px; height: 425px;"></div>
 </div>

@@ -158,8 +158,8 @@
 											<dt>&#10003; 첨부 파일</dt>
 											<dd>
 												<div class="file_box">
-													<input type="text" id="fileNm" title="첨부 파일" placeholder="이미지 파일은 jpg, jpeg, png 확장자만 지원됩니다." readonly="readonly" style="width: 87%;" value="${defaultInfo.fileNm}">
-													<label for="fileUpd" style="margin-bottom: 5px;">업로드</label>
+													<input type="text" id="fileNm" class="width87" title="첨부 파일" placeholder="이미지 파일은 jpg, jpeg, png 확장자만 지원됩니다." readonly="readonly" value="${defaultInfo.fileNm}">
+													<label for="fileUpd" class="mb5">업로드</label>
 													<input type="file" id="fileUpd" name="fileUpd" title="첨부파일" accept=".jpg,.jpeg,.png" onchange="fileUpload(this);">
 													<input type="hidden" id="isUploadImg" name="isUploadImg" value="">
 												</div>

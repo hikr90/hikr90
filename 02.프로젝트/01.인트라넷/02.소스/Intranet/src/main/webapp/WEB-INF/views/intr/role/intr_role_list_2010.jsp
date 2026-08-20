@@ -32,7 +32,7 @@
 	            success : function(data){
 	            	//
 	            	$("#roleTree").html(data);
-	            	$("#menuArea").css("display","none");
+	            	$("#menuArea").css("display","inline-flex");
 	            },
 	            error : function(data){
 	            	//
@@ -117,7 +117,7 @@
 													<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   	<c:set var="spanIcon" 	value="icon_list"/> 
 			
-														<li class="li_1" style="margin-left: 15px;">
+														<li class="li_1 ml15">
 														<span class="${spanIcon}"></span>
 														<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 													</c:forEach>
@@ -125,7 +125,7 @@
 												</c:if>
 												<c:if test="${empty defaultList}">
 													<ul class="ul_1">
-														<li class="li_1" style="margin-left: 15px;">
+														<li class="li_1 ml15">
 															등록된 권한이 없습니다.
 														</li>
 													</ul>
@@ -166,7 +166,7 @@
 																	</td>
 																	<td class="align_left">
 																		<c:if test="${list.lv ne '1'}">
-																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																		</c:if>
 																		${list.menuNm}
 																	</td>

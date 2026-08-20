@@ -130,7 +130,7 @@
 							<div class="form_area">
 								<div class="post_wrap">
 									<input type="hidden" id="tempCd" name="tempCd" value="0">
-									<input type="button" class="listCall" onclick="listCall(this.form);" style="display: none;">
+									<input type="button" class="listCall display_none" onclick="listCall(this.form);">
 								
 									<h2>기안문 관리</h2>
 		                            <div class="srch_wrap">

@@ -100,7 +100,7 @@
 									
 									<div id="tabArea">
 										<!-- 담당업무 조회 -->
-										<div class="srch_wrap" style="margin-top: 5px;">
+										<div class="srch_wrap mt5">
 											<div class="right_srch_area">
 												<!-- 부서 -->
 												<div class="srch_area">

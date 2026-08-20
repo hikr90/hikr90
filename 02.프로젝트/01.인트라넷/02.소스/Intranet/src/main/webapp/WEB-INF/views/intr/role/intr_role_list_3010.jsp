@@ -126,7 +126,7 @@
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
 					           						   		<c:set var="spanIcon" 	value="icon_list"/> 
 			
-															<li class="li_1" style="margin-left: 15px;">
+															<li class="li_1 ml15">
 																<span class="${spanIcon}"></span>
 																<a class="a_btn" id="${list.roleCd}" href="#" onclick="detCall('${list.roleCd}');">${list.roleNm}</a>
 															</li>
@@ -139,7 +139,7 @@
 												<!-- 사용자 목록 -->
 												<div id="empInfo" class="tree_area ml20" style="width: 400px; height: 525px;">
 													<div class="tree">
-														<li class="li_1" style="margin-left: 15px;">
+														<li class="li_1 ml15">
 															<input type="checkbox" id="totalIdx" class="checkbox totalIdx" name="totalIdx">
 															<span class="icon_total"></span>
 															전체 선택
@@ -169,7 +169,7 @@
 																<c:when test="${list.lv gt prevLv}">
 																	<li class="li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
-																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
 																		<span class="${spanIcon}"></span>
@@ -178,7 +178,7 @@
 																<c:when test="${list.lv eq prevLv}">
 																	<li class="li_${list.lv}">
 																		<c:if test="${list.isleaf eq 'Y'}">
-																			&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+																			&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 																			<input type="checkbox" id="empIdx${status.index}" class="${list.isleaf eq 'N' ? 'orgCd' : 'empIdx'}" name="empIdx" value="${list.empIdx}" empNm="${list.empNm}" orgCd="${list.isleaf eq 'N' ? list.orgCd : list.upprorgCd}" orgNm="${list.orgNm}">
 																		</c:if>
 																		<span class="${spanIcon}"></span>

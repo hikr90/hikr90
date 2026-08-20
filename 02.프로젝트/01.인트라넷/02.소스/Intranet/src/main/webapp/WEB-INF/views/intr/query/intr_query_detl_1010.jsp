@@ -234,8 +234,8 @@
 											<input type="button" class="btn_blue_thin listCall" value="조회" onclick="listCall();">
 										</span>
 									</h2>
-									<span style="font-size: 1.5rem; float: right; margin: 10px; font-weight: bold;">
-										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc " name="dmlProc" style="width: 16px; height: 16px; vertical-align: middle;">DML 처리</label>
+									<span class="fs_15 float_right bold mg10">
+										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc va_middle" name="dmlProc" style="width: 16px; height: 16px;">DML 처리</label>
 									</span><br>
 									
 									<!-- 쿼리 입력 -->

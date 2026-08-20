@@ -276,7 +276,7 @@
 									<dl>
 										<dt>&#10003; 회의시간</dt>
 										<dd>
-											<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+											<div class="disp_flex fw_wrap gap10">
 												<c:forEach var="mtgTm" begin="540" end="1080" step="30">
 												    <c:set var="hour" value="${(mtgTm / 60) - ((mtgTm / 60) % 1)}" />
 												    <c:set var="minute" value="${mtgTm % 60}" />

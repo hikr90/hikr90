@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <!-- 로그 메세지 조회 -->
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>요청자</dt>
 		<dd>${defaultInfo.orgNm} ${defaultInfo.empNm}</dd>

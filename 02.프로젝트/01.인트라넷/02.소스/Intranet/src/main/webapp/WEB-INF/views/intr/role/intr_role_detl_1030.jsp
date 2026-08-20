@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" 		uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="post_write" style="margin: 0px;">
+<div class="post_write mg0">
 	<dl>
 		<dt>
 			<label for="post-title">권한명</label>

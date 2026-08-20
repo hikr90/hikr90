@@ -142,10 +142,10 @@
 	}
 </script>
 
-<div class="post_wrap" style="height: auto; padding: 0px;">
+<div class="post_wrap h_auto pd0">
 	<input type="hidden" id="roleCd" name="roleCd" value="">
 	
-	<div class="scroll_wrap" style="max-height: 480px; height: auto;">
+	<div class="scroll_wrap h_auto max_h480">
 		<table class="post_table roleEmpTbl">
 			<caption>사용자 목록 테이블</caption>
 			<colgroup>
@@ -185,6 +185,6 @@
 <div class="btn_center">
 	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
 
-	<button type="button" class="btn_navy_thin float_right" style="margin-left: 5px;" onclick="regProc(this.form);">저장</button> 
+	<button type="button" class="btn_navy_thin float_right ml5" onclick="regProc(this.form);">저장</button> 
 	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</button>
 </div>

@@ -210,7 +210,7 @@
 			<col class="w8per">
 		</colgroup>
 		<thead>
-			<tr style="line-height: 10px;">
+			<tr class="lh10">
 				<th scope="col">관리번호</th>
 				<th scope="col">제품명</th>
 				<th scope="col">수량</th>

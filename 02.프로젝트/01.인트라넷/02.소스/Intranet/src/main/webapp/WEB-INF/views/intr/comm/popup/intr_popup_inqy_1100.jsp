@@ -76,8 +76,8 @@
 	});
 </script>
 
-<div class="pop_area" style="height: 100%;">
-	<article class="sub_article" style="height: 85%;">
+<div class="pop_area height100">
+	<article class="sub_article height85">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -97,7 +97,7 @@
 							</div>
 	                        
 	                     	<!-- 조직도 상세 -->
-	                     	<div id="orgCon" class="post_con disp_flex" style="height: 325px;"></div>
+	                     	<div id="orgCon" class="post_con inline_flex" style="height: 325px;"></div>
 	                        
 							<div class="btn_right mt40">
 	                      		<button type="button" class="btn_gray_thin" onclick="popClose('org');">닫기</button>

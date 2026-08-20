@@ -126,7 +126,7 @@
 										                <c:set var="rowKey" value="${org.orgNm}_연간 소계" />
 										                <c:set var="rowData" value="${statList[rowKey]}" />
 
-										                <td style="font-weight: bold;">
+										                <td class="bold">
 										              		<c:choose>
 										                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty rowData ? rowData.hireTotal : 0}</c:when>
 										                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty rowData ? rowData.leavTotal : 0}</c:when>
@@ -139,13 +139,13 @@
 										    
 										    <tfoot>
 										        <tr>
-										            <td class="bg_total" style="color: #214b97; font-weight: 700; background-color: #f3f6f8;">합계 (월)</td>
+										            <td class="bg_total fw_700 c_214b97 bc_f3f6f8">합계 (월)</td>
 										            <c:forEach var="ym" items="${ymList}">
 										                <%-- 합계(월) --%>
 										                <c:set var="colKey" value="전체 합계_${ym.yearMm}" />
 										                <c:set var="colData" value="${statList[colKey]}" />
 										                
-										                <td style="font-weight: bold;">
+										                <td class="bold">
 										                	<c:choose>
 										                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty colData ? colData.hireTotal : 0}</c:when>
 										                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty colData ? colData.leavTotal : 0}</c:when>
@@ -158,7 +158,7 @@
 										            <c:set var="grandKey" value="전체 합계_연간 소계" />
 										            <c:set var="grandData" value="${statList[grandKey]}" />
 										            
-										            <td style="font-weight: bold;">
+										            <td class="bold">
 										            	<c:choose>
 									                    	<c:when test="${param.srchHireNm eq 'Y'}">${not empty grandData ? grandData.hireTotal : 0}</c:when>
 									                    	<c:when test="${param.srchHireNm eq 'N'}">${not empty grandData ? grandData.leavTotal : 0}</c:when>

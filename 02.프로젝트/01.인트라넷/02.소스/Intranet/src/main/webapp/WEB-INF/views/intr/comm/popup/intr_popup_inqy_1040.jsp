@@ -133,12 +133,12 @@
 	}
 </script>
 
-<div class="pop_area" style="height: 100%;">
+<div class="pop_area height100">
 	<input type="hidden" id="aprvlineList" name="aprvlineList" value="">
 	<input type="hidden" id="itemlineList" name="itemlineList" value="">
 	<input type="hidden" id="corplineList" name="corplineList" value="">
 
-	<article class="sub_article" style="height: 85%; border: none;">
+	<article class="sub_article height85 border_none">
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
@@ -165,9 +165,9 @@
 						    </c:if>
 	                        
 	                     	<!-- 결재선 목록 -->
-	                     	<div id="lineCon" class="post_con disp_flex pt20" style="height: 425px;"></div>
+	                     	<div id="lineCon" class="post_con inline_flex pt20" style="height: 425px;"></div>
 	                        
-							<div class="btn_right" style="margin-top: 40px;">
+							<div class="btn_right mt40">
 	                      		<button type="button" class="btn_blue_thin procBtn" onclick="aprvProc()">등록</button>
 	                      		<button type="button" class="btn_gray_thin viewBtn" onclick="popClose('line');">닫기</button>
 	                 		</div>

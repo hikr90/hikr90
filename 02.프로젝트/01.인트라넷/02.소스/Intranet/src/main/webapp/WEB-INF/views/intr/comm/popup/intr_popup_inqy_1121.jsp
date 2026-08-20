@@ -17,7 +17,7 @@
 	});
 </script>
 
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>&#10003; 업무 제목</dt>
 		<dd>

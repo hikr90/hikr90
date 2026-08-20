@@ -181,7 +181,7 @@
 						</td>
 						<td class="align_left">
 							<c:if test="${list.lv ne '1'}">
-								&nbsp; <img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
+								&nbsp; <img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
 							</c:if>
 							${list.menuNm}
 						</td>
@@ -195,6 +195,6 @@
 <div class="btn_center">
 	<button type="button" class="btn_gray_thin float_left" onclick="delCall();">삭제</button>
 	
-	<button type="button" class="btn_navy_thin float_right" style="margin-left: 5px;" onclick="regProc(this.form);">저장</button> 
+	<button type="button" class="btn_navy_thin float_right ml5" onclick="regProc(this.form);">저장</button> 
 	<button type="button" class="btn_blue_thin float_right" onclick="setListCall();">새로고침</button>
 </div>

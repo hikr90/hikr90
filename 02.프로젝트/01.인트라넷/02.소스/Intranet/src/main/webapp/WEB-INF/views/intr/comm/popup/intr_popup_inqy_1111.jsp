@@ -16,17 +16,17 @@
 	});
 </script>
 
-<div class="post_view" style="margin: 0; margin-top:20px;">
+<div class="post_view mg0 mt20">
 	<dl>
 		<dt>반환 데이터 복사</dt>
 		<dd>
-			<input type="button" class="btn_blue" value="복사" onclick="copyUrl('#jObj');" style="margin-bottom: 5px;">
+			<input type="button" class="btn_blue mb5" value="복사" onclick="copyUrl('#jObj');">
 		</dd>
 	</dl>
 	<dl>
 		<dt>반환 데이터</dt>
 		<dd class="post_text" style="height: 440px;">
-			<textarea id="jObj" readonly="readonly" style="color: #727272;"></textarea>
+			<textarea id="jObj" class="c_727272" readonly="readonly"></textarea>
 		</dd>
 	</dl>
 </div><!-- End post_view -->

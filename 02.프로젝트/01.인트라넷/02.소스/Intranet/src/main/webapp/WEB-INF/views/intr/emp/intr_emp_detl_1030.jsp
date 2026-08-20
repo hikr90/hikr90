@@ -110,7 +110,7 @@
 	                                    <dl>
 	                                        <dt><label>프로필</label></dt>
 	                                        <dd>
-	                                        	<div class="profile_wrap disp_flex">
+	                                        	<div class="profile_wrap inline_flex">
 		                                        	<div class="profile_area">
 		                                        		<c:choose>
 															<c:when test="${defaultInfo.profileYn eq 'Y'}">
@@ -132,7 +132,7 @@
 		                                        				<span id="profText">${fileList[0].fileNm}</span>
 		                                        			</c:otherwise>
 		                                        		</c:choose>
-			                                        	<div style="margin-top: 5px;">
+			                                        	<div class="mt5">
 			                                        		<label for="profBtn" class="btn_blue">등록</label> 
 															<input type="file" id="profBtn">
 															<input type="hidden" id="isUploadImg" name="isUploadImg" value="">

@@ -85,7 +85,7 @@
 															<c:forEach var="list" items="${fileList}" varStatus="status">
 																<li class="fileLi${status.index}">
 																	<img src='resources/images/icon/icon_file.png' width="20" height="20" />
-																	<a href="javascript:#" style="text-indent: 10px;" onclick="fileProc('${list.fileId}', '${list.fileSno}');">${list.fileNm}&nbsp;</a>
+																	<a href="javascript:#" class="text_indent10" onclick="fileProc('${list.fileId}', '${list.fileSno}');">${list.fileNm}&nbsp;</a>
 																	<input type="hidden" id="fileId" name="fileId" value="${list.fileId}">
 																</li>
 															</c:forEach>

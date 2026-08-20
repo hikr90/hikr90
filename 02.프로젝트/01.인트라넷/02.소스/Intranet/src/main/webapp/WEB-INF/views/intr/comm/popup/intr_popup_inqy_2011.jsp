@@ -18,7 +18,7 @@
 			<dd class="sel_2part">
 				<input type="password" title="비밀번호 확인" id="newPwdConf" name="newPwdConf" oninput="checkPwd(this);">
 			</dd>
-			<span id="checkPwd" style="color:red; font-size:14px; text-align:right; margin-top:20px; float:right;"></span>
+			<span id="checkPwd" class="fs_16 mt20 float_right align_right c_ff0000"></span>
 		</dl>
 	</div>
 </div>

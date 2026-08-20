@@ -9,17 +9,17 @@
     	<c:forEach var="list" items="${leftList}">
 			<c:if test="${list.menuCd eq setUpprMenu or list.upprMenuCd eq setUpprMenu}">
 				<tr>
-					<td class="text_left" style="border: none;">
+					<td class="text_left border_none">
 						<c:choose> 
 							<c:when test="${list.lv eq '1'}">
-								<span class="a_title bold" style="color: #214b97; font-size: 16px;">${list.menuNm}</span>
+								<span class="a_title bold fs_16 c_214b97">${list.menuNm}</span>
 							</c:when>
 							<c:otherwise>
 								<c:forEach begin="0" end="1">
 									&nbsp;
 								</c:forEach>
-									<img src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" style="margin-right: 5px;"/>
-									<a class="a_title ${setMenu eq list.menuCd ? 'list_bg' : ''}" style="color: black; font-size: 16px; cursor: pointer;" onclick="goMenu(this);"
+									<img class="mr5" src='resources/images/icon/icon_tree_arrow.png' width="13" height="13" />
+									<a class="a_title fs_16 cursor c_000000 ${setMenu eq list.menuCd ? 'list_bg' : ''}" onclick="goMenu(this);"
 									   data-mapping-id="${list.mappingId}"
 									   data-menu-cd="${list.menuCd}"
 									   data-lead-menu-cd="${list.leadMenuCd}"

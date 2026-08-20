@@ -102,7 +102,7 @@
 								<col class="w70per">
 							</colgroup>
 							<thead>
-								<tr style="border-bottom: none;">
+								<tr class="bb_none">
 									<th scope="col">권한</th>
 									<th scope="col">소유자</th>
 								</tr>
@@ -116,7 +116,7 @@
 											<td class="title align_left">
 												<c:forEach var="list2" items="${defaultList}" varStatus="status2">
 													<c:if test="${list1.roleCd eq list2.roleCd}">
-														<a href="javascript:setInfo('${list2.empId}','${list2.decpwd}');" style="color: #214b97;">${list2.empNm}</a>
+														<a class="c_214b97" href="javascript:setInfo('${list2.empId}','${list2.decpwd}');">${list2.empNm}</a>
 														&nbsp;
 													</c:if>
 												</c:forEach>

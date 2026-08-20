@@ -82,7 +82,7 @@
 										<input type="hidden" id="taskId" name="taskId" value="">
 										
 										<h2>업무일지 조회</h2><br>
-										<div class="srch_wrap" style="margin-top: 5px;">
+										<div class="srch_wrap mt5">
 											<div class="right_srch_area">
 												<!-- 작성일자 -->
 												<div class="srch_area">
@@ -150,7 +150,7 @@
 													        </c:if>
 											
 													        <td class="_title">
-											    		        <a href="javascript:void(0);" class="show_view a_title" style="color: #214b97 !important;" onclick="detCall('${list.taskId}');">${list.taskTitle}</a>
+											    		        <a href="javascript:void(0);" class="show_view a_title c_214b97" onclick="detCall('${list.taskId}');">${list.taskTitle}</a>
 											    		    </td>
 											
 													        <c:if test="${list.rowNum eq 1}">
