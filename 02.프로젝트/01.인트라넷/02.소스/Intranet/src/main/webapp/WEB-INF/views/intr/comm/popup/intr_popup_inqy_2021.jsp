@@ -26,7 +26,7 @@
 	</dl>
 	<dl>
 		<dt>메세지</dt>
-		<dd class="post_text" style="height: 160px;">
+		<dd class="post_text h160p">
 			<textarea readonly="readonly">${defaultInfo.logMsg}</textarea>
 		</dd>
 	</dl>

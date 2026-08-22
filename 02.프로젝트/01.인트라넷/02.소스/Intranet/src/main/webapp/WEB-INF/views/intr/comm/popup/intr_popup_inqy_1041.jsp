@@ -138,7 +138,7 @@
 <div id="custom" class="inline_flex">
 	<!-- 부서 사용자 트리 -->
 	<div class="tree_wrap">
-		<div class="tree_area" id="tree_area" style="width: 300px; height: 445px;"> 
+		<div class="tree_area" id="tree_area" class="w300p h445p"> 
 			<div class="tree">
 				<ul class="ul_1">
 												
@@ -205,9 +205,9 @@
 	<div id="treeArrow" class="tree_arrow" onclick="initAprvLine();"></div>
 	
 	<!-- 결재선 목록 -->
-	<div id="tree_info" class="tree_info b_f6f6f6 pd10" style="width: 640px; height: 425px;">
+	<div id="tree_info" class="tree_info b_f6f6f6 pd10 w640p h425p">
 		<div class="post_wrap">
-			<div class="scroll_wrap" style="height: 410px;">
+			<div class="scroll_wrap h410p">
 				<table class="post_table aprvTbl">
 					<caption>결재선 목록</caption>
 					<colgroup>
@@ -247,7 +247,7 @@
 </div>
 
 <div id="selected" class="tree_wrap" style="display: none;">
-	<div id="treeArea" class="tree_area" style="width: 350px; height: 445px;">
+	<div id="treeArea" class="tree_area w350p h445p">
 		<div id="lineTree" class="tree">
 			<c:if test="${not empty defaultList}">
 				<ul class="ul_1">
@@ -272,5 +272,5 @@
 	</div>
 	
 	<!-- 사용자 목록 -->
-	<div id="aprvlineTb" class="tree_info ml25 pd10 b_f6f6f6" style="width: 640px; height: 425px;"></div>
+	<div id="aprvlineTb" class="tree_info ml25 pd10 b_f6f6f6 w640p h425p"></div>
 </div>

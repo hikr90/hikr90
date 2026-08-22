@@ -51,7 +51,7 @@
 </script>
 
 <div class="mb10 pd8 b_f6f6f6">
-    <input type="text" id="aprvlineNm" style="height: 36px; width: 410px;" placeholder="결재선 명칭을 입력하세요">
+    <input type="text" id="aprvlineNm" class="h36p w410p" placeholder="결재선 명칭을 입력하세요">
 
     <div class="float_right">
         <button type="button" class="btn_navy_thin" onclick="saveProc('');">저장</button>
@@ -60,9 +60,9 @@
 </div>
 
 <!-- 결재선 목록 -->
-<div id="tree_info" class="tree_info pd10 b_f6f6f6" style="width: 623px; height: 390px;">
+<div id="tree_info" class="tree_info pd10 b_f6f6f6 w623p h390p">
 	<div class="post_wrap">
-		<div class="scroll_wrap" style="height: 390px;">
+		<div class="scroll_wrap h390p">
 			<table class="post_table aprvTbl">
 				<caption>결재선 목록</caption>
 				<colgroup>

@@ -120,7 +120,7 @@
 		                                <!-- end Form srch_wrap  -->
 										
 										<div class="tree_wrap">
-											<div id="treeArea" class="tree_area" style="width: 400px; height: 525px;">
+											<div id="treeArea" class="tree_area w400p h525p">
 												<div id="roleTree" class="tree">
 													<ul class="ul_1">
 														<c:forEach var="list" items="${defaultList}" varStatus="status">
@@ -137,7 +137,7 @@
 											
 											<div id="empArea" class="emp_area" style="display: none;">
 												<!-- 사용자 목록 -->
-												<div id="empInfo" class="tree_area ml20" style="width: 400px; height: 525px;">
+												<div id="empInfo" class="tree_area ml20 w400p h525p">
 													<div class="tree">
 														<li class="li_1 ml15">
 															<input type="checkbox" id="totalIdx" class="checkbox totalIdx" name="totalIdx">
@@ -214,7 +214,7 @@
 												<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 												
 												<!-- 사용자 트리 -->
-												<div id="empTree" class="tree_info" style="width: 646px;"></div>
+												<div id="empTree" class="tree_info w646p"></div>
 											</div><!-- End emp_area -->
 										</div><!-- End tree_wrap -->
 								</div><!-- End post_wrap -->

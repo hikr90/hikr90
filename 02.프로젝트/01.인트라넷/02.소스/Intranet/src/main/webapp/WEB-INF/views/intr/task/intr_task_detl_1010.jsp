@@ -78,7 +78,7 @@
 													
 													<dl>
 														<dt>업무 내용</dt>
-														<dd class="post_text" style="height: 300px;">
+														<dd class="post_text h300p">
 															${list.taskCont}
 														</dd>
 													</dl>

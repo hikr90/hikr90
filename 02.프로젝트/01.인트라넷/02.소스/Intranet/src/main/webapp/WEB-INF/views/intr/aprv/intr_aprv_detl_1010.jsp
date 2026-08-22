@@ -85,7 +85,7 @@
 											</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isRequired="Y">
+												<input type="text" id="projPnm" class="w1320p" title="프로젝트명" name="projPnm" readonly="readonly" isRequired="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>

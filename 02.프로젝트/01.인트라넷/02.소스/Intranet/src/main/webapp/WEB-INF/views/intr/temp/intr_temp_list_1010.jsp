@@ -147,7 +147,7 @@
 		                            </div>
 									
 									<div class="tree_wrap">
-										<div class="tree_area mr20" id="tree_area" style="width: 715px; height: 746px;"> 
+										<div id="tree_area" class="tree_area mr20 w715p h746p"> 
 											<div id="tempTree" class="tree">
 												<ul class="ul_1">
 												<c:forEach var="list" items="${defaultList}" varStatus="status">

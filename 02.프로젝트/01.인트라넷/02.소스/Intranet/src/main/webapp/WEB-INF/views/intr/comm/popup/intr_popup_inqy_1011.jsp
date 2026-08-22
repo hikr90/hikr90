@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags" %>
 
 <!-- 담당자 트리 -->
-<div class="scroll_wrap" style="height: 260px;">
+<div class="scroll_wrap h260p">
 	<div class="pop_tree">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">

@@ -303,7 +303,7 @@
 									</dl>
 									<dl>
 										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
-										<dd class="post_text" style="height: 310px;">
+										<dd class="post_text h310p">
 											<textarea id="projCont" title="회의 개요" name="mtgCont" isRequired="Y">${defaultInfo.mtgCont}</textarea>
 										</dd>
 									</dl>

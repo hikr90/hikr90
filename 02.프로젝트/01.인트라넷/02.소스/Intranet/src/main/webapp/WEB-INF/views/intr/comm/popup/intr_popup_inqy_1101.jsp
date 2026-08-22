@@ -7,7 +7,7 @@
 
 <!-- 조직도 트리 -->
 <div class="post_view mt20 mr10 mg0 b_d7d7d7">
-	<div id="empTree" class="tree_area ml20 scroll_wrap" style="width: 300px; height: 300px;">
+	<div id="empTree" class="tree_area ml20 scroll_wrap w300p h300p">
 		<div class="tree">
 			<c:forEach var="list" items="${empList}" varStatus="status">
 				<c:set var="spanIcon"	value="icon_folder"/>
@@ -83,7 +83,7 @@
 </div><!-- End post_view -->
 
 <!-- 조직도 상세 -->
-<div class="post_write" style="height: 305px;">
+<div class="post_write h305p">
 	<dl>
 		<dt><label for="post-title">부서</label></dt>
 		<dd><span id="orgNm"></span></dd>

@@ -79,7 +79,7 @@
 											</dt>
 											<dd>
 												<input type="button" class="btn_blue align_top" value="선택" onclick="projCall();">
-												<input type="text" id="projPnm" title="프로젝트명" name="projPnm" style="width: 1320px;" readonly="readonly" isRequired="Y">
+												<input type="text" id="projPnm" class="w1320p" title="프로젝트명" name="projPnm" readonly="readonly" isRequired="Y">
 												<input type="hidden" id="projPcd" name="projPcd" value="">
 											</dd>
 										</dl>
@@ -106,7 +106,7 @@
 									    	</dd>
 									    	<dt>&#10003; 청구 금액</dt>
 											<dd>
-												<input type="text" id="prepayAmt" name="prepayAmt" title="청구 금액" placeholder="₩0" oninput="amtProc(this);" style="width: 181px;" isRequired="Y">
+												<input type="text" id="prepayAmt" class="w181p" name="prepayAmt" title="청구 금액" placeholder="₩0" oninput="amtProc(this);" isRequired="Y">
 												&nbsp; (<span id="amtNm">원</span>)
 											</dd>
 										</dl>

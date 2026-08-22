@@ -35,7 +35,7 @@
 	</dl>
 	<dl>
 		<dt>&#10003; 업무 내용</dt>
-		<dd class="post_text" style="height: 160px;">
+		<dd class="post_text h160p">
 			<textarea id="tldrCont" name="tldrCont" title="업무 내용" isRequired="Y">${defaultInfo.tldrTitle}</textarea>
 		</dd>
 	</dl>

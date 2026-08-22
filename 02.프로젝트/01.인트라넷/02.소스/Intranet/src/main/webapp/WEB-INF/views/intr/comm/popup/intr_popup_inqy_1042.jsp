@@ -30,14 +30,14 @@
 			<dt>
 				<label for="post-title">결재 의견</label>
 			</dt>
-			<dd class="post_text" style="height: 105px;">
-				<textarea id="rsltRsn" title="결재의견" id="rsltRsn" name="rsltRsn" style="height: 10px;" placeholder="결재자를 선택해주세요." readonly="readonly"></textarea>
+			<dd class="post_text h105p">
+				<textarea id="rsltRsn" title="결재의견" id="rsltRsn" class="h10p" name="rsltRsn" placeholder="결재자를 선택해주세요." readonly="readonly"></textarea>
 			</dd>
 		</dl>
 	</div>
 
 	<!-- 결재선 목록 -->
-	<div id="tree_info" class="tree_info scroll_wrap" style="height: 320px;">
+	<div id="tree_info" class="tree_info scroll_wrap h320p">
 		<div class="post_wrap">
 			<div>
 				<table class="post_table">

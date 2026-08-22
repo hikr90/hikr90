@@ -235,7 +235,7 @@
 										</span>
 									</h2>
 									<span class="fs_15 float_right bold mg10">
-										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc va_middle" name="dmlProc" style="width: 16px; height: 16px;">DML 처리</label>
+										<label for="dmlProc" class="cursor"><input type="checkbox" id="dmlProc" class="dmlProc va_middle w16p h16p" name="dmlProc">DML 처리</label>
 									</span><br>
 									
 									<!-- 쿼리 입력 -->

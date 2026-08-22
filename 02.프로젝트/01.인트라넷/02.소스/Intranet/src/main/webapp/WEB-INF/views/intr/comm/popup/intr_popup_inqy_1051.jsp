@@ -10,7 +10,7 @@
 	</dl>
 	<dl>
 		<dt>결재의견</dt>
-		<dd class="post_text" style="height: 140px;">
+		<dd class="post_text h140p">
 			<textarea rows="5" cols="20" id="rsltNote" name="rsltNote"></textarea>
 		</dd>
 	</dl>

@@ -34,7 +34,7 @@
 			
 			<dl>
 				<dt>&#10003; 업무 내용</dt>
-				<dd class="post_text" style="height: 300px;">
+				<dd class="post_text h300p">
 					<textarea class="taskCont" title="업무 내용" isRequired="Y">${list.taskCont}</textarea>
 				</dd>
 			</dl>

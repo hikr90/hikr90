@@ -25,7 +25,7 @@
 	</dl>
 	<dl>
 		<dt>반환 데이터</dt>
-		<dd class="post_text" style="height: 440px;">
+		<dd class="post_text h440p">
 			<textarea id="jObj" class="c_727272" readonly="readonly"></textarea>
 		</dd>
 	</dl>

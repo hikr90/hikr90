@@ -11,7 +11,7 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap" style="height: 330px;">
+					<div class="pop_wrap h330p">
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">
@@ -22,7 +22,7 @@
 							</div>
 	                        
 	                     	<!-- 결재 의견 입력 -->
-	                     	<div id="opinCon" class="post_con inline_flex" style="height: 240px;"></div>
+	                     	<div id="opinCon" class="post_con inline_flex h240p"></div>
 	                        
 							<div class="btn_right">
 	                      		<input type="button" class="btn_blue_thin" value="확인" onclick="opinConf('opin');">

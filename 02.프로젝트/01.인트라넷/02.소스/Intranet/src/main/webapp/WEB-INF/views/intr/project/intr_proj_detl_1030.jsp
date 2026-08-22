@@ -161,7 +161,7 @@
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" value="${defaultInfo.ownerNm}" style="width: 150px;" disabled="disabled" isRequired="Y">
+											<input type="text" id="empPnm" class="w150p" title="담당자" value="${defaultInfo.ownerNm}" disabled="disabled" isRequired="Y">
 										</dd>
 									</dl>
 									<dl>
@@ -201,7 +201,7 @@
 									</dl>
 									<dl>
 										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
-										<dd class="post_text" style="height: 310px;">
+										<dd class="post_text h310p">
 											<textarea id="projCont" title="개요/설명" name="projCont" isRequired="Y">${defaultInfo.projCont}</textarea>
 										</dd>
 									</dl>

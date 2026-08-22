@@ -130,7 +130,7 @@
 										</dl>
 										<dl>
 											<dt>설명/개요</dt>
-											<dd class="post_text" style="height: 310px;">
+											<dd class="post_text h310p">
 												<pre>${defaultInfo.mtgCont}</pre>
 											</dd>
 										</dl>

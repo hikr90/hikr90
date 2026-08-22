@@ -142,7 +142,7 @@
 		<div class="content">
 			<div id="sub_content">					
 				<div class="form_area">
-					<div class="pop_wrap" style="height: 650px;">
+					<div class="pop_wrap h650p">
 	                	<div class="post_wrap">
 							<div class="srch_wrap">
 								<div class="srch_area">
@@ -165,7 +165,7 @@
 						    </c:if>
 	                        
 	                     	<!-- 결재선 목록 -->
-	                     	<div id="lineCon" class="post_con inline_flex pt20" style="height: 425px;"></div>
+	                     	<div id="lineCon" class="post_con inline_flex pt20 h425p"></div>
 	                        
 							<div class="btn_right mt40">
 	                      		<button type="button" class="btn_blue_thin procBtn" onclick="aprvProc()">등록</button>

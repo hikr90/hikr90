@@ -152,8 +152,8 @@
 		}
 	}
 </script>
-<div class="post_wrap" style="padding: 0px; height: 490px;">
-	<div class="scroll_wrap" style="height: 490px;">
+<div class="post_wrap pd0 h490p">
+	<div class="scroll_wrap h490p">
 		<table class="post_table roleMenuTbl">
 			<caption>권한 목록 테이블</caption>
 			<colgroup>

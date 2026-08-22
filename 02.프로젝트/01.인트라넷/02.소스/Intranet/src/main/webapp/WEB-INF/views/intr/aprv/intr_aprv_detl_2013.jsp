@@ -110,7 +110,7 @@
 										</dl>
 										<dl>
 											<dt>결재선</dt>
-											<dd style="width: 645px;">
+											<dd class="w645p">
 												<input type="button" class="btn_gray align_top mb5" value="조회" onclick="lineCall('${defaultInfo.aprvId}');">
 											</dd>
 											

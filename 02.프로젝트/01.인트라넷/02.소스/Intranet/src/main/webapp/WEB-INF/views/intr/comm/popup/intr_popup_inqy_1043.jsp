@@ -5,7 +5,7 @@
 
 <!-- 결재선 상세 -->
 <div class="post_wrap">
-	<div class="scroll_wrap" style="height: 390px;">
+	<div class="scroll_wrap h390p">
 		<table class="post_table aprvTbl">
 			<caption>결재선 목록</caption>
 			<colgroup>

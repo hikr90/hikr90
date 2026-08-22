@@ -17,7 +17,7 @@
 							</div>
 	                        
 	                     	<!-- 일정 상세 -->
-	                     	<div id="leavCon" class="post_con inline_flex" style="height: 300px;"></div>
+	                     	<div id="leavCon" class="post_con inline_flex h300p"></div>
 	                        
 							<div class="btn_right">
 	                      		<button type="button" class="btn_gray_thin" onclick="popClose('leav');">닫기</button>

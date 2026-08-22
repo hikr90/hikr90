@@ -272,7 +272,7 @@
 		                            </div>
 									
 									<div class="tree_wrap">
-										<div class="tree_area" id="tree_area" style="width: 400px; height: 525px;"> 
+										<div id="tree_area" class="tree_area w400p h525p"> 
 											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
@@ -294,7 +294,7 @@
 												</c:if>
 											</div>	
 										</div>
-										<div class="tree_info pl20" id="tree_info" style="width: 1120px;"></div>
+										<div id="tree_info" class="tree_info pl20 w1120p"></div>
 									</div>
 								</div><!-- End post_wrap -->
 							</div><!-- End form_area -->

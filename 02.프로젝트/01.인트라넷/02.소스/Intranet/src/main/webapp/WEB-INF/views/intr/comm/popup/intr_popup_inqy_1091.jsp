@@ -41,7 +41,7 @@
 	</dl>
 	<dl>
 		<dt>회의 내용</dt>
-		<dd class="post_text" style="height: 140px;">
+		<dd class="post_text h140p">
 			<pre>${defaultInfo.mtgCont}</pre>
 		</dd>
 	</dl>

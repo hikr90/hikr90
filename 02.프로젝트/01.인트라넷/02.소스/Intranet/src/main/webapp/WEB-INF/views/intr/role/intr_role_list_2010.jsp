@@ -110,7 +110,7 @@
 	                                </div>
 										
 									<div class="tree_wrap">
-										<div id="tree_area" class="tree_area" style="width: 400px; height: 525px;">
+										<div id="tree_area" class="tree_area w400p h525p">
 											<div id="roleTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
@@ -135,9 +135,9 @@
 											
 										<div id="menuArea" class="menu_area" style="display: none;">
 											<!-- 권한 메뉴 목록 -->
-											<div id="menuInfo" class="tree_info ml20" style="width: 500px; height: 525px;">
+											<div id="menuInfo" class="tree_info ml20 w500p h525p">
 												<div class="post_wrap">
-													<div class="scroll_wrap" style="height: 525px;">
+													<div class="scroll_wrap h525p">
 														<table class="post_table menuTbl">
 															<caption>권한 목록 테이블</caption>
 															<colgroup>
@@ -182,7 +182,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 권한 목록 -->
-											<div id="roleInfo" class="tree_info" style="width: 550px; height: 525px;"></div>
+											<div id="roleInfo" class="tree_info w550p h525p"></div>
 										</div> <!-- End menu_area -->
 									</div>
 								</div><!-- End post_wrap -->

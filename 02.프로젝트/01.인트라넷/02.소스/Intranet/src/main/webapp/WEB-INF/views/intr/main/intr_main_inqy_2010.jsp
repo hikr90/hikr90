@@ -19,10 +19,10 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="top_box">
-						<div class="wrap" style="width: 1630px;">
+						<div class="wrap w1630p">
 							<div class="top_wrap">
 								<!-- 부서 현황 -->	
-								<div class="top_area" style="width: 1070px;">
+								<div class="top_area w1070p">
 									<div class="area_title">
 										<h3>
 											<img src='resources/images/icon/icon_people.png' width="20" height="20"/>
@@ -136,7 +136,7 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="bottom_box">
-						<div class="wrap" style="width: 1630px;">
+						<div class="wrap w1630p">
 							<div class="bottom_wrap">
 								<!-- 입사 현황 -->
 								<div class="bottom_area">

@@ -157,7 +157,7 @@
 										<dt>&#10003; 담당자</dt>
 										<dd>
 											<input type="button" class="btn_blue align_top" value="선택" onclick="popCall();">
-											<input type="text" id="empPnm" title="담당자" style="width: 150px;" disabled="disabled" isRequired="Y">
+											<input type="text" id="empPnm" class="w150p" title="담당자" disabled="disabled" isRequired="Y">
 										</dd>
 									</dl>
 									<dl>
@@ -165,7 +165,7 @@
 										<dd>
 											<input type="text" class="srch_cdt_date srchSdt" id="projSdt" name="projSdt" title="계약기간 (시작)" readonly="readonly" isRequired="Y" />
 												~
-											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" value="계약기간 (종료)" readonly="readonly" isRequired="Y" />
+											<input type="text" class="srch_cdt_date srchEdt" id="projEdt" name="projEdt" title="계약기간 (종료)" readonly="readonly" isRequired="Y" />
 										</dd>
 										<dt>&#10003; 진행상태</dt>
                                         <dd class="sel_2part">
@@ -197,7 +197,7 @@
 									</dl>
 									<dl>
 										<dt><label for="post_text">&#10003; 개요/설명</label></dt>
-										<dd class="post_text" style="height: 310px;">
+										<dd class="post_text h310p">
 											<textarea id="projCont" title="개요/설명" name="projCont" isRequired="Y"></textarea>
 										</dd>
 									</dl>

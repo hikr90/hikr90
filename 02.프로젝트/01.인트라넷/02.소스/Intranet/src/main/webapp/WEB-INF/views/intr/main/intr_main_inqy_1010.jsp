@@ -215,7 +215,7 @@
 					<input type="hidden" id="aprvId" name="aprvId" value="">
 				
 					<div class="top_box">
-						<div class="wrap" style="width: 1630px">
+						<div class="wrap w1630p">
 							<div class="top_wrap">
 								<div class="top_area">
 									<!-- full calendar -->
@@ -234,7 +234,7 @@
 									</div>
 									
 									<div id="calInfo" class="area_content">
-										<ul class="area_ul scroll_wrap" style="height: 360px;">
+										<ul class="area_ul scroll_wrap h360p">
 											<c:forEach var="list" items="${calInfo}">
 												<li class="main_li mr20 bb_f6f6f6">
 													<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a bold">
@@ -299,7 +299,7 @@
 			<article class="main_article">
 				<div class="content">
 					<div class="bottom_box">
-						<div class="wrap" style="width: 1630px;">
+						<div class="wrap w1630p">
 							<div class="bottom_wrap">
 								<!-- 공지사항 -->	
 								<div class="bottom_area">

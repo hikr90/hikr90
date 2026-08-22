@@ -97,7 +97,7 @@
 							</div>
 	                        
 	                     	<!-- 조직도 상세 -->
-	                     	<div id="orgCon" class="post_con inline_flex" style="height: 325px;"></div>
+	                     	<div id="orgCon" class="post_con inline_flex h325p"></div>
 	                        
 							<div class="btn_right mt40">
 	                      		<button type="button" class="btn_gray_thin" onclick="popClose('org');">닫기</button>

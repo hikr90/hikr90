@@ -84,7 +84,7 @@
 											</div>
 		                                </div>
 									</div>
-									<div class="post_table_wrap scroll_wrap" style="height: 550px;">
+									<div class="post_table_wrap scroll_wrap h550p">
 										<table class="post_table">
 										    <caption>인사통계 목록페이지 입니다.</caption>
 										    <colgroup>

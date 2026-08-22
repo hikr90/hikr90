@@ -32,7 +32,7 @@
 	</dl>
 	<dl>
 		<dt>업무 내용</dt>
-		<dd class="post_text" style="height: 165px;">
+		<dd class="post_text h165p">
 			<pre>${defaultInfo.tldrTitle}</pre>
 		</dd>
 	</dl>

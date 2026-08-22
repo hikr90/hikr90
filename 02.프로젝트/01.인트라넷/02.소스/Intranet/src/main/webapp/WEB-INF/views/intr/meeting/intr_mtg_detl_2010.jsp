@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<ul class="area_ul scroll_wrap" style="height: 360px;">
+<ul class="area_ul scroll_wrap h360p">
 	<c:forEach var="list" items="${calInfo}">
 		<li class="main_li mr20 b_f6f6f6">
 			<a href="javascript:mtgCall('${list.mtgCd}');" class="main_a bold">

@@ -275,7 +275,7 @@
 	                                <!-- end Form srch_wrap  -->
 										
 									<div class="tree_wrap">
-										<div id="treeArea" class="tree_area" style="width: 400px; height: 475px;">
+										<div id="treeArea" class="tree_area w400p h475p">
 											<div id="lineTree" class="tree">
 												<c:if test="${not empty defaultList}">
 													<ul class="ul_1">
@@ -301,7 +301,7 @@
 										
 										<div id="empArea" class="emp_area" style="display: none;">
 											<!-- 사용자 목록 -->
-											<div id="empInfo" class="tree_area ml20" style="width: 400px; height: 475px;">
+											<div id="empInfo" class="tree_area ml20 w400p h475p">
 												<div class="tree">
 													<ul class="ul_1">
 																					
@@ -373,7 +373,7 @@
 											<div id="treeArrow" class="tree_arrow" onclick="moveBtn(this.form);"></div>
 											
 											<!-- 사용자 목록 -->
-											<div id="aprvlineTb" class="tree_info" style="width: 646px;"></div>
+											<div id="aprvlineTb" class="tree_info w646p"></div>
 										</div><!-- End emp_area -->
 									</div><!-- End tree_wrap -->
 								</div><!-- End post_wrap -->

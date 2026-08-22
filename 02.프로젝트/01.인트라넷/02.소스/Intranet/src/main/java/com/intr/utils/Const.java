@@ -45,9 +45,9 @@ public class Const {
 	public static final String TAB_HRM  = "hrm"; 			// 인사관리 (탭)
 	public static final String TAB_WEL  = "wel"; 			// 복리후생 (탭)
 	
-	public static final String RULE_CORP  = "intr_corporateregulations.pdf"; 	// 사규
-	public static final String RULE_HRM  = "intr_hrregulations.pdf"; 				// 인사관리
-	public static final String RULE_WEL  = "intr_welfareregulations.pdf"; 		// 복리후생
+	public static final String RULE_CORP  = "rule_corp.pdf"; 	// 사규
+	public static final String RULE_HRM  = "rule_hrm.pdf";		// 인사관리
+	public static final String RULE_WEL  = "rule_wel.pdf"; 		// 복리후생
 	
 	//--------------------------------------------------------------------------------------------
 	// 페이징

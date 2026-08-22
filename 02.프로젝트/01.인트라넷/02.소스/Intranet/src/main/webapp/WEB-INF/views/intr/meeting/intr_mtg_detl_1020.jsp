@@ -245,7 +245,7 @@
 										<dt>
 											<label for="post-title">&#10003; 회의명</label>
 										</dt>
-										<dd style="width: 600px;">
+										<dd class="w600p">
 											<input type="text" id="mtgTitle" title="회의명" name="mtgTitle">
 										</dd>
 										<dt>&#10003; 회의 일자</dt>
@@ -301,7 +301,7 @@
 									</dl>
 									<dl>
 										<dt><label for="post_text">&#10003; 회의 개요</label></dt>
-										<dd class="post_text" style="height: 310px;">
+										<dd class="post_text h310p">
 											<textarea id="projCont" title="회의 개요" name="mtgCont" isRequired="Y"></textarea>
 										</dd>
 									</dl>

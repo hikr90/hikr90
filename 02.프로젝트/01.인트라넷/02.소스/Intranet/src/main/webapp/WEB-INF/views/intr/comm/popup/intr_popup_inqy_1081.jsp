@@ -28,7 +28,7 @@
 	</dl>
 	<dl>
 		<dt>적요</dt>
-		<dd class="post_text" style="height: 160px;">
+		<dd class="post_text h160p">
 			<pre>${defaultInfo.leavRsn}</pre>
 		</dd>
 	</dl>

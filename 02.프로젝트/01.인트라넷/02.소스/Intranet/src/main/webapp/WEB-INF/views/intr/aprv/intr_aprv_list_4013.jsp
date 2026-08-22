@@ -77,7 +77,7 @@
 </script>
 
 <div class="mb10 pd8 b_f6f6f6" >
-    <input type="text" id="aprvlineNm" style="height: 36px; width: 410px;" placeholder="결재선 명칭을 입력하세요" value="${aprvlineList[0].aprvlineNm}">
+    <input type="text" id="aprvlineNm" class="h36p w410p" placeholder="결재선 명칭을 입력하세요" value="${aprvlineList[0].aprvlineNm}">
 
     <div class="float_right">
         <button type="button" class="btn_navy_thin" onclick="saveProc('${aprvlineList[0].aprvlineId}');">저장</button>
@@ -86,9 +86,9 @@
 </div>
 
 <!-- 결재선 목록 -->
-<div id="tree_info pd10" class="tree_info b_f6f6f6" style="width: 623px; height: 390px;">
+<div id="tree_info pd10" class="tree_info b_f6f6f6 w623p h390p">
 	<div class="post_wrap">
-		<div class="scroll_wrap" style="height: 390px;">
+		<div class="scroll_wrap h390p">
 			<table class="post_table aprvTbl">
 				<caption>결재선 목록</caption>
 				<colgroup>
@@ -118,8 +118,8 @@
 								<c:if test="${status.index eq 0}">${list.aprvtypeNm}</c:if>
 								<c:if test="${status.index ne 0}">
 									<div class='select_wrap'>
-										<div class='pop_sbox bb_unset text_indent0' style='width:126px;'>${list.aprvtypeNm}</div>
-										<ul class='sUl pop_sul scroll_wrap ml_1' style='width:125px;'>
+										<div class='pop_sbox bb_unset text_indent0 w126p'>${list.aprvtypeNm}</div>
+										<ul class='sUl pop_sul scroll_wrap ml_1 w125p'>
 											<c:forEach var="type" items="${aprvtypeList}" varStatus="status">
 												<li setNm='${type.aprvtypeNm}' setCd='${type.aprvtypeCd}'>${type.aprvtypeNm}</li>
 											</c:forEach>
